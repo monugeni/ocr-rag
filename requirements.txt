@@ -1,0 +1,2 @@
+mcp[cli]>=1.0.0
+pdfplumber>=0.10.0

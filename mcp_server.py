@@ -1,0 +1,576 @@
+#!/usr/bin/env python3
+"""
+Document RAG MCP Server
+========================
+Single server for all projects. Every search requires a project name.
+
+Tools:
+    Discovery:
+        list_projects       - List all projects
+        list_documents      - List documents in a project
+        get_document_info   - Full metadata for a document
+        get_toc             - Section tree for a document
+
+    Search:
+        search_pages        - Full-text keyword search (primary tool)
+        search_sections     - Search section headings
+
+    Navigation:
+        get_page            - Get full page content with context
+        get_adjacent        - Get next/previous page
+
+    Fallback (LLM calls these when Marker output looks wrong):
+        reextract_page      - Re-extract page text from original PDF via pdfplumber
+        reextract_table     - Re-extract table from original PDF via pdfplumber
+
+Usage:
+    python mcp_server.py --db docs.db --port 8200
+"""
+
+import argparse
+import json
+import re
+import sqlite3
+import sys
+from contextlib import contextmanager
+from pathlib import Path
+from typing import Optional
+
+from mcp.server.fastmcp import FastMCP
+
+
+# ---------------------------------------------------------------------------
+# Config
+# ---------------------------------------------------------------------------
+
+DB_PATH = "docs.db"
+
+
+@contextmanager
+def get_db():
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+
+def sanitize_fts(query: str) -> str:
+    """Sanitize query for FTS5. Splits hyphenated terms, quotes parts."""
+    words = query.strip().split()
+    out = []
+    for w in words:
+        if w.upper() in ('AND', 'OR', 'NOT', 'NEAR'):
+            continue
+        if re.search(r'[-/\\@#$%&*()+=]', w):
+            parts = re.split(r'[-/\\]', w)
+            out.extend(f'"{p.strip()}"' for p in parts if p.strip())
+        else:
+            w = w.strip('"\'')
+            if w:
+                out.append(w)
+    return ' '.join(out)
+
+
+def project_doc_ids(conn, project: str) -> list[int]:
+    return [r['id'] for r in conn.execute(
+        "SELECT id FROM documents WHERE project = ?", (project,)
+    ).fetchall()]
+
+
+# ---------------------------------------------------------------------------
+# MCP Server
+# ---------------------------------------------------------------------------
+
+mcp = FastMCP(
+    "Document RAG",
+    description=(
+        "Search and navigate engineering project documents. "
+        "All searches are scoped by project. Use list_projects first, "
+        "then search_pages to find content, then get_page to read it. "
+        "If Marker output looks garbled or a table seems wrong, "
+        "use reextract_page or reextract_table for a second extraction from the original PDF."
+    )
+)
+
+
+# ===== Discovery =====
+
+@mcp.tool()
+def list_projects() -> str:
+    """List all projects with document and page counts."""
+    with get_db() as conn:
+        rows = conn.execute("""
+            SELECT project, COUNT(*) as docs, SUM(total_pages) as pages
+            FROM documents GROUP BY project ORDER BY project
+        """).fetchall()
+        return json.dumps([
+            {"project": r["project"], "documents": r["docs"], "total_pages": r["pages"]}
+            for r in rows
+        ], indent=2)
+
+
+@mcp.tool()
+def list_documents(project: str) -> str:
+    """List all documents in a project.
+
+    Args:
+        project: Project name (from list_projects).
+    """
+    with get_db() as conn:
+        docs = conn.execute(
+            "SELECT * FROM documents WHERE project = ? ORDER BY id", (project,)
+        ).fetchall()
+
+        results = []
+        for d in docs:
+            meta = json.loads(d["metadata"]) if d["metadata"] else {}
+            sec_count = conn.execute(
+                "SELECT COUNT(*) FROM sections WHERE doc_id = ?", (d["id"],)
+            ).fetchone()[0]
+
+            results.append({
+                "id": d["id"],
+                "title": d["title"],
+                "filename": d["filename"],
+                "total_pages": d["total_pages"],
+                "sections": sec_count,
+                "document_type": meta.get("document_type"),
+                "prepared_by": meta.get("prepared_by"),
+                "summary": meta.get("summary"),
+            })
+
+        return json.dumps(results, indent=2)
+
+
+@mcp.tool()
+def get_document_info(doc_id: int) -> str:
+    """Get full metadata for a document including LLM-extracted details.
+
+    Args:
+        doc_id: Document ID.
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+
+        meta = json.loads(d["metadata"]) if d["metadata"] else {}
+
+        types = {}
+        for r in conn.execute(
+            "SELECT page_type, COUNT(*) as n FROM pages WHERE doc_id = ? GROUP BY page_type",
+            (doc_id,)
+        ):
+            types[r["page_type"]] = r["n"]
+
+        return json.dumps({
+            "id": d["id"], "project": d["project"], "title": d["title"],
+            "filename": d["filename"], "pdf_path": d["pdf_path"],
+            "total_pages": d["total_pages"], "page_types": types,
+            "document_number": meta.get("document_number"),
+            "revision": meta.get("revision"),
+            "date": meta.get("date"),
+            "prepared_by": meta.get("prepared_by"),
+            "prepared_for": meta.get("prepared_for"),
+            "project_name": meta.get("project_name"),
+            "document_type": meta.get("document_type"),
+            "summary": meta.get("summary"),
+            "equipment_tags": meta.get("equipment_tags"),
+            "applicable_codes": meta.get("applicable_codes"),
+            "keywords": meta.get("keywords"),
+        }, indent=2)
+
+
+@mcp.tool()
+def get_toc(doc_id: int, max_level: int = 4) -> str:
+    """Get the section tree (table of contents) for a document.
+
+    Args:
+        doc_id: Document ID.
+        max_level: Maximum heading depth (default 4).
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT title FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+
+        sections = conn.execute(
+            """SELECT heading, level, page_start, page_end, breadcrumb
+               FROM sections WHERE doc_id = ? AND level <= ? ORDER BY seq""",
+            (doc_id, max_level)
+        ).fetchall()
+
+        return json.dumps({
+            "doc_title": d["title"],
+            "sections": [
+                {"heading": s["heading"], "level": s["level"],
+                 "pages": f"{s['page_start']}-{s['page_end']}",
+                 "breadcrumb": s["breadcrumb"]}
+                for s in sections
+            ]
+        }, indent=2)
+
+
+# ===== Search =====
+
+@mcp.tool()
+def search_pages(
+    project: str,
+    query: str,
+    doc_id: Optional[int] = None,
+    page_type: Optional[str] = None,
+    max_results: int = 10
+) -> str:
+    """Full-text search within a project's documents. Primary search tool.
+
+    Args:
+        project: Project name (required).
+        query: Search keywords. Use specific technical terms.
+               If no results, try synonyms (e.g. "tube pitch" instead of "tube spacing").
+        doc_id: Optional. Restrict to one document.
+        page_type: Optional. Filter: 'text', 'drawing', 'table', 'toc', 'cover'.
+        max_results: Default 10, max 25.
+
+    Returns:
+        Matching pages with doc_title, page_num, breadcrumb, snippet, and rank.
+    """
+    clean = sanitize_fts(query)
+    if not clean:
+        return json.dumps({"error": "Empty query"})
+
+    with get_db() as conn:
+        ids = project_doc_ids(conn, project)
+        if not ids:
+            return json.dumps({"error": f"No documents in project '{project}'"})
+
+        conds = ["pages_fts MATCH ?"]
+        params = [clean]
+
+        ph = ','.join('?' * len(ids))
+        conds.append(f"p.doc_id IN ({ph})")
+        params.extend(ids)
+
+        if doc_id is not None:
+            conds.append("p.doc_id = ?")
+            params.append(doc_id)
+        if page_type:
+            conds.append("p.page_type = ?")
+            params.append(page_type)
+
+        params.append(min(max_results, 25))
+
+        try:
+            rows = conn.execute(f"""
+                SELECT p.doc_id, d.title as doc_title, d.total_pages,
+                       p.page_num, p.breadcrumb, p.page_type, p.char_count,
+                       snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet, rank
+                FROM pages_fts
+                JOIN pages p ON p.id = pages_fts.rowid
+                JOIN documents d ON d.id = p.doc_id
+                WHERE {' AND '.join(conds)}
+                ORDER BY rank LIMIT ?
+            """, params).fetchall()
+        except sqlite3.OperationalError:
+            # Retry with simplified query
+            params[0] = ' '.join(w for w in clean.split() if not w.startswith('"'))
+            try:
+                rows = conn.execute(f"""
+                    SELECT p.doc_id, d.title as doc_title, d.total_pages,
+                           p.page_num, p.breadcrumb, p.page_type, p.char_count,
+                           snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet, rank
+                    FROM pages_fts
+                    JOIN pages p ON p.id = pages_fts.rowid
+                    JOIN documents d ON d.id = p.doc_id
+                    WHERE {' AND '.join(conds)}
+                    ORDER BY rank LIMIT ?
+                """, params).fetchall()
+            except sqlite3.OperationalError as e:
+                return json.dumps({"error": str(e), "query": clean})
+
+        return json.dumps({
+            "query": query, "result_count": len(rows),
+            "results": [
+                {"doc_id": r["doc_id"], "doc_title": r["doc_title"],
+                 "page_num": r["page_num"], "total_pages": r["total_pages"],
+                 "breadcrumb": r["breadcrumb"], "page_type": r["page_type"],
+                 "snippet": r["snippet"], "rank": round(r["rank"], 4)}
+                for r in rows
+            ]
+        }, indent=2)
+
+
+@mcp.tool()
+def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> str:
+    """Search section headings within a project.
+
+    Args:
+        project: Project name.
+        query: Keywords to match in section headings.
+        doc_id: Optional. Restrict to one document.
+    """
+    with get_db() as conn:
+        conds = ["(s.heading LIKE ? OR s.breadcrumb LIKE ?)", "d.project = ?"]
+        params = [f"%{query}%", f"%{query}%", project]
+
+        if doc_id is not None:
+            conds.append("s.doc_id = ?")
+            params.append(doc_id)
+
+        rows = conn.execute(f"""
+            SELECT s.doc_id, d.title as doc_title, s.heading, s.level,
+                   s.breadcrumb, s.page_start, s.page_end
+            FROM sections s JOIN documents d ON d.id = s.doc_id
+            WHERE {' AND '.join(conds)}
+            ORDER BY s.doc_id, s.seq
+        """, params).fetchall()
+
+        return json.dumps({
+            "query": query, "result_count": len(rows),
+            "results": [dict(r) for r in rows]
+        }, indent=2)
+
+
+# ===== Navigation =====
+
+@mcp.tool()
+def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> str:
+    """Get full content of a specific page with section context.
+
+    Args:
+        doc_id: Document ID (from search results).
+        page_num: Page number.
+        include_adjacent: If True, also returns prev/next page content.
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+
+        p = conn.execute(
+            "SELECT * FROM pages WHERE doc_id = ? AND page_num = ?", (doc_id, page_num)
+        ).fetchone()
+        if not p:
+            return json.dumps({"error": f"Page {page_num} not found", "total_pages": d["total_pages"]})
+
+        result = {
+            "doc_id": doc_id, "doc_title": d["title"], "project": d["project"],
+            "page_num": p["page_num"], "total_pages": d["total_pages"],
+            "breadcrumb": p["breadcrumb"], "page_type": p["page_type"],
+            "content": p["content"]
+        }
+
+        if include_adjacent:
+            for direction, offset in [("prev_page", -1), ("next_page", 1)]:
+                adj = conn.execute(
+                    "SELECT page_num, content, breadcrumb, page_type FROM pages WHERE doc_id = ? AND page_num = ?",
+                    (doc_id, page_num + offset)
+                ).fetchone()
+                if adj:
+                    result[direction] = {
+                        "page_num": adj["page_num"], "breadcrumb": adj["breadcrumb"],
+                        "page_type": adj["page_type"], "content": adj["content"]
+                    }
+
+        return json.dumps(result, indent=2)
+
+
+@mcp.tool()
+def get_adjacent(doc_id: int, page_num: int, direction: str = "next") -> str:
+    """Get the next or previous page.
+
+    Args:
+        doc_id: Document ID.
+        page_num: Current page number.
+        direction: "next" or "prev".
+    """
+    target = page_num + (1 if direction == "next" else -1)
+    return get_page(doc_id, target)
+
+
+# ===== Fallback extraction tools =====
+
+@mcp.tool()
+def reextract_page(doc_id: int, page_start: int, page_end: Optional[int] = None) -> str:
+    """Re-extract text from original PDF using pdfplumber (layout-preserved).
+
+    Use this when Marker's output for a page looks garbled, has missing text,
+    or seems to have OCR errors. This goes back to the source PDF for a fresh extraction.
+
+    Args:
+        doc_id: Document ID.
+        page_start: First page to re-extract (1-indexed).
+        page_end: Last page (default: same as page_start).
+    """
+    if page_end is None:
+        page_end = page_start
+
+    with get_db() as conn:
+        d = conn.execute("SELECT pdf_path, title FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+        if not d["pdf_path"] or not Path(d["pdf_path"]).exists():
+            return json.dumps({"error": f"Original PDF not found at {d['pdf_path']}"})
+
+    try:
+        import pdfplumber
+    except ImportError:
+        return json.dumps({"error": "pdfplumber not installed. Run: pip install pdfplumber"})
+
+    try:
+        results = []
+        with pdfplumber.open(d["pdf_path"]) as pdf:
+            for pg_num in range(page_start, min(page_end + 1, len(pdf.pages) + 1)):
+                page = pdf.pages[pg_num - 1]
+                text = page.extract_text(layout=True, x_tolerance=3, y_tolerance=3) or ""
+                results.append({
+                    "page_num": pg_num,
+                    "content": text,
+                    "char_count": len(text),
+                    "width": page.width,
+                    "height": page.height
+                })
+
+        return json.dumps({
+            "doc_id": doc_id, "doc_title": d["title"],
+            "source": "pdfplumber (layout mode)",
+            "pages": results
+        }, indent=2)
+
+    except Exception as e:
+        return json.dumps({"error": f"Extraction failed: {e}"})
+
+
+@mcp.tool()
+def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None) -> str:
+    """Re-extract tables from original PDF using pdfplumber with structure detection.
+
+    Use this when a table in Marker's output has misaligned columns, merged cells,
+    or garbled content. Returns structured table data with identified headers and rows.
+
+    Args:
+        doc_id: Document ID.
+        page_start: First page containing the table (1-indexed).
+        page_end: Last page of the table (for multi-page tables).
+    """
+    if page_end is None:
+        page_end = page_start
+
+    with get_db() as conn:
+        d = conn.execute("SELECT pdf_path, title FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+        if not d["pdf_path"] or not Path(d["pdf_path"]).exists():
+            return json.dumps({"error": f"Original PDF not found at {d['pdf_path']}"})
+
+    try:
+        import pdfplumber
+    except ImportError:
+        return json.dumps({"error": "pdfplumber not installed. Run: pip install pdfplumber"})
+
+    try:
+        all_tables = []
+
+        with pdfplumber.open(d["pdf_path"]) as pdf:
+            for pg_num in range(page_start, min(page_end + 1, len(pdf.pages) + 1)):
+                page = pdf.pages[pg_num - 1]
+
+                # Try strict line-based extraction first
+                tables = page.extract_tables({
+                    "vertical_strategy": "lines_strict",
+                    "horizontal_strategy": "lines_strict",
+                    "snap_tolerance": 5,
+                    "join_tolerance": 5,
+                })
+
+                if not tables:
+                    tables = page.extract_tables({
+                        "vertical_strategy": "text",
+                        "horizontal_strategy": "text",
+                        "snap_tolerance": 5,
+                    })
+
+                for raw_table in (tables or []):
+                    if not raw_table or len(raw_table) < 2:
+                        continue
+
+                    # Clean cells
+                    cleaned = []
+                    for row in raw_table:
+                        cleaned.append([
+                            (str(c).strip().replace('\n', ' ') if c else '')
+                            for c in row
+                        ])
+
+                    # Detect headers (first row usually)
+                    headers = cleaned[0]
+                    data = cleaned[1:]
+
+                    # Build markdown
+                    cols = max(len(r) for r in cleaned)
+                    headers = headers + [''] * (cols - len(headers))
+                    md_lines = [
+                        '| ' + ' | '.join(headers) + ' |',
+                        '| ' + ' | '.join(['---'] * cols) + ' |',
+                    ]
+                    for row in data:
+                        padded = row + [''] * (cols - len(row))
+                        md_lines.append('| ' + ' | '.join(padded) + ' |')
+
+                    all_tables.append({
+                        "page_num": pg_num,
+                        "headers": headers,
+                        "rows": data,
+                        "row_count": len(data),
+                        "col_count": cols,
+                        "markdown": '\n'.join(md_lines)
+                    })
+
+        return json.dumps({
+            "doc_id": doc_id, "doc_title": d["title"],
+            "source": "pdfplumber (table extraction)",
+            "page_range": f"{page_start}-{page_end}",
+            "tables_found": len(all_tables),
+            "tables": all_tables
+        }, indent=2)
+
+    except Exception as e:
+        return json.dumps({"error": f"Table extraction failed: {e}"})
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+def main():
+    global DB_PATH
+
+    p = argparse.ArgumentParser(description='Document RAG MCP Server')
+    p.add_argument('--db', '-d', required=True, help='SQLite database path')
+    p.add_argument('--port', type=int, default=8200, help='SSE port (default: 8200)')
+
+    args = p.parse_args()
+    DB_PATH = args.db
+
+    if not Path(DB_PATH).exists():
+        print(f"Error: {DB_PATH} not found. Run ingest.py first.")
+        sys.exit(1)
+
+    with get_db() as conn:
+        projects = conn.execute(
+            "SELECT project, COUNT(*) as n FROM documents GROUP BY project"
+        ).fetchall()
+        total_pages = conn.execute("SELECT COUNT(*) FROM pages").fetchone()[0]
+
+        print(f"Document RAG MCP Server")
+        print(f"Database: {DB_PATH}")
+        print(f"Projects: {', '.join(f'{r['project']} ({r['n']} docs)' for r in projects)}")
+        print(f"Total pages indexed: {total_pages}")
+        print(f"Starting on port {args.port}...")
+
+    mcp.run(transport="sse", sse_params={"port": args.port})
+
+
+if __name__ == '__main__':
+    main()
