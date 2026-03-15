@@ -743,6 +743,7 @@ def main():
         print(f"Total pages indexed: {total_pages}")
         print(f"Starting on port {args.port}...")
 
+    mcp.settings.host = "0.0.0.0"
     mcp.run(transport="sse")
 
 

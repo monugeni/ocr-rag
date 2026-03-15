@@ -696,6 +696,7 @@ def _start_mcp_server(db_path, port):
     import mcp_server
     mcp_server.DB_PATH = db_path
     mcp_server.mcp.settings.port = port
+    mcp_server.mcp.settings.host = "0.0.0.0"
     mcp_server.mcp.run(transport="sse")
 
 
