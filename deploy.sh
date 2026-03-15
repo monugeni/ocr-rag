@@ -138,9 +138,9 @@ if [[ "${1:-}" == "--update" ]]; then
     sudo -u "$SERVICE_USER" git pull --ff-only
     log "Updating dependencies..."
     sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r requirements.txt
-    log "Restarting services..."
-    systemctl restart "$SERVICE_NAME" ocr-rag-web
-    systemctl --no-pager status "$SERVICE_NAME" ocr-rag-web
+    log "Restarting service..."
+    systemctl restart "$SERVICE_NAME"
+    systemctl --no-pager status "$SERVICE_NAME"
     log "Update complete."
     exit 0
 fi
@@ -240,11 +240,11 @@ log "Setting up uploads directory: ${UPLOADS_DIR}"
 mkdir -p "$UPLOADS_DIR"
 chown -R "${SERVICE_USER}:${SERVICE_USER}" "$UPLOADS_DIR"
 
-# --- Systemd: MCP server ---
+# --- Systemd service (Web GUI + MCP in one process) ---
 log "Creating systemd service: ${SERVICE_NAME}"
 cat > "/etc/systemd/system/${SERVICE_NAME}.service" <<EOF
 [Unit]
-Description=OCR-RAG Document MCP Server
+Description=OCR-RAG Server (Web GUI + MCP)
 After=network.target
 StartLimitIntervalSec=60
 StartLimitBurst=3
@@ -255,7 +255,7 @@ User=${SERVICE_USER}
 Group=${SERVICE_USER}
 WorkingDirectory=${APP_DIR}
 EnvironmentFile=${ENV_FILE}
-ExecStart=${VENV_DIR}/bin/python3 ${APP_DIR}/mcp_server.py --db ${DB_PATH} --port ${MCP_PORT}
+ExecStart=${VENV_DIR}/bin/python3 ${APP_DIR}/web.py --db ${DB_PATH} --port ${WEB_PORT} --mcp-port ${MCP_PORT} --uploads-dir ${UPLOADS_DIR}
 Restart=on-failure
 RestartSec=5
 
@@ -273,56 +273,25 @@ SyslogIdentifier=${SERVICE_NAME}
 WantedBy=multi-user.target
 EOF
 
-# --- Systemd: Web GUI ---
-WEB_SERVICE="ocr-rag-web"
-log "Creating systemd service: ${WEB_SERVICE}"
-cat > "/etc/systemd/system/${WEB_SERVICE}.service" <<EOF
-[Unit]
-Description=OCR-RAG Web GUI
-After=network.target
-StartLimitIntervalSec=60
-StartLimitBurst=3
-
-[Service]
-Type=simple
-User=${SERVICE_USER}
-Group=${SERVICE_USER}
-WorkingDirectory=${APP_DIR}
-EnvironmentFile=${ENV_FILE}
-ExecStart=${VENV_DIR}/bin/python3 ${APP_DIR}/web.py --db ${DB_PATH} --port ${WEB_PORT} --uploads-dir ${UPLOADS_DIR}
-Restart=on-failure
-RestartSec=5
-
-NoNewPrivileges=yes
-ProtectSystem=strict
-ProtectHome=yes
-ReadWritePaths=${DATA_DIR}
-PrivateTmp=yes
-
-StandardOutput=journal
-StandardError=journal
-SyslogIdentifier=${WEB_SERVICE}
-
-[Install]
-WantedBy=multi-user.target
-EOF
+# Remove old separate web service if it exists
+if [[ -f "/etc/systemd/system/ocr-rag-web.service" ]]; then
+    systemctl stop ocr-rag-web 2>/dev/null || true
+    systemctl disable ocr-rag-web 2>/dev/null || true
+    rm -f "/etc/systemd/system/ocr-rag-web.service"
+fi
 
 systemctl daemon-reload
-systemctl enable "$SERVICE_NAME" "$WEB_SERVICE"
-systemctl restart "$SERVICE_NAME" "$WEB_SERVICE"
+systemctl enable "$SERVICE_NAME"
+systemctl restart "$SERVICE_NAME"
 
 # --- Wait and verify ---
 sleep 2
-ALL_OK=true
-for svc in "$SERVICE_NAME" "$WEB_SERVICE"; do
-    if systemctl is-active --quiet "$svc"; then
-        log "${svc} is running"
-    else
-        err "${svc} failed to start: journalctl -u ${svc} -n 20 --no-pager"
-        ALL_OK=false
-    fi
-done
-if [[ "$ALL_OK" != "true" ]]; then exit 1; fi
+if systemctl is-active --quiet "$SERVICE_NAME"; then
+    log "Service is running!"
+else
+    err "Service failed to start. Check: journalctl -u ${SERVICE_NAME} -n 20 --no-pager"
+    exit 1
+fi
 
 # --- Summary ---
 echo ""
@@ -335,13 +304,13 @@ echo "  Data:      ${DATA_DIR}"
 echo "  Database:  ${DB_PATH}"
 echo "  Uploads:   ${UPLOADS_DIR}"
 echo ""
-echo "  MCP Server:  http://localhost:${MCP_PORT}/sse   (${SERVICE_NAME})"
-echo "  Web GUI:     http://localhost:${WEB_PORT}        (${WEB_SERVICE})"
+echo "  Web GUI:     http://localhost:${WEB_PORT}"
+echo "  MCP:         http://localhost:${MCP_PORT}/sse"
 echo ""
 echo "  Commands:"
-echo "    sudo systemctl status ${SERVICE_NAME} ${WEB_SERVICE}"
-echo "    sudo systemctl restart ${SERVICE_NAME} ${WEB_SERVICE}"
-echo "    sudo journalctl -u ${WEB_SERVICE} -f"
+echo "    sudo systemctl status ${SERVICE_NAME}"
+echo "    sudo systemctl restart ${SERVICE_NAME}"
+echo "    sudo journalctl -u ${SERVICE_NAME} -f"
 echo "    sudo bash deploy.sh --update"
 echo ""
 echo "  Ingest PDFs (via web GUI or CLI):"

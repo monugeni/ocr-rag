@@ -28,6 +28,7 @@ import os
 import re
 import shutil
 import sqlite3
+import threading
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
@@ -613,12 +614,23 @@ if static_path.exists():
     app.mount("/static", StaticFiles(directory=str(static_path)))
 
 
+def _start_mcp_server(db_path, port):
+    """Start the MCP server in a background thread."""
+    import mcp_server
+    mcp_server.DB_PATH = db_path
+    mcp_server.mcp.settings.port = port
+    mcp_server.mcp.run(transport="sse")
+
+
 def main():
     global DB_PATH, UPLOADS_DIR
 
-    p = argparse.ArgumentParser(description='OCR-RAG Web GUI')
+    p = argparse.ArgumentParser(description='OCR-RAG Server (Web GUI + MCP)')
     p.add_argument('--db', default='docs.db', help='SQLite database path')
-    p.add_argument('--port', type=int, default=8201, help='Port (default 8201)')
+    p.add_argument('--port', type=int, default=8201,
+                   help='Web GUI port (default 8201)')
+    p.add_argument('--mcp-port', type=int, default=8200,
+                   help='MCP server port (default 8200)')
     p.add_argument('--uploads-dir', default='./uploads',
                    help='PDF uploads directory')
     args = p.parse_args()
@@ -631,10 +643,19 @@ def main():
     total = conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
     conn.close()
 
-    print(f"OCR-RAG Web GUI")
+    # Start MCP server in background thread
+    mcp_thread = threading.Thread(
+        target=_start_mcp_server,
+        args=(DB_PATH, args.mcp_port),
+        daemon=True,
+    )
+    mcp_thread.start()
+
+    print(f"OCR-RAG Server")
     print(f"  Database:  {DB_PATH} ({total} documents)")
     print(f"  Uploads:   {UPLOADS_DIR}")
-    print(f"  Port:      http://0.0.0.0:{args.port}")
+    print(f"  Web GUI:   http://0.0.0.0:{args.port}")
+    print(f"  MCP:       http://0.0.0.0:{args.mcp_port}/sse")
 
     uvicorn.run(app, host="0.0.0.0", port=args.port)
 
