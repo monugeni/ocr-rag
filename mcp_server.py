@@ -744,6 +744,7 @@ def main():
         print(f"Starting on port {args.port}...")
 
     mcp.settings.host = "0.0.0.0"
+    mcp.settings.transport_security.enable_dns_rebinding_protection = False
     mcp.run(transport="sse")
 
 

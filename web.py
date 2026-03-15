@@ -699,6 +699,7 @@ def _start_mcp_server(db_path, port):
     mcp_server.DB_PATH = db_path
     mcp_server.mcp.settings.port = port
     mcp_server.mcp.settings.host = "0.0.0.0"
+    mcp_server.mcp.settings.transport_security.enable_dns_rebinding_protection = False
     mcp_server.mcp.run(transport="sse")
 
 
