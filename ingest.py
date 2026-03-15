@@ -97,6 +97,41 @@ END;
 CREATE INDEX IF NOT EXISTS idx_pages_doc_page ON pages(doc_id, page_num);
 CREATE INDEX IF NOT EXISTS idx_sections_doc ON sections(doc_id);
 CREATE INDEX IF NOT EXISTS idx_documents_project ON documents(project);
+
+CREATE TABLE IF NOT EXISTS corrections (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id      INTEGER NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    category    TEXT NOT NULL,
+    action      TEXT NOT NULL,
+    payload     TEXT NOT NULL,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_by  TEXT DEFAULT 'llm'
+);
+
+CREATE TABLE IF NOT EXISTS cross_references (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id          INTEGER NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    target_doc_id   INTEGER REFERENCES documents(id) ON DELETE SET NULL,
+    relationship    TEXT NOT NULL,
+    page_num        INTEGER,
+    context         TEXT,
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS quality_flags (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id      INTEGER NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    page_num    INTEGER,
+    flag_type   TEXT NOT NULL,
+    reason      TEXT,
+    related_doc_id INTEGER REFERENCES documents(id) ON DELETE SET NULL,
+    resolved    BOOLEAN DEFAULT 0,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_corrections_doc ON corrections(doc_id);
+CREATE INDEX IF NOT EXISTS idx_cross_references_doc ON cross_references(doc_id);
+CREATE INDEX IF NOT EXISTS idx_quality_flags_doc ON quality_flags(doc_id);
 """
 
 
@@ -335,6 +370,72 @@ def parse_marker_json(marker_path: str, pdf_path: str = None) -> tuple[list[dict
     return pages, sections
 
 
+def detect_document_boundaries(pages: list[dict], sections: list[dict]) -> list[int]:
+    """Detect likely document boundaries within a single PDF's parsed output.
+
+    Looks for H1 headers that appear after the first page — these indicate
+    a new logical document started mid-PDF (e.g., the pdf splitter merged
+    a piping spec and a civil works spec into one file).
+
+    Returns list of page numbers where new documents begin.
+    """
+    if not pages or not sections:
+        return []
+
+    first_page = pages[0]['page_num']
+    min_level = min(s['level'] for s in sections) if sections else 1
+    boundaries = []
+
+    for s in sections:
+        if s['level'] == min_level and s['page_num'] > first_page:
+            boundaries.append(s['page_num'])
+
+    return sorted(set(boundaries))
+
+
+def split_into_subdocuments(
+    pages: list[dict], sections: list[dict], boundaries: list[int]
+) -> list[tuple[list[dict], list[dict], str]]:
+    """Split pages and sections into sub-documents at boundary pages.
+
+    Returns list of (sub_pages, sub_sections, title_hint) tuples.
+    title_hint is the H1 heading text at the start of each sub-document.
+    """
+    if not boundaries:
+        first_heading = sections[0]['heading'] if sections else ''
+        return [(pages, sections, first_heading)]
+
+    # Break points: start of first doc, each boundary, past the last page
+    breaks = [pages[0]['page_num']] + boundaries + [pages[-1]['page_num'] + 1]
+
+    subdocs = []
+    for i in range(len(breaks) - 1):
+        start, end = breaks[i], breaks[i + 1]
+
+        sub_pages = [p for p in pages if start <= p['page_num'] < end]
+        sub_sections = [s for s in sections if start <= s['page_num'] < end]
+
+        if not sub_pages:
+            continue
+
+        # Rebuild breadcrumbs relative to this sub-document's own hierarchy
+        # (strip parent context from the previous sub-document)
+        if sub_sections:
+            top_heading = sub_sections[0]['heading']
+            for p in sub_pages:
+                bc = p.get('breadcrumb', '')
+                # If breadcrumb contains the top heading, trim everything before it
+                if top_heading in bc:
+                    idx = bc.index(top_heading)
+                    p['breadcrumb'] = bc[idx:]
+        else:
+            top_heading = ''
+
+        subdocs.append((sub_pages, sub_sections, top_heading))
+
+    return subdocs
+
+
 def parse_marker_md(marker_path: str) -> tuple[list[dict], list[dict]]:
     """Fallback: parse Marker markdown output (no per-page info)."""
     with open(marker_path, 'r', encoding='utf-8') as f:
@@ -548,6 +649,192 @@ def extract_metadata_llm(pages, api_key=None, model="claude-sonnet-4-20250514"):
         return None
 
 
+def replay_corrections(conn, doc_id, pdf_path):
+    """Replay sidecar corrections after re-ingestion.
+
+    Applies corrections in order: skips → reclassifications → heading fixes →
+    breadcrumb overrides → OCR fixes → metadata → cross-refs → quality flags.
+    Each step is idempotent.
+    """
+    from corrections import (
+        _load_sidecar, _sidecar_path, _rebuild_breadcrumbs,
+        _recalculate_section_page_end, _renumber_sections,
+        _update_doc_metadata, _update_doc_total_pages,
+    )
+
+    sidecar = _load_sidecar(pdf_path)
+    if not sidecar:
+        return
+
+    applied = []
+
+    # --- Skipped pages ---
+    for page_num in sidecar.get('skipped_pages', []):
+        conn.execute(
+            "UPDATE pages SET page_type = 'skipped' "
+            "WHERE doc_id = ? AND page_num = ?",
+            (doc_id, page_num)
+        )
+    if sidecar.get('skipped_pages'):
+        applied.append(f"skipped {len(sidecar['skipped_pages'])} pages")
+
+    # --- Page reclassifications ---
+    for page_str, new_type in sidecar.get('page_reclassifications', {}).items():
+        conn.execute(
+            "UPDATE pages SET page_type = ? WHERE doc_id = ? AND page_num = ?",
+            (new_type, doc_id, int(page_str))
+        )
+    if sidecar.get('page_reclassifications'):
+        applied.append(f"reclassified {len(sidecar['page_reclassifications'])} pages")
+
+    # --- Heading removals ---
+    for rem in sidecar.get('removed_headings', []):
+        sec = conn.execute(
+            "SELECT id FROM sections WHERE doc_id = ? AND page_start = ? "
+            "AND heading LIKE ?",
+            (doc_id, rem['page_num'], rem['text_prefix'] + '%')
+        ).fetchone()
+        if sec:
+            conn.execute(
+                "UPDATE pages SET section_id = NULL WHERE section_id = ?",
+                (sec['id'],)
+            )
+            conn.execute("DELETE FROM sections WHERE id = ?", (sec['id'],))
+    if sidecar.get('removed_headings'):
+        applied.append(f"removed {len(sidecar['removed_headings'])} headings")
+
+    # --- New headings ---
+    for new_h in sidecar.get('new_headings', []):
+        exists = conn.execute(
+            "SELECT 1 FROM sections WHERE doc_id = ? AND page_start = ? "
+            "AND heading = ?",
+            (doc_id, new_h['page_num'], new_h['text'])
+        ).fetchone()
+        if not exists:
+            max_seq = conn.execute(
+                "SELECT COALESCE(MAX(seq), -1) FROM sections "
+                "WHERE doc_id = ? AND page_start <= ?",
+                (doc_id, new_h['page_num'])
+            ).fetchone()[0]
+            conn.execute(
+                "UPDATE sections SET seq = seq + 1 "
+                "WHERE doc_id = ? AND seq > ?",
+                (doc_id, max_seq)
+            )
+            conn.execute(
+                "INSERT INTO sections (doc_id, heading, level, page_start, seq) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (doc_id, new_h['text'], new_h['level'],
+                 new_h['page_num'], max_seq + 1)
+            )
+    if sidecar.get('new_headings'):
+        applied.append(f"added {len(sidecar['new_headings'])} headings")
+
+    # --- Heading overrides (level changes, renames) ---
+    for key, override in sidecar.get('heading_overrides', {}).items():
+        parts = key.split(':', 1)
+        if len(parts) != 2:
+            continue
+        page_num, text_prefix = int(parts[0]), parts[1]
+        section = conn.execute(
+            "SELECT id FROM sections WHERE doc_id = ? AND page_start = ? "
+            "AND heading LIKE ?",
+            (doc_id, page_num, text_prefix + '%')
+        ).fetchone()
+        if section:
+            if not override.get('is_heading', True):
+                conn.execute(
+                    "UPDATE pages SET section_id = NULL WHERE section_id = ?",
+                    (section['id'],))
+                conn.execute("DELETE FROM sections WHERE id = ?",
+                             (section['id'],))
+            else:
+                updates = []
+                params = []
+                if 'level' in override:
+                    updates.append("level = ?")
+                    params.append(override['level'])
+                if 'corrected_text' in override:
+                    updates.append("heading = ?")
+                    params.append(override['corrected_text'])
+                if updates:
+                    params.append(section['id'])
+                    conn.execute(
+                        f"UPDATE sections SET {', '.join(updates)} "
+                        f"WHERE id = ?", params
+                    )
+    if sidecar.get('heading_overrides'):
+        applied.append(f"applied {len(sidecar['heading_overrides'])} heading overrides")
+
+    # Rebuild sections after heading changes
+    if any(sidecar.get(k) for k in
+           ('removed_headings', 'new_headings', 'heading_overrides')):
+        _renumber_sections(conn, doc_id)
+        _recalculate_section_page_end(conn, doc_id)
+        _rebuild_breadcrumbs(conn, doc_id)
+
+    # --- Breadcrumb overrides ---
+    for page_str, bc in sidecar.get('breadcrumb_overrides', {}).items():
+        conn.execute(
+            "UPDATE pages SET breadcrumb = ? WHERE doc_id = ? AND page_num = ?",
+            (bc, doc_id, int(page_str))
+        )
+    if sidecar.get('breadcrumb_overrides'):
+        applied.append(f"overrode {len(sidecar['breadcrumb_overrides'])} breadcrumbs")
+
+    # --- OCR fixes ---
+    for fix in sidecar.get('ocr_fixes', []):
+        page = conn.execute(
+            "SELECT id, content FROM pages "
+            "WHERE doc_id = ? AND page_num = ?",
+            (doc_id, fix['page_num'])
+        ).fetchone()
+        if page and fix['old_text'] in page['content']:
+            new_content = page['content'].replace(
+                fix['old_text'], fix['new_text'])
+            conn.execute(
+                "UPDATE pages SET content = ?, char_count = ? WHERE id = ?",
+                (new_content, len(new_content), page['id'])
+            )
+    if sidecar.get('ocr_fixes'):
+        applied.append(f"applied {len(sidecar['ocr_fixes'])} OCR fixes")
+
+    # --- Metadata overrides ---
+    for page_range, overrides in sidecar.get('metadata_overrides', {}).items():
+        for key, value in overrides.items():
+            _update_doc_metadata(conn, doc_id, key, value)
+    if sidecar.get('metadata_overrides'):
+        applied.append("applied metadata overrides")
+
+    # --- Document titles ---
+    titles = sidecar.get('document_titles', {})
+    if titles:
+        # Use the first title override (there's typically one per doc)
+        for pr, title in titles.items():
+            conn.execute(
+                "UPDATE documents SET title = ? WHERE id = ?",
+                (title, doc_id)
+            )
+            break
+        applied.append("applied title override")
+
+    # --- Quality flags ---
+    for qf in sidecar.get('quality_flags', []):
+        conn.execute(
+            "INSERT INTO quality_flags (doc_id, page_num, flag_type, reason) "
+            "VALUES (?, ?, ?, ?)",
+            (doc_id, qf.get('page_num'), qf['type'],
+             qf.get('reason', ''))
+        )
+    if sidecar.get('quality_flags'):
+        applied.append(f"restored {len(sidecar['quality_flags'])} quality flags")
+
+    conn.commit()
+
+    if applied:
+        print(f"  Sidecar corrections replayed: {'; '.join(applied)}")
+
+
 def apply_metadata(conn, doc_id, meta):
     cur = conn.cursor()
     if meta.get("title"):
@@ -627,6 +914,9 @@ def ingest_pdf(conn, pdf_path: Path, marker_path: Path, project: str,
         if meta:
             meta["project"] = project
             apply_metadata(conn, doc_id, meta)
+
+    # Replay sidecar corrections from previous LLM feedback
+    replay_corrections(conn, doc_id, str(pdf_path.resolve()))
 
     return doc_id
 

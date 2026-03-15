@@ -38,6 +38,8 @@ from typing import Optional
 
 from mcp.server.fastmcp import FastMCP
 
+from corrections import register_correction_tools
+
 
 # ---------------------------------------------------------------------------
 # Config
@@ -83,16 +85,21 @@ def project_doc_ids(conn, project: str) -> list[int]:
 # MCP Server
 # ---------------------------------------------------------------------------
 
+SSE_PORT = 8200
+
 mcp = FastMCP(
     "Document RAG",
-    description=(
+    instructions=(
         "Search and navigate engineering project documents. "
         "All searches are scoped by project. Use list_projects first, "
         "then search_pages to find content, then get_page to read it. "
         "If Marker output looks garbled or a table seems wrong, "
         "use reextract_page or reextract_table for a second extraction from the original PDF."
-    )
+    ),
+    port=SSE_PORT,
 )
+
+register_correction_tools(mcp, get_db)
 
 
 # ===== Discovery =====
@@ -544,7 +551,7 @@ def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None
 # ---------------------------------------------------------------------------
 
 def main():
-    global DB_PATH
+    global DB_PATH, SSE_PORT
 
     p = argparse.ArgumentParser(description='Document RAG MCP Server')
     p.add_argument('--db', '-d', required=True, help='SQLite database path')
@@ -556,6 +563,9 @@ def main():
     if not Path(DB_PATH).exists():
         print(f"Error: {DB_PATH} not found. Run ingest.py first.")
         sys.exit(1)
+
+    # Update port on the mcp instance
+    mcp.settings.port = args.port
 
     with get_db() as conn:
         projects = conn.execute(
@@ -569,7 +579,7 @@ def main():
         print(f"Total pages indexed: {total_pages}")
         print(f"Starting on port {args.port}...")
 
-    mcp.run(transport="sse", sse_params={"port": args.port})
+    mcp.run(transport="sse")
 
 
 if __name__ == '__main__':
