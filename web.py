@@ -146,17 +146,17 @@ def list_projects():
         projects = [dict(r) for r in rows]
 
         # Include upload-only projects (dirs with PDFs but no ingested docs)
+        # and empty projects (created but no files yet)
         uploads = Path(UPLOADS_DIR)
         if uploads.exists():
             existing = {p["project"] for p in projects}
             for d in sorted(uploads.iterdir()):
                 if d.is_dir() and d.name not in existing:
                     n = len(list(d.glob("*.pdf")))
-                    if n:
-                        projects.append({
-                            "project": d.name, "docs": 0,
-                            "pages": 0, "pending": n,
-                        })
+                    projects.append({
+                        "project": d.name, "docs": 0,
+                        "pages": 0, "pending": n,
+                    })
         return projects
     finally:
         conn.close()
