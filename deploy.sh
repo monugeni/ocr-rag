@@ -32,7 +32,9 @@ SERVICE_NAME="ocr-rag-mcp"
 SERVICE_USER="ocrrag"
 REPO_URL="https://github.com/monugeni/ocr-rag.git"
 MCP_PORT=8200
+WEB_PORT=8201
 DB_NAME="docs.db"
+UPLOADS_DIR="${DATA_DIR}/uploads"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -136,9 +138,9 @@ if [[ "${1:-}" == "--update" ]]; then
     sudo -u "$SERVICE_USER" git pull --ff-only
     log "Updating dependencies..."
     sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r requirements.txt
-    log "Restarting service..."
-    systemctl restart "$SERVICE_NAME"
-    systemctl --no-pager status "$SERVICE_NAME"
+    log "Restarting services..."
+    systemctl restart "$SERVICE_NAME" ocr-rag-web
+    systemctl --no-pager status "$SERVICE_NAME" ocr-rag-web
     log "Update complete."
     exit 0
 fi
@@ -189,11 +191,7 @@ fi
 
 log "Installing Python dependencies..."
 sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q --upgrade pip
-sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q \
-    "mcp[cli]>=1.20.0" \
-    "pdfplumber>=0.10.0" \
-    "python-dotenv>=1.0.0" \
-    "uvicorn>=0.20.0"
+sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r "${APP_DIR}/requirements.txt"
 
 # --- Initialize database ---
 DB_PATH="${DATA_DIR}/${DB_NAME}"
@@ -228,13 +226,21 @@ if [[ ! -f "$ENV_FILE" ]]; then
 
 # MCP server port
 MCP_PORT=${MCP_PORT}
+
+# Web GUI port
+WEB_PORT=${WEB_PORT}
 EOF
     chown "${SERVICE_USER}:${SERVICE_USER}" "$ENV_FILE"
     chmod 600 "$ENV_FILE"
     warn "Edit ${ENV_FILE} to add your ANTHROPIC_API_KEY"
 fi
 
-# --- Systemd service ---
+# --- Uploads directory ---
+log "Setting up uploads directory: ${UPLOADS_DIR}"
+mkdir -p "$UPLOADS_DIR"
+chown -R "${SERVICE_USER}:${SERVICE_USER}" "$UPLOADS_DIR"
+
+# --- Systemd: MCP server ---
 log "Creating systemd service: ${SERVICE_NAME}"
 cat > "/etc/systemd/system/${SERVICE_NAME}.service" <<EOF
 [Unit]
@@ -253,14 +259,12 @@ ExecStart=${VENV_DIR}/bin/python3 ${APP_DIR}/mcp_server.py --db ${DB_PATH} --por
 Restart=on-failure
 RestartSec=5
 
-# Hardening
 NoNewPrivileges=yes
 ProtectSystem=strict
 ProtectHome=yes
 ReadWritePaths=${DATA_DIR}
 PrivateTmp=yes
 
-# Logging
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=${SERVICE_NAME}
@@ -269,20 +273,56 @@ SyslogIdentifier=${SERVICE_NAME}
 WantedBy=multi-user.target
 EOF
 
+# --- Systemd: Web GUI ---
+WEB_SERVICE="ocr-rag-web"
+log "Creating systemd service: ${WEB_SERVICE}"
+cat > "/etc/systemd/system/${WEB_SERVICE}.service" <<EOF
+[Unit]
+Description=OCR-RAG Web GUI
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=${SERVICE_USER}
+Group=${SERVICE_USER}
+WorkingDirectory=${APP_DIR}
+EnvironmentFile=${ENV_FILE}
+ExecStart=${VENV_DIR}/bin/python3 ${APP_DIR}/web.py --db ${DB_PATH} --port ${WEB_PORT} --uploads-dir ${UPLOADS_DIR}
+Restart=on-failure
+RestartSec=5
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=${DATA_DIR}
+PrivateTmp=yes
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=${WEB_SERVICE}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl daemon-reload
-systemctl enable "$SERVICE_NAME"
-systemctl restart "$SERVICE_NAME"
+systemctl enable "$SERVICE_NAME" "$WEB_SERVICE"
+systemctl restart "$SERVICE_NAME" "$WEB_SERVICE"
 
 # --- Wait and verify ---
 sleep 2
-if systemctl is-active --quiet "$SERVICE_NAME"; then
-    log "Service is running!"
-else
-    err "Service failed to start. Check logs:"
-    err "  journalctl -u ${SERVICE_NAME} -n 20 --no-pager"
-    journalctl -u "$SERVICE_NAME" -n 10 --no-pager
-    exit 1
-fi
+ALL_OK=true
+for svc in "$SERVICE_NAME" "$WEB_SERVICE"; do
+    if systemctl is-active --quiet "$svc"; then
+        log "${svc} is running"
+    else
+        err "${svc} failed to start: journalctl -u ${svc} -n 20 --no-pager"
+        ALL_OK=false
+    fi
+done
+if [[ "$ALL_OK" != "true" ]]; then exit 1; fi
 
 # --- Summary ---
 echo ""
@@ -293,19 +333,18 @@ echo ""
 echo "  App:       ${APP_DIR}"
 echo "  Data:      ${DATA_DIR}"
 echo "  Database:  ${DB_PATH}"
-echo "  Service:   ${SERVICE_NAME}"
-echo "  Port:      ${MCP_PORT}"
-echo "  Logs:      journalctl -u ${SERVICE_NAME} -f"
+echo "  Uploads:   ${UPLOADS_DIR}"
 echo ""
-echo "  MCP endpoint: http://localhost:${MCP_PORT}/sse"
+echo "  MCP Server:  http://localhost:${MCP_PORT}/sse   (${SERVICE_NAME})"
+echo "  Web GUI:     http://localhost:${WEB_PORT}        (${WEB_SERVICE})"
 echo ""
 echo "  Commands:"
-echo "    sudo systemctl status ${SERVICE_NAME}     # Check status"
-echo "    sudo systemctl restart ${SERVICE_NAME}     # Restart"
-echo "    sudo journalctl -u ${SERVICE_NAME} -f      # Follow logs"
-echo "    sudo bash deploy.sh --update               # Pull & restart"
+echo "    sudo systemctl status ${SERVICE_NAME} ${WEB_SERVICE}"
+echo "    sudo systemctl restart ${SERVICE_NAME} ${WEB_SERVICE}"
+echo "    sudo journalctl -u ${WEB_SERVICE} -f"
+echo "    sudo bash deploy.sh --update"
 echo ""
-echo "  Ingest PDFs:"
+echo "  Ingest PDFs (via web GUI or CLI):"
 echo "    sudo -u ${SERVICE_USER} bash ${APP_DIR}/deploy.sh --ingest /path/to/pdfs MyProject"
 echo ""
 if [[ ! -f "${ENV_FILE}" ]] || ! grep -q "^ANTHROPIC_API_KEY=sk-" "${ENV_FILE}" 2>/dev/null; then
