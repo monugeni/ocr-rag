@@ -167,7 +167,10 @@ fi
 # --- Clone/update repo ---
 if [[ -d "${APP_DIR}/.git" ]]; then
     log "Updating existing repo..."
+    chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
     cd "$APP_DIR"
+    git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
+    sudo -u "$SERVICE_USER" git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
     sudo -u "$SERVICE_USER" git pull --ff-only || {
         warn "Git pull failed, continuing with existing code"
     }
