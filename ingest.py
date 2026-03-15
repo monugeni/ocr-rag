@@ -540,6 +540,10 @@ def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
         print("  sentence-transformers not installed, skipping embeddings")
         print("  Install: pip install sentence-transformers")
         return
+    except Exception as e:
+        print(f"  Failed to load sentence-transformers: {e}")
+        print("  If numpy/scipy version mismatch, try: pip install --upgrade scipy numpy")
+        return
 
     print(f"  Computing embeddings ({model_name})...")
     model = SentenceTransformer(model_name)
