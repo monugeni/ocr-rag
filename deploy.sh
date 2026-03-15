@@ -135,6 +135,7 @@ fi
 if [[ "${1:-}" == "--update" ]]; then
     log "Updating code..."
     cd "$APP_DIR"
+    git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
     git pull --ff-only || { warn "Git pull failed — pull manually as your user first: cd $APP_DIR && git pull"; }
     chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
     log "Updating dependencies..."

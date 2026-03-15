@@ -738,7 +738,8 @@ def main():
 
         print(f"Document RAG MCP Server")
         print(f"Database: {DB_PATH}")
-        print(f"Projects: {', '.join(f'{r['project']} ({r['n']} docs)' for r in projects)}")
+        proj_list = ', '.join(f"{r['project']} ({r['n']} docs)" for r in projects)
+        print(f"Projects: {proj_list}")
         print(f"Total pages indexed: {total_pages}")
         print(f"Starting on port {args.port}...")
 
