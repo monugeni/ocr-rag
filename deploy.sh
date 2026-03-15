@@ -25,8 +25,8 @@
 
 set -euo pipefail
 
-APP_DIR="/opt/ocr-rag"
-DATA_DIR="/var/lib/ocr-rag"
+APP_DIR="/btrfs/ocr-rag"
+DATA_DIR="/btrfs/ocr-rag/data"
 VENV_DIR="${APP_DIR}/venv"
 SERVICE_NAME="ocr-rag-mcp"
 SERVICE_USER="ocrrag"
