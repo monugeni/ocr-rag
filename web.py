@@ -563,16 +563,18 @@ def _run_ingestion(jid, pdf_path, project, filename):
         else:
             # Multiple sub-documents from split
             tracker.update(jid, stage=f"Split into {len(parts)} documents")
-            for i, part in enumerate(parts, 1):
-                prefix = f"[{i}/{len(parts)}] "
-                doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
 
-            # Move original PDF to _originals/ so it won't be re-ingested
+            # Move original PDF to _originals/ immediately so it won't
+            # appear in pending uploads or get accidentally re-ingested
             originals_dir = project_dir / "_originals"
             originals_dir.mkdir(exist_ok=True)
             original = Path(pdf_path)
             if original.exists():
                 shutil.move(str(original), str(originals_dir / original.name))
+
+            for i, part in enumerate(parts, 1):
+                prefix = f"[{i}/{len(parts)}] "
+                doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
 
             tracker.update(jid, status="completed",
                            stage=f"Done — split into {len(parts)} documents")
