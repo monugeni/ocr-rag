@@ -139,9 +139,30 @@ If Marker output looks garbled, use reextract_page or reextract_table for a fres
 
 === DATA CORRECTION (YOU CAN AND SHOULD FIX WHAT YOU SEE) ===
 
-These documents were auto-extracted from PDFs using heuristic heading detection and OCR.
-The extraction makes mistakes — wrong headings, bad levels, OCR garbage, wrong page types,
-missing metadata. YOU have correction tools to fix these. Use them proactively as you read.
+*** CRITICAL RULE: NEVER ALTER DOCUMENT CONTENT ***
+The page content is extracted from official engineering documents — specifications,
+contracts, procedures, QAPs. This content is SACRED. Even if you see a spelling mistake,
+a grammatical error, or a wrong number in the document text, DO NOT CHANGE IT. That is
+what the original document says, and it must remain exactly as-is. These are legal and
+contractual documents — altering their content would be falsification.
+
+What you CAN correct (extraction artifacts only):
+  ✓ Heading structure — levels, missing/false headings (the EXTRACTOR got these wrong, not the document)
+  ✓ OCR artifacts — garbled characters from scanning (e.g. "tbe" that is clearly "the" due to
+    a scanning error, random symbols injected by OCR). Only fix text that is OBVIOUSLY a scanning
+    artifact, never "correct" what might be the original document's actual text.
+  ✓ Document structure — splits, merges, page classification, breadcrumbs
+  ✓ Metadata — titles, types, revision numbers, keywords (these are YOUR labels, not document content)
+  ✓ Running headers/footers — repeated extraction artifacts cluttering every page
+  ✓ Quality flags — flagging problems for human review
+  ✓ Cross-references and keywords — adding search aids
+
+What you must NEVER do:
+  ✗ Fix spelling or grammar in document content — that's what the document actually says
+  ✗ "Correct" numbers, dates, or technical values — even if they look wrong
+  ✗ Rewrite or rephrase any document text
+  ✗ Remove content that looks redundant — it may be intentional
+  When in doubt, leave the content alone and flag_low_quality instead.
 
 Your corrections improve the system permanently: they write to both the live database
 (immediate effect on search results) AND a sidecar JSON file next to the PDF. When the
@@ -155,13 +176,13 @@ WHEN TO CORRECT (do this as you go, not as a separate task):
   → add_heading(doc_id, page_num, text, level)
 - Heading is at the wrong level (H3 should be H1):
   → change_heading_level(doc_id, page_num, text_prefix, new_level)
-- Heading text is garbled or truncated:
+- Heading text is garbled from OCR (not a document correction — an extraction fix):
   → rename_heading(doc_id, page_num, old_text_prefix, new_text)
 - Two documents should actually be one (were incorrectly split):
   → merge_documents(doc_id_a, doc_id_b)
 - One document contains multiple logical documents:
   → split_document(doc_id, at_page)
-- OCR misread text (e.g. "tbe" instead of "the", "l" instead of "1"):
+- OCR artifact in content (garbled characters from scanning, NOT a document typo):
   → fix_ocr_text(doc_id, page_num, old_text, new_text)
 - A page is classified wrong (text marked as drawing, or vice versa):
   → reclassify_page(doc_id, page_num, new_type)
@@ -171,7 +192,7 @@ WHEN TO CORRECT (do this as you go, not as a separate task):
   → move_page_to_document(page_num, from_doc_id, to_doc_id)
 - The breadcrumb/context on a page is wrong:
   → set_page_breadcrumb(doc_id, page_num, breadcrumb)
-- A repeated header/footer clutters the content (e.g. "CONFIDENTIAL" on every page):
+- A repeated header/footer clutters the content (extraction artifact on every page):
   → add_running_header(doc_id, text) — strips it from all pages immediately
 - Document title is wrong or unhelpful:
   → set_document_title(doc_id, title)
@@ -183,16 +204,16 @@ WHEN TO CORRECT (do this as you go, not as a separate task):
 - You want to tag keywords or equipment for better future search:
   → add_keywords(doc_id, keywords_csv)
   → add_equipment_tags(doc_id, tags_csv)
-- A page has terrible OCR quality:
-  → flag_low_quality(doc_id, page_num, reason)
+- A page has terrible OCR quality or suspicious content:
+  → flag_low_quality(doc_id, page_num, reason) — flag for human review, don't alter
   → suggest_reocr(doc_id, reason)
 - Two documents look like duplicates:
   → flag_duplicate(doc_id, duplicate_of_doc_id)
 
-Be proactive. If the document title is "f 41  maintenance work procedure   s" and you can
-see from the content it's actually "F-41: Maintenance Work Procedure - Scaffolding", fix it.
-If a page has 50 false headings detected from table rows, remove the worst ones.
-Every correction you make improves search results for all future queries.
+Be proactive with STRUCTURAL fixes. If the document title is "f 41  maintenance work
+procedure   s" and you can see from the content it's actually "F-41: Maintenance Work
+Procedure - Scaffolding", fix the title. If a page has 50 false headings from table rows,
+remove them. But never touch the actual document text.
 """,
     port=SSE_PORT,
 )

@@ -896,13 +896,19 @@ def register_correction_tools(mcp, get_db):
     @mcp.tool()
     def fix_ocr_text(doc_id: int, page_num: int,
                      old_text: str, new_text: str) -> str:
-        """Fix OCR errors by replacing text on a specific page.
+        """Fix OCR scanning artifacts ONLY — garbled characters produced by the scanner.
+
+        IMPORTANT: Only use this for obvious OCR/scanning errors (e.g. random symbols,
+        character substitution from poor scan quality). NEVER use this to fix spelling
+        mistakes, grammar, or any text that might be what the original document actually
+        says. These are legal/contractual engineering documents — their content is sacred.
+        When in doubt, use flag_low_quality instead.
 
         Args:
             doc_id: Document ID.
             page_num: Page number.
-            old_text: Text to find (exact match).
-            new_text: Replacement text.
+            old_text: The garbled OCR text (exact match).
+            new_text: What the scan clearly intended.
         """
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
