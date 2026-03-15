@@ -113,8 +113,9 @@ async function showProject(project) {
            ondragleave="this.classList.remove('dragover')"
            ondrop="handleDrop(event, '${esc(project)}')"
            onclick="document.getElementById('file-input').click()">
-        Drop PDFs here or click to upload
-        <input type="file" id="file-input" accept=".pdf" multiple
+        Drop files here or click to upload
+        <span class="muted" style="font-size:11px;display:block;margin-top:4px">PDF, DOCX, XLSX, images, ZIP/TAR archives</span>
+        <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
                onchange="handleFiles(this.files, '${esc(project)}')">
       </div>`;
 
@@ -144,8 +145,11 @@ async function showProject(project) {
     if (data.documents.length) {
       html += `<table class="table"><tr><th>Title</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>`;
       for (const d of data.documents) {
+        const splitTag = d.split_info
+          ? `<span class="tag" style="background:#e8f4f8;color:#0077aa;margin-left:6px;font-size:10px" title="Split from ${esc(d.split_info.parent)} pages ${d.split_info.page_start}-${d.split_info.page_end}">Part ${d.split_info.part} &middot; p${d.split_info.page_start}-${d.split_info.page_end}</span>`
+          : '';
         html += `<tr class="clickable" onclick="navigate('#/doc/${d.id}')">
-          <td><strong>${esc(d.title)}</strong><br><span class="muted mono">${esc(d.filename)}</span></td>
+          <td><strong>${esc(d.title)}</strong>${splitTag}<br><span class="muted mono">${esc(d.filename)}</span></td>
           <td>${d.total_pages}</td><td>${d.sections}</td>
           <td>${d.document_type ? `<span class="tag">${esc(d.document_type)}</span>` : '<span class="muted">-</span>'}</td>
           <td style="white-space:nowrap">
@@ -184,11 +188,14 @@ async function showViewer(docId, pageNum) {
       api(`/documents/${docId}/toc`),
     ]);
 
+    const splitNote = doc.split_info
+      ? ` <span class="tag" style="background:#e8f4f8;color:#0077aa;font-size:10px">Part ${doc.split_info.part} of ${esc(doc.split_info.parent)} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}</span>`
+      : '';
     setTopbar(
       `<a href="#/" style="color:#666">Projects</a><span>/</span>` +
       `<a href="#/project/${enc(doc.project)}">${esc(doc.project)}</a><span>/</span>` +
-      `<strong>${esc(doc.title)}</strong>`,
-      `<a class="btn btn-ghost btn-sm" href="/api/documents/${docId}/pdf">Download PDF</a>
+      `<strong>${esc(doc.title)}</strong>${splitNote}`,
+      `<a class="btn btn-ghost btn-sm" href="/api/documents/${docId}/pdf">Download</a>
        <button class="btn btn-ghost btn-sm" onclick="navigate('#/project/${enc(doc.project)}')">Back</button>`
     );
 
@@ -442,15 +449,21 @@ async function resolveFlag(flagId) {
 }
 
 // --- Upload ---
+const SUPPORTED_EXT = new Set(['.pdf','.docx','.xlsx','.xls','.jpg','.jpeg','.png','.tiff','.tif','.bmp','.gif','.zip','.tar','.gz','.tgz']);
+function _supported(name) {
+  const i = name.lastIndexOf('.');
+  return i >= 0 && SUPPORTED_EXT.has(name.slice(i).toLowerCase());
+}
+
 function handleDrop(e, project) {
   e.preventDefault();
   e.currentTarget.classList.remove('dragover');
-  const files = [...e.dataTransfer.files].filter(f => f.name.toLowerCase().endsWith('.pdf'));
+  const files = [...e.dataTransfer.files].filter(f => _supported(f.name));
   if (files.length) uploadFiles(files, project);
 }
 
 function handleFiles(fileList, project) {
-  const files = [...fileList].filter(f => f.name.toLowerCase().endsWith('.pdf'));
+  const files = [...fileList].filter(f => _supported(f.name));
   if (files.length) uploadFiles(files, project);
 }
 

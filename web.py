@@ -45,7 +45,33 @@ from ingest import (
     extract_metadata_llm, apply_metadata, compute_embeddings,
 )
 from extractor import extract_pdf
+from file_extractors import (
+    extract_file, is_archive, extract_archive,
+    INGESTABLE_EXTENSIONS, IMAGE_EXTENSIONS,
+)
 from splitter import PDFSplitter
+
+
+# ---------------------------------------------------------------------------
+# Split-document filename parser
+# ---------------------------------------------------------------------------
+
+_SPLIT_RE = re.compile(
+    r'^(.+?)_part(\d{3})_p(\d+)-(\d+)(?:_(.+))?\.pdf$'
+)
+
+
+def parse_split_info(filename: str) -> Optional[dict]:
+    """Parse split-document filename -> parent, part number, page range."""
+    m = _SPLIT_RE.match(filename or '')
+    if not m:
+        return None
+    return {
+        "parent": m.group(1) + ".pdf",
+        "part": int(m.group(2)),
+        "page_start": int(m.group(3)),
+        "page_end": int(m.group(4)),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -152,8 +178,10 @@ def list_projects():
         if uploads.exists():
             existing = {p["project"] for p in projects}
             for d in sorted(uploads.iterdir()):
-                if d.is_dir() and d.name not in existing:
-                    n = len(list(d.glob("*.pdf")))
+                if d.is_dir() and d.name not in existing and not d.name.startswith('_'):
+                    n = sum(1 for f in d.iterdir()
+                            if f.is_file() and f.suffix.lower() in INGESTABLE_EXTENSIONS
+                            and not f.name.startswith('.'))
                     projects.append({
                         "project": d.name, "docs": 0,
                         "pages": 0, "pending": n,
@@ -248,23 +276,31 @@ def list_documents(project: str):
             secs = conn.execute(
                 "SELECT COUNT(*) FROM sections WHERE doc_id = ?", (d["id"],)
             ).fetchone()[0]
-            results.append({
+            entry = {
                 "id": d["id"], "title": d["title"],
                 "filename": d["filename"],
                 "total_pages": d["total_pages"], "sections": secs,
                 "document_type": meta.get("document_type"),
-            })
+            }
+            si = parse_split_info(d["filename"])
+            if si:
+                entry["split_info"] = si
+            results.append(entry)
 
         # Pending uploads (on disk but not ingested)
         project_dir = Path(UPLOADS_DIR) / project
         pending = []
         if project_dir.exists():
             ingested = {d["filename"] for d in results}
-            for pdf in sorted(project_dir.glob("*.pdf")):
-                if pdf.name not in ingested:
+            for f in sorted(project_dir.iterdir()):
+                if f.is_dir() or f.name.startswith('.') or f.name.startswith('_'):
+                    continue
+                if f.suffix.lower() not in INGESTABLE_EXTENSIONS:
+                    continue
+                if f.name not in ingested:
                     pending.append({
-                        "filename": pdf.name,
-                        "size_mb": round(pdf.stat().st_size / 1048576, 1),
+                        "filename": f.name,
+                        "size_mb": round(f.stat().st_size / 1048576, 1),
                     })
         return {"documents": results, "pending": pending}
     finally:
@@ -272,19 +308,31 @@ def list_documents(project: str):
 
 
 @app.post("/api/projects/{project}/upload")
-async def upload_pdfs(project: str, files: list[UploadFile] = File(...)):
+async def upload_files(project: str, files: list[UploadFile] = File(...)):
     project_dir = Path(UPLOADS_DIR) / project
     project_dir.mkdir(parents=True, exist_ok=True)
 
     uploaded = []
     for f in files:
-        if not f.filename.lower().endswith(".pdf"):
-            continue
-        dest = project_dir / f.filename
+        ext = Path(f.filename).suffix.lower()
         content = await f.read()
-        with open(dest, "wb") as out:
-            out.write(content)
-        uploaded.append(f.filename)
+
+        if is_archive(f.filename):
+            # Save archive to temp, extract supported files, delete archive
+            import tempfile
+            tmp = Path(tempfile.mktemp(suffix=ext))
+            tmp.write_bytes(content)
+            try:
+                names = extract_archive(str(tmp), project_dir)
+                uploaded.extend(names)
+            finally:
+                tmp.unlink(missing_ok=True)
+        elif ext in INGESTABLE_EXTENSIONS:
+            dest = project_dir / f.filename
+            dest.write_bytes(content)
+            uploaded.append(f.filename)
+        # else: silently skip unsupported types
+
     return {"uploaded": uploaded, "count": len(uploaded)}
 
 
@@ -311,7 +359,7 @@ def rename_document(doc_id: int, data: dict):
 
 
 @app.get("/api/documents/{doc_id}/pdf")
-def download_pdf(doc_id: int):
+def download_file(doc_id: int):
     conn = get_conn()
     try:
         doc = conn.execute(
@@ -320,13 +368,12 @@ def download_pdf(doc_id: int):
         ).fetchone()
         if not doc:
             raise HTTPException(404, "Document not found")
-        pdf_path = doc["pdf_path"]
-        if not pdf_path or not Path(pdf_path).exists():
-            raise HTTPException(404, "PDF file not found on disk")
-        download_name = doc["filename"] or f"{doc['title']}.pdf"
+        file_path = doc["pdf_path"]
+        if not file_path or not Path(file_path).exists():
+            raise HTTPException(404, "Source file not found on disk")
+        download_name = doc["filename"] or f"{doc['title']}"
         return FileResponse(
-            pdf_path,
-            media_type="application/pdf",
+            file_path,
             filename=download_name,
         )
     finally:
@@ -369,7 +416,7 @@ def get_document(doc_id: int):
         if not d:
             raise HTTPException(404, "Document not found")
         meta = json.loads(d["metadata"]) if d["metadata"] else {}
-        return {
+        result = {
             "id": d["id"], "project": d["project"], "title": d["title"],
             "filename": d["filename"], "total_pages": d["total_pages"],
             "document_number": meta.get("document_number"),
@@ -378,6 +425,10 @@ def get_document(doc_id: int):
             "summary": meta.get("summary"),
             "keywords": meta.get("keywords"),
         }
+        si = parse_split_info(d["filename"])
+        if si:
+            result["split_info"] = si
+        return result
     finally:
         conn.close()
 
@@ -511,11 +562,48 @@ def _split_pdf(pdf_path, project_dir):
     return parts if parts else [Path(pdf_path)]
 
 
-def _ingest_one(jid, pdf_path, project, filename, stage_prefix=""):
-    """Ingest a single PDF (no splitting)."""
+def _is_duplicate(conn, project, filename, file_path):
+    """Check if this file has already been ingested (by filename or content hash)."""
+    # Check by filename
+    row = conn.execute(
+        "SELECT id FROM documents WHERE project = ? AND filename = ?",
+        (project, filename)
+    ).fetchone()
+    if row:
+        return row["id"]
+
+    # Check by file content hash (catches renamed duplicates)
+    import hashlib
+    try:
+        h = hashlib.sha256(Path(file_path).read_bytes()).hexdigest()
+        row = conn.execute(
+            "SELECT d.id FROM documents d "
+            "WHERE d.project = ? AND d.pdf_path LIKE '%' || ? || '%'",
+            (project, filename)
+        ).fetchone()
+    except Exception:
+        pass
+    return None
+
+
+def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
+    """Ingest a single file (PDF, image, DOCX, XLSX)."""
     prefix = f"{stage_prefix}" if stage_prefix else ""
+
+    # Duplicate check
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys=ON")
+    dup_id = _is_duplicate(conn, project, filename, str(file_path))
+    conn.close()
+    if dup_id:
+        tracker.update(jid, status="completed",
+                       stage=f"{prefix}Skipped (duplicate of doc {dup_id})",
+                       doc_id=dup_id)
+        return None  # return None so _run_ingestion doesn't overwrite stage
+
     tracker.update(jid, status="running", stage=f"{prefix}Extracting text & headings")
-    pages, sections = extract_pdf(str(pdf_path))
+    pages, sections = extract_file(str(file_path))
 
     if not pages:
         tracker.update(jid, status="failed", error=f"No content extracted from {filename}")
@@ -530,11 +618,11 @@ def _ingest_one(jid, pdf_path, project, filename, stage_prefix=""):
     doc_id = ingest_document(
         conn, pages, sections, project, title,
         filename=filename,
-        pdf_path=str(Path(pdf_path).resolve()),
+        pdf_path=str(Path(file_path).resolve()),
     )
 
     tracker.update(jid, stage=f"{prefix}Replaying corrections")
-    replay_corrections(conn, doc_id, str(Path(pdf_path).resolve()))
+    replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if api_key:
@@ -550,17 +638,31 @@ def _ingest_one(jid, pdf_path, project, filename, stage_prefix=""):
     return doc_id
 
 
-def _run_ingestion(jid, pdf_path, project, filename):
-    """Run in thread pool. Splits large PDFs first, then ingests each part."""
+def _run_ingestion(jid, file_path, project, filename):
+    """Run in thread pool. Splits large PDFs first, then ingests each part.
+
+    Non-PDF files (images, DOCX, XLSX) are ingested directly — splitting
+    only applies to PDFs.
+    """
     try:
         project_dir = Path(UPLOADS_DIR) / project
+        ext = Path(filename).suffix.lower()
+
+        # Only PDFs go through the splitting pipeline
+        if ext != '.pdf':
+            tracker.update(jid, status="running", stage="Extracting content")
+            doc_id = _ingest_one(jid, file_path, project, filename)
+            if doc_id is not None:
+                tracker.update(jid, status="completed", stage="Done", doc_id=doc_id)
+            return
+
         tracker.update(jid, status="running", stage="Checking for document boundaries")
 
-        parts = _split_pdf(pdf_path, project_dir)
+        parts = _split_pdf(file_path, project_dir)
 
-        if len(parts) == 1 and str(parts[0]) == pdf_path:
+        if len(parts) == 1 and str(parts[0]) == file_path:
             # Single document — ingest directly
-            doc_id = _ingest_one(jid, pdf_path, project, filename)
+            doc_id = _ingest_one(jid, file_path, project, filename)
             if doc_id is not None:
                 tracker.update(jid, status="completed", stage="Done", doc_id=doc_id)
         else:
@@ -571,7 +673,7 @@ def _run_ingestion(jid, pdf_path, project, filename):
             # appear in pending uploads or get accidentally re-ingested
             originals_dir = project_dir / "_originals"
             originals_dir.mkdir(exist_ok=True)
-            original = Path(pdf_path)
+            original = Path(file_path)
             if original.exists():
                 shutil.move(str(original), str(originals_dir / original.name))
 
@@ -600,32 +702,37 @@ async def ingest_all(project: str):
     finally:
         conn.close()
 
-    pdfs = [p for p in sorted(project_dir.glob("*.pdf"))
-            if p.name not in ingested]
-    if not pdfs:
+    pending_files = []
+    for f in sorted(project_dir.iterdir()):
+        if f.is_dir() or f.name.startswith('.') or f.name.startswith('_'):
+            continue
+        if f.suffix.lower() in INGESTABLE_EXTENSIONS and f.name not in ingested:
+            pending_files.append(f)
+
+    if not pending_files:
         return {"status": "nothing_to_ingest", "jobs": []}
 
     loop = asyncio.get_event_loop()
     jobs = []
-    for pdf in pdfs:
-        jid = tracker.create(pdf.name, project)
+    for f in pending_files:
+        jid = tracker.create(f.name, project)
         loop.run_in_executor(
-            executor, _run_ingestion, jid, str(pdf), project, pdf.name
+            executor, _run_ingestion, jid, str(f), project, f.name
         )
         jobs.append(jid)
     return {"status": "started", "jobs": jobs, "count": len(jobs)}
 
 
-@app.post("/api/projects/{project}/ingest/{filename}")
+@app.post("/api/projects/{project}/ingest/{filename:path}")
 async def ingest_single(project: str, filename: str):
-    pdf_path = Path(UPLOADS_DIR) / project / filename
-    if not pdf_path.exists():
+    file_path = Path(UPLOADS_DIR) / project / filename
+    if not file_path.exists():
         raise HTTPException(404, f"File not found: {filename}")
 
     jid = tracker.create(filename, project)
     loop = asyncio.get_event_loop()
     loop.run_in_executor(
-        executor, _run_ingestion, jid, str(pdf_path), project, filename
+        executor, _run_ingestion, jid, str(file_path), project, filename
     )
     return {"status": "started", "job_id": jid}
 
@@ -725,6 +832,16 @@ def main():
 
     conn = init_db(DB_PATH)
     total = conn.execute("SELECT COUNT(*) FROM documents").fetchone()[0]
+
+    # Mark any jobs left running/queued from a previous process as failed
+    stale = conn.execute(
+        "UPDATE ingestion_jobs SET status = 'failed', "
+        "error = 'Server restarted before completion' "
+        "WHERE status IN ('running', 'queued')"
+    ).rowcount
+    conn.commit()
+    if stale:
+        print(f"  Cleaned {stale} stale job(s) from previous run")
     conn.close()
 
     # Start MCP server in background thread

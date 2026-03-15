@@ -42,6 +42,7 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Optional
 
+import fitz  # PyMuPDF — used for extracting individual pages for OCR
 import pdfplumber
 
 
@@ -155,6 +156,7 @@ DECIMAL_NUM_RE = re.compile(r'^(\d+(?:\.\d+)*)\.\s+(.+)')
 ALPHA_NUM_RE = re.compile(r'^([a-z])\.\s+(.+)', re.IGNORECASE)
 ROMAN_NUM_RE = re.compile(r'^(i{1,3}|iv|vi{0,3}|ix|xi{0,3}|xiv|xv)\.\s+(.+)',
                           re.IGNORECASE)
+CID_RE = re.compile(r'\(cid:\d+\)')
 
 
 def parse_decimal_numbering(text: str) -> tuple[str, int, str]:
@@ -305,7 +307,7 @@ def ocr_pdf(pdf_path: str) -> str:
         # --force-ocr: OCR every page even if text exists (scanned PDFs
         # sometimes have garbage invisible text layers)
         result = subprocess.run(
-            ['ocrmypdf', '--force-ocr', '--invalidate-digital-signatures',
+            ['ocrmypdf', '--force-ocr',
              '-l', 'eng', pdf_path, out_path],
             capture_output=True, text=True, timeout=600
         )
@@ -314,7 +316,7 @@ def ocr_pdf(pdf_path: str) -> str:
         print(f"  ocrmypdf attempt 1 failed: {result.stderr.strip()[:200]}")
         # Fallback: just add OCR where missing
         result = subprocess.run(
-            ['ocrmypdf', '--skip-text', '--invalidate-digital-signatures',
+            ['ocrmypdf', '--skip-text',
              '-l', 'eng', pdf_path, out_path],
             capture_output=True, text=True, timeout=600
         )
@@ -694,7 +696,7 @@ def ocr_pdf_skip_text(pdf_path: str) -> str:
     try:
         out_path = tempfile.mktemp(suffix='.pdf')
         result = subprocess.run(
-            ['ocrmypdf', '--skip-text', '--invalidate-digital-signatures',
+            ['ocrmypdf', '--skip-text',
              '-l', 'eng', pdf_path, out_path],
             capture_output=True, text=True, timeout=600
         )
@@ -725,6 +727,122 @@ def stage_ocr(pdf_path: str) -> str:
         return pdf_path
     print(f"  Scanned PDF detected, running OCR...")
     return ocr_pdf(pdf_path)
+
+
+def _page_text_from_lines(lines: list[ExtractedLine]) -> str:
+    """Join line texts for quality checks."""
+    return ' '.join(l.text for l in lines)
+
+
+def _is_garbled_cid(text: str, threshold: float = 0.3) -> bool:
+    """True if extracted text is mostly (cid:N) garbled characters."""
+    if not text or len(text.strip()) < 10:
+        return False
+    cid_chars = sum(len(m) for m in CID_RE.findall(text))
+    return cid_chars / len(text) > threshold
+
+
+def detect_pages_needing_ocr(page_lines: dict[int, list[ExtractedLine]],
+                              pdf_path: str) -> list[int]:
+    """Identify pages that need OCR after initial text extraction.
+
+    Catches two cases that stage_ocr / --skip-text miss:
+      1. Scanned pages (no text, but page has images)
+      2. Pages with garbled (cid:N) text from broken font encodings
+    """
+    bad = []
+    with pdfplumber.open(pdf_path) as pdf:
+        for i, page in enumerate(pdf.pages):
+            page_num = i + 1
+            lines = page_lines.get(page_num, [])
+            text = _page_text_from_lines(lines)
+
+            # Case 1: blank page with images (scan that wasn't OCR'd)
+            if len(text.strip()) < 20 and page.images:
+                bad.append(page_num)
+                continue
+
+            # Case 2: garbled cid text
+            if _is_garbled_cid(text):
+                bad.append(page_num)
+                continue
+
+    return bad
+
+
+def ocr_specific_pages(pdf_path: str, page_nums: list[int]) -> Optional[str]:
+    """Extract specific pages into a temp PDF, OCR it, return path.
+
+    Uses PyMuPDF to pull out just the bad pages, then runs ocrmypdf
+    --force-ocr on the small temp PDF.  Returns None on failure.
+    """
+    doc = fitz.open(pdf_path)
+    tmp_in = tempfile.mktemp(suffix='.pdf')
+    new_doc = fitz.open()
+    for pg in page_nums:
+        new_doc.insert_pdf(doc, from_page=pg - 1, to_page=pg - 1)
+    new_doc.save(tmp_in)
+    new_doc.close()
+    doc.close()
+
+    tmp_out = tempfile.mktemp(suffix='.pdf')
+    try:
+        result = subprocess.run(
+            ['ocrmypdf', '--force-ocr', '-l', 'eng', tmp_in, tmp_out],
+            capture_output=True, text=True, timeout=600,
+        )
+    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
+        print(f"  WARNING: ocrmypdf failed for pages {page_nums}: {exc}")
+        Path(tmp_in).unlink(missing_ok=True)
+        return None
+
+    Path(tmp_in).unlink(missing_ok=True)
+
+    if result.returncode in (0, 4) and Path(tmp_out).exists():
+        return tmp_out
+
+    print(f"  WARNING: ocrmypdf failed (rc={result.returncode}) for pages "
+          f"{page_nums}: {result.stderr.strip()[:200]}")
+    Path(tmp_out).unlink(missing_ok=True)
+    return None
+
+
+def stage_ocr_fixup(page_lines: dict[int, list[ExtractedLine]],
+                    pdf_path: str) -> set[int]:
+    """Post-extraction safety net: OCR any pages with bad text.
+
+    Detects blank scanned pages and garbled (cid:) font pages that
+    stage_ocr missed, OCRs them as a batch, and merges the fixed text
+    back into page_lines (mutated in place).
+
+    Returns set of page numbers that were OCR'd.
+    """
+    bad_pages = detect_pages_needing_ocr(page_lines, pdf_path)
+    if not bad_pages:
+        return set()
+
+    print(f"  {len(bad_pages)} page(s) need OCR: {bad_pages}")
+    ocr_path = ocr_specific_pages(pdf_path, bad_pages)
+    if not ocr_path:
+        return set()
+
+    fixed = set()
+    with pdfplumber.open(ocr_path) as pdf:
+        for i, page in enumerate(pdf.pages):
+            if i >= len(bad_pages):
+                break
+            actual_page_num = bad_pages[i]
+            new_lines = extract_lines_from_page(page, actual_page_num)
+            if new_lines:
+                page_lines[actual_page_num] = new_lines
+                fixed.add(actual_page_num)
+                new_text = _page_text_from_lines(new_lines)
+                print(f"    Page {actual_page_num}: OCR recovered {len(new_text)} chars")
+            else:
+                print(f"    Page {actual_page_num}: OCR produced no text")
+
+    Path(ocr_path).unlink(missing_ok=True)
+    return fixed
 
 
 def stage_extract_text(pdf_path: str, corrections: dict = None
@@ -823,11 +941,15 @@ def stage_build_pages(pdf_path: str,
                       page_lines: dict[int, list[ExtractedLine]],
                       headings: list[Heading],
                       stats: dict,
-                      corrections: dict = None
+                      corrections: dict = None,
+                      ocred_pages: set[int] | None = None,
                       ) -> tuple[list[dict], list[dict]]:
     """Stage 4: Build pages and sections output with breadcrumbs + tables.
 
     Returns (pages, sections) matching ingest.py's expected format.
+    For pages that were individually OCR'd (in *ocred_pages*), table
+    extraction from the original PDF is skipped — the OCR text already
+    contains the table content.
     """
     running_headers = stats['running_headers']
     breadcrumbs = build_breadcrumbs(headings)
@@ -860,23 +982,51 @@ def stage_build_pages(pdf_path: str,
 
             lines = page_lines.get(page_num, [])
 
-            content_parts = []
-            for line in lines:
-                normalized = _normalize_for_comparison(line.text)
-                if normalized in running_headers:
-                    continue
-                if SIMPLE_PAGE_RE.match(line.text.strip()):
-                    continue
-                if PAGE_NUM_RE.search(line.text) and line.word_count <= 5:
-                    continue
-                content_parts.append(line.text)
+            # Detect if this is a scanned page without vector table borders.
+            # Such pages need layout-aware extraction to preserve columnar
+            # structure (e.g. scanned tables where borders are pixels in the
+            # image, not vector lines pdfplumber can detect).
+            has_vector_lines = (
+                len(page.lines or []) + len(page.rects or []) > 2
+            )
+            is_ocred = ocred_pages and page_num in ocred_pages
 
-            # Add tables
-            tables = extract_tables_from_page(page)
-            for table_md in tables:
-                content_parts.append('\n' + table_md)
+            if not has_vector_lines and not is_ocred and lines:
+                # Scanned page: use layout-aware extraction for columns
+                layout_text = page.extract_text(layout=True)
+                if layout_text and len(layout_text.strip()) > 20:
+                    content = layout_text.strip()
+                    # Strip running headers from layout text
+                    filtered = []
+                    for lt_line in content.split('\n'):
+                        normalized = _normalize_for_comparison(lt_line.strip())
+                        if normalized and normalized in running_headers:
+                            continue
+                        filtered.append(lt_line)
+                    content = '\n'.join(filtered).strip()
+                else:
+                    # layout=True returned empty — fall back to lines
+                    content = '\n'.join(l.text for l in lines).strip()
+            else:
+                # Born-digital page or OCR'd page: use line-by-line + tables
+                content_parts = []
+                for line in lines:
+                    normalized = _normalize_for_comparison(line.text)
+                    if normalized in running_headers:
+                        continue
+                    if SIMPLE_PAGE_RE.match(line.text.strip()):
+                        continue
+                    if PAGE_NUM_RE.search(line.text) and line.word_count <= 5:
+                        continue
+                    content_parts.append(line.text)
 
-            content = '\n'.join(content_parts).strip()
+                # Add tables (skip for OCR'd pages — OCR text already has content)
+                if not is_ocred:
+                    tables = extract_tables_from_page(page)
+                    for table_md in tables:
+                        content_parts.append('\n' + table_md)
+
+                content = '\n'.join(content_parts).strip()
 
             # Apply OCR fixes from corrections
             if corrections:
@@ -955,13 +1105,17 @@ def extract_pdf(pdf_path: str, apply_llm_corrections: bool = True
     # Load corrections once, pass through pipeline
     corrections = load_corrections(pdf_path) if apply_llm_corrections else {}
 
-    # Stage 1: OCR
+    # Stage 1: Bulk OCR if obviously scanned
     actual_path = stage_ocr(pdf_path)
 
     # Stage 2: Extract text (applies running header corrections)
     page_lines, stats = stage_extract_text(actual_path, corrections)
     if not page_lines:
         return [], []
+
+    # Stage 2.5: Per-page OCR safety net — catches blank scans and
+    # garbled (cid:) pages that stage_ocr / --skip-text missed
+    ocred_pages = stage_ocr_fixup(page_lines, actual_path)
 
     # Stage 3: Detect headings (applies heading corrections)
     headings = stage_detect_headings(
@@ -970,7 +1124,7 @@ def extract_pdf(pdf_path: str, apply_llm_corrections: bool = True
 
     # Stage 4: Build pages + sections (applies OCR fixes, skips pages)
     pages, sections = stage_build_pages(
-        actual_path, page_lines, headings, stats, corrections)
+        actual_path, page_lines, headings, stats, corrections, ocred_pages)
 
     # Clean up OCR temp file
     if actual_path != pdf_path:

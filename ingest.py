@@ -536,8 +536,8 @@ def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
     try:
         from sentence_transformers import SentenceTransformer
         import numpy as np
-    except ImportError:
-        print("  sentence-transformers not installed, skipping embeddings")
+    except ImportError as e:
+        print(f"  sentence-transformers import failed: {e}")
         print("  Install: pip install sentence-transformers")
         return
     except Exception as e:
