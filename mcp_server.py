@@ -89,13 +89,66 @@ SSE_PORT = 8200
 
 mcp = FastMCP(
     "Document RAG",
-    instructions=(
-        "Search and navigate engineering project documents. "
-        "All searches are scoped by project. Use list_projects first, "
-        "then search_pages to find content, then get_page to read it. "
-        "If Marker output looks garbled or a table seems wrong, "
-        "use reextract_page or reextract_table for a second extraction from the original PDF."
-    ),
+    instructions="""\
+Search and navigate engineering project documents (specifications, procedures, QAPs, tender docs).
+All searches are scoped by project. Use list_projects first.
+
+=== SEARCH STRATEGY (CRITICAL) ===
+
+search_pages uses FTS keyword matching — NOT semantic/vector search. It only finds exact word matches.
+This means you MUST try multiple query variations to get good recall. Treat every search like this:
+
+1. NEVER search just once. Always run 3-8 query variations for any question.
+2. Strip question words: "What is the MOC of superheater coil tubes?" → search for keywords only.
+3. Try DIFFERENT word combinations, not just the obvious one:
+   - Full terms: "superheater coil tube material"
+   - Subset pairs: "superheater tube", "superheater material", "tube material"
+   - Reordered: "material specification superheater", "tube grade boiler"
+4. Expand abbreviations — these documents use both forms:
+   MOC = material of construction | OD = outside diameter | ID = inside diameter
+   NB = nominal bore | CS = carbon steel | SS = stainless steel | AS/LAS = alloy/low alloy steel
+   QAP = quality assurance plan | IBR = Indian boiler regulations | PWHT = post weld heat treatment
+   NDE/NDT = non-destructive examination/testing | MTC = material test certificate
+   PSV/PRV = pressure safety/relief valve | WPS = welding procedure specification
+   LSG = lower steam generator | USG = upper steam generator | TA = turnaround
+5. Try SYNONYMS — engineering docs use varied terminology:
+   tube ↔ pipe ↔ coil ↔ tubing | material ↔ grade ↔ alloy ↔ specification
+   repair ↔ replacement ↔ maintenance | inspection ↔ testing ↔ examination
+   drawing ↔ diagram ↔ figure | specification ↔ standard ↔ requirement
+   superheater ↔ super heater | economizer ↔ economiser | boiler ↔ steam generator
+   refractory ↔ lining ↔ castable | schedule ↔ sch (wall thickness)
+6. Try ASME/SA material spec numbers if relevant:
+   SA 106 (CS pipe), SA 213 (alloy tube), SA 516 (CS plate), SA 240 (SS plate)
+   Grade T9, T11, T22 (chrome-moly alloys)
+7. Look for ANNEXURE references — specs often say "as per Annexure X" and the detail is elsewhere.
+   Follow those references by searching for the annexure content.
+8. Use search_sections to find which DOCUMENT likely has the answer, then search_pages within that doc.
+
+Example — searching for "MOC of superheater coil tubes":
+  search 1: "superheater coil tube material"
+  search 2: "superheater tube material"
+  search 3: "material of construction superheater"
+  search 4: "SA 213 superheater"
+  search 5: "tube specification grade superheater"
+  search 6: "coil material supply boiler"
+  search 7: "QAP superheater tube"
+→ Combine all results, read the most promising pages with get_page.
+
+After finding relevant pages, use get_page with include_adjacent=true to see surrounding context.
+If Marker output looks garbled, use reextract_page or reextract_table for a fresh PDF extraction.
+
+=== CORRECTION TOOLS ===
+
+When you notice extraction errors while reading pages, fix them immediately:
+- Wrong/missing headings: add_heading, remove_heading, change_heading_level, rename_heading
+- Wrong document boundaries: split_document, merge_documents
+- OCR errors: fix_ocr_text
+- Bad page classification: reclassify_page, skip_page
+- Missing metadata: set_document_title, set_document_type, set_document_number, set_revision
+- Cross-references found: add_cross_reference, link_documents
+- Quality issues: flag_low_quality, flag_duplicate, suggest_reocr
+Corrections persist in both the database AND a sidecar JSON file that survives re-ingestion.
+""",
     port=SSE_PORT,
 )
 
@@ -230,12 +283,17 @@ def search_pages(
     page_type: Optional[str] = None,
     max_results: int = 10
 ) -> str:
-    """Full-text search within a project's documents. Primary search tool.
+    """Full-text keyword search across a project's pages. This is FTS, not semantic search.
+
+    IMPORTANT: Always call this multiple times with different query variations.
+    A single query will miss results because FTS only matches exact words.
+    Try 3-8 variations: rearrange words, use synonyms, expand abbreviations,
+    try 2-word subsets. See server instructions for detailed search strategy.
 
     Args:
         project: Project name (required).
-        query: Search keywords. Use specific technical terms.
-               If no results, try synonyms (e.g. "tube pitch" instead of "tube spacing").
+        query: 2-5 keyword terms (not a full sentence). Drop stop words.
+               Examples: "superheater tube material", "SA 213 grade", "QAP coil tube"
         doc_id: Optional. Restrict to one document.
         page_type: Optional. Filter: 'text', 'drawing', 'table', 'toc', 'cover'.
         max_results: Default 10, max 25.
@@ -381,6 +439,45 @@ def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> str:
                     }
 
         return json.dumps(result, indent=2)
+
+
+@mcp.tool()
+def get_pages(doc_id: int, page_start: int, page_end: int) -> str:
+    """Get full content of a range of pages. Max 10 pages per call.
+
+    Args:
+        doc_id: Document ID.
+        page_start: First page number (inclusive).
+        page_end: Last page number (inclusive).
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+
+        page_end = min(page_end, page_start + 9)  # cap at 10 pages
+
+        rows = conn.execute(
+            "SELECT * FROM pages WHERE doc_id = ? AND page_num BETWEEN ? AND ? "
+            "ORDER BY page_num",
+            (doc_id, page_start, page_end)
+        ).fetchall()
+
+        if not rows:
+            return json.dumps({
+                "error": f"No pages found in range {page_start}-{page_end}",
+                "total_pages": d["total_pages"]
+            })
+
+        return json.dumps({
+            "doc_id": doc_id, "doc_title": d["title"], "project": d["project"],
+            "total_pages": d["total_pages"],
+            "pages": [
+                {"page_num": p["page_num"], "breadcrumb": p["breadcrumb"],
+                 "page_type": p["page_type"], "content": p["content"]}
+                for p in rows
+            ]
+        }, indent=2)
 
 
 @mcp.tool()
