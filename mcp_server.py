@@ -137,17 +137,62 @@ Example — searching for "MOC of superheater coil tubes":
 After finding relevant pages, use get_page with include_adjacent=true to see surrounding context.
 If Marker output looks garbled, use reextract_page or reextract_table for a fresh PDF extraction.
 
-=== CORRECTION TOOLS ===
+=== DATA CORRECTION (YOU CAN AND SHOULD FIX WHAT YOU SEE) ===
 
-When you notice extraction errors while reading pages, fix them immediately:
-- Wrong/missing headings: add_heading, remove_heading, change_heading_level, rename_heading
-- Wrong document boundaries: split_document, merge_documents
-- OCR errors: fix_ocr_text
-- Bad page classification: reclassify_page, skip_page
-- Missing metadata: set_document_title, set_document_type, set_document_number, set_revision
-- Cross-references found: add_cross_reference, link_documents
-- Quality issues: flag_low_quality, flag_duplicate, suggest_reocr
-Corrections persist in both the database AND a sidecar JSON file that survives re-ingestion.
+These documents were auto-extracted from PDFs using heuristic heading detection and OCR.
+The extraction makes mistakes — wrong headings, bad levels, OCR garbage, wrong page types,
+missing metadata. YOU have correction tools to fix these. Use them proactively as you read.
+
+Your corrections improve the system permanently: they write to both the live database
+(immediate effect on search results) AND a sidecar JSON file next to the PDF. When the
+document is re-ingested later, your corrections are automatically replayed. The system
+gets better every time you use it.
+
+WHEN TO CORRECT (do this as you go, not as a separate task):
+- You see a heading that shouldn't be one (e.g. a table row detected as H2):
+  → remove_heading(doc_id, page_num, text_prefix)
+- A real heading was missed by the extractor:
+  → add_heading(doc_id, page_num, text, level)
+- Heading is at the wrong level (H3 should be H1):
+  → change_heading_level(doc_id, page_num, text_prefix, new_level)
+- Heading text is garbled or truncated:
+  → rename_heading(doc_id, page_num, old_text_prefix, new_text)
+- Two documents should actually be one (were incorrectly split):
+  → merge_documents(doc_id_a, doc_id_b)
+- One document contains multiple logical documents:
+  → split_document(doc_id, at_page)
+- OCR misread text (e.g. "tbe" instead of "the", "l" instead of "1"):
+  → fix_ocr_text(doc_id, page_num, old_text, new_text)
+- A page is classified wrong (text marked as drawing, or vice versa):
+  → reclassify_page(doc_id, page_num, new_type)
+- A page is junk (blank, duplicate, garbage OCR):
+  → skip_page(doc_id, page_num)
+- A page belongs in a different document:
+  → move_page_to_document(page_num, from_doc_id, to_doc_id)
+- The breadcrumb/context on a page is wrong:
+  → set_page_breadcrumb(doc_id, page_num, breadcrumb)
+- A repeated header/footer clutters the content (e.g. "CONFIDENTIAL" on every page):
+  → add_running_header(doc_id, text) — strips it from all pages immediately
+- Document title is wrong or unhelpful:
+  → set_document_title(doc_id, title)
+- You can identify the document type, number, or revision:
+  → set_document_type, set_document_number, set_revision
+- You spot cross-references between documents:
+  → add_cross_reference(doc_id, page_num, target_doc_id, context)
+  → link_documents(doc_id, related_doc_id, relationship)
+- You want to tag keywords or equipment for better future search:
+  → add_keywords(doc_id, keywords_csv)
+  → add_equipment_tags(doc_id, tags_csv)
+- A page has terrible OCR quality:
+  → flag_low_quality(doc_id, page_num, reason)
+  → suggest_reocr(doc_id, reason)
+- Two documents look like duplicates:
+  → flag_duplicate(doc_id, duplicate_of_doc_id)
+
+Be proactive. If the document title is "f 41  maintenance work procedure   s" and you can
+see from the content it's actually "F-41: Maintenance Work Procedure - Scaffolding", fix it.
+If a page has 50 false headings detected from table rows, remove the worst ones.
+Every correction you make improves search results for all future queries.
 """,
     port=SSE_PORT,
 )
