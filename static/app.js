@@ -94,7 +94,8 @@ async function showProject(project) {
   loadProjects();
   setTopbar(
     `<a href="#/" style="color:#666">Projects</a><span>/</span><strong>${esc(project)}</strong>`,
-    `<button class="btn btn-ghost" onclick="navigate('#/quality/${encodeURIComponent(project)}')">Quality</button>
+    `<button class="btn btn-ghost" onclick="promptRenameProject('${esc(project)}')">Rename</button>
+     <button class="btn btn-ghost" onclick="navigate('#/quality/${encodeURIComponent(project)}')">Quality</button>
      <button class="btn btn-danger btn-sm" onclick="confirmDeleteProject('${esc(project)}')">Delete Project</button>`
   );
 
@@ -147,8 +148,12 @@ async function showProject(project) {
           <td><strong>${esc(d.title)}</strong><br><span class="muted mono">${esc(d.filename)}</span></td>
           <td>${d.total_pages}</td><td>${d.sections}</td>
           <td>${d.document_type ? `<span class="tag">${esc(d.document_type)}</span>` : '<span class="muted">-</span>'}</td>
-          <td><button class="btn btn-ghost btn-sm" style="color:#dc3545"
-               onclick="event.stopPropagation(); confirmDeleteDoc(${d.id}, '${esc(d.title)}')">Delete</button></td>
+          <td style="white-space:nowrap">
+            <a class="btn btn-ghost btn-sm" href="/api/documents/${d.id}/pdf" onclick="event.stopPropagation()" title="Download PDF">PDF</a>
+            <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); promptRenameDoc(${d.id}, '${esc(d.title)}')" title="Rename">Rename</button>
+            <button class="btn btn-ghost btn-sm" style="color:#dc3545"
+               onclick="event.stopPropagation(); confirmDeleteDoc(${d.id}, '${esc(d.title)}')">Delete</button>
+          </td>
         </tr>`;
       }
       html += '</table>';
@@ -179,7 +184,8 @@ async function showViewer(docId, pageNum) {
       `<a href="#/" style="color:#666">Projects</a><span>/</span>` +
       `<a href="#/project/${enc(doc.project)}">${esc(doc.project)}</a><span>/</span>` +
       `<strong>${esc(doc.title)}</strong>`,
-      `<button class="btn btn-ghost btn-sm" onclick="navigate('#/project/${enc(doc.project)}')">Back</button>`
+      `<a class="btn btn-ghost btn-sm" href="/api/documents/${docId}/pdf">Download PDF</a>
+       <button class="btn btn-ghost btn-sm" onclick="navigate('#/project/${enc(doc.project)}')">Back</button>`
     );
 
     const content = document.getElementById('content');
@@ -355,6 +361,58 @@ async function createProject() {
   } catch (e) {
     alert('Error: ' + e.message);
   }
+}
+
+function promptRenameProject(project) {
+  document.getElementById('modal-content').innerHTML = `
+    <h3>Rename Project</h3>
+    <input type="text" id="rename-input" value="${esc(project)}" autofocus
+           onkeydown="if(event.key==='Enter') doRenameProject('${esc(project)}')">
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="doRenameProject('${esc(project)}')">Rename</button>
+    </div>`;
+  document.getElementById('modal-overlay').style.display = 'flex';
+  setTimeout(() => { const el = document.getElementById('rename-input'); el?.focus(); el?.select(); }, 100);
+}
+
+async function doRenameProject(oldName) {
+  const newName = document.getElementById('rename-input').value.trim();
+  if (!newName || newName === oldName) { closeModal(); return; }
+  try {
+    await api(`/projects/${enc(oldName)}`, {
+      method: 'PATCH', body: JSON.stringify({ name: newName })
+    });
+    closeModal();
+    currentProject = newName;
+    await loadProjects();
+    navigate('#/project/' + encodeURIComponent(newName));
+  } catch (e) { alert('Error: ' + e.message); }
+}
+
+function promptRenameDoc(docId, currentTitle) {
+  document.getElementById('modal-content').innerHTML = `
+    <h3>Rename Document</h3>
+    <input type="text" id="rename-input" value="${esc(currentTitle)}" autofocus
+           onkeydown="if(event.key==='Enter') doRenameDoc(${docId})">
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="doRenameDoc(${docId})">Rename</button>
+    </div>`;
+  document.getElementById('modal-overlay').style.display = 'flex';
+  setTimeout(() => { const el = document.getElementById('rename-input'); el?.focus(); el?.select(); }, 100);
+}
+
+async function doRenameDoc(docId) {
+  const title = document.getElementById('rename-input').value.trim();
+  if (!title) { closeModal(); return; }
+  try {
+    await api(`/documents/${docId}`, {
+      method: 'PATCH', body: JSON.stringify({ title })
+    });
+    closeModal();
+    if (currentProject) showProject(currentProject);
+  } catch (e) { alert('Error: ' + e.message); }
 }
 
 function confirmDeleteProject(project) {

@@ -173,6 +173,36 @@ def create_project(data: dict):
     return {"status": "created", "project": name}
 
 
+@app.patch("/api/projects/{project}")
+def rename_project(project: str, data: dict):
+    new_name = data.get("name", "").strip()
+    if not new_name:
+        raise HTTPException(400, "New name required")
+    if re.search(r'[/\\<>:"|?*]', new_name):
+        raise HTTPException(400, "Invalid characters in project name")
+    conn = get_conn()
+    try:
+        conn.execute(
+            "UPDATE documents SET project = ? WHERE project = ?",
+            (new_name, project)
+        )
+        conn.execute(
+            "UPDATE ingestion_jobs SET project = ? WHERE project = ?",
+            (new_name, project)
+        )
+        conn.commit()
+
+        # Rename uploads directory
+        old_dir = Path(UPLOADS_DIR) / project
+        new_dir = Path(UPLOADS_DIR) / new_name
+        if old_dir.exists() and not new_dir.exists():
+            old_dir.rename(new_dir)
+
+        return {"status": "renamed", "old_name": project, "new_name": new_name}
+    finally:
+        conn.close()
+
+
 @app.delete("/api/projects/{project}")
 def delete_project(project: str):
     conn = get_conn()
@@ -254,6 +284,51 @@ async def upload_pdfs(project: str, files: list[UploadFile] = File(...)):
             out.write(content)
         uploaded.append(f.filename)
     return {"uploaded": uploaded, "count": len(uploaded)}
+
+
+@app.patch("/api/documents/{doc_id}")
+def rename_document(doc_id: int, data: dict):
+    new_title = data.get("title", "").strip()
+    if not new_title:
+        raise HTTPException(400, "New title required")
+    conn = get_conn()
+    try:
+        doc = conn.execute(
+            "SELECT id FROM documents WHERE id = ?", (doc_id,)
+        ).fetchone()
+        if not doc:
+            raise HTTPException(404, "Document not found")
+        conn.execute(
+            "UPDATE documents SET title = ? WHERE id = ?",
+            (new_title, doc_id)
+        )
+        conn.commit()
+        return {"status": "renamed", "doc_id": doc_id, "title": new_title}
+    finally:
+        conn.close()
+
+
+@app.get("/api/documents/{doc_id}/pdf")
+def download_pdf(doc_id: int):
+    conn = get_conn()
+    try:
+        doc = conn.execute(
+            "SELECT title, filename, pdf_path FROM documents WHERE id = ?",
+            (doc_id,)
+        ).fetchone()
+        if not doc:
+            raise HTTPException(404, "Document not found")
+        pdf_path = doc["pdf_path"]
+        if not pdf_path or not Path(pdf_path).exists():
+            raise HTTPException(404, "PDF file not found on disk")
+        download_name = doc["filename"] or f"{doc['title']}.pdf"
+        return FileResponse(
+            pdf_path,
+            media_type="application/pdf",
+            filename=download_name,
+        )
+    finally:
+        conn.close()
 
 
 @app.delete("/api/documents/{doc_id}")
