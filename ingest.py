@@ -132,6 +132,17 @@ CREATE TABLE IF NOT EXISTS quality_flags (
 CREATE INDEX IF NOT EXISTS idx_corrections_doc ON corrections(doc_id);
 CREATE INDEX IF NOT EXISTS idx_cross_references_doc ON cross_references(doc_id);
 CREATE INDEX IF NOT EXISTS idx_quality_flags_doc ON quality_flags(doc_id);
+
+CREATE TABLE IF NOT EXISTS ingestion_jobs (
+    id          TEXT PRIMARY KEY,
+    filename    TEXT NOT NULL,
+    project     TEXT NOT NULL,
+    status      TEXT NOT NULL DEFAULT 'queued',
+    stage       TEXT DEFAULT '',
+    error       TEXT,
+    doc_id      INTEGER,
+    started_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 """
 
 

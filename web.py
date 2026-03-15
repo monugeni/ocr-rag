@@ -69,31 +69,61 @@ def get_conn():
 # ---------------------------------------------------------------------------
 
 class IngestionTracker:
-    def __init__(self):
-        self.jobs = {}
+    """Persists ingestion job state to SQLite so it survives page
+    reloads and server restarts."""
+
+    def _conn(self):
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        return conn
 
     def create(self, filename, project):
         jid = str(uuid4())[:8]
-        self.jobs[jid] = {
-            "id": jid, "filename": filename, "project": project,
-            "status": "queued", "stage": "", "error": None,
-            "doc_id": None, "started_at": datetime.now().isoformat(),
-        }
+        conn = self._conn()
+        conn.execute(
+            "INSERT INTO ingestion_jobs (id, filename, project, status, stage) "
+            "VALUES (?, ?, ?, 'queued', '')",
+            (jid, filename, project)
+        )
+        conn.commit()
+        conn.close()
         return jid
 
     def update(self, jid, **kw):
-        if jid in self.jobs:
-            self.jobs[jid].update(kw)
+        if not kw:
+            return
+        conn = self._conn()
+        sets = ", ".join(f"{k} = ?" for k in kw)
+        vals = list(kw.values()) + [jid]
+        conn.execute(f"UPDATE ingestion_jobs SET {sets} WHERE id = ?", vals)
+        conn.commit()
+        conn.close()
 
     def all(self):
-        # Auto-clean completed jobs older than 1h
-        cutoff = datetime.now().timestamp() - 3600
-        self.jobs = {
-            k: v for k, v in self.jobs.items()
-            if v["status"] not in ("completed", "failed")
-            or datetime.fromisoformat(v["started_at"]).timestamp() > cutoff
-        }
-        return list(self.jobs.values())
+        conn = self._conn()
+        # Clean completed/failed jobs older than 1 hour
+        conn.execute(
+            "DELETE FROM ingestion_jobs WHERE status IN ('completed', 'failed') "
+            "AND started_at < datetime('now', '-1 hour')"
+        )
+        conn.commit()
+        rows = conn.execute(
+            "SELECT * FROM ingestion_jobs ORDER BY started_at DESC"
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
+
+    def for_project(self, project):
+        conn = self._conn()
+        rows = conn.execute(
+            "SELECT * FROM ingestion_jobs WHERE project = ? "
+            "AND (status IN ('queued', 'running') "
+            "     OR started_at > datetime('now', '-1 hour')) "
+            "ORDER BY started_at DESC",
+            (project,)
+        ).fetchall()
+        conn.close()
+        return [dict(r) for r in rows]
 
 
 tracker = IngestionTracker()
