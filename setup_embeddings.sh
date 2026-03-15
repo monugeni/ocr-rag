@@ -10,9 +10,13 @@ echo "=== Embedding Setup ==="
 echo "Database: $DB"
 echo ""
 
-# Install sentence-transformers (pulls torch CPU automatically)
-echo "Installing sentence-transformers..."
-pip install sentence-transformers 2>&1 | tail -1
+# Install sentence-transformers if not present
+if python3 -c "import sentence_transformers" 2>/dev/null; then
+    echo "sentence-transformers: already installed"
+else
+    echo "Installing sentence-transformers..."
+    pip install sentence-transformers
+fi
 
 echo ""
 
