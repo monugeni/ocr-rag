@@ -63,7 +63,6 @@ if [[ "${1:-}" == "--ingest" ]]; then
     python3 - "$PDF_DIR" "$PROJECT" "$DB_PATH" <<'PYEOF'
 import sys, os
 sys.path.insert(0, "/opt/ocr-rag")
-sys.path.insert(0, "/opt/ocr-rag/heuristic-extractor")
 
 from pathlib import Path
 from ingest import init_db, ingest_document, replay_corrections
@@ -176,16 +175,6 @@ else
     git clone "$REPO_URL" "$APP_DIR"
     chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
 fi
-
-# --- Copy heuristic extractor alongside (it's in the parent repo) ---
-# If deploying standalone, the extractor needs to be available
-EXTRACTOR_DIR="${APP_DIR}/heuristic-extractor"
-if [[ ! -d "$EXTRACTOR_DIR" ]]; then
-    log "Creating heuristic-extractor placeholder..."
-    mkdir -p "$EXTRACTOR_DIR"
-    warn "Copy extractor.py to ${EXTRACTOR_DIR}/ manually if ingesting from this server"
-fi
-chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
 
 # --- Data directory ---
 log "Setting up data directory: ${DATA_DIR}"
