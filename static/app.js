@@ -163,8 +163,12 @@ async function showProject(project) {
     html += '</div>';
     content.innerHTML = html;
 
-    // Start polling for active jobs
-    startPolling(project);
+    // Only poll if there are active (non-terminal) jobs
+    const jobs = await api('/ingestion/jobs');
+    const activeJobs = jobs.filter(j => j.project === project && j.status !== 'completed' && j.status !== 'failed');
+    if (activeJobs.length) {
+      startPolling(project);
+    }
   } catch (e) {
     content.innerHTML = `<div class="empty">Error: ${esc(e.message)}</div>`;
   }

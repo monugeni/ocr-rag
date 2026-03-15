@@ -45,6 +45,7 @@ from ingest import (
     extract_metadata_llm, apply_metadata,
 )
 from extractor import extract_pdf
+from splitter import PDFSplitter
 
 
 # ---------------------------------------------------------------------------
@@ -465,40 +466,116 @@ def search_in_doc(doc_id: int, q: str = Query(...)):
 # Ingestion routes
 # ---------------------------------------------------------------------------
 
+SPLIT_MIN_PAGES = 20       # only attempt splitting on PDFs with >= this many pages
+SPLIT_SCORE_THRESHOLD = 3.0
+SPLIT_MIN_DOC_PAGES = 4
+
+
+def _split_pdf(pdf_path, project_dir):
+    """Split a large PDF into sub-documents. Returns list of Path objects.
+    If the PDF is small or the splitter finds no boundaries, returns [original]."""
+    import fitz
+    doc = fitz.open(str(pdf_path))
+    page_count = len(doc)
+    doc.close()
+
+    if page_count < SPLIT_MIN_PAGES:
+        return [Path(pdf_path)]
+
+    import tempfile
+    tmp_dir = Path(tempfile.mkdtemp(prefix="ocrrag_split_"))
+    splitter = PDFSplitter(
+        pdf_path=str(pdf_path),
+        output_dir=str(tmp_dir),
+        threshold=SPLIT_SCORE_THRESHOLD,
+        min_doc_pages=SPLIT_MIN_DOC_PAGES,
+    )
+    report = splitter.run()
+
+    segments = report.get("segments", [])
+    if report.get("status") == "skipped" or len(segments) <= 1:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+        return [Path(pdf_path)]
+
+    # Move split parts into the project upload directory
+    parts = []
+    for seg in segments:
+        part_pattern = f"*_part{seg['segment']:03d}_*"
+        matches = list(tmp_dir.glob(part_pattern))
+        if matches:
+            dest = project_dir / matches[0].name
+            shutil.move(str(matches[0]), str(dest))
+            parts.append(dest)
+
+    shutil.rmtree(tmp_dir, ignore_errors=True)
+    return parts if parts else [Path(pdf_path)]
+
+
+def _ingest_one(jid, pdf_path, project, filename, stage_prefix=""):
+    """Ingest a single PDF (no splitting)."""
+    prefix = f"{stage_prefix}" if stage_prefix else ""
+    tracker.update(jid, status="running", stage=f"{prefix}Extracting text & headings")
+    pages, sections = extract_pdf(str(pdf_path))
+
+    if not pages:
+        tracker.update(jid, status="failed", error=f"No content extracted from {filename}")
+        return None
+
+    tracker.update(jid, stage=f"{prefix}Ingesting into database")
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys=ON")
+
+    title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
+    doc_id = ingest_document(
+        conn, pages, sections, project, title,
+        filename=filename,
+        pdf_path=str(Path(pdf_path).resolve()),
+    )
+
+    tracker.update(jid, stage=f"{prefix}Replaying corrections")
+    replay_corrections(conn, doc_id, str(Path(pdf_path).resolve()))
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if api_key:
+        tracker.update(jid, stage=f"{prefix}Extracting metadata (LLM)")
+        meta = extract_metadata_llm(pages, api_key=api_key)
+        if meta:
+            apply_metadata(conn, doc_id, meta)
+
+    conn.close()
+    return doc_id
+
+
 def _run_ingestion(jid, pdf_path, project, filename):
-    """Run in thread pool."""
+    """Run in thread pool. Splits large PDFs first, then ingests each part."""
     try:
-        tracker.update(jid, status="running", stage="Extracting text & headings")
-        pages, sections = extract_pdf(str(pdf_path))
+        project_dir = Path(UPLOADS_DIR) / project
+        tracker.update(jid, status="running", stage="Checking for document boundaries")
 
-        if not pages:
-            tracker.update(jid, status="failed", error="No content extracted")
-            return
+        parts = _split_pdf(pdf_path, project_dir)
 
-        tracker.update(jid, stage="Ingesting into database")
-        conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA foreign_keys=ON")
+        if len(parts) == 1 and str(parts[0]) == pdf_path:
+            # Single document — ingest directly
+            doc_id = _ingest_one(jid, pdf_path, project, filename)
+            if doc_id is not None:
+                tracker.update(jid, status="completed", stage="Done", doc_id=doc_id)
+        else:
+            # Multiple sub-documents from split
+            tracker.update(jid, stage=f"Split into {len(parts)} documents")
+            for i, part in enumerate(parts, 1):
+                prefix = f"[{i}/{len(parts)}] "
+                doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
 
-        title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
-        doc_id = ingest_document(
-            conn, pages, sections, project, title,
-            filename=filename,
-            pdf_path=str(Path(pdf_path).resolve()),
-        )
+            # Move original PDF to _originals/ so it won't be re-ingested
+            originals_dir = project_dir / "_originals"
+            originals_dir.mkdir(exist_ok=True)
+            original = Path(pdf_path)
+            if original.exists():
+                shutil.move(str(original), str(originals_dir / original.name))
 
-        tracker.update(jid, stage="Replaying corrections")
-        replay_corrections(conn, doc_id, str(Path(pdf_path).resolve()))
-
-        api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if api_key:
-            tracker.update(jid, stage="Extracting metadata (LLM)")
-            meta = extract_metadata_llm(pages, api_key=api_key)
-            if meta:
-                apply_metadata(conn, doc_id, meta)
-
-        conn.close()
-        tracker.update(jid, status="completed", stage="Done", doc_id=doc_id)
+            tracker.update(jid, status="completed",
+                           stage=f"Done — split into {len(parts)} documents")
 
     except Exception as e:
         tracker.update(jid, status="failed", error=str(e))
