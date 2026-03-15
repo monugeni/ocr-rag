@@ -135,7 +135,8 @@ fi
 if [[ "${1:-}" == "--update" ]]; then
     log "Updating code..."
     cd "$APP_DIR"
-    sudo -u "$SERVICE_USER" git pull --ff-only
+    git pull --ff-only || { warn "Git pull failed — pull manually as your user first: cd $APP_DIR && git pull"; }
+    chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
     log "Updating dependencies..."
     sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r requirements.txt
     log "Restarting service..."
@@ -166,19 +167,12 @@ fi
 
 # --- Clone/update repo ---
 if [[ -d "${APP_DIR}/.git" ]]; then
-    log "Updating existing repo..."
+    log "Repo exists at ${APP_DIR}"
     chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
-    cd "$APP_DIR"
-    git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
-    sudo -u "$SERVICE_USER" git config --global --add safe.directory "$APP_DIR" 2>/dev/null || true
-    sudo -u "$SERVICE_USER" git pull --ff-only || {
-        warn "Git pull failed, continuing with existing code"
-    }
 else
-    log "Cloning repo..."
-    rm -rf "$APP_DIR"
-    git clone "$REPO_URL" "$APP_DIR"
-    chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
+    err "Clone the repo first as your user:"
+    err "  git clone ${REPO_URL} ${APP_DIR}"
+    exit 1
 fi
 
 # --- Data directory ---
