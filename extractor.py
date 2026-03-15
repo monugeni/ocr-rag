@@ -274,6 +274,23 @@ def is_born_digital(pdf_path: str, sample_pages: int = 3) -> bool:
         return False
 
 
+def has_blank_pages(pdf_path: str, min_chars: int = 20) -> bool:
+    """Check if a born-digital PDF has any pages with no extractable text.
+
+    These are typically scanned images embedded in an otherwise digital PDF.
+    Returns True if OCR should be run with --skip-text to fill in the gaps.
+    """
+    try:
+        with pdfplumber.open(pdf_path) as pdf:
+            for page in pdf.pages:
+                text = page.extract_text() or ''
+                if len(text.strip()) < min_chars and page.images:
+                    return True
+        return False
+    except Exception:
+        return False
+
+
 # ---------------------------------------------------------------------------
 # OCR fallback for scanned PDFs
 # ---------------------------------------------------------------------------
@@ -288,19 +305,20 @@ def ocr_pdf(pdf_path: str) -> str:
         # --force-ocr: OCR every page even if text exists (scanned PDFs
         # sometimes have garbage invisible text layers)
         result = subprocess.run(
-            ['ocrmypdf', '--force-ocr', '-l', 'eng',
-             pdf_path, out_path],
+            ['ocrmypdf', '--force-ocr', '--invalidate-digital-signatures',
+             '-l', 'eng', pdf_path, out_path],
             capture_output=True, text=True, timeout=600
         )
-        if result.returncode == 0:
+        if result.returncode in (0, 4) and Path(out_path).exists():
             return out_path
         print(f"  ocrmypdf attempt 1 failed: {result.stderr.strip()[:200]}")
         # Fallback: just add OCR where missing
         result = subprocess.run(
-            ['ocrmypdf', '--skip-text', '-l', 'eng', pdf_path, out_path],
+            ['ocrmypdf', '--skip-text', '--invalidate-digital-signatures',
+             '-l', 'eng', pdf_path, out_path],
             capture_output=True, text=True, timeout=600
         )
-        if result.returncode == 0:
+        if result.returncode in (0, 4) and Path(out_path).exists():
             return out_path
     except (FileNotFoundError, subprocess.TimeoutExpired):
         pass
@@ -666,13 +684,44 @@ def extract_tables_from_page(page) -> list[str]:
 # Pipeline stages (composable)
 # ---------------------------------------------------------------------------
 
+def ocr_pdf_skip_text(pdf_path: str) -> str:
+    """Run ocrmypdf with --skip-text to OCR only pages missing text.
+
+    For mixed PDFs where some pages are born-digital and others are scans.
+    Accepts exit codes 0 (success) and 4 (output has minor PDF warnings
+    but OCR text was added successfully).
+    """
+    try:
+        out_path = tempfile.mktemp(suffix='.pdf')
+        result = subprocess.run(
+            ['ocrmypdf', '--skip-text', '--invalidate-digital-signatures',
+             '-l', 'eng', pdf_path, out_path],
+            capture_output=True, text=True, timeout=600
+        )
+        if result.returncode in (0, 4) and Path(out_path).exists():
+            return out_path
+        print(f"  ocrmypdf --skip-text failed (rc={result.returncode}): "
+              f"{result.stderr.strip()[:200]}")
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        pass
+    print(f"  WARNING: ocrmypdf not available, using original PDF")
+    return pdf_path
+
+
 def stage_ocr(pdf_path: str) -> str:
     """Stage 1: Ensure PDF has text layer. OCR if scanned.
 
-    Returns path to a PDF with extractable text (may be the original
-    if born-digital, or a temp OCR'd copy if scanned).
+    Handles three cases:
+      - Born-digital (all pages have text): use as-is
+      - Fully scanned (no pages have text): full OCR
+      - Mixed (some pages scanned, some digital): OCR only blank pages
+
+    Returns path to a PDF with extractable text.
     """
     if is_born_digital(pdf_path):
+        if has_blank_pages(pdf_path):
+            print(f"  Mixed PDF: some pages are scans, running OCR on blank pages...")
+            return ocr_pdf_skip_text(pdf_path)
         return pdf_path
     print(f"  Scanned PDF detected, running OCR...")
     return ocr_pdf(pdf_path)
@@ -833,12 +882,20 @@ def stage_build_pages(pdf_path: str,
             if corrections:
                 content = apply_ocr_fixes(content, page_num, corrections)
 
-            if content:
-                pages.append({
-                    'page_num': page_num,
-                    'content': content,
-                    'breadcrumb': breadcrumbs.get(page_num, ''),
-                })
+            # Keep page even if blank — use placeholder so page numbering
+            # stays consistent and the LLM knows the page exists
+            if not content:
+                # Check if this page has images (likely a scan without OCR)
+                if page.images:
+                    content = '[Scanned page — no text extracted. May need OCR.]'
+                else:
+                    continue  # Truly empty page, skip
+
+            pages.append({
+                'page_num': page_num,
+                'content': content,
+                'breadcrumb': breadcrumbs.get(page_num, ''),
+            })
 
     return pages, sections
 
