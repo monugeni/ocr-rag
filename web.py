@@ -42,7 +42,7 @@ from fastapi.staticfiles import StaticFiles
 
 from ingest import (
     init_db, ingest_document, replay_corrections,
-    extract_metadata_llm, apply_metadata,
+    extract_metadata_llm, apply_metadata, compute_embeddings,
 )
 from extractor import extract_pdf
 from splitter import PDFSplitter
@@ -542,6 +542,9 @@ def _ingest_one(jid, pdf_path, project, filename, stage_prefix=""):
         meta = extract_metadata_llm(pages, api_key=api_key)
         if meta:
             apply_metadata(conn, doc_id, meta)
+
+    tracker.update(jid, stage=f"{prefix}Computing embeddings")
+    compute_embeddings(conn, doc_id)
 
     conn.close()
     return doc_id

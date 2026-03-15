@@ -129,9 +129,19 @@ CREATE TABLE IF NOT EXISTS quality_flags (
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS page_embeddings (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    page_id     INTEGER NOT NULL REFERENCES pages(id) ON DELETE CASCADE,
+    chunk_index INTEGER NOT NULL DEFAULT 0,
+    chunk_text  TEXT NOT NULL,
+    embedding   BLOB NOT NULL,
+    model       TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_corrections_doc ON corrections(doc_id);
 CREATE INDEX IF NOT EXISTS idx_cross_references_doc ON cross_references(doc_id);
 CREATE INDEX IF NOT EXISTS idx_quality_flags_doc ON quality_flags(doc_id);
+CREATE INDEX IF NOT EXISTS idx_page_embeddings_page ON page_embeddings(page_id);
 
 CREATE TABLE IF NOT EXISTS ingestion_jobs (
     id          TEXT PRIMARY KEY,
@@ -498,6 +508,100 @@ def classify_page(text: str, page_num: int) -> str:
         if re.search(r'\.{3,}\s*\d+', text):
             return 'toc'
     return 'text'
+
+
+# ---------------------------------------------------------------------------
+# Embedding computation
+# ---------------------------------------------------------------------------
+
+def chunk_text(text: str, chunk_size: int = 256, overlap: int = 50) -> list[str]:
+    """Split text into overlapping word chunks for embedding."""
+    words = text.split()
+    if len(words) <= chunk_size:
+        return [text] if text.strip() else []
+
+    chunks = []
+    start = 0
+    while start < len(words):
+        end = min(start + chunk_size, len(words))
+        chunk = ' '.join(words[start:end])
+        if chunk.strip():
+            chunks.append(chunk)
+        start += chunk_size - overlap
+    return chunks
+
+
+def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
+    """Compute and store embeddings for all pages of a document."""
+    try:
+        from sentence_transformers import SentenceTransformer
+        import numpy as np
+    except ImportError:
+        print("  sentence-transformers not installed, skipping embeddings")
+        print("  Install: pip install sentence-transformers")
+        return
+
+    print(f"  Computing embeddings ({model_name})...")
+    model = SentenceTransformer(model_name)
+
+    pages = conn.execute(
+        "SELECT id, page_num, content, breadcrumb FROM pages "
+        "WHERE doc_id = ? ORDER BY page_num",
+        (doc_id,)
+    ).fetchall()
+
+    # Delete existing embeddings for these pages
+    page_ids = [p['id'] for p in pages]
+    if page_ids:
+        ph = ','.join('?' * len(page_ids))
+        conn.execute(f"DELETE FROM page_embeddings WHERE page_id IN ({ph})", page_ids)
+
+    total_chunks = 0
+    for page in pages:
+        # Prepend breadcrumb to content for context-aware embeddings
+        text = page['content']
+        if page['breadcrumb']:
+            text = page['breadcrumb'] + '\n' + text
+
+        chunks = chunk_text(text)
+        if not chunks:
+            continue
+
+        embeddings = model.encode(chunks)
+
+        for i, (chunk, emb) in enumerate(zip(chunks, embeddings)):
+            conn.execute(
+                "INSERT INTO page_embeddings (page_id, chunk_index, chunk_text, embedding, model) "
+                "VALUES (?, ?, ?, ?, ?)",
+                (page['id'], i, chunk, emb.astype(np.float32).tobytes(), model_name)
+            )
+            total_chunks += 1
+
+    conn.commit()
+    print(f"  Embeddings: {total_chunks} chunks from {len(pages)} pages")
+
+
+def compute_embeddings_for_project(conn, project, model_name='all-MiniLM-L6-v2'):
+    """Compute embeddings for all documents in a project."""
+    docs = conn.execute(
+        "SELECT id, title FROM documents WHERE project = ? ORDER BY id",
+        (project,)
+    ).fetchall()
+
+    for d in docs:
+        # Check if embeddings already exist
+        count = conn.execute("""
+            SELECT COUNT(*) FROM page_embeddings pe
+            JOIN pages p ON p.id = pe.page_id
+            WHERE p.doc_id = ?
+        """, (d['id'],)).fetchone()[0]
+
+        if count > 0:
+            print(f"\n  [{d['id']}] {d['title']} — {count} embeddings exist, skipping")
+            continue
+
+        print(f"\n  [{d['id']}] {d['title']}")
+        compute_embeddings(conn, d['id'], model_name)
 
 
 # ---------------------------------------------------------------------------
@@ -896,8 +1000,8 @@ def find_marker_output(pdf_path: Path) -> Optional[Path]:
 
 
 def ingest_pdf(conn, pdf_path: Path, marker_path: Path, project: str,
-               replace=False, skip_llm=False, api_key=None,
-               llm_model="claude-sonnet-4-20250514"):
+               replace=False, skip_llm=False, skip_embeddings=False,
+               api_key=None, llm_model="claude-sonnet-4-20250514"):
     """Ingest a single PDF using Marker JSON + pdfplumber tables."""
     print(f"\nIngesting: {pdf_path.name}")
     print(f"  Marker: {marker_path}")
@@ -929,11 +1033,16 @@ def ingest_pdf(conn, pdf_path: Path, marker_path: Path, project: str,
     # Replay sidecar corrections from previous LLM feedback
     replay_corrections(conn, doc_id, str(pdf_path.resolve()))
 
+    # Compute embeddings for semantic search
+    if not skip_embeddings:
+        compute_embeddings(conn, doc_id)
+
     return doc_id
 
 
 def ingest_project(project_dir, db_path, replace=False, skip_llm=False,
-                   api_key=None, llm_model="claude-sonnet-4-20250514"):
+                   skip_embeddings=False, api_key=None,
+                   llm_model="claude-sonnet-4-20250514"):
     project_dir = Path(project_dir)
     project = project_dir.name
 
@@ -965,6 +1074,7 @@ def ingest_project(project_dir, db_path, replace=False, skip_llm=False,
         doc_id = ingest_pdf(
             conn, pdf, marker_file, project,
             replace=replace, skip_llm=skip_llm,
+            skip_embeddings=skip_embeddings,
             api_key=api_key, llm_model=llm_model
         )
         if doc_id:
@@ -1018,21 +1128,37 @@ Examples:
     mode = p.add_mutually_exclusive_group(required=True)
     mode.add_argument('--project', help='Project folder (contains PDFs + Marker output)')
     mode.add_argument('--pdf', help='Single PDF file to ingest')
+    mode.add_argument('--embed-only', metavar='PROJECT_DIR',
+                      help='Only compute embeddings for an already-ingested project (no re-ingest)')
 
     p.add_argument('--marker', '-m', help='Marker output file (.json preferred, .md fallback)')
     p.add_argument('--db', '-d', default='docs.db', help='Central database path')
     p.add_argument('--project-name', help='Project name (default: folder name or "default")')
     p.add_argument('--replace', '-r', action='store_true', help='Replace existing documents')
     p.add_argument('--skip-llm', action='store_true', help='Skip LLM metadata extraction')
+    p.add_argument('--skip-embeddings', action='store_true', help='Skip embedding computation')
+    p.add_argument('--embedding-model', default='all-MiniLM-L6-v2',
+                   help='Sentence-transformers model for embeddings (default: all-MiniLM-L6-v2)')
     p.add_argument('--api-key', help='Anthropic API key (or ANTHROPIC_API_KEY env)')
     p.add_argument('--llm-model', default='claude-sonnet-4-20250514', help='Model for metadata')
 
     args = p.parse_args()
 
-    if args.project:
+    if args.embed_only:
+        # Only compute embeddings for existing project
+        project_dir = Path(args.embed_only)
+        project_name = args.project_name or project_dir.name
+        conn = init_db(args.db)
+        print(f"\nComputing embeddings for project: {project_name}")
+        print(f"Model: {args.embedding_model}")
+        compute_embeddings_for_project(conn, project_name, args.embedding_model)
+        conn.close()
+        print("\nDone.")
+    elif args.project:
         ingest_project(
             args.project, args.db,
             replace=args.replace, skip_llm=args.skip_llm,
+            skip_embeddings=args.skip_embeddings,
             api_key=args.api_key, llm_model=args.llm_model
         )
     else:
@@ -1056,6 +1182,7 @@ Examples:
         ingest_pdf(
             conn, pdf_path, marker_path, project,
             replace=args.replace, skip_llm=args.skip_llm,
+            skip_embeddings=args.skip_embeddings,
             api_key=args.api_key, llm_model=args.llm_model
         )
         conn.close()

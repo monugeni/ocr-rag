@@ -12,11 +12,14 @@ Tools:
         get_toc             - Section tree for a document
 
     Search:
-        search_pages        - Full-text keyword search (primary tool)
+        search_pages        - FTS keyword search with abbreviation expansion + OR fallback
         search_sections     - Search section headings
+        semantic_search     - Vector/embedding search for conceptual similarity
+        get_section         - Get all pages belonging to a section heading
 
     Navigation:
         get_page            - Get full page content with context
+        get_pages           - Get a range of pages
         get_adjacent        - Get next/previous page
 
     Fallback (LLM calls these when Marker output looks wrong):
@@ -59,20 +62,129 @@ def get_db():
 
 
 def sanitize_fts(query: str) -> str:
-    """Sanitize query for FTS5. Splits hyphenated terms, quotes parts."""
+    """Sanitize query for FTS5. Handles special characters, section numbers like 3.2."""
     words = query.strip().split()
     out = []
     for w in words:
         if w.upper() in ('AND', 'OR', 'NOT', 'NEAR'):
             continue
-        if re.search(r'[-/\\@#$%&*()+=]', w):
-            parts = re.split(r'[-/\\]', w)
+        # Section/clause numbers like "3.2", "B31.3" — quote as phrase so
+        # the tokenizer splits internally but FTS treats them as adjacent tokens
+        if re.search(r'\w\.\w', w):
+            clean = re.sub(r'[^\w.]+', ' ', w).strip()
+            if clean:
+                out.append(f'"{clean}"')
+        # Words with special chars — split on delimiters and quote parts
+        elif re.search(r'[-/\\@#$%&*()+=,:;^~\[\]{}!?<>]', w):
+            parts = re.split(r'[-/\\.,;:]+', w)
             out.extend(f'"{p.strip()}"' for p in parts if p.strip())
         else:
             w = w.strip('"\'')
             if w:
                 out.append(w)
     return ' '.join(out)
+
+
+# ---------------------------------------------------------------------------
+# Abbreviation / synonym expansion
+# ---------------------------------------------------------------------------
+
+ABBREVIATIONS = {
+    # Engineering / boiler terms
+    'MOC': ['material', 'construction'],
+    'OD': ['outside', 'diameter'],
+    'ID': ['inside', 'diameter'],
+    'NB': ['nominal', 'bore'],
+    'CS': ['carbon', 'steel'],
+    'SS': ['stainless', 'steel'],
+    'AS': ['alloy', 'steel'],
+    'LAS': ['low', 'alloy', 'steel'],
+    'QAP': ['quality', 'assurance', 'plan'],
+    'IBR': ['indian', 'boiler', 'regulations'],
+    'PWHT': ['post', 'weld', 'heat', 'treatment'],
+    'NDE': ['non', 'destructive', 'examination'],
+    'NDT': ['non', 'destructive', 'testing'],
+    'MTC': ['material', 'test', 'certificate'],
+    'PSV': ['pressure', 'safety', 'valve'],
+    'PRV': ['pressure', 'relief', 'valve'],
+    'WPS': ['welding', 'procedure', 'specification'],
+    'LSG': ['lower', 'steam', 'generator'],
+    'USG': ['upper', 'steam', 'generator'],
+    'TA': ['turnaround'],
+    'MDMT': ['minimum', 'design', 'metal', 'temperature'],
+    'HT': ['heat', 'treatment'],
+    'RT': ['radiographic', 'testing'],
+    'UT': ['ultrasonic', 'testing'],
+    'MT': ['magnetic', 'particle', 'testing'],
+    'PT': ['penetrant', 'testing'],
+    'DP': ['dye', 'penetrant'],
+    # Tender / contract terms
+    'PRS': ['price', 'reduction', 'schedule'],
+    'LD': ['liquidated', 'damages'],
+    'BOQ': ['bill', 'quantities'],
+    'SOR': ['schedule', 'rates'],
+    'EMD': ['earnest', 'money', 'deposit'],
+    'SD': ['security', 'deposit'],
+    'BG': ['bank', 'guarantee'],
+    'PBG': ['performance', 'bank', 'guarantee'],
+    'GCC': ['general', 'conditions', 'contract'],
+    'SCC': ['special', 'conditions', 'contract'],
+    'NIT': ['notice', 'inviting', 'tender'],
+    'DLP': ['defect', 'liability', 'period'],
+    'LSTK': ['lump', 'sum', 'turnkey'],
+    'PMC': ['project', 'management', 'consultant'],
+    'EPC': ['engineering', 'procurement', 'construction'],
+    'ITB': ['invitation', 'bid'],
+    'LOI': ['letter', 'intent'],
+    'LOA': ['letter', 'acceptance'],
+    'WO': ['work', 'order'],
+    'PO': ['purchase', 'order'],
+    'TPI': ['third', 'party', 'inspection'],
+    'GRN': ['goods', 'receipt', 'note'],
+    'FAT': ['factory', 'acceptance', 'test'],
+    'SAT': ['site', 'acceptance', 'test'],
+}
+
+
+def expand_abbreviations(query: str) -> list[str]:
+    """Return extra search terms by expanding abbreviations found in the query."""
+    words = query.strip().split()
+    extra = []
+    for w in words:
+        key = w.upper().strip('"\'.,;:')
+        if key in ABBREVIATIONS:
+            extra.extend(ABBREVIATIONS[key])
+    return extra
+
+
+def _fts_search(conn, fts_query, doc_ids, doc_id=None, page_type=None, limit=25):
+    """Execute an FTS5 query and return result rows (may raise OperationalError)."""
+    conds = ["pages_fts MATCH ?"]
+    params: list = [fts_query]
+
+    ph = ','.join('?' * len(doc_ids))
+    conds.append(f"p.doc_id IN ({ph})")
+    params.extend(doc_ids)
+
+    if doc_id is not None:
+        conds.append("p.doc_id = ?")
+        params.append(doc_id)
+    if page_type:
+        conds.append("p.page_type = ?")
+        params.append(page_type)
+
+    params.append(limit)
+
+    return conn.execute(f"""
+        SELECT p.doc_id, d.title as doc_title, d.total_pages,
+               p.page_num, p.breadcrumb, p.page_type, p.char_count,
+               snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet, rank
+        FROM pages_fts
+        JOIN pages p ON p.id = pages_fts.rowid
+        JOIN documents d ON d.id = p.doc_id
+        WHERE {' AND '.join(conds)}
+        ORDER BY rank LIMIT ?
+    """, params).fetchall()
 
 
 def project_doc_ids(conn, project: str) -> list[int]:
@@ -93,46 +205,39 @@ mcp = FastMCP(
 Search and navigate engineering project documents (specifications, procedures, QAPs, tender docs).
 All searches are scoped by project. Use list_projects first.
 
-=== SEARCH STRATEGY (CRITICAL) ===
+=== SEARCH STRATEGY ===
 
-search_pages uses FTS keyword matching — NOT semantic/vector search. It only finds exact word matches.
-This means you MUST try multiple query variations to get good recall. Treat every search like this:
+You have two search tools — use them together:
 
-1. NEVER search just once. Always run 3-8 query variations for any question.
-2. Strip question words: "What is the MOC of superheater coil tubes?" → search for keywords only.
-3. Try DIFFERENT word combinations, not just the obvious one:
-   - Full terms: "superheater coil tube material"
-   - Subset pairs: "superheater tube", "superheater material", "tube material"
-   - Reordered: "material specification superheater", "tube grade boiler"
-4. Expand abbreviations — these documents use both forms:
-   MOC = material of construction | OD = outside diameter | ID = inside diameter
-   NB = nominal bore | CS = carbon steel | SS = stainless steel | AS/LAS = alloy/low alloy steel
-   QAP = quality assurance plan | IBR = Indian boiler regulations | PWHT = post weld heat treatment
-   NDE/NDT = non-destructive examination/testing | MTC = material test certificate
-   PSV/PRV = pressure safety/relief valve | WPS = welding procedure specification
-   LSG = lower steam generator | USG = upper steam generator | TA = turnaround
-5. Try SYNONYMS — engineering docs use varied terminology:
-   tube ↔ pipe ↔ coil ↔ tubing | material ↔ grade ↔ alloy ↔ specification
-   repair ↔ replacement ↔ maintenance | inspection ↔ testing ↔ examination
-   drawing ↔ diagram ↔ figure | specification ↔ standard ↔ requirement
-   superheater ↔ super heater | economizer ↔ economiser | boiler ↔ steam generator
-   refractory ↔ lining ↔ castable | schedule ↔ sch (wall thickness)
-6. Try ASME/SA material spec numbers if relevant:
-   SA 106 (CS pipe), SA 213 (alloy tube), SA 516 (CS plate), SA 240 (SS plate)
-   Grade T9, T11, T22 (chrome-moly alloys)
-7. Look for ANNEXURE references — specs often say "as per Annexure X" and the detail is elsewhere.
-   Follow those references by searching for the annexure content.
-8. Use search_sections to find which DOCUMENT likely has the answer, then search_pages within that doc.
+1. search_pages — FTS keyword search (fast, precise when you know the words)
+   - Automatically expands abbreviations (PRS → price reduction schedule, MOC → material construction, etc.)
+   - Uses AND first for precision, then falls back to OR for recall
+   - Special characters like "3.2" are handled safely
+   - Still benefits from trying 2-4 query variations with different keywords
 
-Example — searching for "MOC of superheater coil tubes":
-  search 1: "superheater coil tube material"
-  search 2: "superheater tube material"
-  search 3: "material of construction superheater"
-  search 4: "SA 213 superheater"
-  search 5: "tube specification grade superheater"
-  search 6: "coil material supply boiler"
-  search 7: "QAP superheater tube"
-→ Combine all results, read the most promising pages with get_page.
+2. semantic_search — Vector/embedding search (finds conceptually similar content)
+   - Use when you don't know the exact terminology in the documents
+   - Accepts natural language questions: "what are the penalty clauses for late delivery?"
+   - Finds content by meaning, not just exact words
+   - Slower than FTS but much better recall for vague queries
+
+3. get_section — Read entire section content in one call
+   - After finding a section via search_sections, use get_section(doc_id, heading) to
+     read all pages at once instead of paging through manually
+
+RECOMMENDED WORKFLOW:
+1. Start with search_pages using the most obvious keywords (2-3 variations)
+2. If FTS returns too few results, use semantic_search with a natural language query
+3. Use search_sections to find which section/document likely has the answer
+4. Use get_section to read the full section content in one call
+5. Use get_page with include_adjacent=true for surrounding context
+
+TIPS:
+- Strip question words: "What is the MOC of superheater coil tubes?" → "superheater coil tube material"
+- Try synonyms: tube ↔ pipe ↔ coil | material ↔ grade ↔ alloy ↔ specification
+- Abbreviations are auto-expanded, but still try both forms for best coverage
+- Look for ANNEXURE references — specs often say "as per Annexure X"
+- Use search_sections to find which DOCUMENT likely has the answer, then search within it
 
 After finding relevant pages, use get_page with include_adjacent=true to see surrounding context.
 If Marker output looks garbled, use reextract_page or reextract_table for a fresh PDF extraction.
@@ -349,17 +454,15 @@ def search_pages(
     page_type: Optional[str] = None,
     max_results: int = 10
 ) -> str:
-    """Full-text keyword search across a project's pages. This is FTS, not semantic search.
+    """Full-text keyword search across a project's pages.
 
-    IMPORTANT: Always call this multiple times with different query variations.
-    A single query will miss results because FTS only matches exact words.
-    Try 3-8 variations: rearrange words, use synonyms, expand abbreviations,
-    try 2-word subsets. See server instructions for detailed search strategy.
+    Automatically expands known abbreviations (e.g. PRS → price reduction schedule)
+    and falls back to OR matching for better recall when exact AND matching is too strict.
 
     Args:
         project: Project name (required).
         query: 2-5 keyword terms (not a full sentence). Drop stop words.
-               Examples: "superheater tube material", "SA 213 grade", "QAP coil tube"
+               Examples: "superheater tube material", "SA 213 grade", "PRS clause"
         doc_id: Optional. Restrict to one document.
         page_type: Optional. Filter: 'text', 'drawing', 'table', 'toc', 'cover'.
         max_results: Default 10, max 25.
@@ -371,63 +474,70 @@ def search_pages(
     if not clean:
         return json.dumps({"error": "Empty query"})
 
+    cap = min(max_results, 25)
+
     with get_db() as conn:
         ids = project_doc_ids(conn, project)
         if not ids:
             return json.dumps({"error": f"No documents in project '{project}'"})
 
-        conds = ["pages_fts MATCH ?"]
-        params = [clean]
+        results = []
+        seen = set()
 
-        ph = ','.join('?' * len(ids))
-        conds.append(f"p.doc_id IN ({ph})")
-        params.extend(ids)
+        def _collect(rows):
+            for r in rows:
+                key = (r["doc_id"], r["page_num"])
+                if key not in seen:
+                    seen.add(key)
+                    results.append(r)
 
-        if doc_id is not None:
-            conds.append("p.doc_id = ?")
-            params.append(doc_id)
-        if page_type:
-            conds.append("p.page_type = ?")
-            params.append(page_type)
-
-        params.append(min(max_results, 25))
-
+        # --- Pass 1: AND with original terms (highest precision) ---
         try:
-            rows = conn.execute(f"""
-                SELECT p.doc_id, d.title as doc_title, d.total_pages,
-                       p.page_num, p.breadcrumb, p.page_type, p.char_count,
-                       snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet, rank
-                FROM pages_fts
-                JOIN pages p ON p.id = pages_fts.rowid
-                JOIN documents d ON d.id = p.doc_id
-                WHERE {' AND '.join(conds)}
-                ORDER BY rank LIMIT ?
-            """, params).fetchall()
+            _collect(_fts_search(conn, clean, ids, doc_id, page_type, cap))
         except sqlite3.OperationalError:
-            # Retry with simplified query
-            params[0] = ' '.join(w for w in clean.split() if not w.startswith('"'))
-            try:
-                rows = conn.execute(f"""
-                    SELECT p.doc_id, d.title as doc_title, d.total_pages,
-                           p.page_num, p.breadcrumb, p.page_type, p.char_count,
-                           snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet, rank
-                    FROM pages_fts
-                    JOIN pages p ON p.id = pages_fts.rowid
-                    JOIN documents d ON d.id = p.doc_id
-                    WHERE {' AND '.join(conds)}
-                    ORDER BY rank LIMIT ?
-                """, params).fetchall()
-            except sqlite3.OperationalError as e:
-                return json.dumps({"error": str(e), "query": clean})
+            pass
 
+        # --- Pass 2: AND with abbreviation-expanded terms ---
+        extra = expand_abbreviations(query)
+        if extra and len(results) < cap:
+            expanded = clean + ' ' + sanitize_fts(' '.join(extra))
+            try:
+                _collect(_fts_search(conn, expanded, ids, doc_id, page_type, cap))
+            except sqlite3.OperationalError:
+                pass
+
+        # --- Pass 3: OR across all terms for recall ---
+        if len(results) < cap:
+            all_terms = clean.split()
+            if extra:
+                all_terms += sanitize_fts(' '.join(extra)).split()
+            # Deduplicate while preserving order
+            seen_t = set()
+            unique = []
+            for t in all_terms:
+                tl = t.lower().strip('"')
+                if tl and tl not in seen_t:
+                    seen_t.add(tl)
+                    unique.append(t)
+            if len(unique) > 1:
+                or_query = ' OR '.join(unique)
+                try:
+                    _collect(_fts_search(conn, or_query, ids, doc_id, page_type, cap))
+                except sqlite3.OperationalError:
+                    pass
+
+        final = results[:cap]
         return json.dumps({
-            "query": query, "result_count": len(rows),
+            "query": query,
+            "sanitized": clean,
+            "expanded_terms": extra if extra else None,
+            "result_count": len(final),
             "results": [
                 {"doc_id": r["doc_id"], "doc_title": r["doc_title"],
                  "page_num": r["page_num"], "total_pages": r["total_pages"],
                  "breadcrumb": r["breadcrumb"], "page_type": r["page_type"],
                  "snippet": r["snippet"], "rank": round(r["rank"], 4)}
-                for r in rows
+                for r in final
             ]
         }, indent=2)
 
@@ -460,6 +570,64 @@ def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> s
         return json.dumps({
             "query": query, "result_count": len(rows),
             "results": [dict(r) for r in rows]
+        }, indent=2)
+
+
+@mcp.tool()
+def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
+    """Get all pages belonging to a section, identified by heading text.
+
+    Use this after search_sections to read the full content of a section
+    without having to page through manually.
+
+    Args:
+        doc_id: Document ID.
+        heading: Section heading text (partial match — use a distinctive substring).
+        max_pages: Maximum pages to return (default 20, max 30).
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT title FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return json.dumps({"error": f"Document {doc_id} not found"})
+
+        section = conn.execute(
+            "SELECT * FROM sections WHERE doc_id = ? AND heading LIKE ? ORDER BY seq LIMIT 1",
+            (doc_id, f"%{heading}%")
+        ).fetchone()
+
+        if not section:
+            # Try case-insensitive
+            section = conn.execute(
+                "SELECT * FROM sections WHERE doc_id = ? AND LOWER(heading) LIKE LOWER(?) ORDER BY seq LIMIT 1",
+                (doc_id, f"%{heading}%")
+            ).fetchone()
+
+        if not section:
+            return json.dumps({"error": f"No section matching '{heading}' in document {doc_id}"})
+
+        page_cap = min(max_pages, 30)
+        pages = conn.execute(
+            "SELECT page_num, content, breadcrumb, page_type FROM pages "
+            "WHERE doc_id = ? AND page_num BETWEEN ? AND ? ORDER BY page_num LIMIT ?",
+            (doc_id, section['page_start'], section['page_end'], page_cap)
+        ).fetchall()
+
+        return json.dumps({
+            "doc_id": doc_id,
+            "doc_title": d["title"],
+            "section": {
+                "heading": section["heading"],
+                "level": section["level"],
+                "breadcrumb": section["breadcrumb"],
+                "pages": f"{section['page_start']}-{section['page_end']}"
+            },
+            "page_count": len(pages),
+            "truncated": len(pages) == page_cap,
+            "pages": [
+                {"page_num": p["page_num"], "breadcrumb": p["breadcrumb"],
+                 "page_type": p["page_type"], "content": p["content"]}
+                for p in pages
+            ]
         }, indent=2)
 
 
@@ -707,6 +875,138 @@ def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None
 
     except Exception as e:
         return json.dumps({"error": f"Table extraction failed: {e}"})
+
+
+# ===== Semantic / vector search =====
+
+_embedding_model = None
+_embedding_model_name = None
+
+
+def _get_embedding_model(model_name: str = 'all-MiniLM-L6-v2'):
+    global _embedding_model, _embedding_model_name
+    if _embedding_model is None or _embedding_model_name != model_name:
+        from sentence_transformers import SentenceTransformer
+        _embedding_model = SentenceTransformer(model_name)
+        _embedding_model_name = model_name
+    return _embedding_model
+
+
+@mcp.tool()
+def semantic_search(
+    project: str,
+    query: str,
+    doc_id: Optional[int] = None,
+    max_results: int = 10
+) -> str:
+    """Semantic (vector) search — finds conceptually similar content even when
+    exact keywords don't match. Use this when search_pages returns too few results
+    or when you don't know the exact terminology used in the documents.
+
+    Requires embeddings to have been computed during ingestion
+    (pip install sentence-transformers).
+
+    Args:
+        project: Project name.
+        query: Natural language query — can be a full question or description.
+        doc_id: Optional. Restrict to one document.
+        max_results: Default 10, max 25.
+    """
+    try:
+        import numpy as np
+    except ImportError:
+        return json.dumps({"error": "numpy is required. Install: pip install numpy"})
+
+    try:
+        _get_embedding_model()
+    except Exception:
+        return json.dumps({
+            "error": "semantic search requires sentence-transformers. "
+                     "Install: pip install sentence-transformers"
+        })
+
+    cap = min(max_results, 25)
+
+    with get_db() as conn:
+        ids = project_doc_ids(conn, project)
+        if not ids:
+            return json.dumps({"error": f"No documents in project '{project}'"})
+
+        # Check if embeddings exist
+        ph = ','.join('?' * len(ids))
+        count = conn.execute(f"""
+            SELECT COUNT(*) FROM page_embeddings pe
+            JOIN pages p ON p.id = pe.page_id
+            WHERE p.doc_id IN ({ph})
+        """, ids).fetchone()[0]
+
+        if count == 0:
+            return json.dumps({
+                "error": "No embeddings found. Run: python ingest.py --embed-only --project <dir> --db <db>"
+            })
+
+        model_row = conn.execute(f"""
+            SELECT pe.model FROM page_embeddings pe
+            JOIN pages p ON p.id = pe.page_id
+            WHERE p.doc_id IN ({ph}) LIMIT 1
+        """, ids).fetchone()
+        model = _get_embedding_model(model_row['model'])
+        query_emb = model.encode([query])[0]
+
+        doc_filter = ""
+        extra_params = list(ids)
+        if doc_id is not None:
+            doc_filter = "AND p.doc_id = ?"
+            extra_params.append(doc_id)
+
+        rows = conn.execute(f"""
+            SELECT pe.page_id, pe.chunk_index, pe.chunk_text, pe.embedding,
+                   p.doc_id, p.page_num, p.breadcrumb, p.page_type,
+                   d.title as doc_title, d.total_pages
+            FROM page_embeddings pe
+            JOIN pages p ON p.id = pe.page_id
+            JOIN documents d ON d.id = p.doc_id
+            WHERE p.doc_id IN ({ph}) {doc_filter}
+        """, extra_params).fetchall()
+
+        dim = len(query_emb)
+        scored = []
+        for row in rows:
+            emb = np.frombuffer(row['embedding'], dtype=np.float32)
+            if len(emb) != dim:
+                continue
+            sim = float(np.dot(query_emb, emb) / (
+                np.linalg.norm(query_emb) * np.linalg.norm(emb) + 1e-8
+            ))
+            scored.append({
+                'doc_id': row['doc_id'],
+                'doc_title': row['doc_title'],
+                'page_num': row['page_num'],
+                'total_pages': row['total_pages'],
+                'breadcrumb': row['breadcrumb'],
+                'page_type': row['page_type'],
+                'chunk_preview': row['chunk_text'][:200],
+                'similarity': round(sim, 4),
+            })
+
+        scored.sort(key=lambda x: x['similarity'], reverse=True)
+
+        # Deduplicate by (doc_id, page_num) — keep highest similarity
+        seen = set()
+        deduped = []
+        for r in scored:
+            key = (r['doc_id'], r['page_num'])
+            if key not in seen:
+                seen.add(key)
+                deduped.append(r)
+                if len(deduped) >= cap:
+                    break
+
+        return json.dumps({
+            "query": query,
+            "result_count": len(deduped),
+            "results": deduped,
+        }, indent=2)
 
 
 # ---------------------------------------------------------------------------
