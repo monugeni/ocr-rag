@@ -1,5 +1,5 @@
 // =========================================================================
-// Esteem Project Knowledge - Client Application
+// Esteem Folder Knowledge - Client Application
 // =========================================================================
 
 // --- API helpers ---
@@ -31,10 +31,10 @@ let currentChatId = null;
 let pollTimer = null;
 let thinkingTimer = null;
 
-const SIDEBAR_WIDTH_KEY = 'esteem.project-knowledge.sidebar-width';
+const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
 const SUPPORTED_EXT = new Set(['.pdf', '.docx', '.xlsx', '.xls', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
 const THINKING_STEPS = [
-  'Searching project documents',
+  'Searching folder documents',
   'Reviewing earlier messages in this chat',
   'Drafting a document-grounded answer',
 ];
@@ -44,7 +44,7 @@ window.addEventListener('hashchange', router);
 window.addEventListener('load', () => {
   configureMarkdown();
   initSidebarResize();
-  loadProjects();
+  loadFolders();
   router();
 });
 
@@ -104,6 +104,13 @@ function router() {
     return;
   }
 
+  if (hash.startsWith('/folder/')) {
+    const name = decodeURIComponent(hash.slice(8));
+    currentProject = name;
+    showProject(name);
+    return;
+  }
+
   if (hash.startsWith('/project/')) {
     const name = decodeURIComponent(hash.slice(9));
     currentProject = name;
@@ -125,24 +132,25 @@ function navigate(hash) {
 }
 
 // --- Sidebar ---
-async function loadProjects() {
+async function loadFolders() {
   try {
-    const projects = await api('/projects');
+    const projects = await api('/folders');
     const list = document.getElementById('project-list');
     if (!list) return;
     if (!projects.length) {
-      list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No projects yet</div>';
+      list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No folders yet</div>';
       return;
     }
     list.innerHTML = projects.map((project) => `
-      <div class="project-item ${currentProject === project.project ? 'active' : ''}"
-           onclick="navigate('#/project/${enc(project.project)}')">
-        <span class="name" title="${esc(project.project)}">${esc(project.project)}</span>
+      <div class="project-item ${currentProject === project.folder ? 'active' : ''}"
+           onclick="navigate('#/folder/${enc(project.folder)}')"
+           style="padding-left:${12 + (project.depth || 0) * 16}px">
+        <span class="name" title="${esc(project.folder)}">${esc(project.display_name || project.folder)}</span>
         <span class="badge">${project.docs}${project.pending ? `+${project.pending}` : ''}</span>
       </div>
     `).join('');
   } catch (error) {
-    console.error('Failed to load projects:', error);
+    console.error('Failed to load folders:', error);
   }
 }
 
@@ -154,32 +162,35 @@ function showWelcome() {
   setTopbar(null);
   document.getElementById('content').innerHTML = `
     <div class="welcome">
-      <h2>Esteem Project Knowledge</h2>
-      <p>Select a project to browse documents, ingest new files, and ask grounded questions only against that project's indexed content.</p>
+      <h2>Esteem Folder Knowledge</h2>
+      <p>Select a folder to browse documents, ingest new files, and ask grounded questions only against that folder and its sub-folders.</p>
     </div>`;
-  loadProjects();
+  loadFolders();
 }
 
 async function showProject(project) {
   currentProject = project;
   currentDocId = null;
-  loadProjects();
+  loadFolders();
   setTopbar(
-    `<a href="#/" style="color:#666">Projects</a><span>/</span><strong>${esc(project)}</strong>`,
-    `<button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>
+    `<a href="#/" style="color:#666">Folders</a><span>/</span><strong>${esc(project)}</strong>`,
+    `<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>
+     <button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>
      <button class="btn btn-ghost" onclick="navigate('#/quality/${enc(project)}')">Quality</button>
-     <button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Project</button>`
+     <button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`
   );
 
   const content = document.getElementById('content');
   content.innerHTML = '<div class="spinner"></div>';
 
   try {
-    const [docData, chats, jobs] = await Promise.all([
-      api(`/projects/${enc(project)}/documents`),
-      api(`/projects/${enc(project)}/chats`),
+    const [docData, chats, jobs, folders] = await Promise.all([
+      api(`/folders/${enc(project)}/documents`),
+      api(`/folders/${enc(project)}/chats`),
       api('/ingestion/jobs'),
+      api('/folders'),
     ]);
+    const childFolders = folders.filter((folder) => folder.parent === project);
 
     if (currentChatId && !chats.some((chat) => chat.id === currentChatId)) {
       currentChatId = null;
@@ -197,6 +208,7 @@ async function showProject(project) {
       <div class="project-workspace">
         <section class="project-library workspace-stack">
           ${renderUploadCard(project)}
+          ${renderChildFoldersCard(project, childFolders)}
           ${renderPendingUploads(project, docData.pending)}
           <div id="jobs-area"></div>
           ${renderDocumentsCard(project, docData.documents)}
@@ -211,7 +223,7 @@ async function showProject(project) {
     scrollChatToBottom();
 
     const activeJobs = jobs.filter((job) =>
-      job.project === project && job.status !== 'completed' && job.status !== 'failed'
+      inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
     );
     if (activeJobs.length) {
       startPolling(project);
@@ -227,8 +239,8 @@ function renderUploadCard(project) {
   return `
     <div class="card">
       <div class="card-title">
-        <span>Project Workspace</span>
-        <span class="count">Documents and chat stay scoped to this project only</span>
+        <span>Folder Workspace</span>
+        <span class="count">Search covers this folder and its sub-folders</span>
       </div>
       <div class="upload-area" id="upload-area"
            ondragover="event.preventDefault(); this.classList.add('dragover')"
@@ -244,6 +256,25 @@ function renderUploadCard(project) {
   `;
 }
 
+function renderChildFoldersCard(project, folders) {
+  if (!folders.length) return '';
+  return `
+    <div class="card">
+      <div class="card-title">Sub-folders <span class="count">${folders.length}</span></div>
+      <table class="table">
+        <tr><th>Name</th><th>Documents</th><th>Pending</th></tr>
+        ${folders.map((folder) => `
+          <tr class="clickable" onclick="navigate('#/folder/${enc(folder.folder)}')">
+            <td><strong>${esc(folder.display_name || folder.folder)}</strong></td>
+            <td>${folder.docs}</td>
+            <td>${folder.pending || 0}</td>
+          </tr>
+        `).join('')}
+      </table>
+    </div>
+  `;
+}
+
 function renderPendingUploads(project, pending) {
   if (!pending.length) return '';
   return `
@@ -253,14 +284,15 @@ function renderPendingUploads(project, pending) {
         <button class="btn btn-primary btn-sm" onclick="ingestAll(${jsq(project)})">Ingest All</button>
       </div>
       <table class="table">
-        <tr><th>Filename</th><th>Size</th><th></th></tr>
+        <tr><th>File</th><th>Folder</th><th>Size</th><th></th></tr>
         ${pending.map((file) => `
           <tr>
             <td>${esc(file.filename)}</td>
+            <td class="muted mono">${esc(file.folder === project ? '.' : file.folder.slice(project.length + 1))}</td>
             <td class="muted">${file.size_mb} MB</td>
             <td>
               <button class="btn btn-ghost btn-sm"
-                      onclick="ingestSingle(${jsq(project)}, ${jsq(file.filename)})">Ingest</button>
+                      onclick="ingestSingle(${jsq(project)}, ${jsq(file.relative_path)})">Ingest</button>
             </td>
           </tr>
         `).join('')}
@@ -270,42 +302,127 @@ function renderPendingUploads(project, pending) {
 }
 
 function renderDocumentsCard(project, documents) {
+  const typeOptions = [...new Set(documents
+    .map((doc) => doc.document_type)
+    .filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b));
+  const folderOptions = [...new Set(documents.map((doc) => doc.folder))]
+    .sort((a, b) => a.localeCompare(b));
+
   return `
     <div class="card">
       <div class="card-title">Documents <span class="count">${documents.length}</span></div>
       ${documents.length ? `
-        <table class="table">
-          <tr><th>Title</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>
-          ${documents.map((doc) => {
-            const splitTag = doc.split_info
-              ? `<span class="tag" title="Split from ${esc(doc.split_info.parent)} pages ${doc.split_info.page_start}-${doc.split_info.page_end}">
-                   Part ${doc.split_info.part} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}
-                 </span>`
-              : '';
-            return `
-              <tr class="clickable" onclick="navigate('#/doc/${doc.id}')">
-                <td>
-                  <strong>${esc(doc.title)}</strong>
-                  ${splitTag}
-                  <br>
-                  <span class="muted mono">${esc(doc.filename)}</span>
-                </td>
-                <td>${doc.total_pages}</td>
-                <td>${doc.sections}</td>
-                <td>${doc.document_type ? `<span class="tag">${esc(doc.document_type)}</span>` : '<span class="muted">-</span>'}</td>
-                <td style="white-space:nowrap">
-                  <a class="btn btn-ghost btn-sm" href="/api/documents/${doc.id}/pdf" onclick="event.stopPropagation()" title="Download PDF">PDF</a>
-                  <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); promptRenameDoc(${doc.id}, ${jsq(doc.title)})" title="Rename">Rename</button>
-                  <button class="btn btn-ghost btn-sm" style="color:#dc3545"
-                          onclick="event.stopPropagation(); confirmDeleteDoc(${doc.id}, ${jsq(doc.title)})">Delete</button>
-                </td>
-              </tr>
-            `;
-          }).join('')}
-        </table>
-      ` : '<div class="empty">No documents ingested yet. Upload files above to start building this project knowledge base.</div>'}
+        <div class="table-filters">
+          <div class="table-filter-controls">
+            <input
+              type="text"
+              id="doc-filter-query"
+              placeholder="Filter by doc #, title, filename, or folder..."
+              oninput="applyDocumentFilters()">
+            <select id="doc-filter-type" onchange="applyDocumentFilters()">
+              <option value="">All types</option>
+              ${typeOptions.map((type) => `<option value="${esc(type)}">${esc(type)}</option>`).join('')}
+            </select>
+            <select id="doc-filter-folder" onchange="applyDocumentFilters()">
+              <option value="">All folders</option>
+              ${folderOptions.map((folder) => `<option value="${esc(folder)}">${esc(folder)}</option>`).join('')}
+            </select>
+            <button class="btn btn-ghost btn-sm" onclick="resetDocumentFilters()">Clear</button>
+          </div>
+          <div class="table-filter-summary" id="document-filter-summary">
+            Showing ${documents.length} of ${documents.length} documents
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <tr><th>Doc #</th><th>Title</th><th>Folder</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>
+            ${documents.map((doc) => {
+              const splitTag = doc.split_info
+                ? `<span class="tag" title="Split from ${esc(doc.split_info.parent)} pages ${doc.split_info.page_start}-${doc.split_info.page_end}">
+                     Part ${doc.split_info.part} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}
+                   </span>`
+                : '';
+              const searchText = [
+                doc.id,
+                doc.title,
+                doc.filename,
+                doc.folder,
+                doc.document_type || '',
+              ].join(' ').toLowerCase();
+              return `
+                <tr
+                  class="clickable document-row"
+                  data-doc-search="${esc(searchText)}"
+                  data-doc-type="${esc(doc.document_type || '')}"
+                  data-doc-folder="${esc(doc.folder)}"
+                  onclick="navigate('#/doc/${doc.id}')">
+                  <td class="mono doc-id-cell"><strong>${doc.id}</strong></td>
+                  <td>
+                    <strong>${esc(doc.title)}</strong>
+                    ${splitTag}
+                    <br>
+                    <span class="muted mono">${esc(doc.filename)}</span>
+                  </td>
+                  <td class="muted mono">${esc(doc.folder)}</td>
+                  <td>${doc.total_pages}</td>
+                  <td>${doc.sections}</td>
+                  <td>${doc.document_type ? `<span class="tag">${esc(doc.document_type)}</span>` : '<span class="muted">-</span>'}</td>
+                  <td style="white-space:nowrap">
+                    <a class="btn btn-ghost btn-sm" href="/api/documents/${doc.id}/pdf" onclick="event.stopPropagation()" title="Download PDF">PDF</a>
+                    <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); promptRenameDoc(${doc.id}, ${jsq(doc.title)})" title="Rename">Rename</button>
+                    <button class="btn btn-ghost btn-sm" style="color:#dc3545"
+                            onclick="event.stopPropagation(); confirmDeleteDoc(${doc.id}, ${jsq(doc.title)})">Delete</button>
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </table>
+        </div>
+        <div class="empty" id="document-filter-empty" style="display:none;padding:20px">
+          No documents match the current filters.
+        </div>
+      ` : '<div class="empty">No documents ingested yet. Upload files above to start building this folder knowledge base.</div>'}
     </div>
   `;
+}
+
+function applyDocumentFilters() {
+  const query = (document.getElementById('doc-filter-query')?.value || '').trim().toLowerCase();
+  const type = document.getElementById('doc-filter-type')?.value || '';
+  const folder = document.getElementById('doc-filter-folder')?.value || '';
+  const rows = [...document.querySelectorAll('.document-row')];
+  if (!rows.length) return;
+
+  let visibleCount = 0;
+  rows.forEach((row) => {
+    const matchesQuery = !query || (row.dataset.docSearch || '').includes(query);
+    const matchesType = !type || (row.dataset.docType || '') === type;
+    const matchesFolder = !folder || (row.dataset.docFolder || '') === folder;
+    const visible = matchesQuery && matchesType && matchesFolder;
+    row.style.display = visible ? '' : 'none';
+    if (visible) visibleCount += 1;
+  });
+
+  const summary = document.getElementById('document-filter-summary');
+  if (summary) {
+    summary.textContent = `Showing ${visibleCount} of ${rows.length} documents`;
+  }
+
+  const empty = document.getElementById('document-filter-empty');
+  if (empty) {
+    empty.style.display = visibleCount ? 'none' : '';
+  }
+}
+
+function resetDocumentFilters() {
+  const query = document.getElementById('doc-filter-query');
+  const type = document.getElementById('doc-filter-type');
+  const folder = document.getElementById('doc-filter-folder');
+  if (query) query.value = '';
+  if (type) type.value = '';
+  if (folder) folder.value = '';
+  applyDocumentFilters();
 }
 
 function renderChatShell(project, chats, messages) {
@@ -332,22 +449,22 @@ function renderChatShell(project, chats, messages) {
       <section class="chat-main">
         <div class="chat-header">
           <div>
-            <h3>${currentChatId ? esc((chats.find((chat) => chat.id === currentChatId)?.title) || 'New chat') : 'Project chat'}</h3>
-            <div class="chat-subtitle">Answers must be grounded only in documents from <strong>${esc(project)}</strong>.</div>
+            <h3>${currentChatId ? esc((chats.find((chat) => chat.id === currentChatId)?.title) || 'New chat') : 'Folder chat'}</h3>
+            <div class="chat-subtitle">Answers must be grounded only in documents from <strong>${esc(project)}</strong> and its sub-folders.</div>
           </div>
           ${currentChatId ? `<button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>` : ''}
         </div>
         <div class="chat-messages" id="chat-messages">
           ${messages.length ? renderChatMessages(messages) : `
             <div class="chat-empty" id="chat-empty">
-              <h3>Ask about this project</h3>
-              <p>The assistant will search only the documents inside <strong>${esc(project)}</strong>, keep the thread history in context, and say so when the documents do not support an answer.</p>
+              <h3>Ask about this folder</h3>
+              <p>The assistant will search only the documents inside <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer.</p>
             </div>
           `}
         </div>
         <div class="chat-composer">
           <textarea id="chat-input"
-                    placeholder="Ask a question about this project's documents..."
+                    placeholder="Ask a question about this folder's documents..."
                     onkeydown="handleChatKeydown(event)"></textarea>
           <div class="chat-composer-footer">
             <div class="chat-composer-hint">Markdown is supported in replies, including math such as <code>\\(E=mc^2\\)</code> or <code>$$x^2$$</code>.</div>
@@ -383,7 +500,7 @@ function renderSourceList(sources) {
         <div class="chat-source">
           <strong>[${source.id}]</strong>
           <a href="#/doc/${source.doc_id}/page/${source.page_num}">${esc(source.doc_title)}</a>
-          <span> &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
+          <span>${source.folder ? ` &middot; ${esc(source.folder)}` : ''} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
         </div>
       `).join('')}
     </div>
@@ -404,11 +521,11 @@ async function showViewer(docId, pageNum) {
       ? ` <span class="tag">Part ${doc.split_info.part} of ${esc(doc.split_info.parent)} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}</span>`
       : '';
     setTopbar(
-      `<a href="#/" style="color:#666">Projects</a><span>/</span>` +
-      `<a href="#/project/${enc(doc.project)}">${esc(doc.project)}</a><span>/</span>` +
+      `<a href="#/" style="color:#666">Folders</a><span>/</span>` +
+      `<a href="#/folder/${enc(doc.folder)}">${esc(doc.folder)}</a><span>/</span>` +
       `<strong>${esc(doc.title)}</strong>${splitNote}`,
       `<a class="btn btn-ghost btn-sm" href="/api/documents/${docId}/pdf">Download</a>
-       <button class="btn btn-ghost btn-sm" onclick="navigate('#/project/${enc(doc.project)}')">Back</button>`
+       <button class="btn btn-ghost btn-sm" onclick="navigate('#/folder/${enc(doc.folder)}')">Back</button>`
     );
 
     const content = document.getElementById('content');
@@ -507,8 +624,8 @@ async function searchInDoc(docId, query) {
 
 async function showQuality(project) {
   setTopbar(
-    `<a href="#/" style="color:#666">Projects</a><span>/</span>` +
-    `<a href="#/project/${enc(project)}">${esc(project)}</a><span>/</span><strong>Quality</strong>`,
+    `<a href="#/" style="color:#666">Folders</a><span>/</span>` +
+    `<a href="#/folder/${enc(project)}">${esc(project)}</a><span>/</span><strong>Quality</strong>`,
     ''
   );
   const content = document.getElementById('content');
@@ -516,7 +633,7 @@ async function showQuality(project) {
   content.innerHTML = '<div class="spinner"></div>';
 
   try {
-    const data = await api(`/projects/${enc(project)}/quality`);
+    const data = await api(`/folders/${enc(project)}/quality`);
     let html = '';
 
     html += `<div class="card"><div class="card-title">Quality Flags <span class="count">${data.flags.length}</span></div>`;
@@ -561,7 +678,7 @@ async function showQuality(project) {
 // --- Chat actions ---
 async function newChat(project) {
   try {
-    const created = await api(`/projects/${enc(project)}/chats`, {
+    const created = await api(`/folders/${enc(project)}/chats`, {
       method: 'POST',
       body: JSON.stringify({ title: 'New chat' }),
     });
@@ -592,7 +709,7 @@ async function sendChatMessage() {
 
   try {
     if (!currentChatId) {
-      const created = await api(`/projects/${enc(currentProject)}/chats`, {
+      const created = await api(`/folders/${enc(currentProject)}/chats`, {
         method: 'POST',
         body: JSON.stringify({ title: 'New chat' }),
       });
@@ -699,11 +816,11 @@ function scrollChatToBottom() {
   }
 }
 
-// --- Project actions ---
-function promptNewProject() {
+// --- Folder actions ---
+function promptNewProject(defaultValue = '') {
   document.getElementById('modal-content').innerHTML = `
-    <h3>New Project</h3>
-    <input type="text" id="new-project-name" placeholder="Project name" autofocus
+    <h3>New Folder</h3>
+    <input type="text" id="new-project-name" placeholder="Folder path" value="${esc(defaultValue)}" autofocus
            onkeydown="if(event.key==='Enter') createProject()">
     <div class="actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
@@ -718,10 +835,10 @@ async function createProject() {
   const name = document.getElementById('new-project-name').value.trim();
   if (!name) return;
   try {
-    await api('/projects', { method: 'POST', body: JSON.stringify({ name }) });
+    await api('/folders', { method: 'POST', body: JSON.stringify({ name }) });
     closeModal();
-    await loadProjects();
-    navigate('#/project/' + encodeURIComponent(name));
+    await loadFolders();
+    navigate('#/folder/' + encodeURIComponent(name));
   } catch (error) {
     alert('Error: ' + error.message);
   }
@@ -729,7 +846,7 @@ async function createProject() {
 
 function promptRenameProject(project) {
   document.getElementById('modal-content').innerHTML = `
-    <h3>Rename Project</h3>
+    <h3>Rename Folder</h3>
     <input type="text" id="rename-input" value="${esc(project)}" autofocus
            onkeydown="if(event.key==='Enter') doRenameProject(${jsq(project)})">
     <div class="actions">
@@ -752,14 +869,14 @@ async function doRenameProject(oldName) {
     return;
   }
   try {
-    await api(`/projects/${enc(oldName)}`, {
+    await api(`/folders/${enc(oldName)}`, {
       method: 'PATCH',
       body: JSON.stringify({ name: newName }),
     });
     closeModal();
     currentProject = newName;
-    await loadProjects();
-    navigate('#/project/' + encodeURIComponent(newName));
+    await loadFolders();
+    navigate('#/folder/' + encodeURIComponent(newName));
   } catch (error) {
     alert('Error: ' + error.message);
   }
@@ -802,12 +919,12 @@ async function doRenameDoc(docId) {
 }
 
 function confirmDeleteProject(project) {
-  if (confirm(`Delete project "${project}" and ALL its documents and chats?`)) {
-    api(`/projects/${enc(project)}`, { method: 'DELETE' })
+  if (confirm(`Delete folder "${project}" and ALL its documents and chats?`)) {
+    api(`/folders/${enc(project)}`, { method: 'DELETE' })
       .then(() => {
         currentChatId = null;
         navigate('#/');
-        loadProjects();
+        loadFolders();
       })
       .catch((error) => alert('Error: ' + error.message));
   }
@@ -850,7 +967,7 @@ async function uploadFiles(files, project) {
   const area = document.getElementById('upload-area');
   if (area) area.textContent = `Uploading ${files.length} file(s)...`;
   try {
-    await apiUpload(`/projects/${enc(project)}/upload`, files);
+    await apiUpload(`/folders/${enc(project)}/upload`, files);
     showProject(project);
   } catch (error) {
     alert('Upload failed: ' + error.message);
@@ -861,7 +978,7 @@ async function uploadFiles(files, project) {
 // --- Ingestion ---
 async function ingestAll(project) {
   try {
-    await api(`/projects/${enc(project)}/ingest`, { method: 'POST' });
+    await api(`/folders/${enc(project)}/ingest`, { method: 'POST' });
     startPolling(project);
   } catch (error) {
     alert('Ingestion failed: ' + error.message);
@@ -870,7 +987,7 @@ async function ingestAll(project) {
 
 async function ingestSingle(project, filename) {
   try {
-    await api(`/projects/${enc(project)}/ingest/${enc(filename)}`, { method: 'POST' });
+    await api(`/folders/${enc(project)}/ingest/${encPath(filename)}`, { method: 'POST' });
     startPolling(project);
   } catch (error) {
     alert('Ingestion failed: ' + error.message);
@@ -893,7 +1010,7 @@ function stopPolling() {
 async function pollJobs(project) {
   try {
     const jobs = await api('/ingestion/jobs');
-    const projectJobs = jobs.filter((job) => job.project === project);
+    const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
     const area = document.getElementById('jobs-area');
     if (!area) return;
 
@@ -984,6 +1101,17 @@ function jsq(value) {
 
 function enc(value) {
   return encodeURIComponent(value);
+}
+
+function encPath(value) {
+  return String(value ?? '')
+    .split('/')
+    .map((part) => encodeURIComponent(part))
+    .join('/');
+}
+
+function inFolderScope(candidate, scope) {
+  return candidate === scope || candidate.startsWith(scope + '/');
 }
 
 function clamp(value, min, max) {

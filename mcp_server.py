@@ -2,12 +2,13 @@
 """
 Document RAG MCP Server
 ========================
-Single server for all projects. Every search requires a project name.
+Single server for all folders. Every search requires a folder path.
 
 Tools:
     Discovery:
-        list_projects       - List all projects
-        list_documents      - List documents in a project
+        list_folders        - List all folders
+        list_folder_entries - List folders/files in a folder
+        list_documents      - List documents in a folder scope
         get_document_info   - Full metadata for a document
         get_toc             - Section tree for a document
 
@@ -720,8 +721,56 @@ def _fts_search(conn, fts_query, doc_ids, doc_id=None, page_type=None, limit=25)
 
 def project_doc_ids(conn, project: str) -> list[int]:
     return [r['id'] for r in conn.execute(
-        "SELECT id FROM documents WHERE project = ?", (project,)
+        "SELECT id FROM documents WHERE project = ? OR project LIKE ?",
+        (project, f"{project}/%")
     ).fetchall()]
+
+
+def all_known_folders(conn) -> list[str]:
+    folders = set()
+    for table in ("documents", "chat_threads", "ingestion_jobs"):
+        try:
+            rows = conn.execute(f"SELECT DISTINCT project FROM {table}").fetchall()
+        except sqlite3.OperationalError:
+            rows = []
+        for row in rows:
+            value = (row["project"] or "").strip().strip("/")
+            if not value:
+                continue
+            parts = value.split("/")
+            for i in range(1, len(parts) + 1):
+                folders.add("/".join(parts[:i]))
+    return sorted(folders)
+
+
+def _folder_entry(folder: str) -> dict:
+    return {
+        "project": folder,
+        "folder": folder,
+        "display_name": folder.rsplit("/", 1)[-1],
+        "parent": folder.rsplit("/", 1)[0] if "/" in folder else None,
+        "depth": folder.count("/"),
+        "kind": "folder",
+    }
+
+
+def _document_entry(conn, row) -> dict:
+    meta = json.loads(row["metadata"]) if row["metadata"] else {}
+    sec_count = conn.execute(
+        "SELECT COUNT(*) FROM sections WHERE doc_id = ?",
+        (row["id"],)
+    ).fetchone()[0]
+    return {
+        "id": row["id"],
+        "project": row["project"],
+        "folder": row["project"],
+        "title": row["title"],
+        "filename": row["filename"],
+        "total_pages": row["total_pages"],
+        "sections": sec_count,
+        "document_type": meta.get("document_type"),
+        "kind": "file",
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -733,8 +782,9 @@ SSE_PORT = 8200
 mcp = FastMCP(
     "Document RAG",
     instructions="""\
-Search and navigate engineering project documents (specifications, procedures, QAPs, tender docs).
-All searches are scoped by project. Use list_projects first.
+Search and navigate engineering folder documents (specifications, procedures, QAPs, tender docs).
+All searches are scoped by folder. A folder search includes all of its sub-folders. Use list_folders first.
+Use list_folder_entries when you need folders/files within a specific folder.
 
 === SEARCH STRATEGY ===
 
@@ -860,29 +910,107 @@ register_correction_tools(mcp, get_db)
 # ===== Discovery =====
 
 @mcp.tool()
-def list_projects() -> str:
-    """List all projects with document and page counts."""
+def list_folders() -> str:
+    """List top-level folders with aggregate document and page counts."""
     with get_db() as conn:
-        rows = conn.execute("""
-            SELECT project, COUNT(*) as docs, SUM(total_pages) as pages
-            FROM documents GROUP BY project ORDER BY project
-        """).fetchall()
-        return json.dumps([
-            {"project": r["project"], "documents": r["docs"], "total_pages": r["pages"]}
-            for r in rows
-        ], indent=2)
+        exact_stats = {
+            row["project"]: {
+                "documents": row["docs"],
+                "total_pages": row["pages"] or 0,
+            }
+            for row in conn.execute("""
+                SELECT project, COUNT(*) as docs, SUM(total_pages) as pages
+                FROM documents GROUP BY project ORDER BY project
+            """).fetchall()
+        }
+
+        folders = [folder for folder in all_known_folders(conn) if "/" not in folder]
+        results = []
+        for folder in folders:
+            prefix = folder + "/"
+            docs = 0
+            pages = 0
+            for candidate, stats in exact_stats.items():
+                if candidate == folder or candidate.startswith(prefix):
+                    docs += stats["documents"]
+                    pages += stats["total_pages"]
+            results.append({
+                "project": folder,
+                "folder": folder,
+                "display_name": folder.rsplit("/", 1)[-1],
+                "parent": folder.rsplit("/", 1)[0] if "/" in folder else None,
+                "depth": folder.count("/"),
+                "documents": docs,
+                "total_pages": pages,
+            })
+        return json.dumps(results, indent=2)
 
 
 @mcp.tool()
-def list_documents(project: str) -> str:
-    """List all documents in a project.
+def list_folder_entries(
+    project: str,
+    include: str = "both",
+    recursive: bool = False,
+) -> str:
+    """List folders/files within a folder.
 
     Args:
-        project: Project name (from list_projects).
+        project: Folder path to inspect.
+        include: 'folders', 'files', or 'both'.
+        recursive: If true, include all descendants. If false, only direct children/direct files.
+    """
+    project = (project or "").strip().strip("/")
+    if not project:
+        return json.dumps({"error": "project is required"})
+    if include not in {"folders", "files", "both"}:
+        return json.dumps({"error": "include must be one of: folders, files, both"})
+
+    with get_db() as conn:
+        folder_items = []
+        file_items = []
+        prefix = project + "/"
+        if include in {"folders", "both"}:
+            for folder in all_known_folders(conn):
+                if not folder.startswith(prefix):
+                    continue
+                suffix = folder[len(prefix):]
+                if not recursive and "/" in suffix:
+                    continue
+                folder_items.append(_folder_entry(folder))
+
+        if include in {"files", "both"}:
+            doc_rows = conn.execute(
+                "SELECT * FROM documents WHERE project = ? OR project LIKE ? ORDER BY project, id",
+                (project, f"{project}/%")
+            ).fetchall()
+            for row in doc_rows:
+                relative_folder = row["project"][len(project):].strip("/")
+                if not recursive and relative_folder:
+                    continue
+                file_items.append(_document_entry(conn, row))
+
+        return json.dumps({
+            "project": project,
+            "folder": project,
+            "include": include,
+            "recursive": recursive,
+            "folder_count": len(folder_items),
+            "file_count": len(file_items),
+            "entries": folder_items + file_items,
+            "folders": folder_items,
+            "files": file_items,
+        }, indent=2)
+@mcp.tool()
+def list_documents(project: str) -> str:
+    """List all documents in a folder scope.
+
+    Args:
+        project: Folder path (from list_folders). Includes sub-folders.
     """
     with get_db() as conn:
         docs = conn.execute(
-            "SELECT * FROM documents WHERE project = ? ORDER BY id", (project,)
+            "SELECT * FROM documents WHERE project = ? OR project LIKE ? ORDER BY project, id",
+            (project, f"{project}/%")
         ).fetchall()
 
         results = []
@@ -985,13 +1113,13 @@ def search_pages(
     page_type: Optional[str] = None,
     max_results: int = 10
 ) -> str:
-    """Full-text keyword search across a project's pages.
+    """Full-text keyword search across a folder's pages.
 
     Automatically expands known abbreviations (e.g. PRS → price reduction schedule)
     and falls back to OR matching for better recall when exact AND matching is too strict.
 
     Args:
-        project: Project name (required).
+        project: Folder path (required). Includes sub-folders.
         query: 2-5 keyword terms (not a full sentence). Drop stop words.
                Examples: "superheater tube material", "SA 213 grade", "PRS clause"
         doc_id: Optional. Restrict to one document.
@@ -1010,7 +1138,7 @@ def search_pages(
     with get_db() as conn:
         ids = project_doc_ids(conn, project)
         if not ids:
-            return json.dumps({"error": f"No documents in project '{project}'"})
+            return json.dumps({"error": f"No documents in folder '{project}'"})
 
         results = []
         seen = set()
@@ -1075,16 +1203,16 @@ def search_pages(
 
 @mcp.tool()
 def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> str:
-    """Search section headings within a project.
+    """Search section headings within a folder scope.
 
     Args:
-        project: Project name.
+        project: Folder path. Includes sub-folders.
         query: Keywords to match in section headings.
         doc_id: Optional. Restrict to one document.
     """
     with get_db() as conn:
-        conds = ["(s.heading LIKE ? OR s.breadcrumb LIKE ?)", "d.project = ?"]
-        params = [f"%{query}%", f"%{query}%", project]
+        conds = ["(s.heading LIKE ? OR s.breadcrumb LIKE ?)", "(d.project = ? OR d.project LIKE ?)"]
+        params = [f"%{query}%", f"%{query}%", project, f"{project}/%"]
 
         if doc_id is not None:
             conds.append("s.doc_id = ?")
@@ -1438,7 +1566,7 @@ def semantic_search(
     (pip install sentence-transformers).
 
     Args:
-        project: Project name.
+        project: Folder path. Includes sub-folders.
         query: Natural language query — can be a full question or description.
         doc_id: Optional. Restrict to one document.
         max_results: Default 10, max 25.
@@ -1461,7 +1589,7 @@ def semantic_search(
     with get_db() as conn:
         ids = project_doc_ids(conn, project)
         if not ids:
-            return json.dumps({"error": f"No documents in project '{project}'"})
+            return json.dumps({"error": f"No documents in folder '{project}'"})
 
         # Check if embeddings exist
         ph = ','.join('?' * len(ids))
@@ -1562,15 +1690,15 @@ def main():
     mcp.settings.port = args.port
 
     with get_db() as conn:
-        projects = conn.execute(
+        folders = conn.execute(
             "SELECT project, COUNT(*) as n FROM documents GROUP BY project"
         ).fetchall()
         total_pages = conn.execute("SELECT COUNT(*) FROM pages").fetchone()[0]
 
         print(f"Document RAG MCP Server")
         print(f"Database: {DB_PATH}")
-        proj_list = ', '.join(f"{r['project']} ({r['n']} docs)" for r in projects)
-        print(f"Projects: {proj_list}")
+        folder_list = ', '.join(f"{r['project']} ({r['n']} docs)" for r in folders)
+        print(f"Folders: {folder_list}")
         print(f"Total pages indexed: {total_pages}")
         print(f"Starting on port {args.port}...")
 

@@ -265,6 +265,53 @@ a:hover { text-decoration: underline; }
 
 .card-title .count { font-weight: 500; color: var(--muted); font-size: 13px; }
 
+.table-filters {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.table-filter-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.table-filter-controls input,
+.table-filter-controls select {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.table-filter-controls input {
+  min-width: 260px;
+  flex: 1 1 320px;
+}
+
+.table-filter-controls select {
+  min-width: 150px;
+}
+
+.table-filter-summary {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-top: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
 /* Project workspace */
 .project-workspace {
   display: grid;
@@ -302,6 +349,10 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid #eef2f7;
   font-size: 13px;
   vertical-align: top;
+}
+
+.table .doc-id-cell strong {
+  white-space: nowrap;
 }
 
 .table tr:hover td { background: #f8fbff; }

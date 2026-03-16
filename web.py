@@ -2,17 +2,17 @@
 """
 OCR-RAG Web GUI
 ================
-Project & document management with PDF ingestion.
+Folder & document management with PDF ingestion.
 
   python web.py --db docs.db --port 8201
 
 Routes:
   /                                     Web GUI
-  /api/projects                         List / create projects
-  /api/projects/{name}/documents        List docs + pending uploads
-  /api/projects/{name}/chats            List / create chat threads
-  /api/projects/{name}/upload           Upload PDFs
-  /api/projects/{name}/ingest           Ingest all pending PDFs
+  /api/folders                          List / create folders
+  /api/folders/{name}/documents         List docs + pending uploads
+  /api/folders/{name}/chats             List / create chat threads
+  /api/folders/{name}/upload            Upload PDFs
+  /api/folders/{name}/ingest            Ingest all pending PDFs
   /api/documents/{id}                   Document info
   /api/documents/{id}/toc               Section tree
   /api/documents/{id}/pages/{num}       Single page
@@ -20,7 +20,7 @@ Routes:
   /api/documents/{id}/search?q=         Search within doc
   /api/chats/{id}/messages              Get / append chat messages
   /api/ingestion/jobs                   Active ingestion jobs
-  /api/projects/{name}/quality          Quality flags + corrections
+  /api/folders/{name}/quality           Quality flags + corrections
 """
 
 import argparse
@@ -86,7 +86,7 @@ DB_PATH = "docs.db"
 UPLOADS_DIR = "./uploads"
 executor = ThreadPoolExecutor(max_workers=2)
 
-app = FastAPI(title="Esteem Project Knowledge", docs_url="/api/docs")
+app = FastAPI(title="Esteem Folder Knowledge", docs_url="/api/docs")
 
 
 def get_conn():
@@ -94,6 +94,153 @@ def get_conn():
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
     return conn
+
+
+def _normalize_folder_name(name: str) -> str:
+    cleaned = re.sub(r"/+", "/", (name or "").replace("\\", "/").strip())
+    return cleaned.strip("/")
+
+
+def _validate_folder_name(name: str, field_name: str = "Folder name") -> str:
+    folder = _normalize_folder_name(name)
+    if not folder:
+        raise HTTPException(400, f"{field_name} required")
+
+    for segment in folder.split("/"):
+        if not segment:
+            raise HTTPException(400, "Folder path contains an empty segment")
+        if segment in {".", ".."}:
+            raise HTTPException(400, "Folder path cannot contain . or ..")
+        if re.search(r'[<>:"|?*]', segment):
+            raise HTTPException(400, f"Invalid characters in folder segment: {segment}")
+    return folder
+
+
+def _folder_disk_path(folder: str) -> Path:
+    folder = _normalize_folder_name(folder)
+    base = Path(UPLOADS_DIR)
+    return base.joinpath(*folder.split("/")) if folder else base
+
+
+def _folder_scope_sql(column: str = "project") -> str:
+    return f"({column} = ? OR {column} LIKE ?)"
+
+
+def _folder_scope_params(folder: str) -> list[str]:
+    return [folder, f"{folder}/%"]
+
+
+def _folder_relative_path(path: Path, root: Path) -> str:
+    rel = path.relative_to(root).as_posix()
+    return _normalize_folder_name(rel)
+
+
+def _iter_upload_folders() -> set[str]:
+    uploads = Path(UPLOADS_DIR)
+    if not uploads.exists():
+        return set()
+
+    folders = set()
+    for current_root, dirnames, _filenames in os.walk(uploads):
+        dirnames[:] = [
+            name for name in dirnames
+            if not name.startswith(".") and not name.startswith("_")
+        ]
+        current_path = Path(current_root)
+        if current_path == uploads:
+            continue
+        folder = _folder_relative_path(current_path, uploads)
+        if folder:
+            folders.add(folder)
+    return folders
+
+
+def _all_known_folders(conn) -> list[str]:
+    folders = set()
+    for table in ("documents", "ingestion_jobs", "chat_threads"):
+        rows = conn.execute(f"SELECT DISTINCT project FROM {table}").fetchall()
+        folders.update(
+            _normalize_folder_name(row["project"])
+            for row in rows
+            if row["project"]
+        )
+    folders.update(_iter_upload_folders())
+
+    expanded = set()
+    for folder in folders:
+        parts = folder.split("/")
+        for i in range(1, len(parts) + 1):
+            expanded.add("/".join(parts[:i]))
+    return sorted(expanded)
+
+
+def _folder_doc_ids(conn, folder: str) -> list[int]:
+    return [r["id"] for r in conn.execute(
+        f"SELECT id FROM documents WHERE {_folder_scope_sql('project')} ORDER BY id",
+        _folder_scope_params(folder)
+    ).fetchall()]
+
+
+def _pending_uploads(conn, folder: str) -> list[dict]:
+    folder_dir = _folder_disk_path(folder)
+    if not folder_dir.exists():
+        return []
+
+    ingested = {
+        (row["project"], row["filename"])
+        for row in conn.execute(
+            f"SELECT project, filename FROM documents WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
+        ).fetchall()
+    }
+
+    uploads_root = Path(UPLOADS_DIR)
+    pending = []
+    for current_root, dirnames, filenames in os.walk(folder_dir):
+        dirnames[:] = [
+            name for name in dirnames
+            if not name.startswith(".") and not name.startswith("_")
+        ]
+        current_path = Path(current_root)
+        current_folder = _folder_relative_path(current_path, uploads_root)
+        for name in sorted(filenames):
+            file_path = current_path / name
+            if name.startswith(".") or name.startswith("_"):
+                continue
+            if file_path.suffix.lower() not in INGESTABLE_EXTENSIONS:
+                continue
+            if (current_folder, name) in ingested:
+                continue
+            relative_path = file_path.relative_to(folder_dir).as_posix()
+            pending.append({
+                "folder": current_folder,
+                "filename": name,
+                "relative_path": relative_path,
+                "size_mb": round(file_path.stat().st_size / 1048576, 1),
+            })
+
+    pending.sort(key=lambda item: (item["folder"], item["filename"]))
+    return pending
+
+
+def _rename_folder_value(value: str, old_folder: str, new_folder: str) -> str:
+    if value == old_folder:
+        return new_folder
+    return new_folder + value[len(old_folder):]
+
+
+def _rename_folder_references(conn, table: str, old_folder: str, new_folder: str):
+    rows = conn.execute(
+        f"SELECT DISTINCT project FROM {table} WHERE {_folder_scope_sql('project')}",
+        _folder_scope_params(old_folder)
+    ).fetchall()
+    for row in rows:
+        current = row["project"]
+        updated = _rename_folder_value(current, old_folder, new_folder)
+        conn.execute(
+            f"UPDATE {table} SET project = ? WHERE project = ?",
+            (updated, current)
+        )
 
 
 def _sanitize_fts_query(query: str) -> str:
@@ -147,7 +294,7 @@ def _fetch_chat_messages(conn, thread_id: str):
     return messages
 
 
-def _list_chat_threads(conn, project: str):
+def _list_chat_threads(conn, folder: str):
     rows = conn.execute(
         """
         SELECT t.id, t.project, t.title, t.created_at, t.updated_at,
@@ -169,22 +316,28 @@ def _list_chat_threads(conn, project: str):
         WHERE t.project = ?
         ORDER BY datetime(t.updated_at) DESC, t.id DESC
         """,
-        (project,)
+        (folder,)
     ).fetchall()
-    return [dict(row) for row in rows]
+    threads = []
+    for row in rows:
+        item = dict(row)
+        item["folder"] = item["project"]
+        threads.append(item)
+    return threads
 
 
-def _create_chat_thread(conn, project: str, title: Optional[str] = None) -> dict:
+def _create_chat_thread(conn, folder: str, title: Optional[str] = None) -> dict:
     thread_id = str(uuid4())
     clean_title = (title or "New chat").strip() or "New chat"
     conn.execute(
         "INSERT INTO chat_threads (id, project, title) VALUES (?, ?, ?)",
-        (thread_id, project, clean_title)
+        (thread_id, folder, clean_title)
     )
     conn.commit()
     return {
         "id": thread_id,
-        "project": project,
+        "project": folder,
+        "folder": folder,
         "title": clean_title,
     }
 
@@ -210,15 +363,8 @@ def _insert_chat_message(
     _touch_thread(conn, thread_id)
 
 
-def _project_doc_ids(conn, project: str) -> list[int]:
-    return [r["id"] for r in conn.execute(
-        "SELECT id FROM documents WHERE project = ? ORDER BY id",
-        (project,)
-    ).fetchall()]
-
-
-def _fts_search_project(conn, project: str, query: str, limit: int = 5) -> list[dict]:
-    doc_ids = _project_doc_ids(conn, project)
+def _fts_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[dict]:
+    doc_ids = _folder_doc_ids(conn, folder)
     if not doc_ids:
         return []
 
@@ -239,7 +385,7 @@ def _fts_search_project(conn, project: str, query: str, limit: int = 5) -> list[
             rows = conn.execute(
                 f"""
                 SELECT p.doc_id, d.title AS doc_title, p.page_num, p.breadcrumb,
-                       p.page_type, p.content,
+                       p.page_type, p.content, d.project AS folder,
                        snippet(pages_fts, 0, '>>>', '<<<', '...', 30) AS snippet,
                        rank
                 FROM pages_fts
@@ -264,6 +410,7 @@ def _fts_search_project(conn, project: str, query: str, limit: int = 5) -> list[
             results.append({
                 "doc_id": row["doc_id"],
                 "doc_title": row["doc_title"],
+                "folder": row["folder"],
                 "page_num": row["page_num"],
                 "breadcrumb": row["breadcrumb"],
                 "page_type": row["page_type"],
@@ -277,8 +424,8 @@ def _fts_search_project(conn, project: str, query: str, limit: int = 5) -> list[
     return results
 
 
-def _semantic_search_project(conn, project: str, query: str, limit: int = 5) -> list[dict]:
-    doc_ids = _project_doc_ids(conn, project)
+def _semantic_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[dict]:
+    doc_ids = _folder_doc_ids(conn, folder)
     if not doc_ids:
         return []
 
@@ -312,7 +459,8 @@ def _semantic_search_project(conn, project: str, query: str, limit: int = 5) -> 
 
     rows = conn.execute(
         f"""
-        SELECT p.doc_id, d.title AS doc_title, p.page_num, p.breadcrumb, p.page_type,
+        SELECT p.doc_id, d.title AS doc_title, d.project AS folder,
+               p.page_num, p.breadcrumb, p.page_type,
                p.content, pe.chunk_text, pe.embedding
         FROM page_embeddings pe
         JOIN pages p ON p.id = pe.page_id
@@ -333,6 +481,7 @@ def _semantic_search_project(conn, project: str, query: str, limit: int = 5) -> 
         scored.append({
             "doc_id": row["doc_id"],
             "doc_title": row["doc_title"],
+            "folder": row["folder"],
             "page_num": row["page_num"],
             "breadcrumb": row["breadcrumb"],
             "page_type": row["page_type"],
@@ -374,16 +523,16 @@ def _build_retrieval_query(history: list[dict], question: str) -> str:
     return question
 
 
-def _retrieve_project_context(conn, project: str, question: str, history: list[dict], limit: int = 6):
+def _retrieve_folder_context(conn, folder: str, question: str, history: list[dict], limit: int = 6):
     retrieval_query = _build_retrieval_query(history, question)
     merged = []
     seen = set()
-    for result in _fts_search_project(conn, project, retrieval_query, limit=limit):
+    for result in _fts_search_folder(conn, folder, retrieval_query, limit=limit):
         key = (result["doc_id"], result["page_num"])
         if key not in seen:
             seen.add(key)
             merged.append(result)
-    for result in _semantic_search_project(conn, project, retrieval_query, limit=limit):
+    for result in _semantic_search_folder(conn, folder, retrieval_query, limit=limit):
         key = (result["doc_id"], result["page_num"])
         if key not in seen:
             seen.add(key)
@@ -402,6 +551,7 @@ def _retrieve_project_context(conn, project: str, question: str, history: list[d
             "id": idx,
             "doc_id": item["doc_id"],
             "doc_title": item["doc_title"],
+            "folder": item["folder"],
             "page_num": item["page_num"],
             "breadcrumb": item["breadcrumb"],
             "page_type": item["page_type"],
@@ -424,10 +574,10 @@ def _chat_api_key() -> Optional[str]:
     return os.environ.get("ANTHROPIC_API_KEY")
 
 
-def _generate_project_answer(project: str, question: str, history: list[dict], retrieval: dict):
+def _generate_folder_answer(folder: str, question: str, history: list[dict], retrieval: dict):
     if not retrieval["sources"]:
         return (
-            "I don't have enough information in this project's documents to answer that.\n\n"
+            "I don't have enough information in this folder's documents to answer that.\n\n"
             "Try asking with more specific document terms, section names, tags, or page topics."
         )
 
@@ -436,12 +586,13 @@ def _generate_project_answer(project: str, question: str, history: list[dict], r
         raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
 
     system_prompt = (
-        "You are Esteem Project Knowledge, a project-scoped document assistant.\n"
-        f"You are currently answering questions for the project '{project}'.\n"
+        "You are Esteem Folder Knowledge, a folder-scoped document assistant.\n"
+        f"You are currently answering questions for the folder '{folder}'.\n"
+        "The folder scope includes that folder and all of its sub-folders.\n"
         "You must answer ONLY from the provided source excerpts and the prior conversation.\n"
-        "Never use outside knowledge. Never use information from any other project.\n"
+        "Never use outside knowledge. Never use information from any folder outside this scope.\n"
         "If the excerpts do not support a confident answer, say that you do not have enough "
-        "information in the documents for this project.\n"
+        "information in the documents for this folder.\n"
         "Do not speculate or fill gaps.\n"
         "Respond in markdown.\n"
         "When you make factual claims, cite supporting sources inline like [1] or [2].\n"
@@ -451,13 +602,13 @@ def _generate_project_answer(project: str, question: str, history: list[dict], r
     excerpts = []
     for source in retrieval["sources"]:
         excerpts.append(
-            f"[{source['id']}] {source['doc_title']} | page {source['page_num']} | "
+            f"[{source['id']}] {source['folder']} | {source['doc_title']} | page {source['page_num']} | "
             f"{source['breadcrumb'] or 'No section breadcrumb'}\n"
             f"{source['content']}"
         )
 
     prompt = (
-        f"Project: {project}\n"
+        f"Folder: {folder}\n"
         f"Retrieved with query: {retrieval['query']}\n\n"
         "Source excerpts:\n"
         "================\n"
@@ -577,91 +728,116 @@ tracker = IngestionTracker()
 
 
 # ---------------------------------------------------------------------------
-# Project routes
+# Folder routes
 # ---------------------------------------------------------------------------
 
 @app.get("/api/projects")
-def list_projects():
+@app.get("/api/folders")
+def list_folders():
     conn = get_conn()
     try:
-        rows = conn.execute("""
-            SELECT project, COUNT(*) as docs,
-                   COALESCE(SUM(total_pages), 0) as pages
-            FROM documents GROUP BY project ORDER BY project
-        """).fetchall()
-        projects = [dict(r) for r in rows]
+        folders = _all_known_folders(conn)
+        exact_docs = {
+            row["project"]: {
+                "docs": row["docs"],
+                "pages": row["pages"] or 0,
+            }
+            for row in conn.execute("""
+                SELECT project, COUNT(*) AS docs, COALESCE(SUM(total_pages), 0) AS pages
+                FROM documents
+                GROUP BY project
+            """).fetchall()
+        }
+        exact_pending = {}
+        for known_folder in folders:
+            exact_pending[known_folder] = len([
+                item for item in _pending_uploads(conn, known_folder)
+                if item["folder"] == known_folder
+            ])
 
-        # Include upload-only projects (dirs with PDFs but no ingested docs)
-        # and empty projects (created but no files yet)
-        uploads = Path(UPLOADS_DIR)
-        if uploads.exists():
-            existing = {p["project"] for p in projects}
-            for d in sorted(uploads.iterdir()):
-                if d.is_dir() and d.name not in existing and not d.name.startswith('_'):
-                    n = sum(1 for f in d.iterdir()
-                            if f.is_file() and f.suffix.lower() in INGESTABLE_EXTENSIONS
-                            and not f.name.startswith('.'))
-                    projects.append({
-                        "project": d.name, "docs": 0,
-                        "pages": 0, "pending": n,
-                    })
-        return projects
+        results = []
+        for folder in folders:
+            scope_docs = 0
+            scope_pages = 0
+            scope_pending = 0
+            prefix = folder + "/"
+            for candidate, stats in exact_docs.items():
+                if candidate == folder or candidate.startswith(prefix):
+                    scope_docs += stats["docs"]
+                    scope_pages += stats["pages"]
+            for candidate, pending_count in exact_pending.items():
+                if candidate == folder or candidate.startswith(prefix):
+                    scope_pending += pending_count
+            parent = folder.rsplit("/", 1)[0] if "/" in folder else None
+            results.append({
+                "folder": folder,
+                "project": folder,
+                "display_name": folder.rsplit("/", 1)[-1],
+                "parent": parent,
+                "depth": folder.count("/"),
+                "docs": scope_docs,
+                "pages": scope_pages,
+                "pending": scope_pending,
+            })
+
+        return results
     finally:
         conn.close()
 
 
 @app.post("/api/projects")
-def create_project(data: dict):
-    name = data.get("name", "").strip()
-    if not name:
-        raise HTTPException(400, "Project name required")
-    if re.search(r'[/\\<>:"|?*]', name):
-        raise HTTPException(400, "Invalid characters in project name")
-    project_dir = Path(UPLOADS_DIR) / name
-    project_dir.mkdir(parents=True, exist_ok=True)
-    return {"status": "created", "project": name}
+@app.post("/api/folders")
+def create_folder(data: dict):
+    folder = _validate_folder_name(data.get("name", "").strip(), "Folder name")
+    folder_dir = _folder_disk_path(folder)
+    folder_dir.mkdir(parents=True, exist_ok=True)
+    return {"status": "created", "folder": folder, "project": folder}
 
 
-@app.patch("/api/projects/{project}")
-def rename_project(project: str, data: dict):
-    new_name = data.get("name", "").strip()
-    if not new_name:
-        raise HTTPException(400, "New name required")
-    if re.search(r'[/\\<>:"|?*]', new_name):
-        raise HTTPException(400, "Invalid characters in project name")
+@app.patch("/api/projects/{folder:path}")
+@app.patch("/api/folders/{folder:path}")
+def rename_folder(folder: str, data: dict):
+    folder = _validate_folder_name(folder, "Folder name")
+    new_folder = _validate_folder_name(data.get("name", "").strip(), "New folder name")
+    if new_folder == folder:
+        return {"status": "unchanged", "folder": folder}
+    if new_folder.startswith(folder + "/"):
+        raise HTTPException(400, "Cannot rename a folder inside itself")
     conn = get_conn()
     try:
-        conn.execute(
-            "UPDATE documents SET project = ? WHERE project = ?",
-            (new_name, project)
-        )
-        conn.execute(
-            "UPDATE ingestion_jobs SET project = ? WHERE project = ?",
-            (new_name, project)
-        )
-        conn.execute(
-            "UPDATE chat_threads SET project = ? WHERE project = ?",
-            (new_name, project)
-        )
+        if new_folder in _all_known_folders(conn):
+            raise HTTPException(400, f"Folder already exists: {new_folder}")
+        _rename_folder_references(conn, "documents", folder, new_folder)
+        _rename_folder_references(conn, "ingestion_jobs", folder, new_folder)
+        _rename_folder_references(conn, "chat_threads", folder, new_folder)
         conn.commit()
 
-        # Rename uploads directory
-        old_dir = Path(UPLOADS_DIR) / project
-        new_dir = Path(UPLOADS_DIR) / new_name
+        old_dir = _folder_disk_path(folder)
+        new_dir = _folder_disk_path(new_folder)
         if old_dir.exists() and not new_dir.exists():
+            new_dir.parent.mkdir(parents=True, exist_ok=True)
             old_dir.rename(new_dir)
 
-        return {"status": "renamed", "old_name": project, "new_name": new_name}
+        return {
+            "status": "renamed",
+            "old_name": folder,
+            "new_name": new_folder,
+            "folder": new_folder,
+            "project": new_folder,
+        }
     finally:
         conn.close()
 
 
-@app.delete("/api/projects/{project}")
-def delete_project(project: str):
+@app.delete("/api/projects/{folder:path}")
+@app.delete("/api/folders/{folder:path}")
+def delete_folder(folder: str):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
         doc_ids = [r["id"] for r in conn.execute(
-            "SELECT id FROM documents WHERE project = ?", (project,)
+            f"SELECT id FROM documents WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
         ).fetchall()]
         for did in doc_ids:
             conn.execute("DELETE FROM pages WHERE doc_id = ?", (did,))
@@ -669,15 +845,24 @@ def delete_project(project: str):
             conn.execute("DELETE FROM corrections WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM cross_references WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM quality_flags WHERE doc_id = ?", (did,))
-        conn.execute("DELETE FROM chat_threads WHERE project = ?", (project,))
-        conn.execute("DELETE FROM ingestion_jobs WHERE project = ?", (project,))
-        conn.execute("DELETE FROM documents WHERE project = ?", (project,))
+        conn.execute(
+            f"DELETE FROM chat_threads WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
+        )
+        conn.execute(
+            f"DELETE FROM ingestion_jobs WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
+        )
+        conn.execute(
+            f"DELETE FROM documents WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
+        )
         conn.commit()
 
-        project_dir = Path(UPLOADS_DIR) / project
-        if project_dir.exists():
-            shutil.rmtree(project_dir)
-        return {"status": "deleted", "project": project}
+        folder_dir = _folder_disk_path(folder)
+        if folder_dir.exists():
+            shutil.rmtree(folder_dir)
+        return {"status": "deleted", "folder": folder, "project": folder}
     finally:
         conn.close()
 
@@ -686,13 +871,15 @@ def delete_project(project: str):
 # Document routes
 # ---------------------------------------------------------------------------
 
-@app.get("/api/projects/{project}/documents")
-def list_documents(project: str):
+@app.get("/api/projects/{folder:path}/documents")
+@app.get("/api/folders/{folder:path}/documents")
+def list_documents(folder: str):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
         docs = conn.execute(
-            "SELECT * FROM documents WHERE project = ? ORDER BY id",
-            (project,)
+            f"SELECT * FROM documents WHERE {_folder_scope_sql('project')} ORDER BY project, id",
+            _folder_scope_params(folder)
         ).fetchall()
 
         results = []
@@ -703,6 +890,8 @@ def list_documents(project: str):
             ).fetchone()[0]
             entry = {
                 "id": d["id"], "title": d["title"],
+                "folder": d["project"],
+                "project": d["project"],
                 "filename": d["filename"],
                 "total_pages": d["total_pages"], "sections": secs,
                 "document_type": meta.get("document_type"),
@@ -711,43 +900,31 @@ def list_documents(project: str):
             if si:
                 entry["split_info"] = si
             results.append(entry)
-
-        # Pending uploads (on disk but not ingested)
-        project_dir = Path(UPLOADS_DIR) / project
-        pending = []
-        if project_dir.exists():
-            ingested = {d["filename"] for d in results}
-            for f in sorted(project_dir.iterdir()):
-                if f.is_dir() or f.name.startswith('.') or f.name.startswith('_'):
-                    continue
-                if f.suffix.lower() not in INGESTABLE_EXTENSIONS:
-                    continue
-                if f.name not in ingested:
-                    pending.append({
-                        "filename": f.name,
-                        "size_mb": round(f.stat().st_size / 1048576, 1),
-                    })
-        return {"documents": results, "pending": pending}
+        return {"folder": folder, "project": folder, "documents": results, "pending": _pending_uploads(conn, folder)}
     finally:
         conn.close()
 
 
-@app.get("/api/projects/{project}/chats")
-def list_project_chats(project: str):
+@app.get("/api/projects/{folder:path}/chats")
+@app.get("/api/folders/{folder:path}/chats")
+def list_folder_chats(folder: str):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
-        return _list_chat_threads(conn, project)
+        return _list_chat_threads(conn, folder)
     finally:
         conn.close()
 
 
-@app.post("/api/projects/{project}/chats")
-def create_project_chat(project: str, data: Optional[dict] = None):
+@app.post("/api/projects/{folder:path}/chats")
+@app.post("/api/folders/{folder:path}/chats")
+def create_folder_chat(folder: str, data: Optional[dict] = None):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
         created = _create_chat_thread(
             conn,
-            project,
+            folder,
             title=(data or {}).get("title"),
         )
         return created
@@ -755,10 +932,12 @@ def create_project_chat(project: str, data: Optional[dict] = None):
         conn.close()
 
 
-@app.post("/api/projects/{project}/upload")
-async def upload_files(project: str, files: list[UploadFile] = File(...)):
-    project_dir = Path(UPLOADS_DIR) / project
-    project_dir.mkdir(parents=True, exist_ok=True)
+@app.post("/api/projects/{folder:path}/upload")
+@app.post("/api/folders/{folder:path}/upload")
+async def upload_files(folder: str, files: list[UploadFile] = File(...)):
+    folder = _validate_folder_name(folder, "Folder name")
+    folder_dir = _folder_disk_path(folder)
+    folder_dir.mkdir(parents=True, exist_ok=True)
 
     uploaded = []
     for f in files:
@@ -771,12 +950,12 @@ async def upload_files(project: str, files: list[UploadFile] = File(...)):
             tmp = Path(tempfile.mktemp(suffix=ext))
             tmp.write_bytes(content)
             try:
-                names = extract_archive(str(tmp), project_dir)
+                names = extract_archive(str(tmp), folder_dir)
                 uploaded.extend(names)
             finally:
                 tmp.unlink(missing_ok=True)
         elif ext in INGESTABLE_EXTENSIONS:
-            dest = project_dir / f.filename
+            dest = folder_dir / f.filename
             dest.write_bytes(content)
             uploaded.append(f.filename)
         # else: silently skip unsupported types
@@ -860,7 +1039,9 @@ def get_chat_thread(thread_id: str):
         ).fetchone()
         if not row:
             raise HTTPException(404, "Chat thread not found")
-        return dict(row)
+        result = dict(row)
+        result["folder"] = result["project"]
+        return result
     finally:
         conn.close()
 
@@ -876,7 +1057,7 @@ def get_chat_messages(thread_id: str):
         if not thread:
             raise HTTPException(404, "Chat thread not found")
         return {
-            "thread": dict(thread),
+            "thread": {**dict(thread), "folder": thread["project"]},
             "messages": _fetch_chat_messages(conn, thread_id),
         }
     finally:
@@ -902,13 +1083,13 @@ def create_chat_message(thread_id: str, data: dict):
 
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
-        retrieval = _retrieve_project_context(
+        retrieval = _retrieve_folder_context(
             conn,
             thread["project"],
             content,
             history,
         )
-        answer = _generate_project_answer(
+        answer = _generate_folder_answer(
             thread["project"],
             content,
             history,
@@ -919,6 +1100,7 @@ def create_chat_message(thread_id: str, data: dict):
                 "id": source["id"],
                 "doc_id": source["doc_id"],
                 "doc_title": source["doc_title"],
+                "folder": source["folder"],
                 "page_num": source["page_num"],
                 "breadcrumb": source["breadcrumb"],
                 "page_type": source["page_type"],
@@ -939,10 +1121,13 @@ def create_chat_message(thread_id: str, data: dict):
 
         conn.commit()
         return {
-            "thread": dict(conn.execute(
+            "thread": {
+                **dict(conn.execute(
                 "SELECT * FROM chat_threads WHERE id = ?",
                 (thread_id,)
             ).fetchone()),
+                "folder": thread["project"],
+            },
             "messages": _fetch_chat_messages(conn, thread_id),
             "retrieval": {
                 "query": retrieval["query"],
@@ -968,7 +1153,7 @@ def get_document(doc_id: int):
             raise HTTPException(404, "Document not found")
         meta = json.loads(d["metadata"]) if d["metadata"] else {}
         result = {
-            "id": d["id"], "project": d["project"], "title": d["title"],
+            "id": d["id"], "project": d["project"], "folder": d["project"], "title": d["title"],
             "filename": d["filename"], "total_pages": d["total_pages"],
             "document_number": meta.get("document_number"),
             "revision": meta.get("revision"),
@@ -1239,51 +1424,45 @@ def _run_ingestion(jid, file_path, project, filename):
         tracker.update(jid, status="failed", error=str(e))
 
 
-@app.post("/api/projects/{project}/ingest")
-async def ingest_all(project: str):
-    project_dir = Path(UPLOADS_DIR) / project
-    if not project_dir.exists():
-        raise HTTPException(404, "No uploads for this project")
-
+@app.post("/api/projects/{folder:path}/ingest")
+@app.post("/api/folders/{folder:path}/ingest")
+async def ingest_all(folder: str):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
-        ingested = {r["filename"] for r in conn.execute(
-            "SELECT filename FROM documents WHERE project = ?", (project,)
-        ).fetchall()}
+        pending_files = _pending_uploads(conn, folder)
     finally:
         conn.close()
-
-    pending_files = []
-    for f in sorted(project_dir.iterdir()):
-        if f.is_dir() or f.name.startswith('.') or f.name.startswith('_'):
-            continue
-        if f.suffix.lower() in INGESTABLE_EXTENSIONS and f.name not in ingested:
-            pending_files.append(f)
 
     if not pending_files:
         return {"status": "nothing_to_ingest", "jobs": []}
 
     loop = asyncio.get_event_loop()
     jobs = []
-    for f in pending_files:
-        jid = tracker.create(f.name, project)
+    for pending in pending_files:
+        file_path = _folder_disk_path(pending["folder"]) / pending["filename"]
+        jid = tracker.create(pending["relative_path"], pending["folder"])
         loop.run_in_executor(
-            executor, _run_ingestion, jid, str(f), project, f.name
+            executor, _run_ingestion, jid, str(file_path), pending["folder"], pending["filename"]
         )
         jobs.append(jid)
     return {"status": "started", "jobs": jobs, "count": len(jobs)}
 
 
-@app.post("/api/projects/{project}/ingest/{filename:path}")
-async def ingest_single(project: str, filename: str):
-    file_path = Path(UPLOADS_DIR) / project / filename
+@app.post("/api/projects/{folder:path}/ingest/{filename:path}")
+@app.post("/api/folders/{folder:path}/ingest/{filename:path}")
+async def ingest_single(folder: str, filename: str):
+    folder = _validate_folder_name(folder, "Folder name")
+    relative_name = _normalize_folder_name(filename)
+    file_path = _folder_disk_path(folder) / relative_name
     if not file_path.exists():
         raise HTTPException(404, f"File not found: {filename}")
 
-    jid = tracker.create(filename, project)
+    target_folder = _folder_relative_path(file_path.parent, Path(UPLOADS_DIR))
+    jid = tracker.create(relative_name, target_folder)
     loop = asyncio.get_event_loop()
     loop.run_in_executor(
-        executor, _run_ingestion, jid, str(file_path), project, filename
+        executor, _run_ingestion, jid, str(file_path), target_folder, file_path.name
     )
     return {"status": "started", "job_id": jid}
 
@@ -1297,15 +1476,18 @@ def get_jobs():
 # Quality routes
 # ---------------------------------------------------------------------------
 
-@app.get("/api/projects/{project}/quality")
-def project_quality(project: str):
+@app.get("/api/projects/{folder:path}/quality")
+@app.get("/api/folders/{folder:path}/quality")
+def folder_quality(folder: str):
+    folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
         doc_ids = [r["id"] for r in conn.execute(
-            "SELECT id FROM documents WHERE project = ?", (project,)
+            f"SELECT id FROM documents WHERE {_folder_scope_sql('project')}",
+            _folder_scope_params(folder)
         ).fetchall()]
         if not doc_ids:
-            return {"flags": [], "corrections": []}
+            return {"folder": folder, "project": folder, "flags": [], "corrections": []}
 
         ph = ",".join("?" * len(doc_ids))
         flags = conn.execute(f"""
@@ -1319,6 +1501,8 @@ def project_quality(project: str):
             WHERE c.doc_id IN ({ph}) ORDER BY c.created_at DESC LIMIT 100
         """, doc_ids).fetchall()
         return {
+            "folder": folder,
+            "project": folder,
             "flags": [dict(r) for r in flags],
             "corrections": [dict(r) for r in corrections],
         }
