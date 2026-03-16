@@ -28,6 +28,7 @@ let currentProject = null;
 let currentDocId = null;
 let currentPage = 1;
 let currentChatId = null;
+let currentFolderSection = 'documents';
 let pollTimer = null;
 let thinkingTimer = null;
 
@@ -105,16 +106,21 @@ function router() {
   }
 
   if (hash.startsWith('/folder/')) {
-    const name = decodeURIComponent(hash.slice(8));
+    const { folder, section } = parseFolderHash(hash);
+    const name = decodeURIComponent(folder);
     currentProject = name;
-    showProject(name);
+    currentFolderSection = section;
+    showProject(name, section);
     return;
   }
 
   if (hash.startsWith('/project/')) {
-    const name = decodeURIComponent(hash.slice(9));
+    const legacy = hash.startsWith('/project/') ? `/folder/${hash.slice(9)}` : hash;
+    const { folder, section } = parseFolderHash(legacy);
+    const name = decodeURIComponent(folder);
     currentProject = name;
-    showProject(name);
+    currentFolderSection = section;
+    showProject(name, section);
     return;
   }
 
@@ -131,6 +137,24 @@ function navigate(hash) {
   location.hash = hash;
 }
 
+function parseFolderHash(hash) {
+  const raw = hash.slice(8);
+  const [folderPart, queryString = ''] = raw.split('?');
+  const params = new URLSearchParams(queryString);
+  const section = params.get('section') || 'documents';
+  return {
+    folder: folderPart,
+    section: ['documents', 'ingestion', 'chat'].includes(section) ? section : 'documents',
+  };
+}
+
+function folderHash(project, section = 'documents') {
+  const encoded = enc(project);
+  return section === 'documents'
+    ? `#/folder/${encoded}`
+    : `#/folder/${encoded}?section=${encodeURIComponent(section)}`;
+}
+
 // --- Sidebar ---
 async function loadFolders() {
   try {
@@ -143,7 +167,7 @@ async function loadFolders() {
     }
     list.innerHTML = projects.map((project) => `
       <div class="project-item ${currentProject === project.folder ? 'active' : ''}"
-           onclick="navigate('#/folder/${enc(project.folder)}')"
+           onclick="navigate(${jsq(folderHash(project.folder))})"
            style="padding-left:${12 + (project.depth || 0) * 16}px">
         <span class="name" title="${esc(project.folder)}">${esc(project.display_name || project.folder)}</span>
         <span class="badge">${project.docs}${project.pending ? `+${project.pending}` : ''}</span>
@@ -168,8 +192,9 @@ function showWelcome() {
   loadFolders();
 }
 
-async function showProject(project) {
+async function showProject(project, section = 'documents') {
   currentProject = project;
+  currentFolderSection = section;
   currentDocId = null;
   loadFolders();
   setTopbar(
@@ -200,23 +225,21 @@ async function showProject(project) {
     }
 
     let chatPayload = null;
-    if (currentChatId) {
+    if (section === 'chat' && currentChatId) {
       chatPayload = await api(`/chats/${currentChatId}/messages`);
     }
 
     content.innerHTML = `
-      <div class="project-workspace">
-        <section class="project-library workspace-stack">
-          ${renderUploadCard(project)}
-          ${renderChildFoldersCard(project, childFolders)}
-          ${renderPendingUploads(project, docData.pending)}
-          <div id="jobs-area"></div>
-          ${renderDocumentsCard(project, docData.documents)}
-        </section>
-        <section class="project-chat">
-          ${renderChatShell(project, chats, chatPayload?.messages || [])}
-        </section>
+      <div class="folder-section-nav">
+        ${renderFolderSectionTabs(project, section)}
       </div>
+      ${renderFolderSection(project, section, {
+        documents: docData.documents,
+        pending: docData.pending,
+        chats,
+        chatMessages: chatPayload?.messages || [],
+        childFolders,
+      })}
     `;
 
     renderMarkdownBlocks(content);
@@ -225,9 +248,9 @@ async function showProject(project) {
     const activeJobs = jobs.filter((job) =>
       inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
     );
-    if (activeJobs.length) {
+    if (section === 'ingestion' && activeJobs.length) {
       startPolling(project);
-    } else {
+    } else if (section === 'ingestion') {
       await pollJobs(project);
     }
   } catch (error) {
@@ -256,6 +279,49 @@ function renderUploadCard(project) {
   `;
 }
 
+function renderFolderSectionTabs(project, activeSection) {
+  const tabs = [
+    ['documents', 'Documents'],
+    ['ingestion', 'Ingestion'],
+    ['chat', 'Chat'],
+  ];
+  return tabs.map(([section, label]) => `
+    <button
+      class="section-tab ${activeSection === section ? 'active' : ''}"
+      onclick="navigate('${folderHash(project, section)}')">
+      ${label}
+    </button>
+  `).join('');
+}
+
+function renderFolderSection(project, section, data) {
+  if (section === 'ingestion') {
+    return `
+      <div class="workspace-stack">
+        ${renderUploadCard(project)}
+        ${renderChildFoldersCard(project, data.childFolders)}
+        ${renderPendingUploads(project, data.pending)}
+        <div id="jobs-area"></div>
+      </div>
+    `;
+  }
+
+  if (section === 'chat') {
+    return `
+      <div class="chat-only-view">
+        ${renderChatShell(project, data.chats, data.chatMessages)}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="workspace-stack">
+      ${renderChildFoldersCard(project, data.childFolders)}
+      ${renderDocumentsCard(project, data.documents)}
+    </div>
+  `;
+}
+
 function renderChildFoldersCard(project, folders) {
   if (!folders.length) return '';
   return `
@@ -264,7 +330,7 @@ function renderChildFoldersCard(project, folders) {
       <table class="table">
         <tr><th>Name</th><th>Documents</th><th>Pending</th></tr>
         ${folders.map((folder) => `
-          <tr class="clickable" onclick="navigate('#/folder/${enc(folder.folder)}')">
+          <tr class="clickable" onclick="navigate(${jsq(folderHash(folder.folder))})">
             <td><strong>${esc(folder.display_name || folder.folder)}</strong></td>
             <td>${folder.docs}</td>
             <td>${folder.pending || 0}</td>
