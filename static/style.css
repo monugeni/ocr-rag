@@ -265,6 +265,34 @@ a:hover { text-decoration: underline; }
 
 .card-title .count { font-weight: 500; color: var(--muted); font-size: 13px; }
 
+.bulk-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.bulk-actions-left,
+.bulk-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bulk-actions-right select {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+  min-width: 220px;
+}
+
 .folder-section-nav {
   display: flex;
   gap: 8px;
@@ -397,6 +425,7 @@ a:hover { text-decoration: underline; }
 .table tr:hover td { background: #f8fbff; }
 .table .clickable { cursor: pointer; }
 .table .clickable:hover td { background: #eef4ff; }
+.table .document-row.selected td { background: #edf4ff; }
 .table .mono { font-family: "SF Mono", "Consolas", monospace; font-size: 12px; }
 .table .muted { color: var(--muted); }
 .table .tag,

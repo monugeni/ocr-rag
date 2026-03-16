@@ -29,6 +29,7 @@ let currentDocId = null;
 let currentPage = 1;
 let currentChatId = null;
 let currentFolderSection = 'documents';
+let selectedDocumentIds = new Set();
 let pollTimer = null;
 let thinkingTimer = null;
 
@@ -155,6 +156,10 @@ function folderHash(project, section = 'documents') {
     : `#/folder/${encoded}?section=${encodeURIComponent(section)}`;
 }
 
+function rootFolder(folder) {
+  return String(folder || '').split('/')[0] || '';
+}
+
 // --- Sidebar ---
 async function loadFolders() {
   try {
@@ -193,6 +198,9 @@ function showWelcome() {
 }
 
 async function showProject(project, section = 'documents') {
+  if (currentProject && currentProject !== project) {
+    selectedDocumentIds.clear();
+  }
   currentProject = project;
   currentFolderSection = section;
   currentDocId = null;
@@ -209,11 +217,16 @@ async function showProject(project, section = 'documents') {
   content.innerHTML = '<div class="spinner"></div>';
 
   try {
-    const [docData, chats, jobs, folders] = await Promise.all([
+    const moveTargetPromise = section === 'documents'
+      ? api(`/folders?scope=${enc(rootFolder(project))}&recursive=true`)
+      : Promise.resolve([]);
+
+    const [docData, chats, jobs, folders, moveTargets] = await Promise.all([
       api(`/folders/${enc(project)}/documents`),
       api(`/folders/${enc(project)}/chats`),
       api('/ingestion/jobs'),
       api('/folders'),
+      moveTargetPromise,
     ]);
     const childFolders = folders.filter((folder) => folder.parent === project);
 
@@ -239,11 +252,16 @@ async function showProject(project, section = 'documents') {
         chats,
         chatMessages: chatPayload?.messages || [],
         childFolders,
+        moveTargets,
       })}
     `;
 
     renderMarkdownBlocks(content);
     scrollChatToBottom();
+    if (section === 'documents') {
+      syncDocumentSelectionState();
+      applyDocumentFilters();
+    }
 
     const activeJobs = jobs.filter((job) =>
       inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
@@ -317,7 +335,7 @@ function renderFolderSection(project, section, data) {
   return `
     <div class="workspace-stack">
       ${renderChildFoldersCard(project, data.childFolders)}
-      ${renderDocumentsCard(project, data.documents)}
+      ${renderDocumentsCard(project, data.documents, data.moveTargets)}
     </div>
   `;
 }
@@ -367,18 +385,36 @@ function renderPendingUploads(project, pending) {
   `;
 }
 
-function renderDocumentsCard(project, documents) {
+function renderDocumentsCard(project, documents, moveTargets = []) {
   const typeOptions = [...new Set(documents
     .map((doc) => doc.document_type)
     .filter(Boolean))]
     .sort((a, b) => a.localeCompare(b));
   const folderOptions = [...new Set(documents.map((doc) => doc.folder))]
     .sort((a, b) => a.localeCompare(b));
+  const targetOptions = moveTargets
+    .map((folder) => folder.folder)
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b));
 
   return `
     <div class="card">
       <div class="card-title">Documents <span class="count">${documents.length}</span></div>
       ${documents.length ? `
+        <div class="bulk-actions">
+          <div class="bulk-actions-left">
+            <strong id="document-selection-count">0 selected</strong>
+            <button class="btn btn-ghost btn-sm" onclick="clearDocumentSelection()">Clear selection</button>
+          </div>
+          <div class="bulk-actions-right">
+            <select id="bulk-move-target">
+              <option value="">Move to folder...</option>
+              ${targetOptions.map((folder) => `<option value="${esc(folder)}">${esc(folder)}</option>`).join('')}
+            </select>
+            <button class="btn btn-primary btn-sm" onclick="bulkMoveDocuments(${jsq(project)})">Move selected</button>
+            <button class="btn btn-danger btn-sm" onclick="bulkDeleteDocuments(${jsq(project)})">Delete selected</button>
+          </div>
+        </div>
         <div class="table-filters">
           <div class="table-filter-controls">
             <input
@@ -402,7 +438,7 @@ function renderDocumentsCard(project, documents) {
         </div>
         <div class="table-wrap">
           <table class="table">
-            <tr><th>Doc #</th><th>Title</th><th>Folder</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>
+            <tr><th><input type="checkbox" id="document-select-all" onclick="toggleVisibleDocuments(this.checked)"></th><th>Doc #</th><th>Title</th><th>Folder</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>
             ${documents.map((doc) => {
               const splitTag = doc.split_info
                 ? `<span class="tag" title="Split from ${esc(doc.split_info.parent)} pages ${doc.split_info.page_start}-${doc.split_info.page_end}">
@@ -419,10 +455,18 @@ function renderDocumentsCard(project, documents) {
               return `
                 <tr
                   class="clickable document-row"
+                  data-doc-id="${doc.id}"
                   data-doc-search="${esc(searchText)}"
                   data-doc-type="${esc(doc.document_type || '')}"
                   data-doc-folder="${esc(doc.folder)}"
                   onclick="navigate('#/doc/${doc.id}')">
+                  <td onclick="event.stopPropagation()">
+                    <input
+                      type="checkbox"
+                      class="document-select"
+                      data-doc-id="${doc.id}"
+                      onchange="toggleDocumentSelection(${doc.id}, this.checked)">
+                  </td>
                   <td class="mono doc-id-cell"><strong>${doc.id}</strong></td>
                   <td>
                     <strong>${esc(doc.title)}</strong>
@@ -461,13 +505,19 @@ function applyDocumentFilters() {
   if (!rows.length) return;
 
   let visibleCount = 0;
+  let visibleSelectedCount = 0;
   rows.forEach((row) => {
     const matchesQuery = !query || (row.dataset.docSearch || '').includes(query);
     const matchesType = !type || (row.dataset.docType || '') === type;
     const matchesFolder = !folder || (row.dataset.docFolder || '') === folder;
     const visible = matchesQuery && matchesType && matchesFolder;
     row.style.display = visible ? '' : 'none';
-    if (visible) visibleCount += 1;
+    if (visible) {
+      visibleCount += 1;
+      if (selectedDocumentIds.has(Number(row.dataset.docId))) {
+        visibleSelectedCount += 1;
+      }
+    }
   });
 
   const summary = document.getElementById('document-filter-summary');
@@ -479,6 +529,12 @@ function applyDocumentFilters() {
   if (empty) {
     empty.style.display = visibleCount ? 'none' : '';
   }
+
+  const selectAll = document.getElementById('document-select-all');
+  if (selectAll) {
+    selectAll.checked = visibleCount > 0 && visibleCount === visibleSelectedCount;
+    selectAll.indeterminate = visibleSelectedCount > 0 && visibleSelectedCount < visibleCount;
+  }
 }
 
 function resetDocumentFilters() {
@@ -489,6 +545,94 @@ function resetDocumentFilters() {
   if (type) type.value = '';
   if (folder) folder.value = '';
   applyDocumentFilters();
+}
+
+function syncDocumentSelectionState() {
+  document.querySelectorAll('.document-select').forEach((checkbox) => {
+    checkbox.checked = selectedDocumentIds.has(Number(checkbox.dataset.docId));
+  });
+  document.querySelectorAll('.document-row').forEach((row) => {
+    row.classList.toggle('selected', selectedDocumentIds.has(Number(row.dataset.docId)));
+  });
+  const count = document.getElementById('document-selection-count');
+  if (count) {
+    count.textContent = `${selectedDocumentIds.size} selected`;
+  }
+}
+
+function toggleDocumentSelection(docId, checked) {
+  if (checked) {
+    selectedDocumentIds.add(docId);
+  } else {
+    selectedDocumentIds.delete(docId);
+  }
+  syncDocumentSelectionState();
+  applyDocumentFilters();
+}
+
+function toggleVisibleDocuments(checked) {
+  document.querySelectorAll('.document-row').forEach((row) => {
+    if (row.style.display === 'none') return;
+    const docId = Number(row.dataset.docId);
+    if (checked) {
+      selectedDocumentIds.add(docId);
+    } else {
+      selectedDocumentIds.delete(docId);
+    }
+  });
+  syncDocumentSelectionState();
+  applyDocumentFilters();
+}
+
+function clearDocumentSelection() {
+  selectedDocumentIds.clear();
+  syncDocumentSelectionState();
+  applyDocumentFilters();
+}
+
+async function bulkMoveDocuments(project) {
+  if (!selectedDocumentIds.size) {
+    alert('Select one or more documents first.');
+    return;
+  }
+  const targetFolder = document.getElementById('bulk-move-target')?.value;
+  if (!targetFolder) {
+    alert('Choose a target folder first.');
+    return;
+  }
+  try {
+    await api('/documents/bulk-move', {
+      method: 'POST',
+      body: JSON.stringify({
+        doc_ids: [...selectedDocumentIds],
+        target_folder: targetFolder,
+      }),
+    });
+    selectedDocumentIds.clear();
+    await showProject(project, 'documents');
+  } catch (error) {
+    alert('Move failed: ' + error.message);
+  }
+}
+
+async function bulkDeleteDocuments(project) {
+  if (!selectedDocumentIds.size) {
+    alert('Select one or more documents first.');
+    return;
+  }
+  if (!confirm(`Delete ${selectedDocumentIds.size} selected document(s)?`)) {
+    return;
+  }
+  try {
+    await api('/documents/bulk-delete', {
+      method: 'POST',
+      body: JSON.stringify({ doc_ids: [...selectedDocumentIds] }),
+    });
+    selectedDocumentIds.clear();
+    await showProject(project, 'documents');
+  } catch (error) {
+    alert('Delete failed: ' + error.message);
+  }
 }
 
 function renderChatShell(project, chats, messages) {

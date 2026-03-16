@@ -135,6 +135,16 @@ def _folder_relative_path(path: Path, root: Path) -> str:
     return _normalize_folder_name(rel)
 
 
+def _folder_root(folder: str) -> str:
+    folder = _normalize_folder_name(folder)
+    return folder.split("/", 1)[0] if folder else ""
+
+
+def _sidecar_path_for_pdf(pdf_path: str) -> Path:
+    path = Path(pdf_path)
+    return path.parent / f"{path.stem}_corrections.json"
+
+
 def _iter_upload_folders() -> set[str]:
     uploads = Path(UPLOADS_DIR)
     if not uploads.exists():
@@ -241,6 +251,51 @@ def _rename_folder_references(conn, table: str, old_folder: str, new_folder: str
             f"UPDATE {table} SET project = ? WHERE project = ?",
             (updated, current)
         )
+
+
+def _delete_document_data(conn, doc_id: int):
+    conn.execute("DELETE FROM pages WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM sections WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM corrections WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM cross_references WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM quality_flags WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
+
+
+def _relocate_document_file(doc_row, target_folder: str):
+    pdf_path = doc_row["pdf_path"]
+    if not pdf_path:
+        return None
+
+    source_path = Path(pdf_path)
+    uploads_root = Path(UPLOADS_DIR).resolve()
+    try:
+        source_resolved = source_path.resolve()
+    except FileNotFoundError:
+        return str(source_path)
+
+    if not source_resolved.exists():
+        return str(source_resolved)
+
+    try:
+        source_resolved.relative_to(uploads_root)
+    except ValueError:
+        return str(source_resolved)
+
+    target_dir = _folder_disk_path(target_folder)
+    target_dir.mkdir(parents=True, exist_ok=True)
+    target_path = target_dir / source_resolved.name
+    if target_path.exists() and target_path.resolve() != source_resolved:
+        raise HTTPException(409, f"Target file already exists: {target_path.name}")
+
+    if target_path.resolve() != source_resolved:
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        source_path.rename(target_path)
+        sidecar_source = _sidecar_path_for_pdf(str(source_resolved))
+        if sidecar_source.exists():
+            sidecar_target = _sidecar_path_for_pdf(str(target_path))
+            sidecar_source.rename(sidecar_target)
+    return str(target_path.resolve())
 
 
 def _sanitize_fts_query(query: str) -> str:
@@ -733,7 +788,7 @@ tracker = IngestionTracker()
 
 @app.get("/api/projects")
 @app.get("/api/folders")
-def list_folders():
+def list_folders(scope: Optional[str] = Query(None), recursive: bool = Query(False)):
     conn = get_conn()
     try:
         folders = _all_known_folders(conn)
@@ -755,8 +810,25 @@ def list_folders():
                 if item["folder"] == known_folder
             ])
 
+        scoped_folders = folders
+        if scope:
+            scope = _validate_folder_name(scope, "Folder name")
+            prefix = scope + "/"
+            if recursive:
+                scoped_folders = [
+                    folder for folder in folders
+                    if folder == scope or folder.startswith(prefix)
+                ]
+            else:
+                scoped_folders = [
+                    folder for folder in folders
+                    if folder.startswith(prefix) and "/" not in folder[len(prefix):]
+                ]
+        else:
+            scoped_folders = [folder for folder in folders if "/" not in folder]
+
         results = []
-        for folder in folders:
+        for folder in scoped_folders:
             scope_docs = 0
             scope_pages = 0
             scope_pending = 0
@@ -985,6 +1057,58 @@ def rename_document(doc_id: int, data: dict):
         conn.close()
 
 
+@app.post("/api/documents/bulk-move")
+def bulk_move_documents(data: dict):
+    doc_ids = data.get("doc_ids") or []
+    if not doc_ids:
+        raise HTTPException(400, "Document ids required")
+
+    try:
+        normalized_ids = sorted({int(doc_id) for doc_id in doc_ids})
+    except (TypeError, ValueError):
+        raise HTTPException(400, "Document ids must be integers")
+
+    target_folder = _validate_folder_name(data.get("target_folder", ""), "Target folder")
+    target_root = _folder_root(target_folder)
+
+    conn = get_conn()
+    try:
+        ph = ",".join("?" * len(normalized_ids))
+        rows = conn.execute(
+            f"SELECT * FROM documents WHERE id IN ({ph}) ORDER BY id",
+            normalized_ids
+        ).fetchall()
+        if len(rows) != len(normalized_ids):
+            raise HTTPException(404, "One or more documents were not found")
+
+        moved = []
+        for row in rows:
+            current_root = _folder_root(row["project"])
+            if current_root != target_root:
+                raise HTTPException(
+                    400,
+                    f"Document {row['id']} cannot move outside root folder '{current_root}'"
+                )
+
+        for row in rows:
+            new_pdf_path = _relocate_document_file(row, target_folder)
+            conn.execute(
+                "UPDATE documents SET project = ?, pdf_path = COALESCE(?, pdf_path) WHERE id = ?",
+                (target_folder, new_pdf_path, row["id"])
+            )
+            moved.append({
+                "id": row["id"],
+                "title": row["title"],
+                "old_folder": row["project"],
+                "new_folder": target_folder,
+            })
+
+        conn.commit()
+        return {"status": "moved", "count": len(moved), "documents": moved}
+    finally:
+        conn.close()
+
+
 @app.get("/api/documents/{doc_id}/pdf")
 def download_file(doc_id: int):
     conn = get_conn()
@@ -1007,6 +1131,39 @@ def download_file(doc_id: int):
         conn.close()
 
 
+@app.post("/api/documents/bulk-delete")
+def bulk_delete_documents(data: dict):
+    doc_ids = data.get("doc_ids") or []
+    if not doc_ids:
+        raise HTTPException(400, "Document ids required")
+
+    try:
+        normalized_ids = sorted({int(doc_id) for doc_id in doc_ids})
+    except (TypeError, ValueError):
+        raise HTTPException(400, "Document ids must be integers")
+
+    conn = get_conn()
+    try:
+        ph = ",".join("?" * len(normalized_ids))
+        rows = conn.execute(
+            f"SELECT id, title FROM documents WHERE id IN ({ph}) ORDER BY id",
+            normalized_ids
+        ).fetchall()
+        if len(rows) != len(normalized_ids):
+            raise HTTPException(404, "One or more documents were not found")
+
+        for row in rows:
+            _delete_document_data(conn, row["id"])
+        conn.commit()
+        return {
+            "status": "deleted",
+            "count": len(rows),
+            "documents": [dict(row) for row in rows],
+        }
+    finally:
+        conn.close()
+
+
 @app.delete("/api/documents/{doc_id}")
 def delete_document(doc_id: int):
     conn = get_conn()
@@ -1017,12 +1174,7 @@ def delete_document(doc_id: int):
         if not doc:
             raise HTTPException(404, "Document not found")
 
-        conn.execute("DELETE FROM pages WHERE doc_id = ?", (doc_id,))
-        conn.execute("DELETE FROM sections WHERE doc_id = ?", (doc_id,))
-        conn.execute("DELETE FROM corrections WHERE doc_id = ?", (doc_id,))
-        conn.execute("DELETE FROM cross_references WHERE doc_id = ?", (doc_id,))
-        conn.execute("DELETE FROM quality_flags WHERE doc_id = ?", (doc_id,))
-        conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
+        _delete_document_data(conn, doc_id)
         conn.commit()
         return {"status": "deleted", "doc_id": doc_id}
     finally:
