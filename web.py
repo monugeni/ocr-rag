@@ -10,6 +10,7 @@ Routes:
   /                                     Web GUI
   /api/projects                         List / create projects
   /api/projects/{name}/documents        List docs + pending uploads
+  /api/projects/{name}/chats            List / create chat threads
   /api/projects/{name}/upload           Upload PDFs
   /api/projects/{name}/ingest           Ingest all pending PDFs
   /api/documents/{id}                   Document info
@@ -17,6 +18,7 @@ Routes:
   /api/documents/{id}/pages/{num}       Single page
   /api/documents/{id}/pages?start=&end= Page range
   /api/documents/{id}/search?q=         Search within doc
+  /api/chats/{id}/messages              Get / append chat messages
   /api/ingestion/jobs                   Active ingestion jobs
   /api/projects/{name}/quality          Quality flags + corrections
 """
@@ -29,6 +31,8 @@ import re
 import shutil
 import sqlite3
 import threading
+import urllib.error
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
@@ -82,7 +86,7 @@ DB_PATH = "docs.db"
 UPLOADS_DIR = "./uploads"
 executor = ThreadPoolExecutor(max_workers=2)
 
-app = FastAPI(title="OCR-RAG Manager", docs_url="/api/docs")
+app = FastAPI(title="Esteem Project Knowledge", docs_url="/api/docs")
 
 
 def get_conn():
@@ -90,6 +94,421 @@ def get_conn():
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
     return conn
+
+
+def _sanitize_fts_query(query: str) -> str:
+    words = query.strip().split()
+    out = []
+    for w in words:
+        if w.upper() in ("AND", "OR", "NOT", "NEAR"):
+            continue
+        if re.search(r"\w\.\w", w):
+            clean = re.sub(r"[^\w.]+", " ", w).strip()
+            if clean:
+                out.append(f'"{clean}"')
+        elif re.search(r"[-/\\@#$%&*()+=,:;^~\[\]{}!?<>]", w):
+            parts = re.split(r"[-/\\.,;:]+", w)
+            out.extend(f'"{p.strip()}"' for p in parts if p.strip())
+        else:
+            clean = w.strip('"\'')
+            if clean:
+                out.append(clean)
+    return " ".join(out)
+
+
+def _get_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
+    if not hasattr(_get_embedding_model, "_cache"):
+        _get_embedding_model._cache = {}
+    cache = _get_embedding_model._cache
+    if model_name not in cache:
+        from sentence_transformers import SentenceTransformer
+        cache[model_name] = SentenceTransformer(model_name)
+    return cache[model_name]
+
+
+def _thread_title_from_message(text: str) -> str:
+    clean = re.sub(r"\s+", " ", (text or "").strip())
+    if not clean:
+        return "New chat"
+    return clean[:57] + "..." if len(clean) > 60 else clean
+
+
+def _fetch_chat_messages(conn, thread_id: str):
+    rows = conn.execute(
+        "SELECT id, role, content, sources, created_at "
+        "FROM chat_messages WHERE thread_id = ? ORDER BY id",
+        (thread_id,)
+    ).fetchall()
+    messages = []
+    for row in rows:
+        item = dict(row)
+        item["sources"] = json.loads(item["sources"]) if item["sources"] else []
+        messages.append(item)
+    return messages
+
+
+def _list_chat_threads(conn, project: str):
+    rows = conn.execute(
+        """
+        SELECT t.id, t.project, t.title, t.created_at, t.updated_at,
+               (
+                   SELECT content FROM chat_messages m
+                   WHERE m.thread_id = t.id
+                   ORDER BY m.id DESC LIMIT 1
+               ) AS last_message,
+               (
+                   SELECT role FROM chat_messages m
+                   WHERE m.thread_id = t.id
+                   ORDER BY m.id DESC LIMIT 1
+               ) AS last_role,
+               (
+                   SELECT COUNT(*) FROM chat_messages m
+                   WHERE m.thread_id = t.id
+               ) AS message_count
+        FROM chat_threads t
+        WHERE t.project = ?
+        ORDER BY datetime(t.updated_at) DESC, t.id DESC
+        """,
+        (project,)
+    ).fetchall()
+    return [dict(row) for row in rows]
+
+
+def _create_chat_thread(conn, project: str, title: Optional[str] = None) -> dict:
+    thread_id = str(uuid4())
+    clean_title = (title or "New chat").strip() or "New chat"
+    conn.execute(
+        "INSERT INTO chat_threads (id, project, title) VALUES (?, ?, ?)",
+        (thread_id, project, clean_title)
+    )
+    conn.commit()
+    return {
+        "id": thread_id,
+        "project": project,
+        "title": clean_title,
+    }
+
+
+def _touch_thread(conn, thread_id: str):
+    conn.execute(
+        "UPDATE chat_threads SET updated_at = CURRENT_TIMESTAMP WHERE id = ?",
+        (thread_id,)
+    )
+
+
+def _insert_chat_message(
+    conn,
+    thread_id: str,
+    role: str,
+    content: str,
+    sources: Optional[list] = None,
+):
+    conn.execute(
+        "INSERT INTO chat_messages (thread_id, role, content, sources) VALUES (?, ?, ?, ?)",
+        (thread_id, role, content, json.dumps(sources or []))
+    )
+    _touch_thread(conn, thread_id)
+
+
+def _project_doc_ids(conn, project: str) -> list[int]:
+    return [r["id"] for r in conn.execute(
+        "SELECT id FROM documents WHERE project = ? ORDER BY id",
+        (project,)
+    ).fetchall()]
+
+
+def _fts_search_project(conn, project: str, query: str, limit: int = 5) -> list[dict]:
+    doc_ids = _project_doc_ids(conn, project)
+    if not doc_ids:
+        return []
+
+    clean = _sanitize_fts_query(query)
+    if not clean:
+        return []
+
+    ph = ",".join("?" * len(doc_ids))
+    queries = [clean]
+    parts = clean.split()
+    if len(parts) > 1:
+        queries.append(" OR ".join(parts))
+
+    seen = set()
+    results = []
+    for candidate in queries:
+        try:
+            rows = conn.execute(
+                f"""
+                SELECT p.doc_id, d.title AS doc_title, p.page_num, p.breadcrumb,
+                       p.page_type, p.content,
+                       snippet(pages_fts, 0, '>>>', '<<<', '...', 30) AS snippet,
+                       rank
+                FROM pages_fts
+                JOIN pages p ON p.id = pages_fts.rowid
+                JOIN documents d ON d.id = p.doc_id
+                WHERE pages_fts MATCH ?
+                  AND p.doc_id IN ({ph})
+                  AND p.page_type != 'skipped'
+                ORDER BY rank
+                LIMIT ?
+                """,
+                [candidate, *doc_ids, limit]
+            ).fetchall()
+        except sqlite3.OperationalError:
+            rows = []
+
+        for row in rows:
+            key = (row["doc_id"], row["page_num"])
+            if key in seen:
+                continue
+            seen.add(key)
+            results.append({
+                "doc_id": row["doc_id"],
+                "doc_title": row["doc_title"],
+                "page_num": row["page_num"],
+                "breadcrumb": row["breadcrumb"],
+                "page_type": row["page_type"],
+                "snippet": row["snippet"],
+                "content": row["content"],
+                "score": float(row["rank"]) if row["rank"] is not None else 0.0,
+                "search_type": "fts",
+            })
+            if len(results) >= limit:
+                return results
+    return results
+
+
+def _semantic_search_project(conn, project: str, query: str, limit: int = 5) -> list[dict]:
+    doc_ids = _project_doc_ids(conn, project)
+    if not doc_ids:
+        return []
+
+    ph = ",".join("?" * len(doc_ids))
+    count = conn.execute(
+        f"""
+        SELECT COUNT(*) FROM page_embeddings pe
+        JOIN pages p ON p.id = pe.page_id
+        WHERE p.doc_id IN ({ph}) AND p.page_type != 'skipped'
+        """,
+        doc_ids
+    ).fetchone()[0]
+    if count == 0:
+        return []
+
+    try:
+        import numpy as np
+        model_name = conn.execute(
+            f"""
+            SELECT pe.model FROM page_embeddings pe
+            JOIN pages p ON p.id = pe.page_id
+            WHERE p.doc_id IN ({ph})
+            LIMIT 1
+            """,
+            doc_ids
+        ).fetchone()["model"]
+        model = _get_embedding_model(model_name)
+        query_emb = model.encode([query])[0]
+    except Exception:
+        return []
+
+    rows = conn.execute(
+        f"""
+        SELECT p.doc_id, d.title AS doc_title, p.page_num, p.breadcrumb, p.page_type,
+               p.content, pe.chunk_text, pe.embedding
+        FROM page_embeddings pe
+        JOIN pages p ON p.id = pe.page_id
+        JOIN documents d ON d.id = p.doc_id
+        WHERE p.doc_id IN ({ph}) AND p.page_type != 'skipped'
+        """,
+        doc_ids
+    ).fetchall()
+
+    scored = []
+    for row in rows:
+        emb = np.frombuffer(row["embedding"], dtype=np.float32)
+        if len(emb) != len(query_emb):
+            continue
+        sim = float(np.dot(query_emb, emb) / (
+            np.linalg.norm(query_emb) * np.linalg.norm(emb) + 1e-8
+        ))
+        scored.append({
+            "doc_id": row["doc_id"],
+            "doc_title": row["doc_title"],
+            "page_num": row["page_num"],
+            "breadcrumb": row["breadcrumb"],
+            "page_type": row["page_type"],
+            "snippet": row["chunk_text"][:240],
+            "content": row["content"],
+            "score": sim,
+            "search_type": "semantic",
+        })
+
+    scored.sort(key=lambda item: item["score"], reverse=True)
+    deduped = []
+    seen = set()
+    for item in scored:
+        key = (item["doc_id"], item["page_num"])
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+        if len(deduped) >= limit:
+            break
+    return deduped
+
+
+def _build_retrieval_query(history: list[dict], question: str) -> str:
+    recent_user_turns = [
+        m["content"].strip()
+        for m in history
+        if m["role"] == "user" and m["content"].strip()
+    ][-2:]
+    if not recent_user_turns:
+        return question
+
+    lower = question.lower()
+    short_follow_up = len(question.split()) <= 10 or any(
+        token in lower for token in ("it", "that", "those", "they", "same", "above", "there")
+    )
+    if short_follow_up:
+        return " ".join(recent_user_turns + [question])
+    return question
+
+
+def _retrieve_project_context(conn, project: str, question: str, history: list[dict], limit: int = 6):
+    retrieval_query = _build_retrieval_query(history, question)
+    merged = []
+    seen = set()
+    for result in _fts_search_project(conn, project, retrieval_query, limit=limit):
+        key = (result["doc_id"], result["page_num"])
+        if key not in seen:
+            seen.add(key)
+            merged.append(result)
+    for result in _semantic_search_project(conn, project, retrieval_query, limit=limit):
+        key = (result["doc_id"], result["page_num"])
+        if key not in seen:
+            seen.add(key)
+            merged.append(result)
+    merged.sort(
+        key=lambda item: (0 if item["search_type"] == "fts" else 1, -item["score"])
+    )
+    final = merged[:limit]
+
+    sources = []
+    for idx, item in enumerate(final, start=1):
+        body = (item["content"] or "").strip()
+        if len(body) > 2200:
+            body = body[:2200].rstrip() + "\n...[truncated]"
+        sources.append({
+            "id": idx,
+            "doc_id": item["doc_id"],
+            "doc_title": item["doc_title"],
+            "page_num": item["page_num"],
+            "breadcrumb": item["breadcrumb"],
+            "page_type": item["page_type"],
+            "snippet": item["snippet"],
+            "search_type": item["search_type"],
+            "score": round(item["score"], 4),
+            "content": body,
+        })
+    return {
+        "query": retrieval_query,
+        "sources": sources,
+    }
+
+
+def _chat_model_name() -> str:
+    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-20250514")
+
+
+def _chat_api_key() -> Optional[str]:
+    return os.environ.get("ANTHROPIC_API_KEY")
+
+
+def _generate_project_answer(project: str, question: str, history: list[dict], retrieval: dict):
+    if not retrieval["sources"]:
+        return (
+            "I don't have enough information in this project's documents to answer that.\n\n"
+            "Try asking with more specific document terms, section names, tags, or page topics."
+        )
+
+    api_key = _chat_api_key()
+    if not api_key:
+        raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
+
+    system_prompt = (
+        "You are Esteem Project Knowledge, a project-scoped document assistant.\n"
+        f"You are currently answering questions for the project '{project}'.\n"
+        "You must answer ONLY from the provided source excerpts and the prior conversation.\n"
+        "Never use outside knowledge. Never use information from any other project.\n"
+        "If the excerpts do not support a confident answer, say that you do not have enough "
+        "information in the documents for this project.\n"
+        "Do not speculate or fill gaps.\n"
+        "Respond in markdown.\n"
+        "When you make factual claims, cite supporting sources inline like [1] or [2].\n"
+        "If useful, end with a brief 'Sources' list that references the same source numbers."
+    )
+
+    excerpts = []
+    for source in retrieval["sources"]:
+        excerpts.append(
+            f"[{source['id']}] {source['doc_title']} | page {source['page_num']} | "
+            f"{source['breadcrumb'] or 'No section breadcrumb'}\n"
+            f"{source['content']}"
+        )
+
+    prompt = (
+        f"Project: {project}\n"
+        f"Retrieved with query: {retrieval['query']}\n\n"
+        "Source excerpts:\n"
+        "================\n"
+        f"{chr(10).join(excerpts)}\n\n"
+        "Answer the user's latest question using only those excerpts."
+    )
+
+    messages = []
+    for item in history[-8:]:
+        messages.append({
+            "role": item["role"],
+            "content": item["content"],
+        })
+    messages.append({
+        "role": "user",
+        "content": f"{prompt}\n\nLatest user question:\n{question}",
+    })
+
+    req = urllib.request.Request(
+        "https://api.anthropic.com/v1/messages",
+        data=json.dumps({
+            "model": _chat_model_name(),
+            "max_tokens": 1600,
+            "system": system_prompt,
+            "messages": messages,
+        }).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise HTTPException(502, f"LLM request failed: {detail}") from exc
+    except Exception as exc:
+        raise HTTPException(502, f"LLM request failed: {exc}") from exc
+
+    text = "".join(
+        block.get("text", "")
+        for block in data.get("content", [])
+        if block.get("type") == "text"
+    ).strip()
+    if not text:
+        raise HTTPException(502, "LLM returned an empty response.")
+    return text
 
 
 # ---------------------------------------------------------------------------
@@ -220,6 +639,10 @@ def rename_project(project: str, data: dict):
             "UPDATE ingestion_jobs SET project = ? WHERE project = ?",
             (new_name, project)
         )
+        conn.execute(
+            "UPDATE chat_threads SET project = ? WHERE project = ?",
+            (new_name, project)
+        )
         conn.commit()
 
         # Rename uploads directory
@@ -246,6 +669,8 @@ def delete_project(project: str):
             conn.execute("DELETE FROM corrections WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM cross_references WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM quality_flags WHERE doc_id = ?", (did,))
+        conn.execute("DELETE FROM chat_threads WHERE project = ?", (project,))
+        conn.execute("DELETE FROM ingestion_jobs WHERE project = ?", (project,))
         conn.execute("DELETE FROM documents WHERE project = ?", (project,))
         conn.commit()
 
@@ -303,6 +728,29 @@ def list_documents(project: str):
                         "size_mb": round(f.stat().st_size / 1048576, 1),
                     })
         return {"documents": results, "pending": pending}
+    finally:
+        conn.close()
+
+
+@app.get("/api/projects/{project}/chats")
+def list_project_chats(project: str):
+    conn = get_conn()
+    try:
+        return _list_chat_threads(conn, project)
+    finally:
+        conn.close()
+
+
+@app.post("/api/projects/{project}/chats")
+def create_project_chat(project: str, data: Optional[dict] = None):
+    conn = get_conn()
+    try:
+        created = _create_chat_thread(
+            conn,
+            project,
+            title=(data or {}).get("title"),
+        )
+        return created
     finally:
         conn.close()
 
@@ -398,6 +846,109 @@ def delete_document(doc_id: int):
         conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
         conn.commit()
         return {"status": "deleted", "doc_id": doc_id}
+    finally:
+        conn.close()
+
+
+@app.get("/api/chats/{thread_id}")
+def get_chat_thread(thread_id: str):
+    conn = get_conn()
+    try:
+        row = conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?",
+            (thread_id,)
+        ).fetchone()
+        if not row:
+            raise HTTPException(404, "Chat thread not found")
+        return dict(row)
+    finally:
+        conn.close()
+
+
+@app.get("/api/chats/{thread_id}/messages")
+def get_chat_messages(thread_id: str):
+    conn = get_conn()
+    try:
+        thread = conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?",
+            (thread_id,)
+        ).fetchone()
+        if not thread:
+            raise HTTPException(404, "Chat thread not found")
+        return {
+            "thread": dict(thread),
+            "messages": _fetch_chat_messages(conn, thread_id),
+        }
+    finally:
+        conn.close()
+
+
+@app.post("/api/chats/{thread_id}/messages")
+def create_chat_message(thread_id: str, data: dict):
+    content = (data.get("content") or "").strip()
+    if not content:
+        raise HTTPException(400, "Message content required")
+
+    conn = get_conn()
+    try:
+        thread = conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?",
+            (thread_id,)
+        ).fetchone()
+        if not thread:
+            raise HTTPException(404, "Chat thread not found")
+
+        _insert_chat_message(conn, thread_id, "user", content)
+
+        existing_messages = _fetch_chat_messages(conn, thread_id)
+        history = existing_messages[:-1]
+        retrieval = _retrieve_project_context(
+            conn,
+            thread["project"],
+            content,
+            history,
+        )
+        answer = _generate_project_answer(
+            thread["project"],
+            content,
+            history,
+            retrieval,
+        )
+        sources = [
+            {
+                "id": source["id"],
+                "doc_id": source["doc_id"],
+                "doc_title": source["doc_title"],
+                "page_num": source["page_num"],
+                "breadcrumb": source["breadcrumb"],
+                "page_type": source["page_type"],
+                "snippet": source["snippet"],
+                "search_type": source["search_type"],
+                "score": source["score"],
+            }
+            for source in retrieval["sources"]
+        ]
+        _insert_chat_message(conn, thread_id, "assistant", answer, sources=sources)
+
+        if len(existing_messages) == 1 and thread["title"] == "New chat":
+            conn.execute(
+                "UPDATE chat_threads SET title = ? WHERE id = ?",
+                (_thread_title_from_message(content), thread_id)
+            )
+            _touch_thread(conn, thread_id)
+
+        conn.commit()
+        return {
+            "thread": dict(conn.execute(
+                "SELECT * FROM chat_threads WHERE id = ?",
+                (thread_id,)
+            ).fetchone()),
+            "messages": _fetch_chat_messages(conn, thread_id),
+            "retrieval": {
+                "query": retrieval["query"],
+                "source_count": len(retrieval["sources"]),
+            },
+        }
     finally:
         conn.close()
 
@@ -816,7 +1367,7 @@ def _start_mcp_server(db_path, port):
 def main():
     global DB_PATH, UPLOADS_DIR
 
-    p = argparse.ArgumentParser(description='OCR-RAG Server (Web GUI + MCP)')
+    p = argparse.ArgumentParser(description='Esteem Project Knowledge Server (Web GUI + MCP)')
     p.add_argument('--db', default='docs.db', help='SQLite database path')
     p.add_argument('--port', type=int, default=8201,
                    help='Web GUI port (default 8201)')
@@ -852,7 +1403,7 @@ def main():
     )
     mcp_thread.start()
 
-    print(f"OCR-RAG Server")
+    print("Esteem Project Knowledge")
     print(f"  Database:  {DB_PATH} ({total} documents)")
     print(f"  Uploads:   {UPLOADS_DIR}")
     print(f"  Web GUI:   http://0.0.0.0:{args.port}")

@@ -153,6 +153,27 @@ CREATE TABLE IF NOT EXISTS ingestion_jobs (
     doc_id      INTEGER,
     started_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS chat_threads (
+    id          TEXT PRIMARY KEY,
+    project     TEXT NOT NULL,
+    title       TEXT NOT NULL,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_chat_threads_project ON chat_threads(project, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS chat_messages (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    thread_id   TEXT NOT NULL REFERENCES chat_threads(id) ON DELETE CASCADE,
+    role        TEXT NOT NULL CHECK(role IN ('user', 'assistant')),
+    content     TEXT NOT NULL,
+    sources     TEXT,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_chat_messages_thread ON chat_messages(thread_id, id);
 """
 
 
