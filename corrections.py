@@ -19,9 +19,11 @@ import json
 import os
 import tempfile
 from pathlib import Path
+from typing import Any
 
 
 CORRECTIONS_SUFFIX = '_corrections.json'
+ToolResult = dict[str, Any]
 
 
 # ---------------------------------------------------------------------------
@@ -216,7 +218,7 @@ def register_correction_tools(mcp, get_db):
     # ===== Document-level (5) =====
 
     @mcp.tool()
-    def merge_documents(doc_id_a: int, doc_id_b: int) -> str:
+    def merge_documents(doc_id_a: int, doc_id_b: int) -> ToolResult:
         """Merge document B into document A. Moves all pages and sections, then deletes B.
         Refuses if page numbers overlap between the two documents.
 
@@ -228,9 +230,9 @@ def register_correction_tools(mcp, get_db):
             doc_a = _get_doc(conn, doc_id_a)
             doc_b = _get_doc(conn, doc_id_b)
             if not doc_a:
-                return json.dumps({"error": f"Document {doc_id_a} not found"})
+                return {"error": f"Document {doc_id_a} not found"}
             if not doc_b:
-                return json.dumps({"error": f"Document {doc_id_b} not found"})
+                return {"error": f"Document {doc_id_b} not found"}
 
             overlap = conn.execute(
                 "SELECT a.page_num FROM pages a "
@@ -239,9 +241,9 @@ def register_correction_tools(mcp, get_db):
                 (doc_id_a, doc_id_b)
             ).fetchone()
             if overlap:
-                return json.dumps({
+                return {
                     "error": f"Page numbers overlap (e.g. page {overlap['page_num']}). Cannot merge."
-                })
+                }
 
             max_seq = conn.execute(
                 "SELECT COALESCE(MAX(seq), -1) FROM sections WHERE doc_id = ?",
@@ -289,13 +291,13 @@ def register_correction_tools(mcp, get_db):
             total = conn.execute(
                 "SELECT total_pages FROM documents WHERE id = ?", (doc_id_a,)
             ).fetchone()['total_pages']
-            return json.dumps({
+            return {
                 "status": "merged", "doc_id": doc_id_a,
                 "deleted_doc_id": doc_id_b, "total_pages": total,
-            })
+            }
 
     @mcp.tool()
-    def split_document(doc_id: int, at_page: int) -> str:
+    def split_document(doc_id: int, at_page: int) -> ToolResult:
         """Split a document at a page boundary. Pages >= at_page become a new document.
         Sections spanning the boundary are cloned. Breadcrumbs rebuilt for both.
 
@@ -306,15 +308,15 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc = _get_doc(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             if not conn.execute(
                 "SELECT 1 FROM pages WHERE doc_id = ? AND page_num = ?",
                 (doc_id, at_page)
             ).fetchone():
-                return json.dumps({
+                return {
                     "error": f"Page {at_page} not found in document {doc_id}"
-                })
+                }
 
             before = conn.execute(
                 "SELECT COUNT(*) FROM pages WHERE doc_id = ? AND page_num < ?",
@@ -325,7 +327,7 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, at_page)
             ).fetchone()[0]
             if before == 0 or after == 0:
-                return json.dumps({"error": "Split would create an empty document"})
+                return {"error": "Split would create an empty document"}
 
             # Title for new doc
             heading_row = conn.execute(
@@ -394,14 +396,14 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "split", "original_doc_id": doc_id,
                 "original_pages": before, "new_doc_id": new_doc_id,
                 "new_title": new_title, "new_pages": after,
-            })
+            }
 
     @mcp.tool()
-    def set_document_title(doc_id: int, title: str) -> str:
+    def set_document_title(doc_id: int, title: str) -> ToolResult:
         """Set or correct a document's title.
 
         Args:
@@ -411,7 +413,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             conn.execute(
                 "UPDATE documents SET title = ? WHERE id = ?", (title, doc_id)
@@ -426,12 +428,12 @@ def register_correction_tools(mcp, get_db):
                 sidecar.setdefault('document_titles', {})[pr] = title
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id, "title": title
-            })
+            }
 
     @mcp.tool()
-    def set_document_type(doc_id: int, doc_type: str) -> str:
+    def set_document_type(doc_id: int, doc_type: str) -> ToolResult:
         """Set the document type classification.
 
         Args:
@@ -443,7 +445,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             _update_doc_metadata(conn, doc_id, 'document_type', doc_type)
             _log_correction(conn, doc_id, "document", "set_type",
@@ -456,14 +458,14 @@ def register_correction_tools(mcp, get_db):
                 sidecar.setdefault('document_types', {})[pr] = doc_type
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id,
                 "document_type": doc_type,
-            })
+            }
 
     @mcp.tool()
     def link_documents(doc_id: int, related_doc_id: int,
-                       relationship: str) -> str:
+                       relationship: str) -> ToolResult:
         """Create a cross-reference link between two documents.
 
         Args:
@@ -473,11 +475,10 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, doc_id):
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
             target = _get_doc(conn, related_doc_id)
             if not target:
-                return json.dumps(
-                    {"error": f"Document {related_doc_id} not found"})
+                return {"error": f"Document {related_doc_id} not found"}
 
             conn.execute(
                 "INSERT INTO cross_references "
@@ -499,17 +500,17 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "linked", "doc_id": doc_id,
                 "related_doc_id": related_doc_id,
                 "relationship": relationship,
-            })
+            }
 
     # ===== Heading hierarchy (4) =====
 
     @mcp.tool()
     def add_heading(doc_id: int, page_num: int, text: str,
-                    level: int) -> str:
+                    level: int) -> ToolResult:
         """Add a heading the extractor missed. Inserts a section and rebuilds breadcrumbs.
 
         Args:
@@ -521,7 +522,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             after_seq = conn.execute(
                 "SELECT COALESCE(MAX(seq), -1) FROM sections "
@@ -554,14 +555,14 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "added", "doc_id": doc_id,
                 "heading": text, "level": level, "page_num": page_num,
-            })
+            }
 
     @mcp.tool()
     def remove_heading(doc_id: int, page_num: int,
-                       text_prefix: str) -> str:
+                       text_prefix: str) -> ToolResult:
         """Remove a false-positive heading. Re-parents its children and rebuilds breadcrumbs.
 
         Args:
@@ -572,7 +573,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             section = conn.execute(
                 "SELECT * FROM sections "
@@ -580,10 +581,10 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, page_num, text_prefix + '%')
             ).fetchone()
             if not section:
-                return json.dumps({
+                return {
                     "error": f"No heading starting with '{text_prefix}' "
                              f"on page {page_num}"
-                })
+                }
 
             # Clear page references to this section
             conn.execute(
@@ -612,14 +613,14 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "removed", "doc_id": doc_id,
                 "heading": section['heading'], "page_num": page_num,
-            })
+            }
 
     @mcp.tool()
     def change_heading_level(doc_id: int, page_num: int,
-                             text_prefix: str, new_level: int) -> str:
+                             text_prefix: str, new_level: int) -> ToolResult:
         """Change a heading's level (e.g. H3 to H2). Rebuilds breadcrumbs.
 
         Args:
@@ -631,7 +632,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             section = conn.execute(
                 "SELECT * FROM sections "
@@ -639,10 +640,10 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, page_num, text_prefix + '%')
             ).fetchone()
             if not section:
-                return json.dumps({
+                return {
                     "error": f"No heading starting with '{text_prefix}' "
                              f"on page {page_num}"
-                })
+                }
 
             old_level = section['level']
             conn.execute(
@@ -665,15 +666,15 @@ def register_correction_tools(mcp, get_db):
                 }
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id,
                 "heading": section['heading'],
                 "old_level": old_level, "new_level": new_level,
-            })
+            }
 
     @mcp.tool()
     def rename_heading(doc_id: int, page_num: int,
-                       old_text_prefix: str, new_text: str) -> str:
+                       old_text_prefix: str, new_text: str) -> ToolResult:
         """Rename a heading. Updates the section and rebuilds breadcrumbs.
 
         Args:
@@ -685,7 +686,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             section = conn.execute(
                 "SELECT * FROM sections "
@@ -693,10 +694,10 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, page_num, old_text_prefix + '%')
             ).fetchone()
             if not section:
-                return json.dumps({
+                return {
                     "error": f"No heading starting with '{old_text_prefix}' "
                              f"on page {page_num}"
-                })
+                }
 
             old_text = section['heading']
             conn.execute(
@@ -719,16 +720,16 @@ def register_correction_tools(mcp, get_db):
                 }
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "renamed", "doc_id": doc_id,
                 "old_text": old_text, "new_text": new_text,
-            })
+            }
 
     # ===== Page-level (4) =====
 
     @mcp.tool()
     def reclassify_page(doc_id: int, page_num: int,
-                        new_type: str) -> str:
+                        new_type: str) -> ToolResult:
         """Change a page's type classification.
 
         Args:
@@ -739,7 +740,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             updated = conn.execute(
                 "UPDATE pages SET page_type = ? "
@@ -747,9 +748,9 @@ def register_correction_tools(mcp, get_db):
                 (new_type, doc_id, page_num)
             ).rowcount
             if not updated:
-                return json.dumps({
+                return {
                     "error": f"Page {page_num} not found in document {doc_id}"
-                })
+                }
 
             _log_correction(conn, doc_id, "page", "reclassify", {
                 "page_num": page_num, "new_type": new_type,
@@ -762,13 +763,13 @@ def register_correction_tools(mcp, get_db):
                     str(page_num)] = new_type
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "reclassified", "doc_id": doc_id,
                 "page_num": page_num, "new_type": new_type,
-            })
+            }
 
     @mcp.tool()
-    def skip_page(doc_id: int, page_num: int) -> str:
+    def skip_page(doc_id: int, page_num: int) -> ToolResult:
         """Mark a page as skipped (excluded from search results).
 
         Args:
@@ -778,7 +779,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             updated = conn.execute(
                 "UPDATE pages SET page_type = 'skipped' "
@@ -786,9 +787,9 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, page_num)
             ).rowcount
             if not updated:
-                return json.dumps({
+                return {
                     "error": f"Page {page_num} not found in document {doc_id}"
-                })
+                }
 
             _log_correction(conn, doc_id, "page", "skip",
                             {"page_num": page_num})
@@ -801,14 +802,14 @@ def register_correction_tools(mcp, get_db):
                     skipped.append(page_num)
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "skipped", "doc_id": doc_id,
                 "page_num": page_num,
-            })
+            }
 
     @mcp.tool()
     def move_page_to_document(page_num: int, from_doc_id: int,
-                              to_doc_id: int) -> str:
+                              to_doc_id: int) -> ToolResult:
         """Move a single page from one document to another. Rebuilds both documents.
 
         Args:
@@ -818,11 +819,9 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, from_doc_id):
-                return json.dumps(
-                    {"error": f"Document {from_doc_id} not found"})
+                return {"error": f"Document {from_doc_id} not found"}
             if not _get_doc(conn, to_doc_id):
-                return json.dumps(
-                    {"error": f"Document {to_doc_id} not found"})
+                return {"error": f"Document {to_doc_id} not found"}
 
             updated = conn.execute(
                 "UPDATE pages SET doc_id = ? "
@@ -830,10 +829,10 @@ def register_correction_tools(mcp, get_db):
                 (to_doc_id, from_doc_id, page_num)
             ).rowcount
             if not updated:
-                return json.dumps({
+                return {
                     "error": f"Page {page_num} not found in "
                              f"document {from_doc_id}"
-                })
+                }
 
             for did in (from_doc_id, to_doc_id):
                 _update_doc_total_pages(conn, did)
@@ -845,14 +844,14 @@ def register_correction_tools(mcp, get_db):
             })
             conn.commit()
 
-            return json.dumps({
+            return {
                 "status": "moved", "page_num": page_num,
                 "from_doc_id": from_doc_id, "to_doc_id": to_doc_id,
-            })
+            }
 
     @mcp.tool()
     def set_page_breadcrumb(doc_id: int, page_num: int,
-                            breadcrumb: str) -> str:
+                            breadcrumb: str) -> ToolResult:
         """Override the breadcrumb (heading context) for a specific page.
 
         Args:
@@ -863,7 +862,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             updated = conn.execute(
                 "UPDATE pages SET breadcrumb = ? "
@@ -871,9 +870,9 @@ def register_correction_tools(mcp, get_db):
                 (breadcrumb, doc_id, page_num)
             ).rowcount
             if not updated:
-                return json.dumps({
+                return {
                     "error": f"Page {page_num} not found in document {doc_id}"
-                })
+                }
 
             _log_correction(conn, doc_id, "page", "set_breadcrumb", {
                 "page_num": page_num, "breadcrumb": breadcrumb,
@@ -886,16 +885,16 @@ def register_correction_tools(mcp, get_db):
                     str(page_num)] = breadcrumb
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id,
                 "page_num": page_num, "breadcrumb": breadcrumb,
-            })
+            }
 
     # ===== Content (3) =====
 
     @mcp.tool()
     def fix_ocr_text(doc_id: int, page_num: int,
-                     old_text: str, new_text: str) -> str:
+                     old_text: str, new_text: str) -> ToolResult:
         """Fix OCR scanning artifacts ONLY — garbled characters produced by the scanner.
 
         IMPORTANT: Only use this for obvious OCR/scanning errors (e.g. random symbols,
@@ -913,7 +912,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             page = conn.execute(
                 "SELECT id, content FROM pages "
@@ -921,15 +920,15 @@ def register_correction_tools(mcp, get_db):
                 (doc_id, page_num)
             ).fetchone()
             if not page:
-                return json.dumps({
+                return {
                     "error": f"Page {page_num} not found in document {doc_id}"
-                })
+                }
 
             if old_text not in page['content']:
-                return json.dumps({
+                return {
                     "error": f"Text not found on page {page_num}: "
                              f"'{old_text[:80]}'"
-                })
+                }
 
             occurrences = page['content'].count(old_text)
             new_content = page['content'].replace(old_text, new_text)
@@ -952,13 +951,13 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "fixed", "doc_id": doc_id,
                 "page_num": page_num, "replacements": occurrences,
-            })
+            }
 
     @mcp.tool()
-    def add_running_header(doc_id: int, text: str) -> str:
+    def add_running_header(doc_id: int, text: str) -> ToolResult:
         """Strip a repeated header/footer from all pages of a document.
         Lines containing this text are removed immediately.
 
@@ -969,7 +968,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             pages = conn.execute(
                 "SELECT id, content FROM pages WHERE doc_id = ?", (doc_id,)
@@ -1001,13 +1000,13 @@ def register_correction_tools(mcp, get_db):
                     headers.append(text)
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "stripped", "doc_id": doc_id,
                 "header_text": text, "lines_removed": lines_removed,
-            })
+            }
 
     @mcp.tool()
-    def remove_running_header(doc_id: int, text: str) -> str:
+    def remove_running_header(doc_id: int, text: str) -> ToolResult:
         """Mark a running header for removal on next re-extraction.
         Sidecar-only — no immediate content change. The extractor will
         stop stripping this text on the next run.
@@ -1019,7 +1018,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             _log_correction(conn, doc_id, "content",
                             "remove_running_header", {"text": text})
@@ -1032,15 +1031,15 @@ def register_correction_tools(mcp, get_db):
                     headers.append(text)
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "recorded", "doc_id": doc_id,
                 "note": "Takes effect on next re-extraction of the PDF",
-            })
+            }
 
     # ===== Metadata (5) =====
 
     @mcp.tool()
-    def set_document_number(doc_id: int, number: str) -> str:
+    def set_document_number(doc_id: int, number: str) -> ToolResult:
         """Set or correct the document reference number.
 
         Args:
@@ -1050,7 +1049,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             _update_doc_metadata(conn, doc_id, 'document_number', number)
             _log_correction(conn, doc_id, "metadata",
@@ -1064,13 +1063,13 @@ def register_correction_tools(mcp, get_db):
                     pr, {})['document_number'] = number
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id,
                 "document_number": number,
-            })
+            }
 
     @mcp.tool()
-    def set_revision(doc_id: int, revision: str) -> str:
+    def set_revision(doc_id: int, revision: str) -> ToolResult:
         """Set or correct the document revision.
 
         Args:
@@ -1080,7 +1079,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             _update_doc_metadata(conn, doc_id, 'revision', revision)
             _log_correction(conn, doc_id, "metadata", "set_revision",
@@ -1094,13 +1093,13 @@ def register_correction_tools(mcp, get_db):
                     pr, {})['revision'] = revision
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id, "revision": revision,
-            })
+            }
 
     @mcp.tool()
     def add_cross_reference(doc_id: int, page_num: int,
-                            target_doc_id: int, context: str) -> str:
+                            target_doc_id: int, context: str) -> ToolResult:
         """Record a cross-reference from a page to another document.
 
         Args:
@@ -1111,12 +1110,10 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, doc_id):
-                return json.dumps(
-                    {"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
             target = _get_doc(conn, target_doc_id)
             if not target:
-                return json.dumps(
-                    {"error": f"Document {target_doc_id} not found"})
+                return {"error": f"Document {target_doc_id} not found"}
 
             conn.execute(
                 "INSERT INTO cross_references "
@@ -1142,13 +1139,13 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "added", "doc_id": doc_id,
                 "page_num": page_num, "target_doc_id": target_doc_id,
-            })
+            }
 
     @mcp.tool()
-    def add_keywords(doc_id: int, keywords_csv: str) -> str:
+    def add_keywords(doc_id: int, keywords_csv: str) -> ToolResult:
         """Add search keywords to a document's metadata. Merges with existing keywords.
 
         Args:
@@ -1158,7 +1155,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             keywords = [k.strip() for k in keywords_csv.split(',')
                         if k.strip()]
@@ -1178,12 +1175,12 @@ def register_correction_tools(mcp, get_db):
                     pr, {})['keywords'] = merged
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id, "keywords": merged,
-            })
+            }
 
     @mcp.tool()
-    def add_equipment_tags(doc_id: int, tags_csv: str) -> str:
+    def add_equipment_tags(doc_id: int, tags_csv: str) -> ToolResult:
         """Add equipment tag references to a document's metadata.
 
         Args:
@@ -1193,7 +1190,7 @@ def register_correction_tools(mcp, get_db):
         with get_db() as conn:
             doc, pdf_path = _get_doc_pdf_path(conn, doc_id)
             if not doc:
-                return json.dumps({"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             tags = [t.strip() for t in tags_csv.split(',') if t.strip()]
             meta = json.loads(doc['metadata']) if doc['metadata'] else {}
@@ -1212,16 +1209,16 @@ def register_correction_tools(mcp, get_db):
                     pr, {})['equipment_tags'] = merged
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "updated", "doc_id": doc_id,
                 "equipment_tags": merged,
-            })
+            }
 
     # ===== Quality (3) =====
 
     @mcp.tool()
     def flag_low_quality(doc_id: int, page_num: int,
-                         reason: str) -> str:
+                         reason: str) -> ToolResult:
         """Flag a page as low quality (OCR errors, garbled text, missing content).
 
         Args:
@@ -1231,8 +1228,7 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, doc_id):
-                return json.dumps(
-                    {"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             conn.execute(
                 "INSERT INTO quality_flags "
@@ -1254,13 +1250,13 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "flagged", "doc_id": doc_id,
                 "page_num": page_num, "flag": "low_quality",
-            })
+            }
 
     @mcp.tool()
-    def flag_duplicate(doc_id: int, duplicate_of_doc_id: int) -> str:
+    def flag_duplicate(doc_id: int, duplicate_of_doc_id: int) -> ToolResult:
         """Flag a document as a duplicate of another.
 
         Args:
@@ -1269,11 +1265,9 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, doc_id):
-                return json.dumps(
-                    {"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
             if not _get_doc(conn, duplicate_of_doc_id):
-                return json.dumps(
-                    {"error": f"Document {duplicate_of_doc_id} not found"})
+                return {"error": f"Document {duplicate_of_doc_id} not found"}
 
             conn.execute(
                 "INSERT INTO quality_flags "
@@ -1295,14 +1289,14 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "flagged", "doc_id": doc_id,
                 "flag": "duplicate",
                 "duplicate_of": duplicate_of_doc_id,
-            })
+            }
 
     @mcp.tool()
-    def suggest_reocr(doc_id: int, reason: str) -> str:
+    def suggest_reocr(doc_id: int, reason: str) -> ToolResult:
         """Suggest that a document needs OCR re-processing.
 
         Args:
@@ -1311,8 +1305,7 @@ def register_correction_tools(mcp, get_db):
         """
         with get_db() as conn:
             if not _get_doc(conn, doc_id):
-                return json.dumps(
-                    {"error": f"Document {doc_id} not found"})
+                return {"error": f"Document {doc_id} not found"}
 
             conn.execute(
                 "INSERT INTO quality_flags "
@@ -1331,7 +1324,7 @@ def register_correction_tools(mcp, get_db):
                 })
                 _save_sidecar(pdf_path, sidecar)
 
-            return json.dumps({
+            return {
                 "status": "flagged", "doc_id": doc_id,
                 "flag": "needs_reocr",
-            })
+            }

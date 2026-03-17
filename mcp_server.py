@@ -38,7 +38,7 @@ import sqlite3
 import sys
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 from mcp.server.fastmcp import FastMCP
 
@@ -50,6 +50,7 @@ from corrections import register_correction_tools
 # ---------------------------------------------------------------------------
 
 DB_PATH = "docs.db"
+ToolResult = dict[str, Any] | list[dict[str, Any]]
 
 
 @contextmanager
@@ -910,7 +911,7 @@ register_correction_tools(mcp, get_db)
 # ===== Discovery =====
 
 @mcp.tool()
-def list_folders() -> str:
+def list_folders() -> ToolResult:
     """List top-level folders with aggregate document and page counts."""
     with get_db() as conn:
         exact_stats = {
@@ -943,7 +944,7 @@ def list_folders() -> str:
                 "documents": docs,
                 "total_pages": pages,
             })
-        return json.dumps(results, indent=2)
+        return results
 
 
 @mcp.tool()
@@ -951,7 +952,7 @@ def list_folder_entries(
     project: str,
     include: str = "both",
     recursive: bool = False,
-) -> str:
+) -> ToolResult:
     """List folders/files within a folder.
 
     Args:
@@ -961,9 +962,9 @@ def list_folder_entries(
     """
     project = (project or "").strip().strip("/")
     if not project:
-        return json.dumps({"error": "project is required"})
+        return {"error": "project is required"}
     if include not in {"folders", "files", "both"}:
-        return json.dumps({"error": "include must be one of: folders, files, both"})
+        return {"error": "include must be one of: folders, files, both"}
 
     with get_db() as conn:
         folder_items = []
@@ -989,7 +990,7 @@ def list_folder_entries(
                     continue
                 file_items.append(_document_entry(conn, row))
 
-        return json.dumps({
+        return {
             "project": project,
             "folder": project,
             "include": include,
@@ -999,9 +1000,9 @@ def list_folder_entries(
             "entries": folder_items + file_items,
             "folders": folder_items,
             "files": file_items,
-        }, indent=2)
+        }
 @mcp.tool()
-def list_documents(project: str) -> str:
+def list_documents(project: str) -> ToolResult:
     """List all documents in a folder scope.
 
     Args:
@@ -1031,11 +1032,11 @@ def list_documents(project: str) -> str:
                 "summary": meta.get("summary"),
             })
 
-        return json.dumps(results, indent=2)
+        return results
 
 
 @mcp.tool()
-def get_document_info(doc_id: int) -> str:
+def get_document_info(doc_id: int) -> ToolResult:
     """Get full metadata for a document including LLM-extracted details.
 
     Args:
@@ -1044,7 +1045,7 @@ def get_document_info(doc_id: int) -> str:
     with get_db() as conn:
         d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
 
         meta = json.loads(d["metadata"]) if d["metadata"] else {}
 
@@ -1055,7 +1056,7 @@ def get_document_info(doc_id: int) -> str:
         ):
             types[r["page_type"]] = r["n"]
 
-        return json.dumps({
+        return {
             "id": d["id"], "project": d["project"], "title": d["title"],
             "filename": d["filename"], "pdf_path": d["pdf_path"],
             "total_pages": d["total_pages"], "page_types": types,
@@ -1070,11 +1071,11 @@ def get_document_info(doc_id: int) -> str:
             "equipment_tags": meta.get("equipment_tags"),
             "applicable_codes": meta.get("applicable_codes"),
             "keywords": meta.get("keywords"),
-        }, indent=2)
+        }
 
 
 @mcp.tool()
-def get_toc(doc_id: int, max_level: int = 4) -> str:
+def get_toc(doc_id: int, max_level: int = 4) -> ToolResult:
     """Get the section tree (table of contents) for a document.
 
     Args:
@@ -1084,7 +1085,7 @@ def get_toc(doc_id: int, max_level: int = 4) -> str:
     with get_db() as conn:
         d = conn.execute("SELECT title FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
 
         sections = conn.execute(
             """SELECT heading, level, page_start, page_end, breadcrumb
@@ -1092,7 +1093,7 @@ def get_toc(doc_id: int, max_level: int = 4) -> str:
             (doc_id, max_level)
         ).fetchall()
 
-        return json.dumps({
+        return {
             "doc_title": d["title"],
             "sections": [
                 {"heading": s["heading"], "level": s["level"],
@@ -1100,7 +1101,7 @@ def get_toc(doc_id: int, max_level: int = 4) -> str:
                  "breadcrumb": s["breadcrumb"]}
                 for s in sections
             ]
-        }, indent=2)
+        }
 
 
 # ===== Search =====
@@ -1112,7 +1113,7 @@ def search_pages(
     doc_id: Optional[int] = None,
     page_type: Optional[str] = None,
     max_results: int = 10
-) -> str:
+) -> ToolResult:
     """Full-text keyword search across a folder's pages.
 
     Automatically expands known abbreviations (e.g. PRS → price reduction schedule)
@@ -1131,14 +1132,14 @@ def search_pages(
     """
     clean = sanitize_fts(query)
     if not clean:
-        return json.dumps({"error": "Empty query"})
+        return {"error": "Empty query"}
 
     cap = min(max_results, 25)
 
     with get_db() as conn:
         ids = project_doc_ids(conn, project)
         if not ids:
-            return json.dumps({"error": f"No documents in folder '{project}'"})
+            return {"error": f"No documents in folder '{project}'"}
 
         results = []
         seen = set()
@@ -1186,7 +1187,7 @@ def search_pages(
                     pass
 
         final = results[:cap]
-        return json.dumps({
+        return {
             "query": query,
             "sanitized": clean,
             "expanded_terms": extra if extra else None,
@@ -1198,11 +1199,11 @@ def search_pages(
                  "snippet": r["snippet"], "rank": round(r["rank"], 4)}
                 for r in final
             ]
-        }, indent=2)
+        }
 
 
 @mcp.tool()
-def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> str:
+def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> ToolResult:
     """Search section headings within a folder scope.
 
     Args:
@@ -1226,14 +1227,14 @@ def search_sections(project: str, query: str, doc_id: Optional[int] = None) -> s
             ORDER BY s.doc_id, s.seq
         """, params).fetchall()
 
-        return json.dumps({
+        return {
             "query": query, "result_count": len(rows),
             "results": [dict(r) for r in rows]
-        }, indent=2)
+        }
 
 
 @mcp.tool()
-def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
+def get_section(doc_id: int, heading: str, max_pages: int = 20) -> ToolResult:
     """Get all pages belonging to a section, identified by heading text.
 
     Use this after search_sections to read the full content of a section
@@ -1247,7 +1248,7 @@ def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
     with get_db() as conn:
         d = conn.execute("SELECT title FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
 
         section = conn.execute(
             "SELECT * FROM sections WHERE doc_id = ? AND heading LIKE ? ORDER BY seq LIMIT 1",
@@ -1262,7 +1263,7 @@ def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
             ).fetchone()
 
         if not section:
-            return json.dumps({"error": f"No section matching '{heading}' in document {doc_id}"})
+            return {"error": f"No section matching '{heading}' in document {doc_id}"}
 
         page_cap = min(max_pages, 30)
         pages = conn.execute(
@@ -1271,7 +1272,7 @@ def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
             (doc_id, section['page_start'], section['page_end'], page_cap)
         ).fetchall()
 
-        return json.dumps({
+        return {
             "doc_id": doc_id,
             "doc_title": d["title"],
             "section": {
@@ -1287,13 +1288,13 @@ def get_section(doc_id: int, heading: str, max_pages: int = 20) -> str:
                  "page_type": p["page_type"], "content": p["content"]}
                 for p in pages
             ]
-        }, indent=2)
+        }
 
 
 # ===== Navigation =====
 
 @mcp.tool()
-def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> str:
+def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> ToolResult:
     """Get full content of a specific page with section context.
 
     Args:
@@ -1304,13 +1305,13 @@ def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> str:
     with get_db() as conn:
         d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
 
         p = conn.execute(
             "SELECT * FROM pages WHERE doc_id = ? AND page_num = ?", (doc_id, page_num)
         ).fetchone()
         if not p:
-            return json.dumps({"error": f"Page {page_num} not found", "total_pages": d["total_pages"]})
+            return {"error": f"Page {page_num} not found", "total_pages": d["total_pages"]}
 
         result = {
             "doc_id": doc_id, "doc_title": d["title"], "project": d["project"],
@@ -1331,11 +1332,11 @@ def get_page(doc_id: int, page_num: int, include_adjacent: bool = False) -> str:
                         "page_type": adj["page_type"], "content": adj["content"]
                     }
 
-        return json.dumps(result, indent=2)
+        return result
 
 
 @mcp.tool()
-def get_pages(doc_id: int, page_start: int, page_end: int) -> str:
+def get_pages(doc_id: int, page_start: int, page_end: int) -> ToolResult:
     """Get full content of a range of pages. Max 10 pages per call.
 
     Args:
@@ -1346,7 +1347,7 @@ def get_pages(doc_id: int, page_start: int, page_end: int) -> str:
     with get_db() as conn:
         d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
 
         page_end = min(page_end, page_start + 9)  # cap at 10 pages
 
@@ -1357,12 +1358,12 @@ def get_pages(doc_id: int, page_start: int, page_end: int) -> str:
         ).fetchall()
 
         if not rows:
-            return json.dumps({
+            return {
                 "error": f"No pages found in range {page_start}-{page_end}",
                 "total_pages": d["total_pages"]
-            })
+            }
 
-        return json.dumps({
+        return {
             "doc_id": doc_id, "doc_title": d["title"], "project": d["project"],
             "total_pages": d["total_pages"],
             "pages": [
@@ -1370,11 +1371,11 @@ def get_pages(doc_id: int, page_start: int, page_end: int) -> str:
                  "page_type": p["page_type"], "content": p["content"]}
                 for p in rows
             ]
-        }, indent=2)
+        }
 
 
 @mcp.tool()
-def get_adjacent(doc_id: int, page_num: int, direction: str = "next") -> str:
+def get_adjacent(doc_id: int, page_num: int, direction: str = "next") -> ToolResult:
     """Get the next or previous page.
 
     Args:
@@ -1389,7 +1390,7 @@ def get_adjacent(doc_id: int, page_num: int, direction: str = "next") -> str:
 # ===== Fallback extraction tools =====
 
 @mcp.tool()
-def reextract_page(doc_id: int, page_start: int, page_end: Optional[int] = None) -> str:
+def reextract_page(doc_id: int, page_start: int, page_end: Optional[int] = None) -> ToolResult:
     """Re-extract text from original PDF using pdfplumber (layout-preserved).
 
     Use this when Marker's output for a page looks garbled, has missing text,
@@ -1406,14 +1407,14 @@ def reextract_page(doc_id: int, page_start: int, page_end: Optional[int] = None)
     with get_db() as conn:
         d = conn.execute("SELECT pdf_path, title FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
         if not d["pdf_path"] or not Path(d["pdf_path"]).exists():
-            return json.dumps({"error": f"Original PDF not found at {d['pdf_path']}"})
+            return {"error": f"Original PDF not found at {d['pdf_path']}"}
 
     try:
         import pdfplumber
     except ImportError:
-        return json.dumps({"error": "pdfplumber not installed. Run: pip install pdfplumber"})
+        return {"error": "pdfplumber not installed. Run: pip install pdfplumber"}
 
     try:
         results = []
@@ -1429,18 +1430,18 @@ def reextract_page(doc_id: int, page_start: int, page_end: Optional[int] = None)
                     "height": page.height
                 })
 
-        return json.dumps({
+        return {
             "doc_id": doc_id, "doc_title": d["title"],
             "source": "pdfplumber (layout mode)",
             "pages": results
-        }, indent=2)
+        }
 
     except Exception as e:
-        return json.dumps({"error": f"Extraction failed: {e}"})
+        return {"error": f"Extraction failed: {e}"}
 
 
 @mcp.tool()
-def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None) -> str:
+def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None) -> ToolResult:
     """Re-extract tables from original PDF using pdfplumber with structure detection.
 
     Use this when a table in Marker's output has misaligned columns, merged cells,
@@ -1457,14 +1458,14 @@ def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None
     with get_db() as conn:
         d = conn.execute("SELECT pdf_path, title FROM documents WHERE id = ?", (doc_id,)).fetchone()
         if not d:
-            return json.dumps({"error": f"Document {doc_id} not found"})
+            return {"error": f"Document {doc_id} not found"}
         if not d["pdf_path"] or not Path(d["pdf_path"]).exists():
-            return json.dumps({"error": f"Original PDF not found at {d['pdf_path']}"})
+            return {"error": f"Original PDF not found at {d['pdf_path']}"}
 
     try:
         import pdfplumber
     except ImportError:
-        return json.dumps({"error": "pdfplumber not installed. Run: pip install pdfplumber"})
+        return {"error": "pdfplumber not installed. Run: pip install pdfplumber"}
 
     try:
         all_tables = []
@@ -1524,16 +1525,16 @@ def reextract_table(doc_id: int, page_start: int, page_end: Optional[int] = None
                         "markdown": '\n'.join(md_lines)
                     })
 
-        return json.dumps({
+        return {
             "doc_id": doc_id, "doc_title": d["title"],
             "source": "pdfplumber (table extraction)",
             "page_range": f"{page_start}-{page_end}",
             "tables_found": len(all_tables),
             "tables": all_tables
-        }, indent=2)
+        }
 
     except Exception as e:
-        return json.dumps({"error": f"Table extraction failed: {e}"})
+        return {"error": f"Table extraction failed: {e}"}
 
 
 # ===== Semantic / vector search =====
@@ -1557,7 +1558,7 @@ def semantic_search(
     query: str,
     doc_id: Optional[int] = None,
     max_results: int = 10
-) -> str:
+) -> ToolResult:
     """Semantic (vector) search — finds conceptually similar content even when
     exact keywords don't match. Use this when search_pages returns too few results
     or when you don't know the exact terminology used in the documents.
@@ -1574,22 +1575,22 @@ def semantic_search(
     try:
         import numpy as np
     except ImportError:
-        return json.dumps({"error": "numpy is required. Install: pip install numpy"})
+        return {"error": "numpy is required. Install: pip install numpy"}
 
     try:
         _get_embedding_model()
     except Exception:
-        return json.dumps({
+        return {
             "error": "semantic search requires sentence-transformers. "
                      "Install: pip install sentence-transformers"
-        })
+        }
 
     cap = min(max_results, 25)
 
     with get_db() as conn:
         ids = project_doc_ids(conn, project)
         if not ids:
-            return json.dumps({"error": f"No documents in folder '{project}'"})
+            return {"error": f"No documents in folder '{project}'"}
 
         # Check if embeddings exist
         ph = ','.join('?' * len(ids))
@@ -1600,9 +1601,9 @@ def semantic_search(
         """, ids).fetchone()[0]
 
         if count == 0:
-            return json.dumps({
+            return {
                 "error": "No embeddings found. Run: python ingest.py --embed-only --project <dir> --db <db>"
-            })
+            }
 
         model_row = conn.execute(f"""
             SELECT pe.model FROM page_embeddings pe
@@ -1661,11 +1662,11 @@ def semantic_search(
                 if len(deduped) >= cap:
                     break
 
-        return json.dumps({
+        return {
             "query": query,
             "result_count": len(deduped),
             "results": deduped,
-        }, indent=2)
+        }
 
 
 # ---------------------------------------------------------------------------
