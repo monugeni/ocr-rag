@@ -160,7 +160,68 @@ function rootFolder(folder) {
   return String(folder || '').split('/')[0] || '';
 }
 
-// --- Sidebar ---
+// --- Sidebar (tree view) ---
+const EXPANDED_KEY = 'esteem.folder-knowledge.expanded-folders';
+
+function getExpandedFolders() {
+  try { return new Set(JSON.parse(localStorage.getItem(EXPANDED_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+
+function saveExpandedFolders(expanded) {
+  localStorage.setItem(EXPANDED_KEY, JSON.stringify([...expanded]));
+}
+
+function toggleFolderExpand(folder, event) {
+  event.stopPropagation();
+  const expanded = getExpandedFolders();
+  if (expanded.has(folder)) expanded.delete(folder);
+  else expanded.add(folder);
+  saveExpandedFolders(expanded);
+  loadFolders();
+}
+
+function buildFolderTree(folders) {
+  const map = new Map();
+  const roots = [];
+  for (const f of folders) map.set(f.folder, { ...f, children: [] });
+  for (const f of folders) {
+    const node = map.get(f.folder);
+    if (f.parent && map.has(f.parent)) {
+      map.get(f.parent).children.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+  return roots;
+}
+
+function renderTreeNode(node, expanded) {
+  const hasChildren = node.children.length > 0;
+  const isExpanded = expanded.has(node.folder);
+  const isActive = currentProject === node.folder;
+  const toggle = hasChildren
+    ? `<span class="tree-toggle ${isExpanded ? 'open' : ''}" onclick="toggleFolderExpand(${jsq(node.folder)}, event)"></span>`
+    : `<span class="tree-toggle leaf"></span>`;
+  const badge = (node.docs || node.pending)
+    ? `<span class="badge">${node.docs}${node.pending ? `+${node.pending}` : ''}</span>`
+    : '';
+  let html = `<div class="tree-node">
+    <div class="project-item ${isActive ? 'active' : ''}"
+         onclick="navigate(${jsq(folderHash(node.folder))})"
+         style="padding-left:${6 + (node.depth || 0) * 18}px">
+      ${toggle}
+      <span class="name" title="${esc(node.folder)}">${esc(node.display_name)}</span>
+      ${badge}
+    </div>`;
+  if (hasChildren && isExpanded) {
+    html += '<div class="tree-children">';
+    for (const child of node.children) html += renderTreeNode(child, expanded);
+    html += '</div>';
+  }
+  return html + '</div>';
+}
+
 async function loadFolders() {
   try {
     const projects = await api('/folders');
@@ -170,14 +231,15 @@ async function loadFolders() {
       list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No folders yet</div>';
       return;
     }
-    list.innerHTML = projects.map((project) => `
-      <div class="project-item ${currentProject === project.folder ? 'active' : ''}"
-           onclick="navigate(${jsq(folderHash(project.folder))})"
-           style="padding-left:${12 + (project.depth || 0) * 16}px">
-        <span class="name" title="${esc(project.folder)}">${esc(project.display_name || project.folder)}</span>
-        <span class="badge">${project.docs}${project.pending ? `+${project.pending}` : ''}</span>
-      </div>
-    `).join('');
+    const expanded = getExpandedFolders();
+    // Auto-expand ancestors of the active folder
+    if (currentProject) {
+      const parts = currentProject.split('/');
+      for (let i = 1; i < parts.length; i++) expanded.add(parts.slice(0, i).join('/'));
+      saveExpandedFolders(expanded);
+    }
+    const tree = buildFolderTree(projects);
+    list.innerHTML = tree.map(node => renderTreeNode(node, expanded)).join('');
   } catch (error) {
     console.error('Failed to load folders:', error);
   }

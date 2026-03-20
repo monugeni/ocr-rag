@@ -95,14 +95,41 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
 }
 
+/* --- Tree view --- */
+
+.tree-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--sidebar-muted);
+  border-radius: 4px;
+  transition: color 0.12s ease;
+}
+
+.tree-toggle::before {
+  content: '\25B8';
+  font-size: 11px;
+  transition: transform 0.15s ease;
+  display: inline-block;
+}
+
+.tree-toggle.open::before { transform: rotate(90deg); }
+.tree-toggle.leaf::before { content: ''; }
+.tree-toggle.leaf { pointer-events: none; }
+.tree-toggle:not(.leaf) { cursor: pointer; }
+.tree-toggle:not(.leaf):hover { color: #fff; background: rgba(255,255,255,0.08); }
+
 .project-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 4px;
+  margin-bottom: 1px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -112,6 +139,9 @@ a:hover { text-decoration: underline; }
   background: linear-gradient(135deg, #2459d3, #183a88);
   color: #fff;
 }
+
+.project-item.active .tree-toggle { color: rgba(255,255,255,0.7); }
+.project-item.active .tree-toggle:hover { color: #fff; background: rgba(255,255,255,0.15); }
 
 .project-item .name {
   flex: 1;
@@ -126,7 +156,7 @@ a:hover { text-decoration: underline; }
   background: rgba(255,255,255,0.12);
   padding: 2px 7px;
   border-radius: 999px;
-  margin-left: 6px;
+  flex-shrink: 0;
 }
 
 .project-item.active .badge { background: rgba(255,255,255,0.24); }

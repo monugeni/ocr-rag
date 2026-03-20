@@ -825,7 +825,7 @@ def list_folders(scope: Optional[str] = Query(None), recursive: bool = Query(Fal
                     if folder.startswith(prefix) and "/" not in folder[len(prefix):]
                 ]
         else:
-            scoped_folders = [folder for folder in folders if "/" not in folder]
+            scoped_folders = folders
 
         results = []
         for folder in scoped_folders:
