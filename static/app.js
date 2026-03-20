@@ -208,7 +208,7 @@ function renderTreeNode(node, expanded) {
     : '';
   let html = `<div class="tree-node">
     <div class="project-item ${isActive ? 'active' : ''}"
-         onclick="navigate(${jsq(folderHash(node.folder))})"
+         onclick="navigate(folderHash(${jsq(node.folder)}, currentProject === ${jsq(node.folder)} ? currentFolderSection : 'documents'))"
          style="padding-left:${6 + (node.depth || 0) * 18}px">
       ${toggle}
       <span class="name" title="${esc(node.folder)}">${esc(node.display_name)}</span>
@@ -961,7 +961,7 @@ async function newChat(project) {
       body: JSON.stringify({ title: 'New chat' }),
     });
     currentChatId = created.id;
-    showProject(project);
+    showProject(project, currentFolderSection);
   } catch (error) {
     alert('Could not create chat: ' + error.message);
   }
@@ -969,7 +969,7 @@ async function newChat(project) {
 
 function selectChat(threadId) {
   currentChatId = threadId;
-  if (currentProject) showProject(currentProject);
+  if (currentProject) showProject(currentProject, currentFolderSection);
 }
 
 function handleChatKeydown(event) {
@@ -992,7 +992,7 @@ async function sendChatMessage() {
         body: JSON.stringify({ title: 'New chat' }),
       });
       currentChatId = created.id;
-      await showProject(currentProject);
+      await showProject(currentProject, currentFolderSection);
     }
   } catch (error) {
     alert('Could not start chat: ' + error.message);
@@ -1012,13 +1012,13 @@ async function sendChatMessage() {
       body: JSON.stringify({ content: messageText }),
     });
     stopThinkingIndicator();
-    await showProject(currentProject);
+    await showProject(currentProject, currentFolderSection);
   } catch (error) {
     stopThinkingIndicator();
     if (sendButton) sendButton.disabled = false;
     if (textarea) textarea.disabled = false;
     alert('Chat failed: ' + error.message);
-    await showProject(currentProject);
+    await showProject(currentProject, currentFolderSection);
   }
 }
 
@@ -1190,7 +1190,7 @@ async function doRenameDoc(docId) {
       body: JSON.stringify({ title }),
     });
     closeModal();
-    if (currentProject) showProject(currentProject);
+    if (currentProject) showProject(currentProject, currentFolderSection);
   } catch (error) {
     alert('Error: ' + error.message);
   }
@@ -1212,7 +1212,7 @@ function confirmDeleteDoc(docId, title) {
   if (confirm(`Delete document "${title}"?`)) {
     api(`/documents/${docId}`, { method: 'DELETE' })
       .then(() => {
-        if (currentProject) showProject(currentProject);
+        if (currentProject) showProject(currentProject, currentFolderSection);
       })
       .catch((error) => alert('Error: ' + error.message));
   }
@@ -1246,10 +1246,10 @@ async function uploadFiles(files, project) {
   if (area) area.textContent = `Uploading ${files.length} file(s)...`;
   try {
     await apiUpload(`/folders/${enc(project)}/upload`, files);
-    showProject(project);
+    showProject(project, currentFolderSection);
   } catch (error) {
     alert('Upload failed: ' + error.message);
-    showProject(project);
+    showProject(project, currentFolderSection);
   }
 }
 
@@ -1277,10 +1277,10 @@ async function uploadFilesWithPaths(files, paths, project) {
     for (const p of paths) form.append('paths', p);
     const res = await fetch('/api/folders/' + enc(project) + '/upload', { method: 'POST', body: form });
     if (!res.ok) throw new Error(await res.text());
-    showProject(project);
+    showProject(project, currentFolderSection);
   } catch (error) {
     alert('Upload failed: ' + error.message);
-    showProject(project);
+    showProject(project, currentFolderSection);
   }
 }
 
@@ -1340,7 +1340,7 @@ async function pollJobs(project) {
     const allDone = projectJobs.every((job) => job.status === 'completed' || job.status === 'failed');
     if (allDone && projectJobs.some((job) => job.status === 'completed')) {
       stopPolling();
-      setTimeout(() => showProject(project), 1000);
+      setTimeout(() => showProject(project, currentFolderSection), 1000);
     }
   } catch (error) {
     console.error('Poll error:', error);
