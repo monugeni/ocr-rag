@@ -32,26 +32,60 @@ def is_archive(filename: str) -> bool:
     return Path(lower).suffix in ARCHIVE_EXTENSIONS | {'.gz'}
 
 
-def extract_archive(archive_path: str, dest_dir: Path) -> list[str]:
-    """Extract supported files from an archive into dest_dir (flattened).
+def _strip_common_root(entries: list[tuple[str, bytes]]) -> list[tuple[str, bytes]]:
+    """If every entry lives under a single top-level directory, strip it.
 
-    Returns list of extracted filenames.
+    This handles the common case where a user zips a folder and every file
+    inside has the folder name as prefix (e.g. ``MyProject/specs/file.pdf``).
+    """
+    if not entries:
+        return entries
+    rel_paths = [Path(p) for p, _ in entries]
+    # Only strip when *all* files are inside at least one subdirectory
+    if not all(len(p.parts) > 1 for p in rel_paths):
+        return entries
+    roots = {p.parts[0] for p in rel_paths}
+    if len(roots) != 1:
+        return entries
+    return [(str(Path(*Path(p).parts[1:])), d) for p, d in entries]
+
+
+def _safe_archive_entry(rel_path: str) -> bool:
+    """Return True if the archive entry path is safe to extract."""
+    p = Path(rel_path)
+    if not p.name or '..' in p.parts:
+        return False
+    # Skip hidden / system entries (macOS __MACOSX, .DS_Store, etc.)
+    for part in p.parts:
+        if part.startswith('.') or part.startswith('_'):
+            return False
+    if p.suffix.lower() not in INGESTABLE_EXTENSIONS:
+        return False
+    return True
+
+
+def extract_archive(archive_path: str, dest_dir: Path) -> list[str]:
+    """Extract supported files from an archive into *dest_dir*.
+
+    Directory structure inside the archive is preserved.  If every file
+    shares a single common root directory it is stripped to avoid
+    double-nesting (e.g. uploading ``Project.zip`` containing
+    ``Project/specs/file.pdf`` into folder "Project" won't create
+    ``Project/Project/specs/file.pdf``).
+
+    Returns list of extracted relative paths (may include subdirectories).
     """
     lower = str(archive_path).lower()
-    extracted = []
+
+    # --- collect raw (internal_path, data) pairs -------------------------
+    entries: list[tuple[str, bytes]] = []
 
     if lower.endswith('.zip'):
         with zipfile.ZipFile(archive_path) as zf:
             for info in zf.infolist():
                 if info.is_dir():
                     continue
-                name = Path(info.filename).name
-                if not name or name.startswith('.'):
-                    continue
-                if Path(name).suffix.lower() in INGESTABLE_EXTENSIONS:
-                    data = zf.read(info.filename)
-                    (dest_dir / name).write_bytes(data)
-                    extracted.append(name)
+                entries.append((info.filename, zf.read(info.filename)))
 
     elif lower.endswith('.tar') or lower.endswith('.tar.gz') or lower.endswith('.tgz'):
         mode = 'r:gz' if (lower.endswith('.gz') or lower.endswith('.tgz')) else 'r'
@@ -59,21 +93,37 @@ def extract_archive(archive_path: str, dest_dir: Path) -> list[str]:
             for member in tf.getmembers():
                 if not member.isfile():
                     continue
-                name = Path(member.name).name
-                if not name or name.startswith('.'):
-                    continue
-                if Path(name).suffix.lower() in INGESTABLE_EXTENSIONS:
-                    f = tf.extractfile(member)
-                    if f:
-                        (dest_dir / name).write_bytes(f.read())
-                        extracted.append(name)
+                f = tf.extractfile(member)
+                if f:
+                    entries.append((member.name, f.read()))
 
     elif lower.endswith('.gz'):
         name = Path(archive_path).stem  # remove .gz
         if Path(name).suffix.lower() in INGESTABLE_EXTENSIONS:
             with gzip.open(archive_path, 'rb') as gz:
                 (dest_dir / name).write_bytes(gz.read())
-            extracted.append(name)
+            return [name]
+        return []
+
+    if not entries:
+        return []
+
+    entries = _strip_common_root(entries)
+
+    # --- write files, preserving directory structure ---------------------
+    extracted: list[str] = []
+    for rel_path, data in entries:
+        if not _safe_archive_entry(rel_path):
+            continue
+        dest = dest_dir / rel_path
+        # Guard against path traversal
+        try:
+            dest.resolve().relative_to(dest_dir.resolve())
+        except ValueError:
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(data)
+        extracted.append(Path(rel_path).as_posix())
 
     return extracted
 

@@ -293,6 +293,12 @@ function renderUploadCard(project) {
         <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
                onchange="handleFiles(this.files, ${jsq(project)})">
       </div>
+      <div style="text-align:center;margin-top:6px">
+        <a href="#" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('folder-input').click()"
+           style="font-size:12px;color:var(--muted)">or upload an entire folder</a>
+        <input type="file" id="folder-input" webkitdirectory style="display:none"
+               onchange="handleFolderUpload(this.files, ${jsq(project)})">
+      </div>
     </div>
   `;
 }
@@ -1178,6 +1184,37 @@ async function uploadFiles(files, project) {
   if (area) area.textContent = `Uploading ${files.length} file(s)...`;
   try {
     await apiUpload(`/folders/${enc(project)}/upload`, files);
+    showProject(project);
+  } catch (error) {
+    alert('Upload failed: ' + error.message);
+    showProject(project);
+  }
+}
+
+function handleFolderUpload(fileList, project) {
+  const files = [];
+  const paths = [];
+  for (const f of fileList) {
+    if (!supported(f.name)) continue;
+    files.push(f);
+    // webkitRelativePath is "SelectedFolder/sub/file.pdf"
+    // Strip the first component (the folder the user picked)
+    const parts = f.webkitRelativePath.split('/');
+    paths.push(parts.slice(1).join('/'));
+  }
+  if (!files.length) { alert('No supported files found in this folder.'); return; }
+  uploadFilesWithPaths(files, paths, project);
+}
+
+async function uploadFilesWithPaths(files, paths, project) {
+  const area = document.getElementById('upload-area');
+  if (area) area.textContent = `Uploading ${files.length} file(s) from folder...`;
+  try {
+    const form = new FormData();
+    for (const f of files) form.append('files', f);
+    for (const p of paths) form.append('paths', p);
+    const res = await fetch('/api/folders/' + enc(project) + '/upload', { method: 'POST', body: form });
+    if (!res.ok) throw new Error(await res.text());
     showProject(project);
   } catch (error) {
     alert('Upload failed: ' + error.message);

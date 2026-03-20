@@ -40,7 +40,7 @@ from typing import Optional
 from uuid import uuid4
 
 import uvicorn
-from fastapi import FastAPI, File, HTTPException, Query, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -1006,30 +1006,62 @@ def create_folder_chat(folder: str, data: Optional[dict] = None):
 
 @app.post("/api/projects/{folder:path}/upload")
 @app.post("/api/folders/{folder:path}/upload")
-async def upload_files(folder: str, files: list[UploadFile] = File(...)):
+async def upload_files(
+    folder: str,
+    files: list[UploadFile] = File(...),
+    paths: list[str] = Form(default=[]),
+):
+    """Upload files (or an entire folder) into *folder*.
+
+    When *paths* is provided (one entry per file), each file is placed at
+    the corresponding relative path inside the folder, preserving the
+    original directory layout.  This is used by the browser folder-upload
+    feature (``webkitdirectory``).
+    """
     folder = _validate_folder_name(folder, "Folder name")
     folder_dir = _folder_disk_path(folder)
     folder_dir.mkdir(parents=True, exist_ok=True)
 
+    use_paths = len(paths) == len(files)
+
+    # Validate supplied paths
+    if use_paths:
+        for p in paths:
+            normed = _normalize_folder_name(p)
+            if '..' in normed.split('/'):
+                raise HTTPException(400, "Invalid path component")
+
     uploaded = []
-    for f in files:
+    for i, f in enumerate(files):
         ext = Path(f.filename).suffix.lower()
         content = await f.read()
 
         if is_archive(f.filename):
-            # Save archive to temp, extract supported files, delete archive
+            # Determine extraction target: subfolder when a path is given
+            if use_paths and paths[i]:
+                rel_parent = str(Path(_normalize_folder_name(paths[i])).parent)
+                target_dir = folder_dir / rel_parent if rel_parent != '.' else folder_dir
+            else:
+                target_dir = folder_dir
+            target_dir.mkdir(parents=True, exist_ok=True)
+
             import tempfile
             tmp = Path(tempfile.mktemp(suffix=ext))
             tmp.write_bytes(content)
             try:
-                names = extract_archive(str(tmp), folder_dir)
+                names = extract_archive(str(tmp), target_dir)
                 uploaded.extend(names)
             finally:
                 tmp.unlink(missing_ok=True)
         elif ext in INGESTABLE_EXTENSIONS:
-            dest = folder_dir / f.filename
+            if use_paths and paths[i]:
+                rel = _normalize_folder_name(paths[i])
+                dest = folder_dir / rel
+            else:
+                dest = folder_dir / f.filename
+            dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(content)
-            uploaded.append(f.filename)
+            uploaded.append(dest.relative_to(folder_dir).as_posix())
         # else: silently skip unsupported types
 
     return {"uploaded": uploaded, "count": len(uploaded)}
