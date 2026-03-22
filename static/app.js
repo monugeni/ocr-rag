@@ -32,6 +32,7 @@ let currentFolderSection = 'documents';
 let selectedDocumentIds = new Set();
 let pollTimer = null;
 let thinkingTimer = null;
+let workspaceNotice = null;
 
 const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
 const SUPPORTED_EXT = new Set(['.pdf', '.docx', '.xlsx', '.xls', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
@@ -250,6 +251,7 @@ function showWelcome() {
   currentProject = null;
   currentDocId = null;
   currentChatId = null;
+  workspaceNotice = null;
   setTopbar(null);
   document.getElementById('content').innerHTML = `
     <div class="welcome">
@@ -262,6 +264,7 @@ function showWelcome() {
 async function showProject(project, section = 'documents') {
   if (currentProject && currentProject !== project) {
     selectedDocumentIds.clear();
+    workspaceNotice = null;
   }
   currentProject = project;
   currentFolderSection = section;
@@ -308,6 +311,7 @@ async function showProject(project, section = 'documents') {
       <div class="folder-section-nav">
         ${renderFolderSectionTabs(project, section)}
       </div>
+      ${renderWorkspaceNotice()}
       ${renderFolderSection(project, section, {
         documents: docData.documents,
         pending: docData.pending,
@@ -315,6 +319,7 @@ async function showProject(project, section = 'documents') {
         chatMessages: chatPayload?.messages || [],
         childFolders,
         moveTargets,
+        jobs,
       })}
     `;
 
@@ -328,38 +333,102 @@ async function showProject(project, section = 'documents') {
     const activeJobs = jobs.filter((job) =>
       inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
     );
-    if (section === 'ingestion' && activeJobs.length) {
+    if (activeJobs.length) {
       startPolling(project);
-    } else if (section === 'ingestion') {
-      await pollJobs(project);
+    } else {
+      stopPolling();
+      if (section === 'ingestion') {
+        await pollJobs(project);
+      }
     }
   } catch (error) {
     content.innerHTML = `<div class="empty">Error: ${esc(error.message)}</div>`;
   }
 }
 
-function renderUploadCard(project) {
+function getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs }) {
+  let headline = 'Start by uploading files';
+  let body = `Search and chat cover documents in ${project} and all of its sub-folders.`;
+  let tone = 'ready';
+
+  if (activeJobs) {
+    headline = `${activeJobs} ingestion job${pluralize(activeJobs)} running`;
+    body = 'You can keep browsing while new documents are extracted and indexed in the background.';
+    tone = 'active';
+  } else if (pendingCount) {
+    headline = `${pendingCount} file${pluralize(pendingCount)} ready to ingest`;
+    body = 'Pending uploads are stored safely, but they will not appear in search or chat until ingestion completes.';
+    tone = 'pending';
+  } else if (documentsCount) {
+    headline = 'Folder is ready for search and chat';
+    body = 'Indexed documents in this workspace are already available for folder-scoped chat and page-level review.';
+  }
+
+  return { headline, body, tone };
+}
+
+function syncWorkspaceOverview(project, jobs) {
+  const overview = document.querySelector('[data-workspace-overview="true"]');
+  if (!overview || overview.dataset.project !== project) return;
+
+  const documentsCount = Number(overview.dataset.documentsCount || 0);
+  const pendingCount = Number(overview.dataset.pendingCount || 0);
+  const activeJobs = jobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
+  const failedJobs = jobs.filter((job) => job.status === 'failed').length;
+  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
+
+  overview.classList.remove('ready', 'pending', 'active');
+  overview.classList.add(state.tone);
+  overview.querySelector('[data-workspace-headline]')?.replaceChildren(document.createTextNode(state.headline));
+  overview.querySelector('[data-workspace-body]')?.replaceChildren(document.createTextNode(state.body));
+  overview.querySelector('[data-workspace-live-jobs]')?.replaceChildren(document.createTextNode(String(activeJobs)));
+  overview.querySelector('[data-workspace-failed-jobs]')?.replaceChildren(document.createTextNode(String(failedJobs)));
+  overview.querySelector('[data-workspace-failures]')?.classList.toggle('warning', failedJobs > 0);
+}
+
+function renderUploadCard(project, pendingCount = 0) {
+  const pendingLabel = pendingCount
+    ? `${pendingCount} file${pluralize(pendingCount)} waiting to be indexed`
+    : 'Uploads land in pending first, then become searchable after ingestion';
   return `
-    <div class="card">
+    <div class="card upload-card-shell">
       <div class="card-title">
-        <span>Folder Workspace</span>
-        <span class="count">Search covers this folder and its sub-folders</span>
+        <span>Upload &amp; stage files</span>
+        <span class="count">${pendingLabel}</span>
       </div>
-      <div class="upload-area" id="upload-area"
+      <div class="upload-card-grid">
+        <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-busy="false"
+           aria-describedby="upload-subtitle"
            ondragover="event.preventDefault(); this.classList.add('dragover')"
            ondragleave="this.classList.remove('dragover')"
            ondrop="handleDrop(event, ${jsq(project)})"
-           onclick="document.getElementById('file-input').click()">
-        Drop files here or click to upload
-        <span class="muted" style="font-size:11px;display:block;margin-top:4px">PDF, DOCX, XLSX, images, ZIP/TAR archives</span>
-        <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
-               onchange="handleFiles(this.files, ${jsq(project)})">
-      </div>
-      <div style="text-align:center;margin-top:6px">
-        <a href="#" onclick="event.preventDefault(); event.stopPropagation(); document.getElementById('folder-input').click()"
-           style="font-size:12px;color:var(--muted)">or upload an entire folder</a>
-        <input type="file" id="folder-input" webkitdirectory style="display:none"
-               onchange="handleFolderUpload(this.files, ${jsq(project)})">
+           onclick="openFilePicker()"
+           onkeydown="handleUploadAreaKeydown(event)">
+          <div class="upload-area-icon" aria-hidden="true">+</div>
+          <div class="upload-area-title" id="upload-title">Drop files anywhere in this folder workspace</div>
+          <div class="upload-area-subtitle" id="upload-subtitle">Supported: PDF, DOCX, spreadsheets, images, ZIP/TAR archives. Files are staged first so you can review them before indexing.</div>
+          <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
+                 onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
+          <input type="file" id="folder-input" webkitdirectory style="display:none"
+                 onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
+        </div>
+        <div class="upload-actions-panel">
+          <div class="upload-actions-row">
+            <button class="btn btn-primary" id="upload-files-btn" onclick="event.stopPropagation(); openFilePicker()">Choose files</button>
+            <button class="btn btn-ghost" id="upload-folder-btn" onclick="event.stopPropagation(); openFolderPicker()">Choose folder</button>
+          </div>
+          <div class="upload-flow-note">
+            <strong>Simple flow</strong>
+            <p>1. Upload into pending. 2. Review what is staged. 3. Run ingestion to extract text, split large PDFs, and index everything for search and chat.</p>
+          </div>
+          <div class="upload-supported-types">
+            <span class="tag">PDF</span>
+            <span class="tag">DOCX</span>
+            <span class="tag">XLSX</span>
+            <span class="tag">Images</span>
+            <span class="tag">ZIP/TAR</span>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -382,12 +451,13 @@ function renderFolderSectionTabs(project, activeSection) {
 
 function renderFolderSection(project, section, data) {
   if (section === 'ingestion') {
+    const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
     return `
       <div class="workspace-stack">
-        ${renderUploadCard(project)}
-        ${renderChildFoldersCard(project, data.childFolders)}
+        ${renderWorkspaceOverview(project, section, data)}
+        ${renderUploadCard(project, data.pending.length)}
         ${renderPendingUploads(project, data.pending)}
-        <div id="jobs-area"></div>
+        <div id="jobs-area" aria-live="polite">${renderJobActivity(scopedJobs)}</div>
       </div>
     `;
   }
@@ -402,8 +472,66 @@ function renderFolderSection(project, section, data) {
 
   return `
     <div class="workspace-stack">
+      ${renderWorkspaceOverview(project, section, data)}
+      ${renderUploadCard(project, data.pending.length)}
       ${renderChildFoldersCard(project, data.childFolders)}
-      ${renderDocumentsCard(project, data.documents, data.moveTargets)}
+      ${renderDocumentsCard(project, data.documents, data.moveTargets, data.pending.length)}
+    </div>
+  `;
+}
+
+function renderWorkspaceOverview(project, section, data) {
+  const documentsCount = data.documents.length;
+  const pendingCount = data.pending.length;
+  const childCount = data.childFolders.length;
+  const chatCount = data.chats.length;
+  const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
+  const activeJobs = scopedJobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
+  const failedJobs = scopedJobs.filter((job) => job.status === 'failed').length;
+  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
+
+  return `
+    <div class="workspace-overview ${state.tone}"
+         data-workspace-overview="true"
+         data-project="${esc(project)}"
+         data-documents-count="${documentsCount}"
+         data-pending-count="${pendingCount}">
+      <div class="workspace-overview-main">
+        <div class="workspace-overview-label">Folder workspace</div>
+        <h2 data-workspace-headline>${esc(state.headline)}</h2>
+        <p data-workspace-body>${esc(state.body)}</p>
+        <div class="workspace-actions">
+          ${section !== 'ingestion' ? `<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Open ingestion</button>` : `<button class="btn btn-primary" onclick="openFilePicker()">Upload more</button>`}
+          ${section !== 'documents' ? `<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">View documents</button>` : ''}
+          ${section !== 'chat' ? `<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Open chat</button>` : ''}
+        </div>
+      </div>
+      <div class="workspace-stat-grid">
+        <div class="workspace-stat">
+          <span class="workspace-stat-label">Indexed</span>
+          <strong>${documentsCount}</strong>
+        </div>
+        <div class="workspace-stat">
+          <span class="workspace-stat-label">Pending</span>
+          <strong>${pendingCount}</strong>
+        </div>
+        <div class="workspace-stat">
+          <span class="workspace-stat-label">Live jobs</span>
+          <strong data-workspace-live-jobs>${activeJobs}</strong>
+        </div>
+        <div class="workspace-stat">
+          <span class="workspace-stat-label">Sub-folders</span>
+          <strong>${childCount}</strong>
+        </div>
+        <div class="workspace-stat">
+          <span class="workspace-stat-label">Chats</span>
+          <strong>${chatCount}</strong>
+        </div>
+        <div class="workspace-stat ${failedJobs ? 'warning' : ''}" data-workspace-failures>
+          <span class="workspace-stat-label">Recent failures</span>
+          <strong data-workspace-failed-jobs>${failedJobs}</strong>
+        </div>
+      </div>
     </div>
   `;
 }
@@ -428,32 +556,45 @@ function renderChildFoldersCard(project, folders) {
 }
 
 function renderPendingUploads(project, pending) {
-  if (!pending.length) return '';
+  const totalSize = pending.reduce((sum, file) => sum + (Number(file.size_mb) || 0), 0);
   return `
     <div class="card">
       <div class="card-title">
         <span>Pending Uploads <span class="count">${pending.length}</span></span>
-        <button class="btn btn-primary btn-sm" onclick="ingestAll(${jsq(project)})">Ingest All</button>
+        <div class="title-actions">
+          ${pending.length ? `<span class="count">${formatMegabytes(totalSize)} total</span>` : ''}
+          <button class="btn btn-primary btn-sm" ${pending.length ? '' : 'disabled'} onclick="ingestAll(${jsq(project)}, ${pending.length})">Ingest All</button>
+        </div>
       </div>
-      <table class="table">
-        <tr><th>File</th><th>Folder</th><th>Size</th><th></th></tr>
-        ${pending.map((file) => `
-          <tr>
-            <td>${esc(file.filename)}</td>
-            <td class="muted mono">${esc(file.folder === project ? '.' : file.folder.slice(project.length + 1))}</td>
-            <td class="muted">${file.size_mb} MB</td>
-            <td>
-              <button class="btn btn-ghost btn-sm"
-                      onclick="ingestSingle(${jsq(project)}, ${jsq(file.relative_path)})">Ingest</button>
-            </td>
-          </tr>
-        `).join('')}
-      </table>
+      <div class="card-intro">Uploads are staged here first so you can confirm what will be indexed. Once ingested, they become searchable and available to chat.</div>
+      ${pending.length ? `
+        <table class="table">
+          <tr><th>File</th><th>Folder</th><th>Size</th><th></th></tr>
+          ${pending.map((file) => `
+            <tr>
+              <td>
+                <strong>${esc(file.filename)}</strong>
+                <div class="table-subtext">Ready to extract and index</div>
+              </td>
+              <td class="muted mono">${esc(relativeFolderLabel(project, file.folder))}</td>
+              <td class="muted">${formatMegabytes(file.size_mb)}</td>
+              <td>
+                <button class="btn btn-ghost btn-sm"
+                        onclick="ingestSingle(${jsq(project)}, ${jsq(file.relative_path)}, ${jsq(file.filename)})">Ingest now</button>
+              </td>
+            </tr>
+          `).join('')}
+        </table>
+      ` : `
+        <div class="empty empty-compact">
+          No pending uploads right now. Add files above and they will appear here before ingestion starts.
+        </div>
+      `}
     </div>
   `;
 }
 
-function renderDocumentsCard(project, documents, moveTargets = []) {
+function renderDocumentsCard(project, documents, moveTargets = [], pendingCount = 0) {
   const typeOptions = [...new Set(documents
     .map((doc) => doc.document_type)
     .filter(Boolean))]
@@ -560,9 +701,39 @@ function renderDocumentsCard(project, documents, moveTargets = []) {
         <div class="empty" id="document-filter-empty" style="display:none;padding:20px">
           No documents match the current filters.
         </div>
-      ` : '<div class="empty">No documents ingested yet. Upload files above to start building this folder knowledge base.</div>'}
+      ` : `
+        <div class="empty">
+          <strong>No documents indexed yet.</strong>
+          <p class="empty-detail">${pendingCount
+            ? `${pendingCount} file${pluralize(pendingCount)} ${pendingCount === 1 ? 'is' : 'are'} staged in pending uploads. Run ingestion to make ${pendingCount === 1 ? 'it' : 'them'} searchable.`
+            : 'Upload files above, then run ingestion to build this folder knowledge base.'}</p>
+        </div>
+      `}
     </div>
   `;
+}
+
+function renderWorkspaceNotice() {
+  if (!workspaceNotice) return '';
+  const role = workspaceNotice.type === 'error' ? 'alert' : 'status';
+  return `
+    <div class="workspace-notice ${workspaceNotice.type}" id="workspace-notice" role="${role}">
+      <div class="workspace-notice-body">
+        <strong>${esc(workspaceNotice.message)}</strong>
+        ${workspaceNotice.detail ? `<div class="workspace-notice-detail">${esc(workspaceNotice.detail)}</div>` : ''}
+      </div>
+      <button class="btn btn-ghost btn-sm" onclick="dismissWorkspaceNotice()">Dismiss</button>
+    </div>
+  `;
+}
+
+function showWorkspaceNotice(type, message, detail = '') {
+  workspaceNotice = { type, message, detail };
+}
+
+function dismissWorkspaceNotice() {
+  workspaceNotice = null;
+  document.getElementById('workspace-notice')?.remove();
 }
 
 function applyDocumentFilters() {
@@ -1232,74 +1403,121 @@ function supported(name) {
 function handleDrop(event, project) {
   event.preventDefault();
   event.currentTarget.classList.remove('dragover');
-  const files = [...event.dataTransfer.files].filter((file) => supported(file.name));
-  if (files.length) uploadFiles(files, project);
+  const { accepted, skipped } = splitSupportedFiles(event.dataTransfer.files);
+  if (!accepted.length) {
+    showWorkspaceNotice('warning', 'No supported files found in this drop.', summarizeSkippedFiles(skipped));
+    if (currentProject) showProject(currentProject, currentFolderSection);
+    return;
+  }
+  uploadFiles(accepted, project, { skipped });
 }
 
 function handleFiles(fileList, project) {
-  const files = [...fileList].filter((file) => supported(file.name));
-  if (files.length) uploadFiles(files, project);
+  const { accepted, skipped } = splitSupportedFiles(fileList);
+  if (!accepted.length) {
+    showWorkspaceNotice('warning', 'No supported files selected.', summarizeSkippedFiles(skipped));
+    if (currentProject) showProject(currentProject, currentFolderSection);
+    return;
+  }
+  uploadFiles(accepted, project, { skipped });
 }
 
-async function uploadFiles(files, project) {
-  const area = document.getElementById('upload-area');
-  if (area) area.textContent = `Uploading ${files.length} file(s)...`;
+async function uploadFiles(files, project, options = {}) {
+  setUploadBusyState(
+    true,
+    `Uploading ${files.length} file${pluralize(files.length)}...`,
+    'Files will show up in pending uploads as soon as transfer completes.'
+  );
   try {
-    await apiUpload(`/folders/${enc(project)}/upload`, files);
-    showProject(project, currentFolderSection);
+    const result = await apiUpload(`/folders/${enc(project)}/upload`, files);
+    const skippedSummary = summarizeSkippedFiles(options.skipped || []);
+    showWorkspaceNotice(
+      'success',
+      `Added ${result.count} file${pluralize(result.count)} to pending uploads.`,
+      skippedSummary || 'Review the staged files below, then run ingestion when you are ready.'
+    );
+    await showProject(project, currentFolderSection);
   } catch (error) {
-    alert('Upload failed: ' + error.message);
-    showProject(project, currentFolderSection);
+    showWorkspaceNotice('error', 'Upload failed.', error.message);
+    await showProject(project, currentFolderSection);
   }
 }
 
 function handleFolderUpload(fileList, project) {
   const files = [];
   const paths = [];
+  const skipped = [];
   for (const f of fileList) {
-    if (!supported(f.name)) continue;
+    if (!supported(f.name)) {
+      skipped.push(f.name);
+      continue;
+    }
     files.push(f);
     // webkitRelativePath is "SelectedFolder/sub/file.pdf"
     // Strip the first component (the folder the user picked)
     const parts = f.webkitRelativePath.split('/');
     paths.push(parts.slice(1).join('/'));
   }
-  if (!files.length) { alert('No supported files found in this folder.'); return; }
-  uploadFilesWithPaths(files, paths, project);
+  if (!files.length) {
+    showWorkspaceNotice('warning', 'No supported files found in this folder.', summarizeSkippedFiles(skipped));
+    if (currentProject) showProject(currentProject, currentFolderSection);
+    return;
+  }
+  uploadFilesWithPaths(files, paths, project, { skipped });
 }
 
-async function uploadFilesWithPaths(files, paths, project) {
-  const area = document.getElementById('upload-area');
-  if (area) area.textContent = `Uploading ${files.length} file(s) from folder...`;
+async function uploadFilesWithPaths(files, paths, project, options = {}) {
+  setUploadBusyState(
+    true,
+    `Uploading ${files.length} file${pluralize(files.length)} from folder...`,
+    'Original sub-folder paths will be preserved inside this workspace.'
+  );
   try {
     const form = new FormData();
     for (const f of files) form.append('files', f);
     for (const p of paths) form.append('paths', p);
     const res = await fetch('/api/folders/' + enc(project) + '/upload', { method: 'POST', body: form });
     if (!res.ok) throw new Error(await res.text());
-    showProject(project, currentFolderSection);
+    const result = await res.json();
+    const skippedSummary = summarizeSkippedFiles(options.skipped || []);
+    showWorkspaceNotice(
+      'success',
+      `Added ${result.count} file${pluralize(result.count)} from the selected folder.`,
+      skippedSummary || 'Folder structure was preserved in pending uploads.'
+    );
+    await showProject(project, currentFolderSection);
   } catch (error) {
-    alert('Upload failed: ' + error.message);
-    showProject(project, currentFolderSection);
+    showWorkspaceNotice('error', 'Folder upload failed.', error.message);
+    await showProject(project, currentFolderSection);
   }
 }
 
 // --- Ingestion ---
-async function ingestAll(project) {
+async function ingestAll(project, pendingCount = 0) {
   try {
     await api(`/folders/${enc(project)}/ingest`, { method: 'POST' });
-    startPolling(project);
+    showWorkspaceNotice(
+      'info',
+      'Ingestion started.',
+      pendingCount
+        ? `Processing ${pendingCount} staged file${pluralize(pendingCount)} in the background.`
+        : 'Processing pending uploads in the background.'
+    );
+    await showProject(project, currentFolderSection);
   } catch (error) {
-    alert('Ingestion failed: ' + error.message);
+    showWorkspaceNotice('error', 'Could not start ingestion.', error.message);
+    await showProject(project, currentFolderSection);
   }
 }
 
-async function ingestSingle(project, filename) {
+async function ingestSingle(project, filename, label = filename) {
   try {
     await api(`/folders/${enc(project)}/ingest/${encPath(filename)}`, { method: 'POST' });
-    startPolling(project);
+    showWorkspaceNotice('info', `Started ingesting ${label}.`, 'You can stay on this page while progress updates live.');
+    await showProject(project, currentFolderSection);
   } catch (error) {
-    alert('Ingestion failed: ' + error.message);
+    showWorkspaceNotice('error', `Could not ingest ${label}.`, error.message);
+    await showProject(project, currentFolderSection);
   }
 }
 
@@ -1320,26 +1538,26 @@ async function pollJobs(project) {
   try {
     const jobs = await api('/ingestion/jobs');
     const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
+    syncWorkspaceOverview(project, projectJobs);
+
     const area = document.getElementById('jobs-area');
-    if (!area) return;
+    if (area && !projectJobs.length) {
+      area.innerHTML = '';
+    }
+    if (area && projectJobs.length) {
+      area.innerHTML = renderJobActivity(projectJobs);
+    }
 
     if (!projectJobs.length) {
-      area.innerHTML = '';
+      stopPolling();
       return;
     }
 
-    area.innerHTML = projectJobs.map((job) => `
-      <div class="job-card">
-        <span class="filename">${esc(job.filename)}</span>
-        <span class="stage">${esc(job.stage)}</span>
-        <span class="status ${job.status}">${job.status}</span>
-        ${job.error ? `<span style="color:#dc3545;font-size:12px">${esc(job.error)}</span>` : ''}
-      </div>
-    `).join('');
-
     const allDone = projectJobs.every((job) => job.status === 'completed' || job.status === 'failed');
-    if (allDone && projectJobs.some((job) => job.status === 'completed')) {
+    if (allDone) {
       stopPolling();
+    }
+    if (allDone && projectJobs.some((job) => job.status === 'completed')) {
       setTimeout(() => showProject(project, currentFolderSection), 1000);
     }
   } catch (error) {
@@ -1358,6 +1576,68 @@ function renderMarkdown(markdown) {
     return window.DOMPurify.sanitize(raw);
   }
   return raw;
+}
+
+function renderJobActivity(jobs) {
+  if (!jobs.length) return '';
+  const active = jobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
+  const completed = jobs.filter((job) => job.status === 'completed').length;
+  const failed = jobs.filter((job) => job.status === 'failed').length;
+  return `
+    <div class="card">
+      <div class="card-title">
+        <span>Ingestion Activity <span class="count">${jobs.length} recent job${pluralize(jobs.length)}</span></span>
+        <span class="count">${active ? 'Live updates every 2 seconds' : 'Recent activity'}</span>
+      </div>
+      <div class="job-summary">
+        <div class="job-summary-pill active">${active} active</div>
+        <div class="job-summary-pill completed">${completed} completed</div>
+        <div class="job-summary-pill failed">${failed} failed</div>
+      </div>
+      <div class="job-list">
+        ${jobs.map((job) => renderJobCard(job)).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderJobCard(job) {
+  const progress = jobProgress(job);
+  const statusLabel = job.status ? `${job.status[0].toUpperCase()}${job.status.slice(1)}` : 'Unknown';
+  return `
+    <div class="job-card ${esc(job.status || '')}">
+      <div class="job-card-top">
+        <div class="job-card-title">
+          <span class="filename">${esc(job.filename)}</span>
+          <span class="job-stage">${esc(job.stage || 'Waiting to start')}</span>
+        </div>
+        <span class="status ${esc(job.status || '')}">${esc(statusLabel)}</span>
+      </div>
+      <div class="job-progress" aria-hidden="true"><span style="width:${progress}%"></span></div>
+      <div class="job-card-footer">
+        <span class="count">${progress}%</span>
+        ${job.doc_id ? `<a href="#/doc/${job.doc_id}">Open document</a>` : '<span class="muted">Document link appears after indexing</span>'}
+        ${job.started_at ? `<span class="muted">${esc(formatDate(job.started_at))}</span>` : ''}
+      </div>
+      ${job.error ? `<div class="job-error">${esc(job.error)}</div>` : ''}
+    </div>
+  `;
+}
+
+function jobProgress(job) {
+  if (job.status === 'completed') return 100;
+  if (job.status === 'failed') return 100;
+  const stage = String(job.stage || '').toLowerCase();
+  if (job.status === 'queued') return 8;
+  if (stage.includes('checking for document boundaries')) return 18;
+  if (stage.includes('split into')) return 35;
+  if (stage.includes('ingesting into database')) return 72;
+  if (stage.includes('replaying corrections')) return 82;
+  if (stage.includes('extracting metadata')) return 90;
+  if (stage.includes('computing embeddings')) return 96;
+  if (stage.includes('extracting')) return 55;
+  if (stage.includes('done') || stage.includes('skipped')) return 100;
+  return job.status === 'running' ? 42 : 0;
 }
 
 function renderMarkdownBlocks(root = document) {
@@ -1393,6 +1673,39 @@ function closeModal() {
   document.getElementById('modal-overlay').style.display = 'none';
 }
 
+function openFilePicker() {
+  document.getElementById('file-input')?.click();
+}
+
+function openFolderPicker() {
+  document.getElementById('folder-input')?.click();
+}
+
+function handleUploadAreaKeydown(event) {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  openFilePicker();
+}
+
+function setUploadBusyState(busy, title, subtitle) {
+  const area = document.getElementById('upload-area');
+  const titleNode = document.getElementById('upload-title');
+  const subtitleNode = document.getElementById('upload-subtitle');
+  const filesBtn = document.getElementById('upload-files-btn');
+  const folderBtn = document.getElementById('upload-folder-btn');
+  const fileInput = document.getElementById('file-input');
+  const folderInput = document.getElementById('folder-input');
+  if (area) {
+    area.classList.toggle('busy', busy);
+    area.setAttribute('aria-busy', String(busy));
+  }
+  if (titleNode) titleNode.textContent = title;
+  if (subtitleNode) subtitleNode.textContent = subtitle;
+  [filesBtn, folderBtn, fileInput, folderInput].forEach((node) => {
+    if (node) node.disabled = busy;
+  });
+}
+
 function esc(value) {
   if (value == null) return '';
   const div = document.createElement('div');
@@ -1425,6 +1738,37 @@ function inFolderScope(candidate, scope) {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function splitSupportedFiles(fileList) {
+  const accepted = [];
+  const skipped = [];
+  for (const file of [...fileList]) {
+    if (supported(file.name)) accepted.push(file);
+    else skipped.push(file.name);
+  }
+  return { accepted, skipped };
+}
+
+function summarizeSkippedFiles(skipped) {
+  if (!skipped.length) return '';
+  const preview = skipped.slice(0, 3).join(', ');
+  const extra = skipped.length > 3 ? ` +${skipped.length - 3} more` : '';
+  return `Skipped ${skipped.length} unsupported file${pluralize(skipped.length)}: ${preview}${extra}`;
+}
+
+function pluralize(count) {
+  return count === 1 ? '' : 's';
+}
+
+function formatMegabytes(value) {
+  const amount = Number(value) || 0;
+  return `${amount.toFixed(amount >= 10 ? 0 : 1)} MB`;
+}
+
+function relativeFolderLabel(project, folder) {
+  if (!folder || folder === project) return 'This folder';
+  return folder.slice(project.length + 1) || folder;
 }
 
 function formatDate(value) {
