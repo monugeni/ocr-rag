@@ -16,9 +16,9 @@
 #
 # What it sets up:
 #   - System user: ocrrag
-#   - App dir:     /opt/ocr-rag
-#   - Data dir:    /var/lib/ocr-rag  (database + sidecars)
-#   - Venv:        /opt/ocr-rag/venv
+#   - App dir:     /btrfs/ocr-rag
+#   - Data dir:    /btrfs/ocr-rag/data  (database + sidecars)
+#   - Venv:        /btrfs/ocr-rag/venv
 #   - Systemd:     ocr-rag-mcp.service (port 8200)
 #   - Logs:        journalctl -u ocr-rag-mcp
 # ============================================================================
@@ -62,9 +62,9 @@ if [[ "${1:-}" == "--ingest" ]]; then
 
     source "${VENV_DIR}/bin/activate"
 
-    python3 - "$PDF_DIR" "$PROJECT" "$DB_PATH" <<'PYEOF'
+    APP_DIR_PY="$APP_DIR" python3 - "$PDF_DIR" "$PROJECT" "$DB_PATH" <<'PYEOF'
 import sys, os
-sys.path.insert(0, "/opt/ocr-rag")
+sys.path.insert(0, os.environ["APP_DIR_PY"])
 
 from pathlib import Path
 from ingest import init_db, ingest_document, replay_corrections
@@ -133,16 +133,46 @@ fi
 # Update mode — pull latest code, reinstall deps, restart
 # ---------------------------------------------------------------------------
 if [[ "${1:-}" == "--update" ]]; then
+    if [[ -z "${SUDO_USER:-}" || "${SUDO_USER}" == "root" ]]; then
+        err "Run update via sudo from your normal git-enabled user account."
+        err "Example: sudo bash deploy.sh --update"
+        exit 1
+    fi
+    if [[ ! -d "${APP_DIR}/.git" ]]; then
+        err "Git repo not found at ${APP_DIR}"
+        exit 1
+    fi
+
     log "Updating code..."
     cd "$APP_DIR"
-    CALLING_USER="${SUDO_USER:-$(whoami)}"
+    CALLING_USER="${SUDO_USER}"
+    restore_app_owner() {
+        chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
+    }
+    trap restore_app_owner EXIT
+
     chown -R "${CALLING_USER}:${CALLING_USER}" "$APP_DIR"
-    sudo -u "$CALLING_USER" git pull --ff-only || { warn "Git pull failed"; }
-    chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
+    sudo -u "$CALLING_USER" git fetch origin main
+
+    CURRENT_HEAD="$(sudo -u "$CALLING_USER" git rev-parse HEAD)"
+    REMOTE_HEAD="$(sudo -u "$CALLING_USER" git rev-parse FETCH_HEAD)"
+    if [[ "$CURRENT_HEAD" == "$REMOTE_HEAD" ]]; then
+        log "Code already up to date at ${CURRENT_HEAD:0:7}"
+    else
+        log "Fast-forwarding ${CURRENT_HEAD:0:7} -> ${REMOTE_HEAD:0:7}"
+        sudo -u "$CALLING_USER" git merge --ff-only FETCH_HEAD
+    fi
+
+    restore_app_owner
+    trap - EXIT
     log "Updating dependencies..."
-    sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r requirements.txt
+    sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/pip" install -q -r "${APP_DIR}/requirements.txt"
     log "Restarting service..."
     systemctl restart "$SERVICE_NAME"
+    if ! systemctl is-active --quiet "$SERVICE_NAME"; then
+        err "Service failed to restart. Check: journalctl -u ${SERVICE_NAME} -n 50 --no-pager"
+        exit 1
+    fi
     systemctl --no-pager status "$SERVICE_NAME"
     log "Update complete."
     exit 0
