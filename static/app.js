@@ -264,6 +264,7 @@ function showWelcome() {
 async function showProject(project, section = 'documents') {
   if (currentProject && currentProject !== project) {
     selectedDocumentIds.clear();
+    workspaceNotice = null;
   }
   currentProject = project;
   currentFolderSection = section;
@@ -332,14 +333,57 @@ async function showProject(project, section = 'documents') {
     const activeJobs = jobs.filter((job) =>
       inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
     );
-    if (section === 'ingestion' && activeJobs.length) {
+    if (activeJobs.length) {
       startPolling(project);
-    } else if (section === 'ingestion') {
-      await pollJobs(project);
+    } else {
+      stopPolling();
+      if (section === 'ingestion') {
+        await pollJobs(project);
+      }
     }
   } catch (error) {
     content.innerHTML = `<div class="empty">Error: ${esc(error.message)}</div>`;
   }
+}
+
+function getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs }) {
+  let headline = 'Start by uploading files';
+  let body = `Search and chat cover documents in ${project} and all of its sub-folders.`;
+  let tone = 'ready';
+
+  if (activeJobs) {
+    headline = `${activeJobs} ingestion job${pluralize(activeJobs)} running`;
+    body = 'You can keep browsing while new documents are extracted and indexed in the background.';
+    tone = 'active';
+  } else if (pendingCount) {
+    headline = `${pendingCount} file${pluralize(pendingCount)} ready to ingest`;
+    body = 'Pending uploads are stored safely, but they will not appear in search or chat until ingestion completes.';
+    tone = 'pending';
+  } else if (documentsCount) {
+    headline = 'Folder is ready for search and chat';
+    body = 'Indexed documents in this workspace are already available for folder-scoped chat and page-level review.';
+  }
+
+  return { headline, body, tone };
+}
+
+function syncWorkspaceOverview(project, jobs) {
+  const overview = document.querySelector('[data-workspace-overview="true"]');
+  if (!overview || overview.dataset.project !== project) return;
+
+  const documentsCount = Number(overview.dataset.documentsCount || 0);
+  const pendingCount = Number(overview.dataset.pendingCount || 0);
+  const activeJobs = jobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
+  const failedJobs = jobs.filter((job) => job.status === 'failed').length;
+  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
+
+  overview.classList.remove('ready', 'pending', 'active');
+  overview.classList.add(state.tone);
+  overview.querySelector('[data-workspace-headline]')?.replaceChildren(document.createTextNode(state.headline));
+  overview.querySelector('[data-workspace-body]')?.replaceChildren(document.createTextNode(state.body));
+  overview.querySelector('[data-workspace-live-jobs]')?.replaceChildren(document.createTextNode(String(activeJobs)));
+  overview.querySelector('[data-workspace-failed-jobs]')?.replaceChildren(document.createTextNode(String(failedJobs)));
+  overview.querySelector('[data-workspace-failures]')?.classList.toggle('warning', failedJobs > 0);
 }
 
 function renderUploadCard(project, pendingCount = 0) {
@@ -444,30 +488,18 @@ function renderWorkspaceOverview(project, section, data) {
   const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
   const activeJobs = scopedJobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
   const failedJobs = scopedJobs.filter((job) => job.status === 'failed').length;
-
-  let headline = 'Start by uploading files';
-  let body = `Search and chat cover documents in ${project} and all of its sub-folders.`;
-  let tone = 'ready';
-
-  if (activeJobs) {
-    headline = `${activeJobs} ingestion job${pluralize(activeJobs)} running`;
-    body = 'You can keep browsing while new documents are extracted and indexed in the background.';
-    tone = 'active';
-  } else if (pendingCount) {
-    headline = `${pendingCount} file${pluralize(pendingCount)} ready to ingest`;
-    body = 'Pending uploads are stored safely, but they will not appear in search or chat until ingestion completes.';
-    tone = 'pending';
-  } else if (documentsCount) {
-    headline = 'Folder is ready for search and chat';
-    body = 'Indexed documents in this workspace are already available for folder-scoped chat and page-level review.';
-  }
+  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
 
   return `
-    <div class="workspace-overview ${tone}">
+    <div class="workspace-overview ${state.tone}"
+         data-workspace-overview="true"
+         data-project="${esc(project)}"
+         data-documents-count="${documentsCount}"
+         data-pending-count="${pendingCount}">
       <div class="workspace-overview-main">
         <div class="workspace-overview-label">Folder workspace</div>
-        <h2>${esc(headline)}</h2>
-        <p>${esc(body)}</p>
+        <h2 data-workspace-headline>${esc(state.headline)}</h2>
+        <p data-workspace-body>${esc(state.body)}</p>
         <div class="workspace-actions">
           ${section !== 'ingestion' ? `<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Open ingestion</button>` : `<button class="btn btn-primary" onclick="openFilePicker()">Upload more</button>`}
           ${section !== 'documents' ? `<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">View documents</button>` : ''}
@@ -485,7 +517,7 @@ function renderWorkspaceOverview(project, section, data) {
         </div>
         <div class="workspace-stat">
           <span class="workspace-stat-label">Live jobs</span>
-          <strong>${activeJobs}</strong>
+          <strong data-workspace-live-jobs>${activeJobs}</strong>
         </div>
         <div class="workspace-stat">
           <span class="workspace-stat-label">Sub-folders</span>
@@ -495,9 +527,9 @@ function renderWorkspaceOverview(project, section, data) {
           <span class="workspace-stat-label">Chats</span>
           <strong>${chatCount}</strong>
         </div>
-        <div class="workspace-stat ${failedJobs ? 'warning' : ''}">
+        <div class="workspace-stat ${failedJobs ? 'warning' : ''}" data-workspace-failures>
           <span class="workspace-stat-label">Recent failures</span>
-          <strong>${failedJobs}</strong>
+          <strong data-workspace-failed-jobs>${failedJobs}</strong>
         </div>
       </div>
     </div>
@@ -1506,19 +1538,26 @@ async function pollJobs(project) {
   try {
     const jobs = await api('/ingestion/jobs');
     const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
+    syncWorkspaceOverview(project, projectJobs);
+
     const area = document.getElementById('jobs-area');
-    if (!area) return;
+    if (area && !projectJobs.length) {
+      area.innerHTML = '';
+    }
+    if (area && projectJobs.length) {
+      area.innerHTML = renderJobActivity(projectJobs);
+    }
 
     if (!projectJobs.length) {
-      area.innerHTML = '';
+      stopPolling();
       return;
     }
 
-    area.innerHTML = renderJobActivity(projectJobs);
-
     const allDone = projectJobs.every((job) => job.status === 'completed' || job.status === 'failed');
-    if (allDone && projectJobs.some((job) => job.status === 'completed')) {
+    if (allDone) {
       stopPolling();
+    }
+    if (allDone && projectJobs.some((job) => job.status === 'completed')) {
       setTimeout(() => showProject(project, currentFolderSection), 1000);
     }
   } catch (error) {

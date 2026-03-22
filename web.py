@@ -266,6 +266,38 @@ def _delete_document_data(conn, doc_id: int):
     conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
 
 
+def _rollback_split_ingestion(
+    original_path: Path,
+    archived_original_path: Path | None,
+    part_paths: list[Path],
+    created_doc_ids: list[int],
+):
+    """Undo partial split ingestion so the original upload can be retried cleanly."""
+    if created_doc_ids:
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        conn.execute("PRAGMA foreign_keys=ON")
+        try:
+            for doc_id in created_doc_ids:
+                _delete_document_data(conn, doc_id)
+            conn.commit()
+        finally:
+            conn.close()
+
+    for part_path in part_paths:
+        if part_path == original_path:
+            continue
+        try:
+            if part_path.exists():
+                part_path.unlink()
+        except OSError:
+            pass
+
+    if archived_original_path and archived_original_path.exists() and not original_path.exists():
+        original_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(archived_original_path), str(original_path))
+
+
 def _relocate_document_file(doc_row, target_folder: str):
     pdf_path = doc_row["pdf_path"]
     if not pdf_path:
@@ -1611,9 +1643,11 @@ def _run_ingestion(jid, file_path, project, filename):
             originals_dir = project_dir / "_originals"
             originals_dir.mkdir(exist_ok=True)
             original = Path(file_path)
+            archived_original = originals_dir / original.name
             if original.exists():
-                shutil.move(str(original), str(originals_dir / original.name))
+                shutil.move(str(original), str(archived_original))
 
+            created_doc_ids = []
             ingested_parts = 0
             skipped_parts = 0
             for i, part in enumerate(parts, 1):
@@ -1621,11 +1655,13 @@ def _run_ingestion(jid, file_path, project, filename):
                 try:
                     doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
                 except IngestionError as exc:
+                    _rollback_split_ingestion(original, archived_original, parts, created_doc_ids)
                     raise IngestionError(f"{prefix}{exc}") from exc
                 if doc_id is None:
                     skipped_parts += 1
                 else:
                     ingested_parts += 1
+                    created_doc_ids.append(doc_id)
 
             summary = [f"{ingested_parts} ingested"]
             if skipped_parts:
