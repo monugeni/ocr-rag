@@ -31,6 +31,7 @@ let currentChatId = null;
 let currentFolderSection = 'documents';
 let selectedDocumentIds = new Set();
 let pollTimer = null;
+let refreshAfterPolling = false;
 let thinkingTimer = null;
 let workspaceNotice = null;
 
@@ -1531,6 +1532,7 @@ async function ingestSingle(project, filename, label = filename) {
 
 function startPolling(project) {
   stopPolling();
+  refreshAfterPolling = true;
   pollJobs(project);
   pollTimer = setInterval(() => pollJobs(project), 2000);
 }
@@ -1540,12 +1542,14 @@ function stopPolling() {
     clearInterval(pollTimer);
     pollTimer = null;
   }
+  refreshAfterPolling = false;
 }
 
 async function pollJobs(project) {
   try {
     const jobs = await api('/ingestion/jobs');
     const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
+    const shouldRefreshOnCompletion = refreshAfterPolling;
     syncWorkspaceOverview(project, projectJobs);
 
     const area = document.getElementById('jobs-area');
@@ -1565,7 +1569,7 @@ async function pollJobs(project) {
     if (allDone) {
       stopPolling();
     }
-    if (allDone && projectJobs.some((job) => job.status === 'completed')) {
+    if (shouldRefreshOnCompletion && allDone && projectJobs.some((job) => job.status === 'completed')) {
       setTimeout(() => showProject(project, currentFolderSection), 1000);
     }
   } catch (error) {
