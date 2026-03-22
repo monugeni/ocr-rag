@@ -254,6 +254,10 @@ def _rename_folder_references(conn, table: str, old_folder: str, new_folder: str
 
 
 def _delete_document_data(conn, doc_id: int):
+    conn.execute(
+        "DELETE FROM page_embeddings WHERE page_id IN (SELECT id FROM pages WHERE doc_id = ?)",
+        (doc_id,),
+    )
     conn.execute("DELETE FROM pages WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM sections WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM corrections WHERE doc_id = ?", (doc_id,))
@@ -780,6 +784,10 @@ class IngestionTracker:
 
 
 tracker = IngestionTracker()
+
+
+class IngestionError(RuntimeError):
+    """Raised when a file cannot be ingested cleanly."""
 
 
 # ---------------------------------------------------------------------------
@@ -1526,36 +1534,45 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
     pages, sections = extract_file(str(file_path))
 
     if not pages:
-        tracker.update(jid, status="failed", error=f"No content extracted from {filename}")
-        return None
+        raise IngestionError(f"No content extracted from {filename}")
 
-    tracker.update(jid, stage=f"{prefix}Ingesting into database")
+    doc_id = None
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
+    try:
+        title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
+        tracker.update(jid, stage=f"{prefix}Ingesting into database")
+        doc_id = ingest_document(
+            conn, pages, sections, project, title,
+            filename=filename,
+            pdf_path=str(Path(file_path).resolve()),
+        )
 
-    title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
-    doc_id = ingest_document(
-        conn, pages, sections, project, title,
-        filename=filename,
-        pdf_path=str(Path(file_path).resolve()),
-    )
+        tracker.update(jid, stage=f"{prefix}Replaying corrections")
+        replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
 
-    tracker.update(jid, stage=f"{prefix}Replaying corrections")
-    replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
+        if api_key:
+            tracker.update(jid, stage=f"{prefix}Extracting metadata (LLM)")
+            meta = extract_metadata_llm(pages, api_key=api_key)
+            if meta:
+                apply_metadata(conn, doc_id, meta)
 
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if api_key:
-        tracker.update(jid, stage=f"{prefix}Extracting metadata (LLM)")
-        meta = extract_metadata_llm(pages, api_key=api_key)
-        if meta:
-            apply_metadata(conn, doc_id, meta)
-
-    tracker.update(jid, stage=f"{prefix}Computing embeddings")
-    compute_embeddings(conn, doc_id)
-
-    conn.close()
-    return doc_id
+        tracker.update(jid, stage=f"{prefix}Computing embeddings")
+        compute_embeddings(conn, doc_id)
+        return doc_id
+    except Exception as exc:
+        conn.rollback()
+        if doc_id is not None:
+            try:
+                _delete_document_data(conn, doc_id)
+                conn.commit()
+            except Exception:
+                conn.rollback()
+        raise IngestionError(f"{filename}: {exc}") from exc
+    finally:
+        conn.close()
 
 
 def _run_ingestion(jid, file_path, project, filename):
@@ -1597,12 +1614,27 @@ def _run_ingestion(jid, file_path, project, filename):
             if original.exists():
                 shutil.move(str(original), str(originals_dir / original.name))
 
+            ingested_parts = 0
+            skipped_parts = 0
             for i, part in enumerate(parts, 1):
                 prefix = f"[{i}/{len(parts)}] "
-                doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
+                try:
+                    doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
+                except IngestionError as exc:
+                    raise IngestionError(f"{prefix}{exc}") from exc
+                if doc_id is None:
+                    skipped_parts += 1
+                else:
+                    ingested_parts += 1
 
-            tracker.update(jid, status="completed",
-                           stage=f"Done — split into {len(parts)} documents")
+            summary = [f"{ingested_parts} ingested"]
+            if skipped_parts:
+                summary.append(f"{skipped_parts} skipped")
+            tracker.update(
+                jid,
+                status="completed",
+                stage=f"Done — processed {len(parts)} split documents ({', '.join(summary)})",
+            )
 
     except Exception as e:
         tracker.update(jid, status="failed", error=str(e))
