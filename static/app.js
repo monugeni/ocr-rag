@@ -161,6 +161,24 @@ function rootFolder(folder) {
   return String(folder || '').split('/')[0] || '';
 }
 
+function renderFolderBreadcrumb(project) {
+  const parts = String(project || '').split('/').filter(Boolean);
+  const section = currentFolderSection || 'documents';
+  let path = '';
+  const items = [`<a href="#/">Folders</a>`];
+
+  for (let i = 0; i < parts.length; i++) {
+    path = path ? `${path}/${parts[i]}` : parts[i];
+    if (i === parts.length - 1) {
+      items.push(`<strong>${esc(parts[i])}</strong>`);
+    } else {
+      items.push(`<a href="${folderHash(path, section)}">${esc(parts[i])}</a>`);
+    }
+  }
+
+  return items.join('<span>/</span>');
+}
+
 // --- Sidebar (tree view) ---
 let expandedFolders = new Set();
 
@@ -221,6 +239,14 @@ async function loadFolders() {
       list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No folders yet</div>';
       return;
     }
+    if (currentProject) {
+      const parts = currentProject.split('/');
+      let parent = '';
+      for (let i = 0; i < parts.length - 1; i++) {
+        parent = parent ? `${parent}/${parts[i]}` : parts[i];
+        expandedFolders.add(parent);
+      }
+    }
     const tree = buildFolderTree(projects);
     list.innerHTML = tree.map(node => renderTreeNode(node, expandedFolders)).join('');
   } catch (error) {
@@ -253,7 +279,7 @@ async function showProject(project, section = 'documents') {
   currentDocId = null;
   loadFolders();
   setTopbar(
-    `<a href="#/" style="color:#666">Folders</a><span>/</span><strong>${esc(project)}</strong>`,
+    renderFolderBreadcrumb(project),
     `<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>
      <button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>
      <button class="btn btn-ghost" onclick="navigate('#/quality/${enc(project)}')">Quality</button>

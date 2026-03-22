@@ -149,10 +149,13 @@ a:hover { text-decoration: underline; }
 .project-item.active {
   background: linear-gradient(135deg, #d8cdf1, #c8dff5);
   color: #4d4460;
+  border: 1px solid rgba(141, 123, 200, 0.32);
+  box-shadow: inset 3px 0 0 rgba(118, 102, 176, 0.85), 0 6px 14px rgba(141, 123, 200, 0.12);
 }
 
 .project-item.active .tree-toggle { color: #6c5e86; }
 .project-item.active .tree-toggle:hover { color: #5b4d76; background: rgba(255,255,255,0.55); }
+.project-item.active .name { font-weight: 700; }
 
 .project-item .name {
   flex: 1;
@@ -198,6 +201,21 @@ a:hover { text-decoration: underline; }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.breadcrumb a {
+  color: var(--brand-strong);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+.breadcrumb strong {
+  color: var(--text);
+  font-weight: 700;
 }
 
 .breadcrumb span { color: #b7a9c4; margin: 0 6px; }
