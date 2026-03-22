@@ -283,7 +283,6 @@ async function showProject(project, section = 'documents') {
     renderFolderBreadcrumb(project),
     `<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>
      <button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>
-     <button class="btn btn-ghost" onclick="navigate('#/quality/${enc(project)}')">Quality</button>
      <button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`
   );
 
@@ -355,89 +354,59 @@ async function showProject(project, section = 'documents') {
   }
 }
 
-function getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs }) {
-  let headline = 'Start by uploading files';
-  let body = `Search and chat cover documents in ${project} and all of its sub-folders.`;
-  let tone = 'ready';
-
-  if (activeJobs) {
-    headline = `${activeJobs} ingestion job${pluralize(activeJobs)} running`;
-    body = 'You can keep browsing while new documents are extracted and indexed in the background.';
-    tone = 'active';
-  } else if (pendingCount) {
-    headline = `${pendingCount} file${pluralize(pendingCount)} ready to ingest`;
-    body = 'Pending uploads are stored safely, but they will not appear in search or chat until ingestion completes.';
-    tone = 'pending';
-  } else if (documentsCount) {
-    headline = 'Folder is ready for search and chat';
-    body = 'Indexed documents in this workspace are already available for folder-scoped chat and page-level review.';
-  }
-
-  return { headline, body, tone };
-}
-
-function syncWorkspaceOverview(project, jobs) {
-  const overview = document.querySelector('[data-workspace-overview="true"]');
-  if (!overview || overview.dataset.project !== project) return;
-
-  const documentsCount = Number(overview.dataset.documentsCount || 0);
-  const pendingCount = Number(overview.dataset.pendingCount || 0);
-  const activeJobs = jobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
-  const failedJobs = jobs.filter((job) => job.status === 'failed').length;
-  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
-
-  overview.classList.remove('ready', 'pending', 'active');
-  overview.classList.add(state.tone);
-  overview.querySelector('[data-workspace-headline]')?.replaceChildren(document.createTextNode(state.headline));
-  overview.querySelector('[data-workspace-body]')?.replaceChildren(document.createTextNode(state.body));
-  overview.querySelector('[data-workspace-live-jobs]')?.replaceChildren(document.createTextNode(String(activeJobs)));
-  overview.querySelector('[data-workspace-failed-jobs]')?.replaceChildren(document.createTextNode(String(failedJobs)));
-  overview.querySelector('[data-workspace-failures]')?.classList.toggle('warning', failedJobs > 0);
+function renderFolderSummary(project, data) {
+  const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
+  const activeJobs = scopedJobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
+  const failedJobs = scopedJobs.filter((job) => job.status === 'failed').length;
+  const items = [
+    `${data.documents.length} document${pluralize(data.documents.length)}`,
+    `${data.childFolders.length} sub-folder${pluralize(data.childFolders.length)}`,
+    `${data.pending.length} pending`,
+  ];
+  if (activeJobs) items.push(`${activeJobs} running`);
+  if (failedJobs) items.push(`${failedJobs} failed`);
+  return `
+    <div class="folder-summary">
+      <div>
+        <h2>${esc(project)}</h2>
+        <p>Search and chat use documents from this folder and its sub-folders.</p>
+      </div>
+      <div class="folder-summary-meta">
+        ${items.map((item) => `<span class="summary-pill">${esc(item)}</span>`).join('')}
+      </div>
+    </div>
+  `;
 }
 
 function renderUploadCard(project, pendingCount = 0) {
   const pendingLabel = pendingCount
-    ? `${pendingCount} file${pluralize(pendingCount)} waiting to be indexed`
-    : 'Uploads land in pending first, then become searchable after ingestion';
+    ? `${pendingCount} file${pluralize(pendingCount)} waiting`
+    : 'Uploads land in pending first';
   return `
-    <div class="card upload-card-shell">
+    <div class="card upload-card-shell upload-card-simple">
       <div class="card-title">
-        <span>Upload &amp; stage files</span>
+        <span>Upload files</span>
         <span class="count">${pendingLabel}</span>
       </div>
-      <div class="upload-card-grid">
-        <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-busy="false"
-           aria-describedby="upload-subtitle"
-           ondragover="event.preventDefault(); this.classList.add('dragover')"
-           ondragleave="this.classList.remove('dragover')"
-           ondrop="handleDrop(event, ${jsq(project)})"
-           onclick="openFilePicker()"
-           onkeydown="handleUploadAreaKeydown(event)">
-          <div class="upload-area-icon" aria-hidden="true">+</div>
-          <div class="upload-area-title" id="upload-title">Drop files anywhere in this folder workspace</div>
-          <div class="upload-area-subtitle" id="upload-subtitle">Supported: PDF, DOCX, spreadsheets, images, ZIP/TAR archives. Files are staged first so you can review them before indexing.</div>
-          <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
-                 onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
-          <input type="file" id="folder-input" webkitdirectory style="display:none"
-                 onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
-        </div>
-        <div class="upload-actions-panel">
-          <div class="upload-actions-row">
-            <button class="btn btn-primary" id="upload-files-btn" onclick="event.stopPropagation(); openFilePicker()">Choose files</button>
-            <button class="btn btn-ghost" id="upload-folder-btn" onclick="event.stopPropagation(); openFolderPicker()">Choose folder</button>
-          </div>
-          <div class="upload-flow-note">
-            <strong>Simple flow</strong>
-            <p>1. Upload into pending. 2. Review what is staged. 3. Run ingestion to extract text, split large PDFs, and index everything for search and chat.</p>
-          </div>
-          <div class="upload-supported-types">
-            <span class="tag">PDF</span>
-            <span class="tag">DOCX</span>
-            <span class="tag">XLSX</span>
-            <span class="tag">Images</span>
-            <span class="tag">ZIP/TAR</span>
-          </div>
-        </div>
+      <div class="card-intro">Drop files here, then ingest them when you are ready. Supported: PDF, DOCX, spreadsheets, images, ZIP/TAR archives.</div>
+      <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-busy="false"
+         aria-describedby="upload-subtitle"
+         ondragover="event.preventDefault(); this.classList.add('dragover')"
+         ondragleave="this.classList.remove('dragover')"
+         ondrop="handleDrop(event, ${jsq(project)})"
+         onclick="openFilePicker()"
+         onkeydown="handleUploadAreaKeydown(event)">
+        <div class="upload-area-icon" aria-hidden="true">+</div>
+        <div class="upload-area-title" id="upload-title">Drop files into ${esc(project)}</div>
+        <div class="upload-area-subtitle" id="upload-subtitle">Files stay in pending until you ingest them.</div>
+        <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
+               onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
+        <input type="file" id="folder-input" webkitdirectory style="display:none"
+               onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
+      </div>
+      <div class="upload-actions-row simple">
+        <button class="btn btn-primary" id="upload-files-btn" onclick="event.stopPropagation(); openFilePicker()">Choose files</button>
+        <button class="btn btn-ghost" id="upload-folder-btn" onclick="event.stopPropagation(); openFolderPicker()">Choose folder</button>
       </div>
     </div>
   `;
@@ -463,7 +432,7 @@ function renderFolderSection(project, section, data) {
     const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
     return `
       <div class="workspace-stack">
-        ${renderWorkspaceOverview(project, section, data)}
+        ${renderFolderSummary(project, data)}
         ${renderUploadCard(project, data.pending.length)}
         ${renderPendingUploads(project, data.pending)}
         <div id="jobs-area" aria-live="polite">${renderJobActivity(scopedJobs)}</div>
@@ -481,66 +450,9 @@ function renderFolderSection(project, section, data) {
 
   return `
     <div class="workspace-stack">
-      ${renderWorkspaceOverview(project, section, data)}
-      ${renderUploadCard(project, data.pending.length)}
+      ${renderFolderSummary(project, data)}
       ${renderChildFoldersCard(project, data.childFolders)}
       ${renderDocumentsCard(project, data.documents, data.moveTargets, data.pending.length)}
-    </div>
-  `;
-}
-
-function renderWorkspaceOverview(project, section, data) {
-  const documentsCount = data.documents.length;
-  const pendingCount = data.pending.length;
-  const childCount = data.childFolders.length;
-  const chatCount = data.chats.length;
-  const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
-  const activeJobs = scopedJobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
-  const failedJobs = scopedJobs.filter((job) => job.status === 'failed').length;
-  const state = getWorkspaceOverviewState(project, { documentsCount, pendingCount, activeJobs });
-
-  return `
-    <div class="workspace-overview ${state.tone}"
-         data-workspace-overview="true"
-         data-project="${esc(project)}"
-         data-documents-count="${documentsCount}"
-         data-pending-count="${pendingCount}">
-      <div class="workspace-overview-main">
-        <div class="workspace-overview-label">Folder workspace</div>
-        <h2 data-workspace-headline>${esc(state.headline)}</h2>
-        <p data-workspace-body>${esc(state.body)}</p>
-        <div class="workspace-actions">
-          ${section !== 'ingestion' ? `<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Open ingestion</button>` : `<button class="btn btn-primary" onclick="openFilePicker()">Upload more</button>`}
-          ${section !== 'documents' ? `<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">View documents</button>` : ''}
-          ${section !== 'chat' ? `<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Open chat</button>` : ''}
-        </div>
-      </div>
-      <div class="workspace-stat-grid">
-        <div class="workspace-stat">
-          <span class="workspace-stat-label">Indexed</span>
-          <strong>${documentsCount}</strong>
-        </div>
-        <div class="workspace-stat">
-          <span class="workspace-stat-label">Pending</span>
-          <strong>${pendingCount}</strong>
-        </div>
-        <div class="workspace-stat">
-          <span class="workspace-stat-label">Live jobs</span>
-          <strong data-workspace-live-jobs>${activeJobs}</strong>
-        </div>
-        <div class="workspace-stat">
-          <span class="workspace-stat-label">Sub-folders</span>
-          <strong>${childCount}</strong>
-        </div>
-        <div class="workspace-stat">
-          <span class="workspace-stat-label">Chats</span>
-          <strong>${chatCount}</strong>
-        </div>
-        <div class="workspace-stat ${failedJobs ? 'warning' : ''}" data-workspace-failures>
-          <span class="workspace-stat-label">Recent failures</span>
-          <strong data-workspace-failed-jobs>${failedJobs}</strong>
-        </div>
-      </div>
     </div>
   `;
 }
@@ -575,7 +487,7 @@ function renderPendingUploads(project, pending) {
           <button class="btn btn-primary btn-sm" ${pending.length ? '' : 'disabled'} onclick="ingestAll(${jsq(project)}, ${pending.length})">Ingest All</button>
         </div>
       </div>
-      <div class="card-intro">Uploads are staged here first so you can confirm what will be indexed. Once ingested, they become searchable and available to chat.</div>
+      <div class="card-intro">Pending files are not searchable until ingestion completes.</div>
       ${pending.length ? `
         <table class="table">
           <tr><th>File</th><th>Folder</th><th>Size</th><th></th></tr>
@@ -604,12 +516,6 @@ function renderPendingUploads(project, pending) {
 }
 
 function renderDocumentsCard(project, documents, moveTargets = [], pendingCount = 0) {
-  const typeOptions = [...new Set(documents
-    .map((doc) => doc.document_type)
-    .filter(Boolean))]
-    .sort((a, b) => a.localeCompare(b));
-  const folderOptions = [...new Set(documents.map((doc) => doc.folder))]
-    .sort((a, b) => a.localeCompare(b));
   const targetOptions = moveTargets
     .map((folder) => folder.folder)
     .filter(Boolean)
@@ -619,7 +525,19 @@ function renderDocumentsCard(project, documents, moveTargets = [], pendingCount 
     <div class="card">
       <div class="card-title">Documents <span class="count">${documents.length}</span></div>
       ${documents.length ? `
-        <div class="bulk-actions">
+        <div class="table-filters simple">
+          <div class="table-filter-controls">
+            <input
+              type="text"
+              id="doc-filter-query"
+              placeholder="Search documents by title, filename, folder, or doc id..."
+              oninput="applyDocumentFilters()">
+          </div>
+          <div class="table-filter-summary" id="document-filter-summary">
+            Showing ${documents.length} of ${documents.length} documents
+          </div>
+        </div>
+        <div class="bulk-actions" id="document-bulk-actions" hidden>
           <div class="bulk-actions-left">
             <strong id="document-selection-count">0 selected</strong>
             <button class="btn btn-ghost btn-sm" onclick="clearDocumentSelection()">Clear selection</button>
@@ -633,30 +551,9 @@ function renderDocumentsCard(project, documents, moveTargets = [], pendingCount 
             <button class="btn btn-danger btn-sm" onclick="bulkDeleteDocuments(${jsq(project)})">Delete selected</button>
           </div>
         </div>
-        <div class="table-filters">
-          <div class="table-filter-controls">
-            <input
-              type="text"
-              id="doc-filter-query"
-              placeholder="Filter by doc #, title, filename, or folder..."
-              oninput="applyDocumentFilters()">
-            <select id="doc-filter-type" onchange="applyDocumentFilters()">
-              <option value="">All types</option>
-              ${typeOptions.map((type) => `<option value="${esc(type)}">${esc(type)}</option>`).join('')}
-            </select>
-            <select id="doc-filter-folder" onchange="applyDocumentFilters()">
-              <option value="">All folders</option>
-              ${folderOptions.map((folder) => `<option value="${esc(folder)}">${esc(folder)}</option>`).join('')}
-            </select>
-            <button class="btn btn-ghost btn-sm" onclick="resetDocumentFilters()">Clear</button>
-          </div>
-          <div class="table-filter-summary" id="document-filter-summary">
-            Showing ${documents.length} of ${documents.length} documents
-          </div>
-        </div>
         <div class="table-wrap">
           <table class="table">
-            <tr><th><input type="checkbox" id="document-select-all" onclick="toggleVisibleDocuments(this.checked)"></th><th>Doc #</th><th>Title</th><th>Folder</th><th>Pages</th><th>Sections</th><th>Type</th><th></th></tr>
+            <tr><th><input type="checkbox" id="document-select-all" onclick="toggleVisibleDocuments(this.checked)"></th><th>Title</th><th>Folder</th><th>Pages</th><th>Type</th><th></th></tr>
             ${documents.map((doc) => {
               const splitTag = doc.split_info
                 ? `<span class="tag" title="Split from ${esc(doc.split_info.parent)} pages ${doc.split_info.page_start}-${doc.split_info.page_end}">
@@ -685,16 +582,14 @@ function renderDocumentsCard(project, documents, moveTargets = [], pendingCount 
                       data-doc-id="${doc.id}"
                       onchange="toggleDocumentSelection(${doc.id}, this.checked)">
                   </td>
-                  <td class="mono doc-id-cell"><strong>${doc.id}</strong></td>
                   <td>
-                    <strong>${esc(doc.title)}</strong>
+                    <strong>${esc(doc.title)}</strong> <span class="count">#${doc.id}</span>
                     ${splitTag}
                     <br>
                     <span class="muted mono">${esc(doc.filename)}</span>
                   </td>
                   <td class="muted mono">${esc(doc.folder)}</td>
                   <td>${doc.total_pages}</td>
-                  <td>${doc.sections}</td>
                   <td>${doc.document_type ? `<span class="tag">${esc(doc.document_type)}</span>` : '<span class="muted">-</span>'}</td>
                   <td style="white-space:nowrap">
                     <a class="btn btn-ghost btn-sm" href="/api/documents/${doc.id}/pdf" onclick="event.stopPropagation()" title="Download PDF">PDF</a>
@@ -715,7 +610,7 @@ function renderDocumentsCard(project, documents, moveTargets = [], pendingCount 
           <strong>No documents indexed yet.</strong>
           <p class="empty-detail">${pendingCount
             ? `${pendingCount} file${pluralize(pendingCount)} ${pendingCount === 1 ? 'is' : 'are'} staged in pending uploads. Run ingestion to make ${pendingCount === 1 ? 'it' : 'them'} searchable.`
-            : 'Upload files above, then run ingestion to build this folder knowledge base.'}</p>
+            : 'Open the ingestion tab to upload files and build this folder library.'}</p>
         </div>
       `}
     </div>
@@ -747,8 +642,6 @@ function dismissWorkspaceNotice() {
 
 function applyDocumentFilters() {
   const query = (document.getElementById('doc-filter-query')?.value || '').trim().toLowerCase();
-  const type = document.getElementById('doc-filter-type')?.value || '';
-  const folder = document.getElementById('doc-filter-folder')?.value || '';
   const rows = [...document.querySelectorAll('.document-row')];
   if (!rows.length) return;
 
@@ -756,9 +649,7 @@ function applyDocumentFilters() {
   let visibleSelectedCount = 0;
   rows.forEach((row) => {
     const matchesQuery = !query || (row.dataset.docSearch || '').includes(query);
-    const matchesType = !type || (row.dataset.docType || '') === type;
-    const matchesFolder = !folder || (row.dataset.docFolder || '') === folder;
-    const visible = matchesQuery && matchesType && matchesFolder;
+    const visible = matchesQuery;
     row.style.display = visible ? '' : 'none';
     if (visible) {
       visibleCount += 1;
@@ -787,11 +678,7 @@ function applyDocumentFilters() {
 
 function resetDocumentFilters() {
   const query = document.getElementById('doc-filter-query');
-  const type = document.getElementById('doc-filter-type');
-  const folder = document.getElementById('doc-filter-folder');
   if (query) query.value = '';
-  if (type) type.value = '';
-  if (folder) folder.value = '';
   applyDocumentFilters();
 }
 
@@ -805,6 +692,10 @@ function syncDocumentSelectionState() {
   const count = document.getElementById('document-selection-count');
   if (count) {
     count.textContent = `${selectedDocumentIds.size} selected`;
+  }
+  const actions = document.getElementById('document-bulk-actions');
+  if (actions) {
+    actions.hidden = selectedDocumentIds.size === 0;
   }
 }
 
@@ -1550,7 +1441,6 @@ async function pollJobs(project) {
     const jobs = await api('/ingestion/jobs');
     const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
     const shouldRefreshOnCompletion = refreshAfterPolling;
-    syncWorkspaceOverview(project, projectJobs);
 
     const area = document.getElementById('jobs-area');
     if (area && !projectJobs.length) {
@@ -1592,19 +1482,11 @@ function renderMarkdown(markdown) {
 
 function renderJobActivity(jobs) {
   if (!jobs.length) return '';
-  const active = jobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
-  const completed = jobs.filter((job) => job.status === 'completed').length;
-  const failed = jobs.filter((job) => job.status === 'failed').length;
   return `
     <div class="card">
       <div class="card-title">
-        <span>Ingestion Activity <span class="count">${jobs.length} recent job${pluralize(jobs.length)}</span></span>
-        <span class="count">${active ? 'Live updates every 2 seconds' : 'Recent activity'}</span>
-      </div>
-      <div class="job-summary">
-        <div class="job-summary-pill active">${active} active</div>
-        <div class="job-summary-pill completed">${completed} completed</div>
-        <div class="job-summary-pill failed">${failed} failed</div>
+        <span>Ingestion jobs <span class="count">${jobs.length}</span></span>
+        <span class="count">Newest first</span>
       </div>
       <div class="job-list">
         ${jobs.map((job) => renderJobCard(job)).join('')}
@@ -1614,42 +1496,23 @@ function renderJobActivity(jobs) {
 }
 
 function renderJobCard(job) {
-  const progress = jobProgress(job);
   const statusLabel = job.status ? `${job.status[0].toUpperCase()}${job.status.slice(1)}` : 'Unknown';
   return `
     <div class="job-card ${esc(job.status || '')}">
-      <div class="job-card-top">
-        <div class="job-card-title">
-          <span class="filename">${esc(job.filename)}</span>
-          <span class="job-stage">${esc(job.stage || 'Waiting to start')}</span>
+      <div class="job-row">
+        <div class="job-row-main">
+          <div class="filename">${esc(job.filename)}</div>
+          <div class="job-stage">${esc(job.stage || 'Waiting to start')}</div>
         </div>
         <span class="status ${esc(job.status || '')}">${esc(statusLabel)}</span>
       </div>
-      <div class="job-progress" aria-hidden="true"><span style="width:${progress}%"></span></div>
       <div class="job-card-footer">
-        <span class="count">${progress}%</span>
         ${job.doc_id ? `<a href="#/doc/${job.doc_id}">Open document</a>` : '<span class="muted">Document link appears after indexing</span>'}
         ${job.started_at ? `<span class="muted">${esc(formatDate(job.started_at))}</span>` : ''}
       </div>
       ${job.error ? `<div class="job-error">${esc(job.error)}</div>` : ''}
     </div>
   `;
-}
-
-function jobProgress(job) {
-  if (job.status === 'completed') return 100;
-  if (job.status === 'failed') return 100;
-  const stage = String(job.stage || '').toLowerCase();
-  if (job.status === 'queued') return 8;
-  if (stage.includes('checking for document boundaries')) return 18;
-  if (stage.includes('split into')) return 35;
-  if (stage.includes('ingesting into database')) return 72;
-  if (stage.includes('replaying corrections')) return 82;
-  if (stage.includes('extracting metadata')) return 90;
-  if (stage.includes('computing embeddings')) return 96;
-  if (stage.includes('extracting')) return 55;
-  if (stage.includes('done') || stage.includes('skipped')) return 100;
-  return job.status === 'running' ? 42 : 0;
 }
 
 function renderMarkdownBlocks(root = document) {
