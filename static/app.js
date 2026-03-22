@@ -162,23 +162,12 @@ function rootFolder(folder) {
 }
 
 // --- Sidebar (tree view) ---
-const EXPANDED_KEY = 'esteem.folder-knowledge.expanded-folders';
-
-function getExpandedFolders() {
-  try { return new Set(JSON.parse(localStorage.getItem(EXPANDED_KEY) || '[]')); }
-  catch { return new Set(); }
-}
-
-function saveExpandedFolders(expanded) {
-  localStorage.setItem(EXPANDED_KEY, JSON.stringify([...expanded]));
-}
+let expandedFolders = new Set();
 
 function toggleFolderExpand(folder, event) {
   event.stopPropagation();
-  const expanded = getExpandedFolders();
-  if (expanded.has(folder)) expanded.delete(folder);
-  else expanded.add(folder);
-  saveExpandedFolders(expanded);
+  if (expandedFolders.has(folder)) expandedFolders.delete(folder);
+  else expandedFolders.add(folder);
   loadFolders();
 }
 
@@ -232,15 +221,8 @@ async function loadFolders() {
       list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No folders yet</div>';
       return;
     }
-    const expanded = getExpandedFolders();
-    // Auto-expand ancestors of the active folder
-    if (currentProject) {
-      const parts = currentProject.split('/');
-      for (let i = 1; i < parts.length; i++) expanded.add(parts.slice(0, i).join('/'));
-      saveExpandedFolders(expanded);
-    }
     const tree = buildFolderTree(projects);
-    list.innerHTML = tree.map(node => renderTreeNode(node, expanded)).join('');
+    list.innerHTML = tree.map(node => renderTreeNode(node, expandedFolders)).join('');
   } catch (error) {
     console.error('Failed to load folders:', error);
   }

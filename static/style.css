@@ -106,21 +106,32 @@ a:hover { text-decoration: underline; }
   flex-shrink: 0;
   color: var(--sidebar-muted);
   border-radius: 4px;
-  transition: color 0.12s ease;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease;
 }
 
 .tree-toggle::before {
-  content: '\25B8';
-  font-size: 11px;
-  transition: transform 0.15s ease;
+  content: '+';
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
   display: inline-block;
 }
 
-.tree-toggle.open::before { transform: rotate(90deg); }
+.tree-toggle.open::before { content: '-'; }
 .tree-toggle.leaf::before { content: ''; }
-.tree-toggle.leaf { pointer-events: none; }
+.tree-toggle.leaf {
+  pointer-events: none;
+  border-color: transparent;
+  background: transparent;
+}
 .tree-toggle:not(.leaf) { cursor: pointer; }
-.tree-toggle:not(.leaf):hover { color: #fff; background: rgba(255,255,255,0.08); }
+.tree-toggle:not(.leaf):hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.10);
+}
 
 .project-item {
   display: flex;
