@@ -11,12 +11,14 @@ from mcp.client.sse import sse_client
 
 
 MAX_HISTORY_MESSAGES = 8
-MAX_TOOL_ROUNDS = 8
+MAX_TOOL_ROUNDS = 20
 MAX_TOOL_RESULT_CHARS = 12000
 MAX_STRING_CHARS = 4000
 SOURCE_SNIPPET_CHARS = 280
 MCP_CONNECT_RETRIES = 5
 MCP_CONNECT_DELAY_SECONDS = 0.35
+MAX_REPEATED_TOOL_CALLS = 2
+MAX_STALE_TOOL_ROUNDS = 3
 
 PROJECT_SCOPED_TOOLS = {
     "list_folder_entries",
@@ -223,6 +225,9 @@ async def _chat_with_tools(
     client = anthropic.AsyncAnthropic(api_key=api_key)
     messages = _build_messages(question=question, history=history, attachment=attachment)
     system_prompt = _build_system_prompt(project=project, attachment=attachment)
+    seen_tool_calls: dict[tuple[str, str], int] = {}
+    stale_rounds = 0
+    previous_round_signature: Optional[tuple[tuple[str, str], ...]] = None
 
     try:
         for _ in range(MAX_TOOL_ROUNDS):
@@ -246,10 +251,26 @@ async def _chat_with_tools(
                 return answer
 
             tool_results = []
+            repeated_loop = True
+            tool_errors = 0
+            sources_before = len(tracker.order)
+            round_signature: list[tuple[str, str]] = []
             for block in tool_uses:
                 arguments = _normalize_tool_arguments(block.name, block.input, project)
+                call_key = (
+                    block.name,
+                    json.dumps(arguments, sort_keys=True, ensure_ascii=True, default=str),
+                )
+                round_signature.append(call_key)
+                seen_tool_calls[call_key] = seen_tool_calls.get(call_key, 0) + 1
+                if seen_tool_calls[call_key] <= MAX_REPEATED_TOOL_CALLS:
+                    repeated_loop = False
+
                 raw_result = await session.call_tool(block.name, arguments)
                 payload = _coerce_tool_payload(raw_result)
+                is_error = bool(getattr(raw_result, "isError", False))
+                if is_error:
+                    tool_errors += 1
                 tool_results.append({
                     "type": "tool_result",
                     "tool_use_id": block.id,
@@ -259,16 +280,34 @@ async def _chat_with_tools(
                         tracker=tracker,
                         project=project,
                     ),
-                    "is_error": bool(getattr(raw_result, "isError", False)),
+                    "is_error": is_error,
                 })
 
             messages.append({"role": "user", "content": tool_results})
+            round_signature_key = tuple(round_signature)
+            new_sources = len(tracker.order) - sources_before
+            no_progress = new_sources <= 0 and (
+                repeated_loop
+                or tool_errors == len(tool_uses)
+                or round_signature_key == previous_round_signature
+            )
+            stale_rounds = stale_rounds + 1 if no_progress else 0
+            previous_round_signature = round_signature_key
+
+            if repeated_loop or stale_rounds >= MAX_STALE_TOOL_ROUNDS:
+                break
     finally:
         close = getattr(client, "close", None)
         if close is not None:
             await close()
 
-    raise RuntimeError("LLM exceeded the tool-use limit before producing a final answer.")
+    return await _force_final_answer(
+        api_key=api_key,
+        model=model,
+        system_prompt=system_prompt,
+        messages=messages,
+        attachment=attachment,
+    )
 
 
 def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) -> str:
@@ -286,6 +325,7 @@ def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) 
         return base + (
             "Investigate with the MCP tools before answering when the question requires document evidence.\n"
             "Prefer precise search first, then expand to page reads or nearby pages when needed.\n"
+            "Do not keep calling tools once you have enough evidence to answer.\n"
         )
 
     return base + (
@@ -299,6 +339,54 @@ def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) 
         "## Suggested next checks\n"
         "## Sources\n"
         "Cite uploaded pages with [A1], [A2], etc. and folder documents with [1], [2], etc.\n"
+        "Do not keep calling tools once you have enough evidence to complete the review.\n"
+    )
+
+
+async def _force_final_answer(
+    *,
+    api_key: str,
+    model: str,
+    system_prompt: str,
+    messages: list[dict[str, Any]],
+    attachment: Optional[dict[str, Any]],
+) -> str:
+    client = anthropic.AsyncAnthropic(api_key=api_key)
+    final_messages = list(messages)
+    final_messages.append({
+        "role": "user",
+        "content": (
+            "Stop using tools and answer now using only the evidence already gathered in the conversation. "
+            "If the gathered evidence is insufficient, say that clearly instead of speculating."
+        ),
+    })
+
+    try:
+        response = await client.messages.create(
+            model=model,
+            max_tokens=2200,
+            system=system_prompt,
+            messages=final_messages,
+            temperature=0.1,
+        )
+    finally:
+        close = getattr(client, "close", None)
+        if close is not None:
+            await close()
+
+    answer = _collect_text(response.content)
+    if answer:
+        return answer
+
+    if attachment:
+        return (
+            "I gathered some evidence from the folder and the uploaded document, but I still could not "
+            "produce a stable final review. Please narrow the question or ask about a smaller section."
+        )
+
+    return (
+        "I gathered evidence from the folder documents, but I still could not produce a stable final answer. "
+        "Please narrow the question or ask about a smaller section."
     )
 
 
