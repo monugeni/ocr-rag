@@ -13,8 +13,15 @@
   <!-- Sidebar -->
   <nav class="sidebar">
     <div class="sidebar-header">
-      <h1>Esteem</h1>
-      <span class="subtitle">Folder Knowledge</span>
+      <div class="sidebar-header-row">
+        <div>
+          <h1>Esteem</h1>
+          <span class="subtitle">Folder Knowledge</span>
+        </div>
+        <button id="sidebar-collapse-btn" class="sidebar-collapse-btn" onclick="toggleSidebar()" aria-label="Collapse folders panel" title="Collapse folders panel">
+          <span aria-hidden="true">◀</span>
+        </button>
+      </div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Folders</div>
@@ -26,6 +33,9 @@
 
   <!-- Main content -->
   <div class="main">
+    <button id="sidebar-expand-btn" class="sidebar-expand-btn" onclick="toggleSidebar()" aria-label="Expand folders panel" title="Expand folders panel">
+      <span aria-hidden="true">▶</span>
+    </button>
     <div id="topbar" class="topbar" style="display:none">
       <div id="breadcrumb" class="breadcrumb"></div>
       <div id="topbar-actions" class="topbar-actions"></div>

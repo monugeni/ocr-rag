@@ -36,6 +36,7 @@ let thinkingTimer = null;
 let workspaceNotice = null;
 
 const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
+const SIDEBAR_COLLAPSED_KEY = 'esteem.folder-knowledge.sidebar-collapsed';
 const SUPPORTED_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
 const THINKING_STEPS = [
   'Searching folder documents',
@@ -47,6 +48,7 @@ const THINKING_STEPS = [
 window.addEventListener('hashchange', router);
 window.addEventListener('load', () => {
   configureMarkdown();
+  initSidebarCollapse();
   initSidebarResize();
   loadFolders();
   router();
@@ -61,6 +63,35 @@ function configureMarkdown() {
   }
 }
 
+function applySidebarCollapsedState(collapsed) {
+  const layout = document.querySelector('.layout');
+  const collapseBtn = document.getElementById('sidebar-collapse-btn');
+  const expandBtn = document.getElementById('sidebar-expand-btn');
+  if (!layout) return;
+
+  layout.classList.toggle('sidebar-collapsed', collapsed);
+  if (collapseBtn) {
+    collapseBtn.setAttribute('aria-label', collapsed ? 'Expand folders panel' : 'Collapse folders panel');
+    collapseBtn.setAttribute('title', collapsed ? 'Expand folders panel' : 'Collapse folders panel');
+  }
+  if (expandBtn) {
+    expandBtn.setAttribute('aria-hidden', collapsed ? 'false' : 'true');
+  }
+}
+
+function initSidebarCollapse() {
+  const collapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true';
+  applySidebarCollapsedState(collapsed);
+}
+
+function toggleSidebar() {
+  const layout = document.querySelector('.layout');
+  if (!layout) return;
+  const collapsed = !layout.classList.contains('sidebar-collapsed');
+  localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(collapsed));
+  applySidebarCollapsedState(collapsed);
+}
+
 function initSidebarResize() {
   const resizer = document.getElementById('sidebar-resizer');
   const root = document.documentElement;
@@ -73,6 +104,7 @@ function initSidebarResize() {
   let dragging = false;
   const onMove = (event) => {
     if (!dragging) return;
+    if (document.querySelector('.layout')?.classList.contains('sidebar-collapsed')) return;
     const width = clamp(event.clientX, 220, 460);
     root.style.setProperty('--sidebar-width', `${width}px`);
   };
@@ -272,18 +304,22 @@ function showWelcome() {
 
 function renderFolderTopbarActions(project, section) {
   const actions = [];
-  if (section !== 'chat') {
-    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Open chat</button>`);
+  if (section === 'chat') {
+    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Manage documents</button>`);
+    return actions.join('');
   }
-  if (section !== 'documents') {
-    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>`);
-  }
-  if (section !== 'ingestion') {
+
+  actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Back to chat</button>`);
+
+  if (section === 'documents') {
     actions.push(`<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Add documents</button>`);
+    actions.push(`<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>`);
+    actions.push(`<button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>`);
+    actions.push(`<button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`);
+    return actions.join('');
   }
-  actions.push(`<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>`);
-  actions.push(`<button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>`);
-  actions.push(`<button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`);
+
+  actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>`);
   return actions.join('');
 }
 
@@ -800,11 +836,11 @@ function renderChatShell(project, chats, messages) {
             <h3>${currentChatId ? esc((chats.find((chat) => chat.id === currentChatId)?.title) || 'New chat') : 'Folder chat'}</h3>
             <div class="chat-subtitle">Answers must be grounded only in documents from <strong>${esc(project)}</strong> and its sub-folders.</div>
           </div>
-          <div class="chat-header-actions">
-            <button class="btn btn-sm btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>
-            <button class="btn btn-sm btn-ghost" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Add documents</button>
-            ${currentChatId ? `<button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>` : ''}
-          </div>
+          ${currentChatId ? `
+            <div class="chat-header-actions">
+              <button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>
+            </div>
+          ` : ''}
         </div>
         <div class="chat-messages" id="chat-messages">
           ${messages.length ? renderChatMessages(messages) : `

@@ -145,6 +145,57 @@ def _sidecar_path_for_pdf(pdf_path: str) -> Path:
     return path.parent / f"{path.stem}_corrections.json"
 
 
+def _search_upload_tree_for_filename(scope_dir: Path, filename: str) -> Optional[Path]:
+    if not filename or not scope_dir.exists():
+        return None
+    for current_root, dirnames, filenames in os.walk(scope_dir):
+        dirnames[:] = [
+            name for name in dirnames
+            if not name.startswith(".") and not name.startswith("_")
+        ]
+        if filename in filenames:
+            return Path(current_root) / filename
+    return None
+
+
+def _resolve_document_source_path(conn, doc_row) -> Optional[str]:
+    filename = doc_row["filename"] or ""
+    project = _normalize_folder_name(doc_row["project"] or "")
+    uploads_root = Path(UPLOADS_DIR).resolve()
+
+    candidates: list[Path] = []
+    if doc_row["pdf_path"]:
+        candidates.append(Path(doc_row["pdf_path"]))
+    if project and filename:
+        candidates.append(_folder_disk_path(project) / filename)
+    if filename and project:
+        root_folder = _folder_root(project)
+        if root_folder:
+            root_match = _search_upload_tree_for_filename(_folder_disk_path(root_folder), filename)
+            if root_match:
+                candidates.append(root_match)
+    if filename:
+        global_match = _search_upload_tree_for_filename(uploads_root, filename)
+        if global_match:
+            candidates.append(global_match)
+
+    seen = set()
+    for candidate in candidates:
+        try:
+            resolved = str(candidate.resolve())
+        except FileNotFoundError:
+            continue
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        if not Path(resolved).exists():
+            continue
+        if doc_row["pdf_path"] != resolved:
+            conn.execute("UPDATE documents SET pdf_path = ? WHERE id = ?", (resolved, doc_row["id"]))
+        return resolved
+    return None
+
+
 def _iter_upload_folders() -> set[str]:
     uploads = Path(UPLOADS_DIR)
     if not uploads.exists():
@@ -1607,14 +1658,15 @@ def download_file(doc_id: int):
     conn = get_conn()
     try:
         doc = conn.execute(
-            "SELECT title, filename, pdf_path FROM documents WHERE id = ?",
+            "SELECT id, project, title, filename, pdf_path FROM documents WHERE id = ?",
             (doc_id,)
         ).fetchone()
         if not doc:
             raise HTTPException(404, "Document not found")
-        file_path = doc["pdf_path"]
-        if not file_path or not Path(file_path).exists():
+        file_path = _resolve_document_source_path(conn, doc)
+        if not file_path:
             raise HTTPException(404, "Source file not found on disk")
+        conn.commit()
         download_name = doc["filename"] or f"{doc['title']}"
         return FileResponse(
             file_path,
