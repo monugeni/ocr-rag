@@ -1135,6 +1135,70 @@ def _open_page_window(
     return pages
 
 
+def _focused_excerpt(body: str, snippet: str, max_chars: int) -> str:
+    text = (body or "").strip()
+    if len(text) <= max_chars:
+        return text
+
+    snippet_text = (snippet or "").strip()
+    if not snippet_text:
+        return text[:max_chars].rstrip() + "\n...[truncated]"
+
+    lowered = text.lower()
+    candidates = []
+
+    clean_snippet = snippet_text.replace(">>>", "").replace("<<<", "")
+    candidates.extend(
+        segment.strip()
+        for segment in clean_snippet.split("...")
+        if len(segment.strip()) >= 10
+    )
+    candidates.extend(re.findall(r">>>(.*?)<<<", snippet_text))
+
+    anchor_index = -1
+    anchor_length = 0
+    snippet_terms = [
+        token for token in re.findall(r"[A-Za-z0-9]+", clean_snippet.lower())
+        if len(token) >= 2 and token not in {"the", "and", "for", "with", "from", "page"}
+    ]
+    if snippet_terms:
+        best_score = 0
+        best_index = -1
+        lines = text.splitlines()
+        offset = 0
+        for idx, line in enumerate(lines):
+            window = "\n".join(lines[idx:idx + 3]).lower()
+            score = sum(1 for term in snippet_terms if term in window)
+            if score > best_score:
+                best_score = score
+                best_index = offset
+            offset += len(line) + 1
+        if best_score >= 2:
+            anchor_index = best_index
+            anchor_length = 0
+
+    if anchor_index == -1:
+        for candidate in sorted(candidates, key=len, reverse=True):
+            idx = lowered.find(candidate.strip().lower())
+            if idx != -1:
+                anchor_index = idx
+                anchor_length = len(candidate.strip())
+                break
+
+    if anchor_index == -1:
+        return text[:max_chars].rstrip() + "\n...[truncated]"
+
+    before = max_chars // 4
+    start = max(0, anchor_index - before)
+    end = min(len(text), max(anchor_index + anchor_length + (max_chars - before), start + max_chars))
+    excerpt = text[start:end].strip()
+    if start > 0:
+        excerpt = "...[truncated]\n" + excerpt
+    if end < len(text):
+        excerpt = excerpt.rstrip() + "\n...[truncated]"
+    return excerpt
+
+
 def _append_source(sources: list[dict], seen: set, item: dict):
     key = (item["doc_id"], item["page_num"])
     if key in seen:
@@ -1142,7 +1206,7 @@ def _append_source(sources: list[dict], seen: set, item: dict):
     seen.add(key)
     body = (item.get("content") or "").strip()
     if len(body) > CHAT_SOURCE_MAX_CHARS:
-        body = body[:CHAT_SOURCE_MAX_CHARS].rstrip() + "\n...[truncated]"
+        body = _focused_excerpt(body, item.get("snippet") or "", CHAT_SOURCE_MAX_CHARS)
     sources.append({
         "doc_id": item["doc_id"],
         "doc_title": item["doc_title"],
