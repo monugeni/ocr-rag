@@ -3,14 +3,24 @@
 // =========================================================================
 
 // --- API helpers ---
+async function readErrorMessage(res) {
+  const text = await res.text();
+  if (!text) return res.statusText;
+  try {
+    const data = JSON.parse(text);
+    return data.detail || data.error || text;
+  } catch {
+    return text;
+  }
+}
+
 async function api(path, opts = {}) {
   const res = await fetch('/api' + path, {
     headers: { 'Content-Type': 'application/json', ...opts.headers },
     ...opts,
   });
   if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || res.statusText);
+    throw new Error(await readErrorMessage(res));
   }
   return res.json();
 }
@@ -19,7 +29,13 @@ async function apiUpload(path, files) {
   const form = new FormData();
   for (const f of files) form.append('files', f);
   const res = await fetch('/api' + path, { method: 'POST', body: form });
-  if (!res.ok) throw new Error(await res.text());
+  if (!res.ok) throw new Error(await readErrorMessage(res));
+  return res.json();
+}
+
+async function apiForm(path, form) {
+  const res = await fetch('/api' + path, { method: 'POST', body: form });
+  if (!res.ok) throw new Error(await readErrorMessage(res));
   return res.json();
 }
 
@@ -34,10 +50,13 @@ let pollTimer = null;
 let refreshAfterPolling = false;
 let thinkingTimer = null;
 let workspaceNotice = null;
+let pendingChatAttachment = null;
 
 const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
 const SIDEBAR_COLLAPSED_KEY = 'esteem.folder-knowledge.sidebar-collapsed';
 const SUPPORTED_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
+const CHAT_REVIEW_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif']);
+const CHAT_REVIEW_MAX_PAGES = 10;
 const THINKING_STEPS = [
   'Searching folder documents',
   'Reviewing earlier messages in this chat',
@@ -327,6 +346,7 @@ async function showProject(project, section = 'chat') {
   if (currentProject && currentProject !== project) {
     selectedDocumentIds.clear();
     workspaceNotice = null;
+    pendingChatAttachment = null;
   }
   currentProject = project;
   currentFolderSection = section;
@@ -846,20 +866,40 @@ function renderChatShell(project, chats, messages) {
           ${messages.length ? renderChatMessages(messages) : `
             <div class="chat-empty" id="chat-empty">
               <h3>Ask about this folder</h3>
-              <p>The assistant will search only the documents inside <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer.</p>
+              <p>The assistant will search only the documents inside <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer. You can also upload one document up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison against this folder.</p>
             </div>
           `}
         </div>
         <div class="chat-composer">
+          <input type="file" id="chat-review-file" hidden
+                 accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif"
+                 onchange="handleChatAttachmentChange(event)">
           <textarea id="chat-input"
                     placeholder="Ask a question about this folder's documents..."
                     onkeydown="handleChatKeydown(event)"></textarea>
+          <div id="chat-attachment-slot">${renderPendingChatAttachment()}</div>
           <div class="chat-composer-footer">
-            <div class="chat-composer-hint">Markdown is supported in replies, including math such as <code>\\(E=mc^2\\)</code> or <code>$$x^2$$</code>.</div>
-            <button class="btn btn-primary" id="send-chat-btn" onclick="sendChatMessage()">Send</button>
+            <div class="chat-composer-hint">Markdown is supported in replies. You can also upload one PDF, image, Word, or Excel file up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison.</div>
+            <div class="chat-composer-actions">
+              <button class="btn btn-ghost" type="button" id="attach-chat-file-btn" onclick="openChatAttachmentPicker()">Review document</button>
+              <button class="btn btn-primary" id="send-chat-btn" onclick="sendChatMessage()">Send</button>
+            </div>
           </div>
         </div>
       </section>
+    </div>
+  `;
+}
+
+function renderPendingChatAttachment() {
+  if (!pendingChatAttachment) return '';
+  return `
+    <div class="chat-attachment-tray">
+      <div class="chat-attachment-pill">
+        <span class="chat-attachment-name">${esc(pendingChatAttachment.name)}</span>
+        <span class="chat-attachment-meta">Review against folder docs · limit ${CHAT_REVIEW_MAX_PAGES} pages</span>
+        <button type="button" class="chat-attachment-remove" onclick="clearChatAttachment()" aria-label="Remove attached review document">Remove</button>
+      </div>
     </div>
   `;
 }
@@ -875,22 +915,46 @@ function renderChatMessages(messages) {
         ${message.role === 'assistant'
           ? `<div class="render-markdown">${renderMarkdown(message.content)}</div>`
           : `<div>${esc(message.content).replace(/\n/g, '<br>')}</div>`}
+        ${message.role === 'user' && message.sources?.some((source) => source.kind === 'attachment_meta') ? renderUserAttachmentList(message.sources) : ''}
         ${message.role === 'assistant' && message.sources?.length ? renderSourceList(message.sources) : ''}
       </div>
     </div>
   `).join('');
 }
 
+function renderUserAttachmentList(sources) {
+  const attachments = sources.filter((source) => source.kind === 'attachment_meta');
+  if (!attachments.length) return '';
+  return `
+    <div class="chat-attachment-history">
+      ${attachments.map((source) => `
+        <div class="chat-attachment-pill static">
+          <span class="chat-attachment-name">${esc(source.name || 'Uploaded document')}</span>
+          <span class="chat-attachment-meta">${source.page_count || '?'} page${source.page_count === 1 ? '' : 's'} submitted for review</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 function renderSourceList(sources) {
   return `
     <div class="chat-source-list">
-      ${sources.map((source) => `
-        <div class="chat-source">
-          <strong>[${source.id}]</strong>
-          <a href="#/doc/${source.doc_id}/page/${source.page_num}">${esc(source.doc_title)}</a>
-          <span>${source.folder ? ` &middot; ${esc(source.folder)}` : ''} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
-        </div>
-      `).join('')}
+      ${sources.map((source) => source.kind === 'attachment'
+        ? `
+          <div class="chat-source attachment">
+            <strong>[${source.id}]</strong>
+            <span>${esc(source.name || 'Uploaded document')} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
+          </div>
+        `
+        : `
+          <div class="chat-source">
+            <strong>[${source.id}]</strong>
+            <a href="#/doc/${source.doc_id}/page/${source.page_num}">${esc(source.doc_title)}</a>
+            <span>${source.folder ? ` &middot; ${esc(source.folder)}` : ''} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
+          </div>
+        `
+      ).join('')}
     </div>
   `;
 }
@@ -1092,8 +1156,9 @@ function handleChatKeydown(event) {
 async function sendChatMessage() {
   const textarea = document.getElementById('chat-input');
   const sendButton = document.getElementById('send-chat-btn');
-  const text = textarea?.value.trim();
-  if (!text || !currentProject) return;
+  const typedText = textarea?.value.trim() || '';
+  const attachment = pendingChatAttachment;
+  if ((!typedText && !attachment) || !currentProject) return;
 
   try {
     if (!currentChatId) {
@@ -1110,29 +1175,78 @@ async function sendChatMessage() {
   }
 
   setComposerBusy(true);
-  const messageText = text;
+  const messageText = typedText || defaultChatAttachmentPrompt(attachment?.name);
   textarea.value = '';
-  appendLocalUserMessage(messageText);
+  pendingChatAttachment = null;
+  syncPendingChatAttachment();
+  appendLocalUserMessage(messageText, attachment);
   startThinkingIndicator();
   scrollChatToBottom();
 
   try {
-    await api(`/chats/${currentChatId}/messages`, {
-      method: 'POST',
-      body: JSON.stringify({ content: messageText }),
-    });
+    if (attachment) {
+      const form = new FormData();
+      form.append('file', attachment.file);
+      if (typedText) form.append('content', typedText);
+      await apiForm(`/chats/${currentChatId}/review-document`, form);
+    } else {
+      await api(`/chats/${currentChatId}/messages`, {
+        method: 'POST',
+        body: JSON.stringify({ content: messageText }),
+      });
+    }
     stopThinkingIndicator();
     await showProject(currentProject, currentFolderSection);
   } catch (error) {
     stopThinkingIndicator();
     if (sendButton) sendButton.disabled = false;
     if (textarea) textarea.disabled = false;
+    if (attachment) {
+      pendingChatAttachment = attachment;
+      syncPendingChatAttachment();
+    }
     alert('Chat failed: ' + error.message);
     await showProject(currentProject, currentFolderSection);
+    const restoredInput = document.getElementById('chat-input');
+    if (restoredInput) restoredInput.value = typedText;
+    syncPendingChatAttachment();
   }
 }
 
-function appendLocalUserMessage(text) {
+function openChatAttachmentPicker() {
+  document.getElementById('chat-review-file')?.click();
+}
+
+function defaultChatAttachmentPrompt(filename = 'uploaded document') {
+  return `Review '${filename}' against the folder documents. Summarize matches, gaps, conflicts, and risks.`;
+}
+
+function syncPendingChatAttachment() {
+  const slot = document.getElementById('chat-attachment-slot');
+  if (slot) slot.innerHTML = renderPendingChatAttachment();
+  const input = document.getElementById('chat-review-file');
+  if (input && !pendingChatAttachment) input.value = '';
+}
+
+function handleChatAttachmentChange(event) {
+  const file = event?.target?.files?.[0];
+  if (!file) return;
+  const ext = '.' + (file.name.split('.').pop() || '').toLowerCase();
+  if (!CHAT_REVIEW_EXT.has(ext)) {
+    event.target.value = '';
+    alert('Supported review files are PDF, image, Word, and Excel documents.');
+    return;
+  }
+  pendingChatAttachment = { file, name: file.name, ext };
+  syncPendingChatAttachment();
+}
+
+function clearChatAttachment() {
+  pendingChatAttachment = null;
+  syncPendingChatAttachment();
+}
+
+function appendLocalUserMessage(text, attachment = null) {
   const chatMessages = document.getElementById('chat-messages');
   const empty = document.getElementById('chat-empty');
   if (!chatMessages) return;
@@ -1146,6 +1260,14 @@ function appendLocalUserMessage(text) {
         <span>${formatDate(new Date().toISOString())}</span>
       </div>
       <div>${esc(text).replace(/\n/g, '<br>')}</div>
+      ${attachment ? `
+        <div class="chat-attachment-history">
+          <div class="chat-attachment-pill static">
+            <span class="chat-attachment-name">${esc(attachment.name)}</span>
+            <span class="chat-attachment-meta">Submitted for comparison review</span>
+          </div>
+        </div>
+      ` : ''}
     </div>
   `;
   chatMessages.appendChild(wrapper);
@@ -1193,8 +1315,10 @@ function stopThinkingIndicator() {
 function setComposerBusy(busy) {
   const textarea = document.getElementById('chat-input');
   const button = document.getElementById('send-chat-btn');
+  const attachButton = document.getElementById('attach-chat-file-btn');
   if (textarea) textarea.disabled = busy;
   if (button) button.disabled = busy;
+  if (attachButton) attachButton.disabled = busy;
 }
 
 function scrollChatToBottom() {

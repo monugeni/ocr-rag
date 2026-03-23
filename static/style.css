@@ -1140,6 +1140,10 @@ a:hover { text-decoration: underline; }
   color: var(--muted);
 }
 
+.chat-source.attachment {
+  color: var(--text);
+}
+
 .chat-source strong {
   color: var(--text);
   display: inline-block;
@@ -1207,11 +1211,73 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .chat-composer-hint {
   font-size: 12px;
   color: var(--muted);
+}
+
+.chat-composer-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.chat-attachment-tray,
+.chat-attachment-history {
+  margin-top: 10px;
+}
+
+.chat-attachment-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border: 1px solid #d8e3f7;
+  border-radius: 12px;
+  background: #f7faff;
+}
+
+.chat-attachment-pill.static {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.22);
+}
+
+.chat-attachment-name {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.chat-attachment-pill.static .chat-attachment-name {
+  color: inherit;
+}
+
+.chat-attachment-meta {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.chat-attachment-pill.static .chat-attachment-meta {
+  color: rgba(255,255,255,0.8);
+}
+
+.chat-attachment-remove {
+  border: none;
+  background: transparent;
+  color: #2459d3;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.chat-attachment-remove:hover {
+  text-decoration: underline;
 }
 
 /* Markdown rendering */

@@ -30,6 +30,7 @@ import os
 import re
 import shutil
 import sqlite3
+import tempfile
 import threading
 import urllib.error
 import urllib.request
@@ -54,6 +55,12 @@ from file_extractors import (
     INGESTABLE_EXTENSIONS, IMAGE_EXTENSIONS,
 )
 from splitter import PDFSplitter
+
+
+CHAT_REVIEW_MAX_PAGES = 10
+CHAT_REVIEW_ALLOWED_EXTENSIONS = INGESTABLE_EXTENSIONS
+CHAT_REVIEW_MAX_PAGE_CHARS = 3200
+CHAT_REVIEW_MAX_EXCERPT_CHARS = 9000
 
 
 # ---------------------------------------------------------------------------
@@ -874,7 +881,7 @@ def _dedupe_strings(values: list[str], limit: Optional[int] = None) -> list[str]
     return result
 
 
-def _fallback_investigation_plan(question: str, retrieval_query: str) -> dict:
+def _fallback_investigation_plan(question: str, retrieval_query: str, attachment_excerpt: str = "") -> dict:
     focus_terms = [
         token.strip('"\'')
         for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", retrieval_query)
@@ -884,6 +891,16 @@ def _fallback_investigation_plan(question: str, retrieval_query: str) -> dict:
             "what", "which", "where", "when", "into", "about", "their",
         }
     ][:8]
+    if attachment_excerpt:
+        focus_terms.extend(
+            token.strip('"\'')
+            for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", attachment_excerpt)
+            if len(token.strip('"\''))
+            and token.lower() not in {
+                "the", "and", "for", "from", "with", "that", "this", "there",
+                "what", "which", "where", "when", "into", "about", "their",
+            }
+        )
     compact = " ".join(focus_terms[:5]) if focus_terms else retrieval_query
     return {
         "strategy_summary": (
@@ -893,11 +910,17 @@ def _fallback_investigation_plan(question: str, retrieval_query: str) -> dict:
         "keyword_queries": _dedupe_strings([retrieval_query, compact], limit=3),
         "semantic_queries": _dedupe_strings([question, retrieval_query], limit=2),
         "section_queries": _dedupe_strings([compact], limit=2),
-        "focus_terms": focus_terms,
+        "focus_terms": _dedupe_strings(focus_terms, limit=8),
     }
 
 
-def _plan_folder_investigation(folder: str, question: str, history: list[dict], retrieval_query: str) -> dict:
+def _plan_folder_investigation(
+    folder: str,
+    question: str,
+    history: list[dict],
+    retrieval_query: str,
+    attachment_excerpt: str = "",
+) -> dict:
     history_preview = "\n".join(
         f"{item['role']}: {item['content']}"
         for item in history[-6:]
@@ -918,6 +941,7 @@ def _plan_folder_investigation(folder: str, question: str, history: list[dict], 
         "section_queries, focus_terms.\n"
         "Each query list should contain short, useful search strings, not full paragraphs."
     )
+    attachment_preview = attachment_excerpt[:2500].strip() or "[none]"
     messages = [{
         "role": "user",
         "content": (
@@ -925,6 +949,7 @@ def _plan_folder_investigation(folder: str, question: str, history: list[dict], 
             f"Conversation so far:\n{history_preview}\n\n"
             f"Latest question: {question}\n"
             f"Combined retrieval query: {retrieval_query}\n"
+            f"Uploaded document excerpt:\n{attachment_preview}\n"
         ),
     }]
     try:
@@ -938,7 +963,7 @@ def _plan_folder_investigation(folder: str, question: str, history: list[dict], 
             "focus_terms": _dedupe_strings(plan.get("focus_terms") or [], limit=8),
         }
     except Exception:
-        return _fallback_investigation_plan(question, retrieval_query)
+        return _fallback_investigation_plan(question, retrieval_query, attachment_excerpt=attachment_excerpt)
 
 
 def _search_sections_folder(conn, folder: str, query: str, limit: int = 4) -> list[dict]:
@@ -998,9 +1023,22 @@ def _append_source(sources: list[dict], seen: set, item: dict):
     })
 
 
-def _retrieve_folder_context(conn, folder: str, question: str, history: list[dict], limit: int = 10):
+def _retrieve_folder_context(
+    conn,
+    folder: str,
+    question: str,
+    history: list[dict],
+    limit: int = 10,
+    attachment_excerpt: str = "",
+):
     retrieval_query = _build_retrieval_query(history, question)
-    plan = _plan_folder_investigation(folder, question, history, retrieval_query)
+    plan = _plan_folder_investigation(
+        folder,
+        question,
+        history,
+        retrieval_query,
+        attachment_excerpt=attachment_excerpt,
+    )
     sources = []
     seen = set()
     investigation = []
@@ -1160,6 +1198,208 @@ def _generate_folder_answer(folder: str, question: str, history: list[dict], ret
         "content": f"{prompt}\n\nLatest user question:\n{question}",
     })
     return _invoke_chat_model(system_prompt, messages, max_tokens=2200)
+
+
+def _truncate_text(text: str, max_chars: int, suffix: str = "\n...[truncated]") -> str:
+    clean = (text or "").strip()
+    if len(clean) <= max_chars:
+        return clean
+    return clean[:max_chars].rstrip() + suffix
+
+
+def _pdf_page_count(file_path: str) -> Optional[int]:
+    try:
+        import fitz
+    except Exception:
+        return None
+
+    try:
+        doc = fitz.open(file_path)
+        try:
+            return int(getattr(doc, "page_count", len(doc)))
+        finally:
+            doc.close()
+    except Exception:
+        return None
+
+
+def _default_attachment_review_question(filename: str) -> str:
+    return (
+        f"Review '{filename}' against the folder documents. "
+        "Summarize matches, gaps, conflicts, and risks."
+    )
+
+
+def _prepare_chat_review_attachment(upload: UploadFile) -> dict:
+    filename = Path(upload.filename or "document").name or "document"
+    ext = Path(filename).suffix.lower()
+    if not ext or ext not in CHAT_REVIEW_ALLOWED_EXTENSIONS or is_archive(filename):
+        raise HTTPException(
+            400,
+            "Supported review files are PDF, image, Word, and Excel documents.",
+        )
+
+    tmp_dir = Path(tempfile.mkdtemp(prefix="ocrrag_chat_review_"))
+    tmp_path = tmp_dir / f"{uuid4().hex}{ext}"
+    try:
+        with tmp_path.open("wb") as fh:
+            shutil.copyfileobj(upload.file, fh)
+        if ext == ".pdf":
+            pdf_pages = _pdf_page_count(str(tmp_path))
+            if pdf_pages and pdf_pages > CHAT_REVIEW_MAX_PAGES:
+                raise HTTPException(
+                    400,
+                    f"Review uploads are limited to {CHAT_REVIEW_MAX_PAGES} pages.",
+                )
+
+        pages, _sections = extract_file(str(tmp_path))
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(400, f"Could not read the uploaded document: {exc}") from exc
+    finally:
+        try:
+            upload.file.close()
+        except Exception:
+            pass
+        tmp_path.unlink(missing_ok=True)
+        try:
+            tmp_dir.rmdir()
+        except OSError:
+            pass
+
+    normalized_pages = []
+    for idx, page in enumerate(pages, start=1):
+        content = _truncate_text(str(page.get("content") or "").strip(), CHAT_REVIEW_MAX_PAGE_CHARS)
+        if not content:
+            continue
+        normalized_pages.append({
+            "id": f"A{len(normalized_pages) + 1}",
+            "page_num": int(page.get("page_num") or idx),
+            "breadcrumb": str(page.get("breadcrumb") or "").strip(),
+            "content": content,
+        })
+
+    if not normalized_pages:
+        raise HTTPException(
+            400,
+            "No readable text could be extracted from that file. Try a clearer scan or a text-based file.",
+        )
+    if len(normalized_pages) > CHAT_REVIEW_MAX_PAGES:
+        raise HTTPException(
+            400,
+            f"Review uploads are limited to {CHAT_REVIEW_MAX_PAGES} pages after extraction.",
+        )
+
+    excerpt_parts = []
+    excerpt_chars = 0
+    for page in normalized_pages:
+        title = f"{page['id']} | page {page['page_num']}"
+        if page["breadcrumb"]:
+            title += f" | {page['breadcrumb']}"
+        block = f"{title}\n{page['content']}"
+        if excerpt_chars + len(block) > CHAT_REVIEW_MAX_EXCERPT_CHARS:
+            remaining = CHAT_REVIEW_MAX_EXCERPT_CHARS - excerpt_chars
+            if remaining > 200:
+                excerpt_parts.append(_truncate_text(block, remaining, suffix=""))
+            break
+        excerpt_parts.append(block)
+        excerpt_chars += len(block)
+
+    return {
+        "filename": filename,
+        "page_count": len(normalized_pages),
+        "excerpt": "\n\n".join(excerpt_parts),
+        "pages": normalized_pages,
+        "message_sources": [{
+            "kind": "attachment_meta",
+            "name": filename,
+            "page_count": len(normalized_pages),
+        }],
+        "assistant_sources": [
+            {
+                "id": page["id"],
+                "kind": "attachment",
+                "name": filename,
+                "page_num": page["page_num"],
+                "breadcrumb": page["breadcrumb"],
+                "snippet": _truncate_text(page["content"], 220, suffix="..."),
+            }
+            for page in normalized_pages
+        ],
+    }
+
+
+def _generate_attachment_review(
+    folder: str,
+    question: str,
+    history: list[dict],
+    retrieval: dict,
+    attachment: dict,
+):
+    attachment_excerpts = []
+    for page in attachment["pages"]:
+        attachment_excerpts.append(
+            f"[{page['id']}] Uploaded file | {attachment['filename']} | page {page['page_num']} | "
+            f"{page['breadcrumb'] or 'No section breadcrumb'}\n"
+            f"{page['content']}"
+        )
+
+    folder_excerpts = []
+    for source in retrieval["sources"]:
+        folder_excerpts.append(
+            f"[{source['id']}] {source['folder']} | {source['doc_title']} | page {source['page_num']} | "
+            f"{source['breadcrumb'] or 'No section breadcrumb'}\n"
+            f"{source['content']}"
+        )
+
+    system_prompt = (
+        "You are Esteem Folder Knowledge, performing a document review.\n"
+        f"You are currently comparing an uploaded document against the folder '{folder}'.\n"
+        "You must answer ONLY from the uploaded document excerpts, the folder source excerpts, and the prior conversation.\n"
+        "Never use outside knowledge. Do not speculate.\n"
+        "Treat uploaded document pages as evidence labeled [A1], [A2], etc.\n"
+        "Treat folder documents as evidence labeled [1], [2], etc.\n"
+        "Respond in markdown.\n"
+        "Use this structure unless a section would truly be empty:\n"
+        "## Overall assessment\n"
+        "## Matches\n"
+        "## Gaps or missing evidence\n"
+        "## Conflicts or risks\n"
+        "## Suggested next checks\n"
+        "## Sources\n"
+        "When you make factual claims, cite the supporting uploaded page(s) and folder source(s) inline."
+    )
+
+    prompt = (
+        f"Folder: {folder}\n"
+        f"Latest question: {question}\n"
+        f"Uploaded document: {attachment['filename']} ({attachment['page_count']} page(s))\n"
+        f"Folder retrieval query: {retrieval['query']}\n\n"
+        f"Investigation strategy: {retrieval.get('plan', {}).get('strategy_summary', '')}\n"
+        "Investigation log:\n"
+        + "\n".join(f"- {step}" for step in retrieval.get("investigation", []))
+        + "\n\nUploaded document excerpts:\n"
+        "==========================\n"
+        + ("\n\n".join(attachment_excerpts) or "[No uploaded document excerpts available]")
+        + "\n\nFolder source excerpts:\n"
+        "======================\n"
+        + ("\n\n".join(folder_excerpts) or "[No matching folder excerpts were found]")
+        + "\n\nReview the uploaded document against the folder documents. "
+        "Focus on what is supported, what is missing, and what appears inconsistent."
+    )
+
+    messages = []
+    for item in history[-8:]:
+        messages.append({
+            "role": item["role"],
+            "content": item["content"],
+        })
+    messages.append({
+        "role": "user",
+        "content": prompt,
+    })
+    return _invoke_chat_model(system_prompt, messages, max_tokens=2400)
 
 
 # ---------------------------------------------------------------------------
@@ -1829,6 +2069,95 @@ def create_chat_message(thread_id: str, data: dict):
             "retrieval": {
                 "query": retrieval["query"],
                 "source_count": len(retrieval["sources"]),
+            },
+        }
+    finally:
+        conn.close()
+
+
+@app.post("/api/chats/{thread_id}/review-document")
+def review_chat_document(
+    thread_id: str,
+    file: UploadFile = File(...),
+    content: str = Form(""),
+):
+    attachment = _prepare_chat_review_attachment(file)
+    question = (content or "").strip() or _default_attachment_review_question(attachment["filename"])
+
+    conn = get_conn()
+    try:
+        thread = conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?",
+            (thread_id,)
+        ).fetchone()
+        if not thread:
+            raise HTTPException(404, "Chat thread not found")
+
+        _insert_chat_message(
+            conn,
+            thread_id,
+            "user",
+            question,
+            sources=attachment["message_sources"],
+        )
+
+        existing_messages = _fetch_chat_messages(conn, thread_id)
+        history = existing_messages[:-1]
+        retrieval = _retrieve_folder_context(
+            conn,
+            thread["project"],
+            question,
+            history,
+            attachment_excerpt=attachment["excerpt"],
+        )
+        answer = _generate_attachment_review(
+            thread["project"],
+            question,
+            history,
+            retrieval,
+            attachment,
+        )
+        sources = [
+            *attachment["assistant_sources"],
+            *[
+                {
+                    "id": source["id"],
+                    "doc_id": source["doc_id"],
+                    "doc_title": source["doc_title"],
+                    "folder": source["folder"],
+                    "page_num": source["page_num"],
+                    "breadcrumb": source["breadcrumb"],
+                    "page_type": source["page_type"],
+                    "snippet": source["snippet"],
+                    "search_type": source["search_type"],
+                    "score": source["score"],
+                }
+                for source in retrieval["sources"]
+            ],
+        ]
+        _insert_chat_message(conn, thread_id, "assistant", answer, sources=sources)
+
+        if len(existing_messages) == 1 and thread["title"] == "New chat":
+            conn.execute(
+                "UPDATE chat_threads SET title = ? WHERE id = ?",
+                (_thread_title_from_message(question), thread_id)
+            )
+            _touch_thread(conn, thread_id)
+
+        conn.commit()
+        return {
+            "thread": {
+                **dict(conn.execute(
+                    "SELECT * FROM chat_threads WHERE id = ?",
+                    (thread_id,)
+                ).fetchone()),
+                "folder": thread["project"],
+            },
+            "messages": _fetch_chat_messages(conn, thread_id),
+            "retrieval": {
+                "query": retrieval["query"],
+                "source_count": len(retrieval["sources"]),
+                "attachment_pages": attachment["page_count"],
             },
         }
     finally:
