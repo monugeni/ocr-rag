@@ -25,6 +25,7 @@ Routes:
 
 import argparse
 import asyncio
+from collections import Counter
 import json
 import os
 import re
@@ -61,6 +62,16 @@ CHAT_REVIEW_MAX_PAGES = 10
 CHAT_REVIEW_ALLOWED_EXTENSIONS = INGESTABLE_EXTENSIONS
 CHAT_REVIEW_MAX_PAGE_CHARS = 3200
 CHAT_REVIEW_MAX_EXCERPT_CHARS = 9000
+CHAT_SOURCE_MAX_CHARS = 1600
+CHAT_SOURCE_SNIPPET_CHARS = 280
+CHAT_CONTEXT_MAX_SOURCES = 10
+CHAT_CONTEXT_TARGET_SOURCES = 6
+CHAT_CONTEXT_MAX_OPEN_PAGES = 8
+CHAT_CONTEXT_MAX_SECTION_PAGES = 2
+CHAT_CONTEXT_MAX_NEIGHBOR_PAGES = 2
+CHAT_SEARCH_MAX_PAGE_CANDIDATES = 8
+CHAT_SEARCH_MAX_SECTION_CANDIDATES = 6
+CHAT_SEARCH_MAX_DOC_SHORTLIST = 3
 
 
 # ---------------------------------------------------------------------------
@@ -524,6 +535,71 @@ def _sanitize_fts_query(query: str) -> str:
     return " ".join(out)
 
 
+def _query_focus_terms(text: str, limit: int = 10) -> list[str]:
+    stop_words = {
+        "the", "and", "for", "from", "with", "that", "this", "there",
+        "what", "which", "where", "when", "into", "about", "their",
+        "your", "have", "does", "dont", "need", "show", "list", "tell",
+        "find", "page", "pages", "document", "documents", "folder",
+        "same", "they", "them", "those", "these", "above",
+    }
+    tokens = []
+    for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", text or ""):
+        clean = token.strip('"\'').lower()
+        if len(clean) < 2 or clean in stop_words:
+            continue
+        tokens.append(clean)
+    return _dedupe_strings(tokens, limit=limit)
+
+
+def _query_expansion_terms(query: str) -> list[str]:
+    text = (query or "").lower()
+    extra = []
+    if re.search(r"\bjb\b", text):
+        extra.extend(["junction", "box"])
+    if re.search(r"\bff\b", text) and ("junction" in text or re.search(r"\bjb\b", text)):
+        extra.extend(["foundation", "fieldbus"])
+    if "field bus" in text:
+        extra.append("fieldbus")
+    if re.search(r"\bvendor(s)?\b", text):
+        extra.extend(["supplier", "bidders"])
+    return _dedupe_strings(extra, limit=8)
+
+
+def _domain_query_variants(question: str, retrieval_query: str, attachment_excerpt: str = "") -> list[str]:
+    text = " ".join([
+        question or "",
+        retrieval_query or "",
+        (attachment_excerpt or "")[:400],
+    ]).lower()
+    variants = []
+
+    has_ff = bool(re.search(r"\bff\b", text))
+    has_jb = "junction box" in text or bool(re.search(r"\bjb\b", text))
+    has_vendor = bool(re.search(r"\b(vendor|vendors|supplier|suppliers|bidder|bidders|approved)\b", text))
+    has_cpmsl = "cpmsl" in text or "supplier list" in text
+
+    if has_ff and has_jb:
+        variants.extend([
+            "foundation fieldbus junction box",
+            "foundation field bus ff jb",
+        ])
+        if has_vendor:
+            variants.extend([
+                "approved vendors foundation fieldbus junction box",
+                "foundation field bus approved vendors",
+                "6.122 foundation field bus",
+            ])
+
+    if has_cpmsl:
+        variants.extend([
+            "common project master supplier list",
+            "section d instrumentation",
+        ])
+
+    return _dedupe_strings(variants, limit=6)
+
+
 def _get_embedding_model(model_name: str = "all-MiniLM-L6-v2"):
     if not hasattr(_get_embedding_model, "_cache"):
         _get_embedding_model._cache = {}
@@ -635,7 +711,14 @@ def _fts_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[di
 
     ph = ",".join("?" * len(doc_ids))
     queries = [clean]
+    extra_terms = _query_expansion_terms(query)
+    if extra_terms:
+        expanded = " ".join([clean, _sanitize_fts_query(" ".join(extra_terms))]).strip()
+        if expanded and expanded not in queries:
+            queries.append(expanded)
     parts = clean.split()
+    if extra_terms:
+        parts.extend(_sanitize_fts_query(" ".join(extra_terms)).split())
     if len(parts) > 1:
         queries.append(" OR ".join(parts))
 
@@ -646,7 +729,7 @@ def _fts_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[di
             rows = conn.execute(
                 f"""
                 SELECT p.doc_id, d.title AS doc_title, p.page_num, p.breadcrumb,
-                       p.page_type, p.content, d.project AS folder,
+                       p.page_type, d.project AS folder,
                        snippet(pages_fts, 0, '>>>', '<<<', '...', 30) AS snippet,
                        rank
                 FROM pages_fts
@@ -676,7 +759,6 @@ def _fts_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[di
                 "breadcrumb": row["breadcrumb"],
                 "page_type": row["page_type"],
                 "snippet": row["snippet"],
-                "content": row["content"],
                 "score": float(row["rank"]) if row["rank"] is not None else 0.0,
                 "search_type": "fts",
             })
@@ -722,7 +804,7 @@ def _semantic_search_folder(conn, folder: str, query: str, limit: int = 5) -> li
         f"""
         SELECT p.doc_id, d.title AS doc_title, d.project AS folder,
                p.page_num, p.breadcrumb, p.page_type,
-               p.content, pe.chunk_text, pe.embedding
+               pe.chunk_text, pe.embedding
         FROM page_embeddings pe
         JOIN pages p ON p.id = pe.page_id
         JOIN documents d ON d.id = p.doc_id
@@ -747,7 +829,6 @@ def _semantic_search_folder(conn, folder: str, query: str, limit: int = 5) -> li
             "breadcrumb": row["breadcrumb"],
             "page_type": row["page_type"],
             "snippet": row["chunk_text"][:240],
-            "content": row["content"],
             "score": sim,
             "search_type": "semantic",
         })
@@ -882,35 +963,23 @@ def _dedupe_strings(values: list[str], limit: Optional[int] = None) -> list[str]
 
 
 def _fallback_investigation_plan(question: str, retrieval_query: str, attachment_excerpt: str = "") -> dict:
-    focus_terms = [
-        token.strip('"\'')
-        for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", retrieval_query)
-        if len(token.strip('"\''))
-        and token.lower() not in {
-            "the", "and", "for", "from", "with", "that", "this", "there",
-            "what", "which", "where", "when", "into", "about", "their",
-        }
-    ][:8]
-    if attachment_excerpt:
-        focus_terms.extend(
-            token.strip('"\'')
-            for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", attachment_excerpt)
-            if len(token.strip('"\''))
-            and token.lower() not in {
-                "the", "and", "for", "from", "with", "that", "this", "there",
-                "what", "which", "where", "when", "into", "about", "their",
-            }
-        )
+    domain_variants = _domain_query_variants(question, retrieval_query, attachment_excerpt)
+    focus_terms = _dedupe_strings([
+        *_query_focus_terms(retrieval_query, limit=8),
+        *_query_focus_terms(attachment_excerpt, limit=4),
+        *_query_focus_terms(" ".join(domain_variants), limit=4),
+    ], limit=10)
     compact = " ".join(focus_terms[:5]) if focus_terms else retrieval_query
     return {
         "strategy_summary": (
-            "Start with exact folder search, then broaden with semantic search, "
-            "then expand nearby pages for context."
+            "Search exact terms first, shortlist likely documents and pages, "
+            "open only the strongest matching pages, inspect likely section headings, "
+            "then expand neighboring pages only if needed."
         ),
-        "keyword_queries": _dedupe_strings([retrieval_query, compact], limit=3),
-        "semantic_queries": _dedupe_strings([question, retrieval_query], limit=2),
-        "section_queries": _dedupe_strings([compact], limit=2),
-        "focus_terms": _dedupe_strings(focus_terms, limit=8),
+        "keyword_queries": _dedupe_strings([retrieval_query, compact, *domain_variants], limit=5),
+        "semantic_queries": _dedupe_strings([question, retrieval_query, *domain_variants[:2]], limit=3),
+        "section_queries": _dedupe_strings([compact, *domain_variants], limit=4),
+        "focus_terms": focus_terms,
     }
 
 
@@ -1001,14 +1070,79 @@ def _fetch_page_range(conn, doc_id: int, start: int, end: int) -> list[dict]:
     return [dict(row) for row in rows]
 
 
+def _term_overlap_score(text: str, focus_terms: list[str]) -> int:
+    haystack = (text or "").lower()
+    return sum(1 for term in focus_terms if term and term.lower() in haystack)
+
+
+def _candidate_priority(item: dict, doc_scores: Counter, focus_terms: list[str]) -> tuple:
+    searchable = " ".join([
+        item.get("doc_title") or "",
+        item.get("breadcrumb") or "",
+        item.get("snippet") or "",
+    ])
+    return (
+        _term_overlap_score(searchable, focus_terms),
+        doc_scores.get(item["doc_id"], 0),
+        1 if item.get("search_type") == "fts" else 0,
+        1 if item.get("search_type") == "section" else 0,
+        float(item.get("score") or 0.0),
+    )
+
+
+def _relevant_doc_sections(conn, doc_id: int, focus_terms: list[str], limit: int = 3) -> list[dict]:
+    rows = conn.execute(
+        """
+        SELECT heading, level, page_start, COALESCE(page_end, page_start) AS page_end, breadcrumb
+        FROM sections
+        WHERE doc_id = ?
+        ORDER BY seq
+        """,
+        (doc_id,),
+    ).fetchall()
+    scored = []
+    for row in rows:
+        item = dict(row)
+        text = " ".join([item["heading"], item.get("breadcrumb") or ""])
+        overlap = _term_overlap_score(text, focus_terms)
+        if overlap <= 0:
+            continue
+        scored.append((
+            overlap,
+            -int(item["level"] or 0),
+            -int(item["page_start"] or 0),
+            item,
+        ))
+    scored.sort(key=lambda entry: entry[:-1], reverse=True)
+    return [item for *_ignored, item in scored[:limit]]
+
+
+def _open_page_window(
+    conn,
+    doc_id: int,
+    start: int,
+    end: int,
+    *,
+    search_type: str,
+    score: float = 0.0,
+    snippet: str = "",
+) -> list[dict]:
+    pages = _fetch_page_range(conn, doc_id, start, end)
+    for page in pages:
+        page["search_type"] = search_type
+        page["score"] = score
+        page["snippet"] = snippet or f"Opened pages {start}-{end}"
+    return pages
+
+
 def _append_source(sources: list[dict], seen: set, item: dict):
     key = (item["doc_id"], item["page_num"])
     if key in seen:
         return
     seen.add(key)
     body = (item.get("content") or "").strip()
-    if len(body) > 2200:
-        body = body[:2200].rstrip() + "\n...[truncated]"
+    if len(body) > CHAT_SOURCE_MAX_CHARS:
+        body = body[:CHAT_SOURCE_MAX_CHARS].rstrip() + "\n...[truncated]"
     sources.append({
         "doc_id": item["doc_id"],
         "doc_title": item["doc_title"],
@@ -1016,7 +1150,7 @@ def _append_source(sources: list[dict], seen: set, item: dict):
         "page_num": item["page_num"],
         "breadcrumb": item.get("breadcrumb"),
         "page_type": item.get("page_type") or "text",
-        "snippet": item.get("snippet") or body[:240],
+        "snippet": item.get("snippet") or body[:CHAT_SOURCE_SNIPPET_CHARS],
         "search_type": item.get("search_type") or "context",
         "score": round(float(item.get("score") or 0.0), 4),
         "content": body,
@@ -1032,90 +1166,165 @@ def _retrieve_folder_context(
     attachment_excerpt: str = "",
 ):
     retrieval_query = _build_retrieval_query(history, question)
-    plan = _plan_folder_investigation(
-        folder,
-        question,
-        history,
-        retrieval_query,
-        attachment_excerpt=attachment_excerpt,
-    )
+    plan = _fallback_investigation_plan(question, retrieval_query, attachment_excerpt=attachment_excerpt)
     sources = []
     seen = set()
     investigation = []
-    base_hits = []
+    focus_terms = plan.get("focus_terms") or []
 
-    fts_queries = _dedupe_strings([retrieval_query, question, *(plan.get("keyword_queries") or [])], limit=4)
-    semantic_queries = _dedupe_strings([question, retrieval_query, *(plan.get("semantic_queries") or [])], limit=3)
-    section_queries = _dedupe_strings(plan.get("section_queries") or [], limit=3)
+    fts_queries = _dedupe_strings([retrieval_query, *(plan.get("keyword_queries") or [])], limit=5)
+    semantic_queries = _dedupe_strings([question, *(plan.get("semantic_queries") or [])], limit=3)
+    section_queries = _dedupe_strings(plan.get("section_queries") or [], limit=4)
 
-    fts_count = 0
+    page_candidates = []
+    page_seen = set()
     for query in fts_queries:
         hits = _fts_search_folder(conn, folder, query, limit=4)
         investigation.append(f"search_pages('{query}') -> {len(hits)} hit(s)")
         for hit in hits:
-            if fts_count >= 6:
+            key = (hit["doc_id"], hit["page_num"])
+            if key in page_seen:
+                continue
+            page_seen.add(key)
+            page_candidates.append(hit)
+            if len(page_candidates) >= CHAT_SEARCH_MAX_PAGE_CANDIDATES:
                 break
-            _append_source(sources, seen, hit)
-            base_hits.append(hit)
-            fts_count += 1
-        if fts_count >= 6:
+        if len(page_candidates) >= CHAT_SEARCH_MAX_PAGE_CANDIDATES:
             break
 
-    semantic_count = 0
-    for query in semantic_queries:
-        hits = _semantic_search_folder(conn, folder, query, limit=4)
-        investigation.append(f"semantic_search('{query}') -> {len(hits)} hit(s)")
-        for hit in hits:
-            if semantic_count >= 4:
-                break
-            _append_source(sources, seen, hit)
-            base_hits.append(hit)
-            semantic_count += 1
-        if semantic_count >= 4:
-            break
-
-    expanded_sections = 0
+    section_matches = []
+    section_seen = set()
     for query in section_queries:
-        matches = _search_sections_folder(conn, folder, query, limit=2)
+        matches = _search_sections_folder(conn, folder, query, limit=3)
         investigation.append(f"search_sections('{query}') -> {len(matches)} match(es)")
         for match in matches:
-            if expanded_sections >= 4:
+            key = (match["doc_id"], match["page_start"], match["heading"])
+            if key in section_seen:
+                continue
+            section_seen.add(key)
+            section_matches.append(match)
+            if len(section_matches) >= CHAT_SEARCH_MAX_SECTION_CANDIDATES:
                 break
-            page_end = min(match["page_end"], match["page_start"] + 2)
-            pages = _fetch_page_range(conn, match["doc_id"], match["page_start"], page_end)
-            for page in pages:
-                page["search_type"] = "section"
-                page["score"] = 0.0
-                page["snippet"] = f"Section match: {match['heading']}"
-                _append_source(sources, seen, page)
-                expanded_sections += 1
-                if expanded_sections >= 4:
-                    break
-        if expanded_sections >= 4:
+        if len(section_matches) >= CHAT_SEARCH_MAX_SECTION_CANDIDATES:
             break
 
-    expanded_neighbors = 0
-    for hit in base_hits[:4]:
-        if expanded_neighbors >= 4:
+    if len(page_candidates) < 4:
+        for query in semantic_queries:
+            hits = _semantic_search_folder(conn, folder, query, limit=4)
+            investigation.append(f"semantic_search('{query}') -> {len(hits)} hit(s)")
+            for hit in hits:
+                key = (hit["doc_id"], hit["page_num"])
+                if key in page_seen:
+                    continue
+                page_seen.add(key)
+                page_candidates.append(hit)
+                if len(page_candidates) >= CHAT_SEARCH_MAX_PAGE_CANDIDATES:
+                    break
+            if len(page_candidates) >= CHAT_SEARCH_MAX_PAGE_CANDIDATES:
+                break
+
+    doc_scores = Counter()
+    for hit in page_candidates:
+        doc_scores[hit["doc_id"]] += 3 if hit.get("search_type") == "fts" else 1
+        doc_scores[hit["doc_id"]] += max(1, _term_overlap_score(
+            " ".join([hit.get("doc_title") or "", hit.get("breadcrumb") or "", hit.get("snippet") or ""]),
+            focus_terms,
+        ))
+    for match in section_matches:
+        doc_scores[match["doc_id"]] += 2 + max(1, _term_overlap_score(
+            " ".join([match.get("heading") or "", match.get("breadcrumb") or ""]),
+            focus_terms,
+        ))
+
+    page_candidates.sort(
+        key=lambda item: _candidate_priority(item, doc_scores, focus_terms),
+        reverse=True,
+    )
+    shortlisted_docs = [
+        doc_id for doc_id, _score in doc_scores.most_common(CHAT_SEARCH_MAX_DOC_SHORTLIST)
+    ]
+
+    opened_pages = 0
+    for hit in page_candidates[:CHAT_CONTEXT_TARGET_SOURCES]:
+        if opened_pages >= CHAT_CONTEXT_MAX_OPEN_PAGES or len(sources) >= limit:
+            break
+        pages = _open_page_window(
+            conn,
+            hit["doc_id"],
+            hit["page_num"],
+            hit["page_num"],
+            search_type=hit.get("search_type") or "fts",
+            score=hit.get("score") or 0.0,
+            snippet=hit.get("snippet") or f"Opened page {hit['page_num']}",
+        )
+        investigation.append(
+            f"get_page(doc={hit['doc_id']}, page={hit['page_num']}) -> {len(pages)} page(s)"
+        )
+        for page in pages:
+            before = len(sources)
+            _append_source(sources, seen, page)
+            if len(sources) > before:
+                opened_pages += 1
+                if opened_pages >= CHAT_CONTEXT_MAX_OPEN_PAGES or len(sources) >= limit:
+                    break
+
+    section_pages_opened = 0
+    for doc_id in shortlisted_docs:
+        if section_pages_opened >= CHAT_CONTEXT_MAX_SECTION_PAGES or len(sources) >= limit:
+            break
+        toc_matches = _relevant_doc_sections(conn, doc_id, focus_terms, limit=2)
+        investigation.append(f"get_toc(doc={doc_id}) -> {len(toc_matches)} relevant heading(s)")
+        for match in toc_matches:
+            if section_pages_opened >= CHAT_CONTEXT_MAX_SECTION_PAGES or len(sources) >= limit:
+                break
+            page_end = min(match["page_end"], match["page_start"] + 1)
+            pages = _open_page_window(
+                conn,
+                doc_id,
+                match["page_start"],
+                page_end,
+                search_type="section",
+                score=0.0,
+                snippet=f"Section match: {match['heading']}",
+            )
+            investigation.append(
+                f"get_pages(doc={doc_id}, start={match['page_start']}, end={page_end}) -> {len(pages)} page(s)"
+            )
+            for page in pages:
+                before = len(sources)
+                _append_source(sources, seen, page)
+                if len(sources) > before:
+                    section_pages_opened += 1
+                    if section_pages_opened >= CHAT_CONTEXT_MAX_SECTION_PAGES or len(sources) >= limit:
+                        break
+
+    neighbor_pages_opened = 0
+    for hit in page_candidates[:CHAT_CONTEXT_MAX_NEIGHBOR_PAGES]:
+        if neighbor_pages_opened >= CHAT_CONTEXT_MAX_NEIGHBOR_PAGES or len(sources) >= limit:
             break
         start = max(1, hit["page_num"] - 1)
         end = hit["page_num"] + 1
-        pages = _fetch_page_range(conn, hit["doc_id"], start, end)
+        pages = _open_page_window(
+            conn,
+            hit["doc_id"],
+            start,
+            end,
+            search_type="context",
+            score=hit.get("score") or 0.0,
+            snippet=f"Expanded around page {hit['page_num']}",
+        )
         investigation.append(
             f"get_pages(doc={hit['doc_id']}, start={start}, end={end}) -> {len(pages)} page(s)"
         )
         for page in pages:
-            page["search_type"] = "context"
-            page["score"] = hit.get("score") or 0.0
-            page["snippet"] = f"Expanded around page {hit['page_num']}"
             before = len(sources)
             _append_source(sources, seen, page)
             if len(sources) > before:
-                expanded_neighbors += 1
-                if expanded_neighbors >= 4:
+                neighbor_pages_opened += 1
+                if neighbor_pages_opened >= CHAT_CONTEXT_MAX_NEIGHBOR_PAGES or len(sources) >= limit:
                     break
 
-    final = sources[:limit]
+    final = sources[:min(limit, CHAT_CONTEXT_MAX_SOURCES)]
     for idx, item in enumerate(final, start=1):
         item["id"] = idx
 
