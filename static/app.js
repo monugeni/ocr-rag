@@ -1,5 +1,5 @@
 // =========================================================================
-// DocLens - Client Application
+// Esteem DocLens - Client Application
 // =========================================================================
 
 // --- API helpers ---
@@ -315,7 +315,7 @@ function showWelcome() {
   setTopbar(null);
   document.getElementById('content').innerHTML = `
     <div class="welcome">
-      <h2>DocLens</h2>
+      <h2>Esteem DocLens</h2>
       <p>Select a folder to open its chat and work against already ingested tender documents. Add more documents only when you need to refresh the folder.</p>
     </div>`;
   loadFolders();
