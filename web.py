@@ -1421,6 +1421,11 @@ def _generate_mcp_chat_answer(
         raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
 
     try:
+        import mcp_server
+
+        # Keep the web chat pinned to the same MCP tool definitions and database
+        # as external clients, without depending on the local SSE hop.
+        mcp_server.DB_PATH = DB_PATH
         return run_folder_chat(
             mcp_url=MCP_SERVER_URL,
             api_key=api_key,
@@ -1429,6 +1434,7 @@ def _generate_mcp_chat_answer(
             question=question,
             history=history,
             attachment=attachment,
+            mcp_server=mcp_server.mcp,
         )
     except HTTPException:
         raise

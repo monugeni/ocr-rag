@@ -97,13 +97,14 @@ class SourceTracker:
 
 def run_folder_chat(
     *,
-    mcp_url: str,
+    mcp_url: Optional[str],
     api_key: str,
     model: str,
     project: str,
     question: str,
     history: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]] = None,
+    mcp_server: Any = None,
 ) -> ChatRunResult:
     return asyncio.run(
         _run_folder_chat(
@@ -114,22 +115,42 @@ def run_folder_chat(
             question=question,
             history=history,
             attachment=attachment,
+            mcp_server=mcp_server,
         )
     )
 
 
 async def _run_folder_chat(
     *,
-    mcp_url: str,
+    mcp_url: Optional[str],
     api_key: str,
     model: str,
     project: str,
     question: str,
     history: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]],
+    mcp_server: Any = None,
 ) -> ChatRunResult:
     tracker = SourceTracker()
+
+    if mcp_server is not None:
+        tools = await _list_allowed_tools(mcp_server)
+        response = await _chat_with_tools(
+            session=mcp_server,
+            api_key=api_key,
+            model=model,
+            project=project,
+            question=question,
+            history=history,
+            attachment=attachment,
+            tools=tools,
+            tracker=tracker,
+        )
+        return ChatRunResult(answer=response, sources=tracker.as_list())
+
     last_error: Optional[Exception] = None
+    if not mcp_url:
+        raise RuntimeError("No MCP server or MCP URL configured for chat.")
 
     for attempt in range(MCP_CONNECT_RETRIES):
         try:
@@ -172,28 +193,24 @@ async def _initialize_session(session: ClientSession) -> None:
     raise RuntimeError(f"Could not connect to MCP server: {last_error}") from last_error
 
 
-async def _list_allowed_tools(session: ClientSession) -> list[dict[str, Any]]:
-    cursor: Optional[str] = None
+async def _list_allowed_tools(session: Any) -> list[dict[str, Any]]:
     selected = []
-    while True:
-        result = await session.list_tools(cursor=cursor)
-        for tool in result.tools:
-            if tool.name not in ALLOWED_TOOLS:
-                continue
-            selected.append({
-                "name": tool.name,
-                "description": tool.description or "",
-                "input_schema": tool.inputSchema,
-            })
-        cursor = getattr(result, "nextCursor", None)
-        if not cursor:
-            break
+    result = await session.list_tools()
+    tools = result.tools if hasattr(result, "tools") else result
+    for tool in tools:
+        if tool.name not in ALLOWED_TOOLS:
+            continue
+        selected.append({
+            "name": tool.name,
+            "description": tool.description or "",
+            "input_schema": tool.inputSchema,
+        })
     return selected
 
 
 async def _chat_with_tools(
     *,
-    session: ClientSession,
+    session: Any,
     api_key: str,
     model: str,
     project: str,
@@ -339,6 +356,12 @@ def _normalize_tool_arguments(name: str, arguments: Any, project: str) -> dict[s
 
 
 def _coerce_tool_payload(result: Any) -> Any:
+    if isinstance(result, tuple) and len(result) == 2:
+        _content, structured = result
+        if isinstance(structured, dict) and set(structured.keys()) == {"result"}:
+            return structured["result"]
+        return structured
+
     structured = getattr(result, "structuredContent", None)
     if structured not in (None, {}):
         if isinstance(structured, dict) and set(structured.keys()) == {"result"}:
