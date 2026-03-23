@@ -9,6 +9,7 @@ A pipeline for ingesting large engineering PDFs (tenders, specifications, etc.) 
 3. **Table Enhancement** — pdfplumber extracts accurate tables to replace Marker's table output where possible
 4. **Ingestion** — Extracted content is stored page-by-page in SQLite with FTS5 full-text search, section breadcrumbs, and LLM-extracted metadata
 5. **MCP Server** — An MCP server provides search, navigation, and re-extraction tools for LLM agents
+6. **Web Chat** — The built-in web chat now answers by using that same MCP tool surface instead of a separate private retrieval path
 
 ## Current Status
 
@@ -22,7 +23,7 @@ A pipeline for ingesting large engineering PDFs (tenders, specifications, etc.) 
 
 - Python 3.10+
 - [marker-pdf](https://pypi.org/project/marker-pdf/) (`pip install marker-pdf`)
-- An `ANTHROPIC_API_KEY` environment variable (for LLM metadata extraction)
+- An `ANTHROPIC_API_KEY` environment variable (for LLM metadata extraction and MCP-backed web chat)
 
 ## Setup
 
@@ -75,6 +76,14 @@ python ingest.py --project samples/split_output --db docs.db --skip-llm
 ```bash
 python mcp_server.py --db docs.db --port 8200
 ```
+
+### 5. Start the Web App
+
+```bash
+python web.py --db docs.db --port 8201 --mcp-port 8200
+```
+
+The web UI chat uses the same MCP tools exposed on the local MCP server, so the in-app assistant and external MCP clients investigate folder documents through the same interface.
 
 ## MCP Server Tools
 

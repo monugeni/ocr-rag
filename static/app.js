@@ -866,7 +866,7 @@ function renderChatShell(project, chats, messages) {
           ${messages.length ? renderChatMessages(messages) : `
             <div class="chat-empty" id="chat-empty">
               <h3>Ask about this folder</h3>
-              <p>The assistant will search only the documents inside <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer. You can also upload one document up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison against this folder.</p>
+              <p>The assistant will use this folder's MCP document tools against only <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer. You can also upload one document up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison against this folder.</p>
             </div>
           `}
         </div>
@@ -875,11 +875,11 @@ function renderChatShell(project, chats, messages) {
                  accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif"
                  onchange="handleChatAttachmentChange(event)">
           <textarea id="chat-input"
-                    placeholder="Ask a question about this folder's documents..."
+                    placeholder="Ask a question and the assistant will use this folder's MCP tools..."
                     onkeydown="handleChatKeydown(event)"></textarea>
           <div id="chat-attachment-slot">${renderPendingChatAttachment()}</div>
           <div class="chat-composer-footer">
-            <div class="chat-composer-hint">Markdown is supported in replies. You can also upload one PDF, image, Word, or Excel file up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison.</div>
+            <div class="chat-composer-hint">Markdown is supported in replies. The web chat uses the same MCP document tools exposed to external clients. You can also upload one PDF, image, Word, or Excel file up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison.</div>
             <div class="chat-composer-actions">
               <button class="btn btn-ghost" type="button" id="attach-chat-file-btn" onclick="openChatAttachmentPicker()">Review document</button>
               <button class="btn btn-primary" id="send-chat-btn" onclick="sendChatMessage()">Send</button>

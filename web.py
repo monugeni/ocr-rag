@@ -46,6 +46,7 @@ from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
+from chat_mcp_runner import run_folder_chat
 from ingest import (
     init_db, ingest_document, replay_corrections,
     extract_metadata_llm, apply_metadata, compute_embeddings,
@@ -102,6 +103,7 @@ def parse_split_info(filename: str) -> Optional[dict]:
 
 DB_PATH = "docs.db"
 UPLOADS_DIR = "./uploads"
+MCP_SERVER_URL = "http://127.0.0.1:8200/sse"
 executor = ThreadPoolExecutor(max_workers=2)
 
 app = FastAPI(title="Esteem Folder Knowledge", docs_url="/api/docs")
@@ -1408,6 +1410,32 @@ def _chat_api_key() -> Optional[str]:
     return os.environ.get("ANTHROPIC_API_KEY")
 
 
+def _generate_mcp_chat_answer(
+    folder: str,
+    question: str,
+    history: list[dict],
+    attachment: Optional[dict] = None,
+):
+    api_key = _chat_api_key()
+    if not api_key:
+        raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
+
+    try:
+        return run_folder_chat(
+            mcp_url=MCP_SERVER_URL,
+            api_key=api_key,
+            model=_chat_model_name(),
+            project=folder,
+            question=question,
+            history=history,
+            attachment=attachment,
+        )
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(502, f"Chat request failed: {exc}") from exc
+
+
 def _generate_folder_answer(folder: str, question: str, history: list[dict], retrieval: dict):
     if not retrieval["sources"]:
         return (
@@ -2293,34 +2321,8 @@ def create_chat_message(thread_id: str, data: dict):
 
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
-        retrieval = _retrieve_folder_context(
-            conn,
-            thread["project"],
-            content,
-            history,
-        )
-        answer = _generate_folder_answer(
-            thread["project"],
-            content,
-            history,
-            retrieval,
-        )
-        sources = [
-            {
-                "id": source["id"],
-                "doc_id": source["doc_id"],
-                "doc_title": source["doc_title"],
-                "folder": source["folder"],
-                "page_num": source["page_num"],
-                "breadcrumb": source["breadcrumb"],
-                "page_type": source["page_type"],
-                "snippet": source["snippet"],
-                "search_type": source["search_type"],
-                "score": source["score"],
-            }
-            for source in retrieval["sources"]
-        ]
-        _insert_chat_message(conn, thread_id, "assistant", answer, sources=sources)
+        response = _generate_mcp_chat_answer(thread["project"], content, history)
+        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources)
 
         if len(existing_messages) == 1 and thread["title"] == "New chat":
             conn.execute(
@@ -2340,8 +2342,8 @@ def create_chat_message(thread_id: str, data: dict):
             },
             "messages": _fetch_chat_messages(conn, thread_id),
             "retrieval": {
-                "query": retrieval["query"],
-                "source_count": len(retrieval["sources"]),
+                "query": content,
+                "source_count": len(response.sources),
             },
         }
     finally:
@@ -2376,39 +2378,17 @@ def review_chat_document(
 
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
-        retrieval = _retrieve_folder_context(
-            conn,
+        response = _generate_mcp_chat_answer(
             thread["project"],
             question,
             history,
-            attachment_excerpt=attachment["excerpt"],
-        )
-        answer = _generate_attachment_review(
-            thread["project"],
-            question,
-            history,
-            retrieval,
-            attachment,
+            attachment=attachment,
         )
         sources = [
             *attachment["assistant_sources"],
-            *[
-                {
-                    "id": source["id"],
-                    "doc_id": source["doc_id"],
-                    "doc_title": source["doc_title"],
-                    "folder": source["folder"],
-                    "page_num": source["page_num"],
-                    "breadcrumb": source["breadcrumb"],
-                    "page_type": source["page_type"],
-                    "snippet": source["snippet"],
-                    "search_type": source["search_type"],
-                    "score": source["score"],
-                }
-                for source in retrieval["sources"]
-            ],
+            *response.sources,
         ]
-        _insert_chat_message(conn, thread_id, "assistant", answer, sources=sources)
+        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=sources)
 
         if len(existing_messages) == 1 and thread["title"] == "New chat":
             conn.execute(
@@ -2428,8 +2408,8 @@ def review_chat_document(
             },
             "messages": _fetch_chat_messages(conn, thread_id),
             "retrieval": {
-                "query": retrieval["query"],
-                "source_count": len(retrieval["sources"]),
+                "query": question,
+                "source_count": len(response.sources),
                 "attachment_pages": attachment["page_count"],
             },
         }
@@ -2963,7 +2943,7 @@ def _start_mcp_server(db_path, port):
 
 
 def main():
-    global DB_PATH, UPLOADS_DIR
+    global DB_PATH, MCP_SERVER_URL, UPLOADS_DIR
 
     p = argparse.ArgumentParser(description='Esteem Project Knowledge Server (Web GUI + MCP)')
     p.add_argument('--db', default='docs.db', help='SQLite database path')
@@ -2976,6 +2956,7 @@ def main():
     args = p.parse_args()
 
     DB_PATH = args.db
+    MCP_SERVER_URL = f"http://127.0.0.1:{args.mcp_port}/sse"
     UPLOADS_DIR = args.uploads_dir
     Path(UPLOADS_DIR).mkdir(parents=True, exist_ok=True)
 
