@@ -28,7 +28,7 @@ let currentProject = null;
 let currentDocId = null;
 let currentPage = 1;
 let currentChatId = null;
-let currentFolderSection = 'documents';
+let currentFolderSection = 'chat';
 let selectedDocumentIds = new Set();
 let pollTimer = null;
 let refreshAfterPolling = false;
@@ -144,16 +144,16 @@ function parseFolderHash(hash) {
   const raw = hash.slice(8);
   const [folderPart, queryString = ''] = raw.split('?');
   const params = new URLSearchParams(queryString);
-  const section = params.get('section') || 'documents';
+  const section = params.get('section') || 'chat';
   return {
     folder: folderPart,
-    section: ['documents', 'ingestion', 'chat'].includes(section) ? section : 'documents',
+    section: ['documents', 'ingestion', 'chat'].includes(section) ? section : 'chat',
   };
 }
 
-function folderHash(project, section = 'documents') {
+function folderHash(project, section = 'chat') {
   const encoded = enc(project);
-  return section === 'documents'
+  return section === 'chat'
     ? `#/folder/${encoded}`
     : `#/folder/${encoded}?section=${encodeURIComponent(section)}`;
 }
@@ -164,7 +164,7 @@ function rootFolder(folder) {
 
 function renderFolderBreadcrumb(project) {
   const parts = String(project || '').split('/').filter(Boolean);
-  const section = currentFolderSection || 'documents';
+  const section = currentFolderSection || 'chat';
   let path = '';
   const items = [`<a href="#/">Folders</a>`];
 
@@ -217,7 +217,7 @@ function renderTreeNode(node, expanded) {
     : '';
   let html = `<div class="tree-node">
     <div class="project-item ${isActive ? 'active' : ''}"
-         onclick="navigate(folderHash(${jsq(node.folder)}, currentProject === ${jsq(node.folder)} ? currentFolderSection : 'documents'))"
+         onclick="navigate(folderHash(${jsq(node.folder)}, currentProject === ${jsq(node.folder)} ? currentFolderSection : 'chat'))"
          style="padding-left:${6 + (node.depth || 0) * 18}px">
       ${toggle}
       <span class="name" title="${esc(node.folder)}">${esc(node.display_name)}</span>
@@ -265,12 +265,29 @@ function showWelcome() {
   document.getElementById('content').innerHTML = `
     <div class="welcome">
       <h2>Esteem Folder Knowledge</h2>
-      <p>Select a folder to browse documents, ingest new files, and ask grounded questions only against that folder and its sub-folders.</p>
+      <p>Select a folder to open its chat and work against already ingested tender documents. Add more documents only when you need to refresh the folder.</p>
     </div>`;
   loadFolders();
 }
 
-async function showProject(project, section = 'documents') {
+function renderFolderTopbarActions(project, section) {
+  const actions = [];
+  if (section !== 'chat') {
+    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Open chat</button>`);
+  }
+  if (section !== 'documents') {
+    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>`);
+  }
+  if (section !== 'ingestion') {
+    actions.push(`<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Add documents</button>`);
+  }
+  actions.push(`<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>`);
+  actions.push(`<button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>`);
+  actions.push(`<button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`);
+  return actions.join('');
+}
+
+async function showProject(project, section = 'chat') {
   if (currentProject && currentProject !== project) {
     selectedDocumentIds.clear();
     workspaceNotice = null;
@@ -281,9 +298,7 @@ async function showProject(project, section = 'documents') {
   loadFolders();
   setTopbar(
     renderFolderBreadcrumb(project),
-    `<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>
-     <button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>
-     <button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`
+    renderFolderTopbarActions(project, section)
   );
 
   const content = document.getElementById('content');
@@ -316,9 +331,6 @@ async function showProject(project, section = 'documents') {
     }
 
     content.innerHTML = `
-      <div class="folder-section-nav">
-        ${renderFolderSectionTabs(project, section)}
-      </div>
       ${renderWorkspaceNotice()}
       ${renderFolderSection(project, section, {
         documents: docData.documents,
@@ -410,21 +422,6 @@ function renderUploadCard(project, pendingCount = 0) {
       </div>
     </div>
   `;
-}
-
-function renderFolderSectionTabs(project, activeSection) {
-  const tabs = [
-    ['documents', 'Documents'],
-    ['ingestion', 'Ingestion'],
-    ['chat', 'Chat'],
-  ];
-  return tabs.map(([section, label]) => `
-    <button
-      class="section-tab ${activeSection === section ? 'active' : ''}"
-      onclick="navigate('${folderHash(project, section)}')">
-      ${label}
-    </button>
-  `).join('');
 }
 
 function renderFolderSection(project, section, data) {
@@ -525,7 +522,7 @@ function renderDocumentsCard(project, documents, moveTargets = [], pendingCount 
 
   return `
     <div class="card">
-      <div class="card-title">Documents <span class="count">${documents.length}</span></div>
+      <div class="card-title">Library <span class="count">${documents.length}</span></div>
       ${documents.length ? `
         <div class="table-filters simple">
           <div class="table-filter-controls">
@@ -803,7 +800,11 @@ function renderChatShell(project, chats, messages) {
             <h3>${currentChatId ? esc((chats.find((chat) => chat.id === currentChatId)?.title) || 'New chat') : 'Folder chat'}</h3>
             <div class="chat-subtitle">Answers must be grounded only in documents from <strong>${esc(project)}</strong> and its sub-folders.</div>
           </div>
-          ${currentChatId ? `<button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>` : ''}
+          <div class="chat-header-actions">
+            <button class="btn btn-sm btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>
+            <button class="btn btn-sm btn-ghost" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Add documents</button>
+            ${currentChatId ? `<button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>` : ''}
+          </div>
         </div>
         <div class="chat-messages" id="chat-messages">
           ${messages.length ? renderChatMessages(messages) : `

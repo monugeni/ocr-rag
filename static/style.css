@@ -652,7 +652,7 @@ a:hover { text-decoration: underline; }
 }
 
 .chat-only-view .chat-shell {
-  min-height: calc(100vh - 210px);
+  min-height: calc(100vh - 150px);
 }
 
 /* Tables */
@@ -891,7 +891,7 @@ a:hover { text-decoration: underline; }
   box-shadow: var(--shadow);
   min-height: 100%;
   display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
+  grid-template-columns: 210px minmax(0, 1fr);
   overflow: hidden;
 }
 
@@ -986,6 +986,14 @@ a:hover { text-decoration: underline; }
 .chat-header h3 {
   font-size: 15px;
   font-weight: 700;
+}
+
+.chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .chat-subtitle {

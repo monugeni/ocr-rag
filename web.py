@@ -726,115 +726,48 @@ def _build_retrieval_query(history: list[dict], question: str) -> str:
     return question
 
 
-def _retrieve_folder_context(conn, folder: str, question: str, history: list[dict], limit: int = 6):
-    retrieval_query = _build_retrieval_query(history, question)
-    merged = []
-    seen = set()
-    for result in _fts_search_folder(conn, folder, retrieval_query, limit=limit):
-        key = (result["doc_id"], result["page_num"])
-        if key not in seen:
-            seen.add(key)
-            merged.append(result)
-    for result in _semantic_search_folder(conn, folder, retrieval_query, limit=limit):
-        key = (result["doc_id"], result["page_num"])
-        if key not in seen:
-            seen.add(key)
-            merged.append(result)
-    merged.sort(
-        key=lambda item: (0 if item["search_type"] == "fts" else 1, -item["score"])
-    )
-    final = merged[:limit]
-
-    sources = []
-    for idx, item in enumerate(final, start=1):
-        body = (item["content"] or "").strip()
-        if len(body) > 2200:
-            body = body[:2200].rstrip() + "\n...[truncated]"
-        sources.append({
-            "id": idx,
-            "doc_id": item["doc_id"],
-            "doc_title": item["doc_title"],
-            "folder": item["folder"],
-            "page_num": item["page_num"],
-            "breadcrumb": item["breadcrumb"],
-            "page_type": item["page_type"],
-            "snippet": item["snippet"],
-            "search_type": item["search_type"],
-            "score": round(item["score"], 4),
-            "content": body,
-        })
-    return {
-        "query": retrieval_query,
-        "sources": sources,
-    }
+CHAT_TOOL_CATALOG = [
+    {
+        "name": "search_pages",
+        "purpose": "keyword search across folder pages when exact terminology is likely to exist in the documents",
+    },
+    {
+        "name": "semantic_search",
+        "purpose": "vector search for conceptually similar passages when the wording may differ from the user's question",
+    },
+    {
+        "name": "search_sections",
+        "purpose": "search section headings and breadcrumbs to jump to relevant parts of documents",
+    },
+    {
+        "name": "get_document_info",
+        "purpose": "inspect document titles, metadata, and document types for relevant matches",
+    },
+    {
+        "name": "get_toc",
+        "purpose": "inspect a document outline before drilling into specific pages",
+    },
+    {
+        "name": "get_page",
+        "purpose": "read an exact page once a likely hit has been found",
+    },
+    {
+        "name": "get_pages",
+        "purpose": "expand to adjacent pages or a short page range for fuller context",
+    },
+]
 
 
-def _chat_model_name() -> str:
-    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-20250514")
-
-
-def _chat_api_key() -> Optional[str]:
-    return os.environ.get("ANTHROPIC_API_KEY")
-
-
-def _generate_folder_answer(folder: str, question: str, history: list[dict], retrieval: dict):
-    if not retrieval["sources"]:
-        return (
-            "I don't have enough information in this folder's documents to answer that.\n\n"
-            "Try asking with more specific document terms, section names, tags, or page topics."
-        )
-
+def _invoke_chat_model(system_prompt: str, messages: list[dict], max_tokens: int = 1600) -> str:
     api_key = _chat_api_key()
     if not api_key:
         raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
-
-    system_prompt = (
-        "You are Esteem Folder Knowledge, a folder-scoped document assistant.\n"
-        f"You are currently answering questions for the folder '{folder}'.\n"
-        "The folder scope includes that folder and all of its sub-folders.\n"
-        "You must answer ONLY from the provided source excerpts and the prior conversation.\n"
-        "Never use outside knowledge. Never use information from any folder outside this scope.\n"
-        "If the excerpts do not support a confident answer, say that you do not have enough "
-        "information in the documents for this folder.\n"
-        "Do not speculate or fill gaps.\n"
-        "Respond in markdown.\n"
-        "When you make factual claims, cite supporting sources inline like [1] or [2].\n"
-        "If useful, end with a brief 'Sources' list that references the same source numbers."
-    )
-
-    excerpts = []
-    for source in retrieval["sources"]:
-        excerpts.append(
-            f"[{source['id']}] {source['folder']} | {source['doc_title']} | page {source['page_num']} | "
-            f"{source['breadcrumb'] or 'No section breadcrumb'}\n"
-            f"{source['content']}"
-        )
-
-    prompt = (
-        f"Folder: {folder}\n"
-        f"Retrieved with query: {retrieval['query']}\n\n"
-        "Source excerpts:\n"
-        "================\n"
-        f"{chr(10).join(excerpts)}\n\n"
-        "Answer the user's latest question using only those excerpts."
-    )
-
-    messages = []
-    for item in history[-8:]:
-        messages.append({
-            "role": item["role"],
-            "content": item["content"],
-        })
-    messages.append({
-        "role": "user",
-        "content": f"{prompt}\n\nLatest user question:\n{question}",
-    })
 
     req = urllib.request.Request(
         "https://api.anthropic.com/v1/messages",
         data=json.dumps({
             "model": _chat_model_name(),
-            "max_tokens": 1600,
+            "max_tokens": max_tokens,
             "system": system_prompt,
             "messages": messages,
         }).encode("utf-8"),
@@ -863,6 +796,319 @@ def _generate_folder_answer(folder: str, question: str, history: list[dict], ret
     if not text:
         raise HTTPException(502, "LLM returned an empty response.")
     return text
+
+
+def _extract_json_object(text: str) -> dict:
+    start = text.find("{")
+    end = text.rfind("}")
+    if start == -1 or end == -1 or end < start:
+        raise ValueError("No JSON object found")
+    return json.loads(text[start:end + 1])
+
+
+def _dedupe_strings(values: list[str], limit: Optional[int] = None) -> list[str]:
+    result = []
+    seen = set()
+    for value in values:
+        clean = re.sub(r"\s+", " ", (value or "").strip())
+        if not clean:
+            continue
+        key = clean.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(clean)
+        if limit is not None and len(result) >= limit:
+            break
+    return result
+
+
+def _fallback_investigation_plan(question: str, retrieval_query: str) -> dict:
+    focus_terms = [
+        token.strip('"\'')
+        for token in re.findall(r"[A-Za-z0-9][A-Za-z0-9._/-]*", retrieval_query)
+        if len(token.strip('"\''))
+        and token.lower() not in {
+            "the", "and", "for", "from", "with", "that", "this", "there",
+            "what", "which", "where", "when", "into", "about", "their",
+        }
+    ][:8]
+    compact = " ".join(focus_terms[:5]) if focus_terms else retrieval_query
+    return {
+        "strategy_summary": (
+            "Start with exact folder search, then broaden with semantic search, "
+            "then expand nearby pages for context."
+        ),
+        "keyword_queries": _dedupe_strings([retrieval_query, compact], limit=3),
+        "semantic_queries": _dedupe_strings([question, retrieval_query], limit=2),
+        "section_queries": _dedupe_strings([compact], limit=2),
+        "focus_terms": focus_terms,
+    }
+
+
+def _plan_folder_investigation(folder: str, question: str, history: list[dict], retrieval_query: str) -> dict:
+    history_preview = "\n".join(
+        f"{item['role']}: {item['content']}"
+        for item in history[-6:]
+        if item.get("content")
+    ) or "[no prior messages]"
+    tool_lines = "\n".join(
+        f"- {tool['name']}: {tool['purpose']}"
+        for tool in CHAT_TOOL_CATALOG
+    )
+    system_prompt = (
+        "You are planning a folder-scoped document investigation.\n"
+        "The backend can use the following tools:\n"
+        f"{tool_lines}\n\n"
+        "Your job is to propose a gradual investigation plan: start with precise keyword search, "
+        "reword queries to match likely document terminology, use semantic search when wording may differ, "
+        "and use section/page expansion to gather surrounding context before answering.\n"
+        "Return JSON only with keys: strategy_summary, keyword_queries, semantic_queries, "
+        "section_queries, focus_terms.\n"
+        "Each query list should contain short, useful search strings, not full paragraphs."
+    )
+    messages = [{
+        "role": "user",
+        "content": (
+            f"Folder: {folder}\n"
+            f"Conversation so far:\n{history_preview}\n\n"
+            f"Latest question: {question}\n"
+            f"Combined retrieval query: {retrieval_query}\n"
+        ),
+    }]
+    try:
+        raw = _invoke_chat_model(system_prompt, messages, max_tokens=700)
+        plan = _extract_json_object(raw)
+        return {
+            "strategy_summary": str(plan.get("strategy_summary") or "").strip() or "Investigate with keyword and semantic search, then expand context.",
+            "keyword_queries": _dedupe_strings([retrieval_query, question, *(plan.get("keyword_queries") or [])], limit=4),
+            "semantic_queries": _dedupe_strings([question, *(plan.get("semantic_queries") or [])], limit=3),
+            "section_queries": _dedupe_strings(plan.get("section_queries") or [], limit=3),
+            "focus_terms": _dedupe_strings(plan.get("focus_terms") or [], limit=8),
+        }
+    except Exception:
+        return _fallback_investigation_plan(question, retrieval_query)
+
+
+def _search_sections_folder(conn, folder: str, query: str, limit: int = 4) -> list[dict]:
+    if not (query or "").strip():
+        return []
+    rows = conn.execute(
+        """
+        SELECT s.doc_id, d.title AS doc_title, d.project AS folder,
+               s.heading, s.level, s.page_start, COALESCE(s.page_end, s.page_start) AS page_end,
+               s.breadcrumb
+        FROM sections s
+        JOIN documents d ON d.id = s.doc_id
+        WHERE (d.project = ? OR d.project LIKE ?)
+          AND (s.heading LIKE ? OR s.breadcrumb LIKE ?)
+        ORDER BY s.level ASC, s.page_start ASC
+        LIMIT ?
+        """,
+        (folder, f"{folder}/%", f"%{query}%", f"%{query}%", limit),
+    ).fetchall()
+    return [dict(row) for row in rows]
+
+
+def _fetch_page_range(conn, doc_id: int, start: int, end: int) -> list[dict]:
+    rows = conn.execute(
+        """
+        SELECT p.doc_id, d.title AS doc_title, d.project AS folder,
+               p.page_num, p.breadcrumb, p.page_type, p.content
+        FROM pages p
+        JOIN documents d ON d.id = p.doc_id
+        WHERE p.doc_id = ? AND p.page_num BETWEEN ? AND ? AND p.page_type != 'skipped'
+        ORDER BY p.page_num
+        """,
+        (doc_id, start, end),
+    ).fetchall()
+    return [dict(row) for row in rows]
+
+
+def _append_source(sources: list[dict], seen: set, item: dict):
+    key = (item["doc_id"], item["page_num"])
+    if key in seen:
+        return
+    seen.add(key)
+    body = (item.get("content") or "").strip()
+    if len(body) > 2200:
+        body = body[:2200].rstrip() + "\n...[truncated]"
+    sources.append({
+        "doc_id": item["doc_id"],
+        "doc_title": item["doc_title"],
+        "folder": item["folder"],
+        "page_num": item["page_num"],
+        "breadcrumb": item.get("breadcrumb"),
+        "page_type": item.get("page_type") or "text",
+        "snippet": item.get("snippet") or body[:240],
+        "search_type": item.get("search_type") or "context",
+        "score": round(float(item.get("score") or 0.0), 4),
+        "content": body,
+    })
+
+
+def _retrieve_folder_context(conn, folder: str, question: str, history: list[dict], limit: int = 10):
+    retrieval_query = _build_retrieval_query(history, question)
+    plan = _plan_folder_investigation(folder, question, history, retrieval_query)
+    sources = []
+    seen = set()
+    investigation = []
+    base_hits = []
+
+    fts_queries = _dedupe_strings([retrieval_query, question, *(plan.get("keyword_queries") or [])], limit=4)
+    semantic_queries = _dedupe_strings([question, retrieval_query, *(plan.get("semantic_queries") or [])], limit=3)
+    section_queries = _dedupe_strings(plan.get("section_queries") or [], limit=3)
+
+    fts_count = 0
+    for query in fts_queries:
+        hits = _fts_search_folder(conn, folder, query, limit=4)
+        investigation.append(f"search_pages('{query}') -> {len(hits)} hit(s)")
+        for hit in hits:
+            if fts_count >= 6:
+                break
+            _append_source(sources, seen, hit)
+            base_hits.append(hit)
+            fts_count += 1
+        if fts_count >= 6:
+            break
+
+    semantic_count = 0
+    for query in semantic_queries:
+        hits = _semantic_search_folder(conn, folder, query, limit=4)
+        investigation.append(f"semantic_search('{query}') -> {len(hits)} hit(s)")
+        for hit in hits:
+            if semantic_count >= 4:
+                break
+            _append_source(sources, seen, hit)
+            base_hits.append(hit)
+            semantic_count += 1
+        if semantic_count >= 4:
+            break
+
+    expanded_sections = 0
+    for query in section_queries:
+        matches = _search_sections_folder(conn, folder, query, limit=2)
+        investigation.append(f"search_sections('{query}') -> {len(matches)} match(es)")
+        for match in matches:
+            if expanded_sections >= 4:
+                break
+            page_end = min(match["page_end"], match["page_start"] + 2)
+            pages = _fetch_page_range(conn, match["doc_id"], match["page_start"], page_end)
+            for page in pages:
+                page["search_type"] = "section"
+                page["score"] = 0.0
+                page["snippet"] = f"Section match: {match['heading']}"
+                _append_source(sources, seen, page)
+                expanded_sections += 1
+                if expanded_sections >= 4:
+                    break
+        if expanded_sections >= 4:
+            break
+
+    expanded_neighbors = 0
+    for hit in base_hits[:4]:
+        if expanded_neighbors >= 4:
+            break
+        start = max(1, hit["page_num"] - 1)
+        end = hit["page_num"] + 1
+        pages = _fetch_page_range(conn, hit["doc_id"], start, end)
+        investigation.append(
+            f"get_pages(doc={hit['doc_id']}, start={start}, end={end}) -> {len(pages)} page(s)"
+        )
+        for page in pages:
+            page["search_type"] = "context"
+            page["score"] = hit.get("score") or 0.0
+            page["snippet"] = f"Expanded around page {hit['page_num']}"
+            before = len(sources)
+            _append_source(sources, seen, page)
+            if len(sources) > before:
+                expanded_neighbors += 1
+                if expanded_neighbors >= 4:
+                    break
+
+    final = sources[:limit]
+    for idx, item in enumerate(final, start=1):
+        item["id"] = idx
+
+    return {
+        "query": retrieval_query,
+        "plan": plan,
+        "investigation": investigation,
+        "sources": final,
+    }
+
+
+def _chat_model_name() -> str:
+    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-20250514")
+
+
+def _chat_api_key() -> Optional[str]:
+    return os.environ.get("ANTHROPIC_API_KEY")
+
+
+def _generate_folder_answer(folder: str, question: str, history: list[dict], retrieval: dict):
+    if not retrieval["sources"]:
+        return (
+            "I don't have enough information in this folder's documents to answer that.\n\n"
+            "Try asking with more specific document terms, section names, tags, or page topics."
+        )
+
+    system_prompt = (
+        "You are Esteem Folder Knowledge, a folder-scoped document assistant.\n"
+        f"You are currently answering questions for the folder '{folder}'.\n"
+        "The folder scope includes that folder and all of its sub-folders.\n"
+        "You must answer ONLY from the provided source excerpts and the prior conversation.\n"
+        "Available investigation tools in this system are: search_pages, semantic_search, search_sections, "
+        "get_document_info, get_toc, get_page, and get_pages.\n"
+        "The backend has already used these tools to investigate before answering.\n"
+        "Treat this as a deliberate research workflow: start from the strongest direct evidence, then synthesize "
+        "broader context from related sections and nearby pages.\n"
+        "Never use outside knowledge. Never use information from any folder outside this scope.\n"
+        "If the excerpts do not support a confident answer, say that you do not have enough "
+        "information in the documents for this folder.\n"
+        "Do not speculate or fill gaps.\n"
+        "Respond in markdown.\n"
+        "When you make factual claims, cite supporting sources inline like [1] or [2].\n"
+        "Aim for a comprehensive answer, not a shallow summary. Compare documents when relevant, "
+        "call out uncertainty or disagreement explicitly, and use brief headings when they help.\n"
+        "If useful, end with a brief 'Sources' list that references the same source numbers."
+    )
+
+    excerpts = []
+    for source in retrieval["sources"]:
+        excerpts.append(
+            f"[{source['id']}] {source['folder']} | {source['doc_title']} | page {source['page_num']} | "
+            f"{source['breadcrumb'] or 'No section breadcrumb'}\n"
+            f"{source['content']}"
+        )
+
+    prompt = (
+        f"Folder: {folder}\n"
+        f"Retrieved with query: {retrieval['query']}\n\n"
+        f"Investigation strategy: {retrieval.get('plan', {}).get('strategy_summary', '')}\n"
+        "Available tools:\n"
+        + "\n".join(f"- {tool['name']}: {tool['purpose']}" for tool in CHAT_TOOL_CATALOG)
+        + "\n\nInvestigation log:\n"
+        + "\n".join(f"- {step}" for step in retrieval.get("investigation", []))
+        + "\n\n"
+        "Source excerpts:\n"
+        "================\n"
+        f"{chr(10).join(excerpts)}\n\n"
+        "Answer the user's latest question using only those excerpts. First resolve the core question, "
+        "then add the supporting detail that makes the answer useful."
+    )
+
+    messages = []
+    for item in history[-8:]:
+        messages.append({
+            "role": item["role"],
+            "content": item["content"],
+        })
+    messages.append({
+        "role": "user",
+        "content": f"{prompt}\n\nLatest user question:\n{question}",
+    })
+    return _invoke_chat_model(system_prompt, messages, max_tokens=2200)
 
 
 # ---------------------------------------------------------------------------
