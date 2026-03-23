@@ -266,6 +266,118 @@ def _delete_document_data(conn, doc_id: int):
     conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
 
 
+def _record_upload_event(
+    conn,
+    project: str,
+    relative_path: str,
+    filename: str,
+    action: str,
+    reason: str = "",
+    job_id: str | None = None,
+    details: str = "",
+):
+    conn.execute(
+        """
+        INSERT INTO upload_events (project, relative_path, filename, action, reason, job_id, details)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        """,
+        (project, relative_path, filename, action, reason or None, job_id, details or None),
+    )
+
+
+def _resolve_upload_path(upload_relative_path: str) -> Path:
+    uploads_root = Path(UPLOADS_DIR).resolve()
+    candidate = (uploads_root / _normalize_folder_name(upload_relative_path)).resolve()
+    try:
+        candidate.relative_to(uploads_root)
+    except ValueError as exc:
+        raise HTTPException(400, "Invalid upload path") from exc
+    return candidate
+
+
+def _prune_empty_upload_dirs(path: Path):
+    uploads_root = Path(UPLOADS_DIR).resolve()
+    current = path.parent
+    while current != uploads_root:
+        try:
+            current.relative_to(uploads_root)
+        except ValueError:
+            return
+        try:
+            current.rmdir()
+        except OSError:
+            return
+        current = current.parent
+
+
+def _discard_upload_path(
+    upload_relative_path: str,
+    *,
+    reason: str = "",
+    job_id: str | None = None,
+    action: str = "discarded",
+):
+    upload_relative_path = _normalize_folder_name(upload_relative_path)
+    upload_path = _resolve_upload_path(upload_relative_path)
+    if not upload_path.exists():
+        raise HTTPException(404, "Pending file not found")
+
+    project = _folder_relative_path(upload_path.parent, Path(UPLOADS_DIR))
+    conn = get_conn()
+    try:
+        _record_upload_event(
+            conn,
+            project=project,
+            relative_path=upload_relative_path,
+            filename=upload_path.name,
+            action=action,
+            reason=reason,
+            job_id=job_id,
+        )
+        upload_path.unlink()
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+    _prune_empty_upload_dirs(upload_path)
+    return {
+        "status": "deleted",
+        "project": project,
+        "relative_path": upload_relative_path,
+        "filename": upload_path.name,
+    }
+
+
+def _raise_if_cancel_requested(jid: str):
+    job = tracker.get(jid)
+    if not job or not job.get("cancel_requested"):
+        return
+    reason = job.get("cancel_reason") or "Cancelled by user"
+    raise IngestionCancelled(reason)
+
+
+def _job_upload_relative_path(job: dict) -> str | None:
+    candidates = [
+        job.get("source_path"),
+        f"{job.get('project', '')}/{job.get('filename', '')}",
+        f"{_folder_root(job.get('project', ''))}/{job.get('filename', '')}",
+    ]
+    for candidate in candidates:
+        candidate = _normalize_folder_name(candidate or "")
+        if not candidate:
+            continue
+        try:
+            resolved = _resolve_upload_path(candidate)
+        except HTTPException:
+            continue
+        if resolved.exists():
+            return _folder_relative_path(resolved, Path(UPLOADS_DIR))
+    return None
+
+
 def _rollback_split_ingestion(
     original_path: Path,
     archived_original_path: Path | None,
@@ -766,13 +878,13 @@ class IngestionTracker:
         conn.row_factory = sqlite3.Row
         return conn
 
-    def create(self, filename, project):
+    def create(self, filename, project, source_path=None):
         jid = str(uuid4())[:8]
         conn = self._conn()
         conn.execute(
-            "INSERT INTO ingestion_jobs (id, filename, project, status, stage) "
-            "VALUES (?, ?, ?, 'queued', '')",
-            (jid, filename, project)
+            "INSERT INTO ingestion_jobs (id, filename, project, status, stage, source_path) "
+            "VALUES (?, ?, ?, 'queued', '', ?)",
+            (jid, filename, project, source_path)
         )
         conn.commit()
         conn.close()
@@ -790,9 +902,9 @@ class IngestionTracker:
 
     def all(self):
         conn = self._conn()
-        # Clean completed/failed jobs older than 1 hour
+        # Clean terminal jobs older than 1 hour
         conn.execute(
-            "DELETE FROM ingestion_jobs WHERE status IN ('completed', 'failed') "
+            "DELETE FROM ingestion_jobs WHERE status IN ('completed', 'failed', 'cancelled') "
             "AND started_at < datetime('now', '-1 hour')"
         )
         conn.commit()
@@ -814,12 +926,26 @@ class IngestionTracker:
         conn.close()
         return [dict(r) for r in rows]
 
+    def get(self, jid):
+        conn = self._conn()
+        row = conn.execute("SELECT * FROM ingestion_jobs WHERE id = ?", (jid,)).fetchone()
+        conn.close()
+        return dict(row) if row else None
+
+    def is_cancel_requested(self, jid):
+        row = self.get(jid)
+        return bool(row and row.get("cancel_requested"))
+
 
 tracker = IngestionTracker()
 
 
 class IngestionError(RuntimeError):
     """Raised when a file cannot be ingested cleanly."""
+
+
+class IngestionCancelled(RuntimeError):
+    """Raised when a user requests cancellation for an ingestion job."""
 
 
 # ---------------------------------------------------------------------------
@@ -1105,6 +1231,55 @@ async def upload_files(
         # else: silently skip unsupported types
 
     return {"uploaded": uploaded, "count": len(uploaded)}
+
+
+@app.post("/api/projects/{folder:path}/pending/{filename:path}/discard")
+@app.post("/api/folders/{folder:path}/pending/{filename:path}/discard")
+def discard_pending_file(folder: str, filename: str, data: Optional[dict] = None):
+    folder = _validate_folder_name(folder, "Folder name")
+    relative_name = _normalize_folder_name(filename)
+    upload_relative = _normalize_folder_name(f"{folder}/{relative_name}")
+    _resolve_upload_path(upload_relative)
+    reason = ((data or {}).get("reason") or "Removed from pending by user").strip()
+
+    result = _discard_upload_path(
+        upload_relative,
+        reason=reason,
+        action="discarded_pending",
+    )
+
+    conn = get_conn()
+    try:
+        rows = conn.execute(
+            """
+            SELECT id, status FROM ingestion_jobs
+            WHERE source_path = ? AND status IN ('queued', 'running', 'failed')
+            """,
+            (upload_relative,),
+        ).fetchall()
+    finally:
+        conn.close()
+
+    for row in rows:
+        if row["status"] == "running":
+            tracker.update(
+                row["id"],
+                cancel_requested=1,
+                cancel_reason=reason,
+                stage="Cancellation requested",
+            )
+        else:
+            tracker.update(
+                row["id"],
+                status="cancelled",
+                stage="Removed from pending",
+                error=reason,
+                cancel_requested=0,
+                delete_after_cancel=0,
+                cancel_reason=reason,
+            )
+
+    return result
 
 
 @app.patch("/api/documents/{doc_id}")
@@ -1549,6 +1724,7 @@ def _is_duplicate(conn, project, filename, file_path):
 def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
     """Ingest a single file (PDF, image, DOCX, XLSX)."""
     prefix = f"{stage_prefix}" if stage_prefix else ""
+    _raise_if_cancel_requested(jid)
 
     # Duplicate check
     conn = sqlite3.connect(DB_PATH)
@@ -1564,6 +1740,7 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
 
     tracker.update(jid, status="running", stage=f"{prefix}Extracting text & headings")
     pages, sections = extract_file(str(file_path))
+    _raise_if_cancel_requested(jid)
 
     if not pages:
         raise IngestionError(f"No content extracted from {filename}")
@@ -1580,9 +1757,11 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
             filename=filename,
             pdf_path=str(Path(file_path).resolve()),
         )
+        _raise_if_cancel_requested(jid)
 
         tracker.update(jid, stage=f"{prefix}Replaying corrections")
         replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
+        _raise_if_cancel_requested(jid)
 
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if api_key:
@@ -1593,6 +1772,7 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
 
         tracker.update(jid, stage=f"{prefix}Computing embeddings")
         compute_embeddings(conn, doc_id)
+        _raise_if_cancel_requested(jid)
         return doc_id
     except Exception as exc:
         conn.rollback()
@@ -1610,12 +1790,13 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
 def _run_ingestion(jid, file_path, project, filename):
     """Run in thread pool. Splits large PDFs first, then ingests each part.
 
-    Non-PDF files (images, DOCX, XLSX) are ingested directly — splitting
+    Non-PDF files (images, DOC/DOCX, XLS/XLSX) are ingested directly — splitting
     only applies to PDFs.
     """
     try:
         project_dir = Path(UPLOADS_DIR) / project
         ext = Path(filename).suffix.lower()
+        _raise_if_cancel_requested(jid)
 
         # Only PDFs go through the splitting pipeline
         if ext != '.pdf':
@@ -1628,6 +1809,7 @@ def _run_ingestion(jid, file_path, project, filename):
         tracker.update(jid, status="running", stage="Checking for document boundaries")
 
         parts = _split_pdf(file_path, project_dir)
+        _raise_if_cancel_requested(jid)
 
         if len(parts) == 1 and str(parts[0]) == file_path:
             # Single document — ingest directly
@@ -1652,6 +1834,7 @@ def _run_ingestion(jid, file_path, project, filename):
             skipped_parts = 0
             for i, part in enumerate(parts, 1):
                 prefix = f"[{i}/{len(parts)}] "
+                _raise_if_cancel_requested(jid)
                 try:
                     doc_id = _ingest_one(jid, str(part), project, part.name, stage_prefix=prefix)
                 except IngestionError as exc:
@@ -1672,6 +1855,24 @@ def _run_ingestion(jid, file_path, project, filename):
                 stage=f"Done — processed {len(parts)} split documents ({', '.join(summary)})",
             )
 
+    except IngestionCancelled as exc:
+        job = tracker.get(jid) or {}
+        tracker.update(
+            jid,
+            status="cancelled",
+            stage="Cancelled by user",
+            error=str(exc),
+        )
+        if job.get("delete_after_cancel") and job.get("source_path"):
+            try:
+                _discard_upload_path(
+                    job["source_path"],
+                    reason=job.get("cancel_reason") or str(exc),
+                    job_id=jid,
+                    action="cancelled_and_deleted",
+                )
+            except HTTPException:
+                pass
     except Exception as e:
         tracker.update(jid, status="failed", error=str(e))
 
@@ -1693,7 +1894,11 @@ async def ingest_all(folder: str):
     jobs = []
     for pending in pending_files:
         file_path = _folder_disk_path(pending["folder"]) / pending["filename"]
-        jid = tracker.create(pending["relative_path"], pending["folder"])
+        jid = tracker.create(
+            pending["relative_path"],
+            pending["folder"],
+            source_path=_folder_relative_path(file_path, Path(UPLOADS_DIR)),
+        )
         loop.run_in_executor(
             executor, _run_ingestion, jid, str(file_path), pending["folder"], pending["filename"]
         )
@@ -1711,7 +1916,11 @@ async def ingest_single(folder: str, filename: str):
         raise HTTPException(404, f"File not found: {filename}")
 
     target_folder = _folder_relative_path(file_path.parent, Path(UPLOADS_DIR))
-    jid = tracker.create(relative_name, target_folder)
+    jid = tracker.create(
+        relative_name,
+        target_folder,
+        source_path=_folder_relative_path(file_path, Path(UPLOADS_DIR)),
+    )
     loop = asyncio.get_event_loop()
     loop.run_in_executor(
         executor, _run_ingestion, jid, str(file_path), target_folder, file_path.name
@@ -1722,6 +1931,59 @@ async def ingest_single(folder: str, filename: str):
 @app.get("/api/ingestion/jobs")
 def get_jobs():
     return tracker.all()
+
+
+@app.post("/api/ingestion/jobs/{job_id}/cancel")
+def cancel_ingestion_job(job_id: str, data: Optional[dict] = None):
+    job = tracker.get(job_id)
+    if not job:
+        raise HTTPException(404, "Ingestion job not found")
+
+    reason = ((data or {}).get("reason") or "Cancelled by user").strip()
+    delete_file = bool((data or {}).get("delete_file"))
+
+    if job["status"] == "completed":
+        raise HTTPException(400, "Completed ingestion jobs cannot be cancelled")
+    if job["status"] == "cancelled":
+        return {"status": "cancelled", "job_id": job_id}
+
+    upload_relative = _job_upload_relative_path(job)
+
+    if job["status"] in {"queued", "failed"}:
+        if delete_file and upload_relative:
+            _discard_upload_path(
+                upload_relative,
+                reason=reason,
+                job_id=job_id,
+                action="cancelled_and_deleted",
+            )
+        tracker.update(
+            job_id,
+            status="cancelled",
+            stage="Cancelled by user",
+            error=reason,
+            cancel_requested=0,
+            delete_after_cancel=0,
+            cancel_reason=reason,
+        )
+        return {
+            "status": "cancelled",
+            "job_id": job_id,
+            "deleted_file": bool(delete_file and upload_relative),
+        }
+
+    tracker.update(
+        job_id,
+        cancel_requested=1,
+        delete_after_cancel=1 if delete_file else 0,
+        cancel_reason=reason,
+        stage="Cancellation requested",
+    )
+    return {
+        "status": "cancelling",
+        "job_id": job_id,
+        "delete_file": delete_file,
+    }
 
 
 # ---------------------------------------------------------------------------

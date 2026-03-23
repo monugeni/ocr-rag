@@ -10,6 +10,10 @@
   --muted: #6f8398;
   --brand: #7eaed8;
   --brand-strong: #5f93c2;
+  --button-primary: #3f7fbb;
+  --button-primary-hover: #31689c;
+  --button-ghost-border: #bfd3e6;
+  --button-ghost-hover: #e7f0f8;
   --sidebar-bg: #edf5fc;
   --sidebar-muted: #7c90a5;
   --sidebar-border: #d8e5f1;
@@ -267,11 +271,15 @@ a:hover { text-decoration: underline; }
 }
 
 .btn-primary {
-  background: var(--brand);
+  background: var(--button-primary);
   color: #fff;
+  border-color: var(--button-primary);
 }
 
-.btn-primary:hover { background: var(--brand-strong); }
+.btn-primary:hover {
+  background: var(--button-primary-hover);
+  border-color: var(--button-primary-hover);
+}
 
 .btn-danger {
   background: var(--danger);
@@ -291,13 +299,18 @@ a:hover { text-decoration: underline; }
 .btn-sm { padding: 5px 10px; font-size: 12px; }
 
 .btn-ghost {
-  background: transparent;
-  color: var(--brand);
-  border-color: transparent;
+  background: #fff;
+  color: #2f6b9f;
+  border-color: var(--button-ghost-border);
   padding: 5px 9px;
 }
 
-.btn-ghost:hover { background: #eef5fc; text-decoration: none; }
+.btn-ghost:hover {
+  background: var(--button-ghost-hover);
+  border-color: #96b6d2;
+  color: #25557f;
+  text-decoration: none;
+}
 
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
@@ -820,6 +833,11 @@ a:hover { text-decoration: underline; }
   border-radius: 10px;
 }
 
+.job-card.cancelled {
+  background: #f7f9fb;
+  border-color: #d8e1ea;
+}
+
 .job-row {
   display: flex;
   align-items: flex-start;
@@ -844,6 +862,7 @@ a:hover { text-decoration: underline; }
 .job-card .status.completed { background: #def2e2; color: #5b8665; }
 .job-card .status.failed { background: #f6dce4; color: #946273; }
 .job-card .status.queued { background: #eaf1f8; color: #5d748a; }
+.job-card .status.cancelled { background: #edf1f5; color: #5f7285; }
 
 .job-card-footer {
   display: flex;

@@ -154,6 +154,21 @@ CREATE TABLE IF NOT EXISTS ingestion_jobs (
     started_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS upload_events (
+    id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    project      TEXT NOT NULL,
+    relative_path TEXT NOT NULL,
+    filename     TEXT NOT NULL,
+    action       TEXT NOT NULL,
+    reason       TEXT,
+    job_id       TEXT,
+    details      TEXT,
+    created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_upload_events_project_created
+    ON upload_events(project, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS chat_threads (
     id          TEXT PRIMARY KEY,
     project     TEXT NOT NULL,
@@ -183,7 +198,24 @@ def init_db(db_path: str) -> sqlite3.Connection:
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA foreign_keys=ON")
     conn.executescript(SCHEMA)
+    _ensure_table_columns(conn, "ingestion_jobs", {
+        "source_path": "TEXT",
+        "cancel_requested": "INTEGER NOT NULL DEFAULT 0",
+        "delete_after_cancel": "INTEGER NOT NULL DEFAULT 0",
+        "cancel_reason": "TEXT",
+    })
     return conn
+
+
+def _ensure_table_columns(conn: sqlite3.Connection, table: str, columns: dict[str, str]):
+    existing = {
+        row["name"]
+        for row in conn.execute(f"PRAGMA table_info({table})").fetchall()
+    }
+    for name, ddl in columns.items():
+        if name in existing:
+            continue
+        conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {ddl}")
 
 
 # ---------------------------------------------------------------------------

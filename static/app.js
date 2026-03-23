@@ -36,7 +36,7 @@ let thinkingTimer = null;
 let workspaceNotice = null;
 
 const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
-const SUPPORTED_EXT = new Set(['.pdf', '.docx', '.xlsx', '.xls', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
+const SUPPORTED_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
 const THINKING_STEPS = [
   'Searching folder documents',
   'Reviewing earlier messages in this chat',
@@ -388,7 +388,7 @@ function renderUploadCard(project, pendingCount = 0) {
         <span>Upload files</span>
         <span class="count">${pendingLabel}</span>
       </div>
-      <div class="card-intro">Drop files here, then ingest them when you are ready. Supported: PDF, DOCX, spreadsheets, images, ZIP/TAR archives.</div>
+      <div class="card-intro">Drop files here, then ingest them when you are ready. Supported: PDF, DOC, DOCX, XLS, XLSX, images, ZIP/TAR archives.</div>
       <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-busy="false"
          aria-describedby="upload-subtitle"
          ondragover="event.preventDefault(); this.classList.add('dragover')"
@@ -399,7 +399,7 @@ function renderUploadCard(project, pendingCount = 0) {
         <div class="upload-area-icon" aria-hidden="true">+</div>
         <div class="upload-area-title" id="upload-title">Drop files into ${esc(project)}</div>
         <div class="upload-area-subtitle" id="upload-subtitle">Files stay in pending until you ingest them.</div>
-        <input type="file" id="file-input" accept=".pdf,.docx,.xlsx,.xls,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
+        <input type="file" id="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
                onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
         <input type="file" id="folder-input" webkitdirectory style="display:none"
                onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
@@ -502,6 +502,8 @@ function renderPendingUploads(project, pending) {
               <td>
                 <button class="btn btn-ghost btn-sm"
                         onclick="ingestSingle(${jsq(project)}, ${jsq(file.relative_path)}, ${jsq(file.filename)})">Ingest now</button>
+                <button class="btn btn-ghost btn-sm"
+                        onclick="discardPendingFile(${jsq(project)}, ${jsq(file.relative_path)}, ${jsq(file.filename)})">Delete</button>
               </td>
             </tr>
           `).join('')}
@@ -1421,6 +1423,55 @@ async function ingestSingle(project, filename, label = filename) {
   }
 }
 
+async function discardPendingFile(project, relativePath, label = relativePath) {
+  if (!confirm(`Delete pending file "${label}"?`)) {
+    return;
+  }
+  try {
+    await api(`/folders/${enc(project)}/pending/${encPath(relativePath)}/discard`, {
+      method: 'POST',
+      body: JSON.stringify({ reason: 'Removed after failed or unwanted ingestion.' }),
+    });
+    showWorkspaceNotice('success', `Deleted ${label}.`, 'A record of the discard was kept in the audit log.');
+    await showProject(project, currentFolderSection);
+  } catch (error) {
+    showWorkspaceNotice('error', `Could not delete ${label}.`, error.message);
+    await showProject(project, currentFolderSection);
+  }
+}
+
+async function cancelIngestionJob(jobId, label, deleteFile = false) {
+  const prompt = deleteFile
+    ? `Cancel this ingestion and delete "${label}" from pending uploads?`
+    : `Cancel ingestion for "${label}"?`;
+  if (!confirm(prompt)) {
+    return;
+  }
+  try {
+    const result = await api(`/ingestion/jobs/${enc(jobId)}/cancel`, {
+      method: 'POST',
+      body: JSON.stringify({
+        delete_file: deleteFile,
+        reason: deleteFile ? 'Cancelled and removed by user.' : 'Cancelled by user.',
+      }),
+    });
+    const detail = result.status === 'cancelling'
+      ? 'The worker will stop at the next safe checkpoint.'
+      : deleteFile
+        ? 'The file was removed from pending uploads and the action was recorded.'
+        : 'The job was marked as cancelled.';
+    showWorkspaceNotice('info', `Updated ingestion for ${label}.`, detail);
+    if (currentProject) {
+      await showProject(currentProject, currentFolderSection);
+    }
+  } catch (error) {
+    showWorkspaceNotice('error', `Could not update ingestion for ${label}.`, error.message);
+    if (currentProject) {
+      await showProject(currentProject, currentFolderSection);
+    }
+  }
+}
+
 function startPolling(project) {
   stopPolling();
   refreshAfterPolling = true;
@@ -1455,7 +1506,9 @@ async function pollJobs(project) {
       return;
     }
 
-    const allDone = projectJobs.every((job) => job.status === 'completed' || job.status === 'failed');
+    const allDone = projectJobs.every((job) =>
+      job.status === 'completed' || job.status === 'failed' || job.status === 'cancelled'
+    );
     if (allDone) {
       stopPolling();
     }
@@ -1497,6 +1550,22 @@ function renderJobActivity(jobs) {
 
 function renderJobCard(job) {
   const statusLabel = job.status ? `${job.status[0].toUpperCase()}${job.status.slice(1)}` : 'Unknown';
+  const actions = [];
+  if (job.doc_id) {
+    actions.push(`<a href="#/doc/${job.doc_id}">Open document</a>`);
+  } else {
+    actions.push('<span class="muted">Document link appears after indexing</span>');
+  }
+  if (job.status === 'running' || job.status === 'queued') {
+    actions.push(
+      `<button class="btn btn-ghost btn-sm" onclick="cancelIngestionJob(${jsq(job.id)}, ${jsq(job.filename)}, false)">Cancel</button>`
+    );
+  }
+  if (job.status === 'failed') {
+    actions.push(
+      `<button class="btn btn-ghost btn-sm" onclick="cancelIngestionJob(${jsq(job.id)}, ${jsq(job.filename)}, true)">Cancel &amp; delete file</button>`
+    );
+  }
   return `
     <div class="job-card ${esc(job.status || '')}">
       <div class="job-row">
@@ -1507,7 +1576,7 @@ function renderJobCard(job) {
         <span class="status ${esc(job.status || '')}">${esc(statusLabel)}</span>
       </div>
       <div class="job-card-footer">
-        ${job.doc_id ? `<a href="#/doc/${job.doc_id}">Open document</a>` : '<span class="muted">Document link appears after indexing</span>'}
+        ${actions.join('')}
         ${job.started_at ? `<span class="muted">${esc(formatDate(job.started_at))}</span>` : ''}
       </div>
       ${job.error ? `<div class="job-error">${esc(job.error)}</div>` : ''}

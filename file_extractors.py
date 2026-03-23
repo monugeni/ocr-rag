@@ -1,5 +1,5 @@
 """
-Extract text from non-PDF file types (images, DOCX, XLSX)
+Extract text from non-PDF file types (images, DOC/DOCX, XLS/XLSX)
 and handle archive extraction (ZIP, TAR, GZ).
 
 Every extractor returns (pages, sections) in the same format as
@@ -8,16 +8,22 @@ extractor.extract_pdf() so the rest of the ingestion pipeline
 """
 
 import gzip
+import shutil
 import subprocess
 import tarfile
+import tempfile
 import zipfile
 from pathlib import Path
 
 IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif'}
+DOC_EXTENSIONS = {'.doc'}
 DOCX_EXTENSIONS = {'.docx'}
-XLSX_EXTENSIONS = {'.xlsx', '.xls'}
+XLS_EXTENSIONS = {'.xls'}
+XLSX_EXTENSIONS = {'.xlsx'}
 PDF_EXTENSIONS = {'.pdf'}
-INGESTABLE_EXTENSIONS = PDF_EXTENSIONS | IMAGE_EXTENSIONS | DOCX_EXTENSIONS | XLSX_EXTENSIONS
+INGESTABLE_EXTENSIONS = (
+    PDF_EXTENSIONS | IMAGE_EXTENSIONS | DOC_EXTENSIONS | DOCX_EXTENSIONS | XLS_EXTENSIONS | XLSX_EXTENSIONS
+)
 ARCHIVE_EXTENSIONS = {'.zip', '.tar', '.tgz'}  # .tar.gz handled separately
 
 
@@ -154,6 +160,41 @@ def extract_image(image_path: str) -> tuple[list[dict], list[dict]]:
 # DOCX extraction
 # ---------------------------------------------------------------------------
 
+
+def _convert_with_soffice(source_path: str, target_ext: str) -> Path:
+    soffice = shutil.which('soffice') or shutil.which('libreoffice')
+    if not soffice:
+        raise RuntimeError(
+            f"Legacy Office conversion for {Path(source_path).suffix.lower()} requires LibreOffice (soffice)."
+        )
+
+    with tempfile.TemporaryDirectory(prefix='office-convert-') as tmp_dir:
+        result = subprocess.run(
+            [
+                soffice,
+                '--headless',
+                '--convert-to', target_ext.lstrip('.'),
+                '--outdir', tmp_dir,
+                str(source_path),
+            ],
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        if result.returncode != 0:
+            detail = (result.stderr or result.stdout).strip() or 'unknown conversion error'
+            raise RuntimeError(f"LibreOffice conversion failed: {detail}")
+
+        converted = Path(tmp_dir) / (Path(source_path).stem + target_ext)
+        if not converted.exists():
+            raise RuntimeError(f"LibreOffice did not produce a {target_ext} file.")
+
+        persistent_dir = Path(tempfile.mkdtemp(prefix='office-converted-'))
+        persistent_path = persistent_dir / converted.name
+        shutil.copy2(converted, persistent_path)
+        return persistent_path
+
+
 def _table_to_markdown(table) -> str:
     """Convert a python-docx Table to a markdown table."""
     rows = []
@@ -253,15 +294,73 @@ def extract_docx(docx_path: str) -> tuple[list[dict], list[dict]]:
     return pages, sections
 
 
+def extract_doc(doc_path: str) -> tuple[list[dict], list[dict]]:
+    """Extract legacy Word .doc files."""
+    converted_path = None
+    try:
+        converted_path = _convert_with_soffice(doc_path, '.docx')
+        return extract_docx(str(converted_path))
+    except RuntimeError as soffice_error:
+        antiword = shutil.which('antiword')
+        if antiword:
+            result = subprocess.run(
+                [antiword, str(doc_path)],
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            text = result.stdout.strip()
+            if text:
+                return ([{
+                    'page_num': 1,
+                    'content': text,
+                    'breadcrumb': '',
+                }], [])
+        raise RuntimeError(
+            "Legacy .doc import requires LibreOffice/soffice or antiword to be installed on the server."
+        ) from soffice_error
+    finally:
+        if converted_path:
+            try:
+                converted_path.unlink(missing_ok=True)
+                converted_path.parent.rmdir()
+            except OSError:
+                pass
+
+
 # ---------------------------------------------------------------------------
-# XLSX extraction
+# XLS / XLSX extraction
 # ---------------------------------------------------------------------------
+
+
+def _rows_to_sheet_page(sheet_name: str, rows: list[list[str]], page_num: int) -> dict:
+    if not rows:
+        return {
+            'page_num': page_num,
+            'content': f'{sheet_name}\n[Empty sheet]',
+            'breadcrumb': sheet_name,
+        }
+
+    ncols = max(len(r) for r in rows)
+    for r in rows:
+        while len(r) < ncols:
+            r.append('')
+
+    lines = [sheet_name, '']
+    lines.append('| ' + ' | '.join(rows[0]) + ' |')
+    lines.append('| ' + ' | '.join(['---'] * ncols) + ' |')
+    for r in rows[1:]:
+        lines.append('| ' + ' | '.join(r) + ' |')
+
+    return {
+        'page_num': page_num,
+        'content': '\n'.join(lines),
+        'breadcrumb': sheet_name,
+    }
+
 
 def extract_xlsx(xlsx_path: str) -> tuple[list[dict], list[dict]]:
-    """Extract sheets from XLSX -> (pages, sections).
-
-    Each sheet becomes a page with cell data rendered as a markdown table.
-    """
+    """Extract sheets from XLSX -> (pages, sections)."""
     from openpyxl import load_workbook
 
     wb = load_workbook(str(xlsx_path), data_only=True, read_only=True)
@@ -271,7 +370,6 @@ def extract_xlsx(xlsx_path: str) -> tuple[list[dict], list[dict]]:
     for sheet_name in wb.sheetnames:
         ws = wb[sheet_name]
         page_num = len(pages) + 1
-
         sections.append({
             'heading': sheet_name, 'level': 1,
             'page_num': page_num, 'breadcrumb': sheet_name,
@@ -283,32 +381,44 @@ def extract_xlsx(xlsx_path: str) -> tuple[list[dict], list[dict]]:
             if any(cells):
                 rows.append(cells)
 
-        if not rows:
-            pages.append({
-                'page_num': page_num,
-                'content': f'{sheet_name}\n[Empty sheet]',
-                'breadcrumb': sheet_name,
-            })
-            continue
-
-        ncols = max(len(r) for r in rows)
-        for r in rows:
-            while len(r) < ncols:
-                r.append('')
-
-        lines = [sheet_name, '']
-        lines.append('| ' + ' | '.join(rows[0]) + ' |')
-        lines.append('| ' + ' | '.join(['---'] * ncols) + ' |')
-        for r in rows[1:]:
-            lines.append('| ' + ' | '.join(r) + ' |')
-
-        pages.append({
-            'page_num': page_num,
-            'content': '\n'.join(lines),
-            'breadcrumb': sheet_name,
-        })
+        pages.append(_rows_to_sheet_page(sheet_name, rows, page_num))
 
     wb.close()
+    return pages, sections
+
+
+def extract_xls(xls_path: str) -> tuple[list[dict], list[dict]]:
+    """Extract sheets from legacy XLS -> (pages, sections)."""
+    import xlrd
+
+    wb = xlrd.open_workbook(str(xls_path), on_demand=True)
+    pages: list[dict] = []
+    sections: list[dict] = []
+
+    for sheet_name in wb.sheet_names():
+        ws = wb.sheet_by_name(sheet_name)
+        page_num = len(pages) + 1
+        sections.append({
+            'heading': sheet_name, 'level': 1,
+            'page_num': page_num, 'breadcrumb': sheet_name,
+        })
+
+        rows = []
+        for row_idx in range(ws.nrows):
+            row = []
+            for value in ws.row_values(row_idx):
+                if value is None:
+                    row.append('')
+                elif isinstance(value, float) and value.is_integer():
+                    row.append(str(int(value)))
+                else:
+                    row.append(str(value).strip())
+            if any(row):
+                rows.append(row)
+
+        pages.append(_rows_to_sheet_page(sheet_name, rows, page_num))
+
+    wb.release_resources()
     return pages, sections
 
 
@@ -329,8 +439,12 @@ def extract_file(file_path: str) -> tuple[list[dict], list[dict]]:
         return extract_pdf(file_path)
     if ext in IMAGE_EXTENSIONS:
         return extract_image(file_path)
+    if ext in DOC_EXTENSIONS:
+        return extract_doc(file_path)
     if ext in DOCX_EXTENSIONS:
         return extract_docx(file_path)
+    if ext in XLS_EXTENSIONS:
+        return extract_xls(file_path)
     if ext in XLSX_EXTENSIONS:
         return extract_xlsx(file_path)
 
