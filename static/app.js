@@ -466,10 +466,10 @@ function renderUploadCard(project, pendingCount = 0) {
          onkeydown="handleUploadAreaKeydown(event)">
         <div class="upload-area-icon" aria-hidden="true">+</div>
         <div class="upload-area-title" id="upload-title">Drop files into ${esc(project)}</div>
-        <div class="upload-area-subtitle" id="upload-subtitle">Files stay in pending until you ingest them.</div>
+        <div class="upload-area-subtitle" id="upload-subtitle">Click here to choose files, or use the "Choose folder" button below.</div>
         <input type="file" id="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
                onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
-        <input type="file" id="folder-input" webkitdirectory style="display:none"
+        <input type="file" id="folder-input" webkitdirectory directory multiple style="display:none"
                onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
       </div>
       <div class="upload-actions-row simple">
