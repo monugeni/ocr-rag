@@ -31,13 +31,17 @@ Usage:
   python splitter.py tender_package.pdf --report-only --report-json report.json
 """
 
+import os
 import re
 import sys
 import json
 import math
+import shutil
 import hashlib
 import logging
 import argparse
+import tempfile
+import subprocess
 import statistics
 from pathlib import Path
 from dataclasses import dataclass, field
@@ -1787,10 +1791,10 @@ class PDFSplitter:
         toc = doc.get_toc(simple=True)
 
         skipped = 0
+        repaired = 0
         for i in range(len(boundaries) - 1):
             start, end = boundaries[i], boundaries[i + 1]
 
-            # Generate a clean filename from the label if available
             label_slug = ""
             if i > 0:
                 raw_label = split_points[i - 1].label
@@ -1808,40 +1812,196 @@ class PDFSplitter:
             out_name = f"{stem}_part{i + 1:03d}_p{start + 1}-{end}{label_slug}.pdf"
             out_path = self.output_dir / out_name
 
+            seg_toc = []
+            for level, title, page_num in toc:
+                if start + 1 <= page_num <= end:
+                    new_page = page_num - start
+                    seg_toc.append([level, title, new_page])
+
             try:
-                writer = fitz.open()
-                writer.insert_pdf(doc, from_page=start, to_page=end - 1)
-
-                # Preserve relevant bookmarks within this segment
-                seg_toc = []
-                for level, title, page_num in toc:
-                    if start + 1 <= page_num <= end:
-                        new_page = page_num - start  # remap to new document
-                        seg_toc.append([level, title, new_page])
-                if seg_toc:
-                    min_lvl = min(e[0] for e in seg_toc)
-                    for e in seg_toc:
-                        e[0] = e[0] - min_lvl + 1
-                    try:
-                        writer.set_toc(seg_toc)
-                    except Exception:
-                        pass
-
-                writer.save(str(out_path))
-                writer.close()
+                self._write_split_part(doc, start, end, seg_toc, out_path)
                 log.info(f"  Written: {out_name} ({end - start} pages, "
                          f"{len(seg_toc)} bookmarks)")
             except Exception as exc:
-                skipped += 1
-                log.warning(f"  Skipped part {i + 1:03d} (pages {start + 1}-{end}): {exc}")
-                if out_path.exists():
-                    out_path.unlink(missing_ok=True)
+                log.warning(f"  Direct split failed for part {i + 1:03d} "
+                            f"(pages {start + 1}-{end}): {exc}")
+                fallback_ok = self._fallback_repair(
+                    start, end, out_path, out_name,
+                )
+                if fallback_ok:
+                    repaired += 1
+                else:
+                    skipped += 1
+                    if out_path.exists():
+                        out_path.unlink(missing_ok=True)
 
         written = len(boundaries) - 1 - skipped
-        summary = f"All {written} parts saved to: {self.output_dir}"
+        parts = [f"{written} written"]
+        if repaired:
+            parts.append(f"{repaired} repaired via fallback")
         if skipped:
-            summary += f" ({skipped} skipped due to corrupt pages)"
-        log.info(summary)
+            parts.append(f"{skipped} skipped")
+        log.info(f"Split complete ({', '.join(parts)}). "
+                 f"Output: {self.output_dir}")
+
+    @staticmethod
+    def _write_split_part(doc, start, end, seg_toc, out_path):
+        """Extract pages [start, end) from *doc* and save to *out_path*."""
+        writer = fitz.open()
+        writer.insert_pdf(doc, from_page=start, to_page=end - 1)
+        if seg_toc:
+            min_lvl = min(e[0] for e in seg_toc)
+            for e in seg_toc:
+                e[0] = e[0] - min_lvl + 1
+            try:
+                writer.set_toc(seg_toc)
+            except Exception:
+                pass
+        writer.save(str(out_path))
+        writer.close()
+
+    def _fallback_repair(self, start, end, out_path, out_name):
+        """Try progressively heavier repair strategies for corrupt pages.
+
+        1. Ghostscript: re-render the page range into a clean PDF.
+        2. Image rasterisation + OCR: render each page as an image, bundle
+           into a PDF, then run ocrmypdf to add a text layer.
+
+        Returns True if *out_path* was successfully written.
+        """
+        num_pages = end - start
+        src_pdf = str(self.pdf_path)
+
+        # --- Strategy 1: Ghostscript flatten/repair ---
+        if self._gs_extract(src_pdf, start, end, out_path):
+            log.info(f"  Repaired via Ghostscript: {out_name} "
+                     f"({num_pages} pages)")
+            return True
+
+        # --- Strategy 2: Rasterise to images then OCR ---
+        if self._rasterise_and_ocr(src_pdf, start, end, out_path):
+            log.info(f"  Repaired via image+OCR: {out_name} "
+                     f"({num_pages} pages)")
+            return True
+
+        log.error(f"  All fallbacks failed for {out_name} "
+                  f"(pages {start + 1}-{end})")
+        return False
+
+    @staticmethod
+    def _gs_extract(src_pdf, start, end, out_path):
+        """Use Ghostscript to re-render pages [start, end) into a clean PDF.
+
+        Ghostscript re-interprets the page content streams, which repairs
+        most structural corruption (broken xrefs, invalid dict keys, etc.).
+        """
+        tmp = None
+        try:
+            tmp = tempfile.mktemp(suffix=".pdf")
+            result = subprocess.run(
+                [
+                    "gs", "-q", "-dNOPAUSE", "-dBATCH", "-dSAFER",
+                    "-sDEVICE=pdfwrite",
+                    "-dCompatibilityLevel=1.5",
+                    f"-dFirstPage={start + 1}",
+                    f"-dLastPage={end}",
+                    f"-sOutputFile={tmp}",
+                    src_pdf,
+                ],
+                capture_output=True, text=True, timeout=300,
+            )
+            if result.returncode == 0 and Path(tmp).stat().st_size > 0:
+                shutil.move(tmp, str(out_path))
+                return True
+            log.warning(f"  Ghostscript returned rc={result.returncode}: "
+                        f"{(result.stderr or '').strip()[:200]}")
+        except FileNotFoundError:
+            log.warning("  Ghostscript (gs) not installed, skipping repair")
+        except subprocess.TimeoutExpired:
+            log.warning("  Ghostscript timed out")
+        except Exception as exc:
+            log.warning(f"  Ghostscript error: {exc}")
+        finally:
+            if tmp and Path(tmp).exists():
+                Path(tmp).unlink(missing_ok=True)
+        return False
+
+    @staticmethod
+    def _rasterise_and_ocr(src_pdf, start, end, out_path):
+        """Render each page as a 300-DPI image, bundle into a PDF, then OCR.
+
+        This is the heaviest fallback but works even when the PDF content
+        streams are completely broken — as long as MuPDF can open the file.
+        """
+        tmp_dir = None
+        try:
+            tmp_dir = tempfile.mkdtemp(prefix="ocrrag_repair_")
+            img_pdf = os.path.join(tmp_dir, "images.pdf")
+
+            doc = fitz.open(src_pdf)
+            writer = fitz.open()
+            dpi = 300
+            zoom = dpi / 72.0
+            mat = fitz.Matrix(zoom, zoom)
+
+            for page_num in range(start, end):
+                try:
+                    page = doc[page_num]
+                    pix = page.get_pixmap(matrix=mat, alpha=False)
+                    img_path = os.path.join(tmp_dir, f"p{page_num:05d}.png")
+                    pix.save(img_path)
+
+                    img_doc = fitz.open(img_path)
+                    pdf_bytes = img_doc.convert_to_pdf()
+                    img_doc.close()
+                    img_pdf_doc = fitz.open("pdf", pdf_bytes)
+                    writer.insert_pdf(img_pdf_doc)
+                    img_pdf_doc.close()
+                except Exception as page_exc:
+                    log.warning(f"  Could not rasterise page {page_num + 1}: "
+                                f"{page_exc}")
+                    rect = fitz.paper_rect("a4")
+                    writer.new_page(width=rect.width, height=rect.height)
+
+            doc.close()
+
+            if len(writer) == 0:
+                writer.close()
+                return False
+
+            writer.save(img_pdf)
+            writer.close()
+
+            ocr_out = os.path.join(tmp_dir, "ocr.pdf")
+            try:
+                result = subprocess.run(
+                    ["ocrmypdf", "--force-ocr", "-l", "eng",
+                     "--optimize", "1", img_pdf, ocr_out],
+                    capture_output=True, text=True,
+                    timeout=max(120, (end - start) * 10),
+                )
+                if result.returncode in (0, 4) and Path(ocr_out).exists():
+                    shutil.move(ocr_out, str(out_path))
+                    return True
+                log.warning(f"  ocrmypdf returned rc={result.returncode}: "
+                            f"{(result.stderr or '').strip()[:200]}")
+            except FileNotFoundError:
+                log.warning("  ocrmypdf not installed, using image PDF "
+                            "without text layer")
+            except subprocess.TimeoutExpired:
+                log.warning("  ocrmypdf timed out, using image PDF "
+                            "without text layer")
+
+            if Path(img_pdf).exists():
+                shutil.move(img_pdf, str(out_path))
+                return True
+
+        except Exception as exc:
+            log.warning(f"  Rasterise+OCR error: {exc}")
+        finally:
+            if tmp_dir and Path(tmp_dir).exists():
+                shutil.rmtree(tmp_dir, ignore_errors=True)
+        return False
 
 
 # ─────────────────────────────────────────────
