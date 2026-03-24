@@ -1786,6 +1786,7 @@ class PDFSplitter:
         stem = self.pdf_path.stem
         toc = doc.get_toc(simple=True)
 
+        skipped = 0
         for i in range(len(boundaries) - 1):
             start, end = boundaries[i], boundaries[i + 1]
 
@@ -1807,31 +1808,40 @@ class PDFSplitter:
             out_name = f"{stem}_part{i + 1:03d}_p{start + 1}-{end}{label_slug}.pdf"
             out_path = self.output_dir / out_name
 
-            writer = fitz.open()
-            writer.insert_pdf(doc, from_page=start, to_page=end - 1)
+            try:
+                writer = fitz.open()
+                writer.insert_pdf(doc, from_page=start, to_page=end - 1)
 
-            # Preserve relevant bookmarks within this segment
-            seg_toc = []
-            for level, title, page_num in toc:
-                if start + 1 <= page_num <= end:
-                    new_page = page_num - start  # remap to new document
-                    seg_toc.append([level, title, new_page])
-            if seg_toc:
-                # Normalize levels so the shallowest becomes level 1
-                min_lvl = min(e[0] for e in seg_toc)
-                for e in seg_toc:
-                    e[0] = e[0] - min_lvl + 1
-                try:
-                    writer.set_toc(seg_toc)
-                except Exception:
-                    pass  # Some edge cases with single-page docs
+                # Preserve relevant bookmarks within this segment
+                seg_toc = []
+                for level, title, page_num in toc:
+                    if start + 1 <= page_num <= end:
+                        new_page = page_num - start  # remap to new document
+                        seg_toc.append([level, title, new_page])
+                if seg_toc:
+                    min_lvl = min(e[0] for e in seg_toc)
+                    for e in seg_toc:
+                        e[0] = e[0] - min_lvl + 1
+                    try:
+                        writer.set_toc(seg_toc)
+                    except Exception:
+                        pass
 
-            writer.save(str(out_path))
-            writer.close()
-            log.info(f"  Written: {out_name} ({end - start} pages, "
-                     f"{len(seg_toc)} bookmarks)")
+                writer.save(str(out_path))
+                writer.close()
+                log.info(f"  Written: {out_name} ({end - start} pages, "
+                         f"{len(seg_toc)} bookmarks)")
+            except Exception as exc:
+                skipped += 1
+                log.warning(f"  Skipped part {i + 1:03d} (pages {start + 1}-{end}): {exc}")
+                if out_path.exists():
+                    out_path.unlink(missing_ok=True)
 
-        log.info(f"All {len(boundaries) - 1} parts saved to: {self.output_dir}")
+        written = len(boundaries) - 1 - skipped
+        summary = f"All {written} parts saved to: {self.output_dir}"
+        if skipped:
+            summary += f" ({skipped} skipped due to corrupt pages)"
+        log.info(summary)
 
 
 # ─────────────────────────────────────────────

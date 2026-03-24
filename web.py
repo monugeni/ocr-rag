@@ -142,6 +142,25 @@ def _folder_disk_path(folder: str) -> Path:
     return base.joinpath(*folder.split("/")) if folder else base
 
 
+def _prune_empty_upload_ancestors(folder_dir: Path) -> None:
+    """Remove empty parent directories left behind after deleting a folder."""
+    uploads_root = Path(UPLOADS_DIR).resolve()
+    current = folder_dir.resolve().parent
+
+    while current != uploads_root:
+        try:
+            current.relative_to(uploads_root)
+        except ValueError:
+            break
+
+        try:
+            current.rmdir()
+        except OSError:
+            break
+
+        current = current.parent
+
+
 def _folder_scope_sql(column: str = "project") -> str:
     return f"({column} = ? OR {column} LIKE ?)"
 
@@ -1944,6 +1963,7 @@ def delete_folder(folder: str):
         folder_dir = _folder_disk_path(folder)
         if folder_dir.exists():
             shutil.rmtree(folder_dir)
+        _prune_empty_upload_ancestors(folder_dir)
         return {"status": "deleted", "folder": folder, "project": folder}
     finally:
         conn.close()
@@ -2760,6 +2780,9 @@ def _run_ingestion(jid, file_path, project, filename):
             except HTTPException:
                 pass
     except Exception as e:
+        import traceback
+        print(f"Ingestion failed for {filename}: {e}", flush=True)
+        traceback.print_exc()
         tracker.update(jid, status="failed", error=str(e))
 
 
