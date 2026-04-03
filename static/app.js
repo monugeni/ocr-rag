@@ -154,7 +154,7 @@ function router() {
   if (hash.startsWith('/doc/')) {
     const parts = hash.split('/');
     const docId = parseInt(parts[2], 10);
-    const pageNum = parts[3] === 'page' ? parseInt(parts[4], 10) : 1;
+    const pageNum = parts[3] === 'page' ? parseInt(parts[4], 10) : null;
     showViewer(docId, pageNum);
     return;
   }
@@ -961,7 +961,7 @@ function renderSourceList(sources) {
 
 async function showViewer(docId, pageNum) {
   currentDocId = docId;
-  currentPage = pageNum || 1;
+  currentPage = Number.isFinite(pageNum) ? pageNum : null;
 
   try {
     const [doc, toc] = await Promise.all([
@@ -999,7 +999,8 @@ async function showViewer(docId, pageNum) {
       </div>
     `;
 
-    loadPage(docId, currentPage, doc.total_pages);
+    const initialPage = currentPage ?? doc.first_page_num ?? toc[0]?.page_start ?? 1;
+    loadPage(docId, initialPage, doc.page_count || doc.total_pages);
   } catch (error) {
     document.getElementById('content').innerHTML =
       `<div class="empty">Error: ${esc(error.message)}</div>`;
@@ -1023,25 +1024,30 @@ async function loadPage(docId, pageNum, totalPages) {
   currentPage = pageNum;
   try {
     const page = await api(`/documents/${docId}/pages/${pageNum}`);
-    totalPages = totalPages || page.total_pages;
+    totalPages = totalPages || page.page_count || page.total_pages;
+    const prevPage = page.prev_page_num;
+    const nextPage = page.next_page_num;
+    const pagePosition = page.page_count
+      ? `Page ${page.page_num} (${page.page_index} of ${page.page_count} indexed)`
+      : `Page ${page.page_num}`;
 
     document.getElementById('page-header').innerHTML = `
       <div><span class="page-bc">${esc(page.breadcrumb || '')}</span></div>
       <div class="page-nav">
-        <button class="btn btn-ghost btn-sm" ${pageNum <= 1 ? 'disabled' : ''}
-                onclick="loadPage(${docId}, ${pageNum - 1}, ${totalPages})">Prev</button>
-        <span class="page-num">Page ${pageNum} / ${totalPages}</span>
-        <button class="btn btn-ghost btn-sm" ${pageNum >= totalPages ? 'disabled' : ''}
-                onclick="loadPage(${docId}, ${pageNum + 1}, ${totalPages})">Next</button>
+        <button class="btn btn-ghost btn-sm" ${prevPage == null ? 'disabled' : ''}
+                onclick="${prevPage == null ? '' : `loadPage(${docId}, ${prevPage}, ${totalPages})`}">Prev</button>
+        <span class="page-num">${esc(pagePosition)}</span>
+        <button class="btn btn-ghost btn-sm" ${nextPage == null ? 'disabled' : ''}
+                onclick="${nextPage == null ? '' : `loadPage(${docId}, ${nextPage}, ${totalPages})`}">Next</button>
       </div>
     `;
     document.getElementById('page-body').innerHTML = `<pre>${esc(page.content)}</pre>`;
-    history.replaceState(null, '', `#/doc/${docId}/page/${pageNum}`);
+    history.replaceState(null, '', `#/doc/${docId}/page/${page.page_num}`);
 
     document.querySelectorAll('.toc-item').forEach((el) => el.classList.remove('active'));
     document.querySelectorAll('.toc-item').forEach((el) => {
       const pg = parseInt(el.querySelector('.toc-pages')?.textContent?.slice(1), 10);
-      if (pg === pageNum) el.classList.add('active');
+      if (pg === page.page_num) el.classList.add('active');
     });
   } catch (error) {
     document.getElementById('page-body').innerHTML =

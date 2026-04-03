@@ -2457,9 +2457,18 @@ def get_document(doc_id: int):
         if not d:
             raise HTTPException(404, "Document not found")
         meta = json.loads(d["metadata"]) if d["metadata"] else {}
+        page_stats = conn.execute(
+            "SELECT COUNT(*) AS page_count, MIN(page_num) AS first_page_num, "
+            "MAX(page_num) AS last_page_num "
+            "FROM pages WHERE doc_id = ?",
+            (doc_id,)
+        ).fetchone()
         result = {
             "id": d["id"], "project": d["project"], "folder": d["project"], "title": d["title"],
             "filename": d["filename"], "total_pages": d["total_pages"],
+            "page_count": page_stats["page_count"],
+            "first_page_num": page_stats["first_page_num"],
+            "last_page_num": page_stats["last_page_num"],
             "document_number": meta.get("document_number"),
             "revision": meta.get("revision"),
             "document_type": meta.get("document_type"),
@@ -2499,8 +2508,15 @@ def get_page(doc_id: int, page_num: int):
         if not d:
             raise HTTPException(404, "Document not found")
         p = conn.execute(
-            "SELECT * FROM pages WHERE doc_id = ? AND page_num = ?",
-            (doc_id, page_num)
+            "SELECT p.*, "
+            "(SELECT page_num FROM pages WHERE doc_id = ? AND page_num < ? "
+            " ORDER BY page_num DESC LIMIT 1) AS prev_page_num, "
+            "(SELECT page_num FROM pages WHERE doc_id = ? AND page_num > ? "
+            " ORDER BY page_num ASC LIMIT 1) AS next_page_num, "
+            "(SELECT COUNT(*) FROM pages WHERE doc_id = ?) AS page_count, "
+            "(SELECT COUNT(*) FROM pages WHERE doc_id = ? AND page_num <= ?) AS page_index "
+            "FROM pages p WHERE p.doc_id = ? AND p.page_num = ?",
+            (doc_id, page_num, doc_id, page_num, doc_id, doc_id, page_num, doc_id, page_num)
         ).fetchone()
         if not p:
             raise HTTPException(404, f"Page {page_num} not found")
@@ -2508,6 +2524,8 @@ def get_page(doc_id: int, page_num: int):
             "doc_title": d["title"], "total_pages": d["total_pages"],
             "page_num": p["page_num"], "content": p["content"],
             "breadcrumb": p["breadcrumb"], "page_type": p["page_type"],
+            "page_count": p["page_count"], "page_index": p["page_index"],
+            "prev_page_num": p["prev_page_num"], "next_page_num": p["next_page_num"],
         }
     finally:
         conn.close()
