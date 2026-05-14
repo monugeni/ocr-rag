@@ -50,6 +50,8 @@ ALLOWED_TOOLS = {
     "get_section",
     "get_page",
     "get_pages",
+    "read_document",
+    "read_document_chunks",
     "get_adjacent",
     "render_page_image",
     "reextract_page",
@@ -341,6 +343,7 @@ def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) 
             "Start with ranked_search for precise tender clauses, vendor names, equipment names, materials, and exact phrases.\n"
             "Use next_offset for more results from the same ranked query when has_more=true, or issue a new query when better terms are visible.\n"
             "Use page reads or nearby pages after ranked chunk hits when surrounding context is needed.\n"
+            "Use read_document_chunks with next_offset pagination when the user asks to read or summarize a whole document.\n"
             "Use render_page_image when a relevant page is a drawing, scanned page, form, visual table, title block, or extracted text appears incomplete.\n"
         )
         if _semantic_tools_enabled():
@@ -561,6 +564,12 @@ def _extract_sources(payload: Any, *, tool_name: str, project: str) -> list[dict
     if isinstance(payload.get("pages"), list):
         for page in payload["pages"]:
             source = _page_source_from_record(page, payload, tool_name=tool_name, project=project)
+            if source:
+                sources.append(source)
+
+    if isinstance(payload.get("chunks"), list):
+        for chunk in payload["chunks"]:
+            source = _page_source_from_record(chunk, payload, tool_name=tool_name, project=project)
             if source:
                 sources.append(source)
 

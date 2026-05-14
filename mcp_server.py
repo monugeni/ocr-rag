@@ -23,6 +23,8 @@ Tools:
     Navigation:
         get_page            - Get full page content with context
         get_pages           - Get a range of pages
+        read_document       - Paginated whole-document page reader
+        read_document_chunks - Paginated whole-document chunk reader
         get_adjacent        - Get next/previous page
         render_page_image   - Render a PDF page to PNG for visual inspection
 
@@ -1143,8 +1145,10 @@ RECOMMENDED WORKFLOW:
 5. If FTS returns too few results, use semantic_search with a natural language query
 6. Use search_sections to find which section/document likely has the answer
 7. Use get_section to read the full section content in one call
-8. Use get_page with include_adjacent=true for surrounding context
-9. Use render_page_image when a relevant page is a drawing, form, scanned page,
+8. Use read_document_chunks for "read this whole document" or long sections;
+   paginate with next_offset until has_more=false.
+9. Use get_page with include_adjacent=true for surrounding context
+10. Use render_page_image when a relevant page is a drawing, form, scanned page,
    table image, or the extracted text looks incomplete/garbled. Visual evidence
    is especially useful for drawing notes, stamps, legends, title blocks, and
    fine print that may not survive text extraction.
@@ -1954,6 +1958,145 @@ def get_pages(doc_id: int, page_start: int, page_end: int) -> ToolResult:
                  "page_type": p["page_type"], "content": p["content"]}
                 for p in rows
             ]
+        }
+
+
+@mcp.tool()
+def read_document(
+    doc_id: int,
+    page_start: int = 1,
+    max_pages: int = 10,
+) -> ToolResult:
+    """Read a document by pages with explicit pagination.
+
+    Use this when the user asks to read, summarize, review, or inspect an
+    entire document. For most tender QA, prefer read_document_chunks because it
+    preserves breadcrumbs at paragraph/clause level.
+
+    Args:
+        doc_id: Document ID from list_documents/search results.
+        page_start: First page to read, 1-indexed.
+        max_pages: Number of pages to return. Default 10, max 25.
+    """
+    page_start = max(1, int(page_start or 1))
+    max_pages = max(1, min(int(max_pages or 10), 25))
+    page_end = page_start + max_pages - 1
+
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return {"error": f"Document {doc_id} not found"}
+
+        rows = conn.execute(
+            """SELECT page_num, breadcrumb, page_type, content
+               FROM pages
+               WHERE doc_id = ? AND page_num BETWEEN ? AND ?
+               ORDER BY page_num""",
+            (doc_id, page_start, page_end),
+        ).fetchall()
+
+        next_page = page_start + len(rows)
+        has_more = next_page <= int(d["total_pages"] or 0)
+
+        return {
+            "doc_id": doc_id,
+            "doc_title": d["title"],
+            "project": d["project"],
+            "filename": d["filename"],
+            "total_pages": d["total_pages"],
+            "page_start": page_start,
+            "page_end": rows[-1]["page_num"] if rows else None,
+            "result_count": len(rows),
+            "next_page": next_page if has_more else None,
+            "has_more": has_more,
+            "pages": [
+                {
+                    "page_num": row["page_num"],
+                    "breadcrumb": row["breadcrumb"],
+                    "page_type": row["page_type"],
+                    "content": row["content"],
+                }
+                for row in rows
+            ],
+        }
+
+
+@mcp.tool()
+def read_document_chunks(
+    doc_id: int,
+    offset: int = 0,
+    max_chunks: int = 40,
+) -> ToolResult:
+    """Read a document by paragraph/clause chunks with pagination.
+
+    This is the preferred whole-document reader for tender documents because it
+    carries the full breadcrumb for each paragraph/clause. Use next_offset from
+    the previous response until has_more=false.
+
+    Args:
+        doc_id: Document ID from list_documents/search results.
+        offset: Chunk offset. Start with 0, then use next_offset.
+        max_chunks: Number of chunks to return. Default 40, max 100.
+    """
+    offset = max(0, int(offset or 0))
+    max_chunks = max(1, min(int(max_chunks or 40), 100))
+
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return {"error": f"Document {doc_id} not found"}
+
+        if not table_exists(conn, "chunks"):
+            return {"error": "Chunk table not available. Use read_document instead."}
+
+        total_chunks = conn.execute(
+            "SELECT COUNT(*) FROM chunks WHERE doc_id = ?",
+            (doc_id,),
+        ).fetchone()[0]
+        if total_chunks == 0:
+            return {
+                "error": "No chunks found for this document. Reingest with the fast pipeline or use read_document.",
+                "doc_id": doc_id,
+                "doc_title": d["title"],
+                "total_pages": d["total_pages"],
+            }
+
+        rows = conn.execute(
+            """SELECT id, chunk_index, page_start, page_end, breadcrumb, text,
+                      chunk_type, confidence
+               FROM chunks
+               WHERE doc_id = ?
+               ORDER BY page_start, chunk_index, id
+               LIMIT ? OFFSET ?""",
+            (doc_id, max_chunks, offset),
+        ).fetchall()
+        next_offset = offset + len(rows)
+
+        return {
+            "doc_id": doc_id,
+            "doc_title": d["title"],
+            "project": d["project"],
+            "filename": d["filename"],
+            "total_pages": d["total_pages"],
+            "total_chunks": total_chunks,
+            "offset": offset,
+            "result_count": len(rows),
+            "next_offset": next_offset if next_offset < total_chunks else None,
+            "has_more": next_offset < total_chunks,
+            "chunks": [
+                {
+                    "chunk_id": row["id"],
+                    "chunk_index": row["chunk_index"],
+                    "page_start": row["page_start"],
+                    "page_end": row["page_end"],
+                    "page_num": row["page_start"],
+                    "breadcrumb": row["breadcrumb"],
+                    "chunk_type": row["chunk_type"],
+                    "confidence": round(float(row["confidence"] or 0.0), 3),
+                    "text": row["text"],
+                }
+                for row in rows
+            ],
         }
 
 
