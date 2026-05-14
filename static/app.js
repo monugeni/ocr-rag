@@ -1,6 +1,8 @@
 const state = {
   folders: [],
   folder: '',
+  expanded: new Set(),
+  moveDoc: null,
   tab: 'ask',
   docs: [],
   pending: [],
@@ -121,6 +123,8 @@ async function loadFolders() {
 
 async function selectFolder(folder) {
   state.folder = folder;
+  expandAncestors(folder);
+  saveExpanded();
   state.threadId = '';
   state.messages = [];
   state.docs = [];
@@ -167,18 +171,95 @@ async function loadJobs() {
   state.jobs = await api('/api/ingestion/jobs');
 }
 
-function renderShell() {
+const EXPANDED_STORAGE_KEY = 'ocr-rag-expanded-folders';
+
+function loadExpanded() {
+  try {
+    const raw = localStorage.getItem(EXPANDED_STORAGE_KEY);
+    if (!raw) return new Set();
+    return new Set(JSON.parse(raw));
+  } catch (_) {
+    return new Set();
+  }
+}
+
+function saveExpanded() {
+  try {
+    localStorage.setItem(EXPANDED_STORAGE_KEY, JSON.stringify([...state.expanded]));
+  } catch (_) {}
+}
+
+function expandAncestors(path) {
+  if (!path) return;
+  const parts = path.split('/');
+  for (let i = 1; i < parts.length; i++) {
+    state.expanded.add(parts.slice(0, i).join('/'));
+  }
+}
+
+function buildFolderTree(folders) {
+  const byPath = new Map(folders.map((f) => [f.folder, { ...f, children: [] }]));
+  const roots = [];
+  for (const node of byPath.values()) {
+    if (node.parent && byPath.has(node.parent)) {
+      byPath.get(node.parent).children.push(node);
+    } else {
+      roots.push(node);
+    }
+  }
+  const sortRec = (list) => {
+    list.sort((a, b) => (a.display_name || a.folder).localeCompare(b.display_name || b.folder));
+    list.forEach((n) => sortRec(n.children));
+  };
+  sortRec(roots);
+  return roots;
+}
+
+function renderFolderList() {
   const search = ($('folder-search')?.value || '').toLowerCase().trim();
-  const folders = state.folders.filter((f) => !search || f.folder.toLowerCase().includes(search));
-  $('folder-list').innerHTML = folders.length ? folders.map((folder) => `
-    <button class="folder-row ${folder.folder === state.folder ? 'active' : ''}" type="button" data-action="select-folder" data-folder="${escapeHtml(folder.folder)}">
-      <span>
-        <span class="folder-title">${escapeHtml(folder.display_name || folder.folder)}</span>
-        <span class="folder-count">${escapeHtml(folder.folder)}</span>
-      </span>
-      <span class="folder-count">${folder.docs || 0}</span>
-    </button>
-  `).join('') : `<div class="empty-state">No folders</div>`;
+  if (search) {
+    const matches = state.folders.filter((f) => f.folder.toLowerCase().includes(search));
+    return matches.length
+      ? matches.map((f) => renderFolderRow(f, { depth: 0, hasChildren: false, flat: true })).join('')
+      : '<div class="empty-state">No folders</div>';
+  }
+  const tree = buildFolderTree(state.folders);
+  if (!tree.length) return '<div class="empty-state">No folders</div>';
+  return tree.map((node) => renderFolderNode(node, 0)).join('');
+}
+
+function renderFolderNode(node, depth) {
+  const hasChildren = node.children.length > 0;
+  const isExpanded = state.expanded.has(node.folder);
+  const row = renderFolderRow(node, { depth, hasChildren, isExpanded, flat: false });
+  if (hasChildren && isExpanded) {
+    return row + node.children.map((child) => renderFolderNode(child, depth + 1)).join('');
+  }
+  return row;
+}
+
+function renderFolderRow(folder, { depth, hasChildren, isExpanded = false, flat = false }) {
+  const isActive = folder.folder === state.folder;
+  const chevron = hasChildren
+    ? `<button class="folder-chevron ${isExpanded ? 'open' : ''}" type="button" data-action="toggle-folder" data-folder="${escapeHtml(folder.folder)}" aria-label="${isExpanded ? 'Collapse' : 'Expand'}"></button>`
+    : `<span class="folder-chevron empty"></span>`;
+  const title = flat ? escapeHtml(folder.folder) : escapeHtml(folder.display_name || folder.folder);
+  return `
+    <div class="folder-row-wrap ${isActive ? 'active' : ''}" style="--depth: ${depth};">
+      ${chevron}
+      <button class="folder-row" type="button" data-action="select-folder" data-folder="${escapeHtml(folder.folder)}">
+        <span class="folder-row-text">
+          <span class="folder-title">${title}</span>
+        </span>
+        <span class="folder-count">${folder.docs || 0}</span>
+      </button>
+      <button class="folder-add" type="button" data-action="new-subfolder" data-parent="${escapeHtml(folder.folder)}" title="New sub-folder">+</button>
+    </div>
+  `;
+}
+
+function renderShell() {
+  $('folder-list').innerHTML = renderFolderList();
 
   const active = state.folders.find((f) => f.folder === state.folder);
   $('active-folder').textContent = active ? active.folder : 'Select a folder';
@@ -327,13 +408,16 @@ function renderDocuments() {
 }
 
 function renderDoc(doc) {
+  const docFolder = doc.folder || doc.project || '';
+  const inSubfolder = docFolder && docFolder !== state.folder;
   return `
     <div class="list-row document-row">
       <span class="row-main">
         <span class="row-title">${escapeHtml(doc.title || doc.filename)}</span>
-        <span class="doc-meta">${doc.total_pages || 0} pages | ${doc.sections || 0} sections${doc.document_type ? ` | ${escapeHtml(doc.document_type)}` : ''}</span>
+        <span class="doc-meta">${doc.total_pages || 0} pages | ${doc.sections || 0} sections${doc.document_type ? ` | ${escapeHtml(doc.document_type)}` : ''}${inSubfolder ? ` | ${escapeHtml(docFolder)}` : ''}</span>
       </span>
       <span class="row-actions">
+        <button class="ghost small" type="button" data-action="move-doc" data-doc-id="${doc.id}">Move</button>
         <button class="ghost small" type="button" data-action="inspect-doc" data-doc-id="${doc.id}">Inspect</button>
         <a class="ghost small" href="/api/documents/${doc.id}/pdf" target="_blank" rel="noopener">PDF</a>
       </span>
@@ -777,11 +861,110 @@ function formatBytes(bytes) {
 }
 
 async function promptNewFolder() {
-  const name = prompt('Folder name');
+  const name = prompt('Folder name (use / for sub-folders, e.g. tender-A/specs)');
   if (!name) return;
   try {
     await api('/api/folders', { method: 'POST', body: JSON.stringify({ name }) });
+    expandAncestors(name);
+    saveExpanded();
     state.folder = name;
+    await loadFolders();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function promptNewSubfolder(parent) {
+  if (!parent) return promptNewFolder();
+  const child = prompt(`New sub-folder inside "${parent}"`);
+  if (!child) return;
+  const trimmed = child.trim().replace(/^\/+|\/+$/g, '');
+  if (!trimmed) return;
+  const name = `${parent}/${trimmed}`;
+  try {
+    await api('/api/folders', { method: 'POST', body: JSON.stringify({ name }) });
+    state.expanded.add(parent);
+    expandAncestors(name);
+    saveExpanded();
+    state.folder = name;
+    await loadFolders();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+function openMoveDialog(docId) {
+  const doc = state.docs.find((d) => d.id === docId);
+  if (!doc) return;
+  state.moveDoc = doc;
+  renderMoveDialog();
+}
+
+function closeMoveDialog() {
+  state.moveDoc = null;
+  const dlg = $('move-dialog');
+  if (dlg) dlg.remove();
+}
+
+function renderMoveDialog() {
+  if (!state.moveDoc) return;
+  const doc = state.moveDoc;
+  const docFolder = doc.folder || doc.project || '';
+  const root = docFolder.split('/')[0];
+  const candidates = state.folders
+    .filter((f) => f.folder === root || f.folder.startsWith(`${root}/`))
+    .filter((f) => f.folder !== docFolder)
+    .sort((a, b) => a.folder.localeCompare(b.folder));
+
+  const existing = $('move-dialog');
+  if (existing) existing.remove();
+  const dlg = document.createElement('div');
+  dlg.id = 'move-dialog';
+  dlg.className = 'modal-overlay';
+  dlg.innerHTML = `
+    <div class="modal">
+      <div class="modal-head">
+        <h3>Move document</h3>
+        <button class="ghost small" type="button" data-action="cancel-move" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="muted">${escapeHtml(doc.title || doc.filename || '')}</div>
+        <div class="muted">Currently in: <code>${escapeHtml(docFolder)}</code></div>
+        <label class="field-label" for="move-target">Target sub-folder under <code>${escapeHtml(root)}</code></label>
+        <select class="field" id="move-target">
+          ${candidates.length
+            ? candidates.map((f) => `<option value="${escapeHtml(f.folder)}">${escapeHtml(f.folder)}</option>`).join('')
+            : '<option value="" disabled>No other sub-folders under this root</option>'}
+        </select>
+        <div class="muted">Documents can only move within the same root folder (<code>${escapeHtml(root)}</code>).</div>
+      </div>
+      <div class="modal-foot">
+        <button class="ghost" type="button" data-action="cancel-move">Cancel</button>
+        <button class="primary" type="button" data-action="confirm-move" ${candidates.length ? '' : 'disabled'}>Move</button>
+      </div>
+    </div>
+  `;
+  dlg.addEventListener('click', (e) => {
+    if (e.target === dlg) closeMoveDialog();
+  });
+  document.body.appendChild(dlg);
+}
+
+async function confirmMove() {
+  if (!state.moveDoc) return;
+  const select = $('move-target');
+  if (!select || !select.value) return;
+  const target = select.value;
+  const doc = state.moveDoc;
+  closeMoveDialog();
+  try {
+    await api('/api/documents/bulk-move', {
+      method: 'POST',
+      body: JSON.stringify({ doc_ids: [doc.id], target_folder: target }),
+    });
+    showToast(`Moved to ${target}`);
     await loadFolders();
     await refreshActiveData();
   } catch (err) {
@@ -817,8 +1000,12 @@ function bindGlobalEvents() {
   document.addEventListener('submit', handleSubmit);
   window.addEventListener('hashchange', async () => {
     readHash();
+    expandAncestors(state.folder);
     renderShell();
     await refreshActiveData();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && state.moveDoc) closeMoveDialog();
   });
 }
 
@@ -828,6 +1015,18 @@ function handleClick(event) {
   const { action } = target.dataset;
   event.preventDefault();
   if (action === 'select-folder') void selectFolder(target.dataset.folder || '');
+  if (action === 'toggle-folder') {
+    const folder = target.dataset.folder || '';
+    if (!folder) return;
+    if (state.expanded.has(folder)) state.expanded.delete(folder);
+    else state.expanded.add(folder);
+    saveExpanded();
+    renderShell();
+  }
+  if (action === 'new-subfolder') void promptNewSubfolder(target.dataset.parent || '');
+  if (action === 'move-doc') openMoveDialog(Number(target.dataset.docId));
+  if (action === 'cancel-move') closeMoveDialog();
+  if (action === 'confirm-move') void confirmMove();
   if (action === 'new-chat') void newChat();
   if (action === 'refresh') void refreshActiveData();
   if (action === 'go-documents') setTab('documents');
@@ -862,7 +1061,9 @@ function handleSubmit(event) {
 async function init() {
   bindGlobalEvents();
   readHash();
+  state.expanded = loadExpanded();
   await loadFolders();
+  expandAncestors(state.folder);
   setHash();
   await refreshActiveData();
   startPolling();
