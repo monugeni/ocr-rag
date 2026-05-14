@@ -1057,28 +1057,39 @@ def ingest_document(
     chunks: list[dict] | None = None,
 ) -> int:
     cur = conn.cursor()
+    existing_doc_id = None
 
     if replace and filename:
         cur.execute("SELECT id FROM documents WHERE filename = ? AND project = ?", (filename, project))
         row = cur.fetchone()
         if row:
+            existing_doc_id = row['id']
             cur.execute(
                 "DELETE FROM page_embeddings WHERE page_id IN "
                 "(SELECT id FROM pages WHERE doc_id = ?)",
-                (row['id'],),
+                (existing_doc_id,),
             )
-            cur.execute("DELETE FROM chunks WHERE doc_id = ?", (row['id'],))
-            cur.execute("DELETE FROM pages WHERE doc_id = ?", (row['id'],))
-            cur.execute("DELETE FROM sections WHERE doc_id = ?", (row['id'],))
-            cur.execute("DELETE FROM documents WHERE id = ?", (row['id'],))
+            cur.execute("DELETE FROM chunks WHERE doc_id = ?", (existing_doc_id,))
+            cur.execute("DELETE FROM pages WHERE doc_id = ?", (existing_doc_id,))
+            cur.execute("DELETE FROM sections WHERE doc_id = ?", (existing_doc_id,))
             print(f"  Replaced: {filename}")
 
-    cur.execute(
-        """INSERT INTO documents (project, title, filename, pdf_path, total_pages, metadata)
-           VALUES (?, ?, ?, ?, ?, ?)""",
-        (project, title, filename, pdf_path, len(pages), json.dumps(metadata or {}))
-    )
-    doc_id = cur.lastrowid
+    if existing_doc_id is not None:
+        cur.execute(
+            """UPDATE documents
+               SET project = ?, title = ?, filename = ?, pdf_path = ?,
+                   total_pages = ?, ingested_at = CURRENT_TIMESTAMP, metadata = ?
+               WHERE id = ?""",
+            (project, title, filename, pdf_path, len(pages), json.dumps(metadata or {}), existing_doc_id),
+        )
+        doc_id = existing_doc_id
+    else:
+        cur.execute(
+            """INSERT INTO documents (project, title, filename, pdf_path, total_pages, metadata)
+               VALUES (?, ?, ?, ?, ?, ?)""",
+            (project, title, filename, pdf_path, len(pages), json.dumps(metadata or {}))
+        )
+        doc_id = cur.lastrowid
 
     # Insert sections
     stack = []
@@ -1087,7 +1098,7 @@ def ingest_document(
         while stack and stack[-1][0] >= s['level']:
             stack.pop()
         parent_id = stack[-1][2] if stack else None
-        breadcrumb = ' > '.join([x[1] for x in stack] + [s['heading']])
+        breadcrumb = s.get('breadcrumb') or ' > '.join([x[1] for x in stack] + [s['heading']])
 
         cur.execute(
             """INSERT INTO sections (doc_id, heading, level, page_start, parent_id, breadcrumb, seq)

@@ -51,28 +51,29 @@ SECTION_RE = re.compile(
 )
 APPENDIX_RE = re.compile(
     r"^(appendix|annex(?:ure)?|attachment|enclosure|exhibit|schedule)\s*"
-    r"([A-Za-z0-9IVXLCM-]+)?(?:\s*[-:.)]\s*|\s+)?(.+)?$",
+    r"([A-Za-z0-9IVXLCM.-]+)?(?:\s*[-:.)]\s*|\s+)?(.+)?$",
     re.IGNORECASE,
 )
 ALPHA_RE = re.compile(r"^([A-Z])(?:[.)])\s+(.+)$")
 ROMAN_RE = re.compile(r"^([IVX]{1,8}|iv|ix|v?i{1,3}|x{1,3})(?:[.)])\s+(.+)$", re.IGNORECASE)
 MD_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TOC_DOT_LEADER_RE = re.compile(r"\.{3,}\s*\d{1,5}\s*$")
+TOC_LEADER_RE = re.compile(r"(?:\.{3,}|[-–—_]{5,})\s*\d{1,5}\s*$")
 TOC_ROW_RE = re.compile(
     r"^\s*(?P<num>(?:(?:section|part|chapter|appendix|annex(?:ure)?|attachment|schedule)\s+"
     r"[A-Za-z0-9IVXLCM.-]+|\d+(?:\.\d+)*|[IVXLCM]+|[A-Z])?)"
     r"\s*(?P<title>.*?)"
-    r"(?:\.{3,}|\s{3,})\s*(?P<page>\d{1,5})\s*$",
+    r"(?:(?:\.{3,}|[-–—_]{5,})|\s{3,})\s*(?P<page>\d{1,5})\s*$",
     re.IGNORECASE,
 )
 DOC_TITLE_HINT_RE = re.compile(
-    r"\b(specification|procedure|standard|code|manual|datasheet|data sheet|"
+    r"\b(advisory|specification|procedure|standard|code|manual|datasheet|data sheet|"
     r"calculation|philosophy|scope of work|technical requirement|"
     r"inspection and test plan|method statement|drawing list)\b",
     re.IGNORECASE,
 )
 STRONG_DOC_TITLE_HINT_RE = re.compile(
-    r"\b(specification|procedure|standard|code|manual|datasheet|data sheet|"
+    r"\b(advisory|specification|procedure|standard|code|manual|datasheet|data sheet|"
     r"calculation|philosophy|scope of work|technical requirement|"
     r"inspection and test plan|method statement|drawing list)\b",
     re.IGNORECASE,
@@ -101,7 +102,7 @@ HEADING_KEYWORDS = {
     "revision", "revisions", "activity", "activities", "procedure",
     "procedures", "method", "methodology", "reference", "references",
     "abbreviation", "abbreviations", "term", "terms", "condition",
-    "conditions", "quality", "inspection", "testing",
+    "conditions", "quality", "inspection", "testing", "list", "lists",
 }
 FORM_LABEL_RE = re.compile(
     r"^(?:prepared|approved|checked|reviewed|date|rev(?:ision)?|doc(?:ument)?\s*no|"
@@ -133,6 +134,11 @@ SUBJECT_TITLE_RE = re.compile(
 LOCAL_CAPTION_RE = re.compile(
     r"^(?:table|figure|fig\.?|drawing|sketch|chart|annex(?:ure)?|appendix|"
     r"attachment|schedule)\s*[-.:]?\s*[A-Za-z0-9IVXLCM.-]*(?:\s+.+)?$",
+    re.IGNORECASE,
+)
+SUBDOCUMENT_ANCHOR_RE = re.compile(
+    r"\b(?:technical\s+advisory|advisory|procedure|specification|standard|"
+    r"method\s+statement|status\s+table|scope\s+of\s+work)\b",
     re.IGNORECASE,
 )
 
@@ -348,6 +354,53 @@ def is_value_like(text: str) -> bool:
     return False
 
 
+def is_compact_code_token(token: str) -> bool:
+    token = token.strip("()[],:;\"'")
+    if not token:
+        return False
+    upper = token.upper().replace(" ", "")
+    if upper in {"CS", "SS", "CR", "MO", "NI", "CU", "TI", "NB", "ER", "ENI", "ERTI"}:
+        return True
+    if re.fullmatch(r"(?:E|ER|ENI|ERTI|B)?[A-Z]{0,5}\d+[A-Z0-9.-]*", upper):
+        return True
+    if re.fullmatch(r"\d+(?:\.\d+)?[A-Z][A-Z0-9.-]*", upper):
+        return True
+    if re.fullmatch(r"[A-Z]{1,6}\d+[A-Z0-9.-]*", upper):
+        return True
+    return False
+
+
+def looks_like_table_data_row(text: str) -> bool:
+    """Reject compact numbered rows made mostly from engineering codes/values."""
+    text = normalize_space(text)
+    m = re.match(r"^\d{1,4}(?!\.\d)(?:[.)])?\s+(.+)$", text)
+    if not m:
+        return False
+    rest = m.group(1)
+    words = [word.strip("()[],:;\"'") for word in rest.split() if word.strip("()[],:;\"'")]
+    if not words or len(words) > 14:
+        return False
+    lower_words = {word.lower() for word in words}
+    if lower_words & HEADING_KEYWORDS:
+        return False
+    code_tokens = 0
+    for word in words:
+        parts = [part for part in re.split(r"[/&,+]", word) if part]
+        if any(is_compact_code_token(part) for part in parts):
+            code_tokens += 1
+    material_hits = sum(
+        1
+        for word in words
+        if re.fullmatch(
+            r"(?:CS|SS\d{2,4}[A-Z]?|DUPLEX|MONEL|INCOLLOY|TITANIUM|TI|CAST|IRON|SUPER)",
+            word.upper(),
+        )
+    )
+    slash_code_row = "/" in rest and code_tokens >= 2
+    dense_code_row = code_tokens + material_hits >= 3 and len(words) <= 10
+    return slash_code_row or dense_code_row
+
+
 def looks_like_sentence(text: str) -> bool:
     text = normalize_space(text)
     if len(text) > 180:
@@ -359,6 +412,8 @@ def looks_like_sentence(text: str) -> bool:
 
 def looks_like_table_line(text: str) -> bool:
     lower = normalize_space(text).lower()
+    if looks_like_table_data_row(text):
+        return True
     if "|" in text and text.count("|") >= 2:
         return True
     if re.match(r"^(?:s[il]|sr)\s*\.?\s*no\b", lower):
@@ -455,6 +510,9 @@ def is_numbered_body_clause(scheme: str, numbered_level: int, numbered_text: str
     if not clean:
         return False
     title = re.sub(r"^\d{1,3}(?:\.\d{1,3}){0,8}[.)]?\s*", "", clean)
+    first_word = title.split()[0].strip("()[],:;.\"'").lower() if title.split() else ""
+    if first_word in HEADING_KEYWORDS and len(title.split()) <= 14:
+        return False
     if is_compact_heading_phrase(title):
         return False
     if text.rstrip().endswith(":") and len(title.split()) <= 10 and not has_clause_sentence_shape(title):
@@ -632,6 +690,7 @@ def run_ocrmypdf_skip_text(pdf_path: Path, work_dir: Path, jobs: int = 4) -> tup
         [
             "ocrmypdf",
             "--skip-text",
+            "--invalidate-digital-signatures",
             "--jobs",
             str(max(1, jobs)),
             "-l",
@@ -960,21 +1019,34 @@ def infer_document_context(
         if not title_key:
             return title
         for lines in page_lines.values():
-            for idx, line in enumerate(lines[:-1]):
+            for idx, line in enumerate(lines):
                 if normalize_space(line.text) != title_key:
                     continue
-                nxt = lines[idx + 1]
-                next_text = normalize_space(nxt.text)
-                if not next_text or nxt.is_running or is_page_number(next_text):
-                    return title
-                continuation_trigger = (
-                    title_key.upper().endswith((" FOR", " OF", " AND", " TO", " IN"))
-                    or (line.centered and nxt.centered and abs(line.font_size - nxt.font_size) <= 2)
-                    or (is_all_caps_short(title_key, 18) and is_all_caps_short(next_text, 18))
-                )
-                if continuation_trigger and len(next_text.split()) <= 10 and not looks_like_table_line(next_text):
-                    return normalize_space(f"{title_key} {next_text}")[:220]
-                return title
+                parts = [title_key]
+                prev = line
+                for nxt in lines[idx + 1:idx + 5]:
+                    next_text = normalize_space(nxt.text)
+                    if (
+                        not next_text
+                        or nxt.is_running
+                        or is_page_number(next_text)
+                        or is_separator_line(next_text)
+                        or looks_like_table_line(next_text)
+                        or re.match(r"^\d{1,3}(?:\.\d+)?[.)]?\s+", next_text)
+                    ):
+                        break
+                    current = normalize_space(" ".join(parts))
+                    continuation_trigger = (
+                        current.upper().endswith((" FOR", " OF", " AND", " TO", " IN", " BY", " WITH"))
+                        or (prev.centered and nxt.centered and abs(prev.font_size - nxt.font_size) <= 2)
+                        or (is_all_caps_short(current, 22) and is_all_caps_short(next_text, 18))
+                    )
+                    if continuation_trigger and len(next_text.split()) <= 12:
+                        parts.append(next_text)
+                        prev = nxt
+                        continue
+                    break
+                return normalize_space(" ".join(parts))[:220]
         return title
 
     filename_title = pdf_path.stem.replace("_", " ").replace("-", " ")
@@ -1042,8 +1114,9 @@ def infer_document_context(
         return choose_title(metadata_title, "metadata")
     if subject_title and not title_is_weak(subject_title):
         return choose_title(subject_title, "subject")
-    if line_title and STRONG_DOC_TITLE_HINT_RE.search(line_title):
-        return choose_title(complete_title(line_title))
+    completed_line_title = complete_title(line_title) if line_title else ""
+    if completed_line_title and STRONG_DOC_TITLE_HINT_RE.search(completed_line_title):
+        return choose_title(completed_line_title)
     if filename_title and STRONG_DOC_TITLE_HINT_RE.search(filename_title):
         return DocumentContext(title=filename_title[:220], path_parts=[], source="filename")
 
@@ -1085,7 +1158,7 @@ def is_toc_page(lines: list[LogicalLine]) -> bool:
     if not lines:
         return False
     first_text = "\n".join(line.text for line in lines[:12]).lower()
-    dot_rows = sum(1 for line in lines if TOC_DOT_LEADER_RE.search(line.text))
+    dot_rows = sum(1 for line in lines if TOC_LEADER_RE.search(line.text))
     numbered_rows = sum(1 for line in lines if TOC_ROW_RE.match(line.text))
     page_ref_rows = sum(
         1 for line in lines
@@ -1520,6 +1593,15 @@ def score_heading_line(
     if text.endswith(":") and line.word_count <= 16:
         score += 1.0
         reasons.append("trailing_colon")
+    if (
+        not scheme
+        and text.endswith(":")
+        and line.word_count <= 8
+        and is_compact_heading_phrase(text.rstrip(":"))
+        and not has_clause_sentence_shape(text.rstrip(":"))
+    ):
+        score += 2.5
+        reasons.append("compact_colon_heading")
     if toc_match_entry:
         score += 3.0
         reasons.append("toc_match")
@@ -1586,6 +1668,58 @@ def merge_heading_lines(candidates: list[dict], pages_by_num: dict[int, PageInfo
             "toc_match": toc_match_entry,
         })
     return merged
+
+
+def extend_heading_candidates_with_continuations(
+    candidates: list[dict],
+    page_lines: dict[int, list[LogicalLine]],
+) -> list[dict]:
+    """Attach one short wrapped line to heading candidates when layout makes it clear."""
+    if not candidates:
+        return []
+    candidate_lines = {(cand["line"].page_num, cand["line"].line_index) for cand in candidates}
+    extended: list[dict] = []
+    for cand in candidates:
+        line: LogicalLine = cand["line"]
+        if cand["scheme"] not in {"decimal", "section", "appendix"} or cand["heading_text"].rstrip().endswith(":"):
+            extended.append(cand)
+            continue
+        lines = page_lines.get(line.page_num, [])
+        next_line = next((item for item in lines if item.line_index == line.line_index + 1), None)
+        if not next_line or (next_line.page_num, next_line.line_index) in candidate_lines:
+            extended.append(cand)
+            continue
+        next_text = normalize_space(next_line.text)
+        if (
+            not next_text
+            or next_line.is_running
+            or next_line.role in {"table", "toc", "drawing", "form", "page_number"}
+            or is_page_number(next_text)
+            or looks_like_table_line(next_text)
+            or re.match(r"^(?:\d{1,3}(?:\.\d+)?|[a-zA-Z])[.)]\s+", next_text)
+            or next_line.word_count > 10
+            or next_line.gap_above > max(12.0, line.height * 1.8)
+        ):
+            extended.append(cand)
+            continue
+        heading_text = normalize_space(cand["heading_text"])
+        continuation_trigger = (
+            heading_text.lower().endswith((" of", " for", " and", " or", " to", " in", " with", " by", " as", " per"))
+            or next_text[:1].islower()
+            or heading_text.count('"') % 2 == 1
+            or heading_text.count("“") > heading_text.count("”")
+            or heading_text.count("(") > heading_text.count(")")
+        )
+        aligned = next_line.centered == line.centered or abs(next_line.left - line.left) <= 60
+        if continuation_trigger and aligned:
+            updated = dict(cand)
+            updated["heading_text"] = normalize_space(f"{heading_text} {next_text}")
+            updated["score"] = cand["score"] + 0.4
+            updated["reasons"] = sorted(set(cand["reasons"] + ["wrapped_heading"]))
+            extended.append(updated)
+        else:
+            extended.append(cand)
+    return extended
 
 
 def assign_heading_level(cand: dict, body_size: float, size_ranks: dict[float, int]) -> int:
@@ -1682,6 +1816,7 @@ def detect_headings(
             "toc_match": toc_match_entry,
         })
 
+    raw_candidates = extend_heading_candidates_with_continuations(raw_candidates, page_lines)
     merged = merge_heading_lines(raw_candidates, pages_by_num)
     headings: list[HeadingEvent] = []
     for cand in merged:
@@ -1742,7 +1877,16 @@ def filter_document_title_headings(headings: list[HeadingEvent], document_title:
     doc_key = comparable_title(document_title)
     filtered = [
         heading for heading in headings
-        if not (heading.page_num <= 2 and comparable_title(heading.text) == doc_key)
+        if not (
+            heading.page_num <= 2
+            and (
+                comparable_title(heading.text) == doc_key
+                or (
+                    len(comparable_title(heading.text)) >= 20
+                    and doc_key.startswith(comparable_title(heading.text))
+                )
+            )
+        )
     ]
     for idx, heading in enumerate(filtered, start=1):
         heading.id = idx
@@ -1769,6 +1913,50 @@ def nest_decimal_headings_under_preamble(headings: list[HeadingEvent], root: str
     for heading in ordered[first_decimal_idx:]:
         if heading.scheme == "decimal":
             heading.level = min(heading.level + 1, 6)
+    attach_breadcrumbs(ordered, root)
+
+
+def anchor_mixed_document_decimal_headings(headings: list[HeadingEvent], root: str = "") -> None:
+    """Nest decimal clauses under nearby unnumbered subdocument titles in stitched packs."""
+    ordered = sorted(headings, key=lambda h: (h.page_num, h.top, h.left))
+    active_anchor: Optional[HeadingEvent] = None
+
+    def is_anchor(heading: HeadingEvent) -> bool:
+        text = normalize_space(heading.text)
+        if heading.scheme in {"appendix", "section"}:
+            return True
+        if heading.scheme == "decimal" or heading.level > 2:
+            return False
+        return bool(SUBDOCUMENT_ANCHOR_RE.search(text))
+
+    for heading in ordered:
+        if heading.scheme != "decimal":
+            if (
+                active_anchor
+                and active_anchor.text.upper().startswith("ATTACHMENT")
+                and heading.page_num > active_anchor.page_num
+                and SUBDOCUMENT_ANCHOR_RE.search(normalize_space(heading.text))
+            ):
+                heading.level = 1
+            if is_anchor(heading):
+                active_anchor = heading
+            continue
+        if not active_anchor:
+            continue
+        if heading.page_num - active_anchor.page_num > 3:
+            active_anchor = None
+            continue
+        decimal_depth = max(heading.level, 1)
+        if heading.numbering:
+            parts = heading.numbering.split(".")
+            decimal_depth = len(parts)
+            if len(parts) > 1 and parts[-1] == "0":
+                decimal_depth -= 1
+            decimal_depth = max(decimal_depth, 1)
+        heading.level = min(max(active_anchor.level + decimal_depth, active_anchor.level + 1), 6)
+        if "mixed_doc_anchor" not in heading.reasons:
+            heading.reasons.append("mixed_doc_anchor")
+
     attach_breadcrumbs(ordered, root)
 
 
@@ -1991,13 +2179,14 @@ def run_fast_pipeline(
         left_margin = detect_left_margin(all_lines)
         toc_entries = parse_toc_entries(page_lines, left_margin)
         classify_line_roles(page_lines, pages, body_size, left_margin, toc_entries)
-        provisional_title = document_title_from_lines(page_lines, body_size) or pdf_path.stem.replace("_", " ").replace("-", " ")
+        provisional_title = document_title_from_lines(page_lines, body_size) or source_pdf.stem.replace("_", " ").replace("-", " ")
         headings, heading_warnings = detect_headings(page_lines, pages, body_size, left_margin, toc_entries)
         headings = filter_document_title_headings(headings, provisional_title)
-        document_context = infer_document_context(pdf_path, page_lines, headings, body_size)
+        document_context = infer_document_context(source_pdf, page_lines, headings, body_size)
         headings = filter_document_title_headings(headings, document_context.title)
         attach_breadcrumbs(headings, document_context.breadcrumb_root)
         nest_decimal_headings_under_preamble(headings, document_context.breadcrumb_root)
+        anchor_mixed_document_decimal_headings(headings, document_context.breadcrumb_root)
         warnings.extend(heading_warnings)
         chunks, page_records = build_chunks_and_pages(page_lines, headings, document_context)
         sections = build_sections(headings, len(pages), document_context)

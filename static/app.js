@@ -1,1895 +1,874 @@
-// =========================================================================
-// Esteem DocLens - Client Application
-// =========================================================================
+const state = {
+  folders: [],
+  folder: '',
+  tab: 'ask',
+  docs: [],
+  pending: [],
+  jobs: [],
+  chats: [],
+  threadId: '',
+  messages: [],
+  sending: false,
+  uploadFiles: [],
+  inspectDocId: null,
+  inspectInfo: null,
+  inspectToc: [],
+  inspectPage: null,
+  inspectSearchResults: [],
+  inspectPanel: 'page',
+  inspecting: false,
+};
 
-// --- API helpers ---
-async function readErrorMessage(res) {
-  const text = await res.text();
-  if (!text) return res.statusText;
-  try {
-    const data = JSON.parse(text);
-    return data.detail || data.error || text;
-  } catch {
-    return text;
-  }
-}
+const VALID_TABS = new Set(['ask', 'documents', 'ingest', 'jobs', 'inspect']);
+const INSPECT_PANELS = new Set(['metadata', 'toc', 'page', 'search']);
+const $ = (id) => document.getElementById(id);
 
 async function api(path, opts = {}) {
-  const res = await fetch('/api' + path, {
-    headers: { 'Content-Type': 'application/json', ...opts.headers },
+  const res = await fetch(path, {
     ...opts,
+    headers: opts.body instanceof FormData ? opts.headers : {
+      'Content-Type': 'application/json',
+      ...(opts.headers || {}),
+    },
   });
   if (!res.ok) {
-    throw new Error(await readErrorMessage(res));
+    let message = `${res.status} ${res.statusText}`;
+    try {
+      const data = await res.json();
+      message = data.detail || data.error || message;
+    } catch (_) {}
+    throw new Error(message);
   }
   return res.json();
-}
-
-async function apiUpload(path, files) {
-  const form = new FormData();
-  for (const f of files) form.append('files', f);
-  const res = await fetch('/api' + path, { method: 'POST', body: form });
-  if (!res.ok) throw new Error(await readErrorMessage(res));
-  return res.json();
-}
-
-async function apiForm(path, form) {
-  const res = await fetch('/api' + path, { method: 'POST', body: form });
-  if (!res.ok) throw new Error(await readErrorMessage(res));
-  return res.json();
-}
-
-// --- State ---
-let currentProject = null;
-let currentDocId = null;
-let currentPage = 1;
-let currentChatId = null;
-let currentFolderSection = 'chat';
-let selectedDocumentIds = new Set();
-let pollTimer = null;
-let refreshAfterPolling = false;
-let thinkingTimer = null;
-let workspaceNotice = null;
-let pendingChatAttachment = null;
-
-const SIDEBAR_WIDTH_KEY = 'esteem.folder-knowledge.sidebar-width';
-const SIDEBAR_COLLAPSED_KEY = 'esteem.folder-knowledge.sidebar-collapsed';
-const SUPPORTED_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif', '.zip', '.tar', '.gz', '.tgz']);
-const CHAT_REVIEW_EXT = new Set(['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png', '.tiff', '.tif', '.bmp', '.gif']);
-const CHAT_REVIEW_MAX_PAGES = 10;
-const THINKING_STEPS = [
-  'Searching folder documents',
-  'Reviewing earlier messages in this chat',
-  'Drafting a document-grounded answer',
-];
-
-// --- Init ---
-window.addEventListener('hashchange', router);
-window.addEventListener('load', () => {
-  configureMarkdown();
-  initSidebarCollapse();
-  initSidebarResize();
-  loadFolders();
-  router();
-});
-
-function configureMarkdown() {
-  if (window.marked?.setOptions) {
-    window.marked.setOptions({
-      gfm: true,
-      breaks: true,
-    });
-  }
-}
-
-function applySidebarCollapsedState(collapsed) {
-  const layout = document.querySelector('.layout');
-  const collapseBtn = document.getElementById('sidebar-collapse-btn');
-  const expandBtn = document.getElementById('sidebar-expand-btn');
-  if (!layout) return;
-
-  layout.classList.toggle('sidebar-collapsed', collapsed);
-  if (collapseBtn) {
-    collapseBtn.setAttribute('aria-label', collapsed ? 'Expand folders panel' : 'Collapse folders panel');
-    collapseBtn.setAttribute('title', collapsed ? 'Expand folders panel' : 'Collapse folders panel');
-  }
-  if (expandBtn) {
-    expandBtn.setAttribute('aria-hidden', collapsed ? 'false' : 'true');
-  }
-}
-
-function initSidebarCollapse() {
-  const collapsed = localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === 'true';
-  applySidebarCollapsedState(collapsed);
-}
-
-function toggleSidebar() {
-  const layout = document.querySelector('.layout');
-  if (!layout) return;
-  const collapsed = !layout.classList.contains('sidebar-collapsed');
-  localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(collapsed));
-  applySidebarCollapsedState(collapsed);
-}
-
-function initSidebarResize() {
-  const resizer = document.getElementById('sidebar-resizer');
-  const root = document.documentElement;
-  const stored = parseInt(localStorage.getItem(SIDEBAR_WIDTH_KEY), 10);
-  if (stored && !Number.isNaN(stored)) {
-    root.style.setProperty('--sidebar-width', `${clamp(stored, 220, 460)}px`);
-  }
-  if (!resizer) return;
-
-  let dragging = false;
-  const onMove = (event) => {
-    if (!dragging) return;
-    if (document.querySelector('.layout')?.classList.contains('sidebar-collapsed')) return;
-    const width = clamp(event.clientX, 220, 460);
-    root.style.setProperty('--sidebar-width', `${width}px`);
-  };
-  const onUp = () => {
-    if (!dragging) return;
-    dragging = false;
-    resizer.classList.remove('dragging');
-    const width = parseInt(getComputedStyle(root).getPropertyValue('--sidebar-width'), 10);
-    localStorage.setItem(SIDEBAR_WIDTH_KEY, String(width));
-    window.removeEventListener('mousemove', onMove);
-    window.removeEventListener('mouseup', onUp);
-  };
-
-  resizer.addEventListener('mousedown', (event) => {
-    dragging = true;
-    resizer.classList.add('dragging');
-    event.preventDefault();
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-  });
-}
-
-// --- Router ---
-function router() {
-  const hash = location.hash.slice(1) || '/';
-  stopPolling();
-
-  if (hash.startsWith('/doc/')) {
-    const parts = hash.split('/');
-    const docId = parseInt(parts[2], 10);
-    const pageNum = parts[3] === 'page' ? parseInt(parts[4], 10) : null;
-    showViewer(docId, pageNum);
-    return;
-  }
-
-  if (hash.startsWith('/folder/')) {
-    const { folder, section } = parseFolderHash(hash);
-    const name = decodeURIComponent(folder);
-    currentProject = name;
-    currentFolderSection = section;
-    showProject(name, section);
-    return;
-  }
-
-  if (hash.startsWith('/project/')) {
-    const legacy = hash.startsWith('/project/') ? `/folder/${hash.slice(9)}` : hash;
-    const { folder, section } = parseFolderHash(legacy);
-    const name = decodeURIComponent(folder);
-    currentProject = name;
-    currentFolderSection = section;
-    showProject(name, section);
-    return;
-  }
-
-  if (hash.startsWith('/quality/')) {
-    const name = decodeURIComponent(hash.slice(9));
-    showQuality(name);
-    return;
-  }
-
-  showWelcome();
-}
-
-function navigate(hash) {
-  location.hash = hash;
-}
-
-function parseFolderHash(hash) {
-  const raw = hash.slice(8);
-  const [folderPart, queryString = ''] = raw.split('?');
-  const params = new URLSearchParams(queryString);
-  const section = params.get('section') || 'chat';
-  return {
-    folder: folderPart,
-    section: ['documents', 'ingestion', 'chat'].includes(section) ? section : 'chat',
-  };
-}
-
-function folderHash(project, section = 'chat') {
-  const encoded = enc(project);
-  return section === 'chat'
-    ? `#/folder/${encoded}`
-    : `#/folder/${encoded}?section=${encodeURIComponent(section)}`;
-}
-
-function rootFolder(folder) {
-  return String(folder || '').split('/')[0] || '';
-}
-
-function renderFolderBreadcrumb(project) {
-  const parts = String(project || '').split('/').filter(Boolean);
-  const section = currentFolderSection || 'chat';
-  let path = '';
-  const items = [`<a href="#/">Folders</a>`];
-
-  for (let i = 0; i < parts.length; i++) {
-    path = path ? `${path}/${parts[i]}` : parts[i];
-    if (i === parts.length - 1) {
-      items.push(`<strong>${esc(parts[i])}</strong>`);
-    } else {
-      items.push(`<a href="${folderHash(path, section)}">${esc(parts[i])}</a>`);
-    }
-  }
-
-  return items.join('<span>/</span>');
-}
-
-// --- Sidebar (tree view) ---
-let expandedFolders = new Set();
-
-function toggleFolderExpand(folder, event) {
-  event.stopPropagation();
-  if (expandedFolders.has(folder)) expandedFolders.delete(folder);
-  else expandedFolders.add(folder);
-  loadFolders();
-}
-
-function buildFolderTree(folders) {
-  const map = new Map();
-  const roots = [];
-  for (const f of folders) map.set(f.folder, { ...f, children: [] });
-  for (const f of folders) {
-    const node = map.get(f.folder);
-    if (f.parent && map.has(f.parent)) {
-      map.get(f.parent).children.push(node);
-    } else {
-      roots.push(node);
-    }
-  }
-  return roots;
-}
-
-function renderTreeNode(node, expanded) {
-  const hasChildren = node.children.length > 0;
-  const isExpanded = expanded.has(node.folder);
-  const isActive = currentProject === node.folder;
-  const toggle = hasChildren
-    ? `<span class="tree-toggle ${isExpanded ? 'open' : ''}" onclick="toggleFolderExpand(${jsq(node.folder)}, event)"></span>`
-    : `<span class="tree-toggle leaf"></span>`;
-  const badge = (node.docs || node.pending)
-    ? `<span class="badge">${node.docs}${node.pending ? `+${node.pending}` : ''}</span>`
-    : '';
-  let html = `<div class="tree-node">
-    <div class="project-item ${isActive ? 'active' : ''}"
-         onclick="navigate(folderHash(${jsq(node.folder)}, currentProject === ${jsq(node.folder)} ? currentFolderSection : 'chat'))"
-         style="padding-left:${6 + (node.depth || 0) * 18}px">
-      ${toggle}
-      <span class="name" title="${esc(node.folder)}">${esc(node.display_name)}</span>
-      ${badge}
-    </div>`;
-  if (hasChildren && isExpanded) {
-    html += '<div class="tree-children">';
-    for (const child of node.children) html += renderTreeNode(child, expanded);
-    html += '</div>';
-  }
-  return html + '</div>';
-}
-
-async function loadFolders() {
-  try {
-    const projects = await api('/folders');
-    const list = document.getElementById('project-list');
-    if (!list) return;
-    if (!projects.length) {
-      list.innerHTML = '<div class="empty" style="padding:16px;font-size:12px">No folders yet</div>';
-      return;
-    }
-    if (currentProject) {
-      const parts = currentProject.split('/');
-      let parent = '';
-      for (let i = 0; i < parts.length - 1; i++) {
-        parent = parent ? `${parent}/${parts[i]}` : parts[i];
-        expandedFolders.add(parent);
-      }
-    }
-    const tree = buildFolderTree(projects);
-    list.innerHTML = tree.map(node => renderTreeNode(node, expandedFolders)).join('');
-  } catch (error) {
-    console.error('Failed to load folders:', error);
-  }
-}
-
-// --- Views ---
-function showWelcome() {
-  currentProject = null;
-  currentDocId = null;
-  currentChatId = null;
-  workspaceNotice = null;
-  setTopbar(null);
-  document.getElementById('content').innerHTML = `
-    <div class="welcome">
-      <h2>Esteem DocLens</h2>
-      <p>Select a folder to open its chat and work against already ingested tender documents. Add more documents only when you need to refresh the folder.</p>
-    </div>`;
-  loadFolders();
-}
-
-function renderFolderTopbarActions(project, section) {
-  const actions = [];
-  if (section === 'chat') {
-    actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Manage documents</button>`);
-    return actions.join('');
-  }
-
-  actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'chat'))})">Back to chat</button>`);
-
-  if (section === 'documents') {
-    actions.push(`<button class="btn btn-primary" onclick="navigate(${jsq(folderHash(project, 'ingestion'))})">Add documents</button>`);
-    actions.push(`<button class="btn btn-ghost" onclick="promptNewProject(${jsq(`${project}/`)})">New Sub-folder</button>`);
-    actions.push(`<button class="btn btn-ghost" onclick="promptRenameProject(${jsq(project)})">Rename</button>`);
-    actions.push(`<button class="btn btn-danger btn-sm" onclick="confirmDeleteProject(${jsq(project)})">Delete Folder</button>`);
-    return actions.join('');
-  }
-
-  actions.push(`<button class="btn btn-ghost" onclick="navigate(${jsq(folderHash(project, 'documents'))})">Library</button>`);
-  return actions.join('');
-}
-
-async function showProject(project, section = 'chat') {
-  if (currentProject && currentProject !== project) {
-    selectedDocumentIds.clear();
-    workspaceNotice = null;
-    pendingChatAttachment = null;
-  }
-  currentProject = project;
-  currentFolderSection = section;
-  currentDocId = null;
-  loadFolders();
-  setTopbar(
-    renderFolderBreadcrumb(project),
-    renderFolderTopbarActions(project, section)
-  );
-
-  const content = document.getElementById('content');
-  content.innerHTML = '<div class="spinner"></div>';
-
-  try {
-    const moveTargetPromise = section === 'documents'
-      ? api(`/folders?scope=${enc(rootFolder(project))}&recursive=true`)
-      : Promise.resolve([]);
-
-    const [docData, chats, jobs, folders, moveTargets] = await Promise.all([
-      api(`/folders/${enc(project)}/documents`),
-      api(`/folders/${enc(project)}/chats`),
-      api('/ingestion/jobs'),
-      api('/folders'),
-      moveTargetPromise,
-    ]);
-    const childFolders = folders.filter((folder) => folder.parent === project);
-
-    if (currentChatId && !chats.some((chat) => chat.id === currentChatId)) {
-      currentChatId = null;
-    }
-    if (!currentChatId && chats.length) {
-      currentChatId = chats[0].id;
-    }
-
-    let chatPayload = null;
-    if (section === 'chat' && currentChatId) {
-      chatPayload = await api(`/chats/${currentChatId}/messages`);
-    }
-
-    content.innerHTML = `
-      ${renderWorkspaceNotice()}
-      ${renderFolderSection(project, section, {
-        documents: docData.documents,
-        pending: docData.pending,
-        chats,
-        chatMessages: chatPayload?.messages || [],
-        childFolders,
-        moveTargets,
-        jobs,
-      })}
-    `;
-
-    renderMarkdownBlocks(content);
-    scrollChatToBottom();
-    if (section === 'documents') {
-      syncDocumentSelectionState();
-      applyDocumentFilters();
-    }
-
-    const activeJobs = jobs.filter((job) =>
-      inFolderScope(job.project, project) && job.status !== 'completed' && job.status !== 'failed'
-    );
-    if (activeJobs.length) {
-      startPolling(project);
-    } else {
-      stopPolling();
-      if (section === 'ingestion') {
-        await pollJobs(project);
-      }
-    }
-  } catch (error) {
-    content.innerHTML = `<div class="empty">Error: ${esc(error.message)}</div>`;
-  }
-}
-
-function renderFolderSummary(project, data) {
-  const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
-  const activeJobs = scopedJobs.filter((job) => job.status === 'queued' || job.status === 'running').length;
-  const failedJobs = scopedJobs.filter((job) => job.status === 'failed').length;
-  const items = [
-    `${data.documents.length} document${pluralize(data.documents.length)}`,
-    `${data.childFolders.length} sub-folder${pluralize(data.childFolders.length)}`,
-    `${data.pending.length} pending`,
-  ];
-  if (activeJobs) items.push(`${activeJobs} running`);
-  if (failedJobs) items.push(`${failedJobs} failed`);
-  return `
-    <div class="folder-summary">
-      <div>
-        <h2>${esc(project)}</h2>
-        <p>Search and chat use documents from this folder and its sub-folders.</p>
-      </div>
-      <div class="folder-summary-meta">
-        ${items.map((item) => `<span class="summary-pill">${esc(item)}</span>`).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderUploadCard(project, pendingCount = 0) {
-  const pendingLabel = pendingCount
-    ? `${pendingCount} file${pluralize(pendingCount)} waiting`
-    : 'Uploads land in pending first';
-  return `
-    <div class="card upload-card-shell upload-card-simple">
-      <div class="card-title">
-        <span>Upload files</span>
-        <span class="count">${pendingLabel}</span>
-      </div>
-      <div class="card-intro">Drop files here, then ingest them when you are ready. Supported: PDF, DOC, DOCX, XLS, XLSX, images, ZIP/TAR archives.</div>
-      <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-busy="false"
-         aria-describedby="upload-subtitle"
-         ondragover="event.preventDefault(); this.classList.add('dragover')"
-         ondragleave="this.classList.remove('dragover')"
-         ondrop="handleDrop(event, ${jsq(project)})"
-         onclick="openFilePicker()"
-         onkeydown="handleUploadAreaKeydown(event)">
-        <div class="upload-area-icon" aria-hidden="true">+</div>
-        <div class="upload-area-title" id="upload-title">Drop files into ${esc(project)}</div>
-        <div class="upload-area-subtitle" id="upload-subtitle">Click here to choose files, or use the "Choose folder" button below.</div>
-        <input type="file" id="file-input" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif,.zip,.tar,.gz,.tgz" multiple
-               onchange="handleFiles(this.files, ${jsq(project)}); this.value='';">
-        <input type="file" id="folder-input" webkitdirectory directory multiple style="display:none"
-               onchange="handleFolderUpload(this.files, ${jsq(project)}); this.value='';">
-      </div>
-      <div class="upload-actions-row simple">
-        <button class="btn btn-primary" id="upload-files-btn" onclick="event.stopPropagation(); openFilePicker()">Choose files</button>
-        <button class="btn btn-ghost" id="upload-folder-btn" onclick="event.stopPropagation(); openFolderPicker()">Choose folder</button>
-      </div>
-    </div>
-  `;
-}
-
-function renderFolderSection(project, section, data) {
-  if (section === 'ingestion') {
-    const scopedJobs = data.jobs.filter((job) => inFolderScope(job.project, project));
-    return `
-      <div class="workspace-stack">
-        ${renderFolderSummary(project, data)}
-        ${renderUploadCard(project, data.pending.length)}
-        ${renderPendingUploads(project, data.pending)}
-        <div id="jobs-area" aria-live="polite">${renderJobActivity(scopedJobs)}</div>
-      </div>
-    `;
-  }
-
-  if (section === 'chat') {
-    return `
-      <div class="chat-only-view">
-        ${renderChatShell(project, data.chats, data.chatMessages)}
-      </div>
-    `;
-  }
-
-  return `
-    <div class="workspace-stack">
-      ${renderFolderSummary(project, data)}
-      ${renderChildFoldersCard(project, data.childFolders)}
-      ${renderDocumentsCard(project, data.documents, data.moveTargets, data.pending.length)}
-    </div>
-  `;
-}
-
-function renderChildFoldersCard(project, folders) {
-  if (!folders.length) return '';
-  return `
-    <div class="card">
-      <div class="card-title">Sub-folders <span class="count">${folders.length}</span></div>
-      <table class="table">
-        <tr><th>Name</th><th>Documents</th><th>Pending</th></tr>
-        ${folders.map((folder) => `
-          <tr class="clickable" onclick="navigate(${jsq(folderHash(folder.folder))})">
-            <td><strong>${esc(folder.display_name || folder.folder)}</strong></td>
-            <td>${folder.docs}</td>
-            <td>${folder.pending || 0}</td>
-          </tr>
-        `).join('')}
-      </table>
-    </div>
-  `;
-}
-
-function renderPendingUploads(project, pending) {
-  const totalSize = pending.reduce((sum, file) => sum + (Number(file.size_mb) || 0), 0);
-  return `
-    <div class="card">
-      <div class="card-title">
-        <span>Pending Uploads <span class="count">${pending.length}</span></span>
-        <div class="title-actions">
-          ${pending.length ? `<span class="count">${formatMegabytes(totalSize)} total</span>` : ''}
-          <button class="btn btn-primary btn-sm" ${pending.length ? '' : 'disabled'} onclick="ingestAll(${jsq(project)}, ${pending.length})">Ingest All</button>
-        </div>
-      </div>
-      <div class="card-intro">Pending files are not searchable until ingestion completes.</div>
-      ${pending.length ? `
-        <table class="table">
-          <tr><th>File</th><th>Folder</th><th>Size</th><th></th></tr>
-          ${pending.map((file) => `
-            <tr>
-              <td>
-                <strong>${esc(file.filename)}</strong>
-                <div class="table-subtext">Ready to extract and index</div>
-              </td>
-              <td class="muted mono">${esc(relativeFolderLabel(project, file.folder))}</td>
-              <td class="muted">${formatMegabytes(file.size_mb)}</td>
-              <td>
-                <button class="btn btn-ghost btn-sm"
-                        onclick="ingestSingle(${jsq(project)}, ${jsq(file.relative_path)}, ${jsq(file.filename)})">Ingest now</button>
-                <button class="btn btn-ghost btn-sm"
-                        onclick="discardPendingFile(${jsq(project)}, ${jsq(file.relative_path)}, ${jsq(file.filename)})">Delete</button>
-              </td>
-            </tr>
-          `).join('')}
-        </table>
-      ` : `
-        <div class="empty empty-compact">
-          No pending uploads right now. Add files above and they will appear here before ingestion starts.
-        </div>
-      `}
-    </div>
-  `;
-}
-
-function renderDocumentsCard(project, documents, moveTargets = [], pendingCount = 0) {
-  const targetOptions = moveTargets
-    .map((folder) => folder.folder)
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b));
-
-  return `
-    <div class="card">
-      <div class="card-title">Library <span class="count">${documents.length}</span></div>
-      ${documents.length ? `
-        <div class="table-filters simple">
-          <div class="table-filter-controls">
-            <input
-              type="text"
-              id="doc-filter-query"
-              placeholder="Search documents by title, filename, folder, or doc id..."
-              oninput="applyDocumentFilters()">
-          </div>
-          <div class="table-filter-summary" id="document-filter-summary">
-            Showing ${documents.length} of ${documents.length} documents
-          </div>
-        </div>
-        <div class="bulk-actions" id="document-bulk-actions" hidden>
-          <div class="bulk-actions-left">
-            <strong id="document-selection-count">0 selected</strong>
-            <button class="btn btn-ghost btn-sm" onclick="clearDocumentSelection()">Clear selection</button>
-          </div>
-          <div class="bulk-actions-right">
-            <select id="bulk-move-target">
-              <option value="">Move to folder...</option>
-              ${targetOptions.map((folder) => `<option value="${esc(folder)}">${esc(folder)}</option>`).join('')}
-            </select>
-            <button class="btn btn-primary btn-sm" onclick="bulkMoveDocuments(${jsq(project)})">Move selected</button>
-            <button class="btn btn-danger btn-sm" onclick="bulkDeleteDocuments(${jsq(project)})">Delete selected</button>
-          </div>
-        </div>
-        <div class="table-wrap">
-          <table class="table">
-            <tr><th><input type="checkbox" id="document-select-all" onclick="toggleVisibleDocuments(this.checked)"></th><th>Title</th><th>Folder</th><th>Pages</th><th>Type</th><th></th></tr>
-            ${documents.map((doc) => {
-              const splitTag = doc.split_info
-                ? `<span class="tag" title="Split from ${esc(doc.split_info.parent)} pages ${doc.split_info.page_start}-${doc.split_info.page_end}">
-                     Part ${doc.split_info.part} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}
-                   </span>`
-                : '';
-              const searchText = [
-                doc.id,
-                doc.title,
-                doc.filename,
-                doc.folder,
-                doc.document_type || '',
-              ].join(' ').toLowerCase();
-              return `
-                <tr
-                  class="clickable document-row"
-                  data-doc-id="${doc.id}"
-                  data-doc-search="${esc(searchText)}"
-                  data-doc-type="${esc(doc.document_type || '')}"
-                  data-doc-folder="${esc(doc.folder)}"
-                  onclick="navigate('#/doc/${doc.id}')">
-                  <td onclick="event.stopPropagation()">
-                    <input
-                      type="checkbox"
-                      class="document-select"
-                      data-doc-id="${doc.id}"
-                      onchange="toggleDocumentSelection(${doc.id}, this.checked)">
-                  </td>
-                  <td>
-                    <strong>${esc(doc.title)}</strong> <span class="count">#${doc.id}</span>
-                    ${splitTag}
-                    <br>
-                    <span class="muted mono">${esc(doc.filename)}</span>
-                  </td>
-                  <td class="muted mono">${esc(doc.folder)}</td>
-                  <td>${doc.total_pages}</td>
-                  <td>${doc.document_type ? `<span class="tag">${esc(doc.document_type)}</span>` : '<span class="muted">-</span>'}</td>
-                  <td style="white-space:nowrap">
-                    <a class="btn btn-ghost btn-sm" href="/api/documents/${doc.id}/pdf" onclick="event.stopPropagation()" title="Download PDF">PDF</a>
-                    <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); promptRenameDoc(${doc.id}, ${jsq(doc.title)})" title="Rename">Rename</button>
-                    <button class="btn btn-ghost btn-sm" style="color:#dc3545"
-                            onclick="event.stopPropagation(); confirmDeleteDoc(${doc.id}, ${jsq(doc.title)})">Delete</button>
-                  </td>
-                </tr>
-              `;
-            }).join('')}
-          </table>
-        </div>
-        <div class="empty" id="document-filter-empty" style="display:none;padding:20px">
-          No documents match the current filters.
-        </div>
-      ` : `
-        <div class="empty">
-          <strong>No documents indexed yet.</strong>
-          <p class="empty-detail">${pendingCount
-            ? `${pendingCount} file${pluralize(pendingCount)} ${pendingCount === 1 ? 'is' : 'are'} staged in pending uploads. Run ingestion to make ${pendingCount === 1 ? 'it' : 'them'} searchable.`
-            : 'Open the ingestion tab to upload files and build this folder library.'}</p>
-        </div>
-      `}
-    </div>
-  `;
-}
-
-function renderWorkspaceNotice() {
-  if (!workspaceNotice) return '';
-  const role = workspaceNotice.type === 'error' ? 'alert' : 'status';
-  return `
-    <div class="workspace-notice ${workspaceNotice.type}" id="workspace-notice" role="${role}">
-      <div class="workspace-notice-body">
-        <strong>${esc(workspaceNotice.message)}</strong>
-        ${workspaceNotice.detail ? `<div class="workspace-notice-detail">${esc(workspaceNotice.detail)}</div>` : ''}
-      </div>
-      <button class="btn btn-ghost btn-sm" onclick="dismissWorkspaceNotice()">Dismiss</button>
-    </div>
-  `;
-}
-
-function showWorkspaceNotice(type, message, detail = '') {
-  workspaceNotice = { type, message, detail };
-}
-
-function dismissWorkspaceNotice() {
-  workspaceNotice = null;
-  document.getElementById('workspace-notice')?.remove();
-}
-
-function applyDocumentFilters() {
-  const query = (document.getElementById('doc-filter-query')?.value || '').trim().toLowerCase();
-  const rows = [...document.querySelectorAll('.document-row')];
-  if (!rows.length) return;
-
-  let visibleCount = 0;
-  let visibleSelectedCount = 0;
-  rows.forEach((row) => {
-    const matchesQuery = !query || (row.dataset.docSearch || '').includes(query);
-    const visible = matchesQuery;
-    row.style.display = visible ? '' : 'none';
-    if (visible) {
-      visibleCount += 1;
-      if (selectedDocumentIds.has(Number(row.dataset.docId))) {
-        visibleSelectedCount += 1;
-      }
-    }
-  });
-
-  const summary = document.getElementById('document-filter-summary');
-  if (summary) {
-    summary.textContent = `Showing ${visibleCount} of ${rows.length} documents`;
-  }
-
-  const empty = document.getElementById('document-filter-empty');
-  if (empty) {
-    empty.style.display = visibleCount ? 'none' : '';
-  }
-
-  const selectAll = document.getElementById('document-select-all');
-  if (selectAll) {
-    selectAll.checked = visibleCount > 0 && visibleCount === visibleSelectedCount;
-    selectAll.indeterminate = visibleSelectedCount > 0 && visibleSelectedCount < visibleCount;
-  }
-}
-
-function resetDocumentFilters() {
-  const query = document.getElementById('doc-filter-query');
-  if (query) query.value = '';
-  applyDocumentFilters();
-}
-
-function syncDocumentSelectionState() {
-  document.querySelectorAll('.document-select').forEach((checkbox) => {
-    checkbox.checked = selectedDocumentIds.has(Number(checkbox.dataset.docId));
-  });
-  document.querySelectorAll('.document-row').forEach((row) => {
-    row.classList.toggle('selected', selectedDocumentIds.has(Number(row.dataset.docId)));
-  });
-  const count = document.getElementById('document-selection-count');
-  if (count) {
-    count.textContent = `${selectedDocumentIds.size} selected`;
-  }
-  const actions = document.getElementById('document-bulk-actions');
-  if (actions) {
-    actions.hidden = selectedDocumentIds.size === 0;
-  }
-}
-
-function toggleDocumentSelection(docId, checked) {
-  if (checked) {
-    selectedDocumentIds.add(docId);
-  } else {
-    selectedDocumentIds.delete(docId);
-  }
-  syncDocumentSelectionState();
-  applyDocumentFilters();
-}
-
-function toggleVisibleDocuments(checked) {
-  document.querySelectorAll('.document-row').forEach((row) => {
-    if (row.style.display === 'none') return;
-    const docId = Number(row.dataset.docId);
-    if (checked) {
-      selectedDocumentIds.add(docId);
-    } else {
-      selectedDocumentIds.delete(docId);
-    }
-  });
-  syncDocumentSelectionState();
-  applyDocumentFilters();
-}
-
-function clearDocumentSelection() {
-  selectedDocumentIds.clear();
-  syncDocumentSelectionState();
-  applyDocumentFilters();
-}
-
-async function bulkMoveDocuments(project) {
-  if (!selectedDocumentIds.size) {
-    alert('Select one or more documents first.');
-    return;
-  }
-  const targetFolder = document.getElementById('bulk-move-target')?.value;
-  if (!targetFolder) {
-    alert('Choose a target folder first.');
-    return;
-  }
-  try {
-    await api('/documents/bulk-move', {
-      method: 'POST',
-      body: JSON.stringify({
-        doc_ids: [...selectedDocumentIds],
-        target_folder: targetFolder,
-      }),
-    });
-    selectedDocumentIds.clear();
-    await showProject(project, 'documents');
-  } catch (error) {
-    alert('Move failed: ' + error.message);
-  }
-}
-
-async function bulkDeleteDocuments(project) {
-  if (!selectedDocumentIds.size) {
-    alert('Select one or more documents first.');
-    return;
-  }
-  if (!confirm(`Delete ${selectedDocumentIds.size} selected document(s)?`)) {
-    return;
-  }
-  try {
-    await api('/documents/bulk-delete', {
-      method: 'POST',
-      body: JSON.stringify({ doc_ids: [...selectedDocumentIds] }),
-    });
-    selectedDocumentIds.clear();
-    await showProject(project, 'documents');
-  } catch (error) {
-    alert('Delete failed: ' + error.message);
-  }
-}
-
-function renderChatShell(project, chats, messages) {
-  return `
-    <div class="chat-shell">
-      <aside class="chat-history">
-        <div class="chat-history-header">
-          <div>
-            <strong>Chats</strong>
-            <div class="chat-subtitle">${chats.length} thread${chats.length === 1 ? '' : 's'}</div>
-          </div>
-          <button class="btn btn-sm btn-primary" onclick="newChat(${jsq(project)})">New</button>
-        </div>
-        <div class="chat-history-list">
-          ${chats.length ? chats.map((chat) => `
-            <button class="chat-thread ${chat.id === currentChatId ? 'active' : ''}" onclick="selectChat('${chat.id}')">
-              <span class="chat-thread-title">${esc(chat.title || 'New chat')}</span>
-              <span class="chat-thread-preview">${esc((chat.last_message || 'No messages yet').slice(0, 120))}</span>
-              <span class="chat-thread-meta">${chat.message_count || 0} message${chat.message_count === 1 ? '' : 's'}</span>
-            </button>
-          `).join('') : '<div class="empty" style="padding:24px 16px;font-size:12px">No chats yet</div>'}
-        </div>
-      </aside>
-      <section class="chat-main">
-        <div class="chat-header">
-          <div>
-            <h3>${currentChatId ? esc((chats.find((chat) => chat.id === currentChatId)?.title) || 'New chat') : 'Folder chat'}</h3>
-            <div class="chat-subtitle">Answers must be grounded only in documents from <strong>${esc(project)}</strong> and its sub-folders.</div>
-          </div>
-          ${currentChatId ? `
-            <div class="chat-header-actions">
-              <button class="btn btn-sm btn-ghost" onclick="newChat(${jsq(project)})">Start fresh</button>
-            </div>
-          ` : ''}
-        </div>
-        <div class="chat-messages" id="chat-messages">
-          ${messages.length ? renderChatMessages(messages) : `
-            <div class="chat-empty" id="chat-empty">
-              <h3>Ask about this folder</h3>
-              <p>The assistant will use this folder's MCP document tools against only <strong>${esc(project)}</strong> and its sub-folders, keep the thread history in context, and say so when the documents do not support an answer. You can also upload one document up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison against this folder.</p>
-            </div>
-          `}
-        </div>
-        <div class="chat-composer">
-          <input type="file" id="chat-review-file" hidden
-                 accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.tiff,.tif,.bmp,.gif"
-                 onchange="handleChatAttachmentChange(event)">
-          <textarea id="chat-input"
-                    placeholder="Ask a question and the assistant will use this folder's MCP tools..."
-                    onkeydown="handleChatKeydown(event)"></textarea>
-          <div id="chat-attachment-slot">${renderPendingChatAttachment()}</div>
-          <div class="chat-composer-footer">
-            <div class="chat-composer-hint">Markdown is supported in replies. The web chat uses the same MCP document tools exposed to external clients. You can also upload one PDF, image, Word, or Excel file up to ${CHAT_REVIEW_MAX_PAGES} pages for comparison.</div>
-            <div class="chat-composer-actions">
-              <button class="btn btn-ghost" type="button" id="attach-chat-file-btn" onclick="openChatAttachmentPicker()">Review document</button>
-              <button class="btn btn-primary" id="send-chat-btn" onclick="sendChatMessage()">Send</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  `;
-}
-
-function renderPendingChatAttachment() {
-  if (!pendingChatAttachment) return '';
-  return `
-    <div class="chat-attachment-tray">
-      <div class="chat-attachment-pill">
-        <span class="chat-attachment-name">${esc(pendingChatAttachment.name)}</span>
-        <span class="chat-attachment-meta">Review against folder docs · limit ${CHAT_REVIEW_MAX_PAGES} pages</span>
-        <button type="button" class="chat-attachment-remove" onclick="clearChatAttachment()" aria-label="Remove attached review document">Remove</button>
-      </div>
-    </div>
-  `;
-}
-
-function renderChatMessages(messages) {
-  return messages.map((message) => `
-    <div class="chat-message ${message.role}">
-      <div class="chat-bubble">
-        <div class="chat-message-header">
-          <span class="chat-role">${message.role === 'assistant' ? 'Assistant' : 'You'}</span>
-          <span>${formatDate(message.created_at)}</span>
-        </div>
-        ${message.role === 'assistant'
-          ? `<div class="render-markdown">${renderMarkdown(message.content)}</div>`
-          : `<div>${esc(message.content).replace(/\n/g, '<br>')}</div>`}
-        ${message.role === 'user' && message.sources?.some((source) => source.kind === 'attachment_meta') ? renderUserAttachmentList(message.sources) : ''}
-        ${message.role === 'assistant' && message.sources?.length ? renderSourceList(message.sources) : ''}
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderUserAttachmentList(sources) {
-  const attachments = sources.filter((source) => source.kind === 'attachment_meta');
-  if (!attachments.length) return '';
-  return `
-    <div class="chat-attachment-history">
-      ${attachments.map((source) => `
-        <div class="chat-attachment-pill static">
-          <span class="chat-attachment-name">${esc(source.name || 'Uploaded document')}</span>
-          <span class="chat-attachment-meta">${source.page_count || '?'} page${source.page_count === 1 ? '' : 's'} submitted for review</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function renderSourceList(sources) {
-  return `
-    <div class="chat-source-list">
-      ${sources.map((source) => source.kind === 'attachment'
-        ? `
-          <div class="chat-source attachment">
-            <strong>[${source.id}]</strong>
-            <span>${esc(source.name || 'Uploaded document')} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
-          </div>
-        `
-        : `
-          <div class="chat-source">
-            <strong>[${source.id}]</strong>
-            <a href="#/doc/${source.doc_id}/page/${source.page_num}">${esc(source.doc_title)}</a>
-            <span>${source.folder ? ` &middot; ${esc(source.folder)}` : ''} &middot; p${source.page_num}${source.breadcrumb ? ` &middot; ${esc(source.breadcrumb)}` : ''}</span>
-          </div>
-        `
-      ).join('')}
-    </div>
-  `;
-}
-
-async function showViewer(docId, pageNum) {
-  currentDocId = docId;
-  currentPage = Number.isFinite(pageNum) ? pageNum : null;
-
-  try {
-    const [doc, toc] = await Promise.all([
-      api(`/documents/${docId}`),
-      api(`/documents/${docId}/toc`),
-    ]);
-
-    const splitNote = doc.split_info
-      ? ` <span class="tag">Part ${doc.split_info.part} of ${esc(doc.split_info.parent)} &middot; p${doc.split_info.page_start}-${doc.split_info.page_end}</span>`
-      : '';
-    setTopbar(
-      `<a href="#/" style="color:#666">Folders</a><span>/</span>` +
-      `<a href="#/folder/${enc(doc.folder)}">${esc(doc.folder)}</a><span>/</span>` +
-      `<strong>${esc(doc.title)}</strong>${splitNote}`,
-      `<a class="btn btn-ghost btn-sm" href="/api/documents/${docId}/pdf">Download</a>
-       <button class="btn btn-ghost btn-sm" onclick="navigate('#/folder/${enc(doc.folder)}')">Back</button>`
-    );
-
-    const content = document.getElementById('content');
-    content.style.padding = '0';
-    content.innerHTML = `
-      <div class="viewer">
-        <div class="viewer-toc">
-          <div class="viewer-search">
-            <input type="text" placeholder="Search in document..."
-                   id="doc-search" onkeydown="if(event.key==='Enter') searchInDoc(${docId}, this.value)">
-          </div>
-          <div id="toc-list">${renderToc(toc, docId)}</div>
-          <div id="search-results"></div>
-        </div>
-        <div class="viewer-content">
-          <div class="page-header" id="page-header"></div>
-          <div class="page-body" id="page-body"><div class="spinner" style="margin:40px auto"></div></div>
-        </div>
-      </div>
-    `;
-
-    const initialPage = currentPage ?? doc.first_page_num ?? toc[0]?.page_start ?? 1;
-    loadPage(docId, initialPage, doc.page_count || doc.total_pages);
-  } catch (error) {
-    document.getElementById('content').innerHTML =
-      `<div class="empty">Error: ${esc(error.message)}</div>`;
-  }
-}
-
-function renderToc(sections, docId) {
-  if (!sections.length) {
-    return '<div class="empty" style="padding:12px;font-size:12px">No sections</div>';
-  }
-  return sections.map((section) => `
-    <div class="toc-item l${Math.min(section.level, 4)}"
-         title="${esc(section.heading)}"
-         onclick="loadPage(${docId}, ${section.page_start})">
-      ${esc(section.heading)}<span class="toc-pages">p${section.page_start}</span>
-    </div>
-  `).join('');
-}
-
-async function loadPage(docId, pageNum, totalPages) {
-  currentPage = pageNum;
-  try {
-    const page = await api(`/documents/${docId}/pages/${pageNum}`);
-    totalPages = totalPages || page.page_count || page.total_pages;
-    const prevPage = page.prev_page_num;
-    const nextPage = page.next_page_num;
-    const pagePosition = page.page_count
-      ? `Page ${page.page_num} (${page.page_index} of ${page.page_count} indexed)`
-      : `Page ${page.page_num}`;
-
-    document.getElementById('page-header').innerHTML = `
-      <div><span class="page-bc">${esc(page.breadcrumb || '')}</span></div>
-      <div class="page-nav">
-        <button class="btn btn-ghost btn-sm" ${prevPage == null ? 'disabled' : ''}
-                onclick="${prevPage == null ? '' : `loadPage(${docId}, ${prevPage}, ${totalPages})`}">Prev</button>
-        <span class="page-num">${esc(pagePosition)}</span>
-        <button class="btn btn-ghost btn-sm" ${nextPage == null ? 'disabled' : ''}
-                onclick="${nextPage == null ? '' : `loadPage(${docId}, ${nextPage}, ${totalPages})`}">Next</button>
-      </div>
-    `;
-    document.getElementById('page-body').innerHTML = `<pre>${esc(page.content)}</pre>`;
-    history.replaceState(null, '', `#/doc/${docId}/page/${page.page_num}`);
-
-    document.querySelectorAll('.toc-item').forEach((el) => el.classList.remove('active'));
-    document.querySelectorAll('.toc-item').forEach((el) => {
-      const pg = parseInt(el.querySelector('.toc-pages')?.textContent?.slice(1), 10);
-      if (pg === page.page_num) el.classList.add('active');
-    });
-  } catch (error) {
-    document.getElementById('page-body').innerHTML =
-      `<div class="empty">Error: ${esc(error.message)}</div>`;
-  }
-}
-
-async function searchInDoc(docId, query) {
-  const tocList = document.getElementById('toc-list');
-  const searchResults = document.getElementById('search-results');
-  if (!query.trim()) {
-    searchResults.innerHTML = '';
-    tocList.style.display = '';
-    return;
-  }
-  try {
-    const results = await api(`/documents/${docId}/search?q=${encodeURIComponent(query)}`);
-    tocList.style.display = 'none';
-    if (!results.length) {
-      searchResults.innerHTML = '<div class="empty" style="padding:12px;font-size:12px">No results</div>';
-      return;
-    }
-    searchResults.innerHTML = results.map((result) => `
-      <div class="toc-item" onclick="loadPage(${docId}, ${result.page_num}); document.getElementById('toc-list').style.display=''; document.getElementById('search-results').innerHTML='';">
-        <strong>p${result.page_num}</strong> ${result.snippet.replace(/>>>/g, '<b>').replace(/<<</g, '</b>')}
-      </div>
-    `).join('');
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-async function showQuality(project) {
-  setTopbar(
-    `<a href="#/" style="color:#666">Folders</a><span>/</span>` +
-    `<a href="#/folder/${enc(project)}">${esc(project)}</a><span>/</span><strong>Quality</strong>`,
-    ''
-  );
-  const content = document.getElementById('content');
-  content.style.padding = '20px';
-  content.innerHTML = '<div class="spinner"></div>';
-
-  try {
-    const data = await api(`/folders/${enc(project)}/quality`);
-    let html = '';
-
-    html += `<div class="card"><div class="card-title">Quality Flags <span class="count">${data.flags.length}</span></div>`;
-    if (data.flags.length) {
-      for (const flag of data.flags) {
-        const resolvedClass = flag.resolved ? ' resolved' : '';
-        html += `<div class="flag-row${resolvedClass}">
-          <span class="flag-type ${flag.flag_type}">${flag.flag_type}</span>
-          <a href="#/doc/${flag.doc_id}">${esc(flag.doc_title)}</a>
-          ${flag.page_num ? `<span class="muted">p${flag.page_num}</span>` : ''}
-          <span style="flex:1">${esc(flag.reason || '')}</span>
-          ${!flag.resolved ? `<button class="btn btn-ghost btn-sm" onclick="resolveFlag(${flag.id})">Resolve</button>` : ''}
-        </div>`;
-      }
-    } else {
-      html += '<div class="empty">No quality flags</div>';
-    }
-    html += '</div>';
-
-    html += `<div class="card"><div class="card-title">Recent Corrections <span class="count">${data.corrections.length}</span></div>`;
-    if (data.corrections.length) {
-      html += '<table class="table"><tr><th>Document</th><th>Category</th><th>Action</th><th>When</th></tr>';
-      for (const correction of data.corrections) {
-        html += `<tr>
-          <td><a href="#/doc/${correction.doc_id}">${esc(correction.doc_title)}</a></td>
-          <td><span class="tag">${esc(correction.category)}</span></td>
-          <td>${esc(correction.action)}</td>
-          <td class="muted">${esc(correction.created_at || '')}</td>
-        </tr>`;
-      }
-      html += '</table>';
-    } else {
-      html += '<div class="empty">No corrections logged</div>';
-    }
-    html += '</div>';
-    content.innerHTML = html;
-  } catch (error) {
-    content.innerHTML = `<div class="empty">Error: ${esc(error.message)}</div>`;
-  }
-}
-
-// --- Chat actions ---
-async function newChat(project) {
-  try {
-    const created = await api(`/folders/${enc(project)}/chats`, {
-      method: 'POST',
-      body: JSON.stringify({ title: 'New chat' }),
-    });
-    currentChatId = created.id;
-    showProject(project, currentFolderSection);
-  } catch (error) {
-    alert('Could not create chat: ' + error.message);
-  }
-}
-
-function selectChat(threadId) {
-  currentChatId = threadId;
-  if (currentProject) showProject(currentProject, currentFolderSection);
-}
-
-function handleChatKeydown(event) {
-  if (event.key === 'Enter' && !event.shiftKey) {
-    event.preventDefault();
-    sendChatMessage();
-  }
-}
-
-async function sendChatMessage() {
-  const textarea = document.getElementById('chat-input');
-  const sendButton = document.getElementById('send-chat-btn');
-  const typedText = textarea?.value.trim() || '';
-  const attachment = pendingChatAttachment;
-  if ((!typedText && !attachment) || !currentProject) return;
-
-  try {
-    if (!currentChatId) {
-      const created = await api(`/folders/${enc(currentProject)}/chats`, {
-        method: 'POST',
-        body: JSON.stringify({ title: 'New chat' }),
-      });
-      currentChatId = created.id;
-      await showProject(currentProject, currentFolderSection);
-    }
-  } catch (error) {
-    alert('Could not start chat: ' + error.message);
-    return;
-  }
-
-  setComposerBusy(true);
-  const messageText = typedText || defaultChatAttachmentPrompt(attachment?.name);
-  textarea.value = '';
-  pendingChatAttachment = null;
-  syncPendingChatAttachment();
-  appendLocalUserMessage(messageText, attachment);
-  startThinkingIndicator();
-  scrollChatToBottom();
-
-  try {
-    if (attachment) {
-      const form = new FormData();
-      form.append('file', attachment.file);
-      if (typedText) form.append('content', typedText);
-      await apiForm(`/chats/${currentChatId}/review-document`, form);
-    } else {
-      await api(`/chats/${currentChatId}/messages`, {
-        method: 'POST',
-        body: JSON.stringify({ content: messageText }),
-      });
-    }
-    stopThinkingIndicator();
-    await showProject(currentProject, currentFolderSection);
-  } catch (error) {
-    stopThinkingIndicator();
-    if (sendButton) sendButton.disabled = false;
-    if (textarea) textarea.disabled = false;
-    if (attachment) {
-      pendingChatAttachment = attachment;
-      syncPendingChatAttachment();
-    }
-    alert('Chat failed: ' + error.message);
-    await showProject(currentProject, currentFolderSection);
-    const restoredInput = document.getElementById('chat-input');
-    if (restoredInput) restoredInput.value = typedText;
-    syncPendingChatAttachment();
-  }
-}
-
-function openChatAttachmentPicker() {
-  document.getElementById('chat-review-file')?.click();
-}
-
-function defaultChatAttachmentPrompt(filename = 'uploaded document') {
-  return `Review '${filename}' against the folder documents. Summarize matches, gaps, conflicts, and risks.`;
-}
-
-function syncPendingChatAttachment() {
-  const slot = document.getElementById('chat-attachment-slot');
-  if (slot) slot.innerHTML = renderPendingChatAttachment();
-  const input = document.getElementById('chat-review-file');
-  if (input && !pendingChatAttachment) input.value = '';
-}
-
-function handleChatAttachmentChange(event) {
-  const file = event?.target?.files?.[0];
-  if (!file) return;
-  const ext = '.' + (file.name.split('.').pop() || '').toLowerCase();
-  if (!CHAT_REVIEW_EXT.has(ext)) {
-    event.target.value = '';
-    alert('Supported review files are PDF, image, Word, and Excel documents.');
-    return;
-  }
-  pendingChatAttachment = { file, name: file.name, ext };
-  syncPendingChatAttachment();
-}
-
-function clearChatAttachment() {
-  pendingChatAttachment = null;
-  syncPendingChatAttachment();
-}
-
-function appendLocalUserMessage(text, attachment = null) {
-  const chatMessages = document.getElementById('chat-messages');
-  const empty = document.getElementById('chat-empty');
-  if (!chatMessages) return;
-  if (empty) empty.remove();
-  const wrapper = document.createElement('div');
-  wrapper.className = 'chat-message user';
-  wrapper.innerHTML = `
-    <div class="chat-bubble">
-      <div class="chat-message-header">
-        <span class="chat-role">You</span>
-        <span>${formatDate(new Date().toISOString())}</span>
-      </div>
-      <div>${esc(text).replace(/\n/g, '<br>')}</div>
-      ${attachment ? `
-        <div class="chat-attachment-history">
-          <div class="chat-attachment-pill static">
-            <span class="chat-attachment-name">${esc(attachment.name)}</span>
-            <span class="chat-attachment-meta">Submitted for comparison review</span>
-          </div>
-        </div>
-      ` : ''}
-    </div>
-  `;
-  chatMessages.appendChild(wrapper);
-}
-
-function startThinkingIndicator() {
-  stopThinkingIndicator();
-  const chatMessages = document.getElementById('chat-messages');
-  const empty = document.getElementById('chat-empty');
-  if (!chatMessages) return;
-  if (empty) empty.remove();
-  const wrapper = document.createElement('div');
-  wrapper.className = 'chat-message assistant';
-  wrapper.id = 'thinking-message';
-  wrapper.innerHTML = `
-    <div class="chat-bubble">
-      <div class="chat-message-header">
-        <span class="chat-role">Assistant</span>
-        <span>Working</span>
-      </div>
-      <div class="thinking">
-        <span class="thinking-dots"><span></span><span></span><span></span></span>
-        <span id="thinking-status">${THINKING_STEPS[0]}</span>
-      </div>
-    </div>
-  `;
-  chatMessages.appendChild(wrapper);
-  let index = 0;
-  thinkingTimer = window.setInterval(() => {
-    index = (index + 1) % THINKING_STEPS.length;
-    const label = document.getElementById('thinking-status');
-    if (label) label.textContent = THINKING_STEPS[index];
-  }, 1300);
-}
-
-function stopThinkingIndicator() {
-  if (thinkingTimer) {
-    clearInterval(thinkingTimer);
-    thinkingTimer = null;
-  }
-  document.getElementById('thinking-message')?.remove();
-  setComposerBusy(false);
-}
-
-function setComposerBusy(busy) {
-  const textarea = document.getElementById('chat-input');
-  const button = document.getElementById('send-chat-btn');
-  const attachButton = document.getElementById('attach-chat-file-btn');
-  if (textarea) textarea.disabled = busy;
-  if (button) button.disabled = busy;
-  if (attachButton) attachButton.disabled = busy;
-}
-
-function scrollChatToBottom() {
-  const chatMessages = document.getElementById('chat-messages');
-  if (chatMessages) {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-}
-
-// --- Folder actions ---
-function promptNewProject(defaultValue = '') {
-  document.getElementById('modal-content').innerHTML = `
-    <h3>New Folder</h3>
-    <input type="text" id="new-project-name" placeholder="Folder path" value="${esc(defaultValue)}" autofocus
-           onkeydown="if(event.key==='Enter') createProject()">
-    <div class="actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="createProject()">Create</button>
-    </div>
-  `;
-  document.getElementById('modal-overlay').style.display = 'flex';
-  setTimeout(() => document.getElementById('new-project-name')?.focus(), 100);
-}
-
-async function createProject() {
-  const name = document.getElementById('new-project-name').value.trim();
-  if (!name) return;
-  try {
-    await api('/folders', { method: 'POST', body: JSON.stringify({ name }) });
-    closeModal();
-    await loadFolders();
-    navigate('#/folder/' + encodeURIComponent(name));
-  } catch (error) {
-    alert('Error: ' + error.message);
-  }
-}
-
-function promptRenameProject(project) {
-  document.getElementById('modal-content').innerHTML = `
-    <h3>Rename Folder</h3>
-    <input type="text" id="rename-input" value="${esc(project)}" autofocus
-           onkeydown="if(event.key==='Enter') doRenameProject(${jsq(project)})">
-    <div class="actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="doRenameProject(${jsq(project)})">Rename</button>
-    </div>
-  `;
-  document.getElementById('modal-overlay').style.display = 'flex';
-  setTimeout(() => {
-    const input = document.getElementById('rename-input');
-    input?.focus();
-    input?.select();
-  }, 100);
-}
-
-async function doRenameProject(oldName) {
-  const newName = document.getElementById('rename-input').value.trim();
-  if (!newName || newName === oldName) {
-    closeModal();
-    return;
-  }
-  try {
-    await api(`/folders/${enc(oldName)}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ name: newName }),
-    });
-    closeModal();
-    currentProject = newName;
-    await loadFolders();
-    navigate('#/folder/' + encodeURIComponent(newName));
-  } catch (error) {
-    alert('Error: ' + error.message);
-  }
-}
-
-function promptRenameDoc(docId, currentTitle) {
-  document.getElementById('modal-content').innerHTML = `
-    <h3>Rename Document</h3>
-    <input type="text" id="rename-input" value="${esc(currentTitle)}" autofocus
-           onkeydown="if(event.key==='Enter') doRenameDoc(${docId})">
-    <div class="actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="doRenameDoc(${docId})">Rename</button>
-    </div>
-  `;
-  document.getElementById('modal-overlay').style.display = 'flex';
-  setTimeout(() => {
-    const input = document.getElementById('rename-input');
-    input?.focus();
-    input?.select();
-  }, 100);
-}
-
-async function doRenameDoc(docId) {
-  const title = document.getElementById('rename-input').value.trim();
-  if (!title) {
-    closeModal();
-    return;
-  }
-  try {
-    await api(`/documents/${docId}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ title }),
-    });
-    closeModal();
-    if (currentProject) showProject(currentProject, currentFolderSection);
-  } catch (error) {
-    alert('Error: ' + error.message);
-  }
-}
-
-function confirmDeleteProject(project) {
-  if (confirm(`Delete folder "${project}" and ALL its documents and chats?`)) {
-    api(`/folders/${enc(project)}`, { method: 'DELETE' })
-      .then(() => {
-        currentChatId = null;
-        navigate('#/');
-        loadFolders();
-      })
-      .catch((error) => alert('Error: ' + error.message));
-  }
-}
-
-function confirmDeleteDoc(docId, title) {
-  if (confirm(`Delete document "${title}"?`)) {
-    api(`/documents/${docId}`, { method: 'DELETE' })
-      .then(() => {
-        if (currentProject) showProject(currentProject, currentFolderSection);
-      })
-      .catch((error) => alert('Error: ' + error.message));
-  }
-}
-
-async function resolveFlag(flagId) {
-  await api(`/quality/${flagId}/resolve`, { method: 'PATCH' });
-  if (location.hash.startsWith('#/quality/')) router();
-}
-
-// --- Upload ---
-function supported(name) {
-  const idx = name.lastIndexOf('.');
-  return idx >= 0 && SUPPORTED_EXT.has(name.slice(idx).toLowerCase());
-}
-
-function handleDrop(event, project) {
-  event.preventDefault();
-  event.currentTarget.classList.remove('dragover');
-  const { accepted, skipped } = splitSupportedFiles(event.dataTransfer.files);
-  if (!accepted.length) {
-    showWorkspaceNotice('warning', 'No supported files found in this drop.', summarizeSkippedFiles(skipped));
-    if (currentProject) showProject(currentProject, currentFolderSection);
-    return;
-  }
-  uploadFiles(accepted, project, { skipped });
-}
-
-function handleFiles(fileList, project) {
-  const { accepted, skipped } = splitSupportedFiles(fileList);
-  if (!accepted.length) {
-    showWorkspaceNotice('warning', 'No supported files selected.', summarizeSkippedFiles(skipped));
-    if (currentProject) showProject(currentProject, currentFolderSection);
-    return;
-  }
-  uploadFiles(accepted, project, { skipped });
-}
-
-async function uploadFiles(files, project, options = {}) {
-  setUploadBusyState(
-    true,
-    `Uploading ${files.length} file${pluralize(files.length)}...`,
-    'Files will show up in pending uploads as soon as transfer completes.'
-  );
-  try {
-    const result = await apiUpload(`/folders/${enc(project)}/upload`, files);
-    const skippedSummary = summarizeSkippedFiles(options.skipped || []);
-    showWorkspaceNotice(
-      'success',
-      `Added ${result.count} file${pluralize(result.count)} to pending uploads.`,
-      skippedSummary || 'Review the staged files below, then run ingestion when you are ready.'
-    );
-    await showProject(project, currentFolderSection);
-  } catch (error) {
-    showWorkspaceNotice('error', 'Upload failed.', error.message);
-    await showProject(project, currentFolderSection);
-  }
-}
-
-function handleFolderUpload(fileList, project) {
-  const files = [];
-  const paths = [];
-  const skipped = [];
-  for (const f of fileList) {
-    if (!supported(f.name)) {
-      skipped.push(f.name);
-      continue;
-    }
-    files.push(f);
-    // webkitRelativePath is "SelectedFolder/sub/file.pdf"
-    // Strip the first component (the folder the user picked)
-    const parts = f.webkitRelativePath.split('/');
-    paths.push(parts.slice(1).join('/'));
-  }
-  if (!files.length) {
-    showWorkspaceNotice('warning', 'No supported files found in this folder.', summarizeSkippedFiles(skipped));
-    if (currentProject) showProject(currentProject, currentFolderSection);
-    return;
-  }
-  uploadFilesWithPaths(files, paths, project, { skipped });
-}
-
-async function uploadFilesWithPaths(files, paths, project, options = {}) {
-  setUploadBusyState(
-    true,
-    `Uploading ${files.length} file${pluralize(files.length)} from folder...`,
-    'Original sub-folder paths will be preserved inside this workspace.'
-  );
-  try {
-    const form = new FormData();
-    for (const f of files) form.append('files', f);
-    for (const p of paths) form.append('paths', p);
-    const res = await fetch('/api/folders/' + enc(project) + '/upload', { method: 'POST', body: form });
-    if (!res.ok) throw new Error(await res.text());
-    const result = await res.json();
-    const skippedSummary = summarizeSkippedFiles(options.skipped || []);
-    showWorkspaceNotice(
-      'success',
-      `Added ${result.count} file${pluralize(result.count)} from the selected folder.`,
-      skippedSummary || 'Folder structure was preserved in pending uploads.'
-    );
-    await showProject(project, currentFolderSection);
-  } catch (error) {
-    showWorkspaceNotice('error', 'Folder upload failed.', error.message);
-    await showProject(project, currentFolderSection);
-  }
-}
-
-// --- Ingestion ---
-async function ingestAll(project, pendingCount = 0) {
-  try {
-    await api(`/folders/${enc(project)}/ingest`, { method: 'POST' });
-    showWorkspaceNotice(
-      'info',
-      'Ingestion started.',
-      pendingCount
-        ? `Processing ${pendingCount} staged file${pluralize(pendingCount)} in the background.`
-        : 'Processing pending uploads in the background.'
-    );
-    await showProject(project, currentFolderSection);
-  } catch (error) {
-    showWorkspaceNotice('error', 'Could not start ingestion.', error.message);
-    await showProject(project, currentFolderSection);
-  }
-}
-
-async function ingestSingle(project, filename, label = filename) {
-  try {
-    await api(`/folders/${enc(project)}/ingest/${encPath(filename)}`, { method: 'POST' });
-    showWorkspaceNotice('info', `Started ingesting ${label}.`, 'You can stay on this page while progress updates live.');
-    await showProject(project, currentFolderSection);
-  } catch (error) {
-    showWorkspaceNotice('error', `Could not ingest ${label}.`, error.message);
-    await showProject(project, currentFolderSection);
-  }
-}
-
-async function discardPendingFile(project, relativePath, label = relativePath) {
-  if (!confirm(`Delete pending file "${label}"?`)) {
-    return;
-  }
-  try {
-    await api(`/folders/${enc(project)}/pending/${encPath(relativePath)}/discard`, {
-      method: 'POST',
-      body: JSON.stringify({ reason: 'Removed after failed or unwanted ingestion.' }),
-    });
-    showWorkspaceNotice('success', `Deleted ${label}.`, 'A record of the discard was kept in the audit log.');
-    await showProject(project, currentFolderSection);
-  } catch (error) {
-    showWorkspaceNotice('error', `Could not delete ${label}.`, error.message);
-    await showProject(project, currentFolderSection);
-  }
-}
-
-async function cancelIngestionJob(jobId, label, deleteFile = false) {
-  const prompt = deleteFile
-    ? `Cancel this ingestion and delete "${label}" from pending uploads?`
-    : `Cancel ingestion for "${label}"?`;
-  if (!confirm(prompt)) {
-    return;
-  }
-  try {
-    const result = await api(`/ingestion/jobs/${enc(jobId)}/cancel`, {
-      method: 'POST',
-      body: JSON.stringify({
-        delete_file: deleteFile,
-        reason: deleteFile ? 'Cancelled and removed by user.' : 'Cancelled by user.',
-      }),
-    });
-    const detail = result.status === 'cancelling'
-      ? 'The worker will stop at the next safe checkpoint.'
-      : deleteFile
-        ? 'The file was removed from pending uploads and the action was recorded.'
-        : 'The job was marked as cancelled.';
-    showWorkspaceNotice('info', `Updated ingestion for ${label}.`, detail);
-    if (currentProject) {
-      await showProject(currentProject, currentFolderSection);
-    }
-  } catch (error) {
-    showWorkspaceNotice('error', `Could not update ingestion for ${label}.`, error.message);
-    if (currentProject) {
-      await showProject(currentProject, currentFolderSection);
-    }
-  }
-}
-
-function startPolling(project) {
-  stopPolling();
-  refreshAfterPolling = true;
-  pollJobs(project);
-  pollTimer = setInterval(() => pollJobs(project), 2000);
-}
-
-function stopPolling() {
-  if (pollTimer) {
-    clearInterval(pollTimer);
-    pollTimer = null;
-  }
-  refreshAfterPolling = false;
-}
-
-async function pollJobs(project) {
-  try {
-    const jobs = await api('/ingestion/jobs');
-    const projectJobs = jobs.filter((job) => inFolderScope(job.project, project));
-    const shouldRefreshOnCompletion = refreshAfterPolling;
-
-    const area = document.getElementById('jobs-area');
-    if (area && !projectJobs.length) {
-      area.innerHTML = '';
-    }
-    if (area && projectJobs.length) {
-      area.innerHTML = renderJobActivity(projectJobs);
-    }
-
-    if (!projectJobs.length) {
-      stopPolling();
-      return;
-    }
-
-    const allDone = projectJobs.every((job) =>
-      job.status === 'completed' || job.status === 'failed' || job.status === 'cancelled'
-    );
-    if (allDone) {
-      stopPolling();
-    }
-    if (shouldRefreshOnCompletion && allDone && projectJobs.some((job) => job.status === 'completed')) {
-      setTimeout(() => showProject(project, currentFolderSection), 1000);
-    }
-  } catch (error) {
-    console.error('Poll error:', error);
-  }
-}
-
-// --- Helpers ---
-function renderMarkdown(markdown) {
-  if (!markdown) return '';
-  if (!window.marked) {
-    return esc(markdown).replace(/\n/g, '<br>');
-  }
-  const raw = window.marked.parse(markdown);
-  if (window.DOMPurify) {
-    return window.DOMPurify.sanitize(raw);
-  }
-  return raw;
-}
-
-function renderJobActivity(jobs) {
-  if (!jobs.length) return '';
-  return `
-    <div class="card">
-      <div class="card-title">
-        <span>Ingestion jobs <span class="count">${jobs.length}</span></span>
-        <span class="count">Newest first</span>
-      </div>
-      <div class="job-list">
-        ${jobs.map((job) => renderJobCard(job)).join('')}
-      </div>
-    </div>
-  `;
-}
-
-function renderJobCard(job) {
-  const statusLabel = job.status ? `${job.status[0].toUpperCase()}${job.status.slice(1)}` : 'Unknown';
-  const actions = [];
-  if (job.doc_id) {
-    actions.push(`<a href="#/doc/${job.doc_id}">Open document</a>`);
-  } else {
-    actions.push('<span class="muted">Document link appears after indexing</span>');
-  }
-  if (job.status === 'running' || job.status === 'queued') {
-    actions.push(
-      `<button class="btn btn-ghost btn-sm" onclick="cancelIngestionJob(${jsq(job.id)}, ${jsq(job.filename)}, false)">Cancel</button>`
-    );
-  }
-  if (job.status === 'failed') {
-    actions.push(
-      `<button class="btn btn-ghost btn-sm" onclick="cancelIngestionJob(${jsq(job.id)}, ${jsq(job.filename)}, true)">Cancel &amp; delete file</button>`
-    );
-  }
-  return `
-    <div class="job-card ${esc(job.status || '')}">
-      <div class="job-row">
-        <div class="job-row-main">
-          <div class="filename">${esc(job.filename)}</div>
-          <div class="job-stage">${esc(job.stage || 'Waiting to start')}</div>
-        </div>
-        <span class="status ${esc(job.status || '')}">${esc(statusLabel)}</span>
-      </div>
-      <div class="job-card-footer">
-        ${actions.join('')}
-        ${job.started_at ? `<span class="muted">${esc(formatDate(job.started_at))}</span>` : ''}
-      </div>
-      ${job.error ? `<div class="job-error">${esc(job.error)}</div>` : ''}
-    </div>
-  `;
-}
-
-function renderMarkdownBlocks(root = document) {
-  root.querySelectorAll('.render-markdown').forEach((node) => {
-    if (window.renderMathInElement) {
-      window.renderMathInElement(node, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '\\[', right: '\\]', display: true },
-          { left: '\\(', right: '\\)', display: false },
-          { left: '$', right: '$', display: false },
-        ],
-        throwOnError: false,
-      });
-    }
-  });
-}
-
-function setTopbar(breadcrumb, actions) {
-  const topbar = document.getElementById('topbar');
-  const content = document.getElementById('content');
-  if (breadcrumb) {
-    topbar.style.display = 'flex';
-    document.getElementById('breadcrumb').innerHTML = breadcrumb;
-    document.getElementById('topbar-actions').innerHTML = actions || '';
-  } else {
-    topbar.style.display = 'none';
-  }
-  content.style.padding = '20px';
-}
-
-function closeModal() {
-  document.getElementById('modal-overlay').style.display = 'none';
-}
-
-function openFilePicker() {
-  document.getElementById('file-input')?.click();
-}
-
-function openFolderPicker() {
-  document.getElementById('folder-input')?.click();
-}
-
-function handleUploadAreaKeydown(event) {
-  if (event.key !== 'Enter' && event.key !== ' ') return;
-  event.preventDefault();
-  openFilePicker();
-}
-
-function setUploadBusyState(busy, title, subtitle) {
-  const area = document.getElementById('upload-area');
-  const titleNode = document.getElementById('upload-title');
-  const subtitleNode = document.getElementById('upload-subtitle');
-  const filesBtn = document.getElementById('upload-files-btn');
-  const folderBtn = document.getElementById('upload-folder-btn');
-  const fileInput = document.getElementById('file-input');
-  const folderInput = document.getElementById('folder-input');
-  if (area) {
-    area.classList.toggle('busy', busy);
-    area.setAttribute('aria-busy', String(busy));
-  }
-  if (titleNode) titleNode.textContent = title;
-  if (subtitleNode) subtitleNode.textContent = subtitle;
-  [filesBtn, folderBtn, fileInput, folderInput].forEach((node) => {
-    if (node) node.disabled = busy;
-  });
-}
-
-function esc(value) {
-  if (value == null) return '';
-  const div = document.createElement('div');
-  div.textContent = String(value);
-  return div.innerHTML;
-}
-
-function jsq(value) {
-  return `'${String(value ?? '')
-    .replace(/\\/g, '\\\\')
-    .replace(/'/g, "\\'")
-    .replace(/\n/g, '\\n')
-    .replace(/\r/g, '')}'`;
 }
 
 function enc(value) {
   return encodeURIComponent(value);
 }
 
-function encPath(value) {
-  return String(value ?? '')
-    .split('/')
-    .map((part) => encodeURIComponent(part))
-    .join('/');
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[ch]));
 }
 
-function inFolderScope(candidate, scope) {
-  return candidate === scope || candidate.startsWith(scope + '/');
+function showToast(message, type = '') {
+  const toast = $('toast');
+  toast.textContent = message;
+  toast.className = `toast ${type}`.trim();
+  setTimeout(() => toast.classList.add('hidden'), 3500);
 }
 
-function clamp(value, min, max) {
-  return Math.max(min, Math.min(max, value));
-}
-
-function splitSupportedFiles(fileList) {
-  const accepted = [];
-  const skipped = [];
-  for (const file of [...fileList]) {
-    if (supported(file.name)) accepted.push(file);
-    else skipped.push(file.name);
+function setHash() {
+  if (!state.folder) return;
+  const params = new URLSearchParams();
+  params.set('folder', state.folder);
+  params.set('tab', state.tab);
+  if (state.tab === 'inspect' && state.inspectDocId) {
+    params.set('doc', String(state.inspectDocId));
+    params.set('panel', state.inspectPanel);
   }
-  return { accepted, skipped };
+  const hash = params.toString();
+  if (location.hash.slice(1) !== hash) {
+    history.replaceState(null, '', `${location.pathname}#${hash}`);
+  }
 }
 
-function summarizeSkippedFiles(skipped) {
-  if (!skipped.length) return '';
-  const preview = skipped.slice(0, 3).join(', ');
-  const extra = skipped.length > 3 ? ` +${skipped.length - 3} more` : '';
-  return `Skipped ${skipped.length} unsupported file${pluralize(skipped.length)}: ${preview}${extra}`;
+function readHash() {
+  const params = new URLSearchParams(location.hash.slice(1));
+  state.folder = params.get('folder') || state.folder;
+  const tab = params.get('tab') || state.tab || 'ask';
+  state.tab = VALID_TABS.has(tab) ? tab : 'ask';
+  const panel = params.get('panel') || state.inspectPanel || 'page';
+  state.inspectPanel = INSPECT_PANELS.has(panel) ? panel : 'page';
+  const doc = Number(params.get('doc'));
+  state.inspectDocId = Number.isFinite(doc) && doc > 0 ? doc : state.inspectDocId;
+  if (state.tab === 'inspect' && !state.inspectDocId) state.tab = 'documents';
 }
 
-function pluralize(count) {
-  return count === 1 ? '' : 's';
+function renderMarkdown(text) {
+  if (!text) return '';
+  if (window.marked && window.DOMPurify) {
+    return DOMPurify.sanitize(marked.parse(text));
+  }
+  return `<p>${escapeHtml(text)}</p>`;
 }
 
-function formatMegabytes(value) {
-  const amount = Number(value) || 0;
-  return `${amount.toFixed(amount >= 10 ? 0 : 1)} MB`;
-}
-
-function relativeFolderLabel(project, folder) {
-  if (!folder || folder === project) return 'This folder';
-  return folder.slice(project.length + 1) || folder;
-}
-
-function formatDate(value) {
-  if (!value) return '';
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value;
-  return date.toLocaleString([], {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
+function renderMath(root) {
+  if (!window.renderMathInElement) return;
+  renderMathInElement(root, {
+    delimiters: [
+      { left: '$$', right: '$$', display: true },
+      { left: '\\(', right: '\\)', display: false },
+      { left: '\\[', right: '\\]', display: true },
+    ],
+    throwOnError: false,
   });
 }
+
+async function loadFolders() {
+  state.folders = await api('/api/folders');
+  if (!state.folder && state.folders.length) state.folder = state.folders[0].folder;
+  if (state.folder && !state.folders.some((f) => f.folder === state.folder)) {
+    state.folder = state.folders[0]?.folder || '';
+  }
+  renderShell();
+}
+
+async function selectFolder(folder) {
+  state.folder = folder;
+  state.threadId = '';
+  state.messages = [];
+  state.docs = [];
+  state.pending = [];
+  clearInspector();
+  if (state.tab === 'inspect') state.tab = 'documents';
+  setHash();
+  renderShell();
+  await refreshActiveData();
+}
+
+async function refreshActiveData() {
+  if (!state.folder) return;
+  await Promise.all([loadDocuments(), loadChats(), loadJobs()]);
+  if (state.tab === 'inspect' && state.inspectDocId && !state.inspectInfo) {
+    await loadInspection(state.inspectDocId);
+  }
+  renderActiveView();
+}
+
+async function loadDocuments() {
+  const data = await api(`/api/folders/${enc(state.folder)}/documents`);
+  state.docs = data.documents || [];
+  state.pending = data.pending || [];
+  renderShell();
+}
+
+async function loadChats() {
+  state.chats = await api(`/api/folders/${enc(state.folder)}/chats`);
+  if (!state.threadId && state.chats.length) state.threadId = state.chats[0].id;
+  if (state.threadId) await loadMessages();
+}
+
+async function loadMessages() {
+  if (!state.threadId) {
+    state.messages = [];
+    return;
+  }
+  const data = await api(`/api/chats/${enc(state.threadId)}/messages`);
+  state.messages = data.messages || [];
+}
+
+async function loadJobs() {
+  state.jobs = await api('/api/ingestion/jobs');
+}
+
+function renderShell() {
+  const search = ($('folder-search')?.value || '').toLowerCase().trim();
+  const folders = state.folders.filter((f) => !search || f.folder.toLowerCase().includes(search));
+  $('folder-list').innerHTML = folders.length ? folders.map((folder) => `
+    <button class="folder-row ${folder.folder === state.folder ? 'active' : ''}" type="button" data-action="select-folder" data-folder="${escapeHtml(folder.folder)}">
+      <span>
+        <span class="folder-title">${escapeHtml(folder.display_name || folder.folder)}</span>
+        <span class="folder-count">${escapeHtml(folder.folder)}</span>
+      </span>
+      <span class="folder-count">${folder.docs || 0}</span>
+    </button>
+  `).join('') : `<div class="empty-state">No folders</div>`;
+
+  const active = state.folders.find((f) => f.folder === state.folder);
+  $('active-folder').textContent = active ? active.folder : 'Select a folder';
+  $('folder-stats').textContent = active
+    ? `${active.docs || 0} documents | ${active.pages || 0} pages | ${active.pending || 0} pending`
+    : '';
+
+  for (const tab of VALID_TABS) {
+    const btn = $(`${tab}-tab`);
+    const view = $(`${tab}-view`);
+    if (btn) btn.classList.toggle('active', state.tab === tab);
+    if (view) view.classList.toggle('hidden', state.tab !== tab);
+  }
+  $('inspect-tab').classList.toggle('hidden', !state.inspectDocId);
+}
+
+function setTab(tab) {
+  if (!VALID_TABS.has(tab)) return;
+  if (tab === 'inspect' && !state.inspectDocId) return;
+  state.tab = tab;
+  setHash();
+  renderShell();
+  renderActiveView();
+}
+
+function renderActiveView() {
+  renderShell();
+  if (state.tab === 'ask') renderAsk();
+  if (state.tab === 'documents') renderDocuments();
+  if (state.tab === 'ingest') renderIngest();
+  if (state.tab === 'jobs') renderJobs();
+  if (state.tab === 'inspect') renderInspect();
+}
+
+function pageHeader(title, subtitle = '', actions = '') {
+  return `
+    <div class="page-head">
+      <div>
+        <h2>${escapeHtml(title)}</h2>
+        ${subtitle ? `<p>${escapeHtml(subtitle)}</p>` : ''}
+      </div>
+      ${actions ? `<div class="page-actions">${actions}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderAsk() {
+  const view = $('ask-view');
+  if (!state.folder) {
+    view.innerHTML = `<div class="empty-state">Select a folder to ask questions.</div>`;
+    return;
+  }
+
+  view.innerHTML = `
+    <div class="ask-toolbar">
+      ${renderThreadControl()}
+      <button class="ghost" type="button" data-action="new-chat">New chat</button>
+      <button class="ghost" type="button" data-action="refresh">Refresh</button>
+    </div>
+    <div class="messages" id="messages">
+      ${state.messages.length ? state.messages.map(renderMessage).join('') : renderAskEmpty()}
+    </div>
+    <form class="chat-input" id="chat-form">
+      <textarea id="message-input" placeholder="Ask about this folder" ${state.sending ? 'disabled' : ''}></textarea>
+      <button class="primary" type="submit" ${state.sending ? 'disabled' : ''}>Send</button>
+    </form>
+  `;
+  const messages = $('messages');
+  messages.scrollTop = messages.scrollHeight;
+  renderMath(view);
+}
+
+function renderThreadControl() {
+  if (!state.chats.length) return `<div class="chat-status">No chat yet</div>`;
+  return `
+    <select class="field thread-select" id="thread-select" data-action="switch-thread">
+      ${state.chats.map((chat) => `
+        <option value="${escapeHtml(chat.id)}" ${chat.id === state.threadId ? 'selected' : ''}>
+          ${escapeHtml(chat.title || 'New chat')}
+        </option>
+      `).join('')}
+    </select>
+  `;
+}
+
+function renderAskEmpty() {
+  return `
+    <div class="empty-state">
+      <div>
+        <strong>Ask a question about ${escapeHtml(state.folder)}</strong>
+        <div class="muted">Examples: scope of work, vendor requirements, LD clause, inspection requirements</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderMessage(message) {
+  const sources = Array.isArray(message.sources) ? message.sources : [];
+  return `
+    <article class="message ${message.role === 'user' ? 'user' : 'assistant'}">
+      <div class="message-role">${message.role === 'user' ? 'You' : 'Answer'}</div>
+      <div class="message-body">${renderMarkdown(message.content || '')}</div>
+      ${sources.length ? `<div class="sources">${sources.map(renderSource).join('')}</div>` : ''}
+    </article>
+  `;
+}
+
+function renderSource(source) {
+  const title = source.doc_title || source.filename || 'Source';
+  const page = source.page_num ? `Page ${source.page_num}` : '';
+  const breadcrumb = source.breadcrumb || '';
+  return `
+    <div class="source">
+      <div class="source-title">[${escapeHtml(source.id || '')}] ${escapeHtml(title)}</div>
+      <div class="source-meta">${escapeHtml([page, breadcrumb].filter(Boolean).join(' | '))}</div>
+      ${source.snippet ? `<div class="source-meta">${escapeHtml(source.snippet)}</div>` : ''}
+    </div>
+  `;
+}
+
+function renderDocuments() {
+  const view = $('documents-view');
+  if (!state.folder) {
+    view.innerHTML = `<div class="empty-state">Select a folder to view documents.</div>`;
+    return;
+  }
+  view.innerHTML = `
+    ${pageHeader('Documents', 'Indexed documents available for search and manual inspection.', `
+      <button class="ghost" type="button" data-action="refresh">Refresh</button>
+      <button class="primary" type="button" data-action="go-ingest">Add documents</button>
+    `)}
+    <div class="page-body single-column">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Indexed documents</div>
+          <div class="muted">${state.docs.length}</div>
+        </div>
+        <div class="panel-body">
+          <div class="list document-list">
+            ${state.docs.length ? state.docs.map(renderDoc).join('') : '<div class="muted">No indexed documents.</div>'}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderDoc(doc) {
+  return `
+    <div class="list-row document-row">
+      <span class="row-main">
+        <span class="row-title">${escapeHtml(doc.title || doc.filename)}</span>
+        <span class="doc-meta">${doc.total_pages || 0} pages | ${doc.sections || 0} sections${doc.document_type ? ` | ${escapeHtml(doc.document_type)}` : ''}</span>
+      </span>
+      <span class="row-actions">
+        <button class="ghost small" type="button" data-action="inspect-doc" data-doc-id="${doc.id}">Inspect</button>
+        <a class="ghost small" href="/api/documents/${doc.id}/pdf" target="_blank" rel="noopener">PDF</a>
+      </span>
+    </div>
+  `;
+}
+
+function renderIngest() {
+  const view = $('ingest-view');
+  if (!state.folder) {
+    view.innerHTML = `<div class="empty-state">Select a folder to ingest documents.</div>`;
+    return;
+  }
+  view.innerHTML = `
+    ${pageHeader('Ingest', 'Upload new files and start ingestion for pending documents.', `
+      <button class="ghost" type="button" data-action="refresh">Refresh</button>
+      <button class="ghost" type="button" data-action="go-documents">View documents</button>
+    `)}
+    <div class="page-body single-column">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Upload documents</div>
+            <div class="muted">${escapeHtml(state.folder)}</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="upload-box">
+            <label class="drop-zone" id="drop-zone">
+              <input id="file-input" type="file" multiple hidden data-action="stage-files">
+              <span>
+                <strong>Choose files or drop them here</strong>
+                <div class="muted">PDF, DOCX, XLSX, images, archives</div>
+              </span>
+            </label>
+            <div class="file-actions">
+              <button class="primary" type="button" data-action="upload-staged" ${state.uploadFiles.length ? '' : 'disabled'}>
+                Upload ${state.uploadFiles.length ? `(${state.uploadFiles.length})` : ''}
+              </button>
+              <button class="ghost" type="button" data-action="clear-staged" ${state.uploadFiles.length ? '' : 'disabled'}>Clear</button>
+            </div>
+            <div id="staged-files" class="list">${renderStagedFiles()}</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Pending ingestion</div>
+            <div class="muted">${state.pending.length} pending</div>
+          </div>
+          <button class="primary small" type="button" data-action="ingest-all" ${state.pending.length ? '' : 'disabled'}>Ingest pending</button>
+        </div>
+        <div class="panel-body">
+          <div class="list">
+            ${state.pending.length ? state.pending.map(renderPending).join('') : '<div class="muted">No pending files.</div>'}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  bindDropZone();
+}
+
+function renderStagedFiles() {
+  return state.uploadFiles.length ? state.uploadFiles.map((file) => `
+    <div class="list-row">
+      <span class="row-title">${escapeHtml(file.name)}</span>
+      <span class="muted">${formatBytes(file.size)}</span>
+    </div>
+  `).join('') : '';
+}
+
+function renderPending(file) {
+  return `
+    <div class="list-row">
+      <span class="row-main">
+        <span class="row-title">${escapeHtml(file.relative_path || file.filename)}</span>
+        <span class="doc-meta">${escapeHtml(file.folder || state.folder)}</span>
+      </span>
+      <button class="secondary small" type="button" data-action="ingest-single" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest</button>
+    </div>
+  `;
+}
+
+function renderJobs() {
+  const view = $('jobs-view');
+  if (!state.folder) {
+    view.innerHTML = `<div class="empty-state">Select a folder to view jobs.</div>`;
+    return;
+  }
+  const scopedJobs = state.jobs.filter((job) => job.project === state.folder || job.project?.startsWith(`${state.folder}/`));
+  view.innerHTML = `
+    ${pageHeader('Jobs', 'Recent ingestion jobs for the selected folder.', `
+      <button class="ghost" type="button" data-action="refresh-jobs">Refresh</button>
+    `)}
+    <div class="page-body single-column">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Recent jobs</div>
+          <div class="muted">${scopedJobs.length}</div>
+        </div>
+        <div class="panel-body">
+          <div class="list">${scopedJobs.length ? scopedJobs.map(renderJob).join('') : '<div class="muted">No recent jobs.</div>'}</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderJob(job) {
+  return `
+    <div class="list-row">
+      <span class="row-main">
+        <span class="row-title">${escapeHtml(job.filename || job.id)}</span>
+        <span class="job-meta">${escapeHtml(job.stage || '')}${job.error ? ` | ${escapeHtml(job.error)}` : ''}</span>
+      </span>
+      <span class="status-pill ${escapeHtml(job.status)}">${escapeHtml(job.status)}</span>
+    </div>
+  `;
+}
+
+function renderInspect() {
+  const view = $('inspect-view');
+  if (!state.inspectDocId) {
+    view.innerHTML = `<div class="empty-state">Select a document from the Documents page.</div>`;
+    return;
+  }
+  if (state.inspecting || !state.inspectInfo) {
+    view.innerHTML = `
+      ${pageHeader('Inspect document', 'Loading document details...', '<button class="ghost" type="button" data-action="go-documents">Back to documents</button>')}
+      <div class="page-body single-column"><div class="panel"><div class="panel-body muted">Loading document inspection...</div></div></div>
+    `;
+    return;
+  }
+
+  const info = state.inspectInfo;
+  view.innerHTML = `
+    ${pageHeader(info.title || info.filename || 'Inspect document', info.filename || '', `
+      <button class="ghost" type="button" data-action="go-documents">Back to documents</button>
+      <a class="ghost" href="/api/documents/${info.id}/pdf" target="_blank" rel="noopener">Open PDF</a>
+    `)}
+    <div class="inspect-tabs" aria-label="Document inspection views">
+      ${renderInspectTab('metadata', 'Metadata')}
+      ${renderInspectTab('toc', 'TOC')}
+      ${renderInspectTab('page', 'Page text')}
+      ${renderInspectTab('search', 'Search')}
+    </div>
+    <div class="page-body single-column">
+      <div class="panel inspect-page-panel">
+        <div class="panel-body">
+          ${renderInspectPanel()}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderInspectTab(panel, label) {
+  return `<button class="inspect-tab ${state.inspectPanel === panel ? 'active' : ''}" type="button" data-action="set-inspect-panel" data-panel="${panel}">${label}</button>`;
+}
+
+function renderInspectPanel() {
+  if (state.inspectPanel === 'metadata') return renderMetadataPanel();
+  if (state.inspectPanel === 'toc') return renderTocPanel();
+  if (state.inspectPanel === 'search') return renderSearchPanel();
+  return renderPagePanel();
+}
+
+function renderMetadataPanel() {
+  const info = state.inspectInfo;
+  const rows = [
+    ['Title', info.title],
+    ['Filename', info.filename],
+    ['Folder', info.folder || info.project],
+    ['Type', info.document_type],
+    ['Number', info.document_number],
+    ['Revision', info.revision],
+    ['Pages', info.total_pages || info.page_count],
+    ['Summary', info.summary],
+    ['Keywords', Array.isArray(info.keywords) ? info.keywords.join(', ') : info.keywords],
+  ].filter(([, value]) => value);
+  return `
+    <div class="metadata-list">
+      ${rows.length ? rows.map(([label, value]) => `
+        <div class="meta-row">
+          <span>${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value)}</strong>
+        </div>
+      `).join('') : '<div class="muted">No LLM metadata stored for this document.</div>'}
+    </div>
+  `;
+}
+
+function renderTocPanel() {
+  return `
+    <div class="toc-list full">
+      ${state.inspectToc.length ? state.inspectToc.map(renderTocItem).join('') : '<div class="muted">No headings detected.</div>'}
+    </div>
+  `;
+}
+
+function renderTocItem(item) {
+  const page = item.page_start || 1;
+  return `
+    <button class="toc-row level-${item.level || 1}" type="button" data-action="load-page" data-page="${page}">
+      <span>${escapeHtml(item.heading || item.breadcrumb || 'Heading')}</span>
+      <small>${page}${item.page_end && item.page_end !== page ? `-${item.page_end}` : ''}</small>
+    </button>
+  `;
+}
+
+function renderPagePanel() {
+  const page = state.inspectPage;
+  if (!page) return '<div class="muted">No extracted page text available.</div>';
+  return `
+    <div class="page-toolbar">
+      <button class="ghost small" type="button" data-action="page-prev" ${page.prev_page_num ? '' : 'disabled'}>Previous</button>
+      <span class="page-title">Page ${page.page_num || '-'}${page.page_count ? ` of ${page.page_count}` : ''}</span>
+      <button class="ghost small" type="button" data-action="page-next" ${page.next_page_num ? '' : 'disabled'}>Next</button>
+    </div>
+    <div class="breadcrumb-box">${escapeHtml(page.breadcrumb || 'No breadcrumb detected')}</div>
+    <pre class="page-text tall">${escapeHtml(page.content || '')}</pre>
+  `;
+}
+
+function renderSearchPanel() {
+  return `
+    <form class="inspect-search" id="doc-search-form">
+      <input class="field" id="doc-search-input" placeholder="Search inside this document">
+      <button class="ghost small" type="submit">Search</button>
+    </form>
+    <div class="search-results full">
+      ${state.inspectSearchResults.length ? state.inspectSearchResults.map((result) => `
+        <button class="search-hit" type="button" data-action="load-page" data-page="${result.page_num || 1}">
+          <span>${escapeHtml(result.breadcrumb || `Page ${result.page_num || ''}`)}</span>
+          <small>${escapeHtml(result.snippet || '')}</small>
+        </button>
+      `).join('') : '<div class="muted">Search results will appear here.</div>'}
+    </div>
+  `;
+}
+
+function clearInspector() {
+  state.inspectDocId = null;
+  state.inspectInfo = null;
+  state.inspectToc = [];
+  state.inspectPage = null;
+  state.inspectSearchResults = [];
+  state.inspectPanel = 'page';
+  state.inspecting = false;
+}
+
+async function openInspection(docId) {
+  clearInspector();
+  state.inspectDocId = Number(docId);
+  state.tab = 'inspect';
+  state.inspecting = true;
+  state.inspectPanel = 'page';
+  setHash();
+  renderShell();
+  renderInspect();
+  await loadInspection(docId);
+  state.inspecting = false;
+  setHash();
+  renderShell();
+  renderInspect();
+}
+
+async function loadInspection(docId) {
+  try {
+    const [info, toc] = await Promise.all([
+      api(`/api/documents/${enc(docId)}`),
+      api(`/api/documents/${enc(docId)}/toc`),
+    ]);
+    state.inspectInfo = info;
+    state.inspectToc = toc || [];
+    await loadInspectPage(info.first_page_num || 1, false, false);
+  } catch (err) {
+    state.inspecting = false;
+    showToast(err.message, 'error');
+  }
+}
+
+async function loadInspectPage(pageNum, shouldRender = true, switchPanel = true) {
+  if (!state.inspectDocId || !pageNum) return;
+  try {
+    state.inspectPage = await api(`/api/documents/${enc(state.inspectDocId)}/pages/${enc(pageNum)}`);
+    if (switchPanel) state.inspectPanel = 'page';
+    if (shouldRender) {
+      setHash();
+      renderInspect();
+    }
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function searchInspectDocument(event) {
+  event.preventDefault();
+  if (!state.inspectDocId) return;
+  const q = $('doc-search-input')?.value.trim();
+  if (!q) {
+    state.inspectSearchResults = [];
+    renderInspect();
+    return;
+  }
+  try {
+    state.inspectSearchResults = await api(`/api/documents/${enc(state.inspectDocId)}/search?q=${enc(q)}`);
+    renderInspect();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function createChatThread() {
+  if (!state.folder) return;
+  const created = await api(`/api/folders/${enc(state.folder)}/chats`, {
+    method: 'POST',
+    body: JSON.stringify({ title: 'New chat' }),
+  });
+  state.threadId = created.id;
+  await loadChats();
+  return created;
+}
+
+async function newChat() {
+  try {
+    await createChatThread();
+    renderAsk();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function sendMessage(event) {
+  event.preventDefault();
+  const input = $('message-input');
+  const content = input?.value.trim();
+  if (!content || state.sending) return;
+  try {
+    state.sending = true;
+    if (!state.threadId) await createChatThread();
+    state.messages.push({ role: 'user', content, sources: [] });
+    state.messages.push({ role: 'assistant', content: 'Working...', sources: [] });
+    renderAsk();
+    const data = await api(`/api/chats/${enc(state.threadId)}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ content }),
+    });
+    state.messages = data.messages || [];
+    state.chats = [data.thread, ...state.chats.filter((t) => t.id !== data.thread.id)];
+  } catch (err) {
+    showToast(err.message, 'error');
+  } finally {
+    state.sending = false;
+    renderAsk();
+  }
+}
+
+async function switchThread(id) {
+  state.threadId = id;
+  await loadMessages();
+  renderAsk();
+}
+
+function bindDropZone() {
+  const zone = $('drop-zone');
+  if (!zone) return;
+  zone.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    zone.classList.add('dragging');
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragging'));
+  zone.addEventListener('drop', (event) => {
+    event.preventDefault();
+    zone.classList.remove('dragging');
+    stageFiles(event.dataTransfer.files);
+  });
+}
+
+function stageFiles(files) {
+  state.uploadFiles = Array.from(files || []);
+  renderIngest();
+}
+
+function clearStaged() {
+  state.uploadFiles = [];
+  renderIngest();
+}
+
+async function uploadStaged() {
+  if (!state.uploadFiles.length || !state.folder) return;
+  const form = new FormData();
+  for (const file of state.uploadFiles) form.append('files', file);
+  try {
+    await api(`/api/folders/${enc(state.folder)}/upload`, { method: 'POST', body: form });
+    state.uploadFiles = [];
+    showToast('Upload complete');
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function ingestAll() {
+  if (!state.pending.length) return;
+  try {
+    await api(`/api/folders/${enc(state.folder)}/ingest`, { method: 'POST', body: JSON.stringify({}) });
+    showToast('Ingestion started');
+    state.tab = 'jobs';
+    setHash();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function ingestSingle(folder, filename) {
+  try {
+    await api(`/api/folders/${enc(folder)}/ingest/${enc(filename)}`, { method: 'POST', body: JSON.stringify({}) });
+    showToast('Ingestion started');
+    state.tab = 'jobs';
+    setHash();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+function formatBytes(bytes) {
+  if (!bytes) return '0 B';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let value = bytes;
+  let idx = 0;
+  while (value >= 1024 && idx < units.length - 1) {
+    value /= 1024;
+    idx += 1;
+  }
+  return `${value.toFixed(idx ? 1 : 0)} ${units[idx]}`;
+}
+
+async function promptNewFolder() {
+  const name = prompt('Folder name');
+  if (!name) return;
+  try {
+    await api('/api/folders', { method: 'POST', body: JSON.stringify({ name }) });
+    state.folder = name;
+    await loadFolders();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+function startPolling() {
+  setInterval(async () => {
+    if (!state.folder) return;
+    try {
+      const previousJobs = JSON.stringify(state.jobs);
+      const hadActiveJobs = state.jobs.some((job) => job.status === 'queued' || job.status === 'running');
+      await loadJobs();
+      const hasActiveJobs = state.jobs.some((job) => job.status === 'queued' || job.status === 'running');
+      const changed = previousJobs !== JSON.stringify(state.jobs);
+      if (changed && (state.tab === 'jobs' || state.tab === 'ingest') && (hadActiveJobs || hasActiveJobs)) {
+        renderActiveView();
+      }
+    } catch (_) {}
+  }, 4000);
+}
+
+function bindGlobalEvents() {
+  for (const tab of VALID_TABS) {
+    const btn = $(`${tab}-tab`);
+    if (btn) btn.addEventListener('click', () => setTab(tab));
+  }
+  $('new-folder-btn').addEventListener('click', promptNewFolder);
+  $('folder-search').addEventListener('input', renderShell);
+  document.addEventListener('click', handleClick);
+  document.addEventListener('change', handleChange);
+  document.addEventListener('submit', handleSubmit);
+  window.addEventListener('hashchange', async () => {
+    readHash();
+    renderShell();
+    await refreshActiveData();
+  });
+}
+
+function handleClick(event) {
+  const target = event.target.closest('[data-action]');
+  if (!target || target.disabled) return;
+  const { action } = target.dataset;
+  event.preventDefault();
+  if (action === 'select-folder') void selectFolder(target.dataset.folder || '');
+  if (action === 'new-chat') void newChat();
+  if (action === 'refresh') void refreshActiveData();
+  if (action === 'go-documents') setTab('documents');
+  if (action === 'go-ingest') setTab('ingest');
+  if (action === 'upload-staged') void uploadStaged();
+  if (action === 'clear-staged') clearStaged();
+  if (action === 'ingest-all') void ingestAll();
+  if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '');
+  if (action === 'refresh-jobs') void loadJobs().then(renderJobs);
+  if (action === 'inspect-doc') void openInspection(target.dataset.docId);
+  if (action === 'set-inspect-panel') {
+    state.inspectPanel = target.dataset.panel || 'page';
+    setHash();
+    renderInspect();
+  }
+  if (action === 'load-page') void loadInspectPage(Number(target.dataset.page));
+  if (action === 'page-prev') void loadInspectPage(state.inspectPage?.prev_page_num);
+  if (action === 'page-next') void loadInspectPage(state.inspectPage?.next_page_num);
+}
+
+function handleChange(event) {
+  const target = event.target;
+  if (target?.dataset?.action === 'switch-thread') void switchThread(target.value);
+  if (target?.dataset?.action === 'stage-files') stageFiles(target.files);
+}
+
+function handleSubmit(event) {
+  if (event.target?.id === 'chat-form') void sendMessage(event);
+  if (event.target?.id === 'doc-search-form') void searchInspectDocument(event);
+}
+
+async function init() {
+  bindGlobalEvents();
+  readHash();
+  await loadFolders();
+  setHash();
+  await refreshActiveData();
+  startPolling();
+}
+
+init().catch((err) => {
+  console.error(err);
+  showToast(err.message, 'error');
+});
