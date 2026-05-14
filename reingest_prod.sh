@@ -51,6 +51,19 @@ if ! id "$SERVICE_USER" &>/dev/null; then
     exit 1
 fi
 
+# Pre-flight: if --with-embeddings is requested, fail fast before touching the
+# service if sentence-transformers isn't installed in the venv.
+for arg in "$@"; do
+    if [[ "$arg" == "--with-embeddings" ]]; then
+        if ! sudo -u "$SERVICE_USER" "${VENV_DIR}/bin/python" -c "import sentence_transformers" 2>/dev/null; then
+            echo "ERROR: --with-embeddings requested but sentence_transformers is not importable in ${VENV_DIR}." >&2
+            echo "       Install with: sudo bash setup_embeddings.sh" >&2
+            exit 1
+        fi
+        break
+    fi
+done
+
 echo "[+] Stopping ${SERVICE_NAME}"
 systemctl stop "$SERVICE_NAME" || true
 
