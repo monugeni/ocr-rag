@@ -45,6 +45,19 @@ log()  { echo -e "${GREEN}[+]${NC} $*"; }
 warn() { echo -e "${YELLOW}[!]${NC} $*"; }
 err()  { echo -e "${RED}[✗]${NC} $*" >&2; }
 
+chown_recursive() {
+    # Btrfs snapshots under .snaps are read-only subvolumes. A plain
+    # `chown -R /btrfs/ocr-rag` walks into them and produces thousands of
+    # "Read-only file system" errors during deploy updates.
+    local owner="$1"
+    shift
+    local target
+    for target in "$@"; do
+        [[ -e "$target" ]] || continue
+        find "$target" -path '*/.snaps' -prune -o -exec chown -h "$owner" {} +
+    done
+}
+
 # ---------------------------------------------------------------------------
 # Ingest mode (doesn't need root)
 # ---------------------------------------------------------------------------
@@ -144,11 +157,11 @@ if [[ "${1:-}" == "--update" ]]; then
     cd "$APP_DIR"
     CALLING_USER="${SUDO_USER}"
     restore_app_owner() {
-        chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
+        chown_recursive "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
     }
     trap restore_app_owner EXIT
 
-    chown -R "${CALLING_USER}:${CALLING_USER}" "$APP_DIR"
+    chown_recursive "${CALLING_USER}:${CALLING_USER}" "$APP_DIR"
     sudo -u "$CALLING_USER" git fetch origin main
 
     CURRENT_HEAD="$(sudo -u "$CALLING_USER" git rev-parse HEAD)"
@@ -198,7 +211,7 @@ fi
 # --- Clone/update repo ---
 if [[ -d "${APP_DIR}/.git" ]]; then
     log "Repo exists at ${APP_DIR}"
-    chown -R "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
+    chown_recursive "${SERVICE_USER}:${SERVICE_USER}" "$APP_DIR"
 else
     err "Clone the repo first as your user:"
     err "  git clone ${REPO_URL} ${APP_DIR}"
@@ -208,7 +221,7 @@ fi
 # --- Data directory ---
 log "Setting up data directory: ${DATA_DIR}"
 mkdir -p "$DATA_DIR"
-chown -R "${SERVICE_USER}:${SERVICE_USER}" "$DATA_DIR"
+chown_recursive "${SERVICE_USER}:${SERVICE_USER}" "$DATA_DIR"
 
 # --- Python venv ---
 log "Setting up Python venv..."
@@ -265,7 +278,7 @@ fi
 # --- Uploads directory ---
 log "Setting up uploads directory: ${UPLOADS_DIR}"
 mkdir -p "$UPLOADS_DIR"
-chown -R "${SERVICE_USER}:${SERVICE_USER}" "$UPLOADS_DIR"
+chown_recursive "${SERVICE_USER}:${SERVICE_USER}" "$UPLOADS_DIR"
 
 # --- Systemd service (Web GUI + MCP in one process) ---
 log "Creating systemd service: ${SERVICE_NAME}"
