@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -20,9 +21,17 @@ MCP_CONNECT_DELAY_SECONDS = 0.35
 MAX_REPEATED_TOOL_CALLS = 2
 MAX_STALE_TOOL_ROUNDS = 3
 
+
+def _semantic_tools_enabled() -> bool:
+    return os.environ.get("OCR_RAG_ENABLE_SEMANTIC_FALLBACK", "").lower() in {
+        "1", "true", "yes", "on",
+    }
+
 PROJECT_SCOPED_TOOLS = {
     "list_folder_entries",
     "list_documents",
+    "ranked_search",
+    "search_chunks",
     "search_pages",
     "search_sections",
     "semantic_search",
@@ -33,6 +42,8 @@ ALLOWED_TOOLS = {
     "list_documents",
     "get_document_info",
     "get_toc",
+    "ranked_search",
+    "search_chunks",
     "search_pages",
     "search_sections",
     "semantic_search",
@@ -40,6 +51,7 @@ ALLOWED_TOOLS = {
     "get_page",
     "get_pages",
     "get_adjacent",
+    "render_page_image",
     "reextract_page",
     "reextract_table",
 }
@@ -200,6 +212,8 @@ async def _list_allowed_tools(session: Any) -> list[dict[str, Any]]:
     result = await session.list_tools()
     tools = result.tools if hasattr(result, "tools") else result
     for tool in tools:
+        if tool.name == "semantic_search" and not _semantic_tools_enabled():
+            continue
         if tool.name not in ALLOWED_TOOLS:
             continue
         selected.append({
@@ -322,11 +336,18 @@ def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) 
         "Respond in markdown.\n"
     )
     if not attachment:
-        return base + (
+        prompt = (
             "Investigate with the MCP tools before answering when the question requires document evidence.\n"
-            "Prefer precise search first, then expand to page reads or nearby pages when needed.\n"
-            "Do not keep calling tools once you have enough evidence to answer.\n"
+            "Start with ranked_search for precise tender clauses, vendor names, equipment names, materials, and exact phrases.\n"
+            "Use next_offset for more results from the same ranked query when has_more=true, or issue a new query when better terms are visible.\n"
+            "Use page reads or nearby pages after ranked chunk hits when surrounding context is needed.\n"
+            "Use render_page_image when a relevant page is a drawing, scanned page, form, visual table, title block, or extracted text appears incomplete.\n"
         )
+        if _semantic_tools_enabled():
+            prompt += (
+                "Semantic search is available only as a secondary recall aid; do not use it as source of truth for technical values.\n"
+            )
+        return base + prompt + "Do not keep calling tools once you have enough evidence to answer.\n"
 
     return base + (
         "You are also reviewing an uploaded document excerpt against the folder documents.\n"
@@ -476,7 +497,7 @@ def _format_tool_result(
     payload: Any,
     tracker: SourceTracker,
     project: str,
-) -> str:
+) -> Any:
     annotations = []
     for source in _extract_sources(payload, tool_name=tool_name, project=project):
         tracked = tracker.add(source)
@@ -492,15 +513,40 @@ def _format_tool_result(
         body = body[:MAX_TOOL_RESULT_CHARS].rstrip() + "\n...[truncated]"
 
     if annotations:
-        return (
+        text = (
             f"Tool: {tool_name}\n"
             "Page-based source IDs from this tool result:\n"
             + "\n".join(f"- {line}" for line in annotations)
             + "\n\nStructured result:\n"
             + body
         )
+    else:
+        text = f"Tool: {tool_name}\nStructured result:\n{body}"
 
-    return f"Tool: {tool_name}\nStructured result:\n{body}"
+    image_block = _image_block_from_payload(payload)
+    if image_block:
+        return [
+            {"type": "text", "text": text},
+            image_block,
+        ]
+    return text
+
+
+def _image_block_from_payload(payload: Any) -> Optional[dict[str, Any]]:
+    if not isinstance(payload, dict):
+        return None
+    image_base64 = payload.get("image_base64")
+    mime_type = payload.get("mime_type") or "image/png"
+    if not image_base64:
+        return None
+    return {
+        "type": "image",
+        "source": {
+            "type": "base64",
+            "media_type": mime_type,
+            "data": image_base64,
+        },
+    }
 
 
 def _extract_sources(payload: Any, *, tool_name: str, project: str) -> list[dict[str, Any]]:
@@ -602,7 +648,13 @@ def _trim_payload(value: Any) -> Any:
     if isinstance(value, list):
         return [_trim_payload(item) for item in value]
     if isinstance(value, dict):
-        return {key: _trim_payload(item) for key, item in value.items()}
+        trimmed = {}
+        for key, item in value.items():
+            if key == "image_base64":
+                trimmed[key] = "[base64 omitted from text; image attached to tool result]"
+            else:
+                trimmed[key] = _trim_payload(item)
+        return trimmed
     return value
 
 

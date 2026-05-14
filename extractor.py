@@ -72,6 +72,8 @@ class Heading:
     text: str
     level: int
     page_num: int
+    top: float = 0.0
+    x0: float = 0.0
     confidence: float = 0.0
     signals: list = field(default_factory=list)
     numbering: str = ""  # e.g. "2.1.3"
@@ -152,7 +154,7 @@ def detect_page_number(lines: list[ExtractedLine]) -> Optional[int]:
 # Numbering pattern detection
 # ---------------------------------------------------------------------------
 
-DECIMAL_NUM_RE = re.compile(r'^(\d+(?:\.\d+)*)\.\s+(.+)')
+DECIMAL_NUM_RE = re.compile(r'^(\d+(?:\.\d+)*)([.)])?\s+(.+)')
 ALPHA_NUM_RE = re.compile(r'^([a-z])\.\s+(.+)', re.IGNORECASE)
 ROMAN_NUM_RE = re.compile(r'^(i{1,3}|iv|vi{0,3}|ix|xi{0,3}|xiv|xv)\.\s+(.+)',
                           re.IGNORECASE)
@@ -167,8 +169,11 @@ def parse_decimal_numbering(text: str) -> tuple[str, int, str]:
     m = DECIMAL_NUM_RE.match(text.strip())
     if m:
         num_str = m.group(1)
+        delimiter = m.group(2)
+        if delimiter is None and '.' not in num_str and len(num_str) > 2:
+            return '', 0, text
         depth = len(num_str.split('.'))
-        return num_str, depth, m.group(2).strip()
+        return num_str, depth, m.group(3).strip()
     return '', 0, text
 
 
@@ -352,8 +357,13 @@ def score_heading(line: ExtractedLine, body_size: float,
     if len(line.text.strip()) < 4:
         return None
 
-    # Skip very long lines (body text)
-    if line.word_count > 12:
+    num_str, num_depth, remaining = parse_decimal_numbering(line.text)
+
+    # Skip very long lines (body text), but allow moderately long numbered
+    # engineering clause titles such as "3.2.1 Inspection and test plan...".
+    if line.word_count > 18 and num_depth == 0:
+        return None
+    if line.word_count > 28:
         return None
 
     # Skip page numbers
@@ -368,11 +378,10 @@ def score_heading(line: ExtractedLine, body_size: float,
     has_primary = False  # Must have at least one primary signal
 
     # --- Signal 1: Decimal numbering (strongest, PRIMARY) ---
-    num_str, num_depth, remaining = parse_decimal_numbering(line.text)
     if num_depth > 0:
         remaining_words = len(remaining.split()) if remaining else 0
         # Must have some text after the number, and be short
-        if remaining and remaining_words <= 10:
+        if remaining and remaining_words <= 20:
             confidence += 0.5
             level = min(num_depth, 4)
             signals.append(f'numbered_d{num_depth}')
@@ -453,6 +462,8 @@ def score_heading(line: ExtractedLine, body_size: float,
         text=line.text.strip(),
         level=level,
         page_num=line.page_num,
+        top=line.top,
+        x0=line.x0,
         confidence=confidence,
         signals=signals,
         numbering=num_str,
@@ -541,12 +552,14 @@ def apply_corrections(headings: list[Heading], corrections: dict) -> list[Headin
             text=new_h['text'],
             level=new_h['level'],
             page_num=new_h['page_num'],
+            top=float(new_h.get('top', 0.0)),
+            x0=float(new_h.get('x0', 0.0)),
             confidence=0.9,
             signals=['llm_added'],
         ))
 
-    # Re-sort by page number
-    result.sort(key=lambda h: (h.page_num, h.confidence), reverse=False)
+    # Re-sort in reading order so same-page breadcrumbs stay correct.
+    result.sort(key=lambda h: (h.page_num, h.top, h.x0, -h.confidence))
     return result
 
 
@@ -606,8 +619,9 @@ def build_breadcrumbs(headings: list[Heading]) -> dict[int, str]:
     breadcrumbs = {}
     stack = []  # [(level, text)]
 
-    # Sort headings by page number
-    sorted_headings = sorted(headings, key=lambda h: h.page_num)
+    # Sort headings in reading order. Multiple clauses can start on the same
+    # page, and page-only ordering corrupts breadcrumbs for those pages.
+    sorted_headings = sorted(headings, key=lambda h: (h.page_num, h.top, h.x0))
 
     # Build a map of page -> list of headings on that page
     page_headings = defaultdict(list)
@@ -958,7 +972,7 @@ def stage_build_pages(pdf_path: str,
     # Build sections list
     sections = []
     heading_stack = []
-    for h in sorted(headings, key=lambda x: x.page_num):
+    for h in sorted(headings, key=lambda x: (x.page_num, x.top, x.x0)):
         while heading_stack and heading_stack[-1][0] >= h.level:
             heading_stack.pop()
         heading_stack.append((h.level, h.text))

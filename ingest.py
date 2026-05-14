@@ -18,16 +18,24 @@ Usage:
 """
 
 import argparse
+from collections import Counter
 import json
 import os
 import re
 import sqlite3
 import sys
+import tempfile
+from dataclasses import asdict
 from pathlib import Path
 from typing import Optional
 
-from dotenv import load_dotenv
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
+
+if load_dotenv:
+    load_dotenv()
 
 
 # ---------------------------------------------------------------------------
@@ -69,6 +77,21 @@ CREATE TABLE IF NOT EXISTS pages (
     char_count  INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS chunks (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    doc_id      INTEGER NOT NULL REFERENCES documents(id) ON DELETE CASCADE,
+    page_id     INTEGER NOT NULL REFERENCES pages(id) ON DELETE CASCADE,
+    chunk_index INTEGER NOT NULL,
+    page_start  INTEGER,
+    page_end    INTEGER,
+    breadcrumb  TEXT,
+    text        TEXT NOT NULL,
+    chunk_type  TEXT DEFAULT 'text',
+    heading_id  INTEGER,
+    confidence  REAL DEFAULT 0,
+    metadata    TEXT
+);
+
 -- FTS5 index on page content and breadcrumbs
 CREATE VIRTUAL TABLE IF NOT EXISTS pages_fts USING fts5(
     content,
@@ -94,9 +117,37 @@ CREATE TRIGGER IF NOT EXISTS pages_au AFTER UPDATE ON pages BEGIN
     VALUES (new.id, new.content, new.breadcrumb);
 END;
 
+-- FTS5 index on paragraph/clause chunks. This is the primary retrieval index
+-- for tender Q&A because it preserves the precise breadcrumb at hit level.
+CREATE VIRTUAL TABLE IF NOT EXISTS chunks_fts USING fts5(
+    text,
+    breadcrumb,
+    content='chunks',
+    content_rowid='id',
+    tokenize='porter unicode61'
+);
+
+CREATE TRIGGER IF NOT EXISTS chunks_ai AFTER INSERT ON chunks BEGIN
+    INSERT INTO chunks_fts(rowid, text, breadcrumb)
+    VALUES (new.id, new.text, new.breadcrumb);
+END;
+CREATE TRIGGER IF NOT EXISTS chunks_ad AFTER DELETE ON chunks BEGIN
+    INSERT INTO chunks_fts(chunks_fts, rowid, text, breadcrumb)
+    VALUES ('delete', old.id, old.text, old.breadcrumb);
+END;
+CREATE TRIGGER IF NOT EXISTS chunks_au AFTER UPDATE ON chunks BEGIN
+    INSERT INTO chunks_fts(chunks_fts, rowid, text, breadcrumb)
+    VALUES ('delete', old.id, old.text, old.breadcrumb);
+    INSERT INTO chunks_fts(rowid, text, breadcrumb)
+    VALUES (new.id, new.text, new.breadcrumb);
+END;
+
 CREATE INDEX IF NOT EXISTS idx_pages_doc_page ON pages(doc_id, page_num);
 CREATE INDEX IF NOT EXISTS idx_sections_doc ON sections(doc_id);
 CREATE INDEX IF NOT EXISTS idx_documents_project ON documents(project);
+CREATE INDEX IF NOT EXISTS idx_chunks_doc ON chunks(doc_id);
+CREATE INDEX IF NOT EXISTS idx_chunks_page ON chunks(page_id);
+CREATE INDEX IF NOT EXISTS idx_chunks_doc_page ON chunks(doc_id, page_start);
 
 CREATE TABLE IF NOT EXISTS corrections (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -132,10 +183,14 @@ CREATE TABLE IF NOT EXISTS quality_flags (
 CREATE TABLE IF NOT EXISTS page_embeddings (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     page_id     INTEGER NOT NULL REFERENCES pages(id) ON DELETE CASCADE,
+    chunk_id    INTEGER REFERENCES chunks(id) ON DELETE CASCADE,
     chunk_index INTEGER NOT NULL DEFAULT 0,
     chunk_text  TEXT NOT NULL,
+    breadcrumb  TEXT,
+    chunk_type  TEXT DEFAULT 'text',
     embedding   BLOB NOT NULL,
-    model       TEXT NOT NULL
+    model       TEXT NOT NULL,
+    metadata    TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_corrections_doc ON corrections(doc_id);
@@ -203,6 +258,12 @@ def init_db(db_path: str) -> sqlite3.Connection:
         "cancel_requested": "INTEGER NOT NULL DEFAULT 0",
         "delete_after_cancel": "INTEGER NOT NULL DEFAULT 0",
         "cancel_reason": "TEXT",
+    })
+    _ensure_table_columns(conn, "page_embeddings", {
+        "breadcrumb": "TEXT",
+        "chunk_type": "TEXT DEFAULT 'text'",
+        "chunk_id": "INTEGER",
+        "metadata": "TEXT",
     })
     return conn
 
@@ -564,6 +625,263 @@ def classify_page(text: str, page_num: int) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Chunk storage for retrieval
+# ---------------------------------------------------------------------------
+
+def _json_default(value):
+    if hasattr(value, "__dict__"):
+        return value.__dict__
+    return str(value)
+
+
+def _insert_chunks(
+    conn: sqlite3.Connection,
+    doc_id: int,
+    chunks: list[dict],
+    page_id_by_num: dict[int, int],
+) -> int:
+    """Store paragraph/clause chunks for chunk-level FTS retrieval."""
+    if not chunks:
+        return 0
+
+    inserted = 0
+    for idx, chunk in enumerate(chunks):
+        page_start = int(chunk.get("page_start") or chunk.get("page_num") or 1)
+        page_end = int(chunk.get("page_end") or page_start)
+        page_id = page_id_by_num.get(page_start)
+        if page_id is None:
+            continue
+
+        text = (chunk.get("text") or chunk.get("chunk_text") or "").strip()
+        if not text:
+            continue
+
+        metadata = chunk.get("metadata")
+        if metadata is not None and not isinstance(metadata, str):
+            metadata = json.dumps(metadata, ensure_ascii=False, default=_json_default)
+
+        conn.execute(
+            """INSERT INTO chunks
+               (doc_id, page_id, chunk_index, page_start, page_end, breadcrumb,
+                text, chunk_type, heading_id, confidence, metadata)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                doc_id,
+                page_id,
+                int(chunk.get("chunk_index") or chunk.get("chunk_id") or idx + 1),
+                page_start,
+                page_end,
+                chunk.get("breadcrumb") or "",
+                text,
+                chunk.get("chunk_type") or chunk.get("type") or "text",
+                chunk.get("heading_id"),
+                float(chunk.get("confidence") or 0.0),
+                metadata,
+            ),
+        )
+        inserted += 1
+    return inserted
+
+
+def _fallback_chunks_for_pages(pages: list[dict]) -> list[dict]:
+    """Create retrieval chunks for non-fast ingestion paths."""
+    chunks = []
+    for page in pages:
+        page_num = int(page["page_num"])
+        for idx, chunk in enumerate(structured_chunks_for_embedding(
+            page.get("content") or "",
+            page.get("breadcrumb") or "",
+        )):
+            chunks.append({
+                "page_start": page_num,
+                "page_end": page_num,
+                "chunk_index": idx + 1,
+                "breadcrumb": chunk.get("breadcrumb") or page.get("breadcrumb") or "",
+                "text": chunk.get("text") or "",
+                "chunk_type": chunk.get("type") or "text",
+                "confidence": 0.0,
+            })
+    return chunks
+
+
+# ---------------------------------------------------------------------------
+# Paragraph / clause aware embedding chunks
+# ---------------------------------------------------------------------------
+
+MD_HEADING_RE = re.compile(r'^(#{1,6})\s+(.+?)\s*$')
+DECIMAL_CLAUSE_RE = re.compile(
+    r'^(\d+(?:\.\d+){0,8})(?:[.)])?\s+(.{2,160})$'
+)
+LETTER_CLAUSE_RE = re.compile(r'^([A-Z])(?:[.)])\s+(.{2,140})$')
+ROMAN_CLAUSE_RE = re.compile(
+    r'^((?:[IVX]{1,8}|iv|ix|v?i{1,3}|x{1,3}))(?:[.)])\s+(.{2,140})$',
+    re.IGNORECASE,
+)
+STRUCTURE_LABEL_RE = re.compile(
+    r'^(section|part|chapter|appendix|annex(?:ure)?|attachment|schedule|'
+    r'exhibit|volume)\b',
+    re.IGNORECASE,
+)
+
+
+def _normalize_heading_text(text: str) -> str:
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text.strip(':- ')
+
+
+def _decimal_depth_from_heading(text: str) -> int:
+    m = re.match(r'^(\d+(?:\.\d+)*)\b', _normalize_heading_text(text))
+    if not m:
+        return 0
+    return len(m.group(1).split('.'))
+
+
+def _looks_like_structural_heading(line: str) -> tuple[int, str, str] | None:
+    """Return (level, heading_text, type) when a line should affect breadcrumbs."""
+    text = _normalize_heading_text(line)
+    if not text or len(text) < 3:
+        return None
+
+    md = MD_HEADING_RE.match(text)
+    if md:
+        return min(len(md.group(1)), 6), _normalize_heading_text(md.group(2)), 'heading'
+
+    # Avoid treating table rows or prose sentences as clause headings.
+    words = text.split()
+    if len(words) > 18 or len(text) > 180:
+        return None
+    if text.count('|') >= 2:
+        return None
+    if re.search(r'[a-z].*,\s+[a-z]', text) and not text.endswith(':'):
+        return None
+
+    m = DECIMAL_CLAUSE_RE.match(text)
+    if m:
+        number, title = m.groups()
+        if '.' not in number and len(number) > 2:
+            return None
+        if title and len(title.split()) <= 14:
+            return min(len(number.split('.')), 6), f"{number} {title.strip()}", 'clause'
+
+    m = LETTER_CLAUSE_RE.match(text)
+    if m and len(m.group(2).split()) <= 12:
+        return 4, f"{m.group(1)}. {m.group(2).strip()}", 'clause'
+
+    m = ROMAN_CLAUSE_RE.match(text)
+    if m and len(m.group(2).split()) <= 12:
+        return 4, f"{m.group(1)}. {m.group(2).strip()}", 'clause'
+
+    alpha = [c for c in text if c.isalpha()]
+    is_caps = bool(alpha) and text == text.upper()
+    if (STRUCTURE_LABEL_RE.match(text) or text.endswith(':') or is_caps) and 2 <= len(words) <= 12:
+        level = 1 if STRUCTURE_LABEL_RE.match(text) else 3
+        return level, text.rstrip(':'), 'heading'
+
+    return None
+
+
+def _append_chunk(chunks: list[dict], breadcrumb: str, parts: list[str],
+                  chunk_type: str = 'text') -> None:
+    body = '\n'.join(part.strip() for part in parts if part.strip()).strip()
+    if not body:
+        return
+    context = breadcrumb.strip()
+    chunk_text = f"Breadcrumb: {context}\n\n{body}" if context else body
+    chunks.append({
+        'text': chunk_text,
+        'breadcrumb': context,
+        'type': chunk_type,
+    })
+
+
+def structured_chunks_for_embedding(
+    content: str,
+    page_breadcrumb: str = '',
+    chunk_size: int = 220,
+    overlap: int = 40,
+) -> list[dict]:
+    """Split page content into paragraph/clause chunks with local breadcrumbs.
+
+    Page-level breadcrumbs are still the fallback. When the page text contains
+    markdown headings, numbered clauses, or short heading-shaped lines, the
+    current breadcrumb stack is updated before subsequent paragraphs are
+    chunked. This gives embeddings a more precise context than arbitrary
+    page-level word windows.
+    """
+    base_parts = [
+        _normalize_heading_text(part)
+        for part in (page_breadcrumb or '').split(' > ')
+        if _normalize_heading_text(part)
+    ]
+    first_numbered_idx = next(
+        (idx for idx, part in enumerate(base_parts) if _decimal_depth_from_heading(part)),
+        len(base_parts),
+    )
+    decimal_level_offset = first_numbered_idx
+    base_stack = []
+    for idx, part in enumerate(base_parts):
+        decimal_depth = _decimal_depth_from_heading(part)
+        level = decimal_level_offset + decimal_depth if decimal_depth else idx + 1
+        if base_stack and level <= base_stack[-1][0]:
+            level = base_stack[-1][0] + 1
+        base_stack.append((level, part))
+    stack = list(base_stack)
+    chunks: list[dict] = []
+    paragraph: list[str] = []
+
+    def current_breadcrumb() -> str:
+        return ' > '.join(text for _level, text in stack if text)
+
+    def flush_paragraph() -> None:
+        nonlocal paragraph
+        text = '\n'.join(paragraph).strip()
+        paragraph = []
+        if not text:
+            return
+        words = text.split()
+        if len(words) <= chunk_size:
+            _append_chunk(chunks, current_breadcrumb(), [text])
+            return
+        start = 0
+        while start < len(words):
+            end = min(start + chunk_size, len(words))
+            _append_chunk(chunks, current_breadcrumb(), [' '.join(words[start:end])])
+            if end == len(words):
+                break
+            start = max(end - overlap, start + 1)
+
+    for raw_line in (content or '').splitlines():
+        line = raw_line.strip()
+        if not line:
+            flush_paragraph()
+            continue
+
+        structural = _looks_like_structural_heading(line)
+        if structural:
+            flush_paragraph()
+            level, heading_text, chunk_type = structural
+            decimal_depth = _decimal_depth_from_heading(heading_text)
+            if decimal_depth:
+                level = decimal_level_offset + decimal_depth
+            while stack and stack[-1][0] >= level:
+                stack.pop()
+            stack.append((level, heading_text))
+            _append_chunk(chunks, current_breadcrumb(), [line], chunk_type)
+            continue
+
+        paragraph.append(raw_line.rstrip())
+
+    flush_paragraph()
+    if chunks:
+        return chunks
+
+    return [
+        {'text': chunk, 'breadcrumb': page_breadcrumb or '', 'type': 'text'}
+        for chunk in chunk_text(content, chunk_size=chunk_size, overlap=overlap)
+    ]
+
+
+# ---------------------------------------------------------------------------
 # Embedding computation
 # ---------------------------------------------------------------------------
 
@@ -585,7 +903,12 @@ def chunk_text(text: str, chunk_size: int = 256, overlap: int = 50) -> list[str]
 
 
 def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
-    """Compute and store embeddings for all pages of a document."""
+    """Compute optional semantic embeddings.
+
+    Chunk-level FTS is the primary retrieval path. Embeddings are stored against
+    chunks when available, and only fall back to legacy page-derived chunks for
+    older ingestions.
+    """
     try:
         from sentence_transformers import SentenceTransformer
         import numpy as np
@@ -597,6 +920,13 @@ def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
         print(f"  Failed to load sentence-transformers: {e}")
         print("  If numpy/scipy version mismatch, try: pip install --upgrade scipy numpy")
         return
+
+    _ensure_table_columns(conn, "page_embeddings", {
+        "breadcrumb": "TEXT",
+        "chunk_type": "TEXT DEFAULT 'text'",
+        "chunk_id": "INTEGER",
+        "metadata": "TEXT",
+    })
 
     print(f"  Computing embeddings ({model_name})...")
     model = SentenceTransformer(model_name)
@@ -614,23 +944,72 @@ def compute_embeddings(conn, doc_id, model_name='all-MiniLM-L6-v2'):
         conn.execute(f"DELETE FROM page_embeddings WHERE page_id IN ({ph})", page_ids)
 
     total_chunks = 0
-    for page in pages:
-        # Prepend breadcrumb to content for context-aware embeddings
-        text = page['content']
-        if page['breadcrumb']:
-            text = page['breadcrumb'] + '\n' + text
+    stored_chunks = conn.execute(
+        """SELECT c.id, c.page_id, c.chunk_index, c.text, c.breadcrumb,
+                  c.chunk_type, c.metadata
+           FROM chunks c
+           JOIN pages p ON p.id = c.page_id
+           WHERE c.doc_id = ?
+           ORDER BY c.page_start, c.chunk_index, c.id""",
+        (doc_id,),
+    ).fetchall()
 
-        chunks = chunk_text(text)
+    if stored_chunks:
+        embedding_inputs = [
+            f"Breadcrumb: {row['breadcrumb']}\n\n{row['text']}".strip()
+            if row["breadcrumb"] else row["text"]
+            for row in stored_chunks
+        ]
+        embeddings = model.encode(embedding_inputs)
+        for row, emb in zip(stored_chunks, embeddings):
+            conn.execute(
+                "INSERT INTO page_embeddings "
+                "(page_id, chunk_id, chunk_index, chunk_text, breadcrumb, chunk_type, "
+                "embedding, model, metadata) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    row["page_id"],
+                    row["id"],
+                    row["chunk_index"],
+                    row["text"],
+                    row["breadcrumb"] or "",
+                    row["chunk_type"] or "text",
+                    emb.astype(np.float32).tobytes(),
+                    model_name,
+                    row["metadata"],
+                )
+            )
+            total_chunks += 1
+        conn.commit()
+        print(f"  Embeddings: {total_chunks} stored retrieval chunks from {len(pages)} pages")
+        return
+
+    for page in pages:
+        chunks = structured_chunks_for_embedding(
+            page['content'],
+            page['breadcrumb'] or '',
+        )
         if not chunks:
             continue
 
-        embeddings = model.encode(chunks)
+        chunk_texts = [chunk['text'] for chunk in chunks]
+        embeddings = model.encode(chunk_texts)
 
         for i, (chunk, emb) in enumerate(zip(chunks, embeddings)):
             conn.execute(
-                "INSERT INTO page_embeddings (page_id, chunk_index, chunk_text, embedding, model) "
-                "VALUES (?, ?, ?, ?, ?)",
-                (page['id'], i, chunk, emb.astype(np.float32).tobytes(), model_name)
+                "INSERT INTO page_embeddings "
+                "(page_id, chunk_index, chunk_text, breadcrumb, chunk_type, embedding, model, metadata) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    page['id'],
+                    i,
+                    chunk['text'],
+                    chunk.get('breadcrumb', ''),
+                    chunk.get('type', 'text'),
+                    emb.astype(np.float32).tobytes(),
+                    model_name,
+                    json.dumps({"source": "legacy_page_chunk"}, ensure_ascii=False),
+                )
             )
             total_chunks += 1
 
@@ -674,7 +1053,8 @@ def ingest_document(
     filename: str = None,
     pdf_path: str = None,
     metadata: dict = None,
-    replace: bool = False
+    replace: bool = False,
+    chunks: list[dict] | None = None,
 ) -> int:
     cur = conn.cursor()
 
@@ -682,6 +1062,12 @@ def ingest_document(
         cur.execute("SELECT id FROM documents WHERE filename = ? AND project = ?", (filename, project))
         row = cur.fetchone()
         if row:
+            cur.execute(
+                "DELETE FROM page_embeddings WHERE page_id IN "
+                "(SELECT id FROM pages WHERE doc_id = ?)",
+                (row['id'],),
+            )
+            cur.execute("DELETE FROM chunks WHERE doc_id = ?", (row['id'],))
             cur.execute("DELETE FROM pages WHERE doc_id = ?", (row['id'],))
             cur.execute("DELETE FROM sections WHERE doc_id = ?", (row['id'],))
             cur.execute("DELETE FROM documents WHERE id = ?", (row['id'],))
@@ -721,27 +1107,33 @@ def ingest_document(
 
     # Insert pages
     sec_id = None
+    page_id_by_num = {}
     for p in pages:
         if p['page_num'] in section_ids:
             sec_id = section_ids[p['page_num']]
 
-        ptype = classify_page(p['content'], p['page_num'])
+        ptype = p.get('page_type') or classify_page(p['content'], p['page_num'])
         cur.execute(
             """INSERT INTO pages (doc_id, page_num, section_id, content, breadcrumb, page_type, char_count)
                VALUES (?, ?, ?, ?, ?, ?, ?)""",
             (doc_id, p['page_num'], sec_id, p['content'], p.get('breadcrumb', ''), ptype, len(p['content']))
         )
+        page_id_by_num[int(p['page_num'])] = cur.lastrowid
+
+    retrieval_chunks = chunks if chunks is not None else _fallback_chunks_for_pages(pages)
+    chunk_count = _insert_chunks(conn, doc_id, retrieval_chunks, page_id_by_num)
 
     conn.commit()
 
     types = {}
     for p in pages:
-        t = classify_page(p['content'], p['page_num'])
+        t = p.get('page_type') or classify_page(p['content'], p['page_num'])
         types[t] = types.get(t, 0) + 1
 
     print(f"  Title: {title}")
     print(f"  Pages: {len(pages)} ({', '.join(f'{v} {k}' for k, v in sorted(types.items()))})")
     print(f"  Sections: {len(sections)}")
+    print(f"  Retrieval chunks: {chunk_count}")
     return doc_id
 
 
@@ -1056,6 +1448,107 @@ def find_marker_output(pdf_path: Path) -> Optional[Path]:
     return None
 
 
+def _page_type_from_fast_chunks(chunks: list[dict], page_num: int, content: str) -> str:
+    roles = [
+        chunk.get("chunk_type") or "text"
+        for chunk in chunks
+        if int(chunk.get("page_start") or 0) <= page_num <= int(chunk.get("page_end") or 0)
+    ]
+    if roles:
+        common = Counter(role for role in roles if role not in {"heading", "text"})
+        if common:
+            return common.most_common(1)[0][0]
+    return classify_page(content, page_num)
+
+
+def ingest_fast_pdf(
+    conn: sqlite3.Connection,
+    pdf_path: Path,
+    project: str,
+    replace=False,
+    skip_llm=False,
+    skip_embeddings=False,
+    api_key=None,
+    llm_model="claude-sonnet-4-20250514",
+    ocr=False,
+    ocr_jobs=4,
+):
+    """Ingest a PDF with the fast Poppler/PyMuPDF heading pipeline.
+
+    This path stores chunk-level FTS records with document/chapter/section
+    breadcrumbs. It does not require Marker output.
+    """
+    from fast_pipeline import run_fast_pipeline
+
+    print(f"\nFast ingesting: {pdf_path.name}")
+    with tempfile.TemporaryDirectory(prefix="ocr-rag-fast-ingest-") as tmp:
+        artifacts = run_fast_pipeline(pdf_path, Path(tmp), ocr=ocr, ocr_jobs=ocr_jobs)
+
+    chunks = []
+    chunk_dicts = [asdict(chunk) for chunk in artifacts.chunks]
+    for chunk in chunk_dicts:
+        chunk["metadata"] = {
+            "source": "fast_pipeline",
+            "document_title": artifacts.document_title,
+            "document_context": asdict(artifacts.document_context),
+            "extractor": artifacts.extractor,
+            "warnings": artifacts.warnings,
+        }
+        chunks.append(chunk)
+
+    pages = []
+    for page in artifacts.pages:
+        content = page.get("content") or ""
+        page_num = int(page["page_num"])
+        pages.append({
+            "page_num": page_num,
+            "content": content,
+            "breadcrumb": page.get("breadcrumb") or artifacts.document_context.breadcrumb_root,
+            "page_type": _page_type_from_fast_chunks(chunk_dicts, page_num, content),
+        })
+
+    sections = []
+    for section in artifacts.sections:
+        sections.append({
+            "heading": section["heading"],
+            "level": section["level"],
+            "page_num": section.get("page_num") or section.get("page_start") or 1,
+            "breadcrumb": section.get("breadcrumb") or "",
+        })
+
+    title = artifacts.document_title or pdf_path.stem.replace('-', ' ').replace('_', ' ')
+    metadata = {
+        "document_type": "fast_pdf",
+        "document_context": asdict(artifacts.document_context),
+        "extractor": artifacts.extractor,
+        "warnings": artifacts.warnings,
+        "heading_count": len(artifacts.headings),
+        "toc_entry_count": len(artifacts.toc_entries),
+        "chunk_count": len(artifacts.chunks),
+    }
+    doc_id = ingest_document(
+        conn, pages, sections, project, title,
+        filename=pdf_path.name,
+        pdf_path=str(pdf_path.resolve()),
+        metadata=metadata,
+        replace=replace,
+        chunks=chunks,
+    )
+
+    if not skip_llm:
+        meta = extract_metadata_llm(pages, api_key=api_key, model=llm_model)
+        if meta:
+            meta["project"] = project
+            apply_metadata(conn, doc_id, meta)
+
+    replay_corrections(conn, doc_id, str(pdf_path.resolve()))
+
+    if not skip_embeddings:
+        compute_embeddings(conn, doc_id)
+
+    return doc_id
+
+
 def ingest_pdf(conn, pdf_path: Path, marker_path: Path, project: str,
                replace=False, skip_llm=False, skip_embeddings=False,
                api_key=None, llm_model="claude-sonnet-4-20250514"):
@@ -1099,7 +1592,8 @@ def ingest_pdf(conn, pdf_path: Path, marker_path: Path, project: str,
 
 def ingest_project(project_dir, db_path, replace=False, skip_llm=False,
                    skip_embeddings=False, api_key=None,
-                   llm_model="claude-sonnet-4-20250514"):
+                   llm_model="claude-sonnet-4-20250514",
+                   fast_pdf=False, ocr=False, ocr_jobs=4):
     project_dir = Path(project_dir)
     project = project_dir.name
 
@@ -1123,17 +1617,26 @@ def ingest_project(project_dir, db_path, replace=False, skip_llm=False,
             print(f"\nSkipping (exists): {pdf.name}")
             continue
 
-        marker_file = find_marker_output(pdf)
-        if not marker_file:
-            print(f"\nSkipping (no Marker output): {pdf.name}")
-            continue
+        if fast_pdf:
+            doc_id = ingest_fast_pdf(
+                conn, pdf, project,
+                replace=replace, skip_llm=skip_llm,
+                skip_embeddings=skip_embeddings,
+                api_key=api_key, llm_model=llm_model,
+                ocr=ocr, ocr_jobs=ocr_jobs,
+            )
+        else:
+            marker_file = find_marker_output(pdf)
+            if not marker_file:
+                print(f"\nSkipping (no Marker output): {pdf.name}")
+                continue
 
-        doc_id = ingest_pdf(
-            conn, pdf, marker_file, project,
-            replace=replace, skip_llm=skip_llm,
-            skip_embeddings=skip_embeddings,
-            api_key=api_key, llm_model=llm_model
-        )
+            doc_id = ingest_pdf(
+                conn, pdf, marker_file, project,
+                replace=replace, skip_llm=skip_llm,
+                skip_embeddings=skip_embeddings,
+                api_key=api_key, llm_model=llm_model
+            )
         if doc_id:
             ingested += 1
 
@@ -1194,6 +1697,12 @@ Examples:
     p.add_argument('--replace', '-r', action='store_true', help='Replace existing documents')
     p.add_argument('--skip-llm', action='store_true', help='Skip LLM metadata extraction')
     p.add_argument('--skip-embeddings', action='store_true', help='Skip embedding computation')
+    p.add_argument('--fast-pdf', action='store_true',
+                   help='Use the fast Poppler/PyMuPDF PDF pipeline instead of Marker output')
+    p.add_argument('--ocr', action='store_true',
+                   help='With --fast-pdf, run ocrmypdf --skip-text before extraction')
+    p.add_argument('--ocr-jobs', type=int, default=4,
+                   help='ocrmypdf worker count for --ocr (default: 4)')
     p.add_argument('--embedding-model', default='all-MiniLM-L6-v2',
                    help='Sentence-transformers model for embeddings (default: all-MiniLM-L6-v2)')
     p.add_argument('--api-key', help='Anthropic API key (or ANTHROPIC_API_KEY env)')
@@ -1216,7 +1725,9 @@ Examples:
             args.project, args.db,
             replace=args.replace, skip_llm=args.skip_llm,
             skip_embeddings=args.skip_embeddings,
-            api_key=args.api_key, llm_model=args.llm_model
+            api_key=args.api_key, llm_model=args.llm_model,
+            fast_pdf=args.fast_pdf,
+            ocr=args.ocr, ocr_jobs=args.ocr_jobs,
         )
     else:
         pdf_path = Path(args.pdf)
@@ -1224,24 +1735,33 @@ Examples:
             print(f"PDF not found: {pdf_path}")
             sys.exit(1)
 
-        if args.marker:
-            marker_path = Path(args.marker)
-        else:
-            marker_path = find_marker_output(pdf_path)
-
-        if not marker_path or not marker_path.exists():
-            print(f"Marker output not found for {pdf_path.name}")
-            print(f"  Run: marker_single {pdf_path} --output_dir {pdf_path.parent}/ --output_format json")
-            sys.exit(1)
-
         project = args.project_name or "default"
         conn = init_db(args.db)
-        ingest_pdf(
-            conn, pdf_path, marker_path, project,
-            replace=args.replace, skip_llm=args.skip_llm,
-            skip_embeddings=args.skip_embeddings,
-            api_key=args.api_key, llm_model=args.llm_model
-        )
+        if args.fast_pdf:
+            ingest_fast_pdf(
+                conn, pdf_path, project,
+                replace=args.replace, skip_llm=args.skip_llm,
+                skip_embeddings=args.skip_embeddings,
+                api_key=args.api_key, llm_model=args.llm_model,
+                ocr=args.ocr, ocr_jobs=args.ocr_jobs,
+            )
+        else:
+            if args.marker:
+                marker_path = Path(args.marker)
+            else:
+                marker_path = find_marker_output(pdf_path)
+
+            if not marker_path or not marker_path.exists():
+                print(f"Marker output not found for {pdf_path.name}")
+                print(f"  Run: marker_single {pdf_path} --output_dir {pdf_path.parent}/ --output_format json")
+                sys.exit(1)
+
+            ingest_pdf(
+                conn, pdf_path, marker_path, project,
+                replace=args.replace, skip_llm=args.skip_llm,
+                skip_embeddings=args.skip_embeddings,
+                api_key=args.api_key, llm_model=args.llm_model
+            )
         conn.close()
 
 

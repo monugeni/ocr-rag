@@ -11,7 +11,7 @@
 #   # Update code only (after git push):
 #   sudo bash deploy.sh --update
 #
-#   # Ingest a project folder:
+#   # Ingest a project folder with the fast pipeline:
 #   sudo -u ocrrag bash deploy.sh --ingest /path/to/pdf/folder ProjectName
 #
 # What it sets up:
@@ -19,7 +19,7 @@
 #   - App dir:     /btrfs/ocr-rag
 #   - Data dir:    /btrfs/ocr-rag/data  (database + sidecars)
 #   - Venv:        /btrfs/ocr-rag/venv
-#   - Systemd:     ocr-rag-mcp.service (port 8200)
+#   - Systemd:     ocr-rag-mcp.service (ports 8200/8201)
 #   - Logs:        journalctl -u ocr-rag-mcp
 # ============================================================================
 
@@ -58,7 +58,7 @@ if [[ "${1:-}" == "--ingest" ]]; then
         exit 1
     fi
 
-    log "Ingesting project '${PROJECT}' from ${PDF_DIR}"
+    log "Ingesting project '${PROJECT}' from ${PDF_DIR} with fast PDF pipeline"
 
     source "${VENV_DIR}/bin/activate"
 
@@ -67,8 +67,7 @@ import sys, os
 sys.path.insert(0, os.environ["APP_DIR_PY"])
 
 from pathlib import Path
-from ingest import init_db, ingest_document, replay_corrections
-from extractor import extract_pdf
+from ingest import init_db, ingest_fast_pdf
 
 pdf_dir = Path(sys.argv[1])
 project = sys.argv[2]
@@ -91,21 +90,19 @@ for pdf in pdfs:
 
     print(f"\n--- {pdf.name} ---")
     try:
-        pages, sections = extract_pdf(str(pdf))
+        ingest_fast_pdf(
+            conn,
+            pdf,
+            project,
+            skip_llm=not bool(os.environ.get("ANTHROPIC_API_KEY")),
+            skip_embeddings=True,
+            ocr=os.environ.get("OCR_RAG_FAST_PIPELINE_OCR", "").lower() in {"1", "true", "yes", "on"},
+            ocr_jobs=4,
+        )
     except Exception as e:
         print(f"  FAILED: {e}")
         continue
 
-    if not pages:
-        print(f"  No content, skipping")
-        continue
-
-    title = pdf.stem.replace('_', ' ').replace('-', ' ')
-    doc_id = ingest_document(
-        conn, pages, sections, project, title,
-        filename=pdf.name, pdf_path=str(pdf.resolve()),
-    )
-    replay_corrections(conn, doc_id, str(pdf.resolve()))
     ingested += 1
 
 stats = conn.execute(
@@ -188,6 +185,7 @@ log "=== OCR-RAG Production Deployment ==="
 log "Installing system packages..."
 apt-get update -qq
 apt-get install -y -qq python3 python3-venv python3-pip git \
+    poppler-utils ghostscript qpdf \
     ocrmypdf tesseract-ocr tesseract-ocr-eng \
     > /dev/null 2>&1
 

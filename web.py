@@ -49,7 +49,7 @@ from fastapi.staticfiles import StaticFiles
 from chat_mcp_runner import run_folder_chat
 from ingest import (
     init_db, ingest_document, replay_corrections,
-    extract_metadata_llm, apply_metadata, compute_embeddings,
+    extract_metadata_llm, apply_metadata, compute_embeddings, ingest_fast_pdf,
 )
 from extractor import extract_pdf
 from file_extractors import (
@@ -73,6 +73,18 @@ CHAT_CONTEXT_MAX_NEIGHBOR_PAGES = 2
 CHAT_SEARCH_MAX_PAGE_CANDIDATES = 8
 CHAT_SEARCH_MAX_SECTION_CANDIDATES = 6
 CHAT_SEARCH_MAX_DOC_SHORTLIST = 3
+
+
+def _semantic_fallback_enabled() -> bool:
+    return os.environ.get("OCR_RAG_ENABLE_SEMANTIC_FALLBACK", "").lower() in {
+        "1", "true", "yes", "on",
+    }
+
+
+def _fast_pipeline_ocr_enabled() -> bool:
+    return os.environ.get("OCR_RAG_FAST_PIPELINE_OCR", "").lower() in {
+        "1", "true", "yes", "on",
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -114,6 +126,13 @@ def get_conn():
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
     return conn
+
+
+def _table_exists(conn, name: str) -> bool:
+    return bool(conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE name = ? AND type IN ('table', 'view')",
+        (name,),
+    ).fetchone())
 
 
 def _normalize_folder_name(name: str) -> str:
@@ -348,6 +367,7 @@ def _delete_document_data(conn, doc_id: int):
         "DELETE FROM page_embeddings WHERE page_id IN (SELECT id FROM pages WHERE doc_id = ?)",
         (doc_id,),
     )
+    conn.execute("DELETE FROM chunks WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM pages WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM sections WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM corrections WHERE doc_id = ?", (doc_id,))
@@ -743,6 +763,60 @@ def _fts_search_folder(conn, folder: str, query: str, limit: int = 5) -> list[di
     if len(parts) > 1:
         queries.append(" OR ".join(parts))
 
+    if _table_exists(conn, "chunks_fts"):
+        seen = set()
+        results = []
+        for candidate in queries:
+            try:
+                rows = conn.execute(
+                    f"""
+                    SELECT c.id AS chunk_id, c.doc_id, d.title AS doc_title,
+                           d.project AS folder, c.page_start AS page_num,
+                           c.page_start, c.page_end, c.breadcrumb, c.chunk_type,
+                           p.page_type,
+                           snippet(chunks_fts, 0, '>>>', '<<<', '...', 45) AS snippet,
+                           c.text AS content,
+                           rank
+                    FROM chunks_fts
+                    JOIN chunks c ON c.id = chunks_fts.rowid
+                    JOIN pages p ON p.id = c.page_id
+                    JOIN documents d ON d.id = c.doc_id
+                    WHERE chunks_fts MATCH ?
+                      AND c.doc_id IN ({ph})
+                      AND p.page_type != 'skipped'
+                    ORDER BY rank
+                    LIMIT ?
+                    """,
+                    [candidate, *doc_ids, limit]
+                ).fetchall()
+            except sqlite3.OperationalError:
+                rows = []
+
+            for row in rows:
+                key = row["chunk_id"]
+                if key in seen:
+                    continue
+                seen.add(key)
+                results.append({
+                    "doc_id": row["doc_id"],
+                    "doc_title": row["doc_title"],
+                    "folder": row["folder"],
+                    "page_num": row["page_num"],
+                    "page_start": row["page_start"],
+                    "page_end": row["page_end"],
+                    "breadcrumb": row["breadcrumb"],
+                    "page_type": row["page_type"],
+                    "chunk_type": row["chunk_type"],
+                    "snippet": row["snippet"],
+                    "content": row["content"],
+                    "score": float(row["rank"]) if row["rank"] is not None else 0.0,
+                    "search_type": "chunk_fts",
+                })
+                if len(results) >= limit:
+                    return results
+        if results:
+            return results
+
     seen = set()
     results = []
     for candidate in queries:
@@ -824,7 +898,9 @@ def _semantic_search_folder(conn, folder: str, query: str, limit: int = 5) -> li
     rows = conn.execute(
         f"""
         SELECT p.doc_id, d.title AS doc_title, d.project AS folder,
-               p.page_num, p.breadcrumb, p.page_type,
+               p.page_num,
+               COALESCE(pe.breadcrumb, p.breadcrumb) AS breadcrumb,
+               p.page_type,
                pe.chunk_text, pe.embedding
         FROM page_embeddings pe
         JOIN pages p ON p.id = pe.page_id
@@ -1293,7 +1369,7 @@ def _retrieve_folder_context(
         if len(section_matches) >= CHAT_SEARCH_MAX_SECTION_CANDIDATES:
             break
 
-    if len(page_candidates) < 4:
+    if _semantic_fallback_enabled() and len(page_candidates) < 4:
         for query in semantic_queries:
             hits = _semantic_search_folder(conn, folder, query, limit=4)
             investigation.append(f"semantic_search('{query}') -> {len(hits)} hit(s)")
@@ -1307,6 +1383,8 @@ def _retrieve_folder_context(
                     break
             if len(page_candidates) >= CHAT_SEARCH_MAX_PAGE_CANDIDATES:
                 break
+    elif not _semantic_fallback_enabled():
+        investigation.append("semantic_search skipped (OCR_RAG_ENABLE_SEMANTIC_FALLBACK is not enabled)")
 
     doc_scores = Counter()
     for hit in page_candidates:
@@ -1333,6 +1411,17 @@ def _retrieve_folder_context(
     for hit in page_candidates[:CHAT_CONTEXT_TARGET_SOURCES]:
         if opened_pages >= CHAT_CONTEXT_MAX_OPEN_PAGES or len(sources) >= limit:
             break
+        if hit.get("search_type") == "chunk_fts" and hit.get("content"):
+            before = len(sources)
+            _append_source(sources, seen, hit)
+            investigation.append(
+                f"search_chunks_hit(doc={hit['doc_id']}, page={hit['page_num']}) -> "
+                f"{len(sources) - before} source(s)"
+            )
+            if len(sources) > before:
+                opened_pages += 1
+                continue
+
         pages = _open_page_window(
             conn,
             hit["doc_id"],
@@ -1941,6 +2030,11 @@ def delete_folder(folder: str):
             _folder_scope_params(folder)
         ).fetchall()]
         for did in doc_ids:
+            conn.execute(
+                "DELETE FROM page_embeddings WHERE page_id IN (SELECT id FROM pages WHERE doc_id = ?)",
+                (did,),
+            )
+            conn.execute("DELETE FROM chunks WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM pages WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM sections WHERE doc_id = ?", (did,))
             conn.execute("DELETE FROM corrections WHERE doc_id = ?", (did,))
@@ -2557,6 +2651,22 @@ def search_in_doc(doc_id: int, q: str = Query(...)):
         )
         if not clean:
             return []
+        if _table_exists(conn, "chunks_fts"):
+            try:
+                rows = conn.execute("""
+                    SELECT c.page_start AS page_num, c.page_end, c.breadcrumb,
+                           c.chunk_type AS page_type,
+                           snippet(chunks_fts, 0, '>>>', '<<<', '...', 45) as snippet,
+                           c.text
+                    FROM chunks_fts
+                    JOIN chunks c ON c.id = chunks_fts.rowid
+                    WHERE chunks_fts MATCH ? AND c.doc_id = ?
+                    ORDER BY rank LIMIT 20
+                """, (clean, doc_id)).fetchall()
+                if rows:
+                    return [dict(r) for r in rows]
+            except sqlite3.OperationalError:
+                pass
         rows = conn.execute("""
             SELECT p.page_num, p.breadcrumb, p.page_type,
                    snippet(pages_fts, 0, '>>>', '<<<', '...', 40) as snippet
@@ -2649,6 +2759,7 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
     """Ingest a single file (PDF, image, DOCX, XLSX)."""
     prefix = f"{stage_prefix}" if stage_prefix else ""
     _raise_if_cancel_requested(jid)
+    ext = Path(filename).suffix.lower()
 
     # Duplicate check
     conn = sqlite3.connect(DB_PATH)
@@ -2662,40 +2773,53 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
                        doc_id=dup_id)
         return None  # return None so _run_ingestion doesn't overwrite stage
 
-    tracker.update(jid, status="running", stage=f"{prefix}Extracting text & headings")
-    pages, sections = extract_file(str(file_path))
-    _raise_if_cancel_requested(jid)
-
-    if not pages:
-        raise IngestionError(f"No content extracted from {filename}")
-
     doc_id = None
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
     try:
-        title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
-        tracker.update(jid, stage=f"{prefix}Ingesting into database")
-        doc_id = ingest_document(
-            conn, pages, sections, project, title,
-            filename=filename,
-            pdf_path=str(Path(file_path).resolve()),
-        )
-        _raise_if_cancel_requested(jid)
-
-        tracker.update(jid, stage=f"{prefix}Replaying corrections")
-        replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
-        _raise_if_cancel_requested(jid)
-
         api_key = os.environ.get("ANTHROPIC_API_KEY")
-        if api_key:
-            tracker.update(jid, stage=f"{prefix}Extracting metadata (LLM)")
-            meta = extract_metadata_llm(pages, api_key=api_key)
-            if meta:
-                apply_metadata(conn, doc_id, meta)
+        if ext == ".pdf":
+            tracker.update(jid, status="running", stage=f"{prefix}Fast PDF structure extraction")
+            doc_id = ingest_fast_pdf(
+                conn,
+                Path(file_path),
+                project,
+                skip_llm=not bool(api_key),
+                skip_embeddings=False,
+                api_key=api_key,
+                ocr=_fast_pipeline_ocr_enabled(),
+                ocr_jobs=4,
+            )
+        else:
+            tracker.update(jid, status="running", stage=f"{prefix}Extracting text & headings")
+            pages, sections = extract_file(str(file_path))
+            _raise_if_cancel_requested(jid)
 
-        tracker.update(jid, stage=f"{prefix}Computing embeddings")
-        compute_embeddings(conn, doc_id)
+            if not pages:
+                raise IngestionError(f"No content extracted from {filename}")
+
+            title = Path(filename).stem.replace('_', ' ').replace('-', ' ')
+            tracker.update(jid, stage=f"{prefix}Ingesting into database")
+            doc_id = ingest_document(
+                conn, pages, sections, project, title,
+                filename=filename,
+                pdf_path=str(Path(file_path).resolve()),
+            )
+            _raise_if_cancel_requested(jid)
+
+            tracker.update(jid, stage=f"{prefix}Replaying corrections")
+            replay_corrections(conn, doc_id, str(Path(file_path).resolve()))
+            _raise_if_cancel_requested(jid)
+
+            if api_key:
+                tracker.update(jid, stage=f"{prefix}Extracting metadata (LLM)")
+                meta = extract_metadata_llm(pages, api_key=api_key)
+                if meta:
+                    apply_metadata(conn, doc_id, meta)
+
+            tracker.update(jid, stage=f"{prefix}Computing embeddings")
+            compute_embeddings(conn, doc_id)
         _raise_if_cancel_requested(jid)
         return doc_id
     except Exception as exc:

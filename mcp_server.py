@@ -13,6 +13,8 @@ Tools:
         get_toc             - Section tree for a document
 
     Search:
+        ranked_search       - Broad chunk FTS plus deterministic statistical reranking
+        search_chunks       - Chunk-level FTS keyword search with pagination
         search_pages        - FTS keyword search with abbreviation expansion + OR fallback
         search_sections     - Search section headings
         semantic_search     - Vector/embedding search for conceptual similarity
@@ -22,6 +24,7 @@ Tools:
         get_page            - Get full page content with context
         get_pages           - Get a range of pages
         get_adjacent        - Get next/previous page
+        render_page_image   - Render a PDF page to PNG for visual inspection
 
     Fallback (LLM calls these when Marker output looks wrong):
         reextract_page      - Re-extract page text from original PDF via pdfplumber
@@ -32,10 +35,16 @@ Usage:
 """
 
 import argparse
+import base64
+from collections import Counter
 import json
+import math
 import re
 import sqlite3
+import struct
+import subprocess
 import sys
+import tempfile
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Optional
@@ -51,6 +60,14 @@ from corrections import register_correction_tools
 
 DB_PATH = "docs.db"
 ToolResult = dict[str, Any] | list[dict[str, Any]]
+
+TOKEN_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._/-]*")
+RANK_STOP_WORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "by", "can", "for",
+    "from", "has", "have", "in", "is", "it", "may", "of", "on",
+    "or", "shall", "should", "that", "the", "their", "this", "to",
+    "with", "what", "when", "where", "which", "who", "will",
+}
 
 
 @contextmanager
@@ -85,6 +102,43 @@ def sanitize_fts(query: str) -> str:
             if w:
                 out.append(w)
     return ' '.join(out)
+
+
+def ensure_embedding_metadata_columns(conn: sqlite3.Connection) -> None:
+    """Keep older DB files compatible with chunk-level breadcrumb retrieval."""
+    existing = {
+        row["name"]
+        for row in conn.execute("PRAGMA table_info(page_embeddings)").fetchall()
+    }
+    if "breadcrumb" not in existing:
+        conn.execute("ALTER TABLE page_embeddings ADD COLUMN breadcrumb TEXT")
+    if "chunk_type" not in existing:
+        conn.execute("ALTER TABLE page_embeddings ADD COLUMN chunk_type TEXT DEFAULT 'text'")
+    if "chunk_id" not in existing:
+        conn.execute("ALTER TABLE page_embeddings ADD COLUMN chunk_id INTEGER")
+    if "metadata" not in existing:
+        conn.execute("ALTER TABLE page_embeddings ADD COLUMN metadata TEXT")
+    conn.commit()
+
+
+def table_exists(conn: sqlite3.Connection, name: str) -> bool:
+    row = conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE name = ? AND type IN ('table', 'view')",
+        (name,),
+    ).fetchone()
+    return bool(row)
+
+
+def command_exists(name: str) -> bool:
+    from shutil import which
+    return which(name) is not None
+
+
+def png_size(png_bytes: bytes) -> tuple[int, int]:
+    if len(png_bytes) < 24 or png_bytes[:8] != b"\x89PNG\r\n\x1a\n":
+        return 0, 0
+    width, height = struct.unpack(">II", png_bytes[16:24])
+    return int(width), int(height)
 
 
 # ---------------------------------------------------------------------------
@@ -720,6 +774,267 @@ def _fts_search(conn, fts_query, doc_ids, doc_id=None, page_type=None, limit=25)
     """, params).fetchall()
 
 
+def _fts_search_chunks(conn, fts_query, doc_ids, doc_id=None, chunk_type=None, limit=25):
+    """Execute chunk-level FTS5 query and return paragraph/clause hits."""
+    conds = ["chunks_fts MATCH ?"]
+    params: list = [fts_query]
+
+    ph = ','.join('?' * len(doc_ids))
+    conds.append(f"c.doc_id IN ({ph})")
+    params.extend(doc_ids)
+
+    if doc_id is not None:
+        conds.append("c.doc_id = ?")
+        params.append(doc_id)
+    if chunk_type:
+        conds.append("c.chunk_type = ?")
+        params.append(chunk_type)
+
+    params.append(limit)
+
+    return conn.execute(f"""
+        SELECT c.id AS chunk_id, c.doc_id, d.title AS doc_title, d.total_pages,
+               c.page_start, c.page_end, c.breadcrumb, c.chunk_type,
+               c.text, c.confidence, p.page_type,
+               snippet(chunks_fts, 0, '>>>', '<<<', '...', 55) AS snippet,
+               rank
+        FROM chunks_fts
+        JOIN chunks c ON c.id = chunks_fts.rowid
+        JOIN pages p ON p.id = c.page_id
+        JOIN documents d ON d.id = c.doc_id
+        WHERE {' AND '.join(conds)}
+          AND p.page_type != 'skipped'
+        ORDER BY rank LIMIT ?
+    """, params).fetchall()
+
+
+def _rank_tokens(text: str) -> list[str]:
+    tokens = []
+    for token in TOKEN_RE.findall(text or ""):
+        clean = token.strip("._/-").lower()
+        if len(clean) < 2 or clean in RANK_STOP_WORDS:
+            continue
+        tokens.append(clean)
+    return tokens
+
+
+def _rank_phrases(tokens: list[str]) -> list[str]:
+    phrases = []
+    for size in (2, 3):
+        for idx in range(0, max(0, len(tokens) - size + 1)):
+            phrase = " ".join(tokens[idx:idx + size])
+            if phrase not in phrases:
+                phrases.append(phrase)
+    return phrases[:12]
+
+
+def _contains_token(text: str, token: str) -> bool:
+    return bool(re.search(rf"(?<![A-Za-z0-9]){re.escape(token)}(?![A-Za-z0-9])", text))
+
+
+def _term_positions(tokens: list[str], query_tokens: list[str]) -> dict[str, list[int]]:
+    wanted = set(query_tokens)
+    positions: dict[str, list[int]] = {term: [] for term in query_tokens}
+    for idx, token in enumerate(tokens):
+        if token in wanted:
+            positions[token].append(idx)
+    return positions
+
+
+def _min_proximity_span(positions: dict[str, list[int]]) -> int | None:
+    populated = [vals for vals in positions.values() if vals]
+    if len(populated) < 2:
+        return None
+    all_positions = sorted((pos, term_idx) for term_idx, vals in enumerate(populated) for pos in vals)
+    counts = Counter()
+    left = 0
+    best = None
+    for right, (pos, term_idx) in enumerate(all_positions):
+        counts[term_idx] += 1
+        while len(counts) == len(populated) and left <= right:
+            span = pos - all_positions[left][0]
+            best = span if best is None else min(best, span)
+            old_term = all_positions[left][1]
+            counts[old_term] -= 1
+            if counts[old_term] <= 0:
+                del counts[old_term]
+            left += 1
+    return best
+
+
+def _chunk_idf(conn: sqlite3.Connection, doc_ids: list[int], tokens: list[str]) -> dict[str, float]:
+    if not tokens:
+        return {}
+    ph = ",".join("?" * len(doc_ids))
+    total = conn.execute(
+        f"SELECT COUNT(*) FROM chunks WHERE doc_id IN ({ph})",
+        doc_ids,
+    ).fetchone()[0] or 1
+    idf = {}
+    for token in tokens:
+        like = f"%{token}%"
+        df = conn.execute(
+            f"""
+            SELECT COUNT(*) FROM chunks c
+            JOIN documents d ON d.id = c.doc_id
+            WHERE c.doc_id IN ({ph})
+              AND LOWER(COALESCE(c.text, '') || ' ' || COALESCE(c.breadcrumb, '') || ' ' || COALESCE(d.title, '')) LIKE ?
+            """,
+            [*doc_ids, like],
+        ).fetchone()[0]
+        idf[token] = math.log((total + 1) / (df + 1)) + 1.0
+    return idf
+
+
+def _score_ranked_chunk(
+    row: sqlite3.Row,
+    *,
+    query_tokens: list[str],
+    phrases: list[str],
+    idf: dict[str, float],
+    fts_order: int,
+    candidate_count: int,
+    doc_hit_count: int,
+    breadcrumb_hit_count: int,
+) -> dict[str, Any]:
+    text = (row["text"] or "").lower()
+    breadcrumb = (row["breadcrumb"] or "").lower()
+    title = (row["doc_title"] or "").lower()
+    combined = " ".join([text, breadcrumb, title])
+    text_tokens = _rank_tokens(text)
+    positions = _term_positions(text_tokens, query_tokens)
+    present = [term for term in query_tokens if _contains_token(combined, term)]
+    total_idf = sum(idf.get(term, 1.0) for term in query_tokens) or 1.0
+    present_idf = sum(idf.get(term, 1.0) for term in present)
+
+    score = 0.0
+    reasons = []
+
+    coverage = present_idf / total_idf
+    score += 14.0 * coverage
+    if present:
+        reasons.append(f"term coverage {len(present)}/{len(query_tokens)}")
+    if query_tokens and len(present) == len(query_tokens):
+        score += 4.0
+        reasons.append("all query terms present")
+
+    for term in present:
+        weight = idf.get(term, 1.0)
+        if _contains_token(text, term):
+            score += min(3.0, weight * 0.7)
+        if _contains_token(breadcrumb, term):
+            score += min(4.0, weight * 1.0)
+            reasons.append(f"breadcrumb term: {term}")
+        if _contains_token(title, term):
+            score += min(4.5, weight * 1.1)
+            reasons.append(f"document title term: {term}")
+
+    phrase_hits = []
+    for phrase in phrases:
+        if phrase in text:
+            score += 4.0
+            phrase_hits.append(phrase)
+        elif phrase in breadcrumb:
+            score += 5.0
+            phrase_hits.append(f"{phrase} in breadcrumb")
+        elif phrase in title:
+            score += 5.0
+            phrase_hits.append(f"{phrase} in title")
+    if phrase_hits:
+        reasons.append("phrase match: " + "; ".join(phrase_hits[:3]))
+
+    span = _min_proximity_span(positions)
+    if span is not None:
+        proximity = max(0.0, 5.0 - min(span, 40) / 8.0)
+        score += proximity
+        if proximity >= 2.0:
+            reasons.append(f"query terms close together (span {span})")
+
+    if candidate_count:
+        score += max(0.0, 3.0 * (1.0 - (fts_order / max(candidate_count, 1))))
+    if doc_hit_count > 1:
+        score += min(3.0, math.log1p(doc_hit_count) * 0.8)
+        reasons.append(f"{doc_hit_count} candidate hits in document")
+    if breadcrumb_hit_count > 1:
+        score += min(2.0, math.log1p(breadcrumb_hit_count) * 0.6)
+
+    chunk_type = row["chunk_type"] or "text"
+    page_type = row["page_type"] or "text"
+    if chunk_type in {"table", "form"}:
+        score += 0.8
+        reasons.append(f"{chunk_type} chunk")
+    if chunk_type == "heading":
+        score -= 1.0
+    if page_type == "drawing":
+        score -= 2.5
+        reasons.append("drawing page penalty")
+    if len((row["text"] or "").split()) < 6:
+        score -= 1.5
+        reasons.append("very short chunk penalty")
+    if not row["breadcrumb"]:
+        score -= 1.0
+
+    score += min(1.5, float(row["confidence"] or 0.0))
+
+    return {
+        "score": round(score, 4),
+        "reasons": reasons[:8],
+    }
+
+
+def _collect_chunk_candidates(
+    conn: sqlite3.Connection,
+    *,
+    clean_query: str,
+    query: str,
+    doc_ids: list[int],
+    doc_id: Optional[int],
+    chunk_type: Optional[str],
+    candidate_limit: int,
+) -> tuple[list[sqlite3.Row], list[str]]:
+    candidates: list[sqlite3.Row] = []
+    seen = set()
+    fts_queries = [clean_query]
+    extra = expand_abbreviations(query)
+    if extra:
+        expanded = f"{clean_query} {sanitize_fts(' '.join(extra))}".strip()
+        if expanded not in fts_queries:
+            fts_queries.append(expanded)
+    terms = clean_query.split()
+    if extra:
+        terms.extend(sanitize_fts(" ".join(extra)).split())
+    unique_terms = []
+    seen_terms = set()
+    for term in terms:
+        key = term.lower().strip('"')
+        if key and key not in seen_terms:
+            seen_terms.add(key)
+            unique_terms.append(term)
+    if len(unique_terms) > 1:
+        fts_queries.append(" OR ".join(unique_terms))
+
+    used_queries = []
+    for fts_query in fts_queries:
+        if not fts_query or fts_query in used_queries:
+            continue
+        used_queries.append(fts_query)
+        try:
+            rows = _fts_search_chunks(
+                conn, fts_query, doc_ids, doc_id, chunk_type, candidate_limit
+            )
+        except sqlite3.OperationalError:
+            rows = []
+        for row in rows:
+            key = row["chunk_id"]
+            if key in seen:
+                continue
+            seen.add(key)
+            candidates.append(row)
+            if len(candidates) >= candidate_limit:
+                return candidates, used_queries
+    return candidates, used_queries
+
+
 def project_doc_ids(conn, project: str) -> list[int]:
     return [r['id'] for r in conn.execute(
         "SELECT id FROM documents WHERE project = ? OR project LIKE ?",
@@ -789,30 +1104,50 @@ Use list_folder_entries when you need folders/files within a specific folder.
 
 === SEARCH STRATEGY ===
 
-You have two search tools — use them together:
+Use ranked chunk search first, then page/section/semantic tools only as needed:
 
-1. search_pages — FTS keyword search (fast, precise when you know the words)
+1. ranked_search — broad chunk FTS plus deterministic statistical reranking
+   - Preferred first tool for technical tender questions
+   - Searches the whole folder/project, then ranks chunks by term rarity, coverage,
+     phrase/proximity, breadcrumb/title match, and quality signals
+   - Supports pagination: use next_offset with the same query when has_more=true
+   - Use a new query when visible results suggest better exact terms
+
+2. search_chunks — raw FTS keyword search over paragraph/clause chunks
+   - Preferred for technical tenders, vendor lists, clause wording, equipment names,
+     material grades, document numbers, and exact phrases
+   - Returns the matched chunk text plus full document/chapter/section breadcrumb
+   - Use this before opening pages so answers are grounded at paragraph/clause level
+
+3. search_pages — FTS keyword search over whole pages
    - Automatically expands abbreviations (PRS → price reduction schedule, MOC → material construction, etc.)
    - Uses AND first for precision, then falls back to OR for recall
    - Special characters like "3.2" are handled safely
    - Still benefits from trying 2-4 query variations with different keywords
 
-2. semantic_search — Vector/embedding search (finds conceptually similar content)
+4. semantic_search — Vector/embedding search (finds conceptually similar content)
    - Use when you don't know the exact terminology in the documents
    - Accepts natural language questions: "what are the penalty clauses for late delivery?"
    - Finds content by meaning, not just exact words
    - Slower than FTS but much better recall for vague queries
 
-3. get_section — Read entire section content in one call
+5. get_section — Read entire section content in one call
    - After finding a section via search_sections, use get_section(doc_id, heading) to
      read all pages at once instead of paging through manually
 
 RECOMMENDED WORKFLOW:
-1. Start with search_pages using the most obvious keywords (2-3 variations)
-2. If FTS returns too few results, use semantic_search with a natural language query
-3. Use search_sections to find which section/document likely has the answer
-4. Use get_section to read the full section content in one call
-5. Use get_page with include_adjacent=true for surrounding context
+1. Start with ranked_search using the most obvious exact keywords
+2. If has_more=true and the results are relevant, call ranked_search again with next_offset
+3. If results suggest better terms, issue a new ranked_search query
+4. Use search_pages if chunk hits need broader page context
+5. If FTS returns too few results, use semantic_search with a natural language query
+6. Use search_sections to find which section/document likely has the answer
+7. Use get_section to read the full section content in one call
+8. Use get_page with include_adjacent=true for surrounding context
+9. Use render_page_image when a relevant page is a drawing, form, scanned page,
+   table image, or the extracted text looks incomplete/garbled. Visual evidence
+   is especially useful for drawing notes, stamps, legends, title blocks, and
+   fine print that may not survive text extraction.
 
 TIPS:
 - Strip question words: "What is the MOC of superheater coil tubes?" → "superheater coil tube material"
@@ -1107,6 +1442,254 @@ def get_toc(doc_id: int, max_level: int = 4) -> ToolResult:
 # ===== Search =====
 
 @mcp.tool()
+def search_chunks(
+    project: str,
+    query: str,
+    doc_id: Optional[int] = None,
+    chunk_type: Optional[str] = None,
+    max_results: int = 10,
+    offset: int = 0,
+) -> ToolResult:
+    """Full-text keyword search across paragraph/clause chunks.
+
+    This is the preferred tender retrieval tool when exact terms matter. It
+    returns the matching chunk text with document/chapter/section breadcrumb,
+    page number, and rank. Use get_page only when you need surrounding context.
+
+    Args:
+        project: Folder path (required). Includes sub-folders.
+        query: Precise terms, clause number, equipment tag, vendor, or spec phrase.
+        doc_id: Optional. Restrict to one document.
+        chunk_type: Optional. Filter chunk type such as 'text', 'table', 'form'.
+        max_results: Default 10, max 25.
+        offset: Result offset for pagination. Use next_offset from the previous call.
+    """
+    clean = sanitize_fts(query)
+    if not clean:
+        return {"error": "Empty query"}
+
+    cap = min(max_results, 25)
+    offset = max(0, int(offset or 0))
+    fetch_limit = min(250, cap + offset)
+
+    with get_db() as conn:
+        if not table_exists(conn, "chunks_fts"):
+            return {
+                "error": "Chunk FTS is not available in this database. Re-run ingestion with the updated pipeline."
+            }
+
+        ids = project_doc_ids(conn, project)
+        if not ids:
+            return {"error": f"No documents in folder '{project}'"}
+
+        results = []
+        seen = set()
+
+        def _collect(rows):
+            for r in rows:
+                key = r["chunk_id"]
+                if key not in seen:
+                    seen.add(key)
+                    results.append(r)
+
+        try:
+            _collect(_fts_search_chunks(conn, clean, ids, doc_id, chunk_type, fetch_limit))
+        except sqlite3.OperationalError:
+            pass
+
+        extra = expand_abbreviations(query)
+        if extra and len(results) < cap:
+            expanded = clean + ' ' + sanitize_fts(' '.join(extra))
+            try:
+                _collect(_fts_search_chunks(conn, expanded, ids, doc_id, chunk_type, fetch_limit))
+            except sqlite3.OperationalError:
+                pass
+
+        if len(results) < cap:
+            all_terms = clean.split()
+            if extra:
+                all_terms += sanitize_fts(' '.join(extra)).split()
+            unique = []
+            seen_terms = set()
+            for term in all_terms:
+                key = term.lower().strip('"')
+                if key and key not in seen_terms:
+                    seen_terms.add(key)
+                    unique.append(term)
+            if len(unique) > 1:
+                try:
+                    _collect(_fts_search_chunks(
+                        conn, ' OR '.join(unique), ids, doc_id, chunk_type, fetch_limit
+                    ))
+                except sqlite3.OperationalError:
+                    pass
+
+        final = results[offset:offset + cap]
+        next_offset = offset + len(final)
+        return {
+            "query": query,
+            "sanitized": clean,
+            "expanded_terms": extra if extra else None,
+            "result_count": len(final),
+            "offset": offset,
+            "next_offset": next_offset if next_offset < len(results) else None,
+            "has_more": next_offset < len(results),
+            "results": [
+                {
+                    "chunk_id": r["chunk_id"],
+                    "doc_id": r["doc_id"],
+                    "doc_title": r["doc_title"],
+                    "page_num": r["page_start"],
+                    "page_start": r["page_start"],
+                    "page_end": r["page_end"],
+                    "total_pages": r["total_pages"],
+                    "breadcrumb": r["breadcrumb"],
+                    "chunk_type": r["chunk_type"],
+                    "page_type": r["page_type"],
+                    "confidence": round(float(r["confidence"] or 0.0), 3),
+                    "snippet": r["snippet"],
+                    "text": r["text"],
+                    "rank": round(r["rank"], 4),
+                }
+                for r in final
+            ],
+        }
+
+
+@mcp.tool()
+def ranked_search(
+    project: str,
+    query: str,
+    doc_id: Optional[int] = None,
+    chunk_type: Optional[str] = None,
+    max_results: int = 10,
+    offset: int = 0,
+) -> ToolResult:
+    """Broad chunk FTS search with deterministic statistical reranking.
+
+    This searches the whole project/folder first, then reranks candidate chunks
+    without an LLM. The score uses query term coverage, project-level term
+    rarity, phrase and proximity matches, breadcrumb/title matches, document
+    concentration, and chunk/page quality signals.
+
+    Pagination:
+      - Call with offset=0 first.
+      - If has_more is true, call again with the returned next_offset and the
+        same query/project/doc_id/chunk_type to get the next result page.
+      - Or issue a new query when the visible results suggest better terms.
+
+    Args:
+        project: Folder path (required). Includes sub-folders.
+        query: Exact tender terms, clause number, equipment tag, phrase, or question.
+        doc_id: Optional. Restrict to one document after broad discovery.
+        chunk_type: Optional. Filter chunk type such as 'text', 'table', 'form'.
+        max_results: Default 10, max 25.
+        offset: Result offset for pagination. Use next_offset from prior call.
+    """
+    clean = sanitize_fts(query)
+    if not clean:
+        return {"error": "Empty query"}
+
+    cap = min(max_results, 25)
+    offset = max(0, int(offset or 0))
+    candidate_limit = min(500, max(100, offset + cap * 8))
+
+    query_tokens = _rank_tokens(query)
+    if not query_tokens:
+        query_tokens = [term.strip('"').lower() for term in clean.split() if term.strip('"')]
+    query_tokens = list(dict.fromkeys(query_tokens))[:12]
+    phrases = _rank_phrases(query_tokens)
+
+    with get_db() as conn:
+        if not table_exists(conn, "chunks_fts"):
+            return {
+                "error": "Chunk FTS is not available in this database. Re-run ingestion with the updated pipeline."
+            }
+
+        ids = project_doc_ids(conn, project)
+        if not ids:
+            return {"error": f"No documents in folder '{project}'"}
+
+        candidates, fts_queries = _collect_chunk_candidates(
+            conn,
+            clean_query=clean,
+            query=query,
+            doc_ids=ids,
+            doc_id=doc_id,
+            chunk_type=chunk_type,
+            candidate_limit=candidate_limit,
+        )
+        if not candidates:
+            return {
+                "query": query,
+                "sanitized": clean,
+                "result_count": 0,
+                "offset": offset,
+                "next_offset": None,
+                "has_more": False,
+                "candidate_count": 0,
+                "fts_queries": fts_queries,
+                "results": [],
+            }
+
+        idf = _chunk_idf(conn, ids, query_tokens)
+        doc_counts = Counter(row["doc_id"] for row in candidates)
+        breadcrumb_counts = Counter((row["doc_id"], row["breadcrumb"] or "") for row in candidates)
+        scored = []
+        for order, row in enumerate(candidates):
+            score_info = _score_ranked_chunk(
+                row,
+                query_tokens=query_tokens,
+                phrases=phrases,
+                idf=idf,
+                fts_order=order,
+                candidate_count=len(candidates),
+                doc_hit_count=doc_counts[row["doc_id"]],
+                breadcrumb_hit_count=breadcrumb_counts[(row["doc_id"], row["breadcrumb"] or "")],
+            )
+            scored.append((score_info["score"], order, row, score_info))
+
+        scored.sort(key=lambda item: (item[0], -item[1]), reverse=True)
+        page = scored[offset:offset + cap]
+        next_offset = offset + len(page)
+
+        return {
+            "query": query,
+            "sanitized": clean,
+            "query_terms": query_tokens,
+            "phrases": phrases,
+            "term_idf": {term: round(value, 3) for term, value in idf.items()},
+            "fts_queries": fts_queries,
+            "candidate_count": len(scored),
+            "result_count": len(page),
+            "offset": offset,
+            "next_offset": next_offset if next_offset < len(scored) else None,
+            "has_more": next_offset < len(scored),
+            "results": [
+                {
+                    "chunk_id": row["chunk_id"],
+                    "doc_id": row["doc_id"],
+                    "doc_title": row["doc_title"],
+                    "page_num": row["page_start"],
+                    "page_start": row["page_start"],
+                    "page_end": row["page_end"],
+                    "total_pages": row["total_pages"],
+                    "breadcrumb": row["breadcrumb"],
+                    "chunk_type": row["chunk_type"],
+                    "page_type": row["page_type"],
+                    "confidence": round(float(row["confidence"] or 0.0), 3),
+                    "score": score,
+                    "rank": round(row["rank"], 4),
+                    "reasons": score_info["reasons"],
+                    "snippet": row["snippet"],
+                    "text": row["text"],
+                }
+                for score, _order, row, score_info in page
+            ],
+        }
+
+
+@mcp.tool()
 def search_pages(
     project: str,
     query: str,
@@ -1375,6 +1958,125 @@ def get_pages(doc_id: int, page_start: int, page_end: int) -> ToolResult:
 
 
 @mcp.tool()
+def render_page_image(
+    doc_id: int,
+    page_num: int,
+    dpi: int = 160,
+    max_side_px: int = 1800,
+) -> ToolResult:
+    """Render a PDF page to PNG for visual inspection by a multimodal LLM.
+
+    Use this after search/ranking finds a page that may be a drawing, form,
+    scanned page, title block, table image, or a page where extracted text is
+    incomplete. The result includes a PNG image as base64 plus page metadata.
+
+    Args:
+        doc_id: Document ID.
+        page_num: 1-indexed page number.
+        dpi: Render DPI. Default 160, max 220.
+        max_side_px: Downscale longest side to this many pixels. Default 1800.
+    """
+    with get_db() as conn:
+        d = conn.execute("SELECT * FROM documents WHERE id = ?", (doc_id,)).fetchone()
+        if not d:
+            return {"error": f"Document {doc_id} not found"}
+        p = conn.execute(
+            "SELECT page_num, breadcrumb, page_type FROM pages WHERE doc_id = ? AND page_num = ?",
+            (doc_id, page_num),
+        ).fetchone()
+        if not p:
+            return {"error": f"Page {page_num} not found", "total_pages": d["total_pages"]}
+        pdf_path = Path(d["pdf_path"] or "")
+        if not pdf_path.exists():
+            return {"error": f"Original PDF not found at {d['pdf_path']}"}
+
+    dpi = max(72, min(int(dpi or 160), 220))
+    max_side_px = max(800, min(int(max_side_px or 1800), 2600))
+
+    renderer = "pymupdf"
+    try:
+        import fitz  # type: ignore
+
+        doc = fitz.open(str(pdf_path))
+        try:
+            if page_num < 1 or page_num > len(doc):
+                return {"error": f"Page {page_num} outside document range 1-{len(doc)}"}
+            page = doc[page_num - 1]
+            zoom = dpi / 72.0
+            pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+            if max(pix.width, pix.height) > max_side_px:
+                scale = max_side_px / max(pix.width, pix.height)
+                pix = page.get_pixmap(matrix=fitz.Matrix(zoom * scale, zoom * scale), alpha=False)
+            png_bytes = pix.tobytes("png")
+            width_px, height_px = pix.width, pix.height
+        finally:
+            doc.close()
+    except ImportError:
+        if not command_exists("pdftoppm"):
+            return {"error": "Rendering requires PyMuPDF or pdftoppm"}
+        renderer = "pdftoppm"
+        with tempfile.TemporaryDirectory(prefix="ocr-rag-render-") as tmp:
+            out_prefix = Path(tmp) / "page"
+            render_dpi = dpi
+            png_path = out_prefix.with_suffix(".png")
+            png_bytes = b""
+            width_px = height_px = 0
+            while render_dpi >= 72:
+                result = subprocess.run(
+                    [
+                        "pdftoppm",
+                        "-f",
+                        str(page_num),
+                        "-l",
+                        str(page_num),
+                        "-singlefile",
+                        "-png",
+                        "-r",
+                        str(render_dpi),
+                        str(pdf_path),
+                        str(out_prefix),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if result.returncode != 0 or not png_path.exists():
+                    detail = (result.stderr or result.stdout or "").strip()[:300]
+                    return {"error": f"pdftoppm render failed: {detail}"}
+                png_bytes = png_path.read_bytes()
+                width_px, height_px = png_size(png_bytes)
+                if max(width_px, height_px) <= max_side_px or render_dpi <= 72:
+                    dpi = render_dpi
+                    break
+                render_dpi = max(72, int(render_dpi * (max_side_px / max(width_px, height_px))))
+    except Exception as exc:
+        return {"error": f"Page render failed: {exc}"}
+
+    cache_dir = Path(tempfile.gettempdir()) / "ocr-rag-rendered-pages"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    image_path = cache_dir / f"doc{doc_id}_page{page_num}_{dpi}dpi.png"
+    image_path.write_bytes(png_bytes)
+
+    return {
+        "doc_id": doc_id,
+        "doc_title": d["title"],
+        "project": d["project"],
+        "page_num": page_num,
+        "total_pages": d["total_pages"],
+        "breadcrumb": p["breadcrumb"],
+        "page_type": p["page_type"],
+        "pdf_path": str(pdf_path),
+        "image_path": str(image_path),
+        "mime_type": "image/png",
+        "width_px": width_px,
+        "height_px": height_px,
+        "dpi": dpi,
+        "renderer": renderer,
+        "image_base64": base64.b64encode(png_bytes).decode("ascii"),
+    }
+
+
+@mcp.tool()
 def get_adjacent(doc_id: int, page_num: int, direction: str = "next") -> ToolResult:
     """Get the next or previous page.
 
@@ -1605,6 +2307,8 @@ def semantic_search(
                 "error": "No embeddings found. Run: python ingest.py --embed-only --project <dir> --db <db>"
             }
 
+        ensure_embedding_metadata_columns(conn)
+
         model_row = conn.execute(f"""
             SELECT pe.model FROM page_embeddings pe
             JOIN pages p ON p.id = pe.page_id
@@ -1620,8 +2324,11 @@ def semantic_search(
             extra_params.append(doc_id)
 
         rows = conn.execute(f"""
-            SELECT pe.page_id, pe.chunk_index, pe.chunk_text, pe.embedding,
-                   p.doc_id, p.page_num, p.breadcrumb, p.page_type,
+            SELECT pe.page_id, pe.chunk_id, pe.chunk_index, pe.chunk_text,
+                   pe.chunk_type, pe.embedding,
+                   p.doc_id, p.page_num,
+                   COALESCE(pe.breadcrumb, p.breadcrumb) AS breadcrumb,
+                   p.page_type,
                    d.title as doc_title, d.total_pages
             FROM page_embeddings pe
             JOIN pages p ON p.id = pe.page_id
@@ -1639,33 +2346,25 @@ def semantic_search(
                 np.linalg.norm(query_emb) * np.linalg.norm(emb) + 1e-8
             ))
             scored.append({
+                'chunk_id': row['chunk_id'],
                 'doc_id': row['doc_id'],
                 'doc_title': row['doc_title'],
                 'page_num': row['page_num'],
                 'total_pages': row['total_pages'],
                 'breadcrumb': row['breadcrumb'],
+                'chunk_type': row['chunk_type'] or 'text',
                 'page_type': row['page_type'],
                 'chunk_preview': row['chunk_text'][:200],
                 'similarity': round(sim, 4),
             })
 
         scored.sort(key=lambda x: x['similarity'], reverse=True)
-
-        # Deduplicate by (doc_id, page_num) — keep highest similarity
-        seen = set()
-        deduped = []
-        for r in scored:
-            key = (r['doc_id'], r['page_num'])
-            if key not in seen:
-                seen.add(key)
-                deduped.append(r)
-                if len(deduped) >= cap:
-                    break
+        final = scored[:cap]
 
         return {
             "query": query,
-            "result_count": len(deduped),
-            "results": deduped,
+            "result_count": len(final),
+            "results": final,
         }
 
 
