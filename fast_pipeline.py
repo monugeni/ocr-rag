@@ -55,6 +55,7 @@ APPENDIX_RE = re.compile(
     re.IGNORECASE,
 )
 ALPHA_RE = re.compile(r"^([A-Z])(?:[.)])\s+(.+)$")
+ALPHA_DECIMAL_RE = re.compile(r"^([A-Z])\s*\.\s*(\d+(?:\.\d+)*)\s+(.+)$")
 ROMAN_RE = re.compile(r"^([IVX]{1,8}|iv|ix|v?i{1,3}|x{1,3})(?:[.)])\s+(.+)$", re.IGNORECASE)
 MD_HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TOC_DOT_LEADER_RE = re.compile(r"\.{3,}\s*\d{1,5}\s*$")
@@ -103,6 +104,14 @@ HEADING_KEYWORDS = {
     "procedures", "method", "methodology", "reference", "references",
     "abbreviation", "abbreviations", "term", "terms", "condition",
     "conditions", "quality", "inspection", "testing", "list", "lists",
+    "unit", "units", "code", "codes", "standard", "standards",
+    "purpose", "applicable", "base", "metal", "consumable",
+    "consumables", "shielding", "purging", "process", "procedure",
+    "qualification", "edge", "preparation", "alignment", "alingnment",
+    "spacing", "weather", "technique", "workmanship", "root", "pass",
+    "joint", "completion", "dissimilar", "heat", "treatment", "preheating",
+    "repairs", "repair", "documentation", "documents",
+    "weight", "weights", "span", "spans",
 }
 FORM_LABEL_RE = re.compile(
     r"^(?:prepared|approved|checked|reviewed|date|rev(?:ision)?|doc(?:ument)?\s*no|"
@@ -340,6 +349,10 @@ def is_separator_line(text: str) -> bool:
     return False
 
 
+def has_long_blank_run(text: str) -> bool:
+    return bool(re.search(r"[_]{8,}", normalize_space(text)))
+
+
 def is_value_like(text: str) -> bool:
     t = normalize_space(text)
     lower = t.lower()
@@ -352,6 +365,65 @@ def is_value_like(text: str) -> bool:
     if len(t.split()) <= 2 and re.fullmatch(r"[A-Z]{1,4}-?\d+[A-Z0-9-]*", t):
         return True
     return False
+
+
+def looks_like_bank_or_contact_field(text: str) -> bool:
+    text = normalize_space(text)
+    return bool(re.search(
+        r"\b(?:micr|ifsc|account\s+no|a/c|current\s+account|name\s+of\s+the\s+bank|"
+        r"name\s+of\s+the\s+branch|address\s+of\s+the\s+bank|branch\s+code|swift|iban|gstin|pan\s+no)\b",
+        text,
+        re.IGNORECASE,
+    ))
+
+
+def looks_like_datasheet_value_line(text: str) -> bool:
+    text = normalize_space(text)
+    if re.match(r"^\d+(?:\.\d+)+\s+FOR\b", text, re.IGNORECASE):
+        return True
+    if (
+        is_all_caps_short(text, 16)
+        and re.search(r"\b(?:REFER|SKETCH|SHEET|EXISTING|CASE|CASES)\b", text, re.IGNORECASE)
+        and re.search(r"\b\d+\s*$", text)
+    ):
+        return True
+    return False
+
+
+def looks_like_clause_table_header(text: str) -> bool:
+    text = normalize_space(text)
+    return bool(
+        (
+            re.match(r"^S\.?\s*No\.?\b", text, re.IGNORECASE)
+            and re.search(r"\b(?:clause|title|description|remarks|status)\b", text, re.IGNORECASE)
+        )
+        or (
+            re.match(r"^Sr\.?\s+", text, re.IGNORECASE)
+            and re.search(r"\b(?:description|standard|remarks|equivalent)\b", text, re.IGNORECASE)
+        )
+    )
+
+
+def looks_like_part_standard_reference(text: str) -> bool:
+    text = normalize_space(text)
+    return bool(
+        re.match(r"^PART\s+\d+\s+", text, re.IGNORECASE)
+        and re.search(
+            r"\b(?:assessment|method|determination|preparation|field|test|classification|measurement|sampling)\b",
+            text,
+            re.IGNORECASE,
+        )
+        and not is_all_caps_short(text, 12)
+    )
+
+
+def looks_like_standard_table_row(text: str) -> bool:
+    text = normalize_space(text)
+    return bool(
+        re.match(r"^\d+(?:\.\d+)*\s+", text)
+        and re.search(r"\b(?:SSPC|NACE|ISO|ASTM|AMPP|Sa\s*\d|SP-\d)\b", text, re.IGNORECASE)
+        and len(text.split()) >= 5
+    )
 
 
 def is_compact_code_token(token: str) -> bool:
@@ -401,6 +473,22 @@ def looks_like_table_data_row(text: str) -> bool:
     return slash_code_row or dense_code_row
 
 
+def looks_like_numeric_table_value_row(text: str) -> bool:
+    text = normalize_space(text)
+    if not re.match(r"^\d{1,4}\s+\S+", text):
+        return False
+    tokens = text.split()
+    if len(tokens) < 3 or len(tokens) > 10:
+        return False
+    alpha_chars = sum(1 for char in text if char.isalpha())
+    numericish = sum(
+        1
+        for token in tokens
+        if re.fullmatch(r"[\d./¼½¾\"'“”]+", token)
+    )
+    return alpha_chars <= 3 and numericish >= max(2, len(tokens) - 1)
+
+
 def looks_like_sentence(text: str) -> bool:
     text = normalize_space(text)
     if len(text) > 180:
@@ -431,10 +519,86 @@ def looks_like_table_line(text: str) -> bool:
 
 
 def looks_like_form_label(text: str) -> bool:
-    text = normalize_space(text).strip(":")
+    text = normalize_space(normalize_space(text).strip(":"))
     if FORM_LABEL_RE.match(text) and len(text.split()) <= 6:
         return True
-    return text.lower() in {"prepared", "approved", "checked", "reviewed"}
+    return text.lower() in {"prepared", "approved", "checked", "reviewed", "status codes"}
+
+
+def looks_like_form_value_label(text: str) -> bool:
+    text = normalize_space(text)
+    if ":" not in text:
+        return False
+    label = normalize_space(text.split(":", 1)[0])
+    if len(label) < 3 or len(label.split()) > 6:
+        return False
+    alpha = [char for char in label if char.isalpha()]
+    if not alpha:
+        return False
+    if label.upper() != label:
+        return False
+    return bool(re.search(r"\b(?:pipe|pipes|fitting|fittings|flange|flanges|material|materials|metal|welding|root|filler|gas|gases|preheat|heat|treatment|hardness|code|method|property|joint|groove|process|pass|composition|others)\b", label, re.IGNORECASE))
+
+
+def looks_like_welding_chart_header(text: str) -> bool:
+    text = normalize_space(text)
+    if not is_all_caps_short(text, 10):
+        return False
+    terms = re.findall(
+        r"\b(?:BASE|WELD|WELDING|METAL|MATERIAL|MATERIALS|GROOVE|JOINT|JOINTS|"
+        r"ROOT|FILLER|PASS|TREATMENT|PROCESS|GAS|COMPOSITION)\b",
+        text,
+        re.IGNORECASE,
+    )
+    return len({term.upper() for term in terms}) >= 3
+
+
+def looks_like_inspection_table_header(text: str) -> bool:
+    text = normalize_space(text)
+    if not is_all_caps_short(text, 12):
+        return False
+    terms = re.findall(
+        r"\b(?:STAGE|ACTIVITY|CHARACTERISTICS|RECORD|AGENCY|EXTENT|CHECK|"
+        r"SUB|VENDOR|TPI|INSPECTION|TEST|DOCUMENT|FORMAT|ACCEPTANCE)\b",
+        text,
+        re.IGNORECASE,
+    )
+    return len({term.upper() for term in terms}) >= 3
+
+
+def looks_like_standard_header_noise(text: str) -> bool:
+    text = normalize_space(text)
+    lower = text.lower()
+    if "issued as standard" in lower:
+        return True
+    if "revised" in lower and "standard" in lower and re.search(r"\d{5,}", lower):
+        return True
+    if re.search(r"\bpage\s*\d+\s*of\s*\d+\b", lower):
+        return True
+    if "engineers standard specification" in lower:
+        return True
+    if re.search(r"\b\w?\s*ngineers\s+standard\s+specification\b", lower):
+        return True
+    if "encinefrs standard specification" in lower:
+        return True
+    if "standard specification" in lower and re.search(r"\b(?:rev|no\.?|limited|engineers)\b", lower):
+        return True
+    if re.search(r"\b(?:standard|specification)\s+no\.?\b", lower):
+        return True
+    return False
+
+
+def looks_like_symbol_or_code_fragment(text: str) -> bool:
+    text = normalize_space(text)
+    if not text:
+        return False
+    alpha = sum(1 for char in text if char.isalpha())
+    alnum = sum(1 for char in text if char.isalnum())
+    if len(text) <= 10 and alpha <= 1 and re.search(r"[-=()[\]{}|]", text):
+        return True
+    if len(text) <= 16 and alnum <= 5 and re.search(r"[-=()[\]{}|]", text):
+        return True
+    return False
 
 
 def looks_like_local_caption(text: str) -> bool:
@@ -462,13 +626,73 @@ def looks_like_drawing_view_text(text: str) -> bool:
     return bool(DRAWING_VIEW_RE.search(text))
 
 
+def looks_like_drawing_sheet_page(
+    line_count: int,
+    drawing_hits: int,
+    drawing_core_hits: int,
+    drawing_view_hits: int,
+    symbol_rows: int,
+    prose_rows: int,
+    caps_rows: int,
+    table_rows: int,
+) -> bool:
+    if line_count < 12:
+        return False
+    drawing_signal = drawing_hits + drawing_core_hits + drawing_view_hits
+    graphics_signal = symbol_rows + table_rows
+    dense_sheet = (
+        drawing_signal >= 6
+        and symbol_rows >= 10
+        and prose_rows <= 6
+        and (caps_rows >= 18 or table_rows >= 5)
+    )
+    compact_drawing_sheet = (
+        drawing_signal >= 6
+        and symbol_rows >= 10
+        and prose_rows <= 2
+        and caps_rows >= 10
+        and line_count <= 45
+    )
+    callout_drawing_sheet = (
+        drawing_signal >= 10
+        and (symbol_rows + table_rows) >= 8
+        and caps_rows >= 12
+        and prose_rows <= 2
+    )
+    view_heavy_sheet = (
+        drawing_view_hits >= 8
+        and graphics_signal >= 14
+        and prose_rows <= 8
+        and caps_rows >= 18
+    )
+    return dense_sheet or compact_drawing_sheet or callout_drawing_sheet or view_heavy_sheet
+
+
+def looks_like_dense_table_sheet_page(
+    line_count: int,
+    table_rows: int,
+    symbol_rows: int,
+    prose_rows: int,
+    caps_rows: int,
+) -> bool:
+    if line_count < 40 or prose_rows > 2:
+        return False
+    dense_rows = table_rows + symbol_rows
+    return (
+        table_rows >= max(18, int(line_count * 0.25))
+        or (dense_rows >= int(line_count * 0.35) and caps_rows >= 8)
+    )
+
+
 def looks_like_mojibake(text: str) -> bool:
     text = normalize_space(text)
     if not text:
         return False
-    marker_hits = len(re.findall(r"(?:keÀ|ef|Dee|Òe|³e|HeÀ|meÀ|ì|ð|þ|®|Æ)", text))
+    marker_hits = len(re.findall(r"(?:keÀ|ef|Dee|Òe|³e|HeÀ|meÀ|ì|ð|þ|®|Æ|ﬁ|ﬂ|@@|@g)", text))
     latin_ext_hits = sum(1 for char in text if "\u00c0" <= char <= "\u024f")
-    return marker_hits >= 3 or latin_ext_hits >= 8
+    ligature_hits = sum(1 for char in text if "\ufb00" <= char <= "\ufb06")
+    at_hits = text.count("@")
+    return marker_hits >= 2 or latin_ext_hits >= 8 or ligature_hits >= 2 or at_hits >= 3
 
 
 def has_clause_sentence_shape(text: str) -> bool:
@@ -513,6 +737,8 @@ def is_numbered_body_clause(scheme: str, numbered_level: int, numbered_text: str
     first_word = title.split()[0].strip("()[],:;.\"'").lower() if title.split() else ""
     if first_word in HEADING_KEYWORDS and len(title.split()) <= 14:
         return False
+    if is_all_caps_short(title, 14):
+        return False
     if is_compact_heading_phrase(title):
         return False
     if text.rstrip().endswith(":") and len(title.split()) <= 10 and not has_clause_sentence_shape(title):
@@ -549,6 +775,16 @@ def role_rank(role: str) -> int:
 def parse_numbering(text: str) -> tuple[str, str, int, str]:
     """Return (scheme, number, level, title) for heading-like numbering."""
     stripped = normalize_space(text).strip("# ").strip()
+    if (
+        has_long_blank_run(stripped)
+        or looks_like_bank_or_contact_field(stripped)
+        or looks_like_datasheet_value_line(stripped)
+        or looks_like_clause_table_header(stripped)
+        or looks_like_standard_table_row(stripped)
+    ):
+        return "", "", 0, stripped
+    if looks_like_part_standard_reference(stripped):
+        return "", "", 0, stripped
     md = MD_HEADING_RE.match(stripped)
     if md:
         return "markdown", "", min(len(md.group(1)), 6), normalize_space(md.group(2))
@@ -598,6 +834,13 @@ def parse_numbering(text: str) -> tuple[str, str, int, str]:
             return "", "", 0, stripped
         full = normalize_space(" ".join(part for part in (label.upper(), number or "", title or "") if part))
         return "appendix", normalize_space(f"{label} {number or ''}"), 1, full
+
+    m = ALPHA_DECIMAL_RE.match(stripped)
+    if m:
+        letter, number, title = m.groups()
+        title = normalize_space(title)
+        level = min(1 + len(number.split(".")), 6)
+        return "alpha_decimal", f"{letter.upper()}.{number}", level, f"{letter.upper()}.{number} {title}"
 
     m = ALPHA_RE.match(stripped)
     if m and len(m.group(2).split()) <= 14:
@@ -958,6 +1201,8 @@ def document_title_from_lines(page_lines: dict[int, list[LogicalLine]], body_siz
             text = normalize_space(line.text)
             if not text or line.is_running or is_page_number(text) or is_separator_line(text) or is_value_like(text):
                 continue
+            if looks_like_mojibake(text) or looks_like_standard_header_noise(text) or looks_like_symbol_or_code_fragment(text):
+                continue
             if line.word_count > 18 or looks_like_table_line(text):
                 continue
             score = 0.0
@@ -982,6 +1227,8 @@ def document_title_from_lines(page_lines: dict[int, list[LogicalLine]], body_siz
 def _title_candidate_score(line: LogicalLine, body_size: float, page_num: int) -> float:
     text = normalize_space(line.text)
     if not text or line.is_running or is_page_number(text) or is_value_like(text):
+        return -10.0
+    if looks_like_mojibake(text) or looks_like_standard_header_noise(text) or looks_like_symbol_or_code_fragment(text):
         return -10.0
     if looks_like_form_label(text) or looks_like_table_line(text):
         return -8.0
@@ -1075,13 +1322,15 @@ def infer_document_context(
         text = normalize_space(title)
         if not text:
             return True
+        if looks_like_mojibake(text) or looks_like_standard_header_noise(text) or looks_like_symbol_or_code_fragment(text):
+            return True
         if is_value_like(text) or looks_like_sentence(text):
             return True
         if text[:1].islower() and not STRONG_DOC_TITLE_HINT_RE.search(text):
             return True
         if text.endswith(".") and text[:1].islower():
             return True
-        if re.match(r"^\d{1,3}[.)]?\s+", text) and re.search(
+        if re.match(r"^\d{1,3}(?:\.\d{1,3})*[.)]?\s+", text) and re.search(
             r"\b(?:details of|shall|should|must|may|navigate|to be followed|given below)\b",
             text,
             re.IGNORECASE,
@@ -1098,6 +1347,11 @@ def infer_document_context(
         if heading.page_num > 2:
             break
         text = normalize_space(heading.text)
+        scheme, _number, _level, _title = parse_numbering(text)
+        if scheme in {"decimal", "section"}:
+            continue
+        if looks_like_mojibake(text) or looks_like_standard_header_noise(text) or looks_like_symbol_or_code_fragment(text):
+            continue
         if text and not title_is_weak(text) and (is_all_caps_short(text, 18) or DOC_TITLE_HINT_RE.search(text)):
             first_heading_title = text
             break
@@ -1126,6 +1380,8 @@ def infer_document_context(
             continue
         for line in page_lines[page_num][:30]:
             text = normalize_space(line.text)
+            if looks_like_mojibake(text) or looks_like_standard_header_noise(text) or looks_like_symbol_or_code_fragment(text):
+                continue
             score = _title_candidate_score(line, body_size, page_num)
             if looks_like_sentence(text) and not DOC_TITLE_HINT_RE.search(text):
                 continue
@@ -1166,6 +1422,13 @@ def is_toc_page(lines: list[LogicalLine]) -> bool:
         and len(line.text.split()) >= 3
         and not looks_like_sentence(line.text)
     )
+    index_list_rows = sum(
+        1 for line in lines
+        if re.match(r"^\s*\d{1,3}[.)]?\s+\S+", line.text)
+        and len(line.text.split()) >= 2
+        and len(line.text.split()) <= 14
+        and not looks_like_sentence(line.text)
+    )
     index_header = bool(
         re.search(r"(^|\n)\s*(?:index|contents)\s*($|\n)", first_text)
         or ("description" in first_text and "page no" in first_text)
@@ -1177,19 +1440,34 @@ def is_toc_page(lines: list[LogicalLine]) -> bool:
         or dot_rows >= 5
         or numbered_rows >= 8
         or (index_header and page_ref_rows >= 4)
+        or (index_header and index_list_rows >= 8)
     )
 
 
 def toc_level_from_number(number: str, left: float, left_margin: float) -> int:
-    n = normalize_space(number)
+    n = re.sub(r"\s*\.\s*", ".", normalize_space(number))
     if not n:
         return max(1, min(6, int((left - left_margin) // 24) + 1 if left_margin else 1))
+    alpha_decimal = re.match(r"^[A-Z]\.(\d+(?:\.\d+)*)$", n, re.IGNORECASE)
+    if alpha_decimal:
+        return min(6, 1 + len(alpha_decimal.group(1).split(".")))
     scheme, parsed_number, level, _title = parse_numbering(f"{n} dummy")
     if scheme in {"decimal", "markdown"}:
         return max(1, level)
     if scheme in {"section", "appendix"}:
         return 1
     return max(1, min(6, int((left - left_margin) // 24) + 1 if left_margin else 2))
+
+
+def normalize_toc_number_title(number: str, title: str) -> tuple[str, str]:
+    number = normalize_space(number)
+    title = normalize_space(title)
+    if re.fullmatch(r"[A-Z]", number, re.IGNORECASE):
+        m = re.match(r"^\.\s*(\d+(?:\.\d+)*)\s+(.+)$", title)
+        if m:
+            number = f"{number}.{m.group(1)}"
+            title = normalize_space(m.group(2))
+    return re.sub(r"\s*\.\s*", ".", number), title
 
 
 def parse_toc_entries(page_lines: dict[int, list[LogicalLine]], left_margin: float) -> list[TocEntry]:
@@ -1204,6 +1482,7 @@ def parse_toc_entries(page_lines: dict[int, list[LogicalLine]], left_margin: flo
                 continue
             title = normalize_space(m.group("title"))
             number = normalize_space(m.group("num"))
+            number, title = normalize_toc_number_title(number, title)
             page_num = int(m.group("page"))
             if not title or len(title) < 3:
                 continue
@@ -1237,9 +1516,20 @@ def match_toc(line_text: str, page_num: int, toc_entries: list[TocEntry]) -> Opt
         return None
     best: tuple[float, TocEntry] | None = None
     line_cmp = comparable_title(line_text)
+    if len(line_cmp) < 4:
+        return None
+    line_scheme, line_number, _line_level, _line_title = parse_numbering(line_text)
+    line_number_norm = re.sub(r"\s*\.\s*", ".", normalize_space(line_number)).lower()
     for entry in toc_entries:
         entry_cmp = comparable_title(entry.text)
         if not line_cmp or not entry_cmp:
+            continue
+        entry_number_norm = toc_entry_number(entry)
+        if line_number_norm and entry_number_norm and line_number_norm != entry_number_norm:
+            continue
+        if len(line_cmp.split()) <= 1 and line_cmp != entry_cmp:
+            continue
+        if len(entry_cmp.split()) <= 2 and line_cmp != entry_cmp:
             continue
         # A body sentence that happens to contain one TOC keyword should not
         # inherit TOC authority.  Prefer exact/substring matches; require a
@@ -1276,7 +1566,6 @@ def classify_line_roles(
     """Classify each line by local structure, not by whole-document type."""
     page_by_num = {page.page_num: page for page in pages}
     toc_pages = {page_num for page_num, lines in page_lines.items() if is_toc_page(lines)}
-    toc_row_keys = {comparable_title(entry.text) for entry in toc_entries}
 
     for page_num, lines in page_lines.items():
         page = page_by_num.get(page_num)
@@ -1288,6 +1577,9 @@ def classify_line_roles(
         lower_zone_hits = 0
         symbol_rows = 0
         prose_rows = 0
+        caps_rows = 0
+        table_rows = 0
+        structured_section_rows = 0
         for line in lines:
             if looks_like_drawing_field(line.text):
                 drawing_hits += 1
@@ -1301,20 +1593,76 @@ def classify_line_roles(
                 symbol_rows += 1
             if line.word_count >= 9 and re.search(r"\b(?:shall|should|procedure|manual|operation|requirement)\b", line.text, re.IGNORECASE):
                 prose_rows += 1
-        drawing_like_page = (
+            if is_all_caps_short(normalize_space(line.text), 16):
+                caps_rows += 1
+            if line.is_table_like:
+                table_rows += 1
+            scheme, _number, _level, heading_text = parse_numbering(line.text)
+            if scheme == "decimal" and (
+                is_all_caps_short(heading_text, 10)
+                or DOC_TITLE_HINT_RE.search(heading_text)
+                or len(heading_text.split()) <= 6
+            ):
+                structured_section_rows += 1
+        appendix_index_rows = sum(
+            1 for line in lines
+            if APPENDIX_RE.match(normalize_space(line.text))
+        )
+        drawing_layout_page = (
             (
                 drawing_core_hits >= 2 and drawing_hits >= 4 and (lower_zone_hits >= 2 or drawing_view_hits >= 3 or len(lines) <= 45)
             )
             or (
                 drawing_view_hits >= 5 and (symbol_rows >= 4 or drawing_core_hits >= 2)
             )
-        ) and prose_rows <= 6
+        ) and prose_rows <= 6 and structured_section_rows == 0
+        drawing_sheet_page = looks_like_drawing_sheet_page(
+            len(lines),
+            drawing_hits,
+            drawing_core_hits,
+            drawing_view_hits,
+            symbol_rows,
+            prose_rows,
+            caps_rows,
+            table_rows,
+        )
+        dense_table_sheet_page = looks_like_dense_table_sheet_page(
+            len(lines),
+            table_rows,
+            symbol_rows,
+            prose_rows,
+            caps_rows,
+        )
+        drawing_like_page = drawing_layout_page or drawing_sheet_page or dense_table_sheet_page
 
         active_caption = ""
         for line in lines:
             text = normalize_space(line.text)
             reasons: list[str] = []
             role = "body"
+            line_scheme, _line_number, _line_level, line_heading_text = parse_numbering(text)
+            line_heading_words = [
+                token.strip("().,:;").lower()
+                for token in line_heading_text.split()
+            ]
+            structural_heading_line = bool(
+                (
+                    line_scheme in {"section", "appendix", "alpha_decimal"}
+                    and not drawing_layout_page
+                    and not drawing_sheet_page
+                )
+                or (
+                    dense_table_sheet_page
+                    and not drawing_layout_page
+                    and not drawing_sheet_page
+                    and
+                    line_scheme == "decimal"
+                    and (
+                        DOC_TITLE_HINT_RE.search(line_heading_text)
+                        or any(word in HEADING_KEYWORDS for word in line_heading_words)
+                    )
+                )
+            )
 
             if line.is_running:
                 role = "running"
@@ -1322,9 +1670,20 @@ def classify_line_roles(
             elif is_page_number(text):
                 role = "page_number"
                 reasons.append("page_number")
-            elif page_num in toc_pages or TOC_ROW_RE.match(text) or comparable_title(text) in toc_row_keys:
+            elif page_num in toc_pages or TOC_ROW_RE.match(text):
                 role = "toc"
                 reasons.append("toc")
+            elif (
+                appendix_index_rows >= 3
+                and APPENDIX_RE.match(text)
+                and not (
+                    line.centered
+                    or line.font_size >= body_size + 3.0
+                    or (line.bold and line.word_count <= 4)
+                )
+            ):
+                role = "toc"
+                reasons.append("appendix_index")
             else:
                 in_title_block = bool(
                     drawing_like_page
@@ -1340,7 +1699,7 @@ def classify_line_roles(
                 elif in_title_block and (looks_like_drawing_field(text) or line.is_table_like or line.node_count >= 3):
                     role = "drawing"
                     reasons.append("drawing_title_block")
-                elif drawing_like_page and (
+                elif drawing_like_page and not structural_heading_line and (
                     looks_like_drawing_view_text(text)
                     or looks_like_drawing_field(text)
                     or line.is_table_like
@@ -1351,6 +1710,9 @@ def classify_line_roles(
                 elif looks_like_form_label(text):
                     role = "form"
                     reasons.append("form_label")
+                elif looks_like_form_value_label(text):
+                    role = "form"
+                    reasons.append("form_value_label")
                 elif line.is_table_like or (line.row_density >= 5 and not line.centered):
                     role = "table"
                     reasons.append("table_or_dense_row")
@@ -1399,6 +1761,8 @@ def score_heading_line(
         return -10.0, ["separator_line"], "", "", 0, text, None
     if is_page_number(text):
         return -10.0, ["page_number"], "", "", 0, text, None
+    if looks_like_table_data_row(text) or looks_like_numeric_table_value_row(text):
+        return -7.0, ["table_value_row"], "", "", 0, text, None
     if line.role == "page_number":
         return -10.0, ["page_number"], "", "", 0, text, None
     if line.is_running:
@@ -1409,6 +1773,29 @@ def score_heading_line(
         return -8.0, ["toc_row"], "", "", 0, text, None
     if is_value_like(text):
         return -7.0, ["value_like"], "", "", 0, text, None
+    if has_long_blank_run(text):
+        return -7.0, ["blank_form_line"], "", "", 0, text, None
+    if looks_like_bank_or_contact_field(text):
+        return -7.0, ["bank_or_contact_field"], "", "", 0, text, None
+    if looks_like_datasheet_value_line(text):
+        return -7.0, ["datasheet_value_line"], "", "", 0, text, None
+    if looks_like_clause_table_header(text):
+        return -7.0, ["clause_table_header"], "", "", 0, text, None
+    if looks_like_standard_table_row(text):
+        return -7.0, ["standard_table_row"], "", "", 0, text, None
+    if looks_like_part_standard_reference(text):
+        return -6.0, ["part_standard_reference"], "", "", 0, text, None
+    if looks_like_form_value_label(text):
+        return -6.5, ["form_value_label"], "", "", 0, text, None
+    if looks_like_symbol_or_code_fragment(text):
+        return -6.5, ["symbol_or_code_fragment"], "", "", 0, text, None
+    if not scheme and looks_like_standard_header_noise(text):
+        return -6.5, ["standard_header_noise"], "", "", 0, text, None
+    if re.match(r"^\d{1,3}\s*=\s+", text):
+        return -6.0, ["equation_definition"], "", "", 0, text, None
+    if not scheme and (looks_like_welding_chart_header(text) or looks_like_inspection_table_header(text)):
+        reason = "welding_chart_header" if looks_like_welding_chart_header(text) else "inspection_table_header"
+        return -6.0, [reason], "", "", 0, text, None
     if line.role == "drawing":
         return -7.0, ["drawing_title_block"], "", "", 0, text, None
     if line.role == "form" and not (
@@ -1423,6 +1810,12 @@ def score_heading_line(
         return -5.5, ["local_caption"], "", "", 0, text, None
     if looks_like_mojibake(text):
         return -5.0, ["mojibake_text"], "", "", 0, text, None
+    if (
+        scheme == "appendix"
+        and re.match(r"^annexure\s+\d+\s*\.\s*\d+", text, re.IGNORECASE)
+        and line.word_count > 5
+    ):
+        return -5.0, ["appendix_index_row"], "", "", 0, text, None
     if is_numbered_body_clause(scheme, numbered_level, numbered_text, text):
         return -4.5, ["numbered_body_clause"], "", "", 0, text, None
     if not scheme and has_clause_sentence_shape(text) and not (
@@ -1519,12 +1912,21 @@ def score_heading_line(
         numbered_words = numbered_text.split()
         numbered_has_table_terms = any(token.strip("().,:;").lower() in TABLE_WORDS for token in numbered_words)
         numbered_has_heading_terms = any(token.strip("().,:;").lower() in HEADING_KEYWORDS for token in numbered_words)
+        alpha_decimal_value = (
+            scheme == "alpha_decimal"
+            and not toc_match_entry
+            and len(numbered_words) <= 6
+            and not numbered_has_heading_terms
+            and not DOC_TITLE_HINT_RE.search(numbered_text)
+        )
+        if alpha_decimal_value:
+            return -5.5, ["alpha_decimal_value"], "", "", 0, text, None
         clause_modal = bool(re.search(r"\b(?:shall|should|must|will|may|is|are|be|being|been)\b", numbered_text, re.IGNORECASE))
         trailing_colon_heading = bool(text.rstrip().endswith(":") and (is_all_caps_short(numbered_text, 14) or not clause_modal))
         decimal_has_layout_signal = (
             line.bold
             or gap_signal
-            or font_delta >= 0.8
+            or (font_delta >= 1.2 if plain_integer and not toc_match_entry else font_delta >= 0.8)
             or bool(toc_match_entry)
             or centered_title_shape
             or trailing_colon_heading
@@ -1539,17 +1941,49 @@ def score_heading_line(
             and not is_all_caps_short(numbered_text)
             and not numbered_has_heading_terms
         )
+        weak_plain_integer_list = (
+            plain_integer
+            and not toc_match_entry
+            and not numbered_has_heading_terms
+            and not DOC_TITLE_HINT_RE.search(numbered_text)
+            and not is_all_caps_short(numbered_text)
+            and not text.rstrip().endswith(":")
+            and not line.bold
+            and not gap_signal
+            and font_delta < 1.2
+        )
+        short_plain_integer_value = (
+            plain_integer
+            and not toc_match_entry
+            and len(numbered_words) <= 8
+            and not numbered_has_heading_terms
+            and not DOC_TITLE_HINT_RE.search(numbered_text)
+            and not text.rstrip().endswith(":")
+        )
+        punctuated_integer_value = (
+            scheme == "decimal"
+            and "." not in number
+            and re.match(r"^\d{1,3}[.)]\s+\d", text)
+            and not toc_match_entry
+            and not numbered_has_heading_terms
+            and not DOC_TITLE_HINT_RE.search(numbered_text)
+        )
+        if short_plain_integer_value or punctuated_integer_value:
+            reason = "punctuated_integer_value" if punctuated_integer_value else "short_plain_integer_value"
+            return -5.5, [reason], "", "", 0, text, None
         numbered_body_clause = (
             not toc_match_entry
             and is_numbered_body_clause(scheme, numbered_level, numbered_text, text)
         )
         if (
-            scheme == "decimal"
+            scheme in {"decimal", "alpha_decimal"}
             and len(numbered_words) <= 24
             and not looks_like_sentence(numbered_text)
             and decimal_has_layout_signal
             and not (plain_integer and not has_structural_style and not DOC_TITLE_HINT_RE.search(numbered_text))
             and not integer_item_is_probably_list
+            and not weak_plain_integer_list
+            and not short_plain_integer_value
             and not numbered_body_clause
             and not numbered_has_table_terms
         ):
@@ -1619,7 +2053,7 @@ def score_heading_line(
         score -= 4.0
         reasons.append("too_many_words")
 
-    heading_text = numbered_text if scheme in {"decimal", "section", "appendix", "alpha", "roman", "markdown"} else text.rstrip(":")
+    heading_text = numbered_text if scheme in {"decimal", "alpha_decimal", "section", "appendix", "alpha", "roman", "markdown"} else text.rstrip(":")
     return score, reasons, scheme, number, numbered_level, heading_text, toc_match_entry
 
 
@@ -1729,7 +2163,7 @@ def assign_heading_level(cand: dict, body_size: float, size_ranks: dict[float, i
         return min(max(toc_match_entry.level, 1), 6)
     if cand["scheme"] == "markdown":
         return min(max(cand["numbered_level"], 1), 6)
-    if cand["scheme"] in {"decimal", "section", "appendix"}:
+    if cand["scheme"] in {"decimal", "section", "appendix", "alpha_decimal"}:
         return min(max(cand["numbered_level"] or 1, 1), 6)
     if cand["scheme"] in {"alpha", "roman"}:
         return 2
@@ -1805,6 +2239,12 @@ def detect_headings(
             continue
         if not scheme and not toc_match_entry and score < 4.0:
             continue
+        if (
+            scheme == "decimal"
+            and not toc_match_entry
+            and reasons == [f"numbered_{numbered_level}"]
+        ):
+            continue
         raw_candidates.append({
             "line": line,
             "score": score,
@@ -1875,23 +2315,117 @@ def filter_document_title_headings(headings: list[HeadingEvent], document_title:
     if not document_title:
         return headings
     doc_key = comparable_title(document_title)
+    doc_words = set(doc_key.split())
+
+    def is_cover_title_fragment(heading: HeadingEvent) -> bool:
+        if heading.scheme or heading.toc_match:
+            return False
+        key = comparable_title(heading.text)
+        if not key:
+            return False
+        words = key.split()
+        first_word = words[0] if words else ""
+        title_word_overlap = sum(1 for word in words if word in doc_words)
+        if key == doc_key:
+            return True
+        if len(key) >= 20 and doc_key.startswith(key):
+            return True
+        if looks_like_standard_header_noise(heading.text):
+            return True
+        if (
+            heading.page_num <= 5
+            and len(words) >= 5
+            and doc_words
+            and title_word_overlap / max(len(words), 1) >= 0.55
+        ):
+            return True
+        if (
+            heading.page_num <= 2
+            and 1 <= len(words) <= 6
+            and all(word in doc_words for word in words)
+        ):
+            return True
+        if (
+            heading.page_num <= 2
+            and 1 <= len(words) <= 8
+            and title_word_overlap >= max(1, len(words) // 2)
+        ):
+            return True
+        if (
+            heading.page_num <= 2
+            and first_word not in HEADING_KEYWORDS
+            and not DOC_TITLE_HINT_RE.search(heading.text)
+            and not STRONG_DOC_TITLE_HINT_RE.search(heading.text)
+        ):
+            return True
+        if (
+            heading.page_num > 2
+            and 2 <= len(words) <= 8
+            and is_all_caps_short(heading.text, 10)
+            and all(word in doc_words for word in words)
+        ):
+            return True
+        return False
+
+    filtered = [
+        heading for heading in headings
+        if not is_cover_title_fragment(heading)
+    ]
+    for idx, heading in enumerate(filtered, start=1):
+        heading.id = idx
+    attach_breadcrumbs(filtered)
+    return filtered
+
+
+def filter_unstructured_headings_after_numbering(headings: list[HeadingEvent]) -> list[HeadingEvent]:
+    filtered: list[HeadingEvent] = []
+    numbered_context = False
+    for heading in sorted(headings, key=lambda h: (h.page_num, h.top, h.left)):
+        if heading.scheme in {"decimal", "alpha_decimal", "section", "appendix"}:
+            numbered_context = True
+            filtered.append(heading)
+            continue
+        if not numbered_context or heading.toc_match or heading.scheme:
+            filtered.append(heading)
+            continue
+        text = normalize_space(heading.text)
+        words = comparable_title(text).split()
+        first_word = words[0] if words else ""
+        has_heading_term = (
+            first_word in HEADING_KEYWORDS
+            or any(word in HEADING_KEYWORDS for word in words[:3])
+            or DOC_TITLE_HINT_RE.search(text)
+            or STRONG_DOC_TITLE_HINT_RE.search(text)
+        )
+        if has_heading_term and not looks_like_standard_header_noise(text):
+            filtered.append(heading)
+    for idx, heading in enumerate(filtered, start=1):
+        heading.id = idx
+    attach_breadcrumbs(filtered)
+    return filtered
+
+
+def filter_obvious_non_heading_events(headings: list[HeadingEvent]) -> list[HeadingEvent]:
     filtered = [
         heading for heading in headings
         if not (
-            heading.page_num <= 2
-            and (
-                comparable_title(heading.text) == doc_key
-                or (
-                    len(comparable_title(heading.text)) >= 20
-                    and doc_key.startswith(comparable_title(heading.text))
-                )
-            )
+            has_long_blank_run(heading.text)
+            or looks_like_bank_or_contact_field(heading.text)
+            or looks_like_datasheet_value_line(heading.text)
+            or looks_like_clause_table_header(heading.text)
+            or looks_like_part_standard_reference(heading.text)
+            or looks_like_standard_table_row(heading.text)
+            or looks_like_symbol_or_code_fragment(heading.text)
         )
     ]
     for idx, heading in enumerate(filtered, start=1):
         heading.id = idx
     attach_breadcrumbs(filtered)
     return filtered
+
+
+def toc_entry_number(entry: TocEntry) -> str:
+    return re.sub(r"\s*\.\s*", ".", normalize_space(entry.number)).lower()
 
 
 def nest_decimal_headings_under_preamble(headings: list[HeadingEvent], root: str = "") -> None:
@@ -2184,6 +2718,8 @@ def run_fast_pipeline(
         headings = filter_document_title_headings(headings, provisional_title)
         document_context = infer_document_context(source_pdf, page_lines, headings, body_size)
         headings = filter_document_title_headings(headings, document_context.title)
+        headings = filter_unstructured_headings_after_numbering(headings)
+        headings = filter_obvious_non_heading_events(headings)
         attach_breadcrumbs(headings, document_context.breadcrumb_root)
         nest_decimal_headings_under_preamble(headings, document_context.breadcrumb_root)
         anchor_mixed_document_decimal_headings(headings, document_context.breadcrumb_root)
