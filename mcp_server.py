@@ -2520,7 +2520,7 @@ def main():
 
     p = argparse.ArgumentParser(description='Document RAG MCP Server')
     p.add_argument('--db', '-d', required=True, help='SQLite database path')
-    p.add_argument('--port', type=int, default=8200, help='SSE port (default: 8200)')
+    p.add_argument('--port', type=int, default=8200, help='HTTP port (default: 8200)')
 
     args = p.parse_args()
     DB_PATH = args.db
@@ -2547,7 +2547,7 @@ def main():
 
     mcp.settings.host = "0.0.0.0"
     mcp.settings.transport_security.enable_dns_rebinding_protection = False
-    mcp.run(transport="sse")
+    mcp.run(transport="streamable-http")
 
 
 if __name__ == '__main__':

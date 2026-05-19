@@ -115,7 +115,7 @@ def parse_split_info(filename: str) -> Optional[dict]:
 
 DB_PATH = "docs.db"
 UPLOADS_DIR = "./uploads"
-MCP_SERVER_URL = "http://127.0.0.1:8200/sse"
+MCP_SERVER_URL = "http://127.0.0.1:8200/mcp"
 executor = ThreadPoolExecutor(max_workers=2)
 
 app = FastAPI(title="Esteem Folder Knowledge", docs_url="/api/docs")
@@ -3110,7 +3110,7 @@ def _start_mcp_server(db_path, port):
     mcp_server.mcp.settings.port = port
     mcp_server.mcp.settings.host = "0.0.0.0"
     mcp_server.mcp.settings.transport_security.enable_dns_rebinding_protection = False
-    mcp_server.mcp.run(transport="sse")
+    mcp_server.mcp.run(transport="streamable-http")
 
 
 def main():
@@ -3127,7 +3127,7 @@ def main():
     args = p.parse_args()
 
     DB_PATH = args.db
-    MCP_SERVER_URL = f"http://127.0.0.1:{args.mcp_port}/sse"
+    MCP_SERVER_URL = f"http://127.0.0.1:{args.mcp_port}/mcp"
     UPLOADS_DIR = args.uploads_dir
     Path(UPLOADS_DIR).mkdir(parents=True, exist_ok=True)
 
@@ -3157,7 +3157,7 @@ def main():
     print(f"  Database:  {DB_PATH} ({total} documents)")
     print(f"  Uploads:   {UPLOADS_DIR}")
     print(f"  Web GUI:   http://0.0.0.0:{args.port}")
-    print(f"  MCP:       http://0.0.0.0:{args.mcp_port}/sse")
+    print(f"  MCP:       http://0.0.0.0:{args.mcp_port}/mcp")
 
     uvicorn.run(app, host="0.0.0.0", port=args.port)
 

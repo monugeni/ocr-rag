@@ -8,7 +8,7 @@ from typing import Any, Optional
 
 import anthropic
 from mcp import ClientSession
-from mcp.client.sse import sse_client
+from mcp.client.streamable_http import streamablehttp_client
 
 
 MAX_HISTORY_MESSAGES = 8
@@ -170,8 +170,8 @@ async def _run_folder_chat(
 
     for attempt in range(MCP_CONNECT_RETRIES):
         try:
-            async with sse_client(mcp_url, timeout=10, sse_read_timeout=120) as streams:
-                async with ClientSession(*streams) as session:
+            async with streamablehttp_client(mcp_url, timeout=10, sse_read_timeout=120) as (read_stream, write_stream, _):
+                async with ClientSession(read_stream, write_stream) as session:
                     await _initialize_session(session)
                     tools = await _list_allowed_tools(session)
                     response = await _chat_with_tools(
