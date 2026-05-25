@@ -1,0 +1,684 @@
+[
+  {
+    "heading": "latig0:10 r ENGINEERS INSTRUMENT SUPPORT",
+    "level": 4,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > latig0:10 r ENGINEERS INSTRUMENT SUPPORT",
+    "seq": 0,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "&.ir Wes INDIA LIMITED 7-52-0101 Rev. 4",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4",
+    "seq": 1,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "TYPE 11 SINGLE INSTRUMENT SUPPORT - GENERAL ARRANGEMENT CAP PLATE 6 T AT END OF PIPE",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > TYPE 11 SINGLE INSTRUMENT SUPPORT - GENERAL ARRANGEMENT CAP PLATE 6 T AT END OF PIPE",
+    "seq": 2,
+    "confidence": 0.99,
+    "score": 14.4,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "left_aligned",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "DE AIL\"P\"",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > DE AIL\"P\"",
+    "seq": 3,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "TYPE 11-1 TYPE 11-2",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > TYPE 11-1 TYPE 11-2",
+    "seq": 4,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "M12 M12 CLINCH ANCHOR BOLTS BOLTS & NUTS (QTY. 04 NOS.) (QTY. 04 NOS.)",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > M12 M12 CLINCH ANCHOR BOLTS BOLTS & NUTS (QTY. 04 NOS.) (QTY. 04 NOS.)",
+    "seq": 5,
+    "confidence": 0.99,
+    "score": 12.6,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "ii. I . . • .4 .•=1••••=11•• MINNIN•MINEMO",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > ii. I . . • .4 .•=1••••=11•• MINNIN•MINEMO",
+    "seq": 6,
+    "confidence": 0.978,
+    "score": 8.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "MS PLATE MS PLATE",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > ii. I . . • .4 .•=1••••=11•• MINNIN•MINEMO > MS PLATE MS PLATE",
+    "seq": 7,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "0.1 I-",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 > 0.1 I-",
+    "seq": 8,
+    "confidence": 0.789,
+    "score": 7.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "numbered_2"
+    ],
+    "warnings": [
+      "p1: decimal heading '0.1' has no detected parent '0'"
+    ],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "14 DIA HOLES 14 DIA HOLES",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 14 DIA HOLES 14 DIA HOLES",
+    "seq": 9,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "180 • 180 (4 NOS.)",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 14 DIA HOLES 14 DIA HOLES > 180 • 180 (4 NOS.)",
+    "seq": 10,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "PAVED AREA MOUNTING PLATFORM MOUNTING TYPE 11-3 TYPE 11-4",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 14 DIA HOLES 14 DIA HOLES > PAVED AREA MOUNTING PLATFORM MOUNTING TYPE 11-3 TYPE 11-4",
+    "seq": 11,
+    "confidence": 0.99,
+    "score": 11.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "7 PIPE",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 7 PIPE",
+    "seq": 12,
+    "confidence": 0.889,
+    "score": 8.0,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "STRIPS (WELD) ,- 4 I",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I",
+    "seq": 13,
+    "confidence": 0.978,
+    "score": 8.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "G. LEVEL.• 1111O111.1 G. LEVEL",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > G. LEVEL.• 1111O111.1 G. LEVEL",
+    "seq": 14,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "left_aligned",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "EARL COMPACTED",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > EARL COMPACTED",
+    "seq": 15,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "UNPAVED AREA MOUNTING UNPAVED AREA MOUNTING",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > UNPAVED AREA MOUNTING UNPAVED AREA MOUNTING",
+    "seq": 16,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "150-Zid ENGINEERS INSTRUMENT SUPPORT",
+    "level": 5,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > UNPAVED AREA MOUNTING UNPAVED AREA MOUNTING > 150-Zid ENGINEERS INSTRUMENT SUPPORT",
+    "seq": 17,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "Ogar fafReg INDIA LIMITED",
+    "level": 5,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > UNPAVED AREA MOUNTING UNPAVED AREA MOUNTING > Ogar fafReg INDIA LIMITED",
+    "seq": 18,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "TYPE 12 CONCRETE COLUMN MOUNTING",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > UNPAVED AREA MOUNTING UNPAVED AREA MOUNTING > TYPE 12 CONCRETE COLUMN MOUNTING",
+    "seq": 19,
+    "confidence": 0.511,
+    "score": 4.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "TYPE 13 CONCRETE COLUMN (WITH ANGLE INSERT) MOUNTING",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > TYPE 13 CONCRETE COLUMN (WITH ANGLE INSERT) MOUNTING",
+    "seq": 20,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "ISMC 100 MEMBER WITH EXISTING 300",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > ISMC 100 MEMBER WITH EXISTING 300",
+    "seq": 21,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "2\" PIPE T",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > 2\" PIPE T",
+    "seq": 22,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "TYPE-14 CONCRETE COLUMN (WITH INSERT PLATE) MOUNTING",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > STRIPS (WELD) ,- 4 I > TYPE-14 CONCRETE COLUMN (WITH INSERT PLATE) MOUNTING",
+    "seq": 23,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "7 PIPE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 7 PIPE",
+    "seq": 24,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "ENGINEERS INSTRUMENT SUPPORT fa Res INDIA LIMITED 7-52-0101 Rev. 4 SINGLE INSTRUMENT",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "(A SINGLE INSTRUMENT > ENGINEERS INSTRUMENT SUPPORT fa Res INDIA LIMITED 7-52-0101 Rev. 4 SINGLE INSTRUMENT",
+    "seq": 25,
+    "confidence": 0.99,
+    "score": 23.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "0 U-BOLT ASSY.",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 0 U-BOLT ASSY.",
+    "seq": 26,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1 ALL DIMENSIONS ARE IN M.M. UNLESS OTHERWISE SPECIFIED.",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 1 ALL DIMENSIONS ARE IN M.M. UNLESS OTHERWISE SPECIFIED.",
+    "seq": 27,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "4 U-BOLT ASSEMBLY SHALL BE OF MINIMUM M12 SIZE WITH NUTS AND SPRING WASHERS.",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 4 U-BOLT ASSEMBLY SHALL BE OF MINIMUM M12 SIZE WITH NUTS AND SPRING WASHERS.",
+    "seq": 28,
+    "confidence": 0.333,
+    "score": 3.0,
+    "reasons": [
+      "all_caps_short",
+      "centered"
+    ],
+    "warnings": [
+      "p3: top-level decimal jump 1 -> 4"
+    ],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "9 GALVANISED PLATES SHAL BE CONSIDERED FOR MOUNTING OF INSTRUMENT SUPPORT ON PIPES.",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "(A SINGLE INSTRUMENT > 9 GALVANISED PLATES SHAL BE CONSIDERED FOR MOUNTING OF INSTRUMENT SUPPORT ON PIPES.",
+    "seq": 29,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p3: top-level decimal jump 4 -> 9"
+    ],
+    "document_context": {
+      "title": "(A SINGLE INSTRUMENT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  }
+]

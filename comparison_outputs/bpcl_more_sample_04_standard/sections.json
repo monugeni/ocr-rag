@@ -1,0 +1,70 @@
+[
+  {
+    "heading": "SECTION 2 2",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "TYPE—III SECTION 3-3 > SECTION 2 2",
+    "seq": 0,
+    "confidence": 0.944,
+    "score": 8.5,
+    "reasons": [
+      "all_caps_short",
+      "large_font",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TYPE—III SECTION 3-3",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "SECTION 8 8",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "TYPE—III SECTION 3-3 > SECTION 8 8",
+    "seq": 1,
+    "confidence": 0.99,
+    "score": 9.5,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "large_font",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TYPE—III SECTION 3-3",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "SCHEDULE OF CONNECTION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "TYPE—III SECTION 3-3 > SCHEDULE OF CONNECTION",
+    "seq": 2,
+    "confidence": 0.99,
+    "score": 9.7,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TYPE—III SECTION 3-3",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Downloads/02. Construction Quality Requirement_part002_p17-44_Plant.pdf",
+  "document_title": "02. Construction Quality Requirement Plant",
+  "document_context": {
+    "title": "02. Construction Quality Requirement Plant",
+    "path_parts": [],
+    "source": "filename_fallback"
+  },
+  "page_count": 28,
+  "body_font_size": 17.0,
+  "heading_count": 27,
+  "toc_entry_count": 0,
+  "chunk_count": 147,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 28,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 10,
+    "line_role_counts": {
+      "running": 278,
+      "table": 9,
+      "body": 521,
+      "form": 44,
+      "page_number": 27,
+      "caption": 1
+    }
+  }
+}

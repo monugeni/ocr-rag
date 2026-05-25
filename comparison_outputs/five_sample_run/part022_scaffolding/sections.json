@@ -1,0 +1,223 @@
+[
+  {
+    "heading": "4 CONSTRUCTION OF SCAFFOLDS",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS",
+    "seq": 0,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "4.1 GENERAL",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.1 GENERAL",
+    "seq": 1,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "4.2 FOUNDATIONS, BASE PLATES & SOLE PLATES",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.2 FOUNDATIONS, BASE PLATES & SOLE PLATES",
+    "seq": 2,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "4.4 LEDGERS (Horizontal Tubes/Runners)",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.4 LEDGERS (Horizontal Tubes/Runners)",
+    "seq": 3,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "4.5 DECKING",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.5 DECKING",
+    "seq": 4,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "4.6 GUARDRAILS & TOE BOARDS",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.6 GUARDRAILS & TOE BOARDS",
+    "seq": 5,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "4.8 ACCESS",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.8 ACCESS",
+    "seq": 6,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.9 INCLEMENT WEATHER",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.9 INCLEMENT WEATHER",
+    "seq": 7,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.10 SAFETY NETS & LANDING BAGS:",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 4 CONSTRUCTION OF SCAFFOLDS > 4.10 SAFETY NETS & LANDING BAGS:",
+    "seq": 8,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "5 ERECTION & DISMANTLING",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "2 SCAFFOLDING TYPE > 5 ERECTION & DISMANTLING",
+    "seq": 9,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2 SCAFFOLDING TYPE",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 6
+  }
+]

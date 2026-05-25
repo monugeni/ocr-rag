@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 12,
+    "top": 461.0,
+    "left": 100.0,
+    "text": "T -",
+    "level": 3,
+    "score": 4.3,
+    "confidence": 0.478,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6 040325 REVISED & ISSUED AS STANDARD Tpx ™ sH == MN > T -",
+    "toc_match": null,
+    "warnings": []
+  }
+]

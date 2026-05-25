@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "page_num": 3,
+    "line_index": 5,
+    "top": 136.0,
+    "left": 106.0,
+    "text": "1.0 GENERAL",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 1.0 GENERAL",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 3,
+    "line_index": 14,
+    "top": 405.0,
+    "left": 106.0,
+    "text": "2.0 SCOPE OF SUPPLY AND SERVICES",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 2.0 SCOPE OF SUPPLY AND SERVICES",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 4,
+    "line_index": 5,
+    "top": 136.0,
+    "left": 106.0,
+    "text": "3.0 DESCRIPTION OF HEATERS",
+    "level": 1,
+    "score": 3.6,
+    "confidence": 0.4,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 3.0 DESCRIPTION OF HEATERS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 4,
+    "line_index": 15,
+    "top": 446.0,
+    "left": 106.0,
+    "text": "4.0 INSTRUCTIONS TO VENDOR (OEM):",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "4.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 4.0 INSTRUCTIONS TO VENDOR (OEM):",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 5,
+    "line_index": 31,
+    "top": 840.0,
+    "left": 106.0,
+    "text": "5.0 GUARANTEE:",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "5.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 5.0 GUARANTEE:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 5,
+    "line_index": 34,
+    "top": 944.0,
+    "left": 106.0,
+    "text": "6.0 INSPECTION :",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "6.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 6.0 INSPECTION :",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 6,
+    "line_index": 11,
+    "top": 323.0,
+    "left": 106.0,
+    "text": "7.0 PAINTING",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "7.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 7.0 PAINTING",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 6,
+    "line_index": 13,
+    "top": 405.0,
+    "left": 106.0,
+    "text": "8.0 PACKING & SHIPPING",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "8.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 8.0 PACKING & SHIPPING",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 6,
+    "line_index": 31,
+    "top": 944.0,
+    "left": 106.0,
+    "text": "9.0 CORRESPONDENCE AND DOCUMENTATION",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "9.0",
+    "scheme": "decimal",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 9.0 CORRESPONDENCE AND DOCUMENTATION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 6,
+    "line_index": 37,
+    "top": 1151.0,
+    "left": 160.0,
+    "text": "A. PROJECT : CAPACITY / RELIABILITY IMPROVEMENT PROJECT",
+    "level": 2,
+    "score": 3.0,
+    "confidence": 0.333,
+    "reasons": [
+      "all_caps_short",
+      "centered"
+    ],
+    "numbering": "A",
+    "scheme": "alpha",
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 9.0 CORRESPONDENCE AND DOCUMENTATION > A. PROJECT : CAPACITY / RELIABILITY IMPROVEMENT PROJECT",
+    "toc_match": null,
+    "warnings": []
+  }
+]

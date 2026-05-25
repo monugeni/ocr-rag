@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/split_output/2500024832-HB-06600_3_part025_p1032-1038_Doc_No.pdf",
+  "document_title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+  "document_context": {
+    "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 7,
+  "body_font_size": 18.0,
+  "heading_count": 9,
+  "toc_entry_count": 0,
+  "chunk_count": 30,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 7,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 7,
+    "line_role_counts": {
+      "body": 231,
+      "form": 8,
+      "running": 40,
+      "table": 81,
+      "caption": 2
+    }
+  }
+}

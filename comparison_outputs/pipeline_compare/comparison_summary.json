@@ -1,0 +1,50 @@
+[
+  {
+    "sample": "part011_scope_of_work",
+    "pdf": "samples/split_output/2500024832-HB-06600_3_part011_p295-308_1_SCOPE_OF_WORK.pdf",
+    "current_marker": {
+      "parse_seconds": 0.0066,
+      "pages": 14,
+      "sections": 16,
+      "chars": 14441
+    },
+    "fast_pipeline": {
+      "pages": 14,
+      "headings": 8,
+      "chunks": 29,
+      "body_font_size": 18.0,
+      "extractor": {
+        "layout_text": "pdftotext_layout",
+        "layout_page_count": 10,
+        "geometry": "pdftohtml_xml",
+        "running_line_count": 4
+      },
+      "warnings": [
+        "p3: top-level decimal jump 4 -> 12"
+      ]
+    }
+  },
+  {
+    "sample": "part025_ppe",
+    "pdf": "samples/split_output/2500024832-HB-06600_3_part025_p1032-1038_Doc_No.pdf",
+    "current_marker": {
+      "parse_seconds": 0.0063,
+      "pages": 7,
+      "sections": 10,
+      "chars": 10494
+    },
+    "fast_pipeline": {
+      "pages": 7,
+      "headings": 11,
+      "chunks": 32,
+      "body_font_size": 18.0,
+      "extractor": {
+        "layout_text": "pdftotext_layout",
+        "layout_page_count": 7,
+        "geometry": "pdftohtml_xml",
+        "running_line_count": 7
+      },
+      "warnings": []
+    }
+  }
+]

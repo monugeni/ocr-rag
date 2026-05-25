@@ -1,0 +1,154 @@
+[
+  {
+    "heading": "ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING",
+    "seq": 0,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "3 Vendor Code in BPCL (If available)",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 3 Vendor Code in BPCL (If available)",
+    "seq": 1,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "6 Technical Specification and scope of work document.",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 6 Technical Specification and scope of work document.",
+    "seq": 2,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p4: top-level decimal jump 3 -> 6"
+    ],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": " EARNEST MONEY DEPOSIT (EMD)",
+    "level": 3,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 6 Technical Specification and scope of work document. >  EARNEST MONEY DEPOSIT (EMD)",
+    "seq": 3,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "1.0 ORGANIZATION AND TAX RELATED DETAILS",
+    "level": 2,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 1.0 ORGANIZATION AND TAX RELATED DETAILS",
+    "seq": 4,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "2 Vendor Code Mention existing vendor code",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 2 Vendor Code Mention existing vendor code",
+    "seq": 5,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "2 Vendor Code",
+    "level": 2,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 2 Vendor Code",
+    "seq": 6,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BIDDER DOCUMENT CHECKLIST",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  }
+]

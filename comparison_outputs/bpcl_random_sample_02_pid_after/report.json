@@ -1,0 +1,25 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC I II III/Sec III P&ID & DATASHEETS/C238-131-80-45-1186 SHT.1 REV-5-Model.pdf",
+  "document_title": "C238 131 80 45 1186 SHT.1 REV 5 Model",
+  "document_context": {
+    "title": "C238 131 80 45 1186 SHT.1 REV 5 Model",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 1,
+  "body_font_size": 14.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 1,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 1,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 3
+    }
+  }
+}

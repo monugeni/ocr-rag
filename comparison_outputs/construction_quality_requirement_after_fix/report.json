@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Downloads/02. Construction Quality Requirement_part002_p17-44_Plant.pdf",
+  "document_title": "1.1. This specification shall be followed for the fabrication of all types of welded joints of piping",
+  "document_context": {
+    "title": "1.1. This specification shall be followed for the fabrication of all types of welded joints of piping",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 28,
+  "body_font_size": 17.0,
+  "heading_count": 31,
+  "toc_entry_count": 0,
+  "chunk_count": 151,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 28,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 10,
+    "line_role_counts": {
+      "running": 278,
+      "table": 11,
+      "body": 540,
+      "page_number": 27,
+      "form": 23,
+      "caption": 1
+    }
+  }
+}

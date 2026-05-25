@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="14" family="Mangal" color="#000000"/>
+	<fontspec id="1" size="14" family="DejaVuSans" color="#000000"/>
+	<fontspec id="2" size="14" family="DejaVuSans" color="#000000"/>
+	<fontspec id="3" size="16" family="DejaVuSans" color="#000000"/>
+	<fontspec id="4" size="9" family="DejaVuSans" color="#000000"/>
+<text top="260" left="372" width="15" height="20" font="0">बड</text>
+<text top="260" left="371" width="60" height="20" font="0">बड   ववरण</text>
+<text top="260" left="397" width="42" height="20" font="0">ववरण//</text>
+<text top="262" left="440" width="24" height="16" font="1"><b>Bid</b></text>
+<text top="260" left="464" width="7" height="20" font="0">  </text>
+<text top="262" left="471" width="53" height="16" font="1"><b>Details</b></text>
+<text top="295" left="72" width="15" height="20" font="0">बड</text>
+<text top="295" left="71" width="39" height="20" font="0">बड  बंद</text>
+<text top="295" left="93" width="43" height="20" font="0">बंद  होने</text>
+<text top="295" left="116" width="38" height="20" font="0">होने  क</text>
+<text top="295" left="143" width="55" height="20" font="0">क   तार ख</text>
+<text top="295" left="164" width="71" height="20" font="0">तार ख//समय</text>
+<text top="295" left="206" width="36" height="20" font="0">समय  </text>
+<text top="297" left="243" width="145" height="16" font="1"><b>/Bid End Date/Time</b></text>
+<text top="297" left="414" width="143" height="16" font="2">30-04-2026 15:00:00</text>
+<text top="330" left="72" width="15" height="20" font="0">बड</text>
+<text top="330" left="71" width="53" height="20" font="0">बड  खुलने</text>
+<text top="330" left="93" width="48" height="20" font="0">खुलने  क</text>
+<text top="330" left="130" width="55" height="20" font="0">क   तार ख</text>
+<text top="330" left="151" width="71" height="20" font="0">तार ख//समय</text>
+<text top="330" left="193" width="36" height="20" font="0">समय  </text>
+<text top="332" left="231" width="98" height="16" font="1"><b>/Bid Opening</b></text>
+<text top="352" left="68" width="78" height="16" font="1"><b>Date/Time</b></text>
+<text top="340" left="414" width="143" height="16" font="2">30-04-2026 15:30:00</text>
+<text top="382" left="72" width="15" height="20" font="0">बड</text>
+<text top="382" left="71" width="61" height="20" font="0">बड  पेशकश</text>
+<text top="382" left="93" width="76" height="20" font="0">पेशकश  वैधता</text>
+<text top="382" left="138" width="43" height="20" font="0">वैधता (</text>
+<text top="382" left="169" width="29" height="20" font="0"> (बंद</text>
+<text top="382" left="181" width="43" height="20" font="0">बंद  होने</text>
+<text top="382" left="203" width="38" height="20" font="0">होने  क</text>
+<text top="382" left="230" width="55" height="20" font="0">क   तार ख</text>
+<text top="382" left="251" width="51" height="20" font="0">तार ख  से</text>
+<text top="382" left="291" width="16" height="20" font="0">से))</text>
+<text top="383" left="309" width="73" height="16" font="1"><b>/Bid Offer</b></text>
+<text top="404" left="68" width="188" height="16" font="1"><b>Validity (From End Date)</b></text>
+<text top="391" left="414" width="74" height="16" font="2">120 (Days)</text>
+<text top="434" left="68" width="40" height="20" font="0">मं ालय</text>
+<text top="434" left="67" width="76" height="20" font="0">मं ालय//रा य</text>
+<text top="434" left="115" width="49" height="20" font="0">रा य  का</text>
+<text top="434" left="150" width="44" height="20" font="0">का  नाम</text>
+<text top="434" left="170" width="22" height="20" font="0">नाम</text>
+<text top="435" left="195" width="161" height="16" font="1"><b>/Ministry/State Name</b></text>
+<text top="435" left="414" width="261" height="16" font="2">Ministry Of Petroleum And Natural Gas</text>
+<text top="468" left="72" width="31" height="20" font="0">वभाग</text>
+<text top="468" left="71" width="52" height="20" font="0">वभाग  का</text>
+<text top="468" left="109" width="44" height="20" font="0">का  नाम</text>
+<text top="468" left="130" width="22" height="20" font="0">नाम</text>
+<text top="470" left="153" width="145" height="16" font="1"><b>/Department Name</b></text>
+<text top="470" left="414" width="228" height="16" font="2">Bharat Petroleum Corporation Ltd</text>
+<text top="503" left="68" width="37" height="20" font="0">संगठन</text>
+<text top="503" left="67" width="58" height="20" font="0">संगठन  का</text>
+<text top="503" left="111" width="44" height="20" font="0">का  नाम</text>
+<text top="503" left="131" width="22" height="20" font="0">नाम</text>
+<text top="505" left="155" width="151" height="16" font="1"><b>/Organisation Name</b></text>
+<text top="505" left="414" width="228" height="16" font="2">Bharat Petroleum Corporation Ltd</text>
+<text top="538" left="68" width="46" height="20" font="0">कायालय</text>
+<text top="538" left="67" width="67" height="20" font="0">कायालय  का</text>
+<text top="538" left="119" width="44" height="20" font="0">का  नाम</text>
+<text top="538" left="140" width="22" height="20" font="0">नाम</text>
+<text top="540" left="164" width="98" height="16" font="1"><b>/Office Name</b></text>
+<text top="540" left="414" width="56" height="16" font="2">Bpcl Pcs</text>
+<text top="628" left="68" width="25" height="20" font="0">व तु</text>
+<text top="628" left="67" width="56" height="20" font="0">व तु   ेणी</text>
+<text top="628" left="108" width="21" height="20" font="0">ेणी  </text>
+<text top="630" left="129" width="113" height="16" font="1"><b>/Item Category</b></text>
+<text top="571" left="414" width="380" height="16" font="2">Custom Bid for Services - Supply and Installation of New</text>
+<text top="588" left="414" width="407" height="16" font="2">CAPH &amp; GAPH , Custom Bid for Services - Revamp of radiant</text>
+<text top="605" left="414" width="370" height="16" font="2">section including associated jobs and material supply ,</text>
+<text top="622" left="414" width="379" height="16" font="2">Custom Bid for Services - Revamp of convection section</text>
+<text top="639" left="414" width="399" height="16" font="2">including associated jobs and material supply , Custom Bid</text>
+<text top="656" left="414" width="372" height="16" font="2">for Services - Supply and service cost for Electrical and</text>
+<text top="673" left="414" width="378" height="16" font="2">Instrument Jobs , Custom Bid for Services - SOR Jobs for</text>
+<text top="689" left="414" width="188" height="16" font="2">heater miscellaneous works</text>
+<text top="763" left="68" width="32" height="20" font="0">समान</text>
+<text top="763" left="67" width="63" height="20" font="0">समान   ेणी</text>
+<text top="763" left="116" width="14" height="20" font="0">ेणी</text>
+<text top="765" left="131" width="132" height="16" font="1"><b>/Similar Category</b></text>
+<text top="731" left="459" width="155" height="16" font="2">Piping Erection Service</text>
+<text top="748" left="459" width="155" height="16" font="2">Piping Erection Service</text>
+<text top="765" left="459" width="155" height="16" font="2">Piping Erection Service</text>
+<text top="782" left="459" width="155" height="16" font="2">Piping Erection Service</text>
+<text top="799" left="459" width="155" height="16" font="2">Piping Erection Service</text>
+<text top="842" left="68" width="37" height="20" font="0">अनुबंध</text>
+<text top="842" left="67" width="77" height="20" font="0">अनुबंध  अविध</text>
+<text top="842" left="111" width="40" height="20" font="0">अविध  </text>
+<text top="844" left="151" width="124" height="16" font="1"><b>/Contract Period</b></text>
+<text top="844" left="414" width="65" height="16" font="2"> 1 Year(s)</text>
+<text top="877" left="72" width="22" height="20" font="0">बडर</text>
+<text top="877" left="71" width="43" height="20" font="0">बडर  का</text>
+<text top="877" left="100" width="65" height="20" font="0">का   यूनतम</text>
+<text top="877" left="128" width="77" height="20" font="0">यूनतम  औसत</text>
+<text top="877" left="171" width="75" height="20" font="0">औसत  वा षक</text>
+<text top="877" left="211" width="87" height="20" font="0">वा षक  टनओवर</text>
+<text top="877" left="252" width="73" height="20" font="0">टनओवर (3 </text>
+<text top="877" left="298" width="44" height="20" font="0"> (3 वष</text>
+<text top="877" left="325" width="41" height="20" font="0">वष   का</text>
+<text top="877" left="351" width="20" height="20" font="0">का))</text>
+<text top="899" left="68" width="323" height="16" font="1"><b>/Minimum Average Annual Turnover of the</b></text>
+<text top="916" left="68" width="153" height="16" font="1"><b>bidder (For 3 Years)</b></text>
+<text top="895" left="414" width="84" height="16" font="2">596 Lakh (s)</text>
+<text top="945" left="68" width="26" height="20" font="0">उ ह ं</text>
+<text top="945" left="67" width="67" height="20" font="0">उ ह ं//समान</text>
+<text top="945" left="101" width="61" height="20" font="0">समान  सेवा</text>
+<text top="945" left="140" width="39" height="20" font="0">सेवा  के</text>
+<text top="945" left="168" width="40" height="20" font="0">के  िलए</text>
+<text top="945" left="186" width="72" height="20" font="0">िलए  अपे त</text>
+<text top="945" left="215" width="80" height="20" font="0">अपे त   वगत</text>
+<text top="945" left="268" width="71" height="20" font="0">वगत  अनुभव</text>
+<text top="945" left="301" width="55" height="20" font="0">अनुभव  के</text>
+<text top="945" left="346" width="10" height="20" font="0">के</text>
+<text top="969" left="68" width="16" height="20" font="0">वष</text>
+<text top="969" left="67" width="16" height="20" font="0">वष</text>
+<text top="971" left="83" width="294" height="16" font="1"><b>/Years of Past Experience Required for</b></text>
+<text top="991" left="68" width="156" height="16" font="1"><b>same/similar service</b></text>
+<text top="967" left="414" width="65" height="16" font="2">7 Year (s)</text>
+<text top="1017" left="68" width="61" height="20" font="0">एमएसएमई</text>
+<text top="1017" left="67" width="61" height="20" font="0">एमएसएमई</text>
+<text top="1019" left="129" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="133" width="10" height="20" font="0">के</text>
+<text top="1017" left="133" width="10" height="20" font="0">के</text>
+<text top="1019" left="144" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="149" width="22" height="20" font="0">िलए</text>
+<text top="1017" left="148" width="22" height="20" font="0">िलए</text>
+<text top="1019" left="171" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="176" width="38" height="20" font="0">अनुभव</text>
+<text top="1017" left="175" width="38" height="20" font="0">अनुभव</text>
+<text top="1019" left="213" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="218" width="10" height="20" font="0">के</text>
+<text top="1017" left="217" width="10" height="20" font="0">के</text>
+<text top="1019" left="228" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="233" width="16" height="20" font="0">वष</text>
+<text top="1017" left="233" width="16" height="20" font="0">वष</text>
+<text top="1019" left="253" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="257" width="20" height="20" font="0">और</text>
+<text top="1017" left="257" width="20" height="20" font="0">और</text>
+<text top="1019" left="278" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="283" width="45" height="20" font="0">टनओवर</text>
+<text top="1017" left="282" width="45" height="20" font="0">टनओवर</text>
+<text top="1019" left="328" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="333" width="10" height="20" font="0">से</text>
+<text top="1017" left="332" width="10" height="20" font="0">से</text>
+<text top="1019" left="343" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="347" width="18" height="20" font="0">छूट</text>
+<text top="1017" left="347" width="18" height="20" font="0">छूट</text>
+<text top="1019" left="366" width="5" height="16" font="1"><b> </b></text>
+<text top="1017" left="378" width="20" height="20" font="0">दान</text>
+<text top="1017" left="378" width="20" height="20" font="0">दान</text>
+<text top="1034" left="68" width="10" height="20" font="0">क</text>
+<text top="1034" left="67" width="10" height="20" font="0">क</text>
+<text top="1036" left="82" width="5" height="16" font="1"><b> </b></text>
+<text top="1034" left="86" width="17" height="20" font="0">गई</text>
+<text top="1034" left="86" width="17" height="20" font="0">गई</text>
+<text top="1036" left="103" width="5" height="16" font="1"><b> </b></text>
+<text top="1034" left="108" width="7" height="20" font="0">हैहै</text>
+<text top="1036" left="115" width="216" height="16" font="1"><b>/MSE Relaxation for Years of</b></text>
+<text top="1053" left="68" width="190" height="16" font="1"><b>Experience and Turnover</b></text>
+<text top="1036" left="414" width="18" height="16" font="2">No</text>
+<text top="1079" left="75" width="38" height="20" font="0">टाटअप</text>
+<text top="1079" left="75" width="38" height="20" font="0">टाटअप</text>
+<text top="1081" left="113" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="118" width="10" height="20" font="0">के</text>
+<text top="1079" left="117" width="10" height="20" font="0">के</text>
+<text top="1081" left="128" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="133" width="22" height="20" font="0">िलए</text>
+<text top="1079" left="132" width="22" height="20" font="0">िलए</text>
+<text top="1081" left="155" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="160" width="38" height="20" font="0">अनुभव</text>
+<text top="1079" left="159" width="38" height="20" font="0">अनुभव</text>
+<text top="1081" left="197" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="202" width="10" height="20" font="0">के</text>
+<text top="1079" left="201" width="10" height="20" font="0">के</text>
+<text top="1081" left="213" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="217" width="16" height="20" font="0">वष</text>
+<text top="1079" left="217" width="16" height="20" font="0">वष</text>
+<text top="1081" left="237" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="242" width="20" height="20" font="0">और</text>
+<text top="1079" left="241" width="20" height="20" font="0">और</text>
+<text top="1081" left="262" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="267" width="45" height="20" font="0">टनओवर</text>
+<text top="1079" left="266" width="45" height="20" font="0">टनओवर</text>
+<text top="1081" left="312" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="317" width="10" height="20" font="0">से</text>
+<text top="1079" left="316" width="10" height="20" font="0">से</text>
+<text top="1081" left="327" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="332" width="18" height="20" font="0">छूट</text>
+<text top="1079" left="331" width="18" height="20" font="0">छूट</text>
+<text top="1081" left="350" width="5" height="16" font="1"><b> </b></text>
+<text top="1079" left="363" width="20" height="20" font="0">दान</text>
+<text top="1079" left="362" width="20" height="20" font="0">दान</text>
+<text top="1096" left="68" width="10" height="20" font="0">क</text>
+<text top="1096" left="67" width="10" height="20" font="0">क</text>
+<text top="1098" left="82" width="5" height="16" font="1"><b> </b></text>
+<text top="1096" left="86" width="17" height="20" font="0">गई</text>
+<text top="1096" left="86" width="17" height="20" font="0">गई</text>
+<text top="1098" left="103" width="5" height="16" font="1"><b> </b></text>
+<text top="1096" left="108" width="7" height="20" font="0">हैहै</text>
+<text top="1098" left="115" width="245" height="16" font="1"><b> /Startup Relaxation for Years of</b></text>
+<text top="1115" left="68" width="190" height="16" font="1"><b>Experience and Turnover</b></text>
+<text top="1098" left="414" width="18" height="16" font="2">No</text>
+<text top="162" left="225" width="4" height="16" font="2"> </text>
+<text top="104" left="523" width="62" height="20" font="0">बड सं या/</text>
+<text top="106" left="585" width="21" height="16" font="2">Bid</text>
+<text top="104" left="607" width="7" height="20" font="0"> </text>
+<text top="106" left="613" width="212" height="16" font="2">Number: GEM/2026/B/7425195</text>
+<text top="128" left="652" width="46" height="20" font="0">दनांक /</text>
+<text top="129" left="698" width="41" height="16" font="2">Dated</text>
+<text top="128" left="739" width="85" height="20" font="0">: 09-04-2026</text>
+<text top="203" left="343" width="15" height="20" font="0">बड</text>
+<text top="203" left="343" width="69" height="20" font="0">बड  द तावेज़</text>
+<text top="203" left="365" width="47" height="20" font="0">द तावेज़</text>
+<text top="203" left="412" width="141" height="18" font="3"><b> / Bid Document</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">1 / 10</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="167" left="72" width="31" height="20" font="0">व े ता</text>
+<text top="167" left="71" width="48" height="20" font="0">व े ता  से</text>
+<text top="167" left="109" width="40" height="20" font="0">से  मांगे</text>
+<text top="167" left="126" width="48" height="20" font="0">मांगे  गए</text>
+<text top="167" left="155" width="71" height="20" font="0">गए  द तावेज़</text>
+<text top="167" left="179" width="47" height="20" font="0">द तावेज़</text>
+<text top="169" left="226" width="152" height="16" font="1"><b>/Document required</b></text>
+<text top="189" left="68" width="83" height="16" font="1"><b>from seller</b></text>
+<text top="127" left="414" width="399" height="16" font="2">Experience Criteria,Bidder Turnover,Certificate (Requested</text>
+<text top="144" left="414" width="401" height="16" font="2">in ATC),Additional Doc 1 (Requested in ATC),Additional Doc</text>
+<text top="161" left="414" width="394" height="16" font="2">2 (Requested in ATC),Additional Doc 3 (Requested in ATC)</text>
+<text top="178" left="414" width="403" height="16" font="2">*In case any bidder is seeking exemption from Experience /</text>
+<text top="194" left="414" width="386" height="16" font="2">Turnover Criteria, the supporting documents to prove his</text>
+<text top="211" left="414" width="406" height="16" font="2">eligibility for exemption must be uploaded for evaluation by</text>
+<text top="228" left="414" width="65" height="16" font="2">the buyer</text>
+<text top="258" left="76" width="13" height="20" font="0">या</text>
+<text top="258" left="75" width="42" height="20" font="0">या  आप</text>
+<text top="258" left="95" width="87" height="20" font="0">आप  िन वदाकार</text>
+<text top="258" left="124" width="89" height="20" font="0">िन वदाकार    ारा</text>
+<text top="258" left="199" width="60" height="20" font="0">ारा  अपलोड</text>
+<text top="258" left="219" width="70" height="20" font="0">अपलोड   कए</text>
+<text top="258" left="270" width="43" height="20" font="0">कए  गए</text>
+<text top="258" left="295" width="71" height="20" font="0">गए  द तावेज़</text>
+<text top="258" left="319" width="71" height="20" font="0">द तावेज़   को</text>
+<text top="258" left="376" width="14" height="20" font="0">को</text>
+<text top="282" left="68" width="37" height="20" font="0">िन वदा</text>
+<text top="282" left="67" width="54" height="20" font="0">िन वदा  म</text>
+<text top="282" left="111" width="40" height="20" font="0">म  भाग</text>
+<text top="282" left="127" width="49" height="20" font="0">भाग  लेने</text>
+<text top="282" left="157" width="48" height="20" font="0">लेने  वाले</text>
+<text top="282" left="183" width="52" height="20" font="0">वाले  सभी</text>
+<text top="282" left="211" width="88" height="20" font="0">सभी  िन वदाकार</text>
+<text top="282" left="241" width="82" height="20" font="0">िन वदाकार   को</text>
+<text top="282" left="308" width="61" height="20" font="0">को   दखाना</text>
+<text top="282" left="333" width="35" height="20" font="0">दखाना</text>
+<text top="305" left="68" width="29" height="20" font="0">चाहते</text>
+<text top="305" left="67" width="58" height="20" font="0">चाहते  हह? </text>
+<text top="305" left="110" width="42" height="20" font="0">? संदभ</text>
+<text top="305" left="125" width="54" height="20" font="0">संदभ  मेनू</text>
+<text top="305" left="159" width="34" height="20" font="0">मेनू  हैहै</text>
+<text top="307" left="192" width="164" height="16" font="1"><b>/Do you want to show</b></text>
+<text top="327" left="68" width="288" height="16" font="1"><b>documents uploaded by bidders to all</b></text>
+<text top="344" left="68" width="210" height="16" font="1"><b>bidders participated in bid?</b></text>
+<text top="300" left="414" width="18" height="16" font="2">No</text>
+<text top="374" left="72" width="15" height="20" font="0">बड</text>
+<text top="374" left="71" width="55" height="20" font="0">बड  लगाने</text>
+<text top="374" left="93" width="50" height="20" font="0">लगाने  क</text>
+<text top="374" left="132" width="50" height="20" font="0">क   समय</text>
+<text top="374" left="153" width="63" height="20" font="0">समय  सीमा</text>
+<text top="374" left="188" width="63" height="20" font="0">सीमा   वतः</text>
+<text top="374" left="230" width="49" height="20" font="0">वतः  नह ं</text>
+<text top="374" left="258" width="56" height="20" font="0">नह ं  बढ़ाने</text>
+<text top="374" left="285" width="46" height="20" font="0">बढ़ाने  के</text>
+<text top="374" left="320" width="40" height="20" font="0">के  िलए</text>
+<text top="374" left="337" width="22" height="20" font="0">िलए</text>
+<text top="398" left="68" width="48" height="20" font="0">आव यक</text>
+<text top="398" left="67" width="75" height="20" font="0">आव यक   बड</text>
+<text top="398" left="126" width="33" height="20" font="0">बड  क</text>
+<text top="398" left="148" width="53" height="20" font="0">क   सं या</text>
+<text top="398" left="169" width="38" height="20" font="0">सं या।।</text>
+<text top="399" left="207" width="167" height="16" font="1"><b> / Minimum number of</b></text>
+<text top="419" left="68" width="292" height="16" font="1"><b>bids required to disable automatic bid</b></text>
+<text top="436" left="68" width="74" height="16" font="1"><b>extension</b></text>
+<text top="404" left="414" width="9" height="16" font="2">3</text>
+<text top="466" left="72" width="17" height="20" font="0">दन</text>
+<text top="466" left="71" width="38" height="20" font="0">दन   क</text>
+<text top="466" left="98" width="53" height="20" font="0">क   सं या</text>
+<text top="466" left="119" width="43" height="20" font="0">सं या, </text>
+<text top="466" left="151" width="45" height="20" font="0">,  जनके</text>
+<text top="466" left="165" width="60" height="20" font="0">जनके  िलए</text>
+<text top="466" left="202" width="49" height="20" font="0">िलए   बड</text>
+<text top="466" left="236" width="55" height="20" font="0">बड  लगाने</text>
+<text top="466" left="258" width="50" height="20" font="0">लगाने  क</text>
+<text top="466" left="296" width="50" height="20" font="0">क   समय</text>
+<text top="466" left="317" width="62" height="20" font="0">समय--सीमा</text>
+<text top="466" left="352" width="27" height="20" font="0">सीमा</text>
+<text top="490" left="68" width="27" height="20" font="0">बढ़ाई</text>
+<text top="490" left="67" width="69" height="20" font="0">बढ़ाई  जाएगी</text>
+<text top="490" left="100" width="63" height="20" font="0">जाएगी। / </text>
+<text top="490" left="135" width="28" height="20" font="0">। / </text>
+<text top="491" left="164" width="60" height="16" font="1"><b>Number</b></text>
+<text top="490" left="224" width="7" height="20" font="0">  </text>
+<text top="491" left="231" width="15" height="16" font="1"><b>of</b></text>
+<text top="490" left="246" width="7" height="20" font="0">  </text>
+<text top="491" left="253" width="36" height="16" font="1"><b>days</b></text>
+<text top="490" left="288" width="7" height="20" font="0">  </text>
+<text top="491" left="295" width="22" height="16" font="1"><b>for</b></text>
+<text top="490" left="317" width="7" height="20" font="0">  </text>
+<text top="491" left="323" width="44" height="16" font="1"><b>which</b></text>
+<text top="490" left="368" width="7" height="20" font="0">  </text>
+<text top="491" left="375" width="24" height="16" font="1"><b>Bid</b></text>
+<text top="515" left="68" width="46" height="16" font="1"><b>would</b></text>
+<text top="513" left="113" width="7" height="20" font="0">  </text>
+<text top="515" left="120" width="19" height="16" font="1"><b>be</b></text>
+<text top="513" left="139" width="7" height="20" font="0">  </text>
+<text top="515" left="145" width="34" height="16" font="1"><b>auto</b></text>
+<text top="513" left="180" width="5" height="20" font="0">--</text>
+<text top="515" left="185" width="71" height="16" font="1"><b>extended</b></text>
+<text top="491" left="414" width="9" height="16" font="2">3</text>
+<text top="548" left="68" width="25" height="20" font="0">ऑटो</text>
+<text top="548" left="67" width="86" height="20" font="0">ऑटो  ए सटशन</text>
+<text top="548" left="99" width="114" height="20" font="0">ए सटशन  अिधकतम</text>
+<text top="548" left="159" width="97" height="20" font="0">अिधकतम   कतनी</text>
+<text top="548" left="224" width="57" height="20" font="0">कतनी  बार</text>
+<text top="548" left="262" width="53" height="20" font="0">बार   कया</text>
+<text top="548" left="291" width="57" height="20" font="0">कया  जाना</text>
+<text top="548" left="321" width="62" height="20" font="0">जाना  हैहै। /</text>
+<text top="548" left="362" width="21" height="20" font="0">। /</text>
+<text top="574" left="68" width="60" height="16" font="1"><b>Number</b></text>
+<text top="572" left="128" width="7" height="20" font="0">  </text>
+<text top="574" left="135" width="15" height="16" font="1"><b>of</b></text>
+<text top="572" left="150" width="7" height="20" font="0">  </text>
+<text top="574" left="157" width="36" height="16" font="1"><b>Auto</b></text>
+<text top="572" left="192" width="7" height="20" font="0">  </text>
+<text top="574" left="199" width="75" height="16" font="1"><b>Extension</b></text>
+<text top="572" left="274" width="7" height="20" font="0">  </text>
+<text top="574" left="280" width="43" height="16" font="1"><b>count</b></text>
+<text top="561" left="414" width="9" height="16" font="2">2</text>
+<text top="607" left="72" width="15" height="20" font="0">बड</text>
+<text top="607" left="71" width="33" height="20" font="0">बड  से</text>
+<text top="607" left="93" width="46" height="20" font="0">से   रवस</text>
+<text top="607" left="114" width="71" height="20" font="0">रवस  नीलामी</text>
+<text top="607" left="145" width="80" height="20" font="0">नीलामी  स य</text>
+<text top="607" left="191" width="68" height="20" font="0">स य   कया</text>
+<text top="607" left="236" width="23" height="20" font="0">कया</text>
+<text top="608" left="260" width="172" height="16" font="1"><b>/Bid to RA enabled </b>No</text>
+<text top="642" left="72" width="15" height="20" font="0">बड</text>
+<text top="642" left="71" width="37" height="20" font="0">बड  का</text>
+<text top="642" left="93" width="50" height="20" font="0">का   कार</text>
+<text top="642" left="122" width="20" height="20" font="0">कार</text>
+<text top="643" left="144" width="91" height="16" font="1"><b>/Type of Bid</b></text>
+<text top="643" left="414" width="103" height="16" font="2">Two Packet Bid</text>
+<text top="677" left="68" width="43" height="20" font="0">तकनीक</text>
+<text top="677" left="67" width="103" height="20" font="0">तकनीक   मू यांकन</text>
+<text top="677" left="120" width="68" height="20" font="0">मू यांकन  के</text>
+<text top="677" left="177" width="48" height="20" font="0">के  दौरान</text>
+<text top="677" left="194" width="80" height="20" font="0">दौरान  तकनीक</text>
+<text top="677" left="231" width="109" height="20" font="0">तकनीक    प ीकरण</text>
+<text top="677" left="292" width="71" height="20" font="0">प ीकरण  हेतु</text>
+<text top="677" left="346" width="16" height="20" font="0">हेतु</text>
+<text top="700" left="68" width="38" height="20" font="0">अनुमत</text>
+<text top="700" left="67" width="75" height="20" font="0">अनुमत  समय</text>
+<text top="700" left="112" width="36" height="20" font="0">समय  </text>
+<text top="702" left="149" width="209" height="16" font="1"><b>/Time allowed for Technical</b></text>
+<text top="722" left="68" width="314" height="16" font="1"><b>Clarifications during technical evaluation</b></text>
+<text top="698" left="414" width="46" height="16" font="2">2 Days</text>
+<text top="752" left="68" width="50" height="20" font="0">मू यांकन</text>
+<text top="752" left="67" width="88" height="20" font="0">मू यांकन  प ित</text>
+<text top="752" left="124" width="30" height="20" font="0">प ित</text>
+<text top="754" left="154" width="147" height="16" font="1"><b>/Evaluation Method</b></text>
+<text top="754" left="414" width="184" height="16" font="2">Total value wise evaluation</text>
+<text top="787" left="68" width="27" height="20" font="0">मू य</text>
+<text top="787" left="67" width="64" height="20" font="0">मू य  दशाने</text>
+<text top="787" left="100" width="63" height="20" font="0">दशाने  वाला</text>
+<text top="787" left="137" width="66" height="20" font="0">वाला   व ीय</text>
+<text top="787" left="173" width="83" height="20" font="0">व ीय  द तावेज</text>
+<text top="787" left="209" width="91" height="20" font="0">द तावेज   ेकअप</text>
+<text top="787" left="271" width="85" height="20" font="0">ेकअप  आव यक</text>
+<text top="787" left="307" width="63" height="20" font="0">आव यक  हैहै</text>
+<text top="788" left="370" width="10" height="16" font="1"><b> /</b></text>
+<text top="809" left="68" width="274" height="16" font="1"><b>Financial Document Indicating Price</b></text>
+<text top="826" left="68" width="137" height="16" font="1"><b>Breakup Required</b></text>
+<text top="805" left="414" width="24" height="16" font="2">Yes</text>
+<text top="852" left="68" width="56" height="20" font="0">म य थता</text>
+<text top="852" left="67" width="56" height="20" font="0">म य थता</text>
+<text top="854" left="124" width="5" height="16" font="1"><b> </b></text>
+<text top="852" left="128" width="19" height="20" font="0">खंड</text>
+<text top="852" left="128" width="19" height="20" font="0">खंड</text>
+<text top="854" left="147" width="143" height="16" font="1"><b>/Arbitration Clause</b></text>
+<text top="854" left="414" width="18" height="16" font="2">No</text>
+<text top="880" left="68" width="27" height="20" font="0">सुलह</text>
+<text top="880" left="67" width="27" height="20" font="0">सुलह</text>
+<text top="882" left="95" width="5" height="16" font="1"><b> </b></text>
+<text top="880" left="99" width="19" height="20" font="0">खंड</text>
+<text top="880" left="99" width="19" height="20" font="0">खंड</text>
+<text top="882" left="118" width="136" height="16" font="1"><b>/Mediation Clause</b></text>
+<text top="882" left="414" width="18" height="16" font="2">No</text>
+<text top="94" left="372" width="15" height="20" font="0">बड</text>
+<text top="94" left="371" width="60" height="20" font="0">बड   ववरण</text>
+<text top="94" left="397" width="42" height="20" font="0">ववरण//</text>
+<text top="95" left="440" width="24" height="16" font="1"><b>Bid</b></text>
+<text top="94" left="464" width="7" height="20" font="0">  </text>
+<text top="95" left="471" width="53" height="16" font="1"><b>Details</b></text>
+<text top="930" left="61" width="33" height="20" font="0">ईएमड</text>
+<text top="930" left="60" width="81" height="20" font="0">ईएमड    ववरण</text>
+<text top="930" left="107" width="33" height="20" font="0">ववरण</text>
+<text top="931" left="141" width="89" height="16" font="1"><b>/EMD Detail</b></text>
+<text top="979" left="70" width="80" height="20" font="0">एडवाईजर  बक</text>
+<text top="981" left="151" width="101" height="16" font="2">/Advisory Bank</text>
+<text top="981" left="415" width="128" height="16" font="2">State Bank of India</text>
+<text top="1016" left="70" width="67" height="20" font="0">ईएमड  रािश</text>
+<text top="1018" left="136" width="92" height="16" font="2">/EMD Amount</text>
+<text top="1018" left="415" width="60" height="16" font="2">1000000</text>
+<text top="1083" left="61" width="45" height="20" font="0">ईपीबीजी</text>
+<text top="1083" left="60" width="89" height="20" font="0">ईपीबीजी   ववरण</text>
+<text top="1083" left="116" width="41" height="20" font="0">ववरण  </text>
+<text top="1084" left="156" width="95" height="16" font="1"><b>/ePBG Detail</b></text>
+<text top="1132" left="70" width="80" height="20" font="0">एडवाइजर  बक</text>
+<text top="1134" left="151" width="101" height="16" font="2">/Advisory Bank</text>
+<text top="1134" left="415" width="31" height="16" font="2">ICICI</text>
+<text top="1220" left="824" width="26" height="10" font="4">2 / 10</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="5" size="14" family="DejaVuSans" color="#0000ee"/>
+<text top="94" left="70" width="120" height="20" font="0">ईपीबीजी  ितशत (%)</text>
+<text top="95" left="190" width="145" height="16" font="2">/ePBG Percentage(%)</text>
+<text top="95" left="415" width="30" height="16" font="2">5.00</text>
+<text top="131" left="70" width="205" height="20" font="0">ईपीबीजी क  आव यक अविध (माह) </text>
+<text top="133" left="276" width="121" height="16" font="2">/Duration of ePBG</text>
+<text top="153" left="70" width="125" height="16" font="2">required (Months).</text>
+<text top="140" left="415" width="17" height="16" font="2">30</text>
+<text top="226" left="61" width="27" height="16" font="2">(a). </text>
+<text top="224" left="88" width="20" height="20" font="0">जेम</text>
+<text top="226" left="109" width="4" height="16" font="2"> </text>
+<text top="224" left="113" width="10" height="20" font="0">क</text>
+<text top="226" left="127" width="4" height="16" font="2"> </text>
+<text top="224" left="131" width="19" height="20" font="0">शत</text>
+<text top="226" left="153" width="4" height="16" font="2"> </text>
+<text top="224" left="158" width="10" height="20" font="0">के</text>
+<text top="226" left="168" width="4" height="16" font="2"> </text>
+<text top="224" left="173" width="39" height="20" font="0">अनुसार</text>
+<text top="226" left="212" width="4" height="16" font="2"> </text>
+<text top="224" left="216" width="33" height="20" font="0">ईएमड</text>
+<text top="226" left="253" width="4" height="16" font="2"> </text>
+<text top="224" left="257" width="18" height="20" font="0">छूट</text>
+<text top="226" left="275" width="4" height="16" font="2"> </text>
+<text top="224" left="279" width="10" height="20" font="0">के</text>
+<text top="226" left="290" width="4" height="16" font="2"> </text>
+<text top="224" left="294" width="36" height="20" font="0">इ छुक</text>
+<text top="226" left="330" width="4" height="16" font="2"> </text>
+<text top="224" left="339" width="22" height="20" font="0">बडर</text>
+<text top="226" left="360" width="4" height="16" font="2"> </text>
+<text top="224" left="365" width="14" height="20" font="0">को</text>
+<text top="226" left="379" width="4" height="16" font="2"> </text>
+<text top="224" left="383" width="41" height="20" font="0">संबंिधत</text>
+<text top="226" left="424" width="4" height="16" font="2"> </text>
+<text top="224" left="428" width="34" height="20" font="0">केटेगर</text>
+<text top="226" left="465" width="4" height="16" font="2"> </text>
+<text top="224" left="470" width="10" height="20" font="0">के</text>
+<text top="226" left="480" width="4" height="16" font="2"> </text>
+<text top="224" left="485" width="22" height="20" font="0">िलए</text>
+<text top="226" left="507" width="4" height="16" font="2"> </text>
+<text top="224" left="515" width="15" height="20" font="0">बड</text>
+<text top="226" left="531" width="4" height="16" font="2"> </text>
+<text top="224" left="535" width="10" height="20" font="0">के</text>
+<text top="226" left="546" width="4" height="16" font="2"> </text>
+<text top="224" left="550" width="23" height="20" font="0">साथ</text>
+<text top="226" left="573" width="4" height="16" font="2"> </text>
+<text top="224" left="577" width="18" height="20" font="0">वैध</text>
+<text top="226" left="595" width="4" height="16" font="2"> </text>
+<text top="224" left="599" width="42" height="20" font="0">समिथत</text>
+<text top="226" left="641" width="4" height="16" font="2"> </text>
+<text top="224" left="646" width="47" height="20" font="0">द तावेज़</text>
+<text top="226" left="692" width="4" height="16" font="2"> </text>
+<text top="224" left="712" width="18" height="20" font="0">तुत</text>
+<text top="226" left="730" width="4" height="16" font="2"> </text>
+<text top="224" left="735" width="26" height="20" font="0">करने</text>
+<text top="226" left="761" width="4" height="16" font="2"> </text>
+<text top="224" left="765" width="13" height="20" font="0">है।</text>
+<text top="226" left="778" width="4" height="16" font="2"> </text>
+<text top="224" left="782" width="43" height="20" font="0">एमएसई</text>
+<text top="241" left="61" width="34" height="20" font="0">केटेगर</text>
+<text top="243" left="98" width="4" height="16" font="2"> </text>
+<text top="241" left="103" width="10" height="20" font="0">के</text>
+<text top="243" left="113" width="4" height="16" font="2"> </text>
+<text top="241" left="117" width="38" height="20" font="0">अंतगत</text>
+<text top="243" left="155" width="4" height="16" font="2"> </text>
+<text top="241" left="160" width="28" height="20" font="0">केवल</text>
+<text top="243" left="188" width="4" height="16" font="2"> </text>
+<text top="241" left="192" width="39" height="20" font="0">व तुओं</text>
+<text top="243" left="231" width="4" height="16" font="2"> </text>
+<text top="241" left="236" width="10" height="20" font="0">के</text>
+<text top="243" left="246" width="4" height="16" font="2"> </text>
+<text top="241" left="250" width="22" height="20" font="0">िलए</text>
+<text top="243" left="273" width="4" height="16" font="2"> </text>
+<text top="241" left="281" width="47" height="20" font="0">विनमाता</text>
+<text top="243" left="328" width="4" height="16" font="2"> </text>
+<text top="241" left="333" width="22" height="20" font="0">तथा</text>
+<text top="243" left="355" width="4" height="16" font="2"> </text>
+<text top="241" left="359" width="36" height="20" font="0">सेवाओं</text>
+<text top="243" left="395" width="4" height="16" font="2"> </text>
+<text top="241" left="399" width="10" height="20" font="0">के</text>
+<text top="243" left="409" width="4" height="16" font="2"> </text>
+<text top="241" left="414" width="22" height="20" font="0">िलए</text>
+<text top="243" left="436" width="4" height="16" font="2"> </text>
+<text top="241" left="440" width="21" height="20" font="0">सेवा</text>
+<text top="243" left="462" width="4" height="16" font="2"> </text>
+<text top="241" left="474" width="24" height="20" font="0">दाता</text>
+<text top="243" left="498" width="4" height="16" font="2"> </text>
+<text top="241" left="502" width="33" height="20" font="0">ईएमड</text>
+<text top="243" left="538" width="4" height="16" font="2"> </text>
+<text top="241" left="543" width="10" height="20" font="0">से</text>
+<text top="243" left="552" width="4" height="16" font="2"> </text>
+<text top="241" left="557" width="18" height="20" font="0">छूट</text>
+<text top="243" left="575" width="4" height="16" font="2"> </text>
+<text top="241" left="579" width="10" height="20" font="0">के</text>
+<text top="243" left="590" width="4" height="16" font="2"> </text>
+<text top="241" left="594" width="12" height="20" font="0">पा</text>
+<text top="243" left="613" width="4" height="16" font="2"> </text>
+<text top="241" left="618" width="13" height="20" font="0">ह।</text>
+<text top="243" left="631" width="4" height="16" font="2"> </text>
+<text top="241" left="641" width="44" height="20" font="0">यापा रय</text>
+<text top="243" left="689" width="4" height="16" font="2"> </text>
+<text top="241" left="693" width="14" height="20" font="0">को</text>
+<text top="243" left="707" width="4" height="16" font="2"> </text>
+<text top="241" left="711" width="17" height="20" font="0">इस</text>
+<text top="243" left="728" width="4" height="16" font="2"> </text>
+<text top="241" left="733" width="26" height="20" font="0">नीित</text>
+<text top="243" left="759" width="4" height="16" font="2"> </text>
+<text top="241" left="763" width="10" height="20" font="0">के</text>
+<text top="243" left="773" width="4" height="16" font="2"> </text>
+<text top="241" left="778" width="27" height="20" font="0">दायरे</text>
+<text top="243" left="804" width="4" height="16" font="2"> </text>
+<text top="241" left="809" width="10" height="20" font="0">से</text>
+<text top="258" left="61" width="25" height="20" font="0">बाहर</text>
+<text top="260" left="86" width="4" height="16" font="2"> </text>
+<text top="258" left="90" width="21" height="20" font="0">रखा</text>
+<text top="260" left="111" width="4" height="16" font="2"> </text>
+<text top="258" left="116" width="22" height="20" font="0">गया</text>
+<text top="260" left="138" width="4" height="16" font="2"> </text>
+<text top="258" left="142" width="13" height="20" font="0">है।</text>
+<text top="260" left="155" width="673" height="16" font="2">/EMD EXEMPTION: The bidder seeking EMD exemption, must submit the valid supporting document</text>
+<text top="277" left="61" width="751" height="16" font="2">for the relevant category as per GeM GTC with the bid. Under MSE category, only manufacturers for goods and</text>
+<text top="293" left="61" width="769" height="16" font="2">Service Providers for Services are eligible for exemption from EMD. Traders are excluded from the purview of this</text>
+<text top="310" left="61" width="44" height="16" font="2">Policy.</text>
+<text top="344" left="61" width="23" height="16" font="2">(b).</text>
+<text top="342" left="84" width="33" height="20" font="0">ईएमड</text>
+<text top="344" left="120" width="4" height="16" font="2"> </text>
+<text top="342" left="125" width="20" height="20" font="0">और</text>
+<text top="344" left="145" width="4" height="16" font="2"> </text>
+<text top="342" left="150" width="38" height="20" font="0">संपादन</text>
+<text top="344" left="188" width="4" height="16" font="2"> </text>
+<text top="342" left="192" width="42" height="20" font="0">जमानत</text>
+<text top="344" left="234" width="4" height="16" font="2"> </text>
+<text top="342" left="239" width="24" height="20" font="0">रािश</text>
+<text top="344" left="262" width="9" height="16" font="2">, </text>
+<text top="342" left="271" width="21" height="20" font="0">जहां</text>
+<text top="344" left="293" width="4" height="16" font="2"> </text>
+<text top="342" left="297" width="16" height="20" font="0">यह</text>
+<text top="344" left="313" width="4" height="16" font="2"> </text>
+<text top="342" left="318" width="23" height="20" font="0">लागू</text>
+<text top="344" left="340" width="4" height="16" font="2"> </text>
+<text top="342" left="345" width="23" height="20" font="0">होती</text>
+<text top="344" left="368" width="4" height="16" font="2"> </text>
+<text top="342" left="372" width="7" height="20" font="0">है</text>
+<text top="344" left="380" width="9" height="16" font="2">, </text>
+<text top="342" left="388" width="36" height="20" font="0">लाभाथ</text>
+<text top="344" left="428" width="4" height="16" font="2"> </text>
+<text top="342" left="432" width="10" height="20" font="0">के</text>
+<text top="344" left="443" width="4" height="16" font="2"> </text>
+<text top="342" left="447" width="8" height="20" font="0">प</text>
+<text top="344" left="466" width="4" height="16" font="2"> </text>
+<text top="342" left="470" width="10" height="20" font="0">म</text>
+<text top="344" left="480" width="4" height="16" font="2"> </text>
+<text top="342" left="484" width="24" height="20" font="0">होनी</text>
+<text top="344" left="508" width="4" height="16" font="2"> </text>
+<text top="342" left="512" width="38" height="20" font="0">चा हए।</text>
+<text top="344" left="551" width="273" height="16" font="2"> / EMD &amp; Performance securityshould be</text>
+<text top="361" left="61" width="340" height="16" font="2">in favour of Beneficiary, wherever it is applicable. </text>
+<text top="393" left="61" width="36" height="20" font="0">लाभाथ</text>
+<text top="393" left="60" width="47" height="20" font="0">लाभाथ   </text>
+<text top="395" left="107" width="106" height="16" font="1"><b>/Beneficiary :</b> </text>
+<text top="415" left="61" width="4" height="16" font="2">.</text>
+<text top="432" left="61" width="333" height="16" font="2">As per details mentioned in request for quotation</text>
+<text top="449" left="61" width="268" height="16" font="2">(Bharat Petroleum Corporation Limited)</text>
+<text top="483" left="61" width="196" height="20" font="0">बोली  वभाजन लागू नह ं  कया गया</text>
+<text top="485" left="257" width="174" height="16" font="2">/ Bid splitting not applied.</text>
+<text top="524" left="61" width="61" height="20" font="0">एमआईआई</text>
+<text top="524" left="60" width="119" height="20" font="0">एमआईआई  अनुपालन</text>
+<text top="524" left="128" width="50" height="20" font="0">अनुपालन</text>
+<text top="525" left="179" width="121" height="16" font="1"><b>/MII Compliance</b></text>
+<text top="573" left="70" width="118" height="20" font="0">एमआईआई अनुपालन</text>
+<text top="575" left="188" width="108" height="16" font="2">/MII Compliance</text>
+<text top="575" left="415" width="24" height="16" font="2">Yes</text>
+<text top="623" left="61" width="43" height="20" font="0">एमएसई</text>
+<text top="623" left="60" width="79" height="20" font="0">एमएसई  खर द</text>
+<text top="623" left="110" width="76" height="20" font="0">खर द  वर यता</text>
+<text top="623" left="146" width="40" height="20" font="0">वर यता</text>
+<text top="624" left="186" width="200" height="16" font="1"><b>/MSE Purchase Preference</b></text>
+<text top="670" left="68" width="125" height="20" font="0">एमएसई खर द वर यता</text>
+<text top="671" left="192" width="177" height="16" font="2">/MSE Purchase Preference</text>
+<text top="671" left="414" width="24" height="16" font="2">Yes</text>
+<text top="705" left="68" width="324" height="20" font="0">सू म और लघु उ म मूल उपकरण िनमाताओं को खर द म</text>
+<text top="728" left="76" width="160" height="20" font="0">ाथिमकता, य द उनका मू य </text>
+<text top="730" left="235" width="7" height="16" font="2">L</text>
+<text top="728" left="243" width="14" height="20" font="0">1+</text>
+<text top="730" left="257" width="9" height="16" font="2">X</text>
+<text top="728" left="266" width="125" height="20" font="0">% तक क  सीमा म हो</text>
+<text top="730" left="392" width="9" height="16" font="2"> /</text>
+<text top="750" left="68" width="332" height="16" font="2">Purchase Preference to MSE OEMs available upto</text>
+<text top="767" left="68" width="132" height="16" font="2">price within L1+X%</text>
+<text top="734" left="414" width="17" height="16" font="2">15</text>
+<text top="851" left="61" width="729" height="16" font="2">1. The minimum average annual financial turnover of the bidder during the last three years, ending on 31st</text>
+<text top="868" left="61" width="772" height="16" font="2">March of the previous financial year, should be as indicated above in the bid document. Documentary evidence in</text>
+<text top="885" left="61" width="759" height="16" font="2">the form of certified Audited Balance Sheets of relevant periods or a certificate from the Chartered Accountant /</text>
+<text top="902" left="61" width="767" height="16" font="2">Cost Accountant indicating the turnover details for the relevant period shall be uploaded with the bid. In case the</text>
+<text top="919" left="61" width="747" height="16" font="2">date of constitution / incorporation of the bidder is less than 3-year-old, the average turnover in respect of the</text>
+<text top="936" left="61" width="673" height="16" font="2">completed financial years after the date of constitution shall be taken into account for this criteria. </text>
+<text top="953" left="61" width="769" height="16" font="2">2. Years of Past Experience required: The bidder must have experience for number of years as indicated above in</text>
+<text top="970" left="61" width="722" height="16" font="2">bid document (ending month of March prior to the bid opening) of providing similar type of services to any</text>
+<text top="986" left="61" width="742" height="16" font="2">Central / State Govt Organization / PSU. Copies of relevant contracts / orders to be uploaded along with bid in</text>
+<text top="1003" left="61" width="478" height="16" font="2">support of having provided services during each of the Financial year. </text>
+<text top="1020" left="61" width="733" height="16" font="2">3. Purchase preference to Micro and Small Enterprises (MSEs): Purchase preference will be given to MSEs as</text>
+<text top="1037" left="61" width="771" height="16" font="2">defined in Public Procurement Policy for Micro and Small Enterprises (MSEs) Order, 2012 dated 23.03.2012 issued</text>
+<text top="1054" left="61" width="762" height="16" font="2">by Ministry of Micro, Small and Medium Enterprises and its subsequent Orders/Notifications issued by concerned</text>
+<text top="1071" left="61" width="714" height="16" font="2">Ministry. If the bidder wants to avail the Purchase preference for services, the bidder must be the Service</text>
+<text top="1088" left="61" width="754" height="16" font="2">provider of the offered Service. Relevant documentary evidence in this regard shall be uploaded along with the</text>
+<text top="1105" left="61" width="734" height="16" font="2">bid in respect of the offered service. If L-1 is not an MSE and MSE Service Provider (s) has/have quoted price</text>
+<text top="1121" left="61" width="768" height="16" font="2">within L-1+ 15% of margin of purchase preference /price band as defined in the relevant policy, then 100% order</text>
+<text top="1138" left="61" width="739" height="16" font="2">quantity will be awarded to such MSE bidder subject to acceptance of L1 bid price. The buyers are advised to</text>
+<text top="1155" left="61" width="81" height="16" font="2">refer to the </text>
+<text top="1155" left="142" width="280" height="16" font="5"><a href="https://bidplus.gem.gov.in/bidding/downloadOmppdfile/">OM_No.1_4_2021_PPD_dated_18.05.2023</a></text>
+<text top="1155" left="422" width="342" height="16" font="2"><a href="https://bidplus.gem.gov.in/bidding/downloadOmppdfile/"> </a>for compliance of Concurrent application of Public</text>
+<text top="1220" left="824" width="26" height="10" font="4">3 / 10</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="86" left="61" width="755" height="16" font="2">Procurement Policy for Micro and Small Enterprises Order, 2012 and Public Procurement (Preference to Make in</text>
+<text top="103" left="61" width="769" height="16" font="2">India) Order, 2017. Benefits of MSE will be allowed only if the credentials of the service provider are validated on-</text>
+<text top="120" left="61" width="739" height="16" font="2">line in GeM profile as well as validated and approved by the Buyer after evaluation of submitted documents. </text>
+<text top="137" left="61" width="770" height="16" font="2">4. If L-1 is not an MSE and MSE Service Provider (s) has/have quoted price within L-1+ 15% of margin of purchase</text>
+<text top="154" left="61" width="756" height="16" font="2">preference /price band as defined in the relevant policy, then 100% order quantity will be awarded to such MSE</text>
+<text top="171" left="61" width="306" height="16" font="2">bidder subject to acceptance of L1 bid price. </text>
+<text top="188" left="61" width="763" height="16" font="2">5. Estimated Bid Value indicated above is being declared solely for the purpose of guidance on EMD amount and</text>
+<text top="205" left="61" width="753" height="16" font="2">for determining the Eligibility Criteria related to Turn Over, Past Performance and Project / Past Experience etc.</text>
+<text top="221" left="61" width="728" height="16" font="2">This has no relevance or bearing on the price to be quoted by the bidders and is also not going to have any</text>
+<text top="238" left="61" width="722" height="16" font="2">impact on bid participation. Also this is not going to be used as a criteria in determining reasonableness of</text>
+<text top="255" left="61" width="734" height="16" font="2">quoted prices which would be determined by the buyer based on its own assessment of reasonableness and</text>
+<text top="272" left="61" width="392" height="16" font="2">based on competitive prices received in Bid / RA process. </text>
+<text top="308" left="61" width="36" height="20" font="0">ए सेल</text>
+<text top="308" left="60" width="53" height="20" font="0">ए सेल  म</text>
+<text top="308" left="103" width="57" height="20" font="0">म  अपलोड</text>
+<text top="308" left="120" width="70" height="20" font="0">अपलोड   कए</text>
+<text top="308" left="170" width="49" height="20" font="0">कए  जाने</text>
+<text top="308" left="196" width="41" height="20" font="0">जाने  क</text>
+<text top="308" left="225" width="82" height="20" font="0">क   आव यकता</text>
+<text top="308" left="246" width="68" height="20" font="0">आव यकता  </text>
+<text top="309" left="315" width="186" height="16" font="1"><b>/Excel Upload Required :</b></text>
+<text top="346" left="61" width="107" height="16" font="2">Bill of qualtity - </text>
+<text top="346" left="169" width="117" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/excel/bid-9201620/1775641705.xlsx">1775641705.xlsx</a></text>
+<text top="382" left="61" width="34" height="20" font="0">अित र</text>
+<text top="382" left="60" width="93" height="20" font="0">अित र   यो यता</text>
+<text top="382" left="112" width="56" height="20" font="0">यो यता /</text>
+<text top="382" left="153" width="64" height="20" font="0"> /आव यक</text>
+<text top="382" left="168" width="74" height="20" font="0">आव यक  डेटा</text>
+<text top="382" left="223" width="19" height="20" font="0">डेटा</text>
+<text top="383" left="242" width="299" height="16" font="1"><b>/Additional Qualification/Data Required</b></text>
+<text top="421" left="61" width="691" height="16" font="1"><b>Introduction about the project /services being proposed for procurement using custom bid</b></text>
+<text top="437" left="61" width="102" height="16" font="1"><b>functionality:</b></text>
+<text top="437" left="163" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645837.pdf">1775645837.pdf</a></text>
+<text top="468" left="61" width="398" height="16" font="1"><b>Pre Qualification Criteria ( PQC ) etc if any required<a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645843.pdf">:</a></b></text>
+<text top="468" left="456" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645843.pdf">1775645843.pdf</a></text>
+<text top="498" left="61" width="124" height="16" font="1"><b>Payment Terms:</b></text>
+<text top="498" left="186" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645893.pdf">1775645893.pdf</a></text>
+<text top="529" left="61" width="115" height="16" font="1"><b>Scope of Work<a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645912.pdf">:</a></b></text>
+<text top="529" left="176" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645912.pdf">1775645912.pdf</a></text>
+<text top="559" left="61" width="76" height="16" font="1"><b>Penalties:</b></text>
+<text top="559" left="137" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645932.pdf">1775645932.pdf</a></text>
+<text top="589" left="61" width="239" height="16" font="1"><b>GEM Availability Report ( GAR)<a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645951.pdf">:</a></b></text>
+<text top="589" left="299" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775645951.pdf">1775645951.pdf</a></text>
+<text top="620" left="61" width="451" height="16" font="1"><b>Quantifiable Specification / Standards of The Service/ BOQ<a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775646965.pdf">:</a></b></text>
+<text top="620" left="509" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775646965.pdf">1775646965.pdf</a></text>
+<text top="650" left="61" width="704" height="16" font="1"><b>Undertaking of Competent Authority is mandatory to create Custom Bid for Services. Please</b></text>
+<text top="667" left="61" width="378" height="16" font="1"><b>download standard format document and upload:</b></text>
+<text top="667" left="439" width="112" height="16" font="5"><a href="https://bidplus.gem.gov.in/resources/upload_nas/AprQ226/bidding/biddoc/bid-9201620/1775646986.pdf">1775646986.pdf</a></text>
+<text top="706" left="61" width="125" height="16" font="1"><b>Pre Bid Detail(s)</b></text>
+<text top="745" left="68" width="27" height="20" font="0">मू य</text>
+<text top="745" left="67" width="27" height="20" font="0">मू य</text>
+<text top="747" left="94" width="5" height="16" font="1"><b> </b></text>
+<text top="745" left="99" width="43" height="20" font="0">िभ नता</text>
+<text top="745" left="98" width="43" height="20" font="0">िभ नता</text>
+<text top="747" left="142" width="5" height="16" font="1"><b> </b></text>
+<text top="745" left="146" width="19" height="20" font="0">खंड</text>
+<text top="745" left="146" width="19" height="20" font="0">खंड</text>
+<text top="747" left="165" width="5" height="16" font="1"><b> </b></text>
+<text top="745" left="170" width="47" height="20" font="0">द तावेज़</text>
+<text top="745" left="169" width="47" height="20" font="0">द तावेज़</text>
+<text top="747" left="216" width="61" height="16" font="1"><b>/Pre-Bid</b></text>
+<text top="764" left="68" width="111" height="16" font="1"><b>Date and Time</b></text>
+<text top="753" left="306" width="3" height="20" font="0">ीी</text>
+<text top="755" left="310" width="6" height="16" font="1"><b>-</b></text>
+<text top="753" left="320" width="15" height="20" font="0">बड</text>
+<text top="753" left="319" width="15" height="20" font="0">बड</text>
+<text top="755" left="335" width="5" height="16" font="1"><b> </b></text>
+<text top="753" left="347" width="22" height="20" font="0">थान</text>
+<text top="753" left="347" width="22" height="20" font="0">थान</text>
+<text top="755" left="370" width="112" height="16" font="1"><b>/Pre-Bid Venue</b></text>
+<text top="792" left="68" width="143" height="16" font="2">17-04-2026 11:00:00</text>
+<text top="792" left="298" width="218" height="16" font="2">As per details mentioned in RFQ</text>
+<text top="830" left="61" width="680" height="18" font="3"><b>Custom Bid For Services - Supply And Installation Of New CAPH &amp; GAPH ( 1 )</b></text>
+<text top="868" left="61" width="43" height="20" font="0">तकनीक</text>
+<text top="868" left="60" width="105" height="20" font="0">तकनीक    विश याँ</text>
+<text top="868" left="117" width="54" height="20" font="0">विश याँ  </text>
+<text top="869" left="172" width="188" height="16" font="1"><b>/Technical Specifications</b></text>
+<text top="914" left="252" width="33" height="20" font="0">ववरण</text>
+<text top="914" left="252" width="33" height="20" font="0">ववरण</text>
+<text top="916" left="285" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="914" left="660" width="27" height="20" font="0">मू य</text>
+<text top="914" left="660" width="27" height="20" font="0">मू य</text>
+<text top="916" left="687" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="953" left="70" width="20" height="20" font="0">कोर</text>
+<text top="953" left="69" width="20" height="20" font="0">कोर</text>
+<text top="955" left="90" width="49" height="16" font="1"><b> / Core</b></text>
+<text top="989" left="70" width="475" height="16" font="2">Description /Nomenclature of Service Proposed for procurement using</text>
+<text top="1006" left="70" width="163" height="16" font="2">custom bid functionality</text>
+<text top="989" left="585" width="205" height="16" font="2">Supply and Installation of New</text>
+<text top="1006" left="585" width="94" height="16" font="2">CAPH &amp; GAPH</text>
+<text top="1036" left="70" width="301" height="16" font="2">Regulatory/ Statutory Compliance of Service</text>
+<text top="1036" left="585" width="25" height="16" font="2">YES</text>
+<text top="1066" left="70" width="299" height="16" font="2">Compliance of Service to SOW, STC, SLA etc</text>
+<text top="1066" left="585" width="25" height="16" font="2">YES</text>
+<text top="1098" left="70" width="39" height="20" font="0">एडऑन</text>
+<text top="1098" left="69" width="46" height="20" font="0">एडऑन  </text>
+<text top="1100" left="115" width="74" height="16" font="1"><b>/Addon(s)</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">4 / 10</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="88" left="68" width="16" height="20" font="0">े ता</text>
+<text top="88" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="88" left="98" width="66" height="20" font="0">ारा  िनधा रत</text>
+<text top="88" left="118" width="97" height="20" font="0">िनधा रत   यूनतम</text>
+<text top="88" left="177" width="71" height="20" font="0">यूनतम  मू य</text>
+<text top="88" left="221" width="27" height="20" font="0">मू य</text>
+<text top="90" left="249" width="296" height="16" font="1"><b>/Minimum Floor Price defined by Buyer</b></text>
+<text top="134" left="77" width="181" height="20" font="0">े ता  ारा िनधा रत  यूनतम मू य</text>
+<text top="136" left="258" width="142" height="16" font="2">/Minimum Floor Price</text>
+<text top="156" left="70" width="115" height="16" font="2">defined by Buyer</text>
+<text top="144" left="415" width="18" height="16" font="2">No</text>
+<text top="214" left="61" width="34" height="20" font="0">अित र</text>
+<text top="214" left="60" width="79" height="20" font="0">अित र    विश</text>
+<text top="214" left="116" width="88" height="20" font="0">विश   द तावेज़</text>
+<text top="214" left="158" width="54" height="20" font="0">द तावेज़  </text>
+<text top="216" left="210" width="276" height="16" font="1"><b>/Additional Specification Documents</b></text>
+<text top="284" left="61" width="39" height="20" font="0">परे षती</text>
+<text top="284" left="60" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="284" left="112" width="91" height="20" font="0">रपो टग  अिधकार</text>
+<text top="284" left="158" width="55" height="20" font="0">अिधकार   </text>
+<text top="286" left="214" width="332" height="16" font="1"><b>/Consignees/Reporting Officer and Quantity</b></text>
+<text top="341" left="83" width="18" height="20" font="0">.सं.</text>
+<text top="341" left="82" width="18" height="20" font="0">.सं.</text>
+<text top="343" left="101" width="31" height="16" font="1"><b>/S.N</b></text>
+<text top="363" left="95" width="14" height="16" font="1"><b>o.</b></text>
+<text top="330" left="173" width="39" height="20" font="0">परे षती</text>
+<text top="330" left="173" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="330" left="225" width="39" height="20" font="0">रपो टग</text>
+<text top="354" left="149" width="45" height="20" font="0">अिधकार</text>
+<text top="354" left="149" width="55" height="20" font="0">अिधकार   </text>
+<text top="355" left="204" width="84" height="16" font="1"><b>/Consignee</b></text>
+<text top="376" left="153" width="132" height="16" font="1"><b>Reporting/Officer</b></text>
+<text top="350" left="367" width="21" height="20" font="0">पता</text>
+<text top="350" left="366" width="21" height="20" font="0">पता</text>
+<text top="352" left="387" width="66" height="16" font="1"><b>/Address</b></text>
+<text top="352" left="548" width="66" height="16" font="1"><b>Quantity</b></text>
+<text top="333" left="679" width="34" height="20" font="0">अित र</text>
+<text top="333" left="678" width="34" height="20" font="0">अित र</text>
+<text top="335" left="724" width="5" height="16" font="1"><b> </b></text>
+<text top="333" left="729" width="61" height="20" font="0">आव यकता</text>
+<text top="333" left="728" width="61" height="20" font="0">आव यकता</text>
+<text top="352" left="692" width="83" height="16" font="1"><b>/Additional</b></text>
+<text top="369" left="685" width="98" height="16" font="1"><b>Requirement</b></text>
+<text top="425" left="70" width="9" height="16" font="2">1</text>
+<text top="425" left="149" width="85" height="16" font="2">Harsh Gupta</text>
+<text top="408" left="303" width="198" height="16" font="2">400071,BHARAT PETROLEUM</text>
+<text top="425" left="303" width="208" height="16" font="2">CORPN LTD MUMBAI REFINERY</text>
+<text top="442" left="303" width="138" height="16" font="2">, MAHUL , CHEMBUR</text>
+<text top="408" left="531" width="55" height="16" font="2">Project /</text>
+<text top="425" left="531" width="66" height="16" font="2">Lumpsum</text>
+<text top="442" left="531" width="41" height="16" font="2">Based</text>
+<text top="425" left="646" width="24" height="16" font="2">N/A</text>
+<text top="483" left="61" width="749" height="18" font="3"><b>Custom Bid For Services - Revamp Of Radiant Section Including Associated Jobs And</b></text>
+<text top="502" left="61" width="182" height="18" font="3"><b>Material Supply ( 1 )</b></text>
+<text top="539" left="61" width="43" height="20" font="0">तकनीक</text>
+<text top="539" left="60" width="105" height="20" font="0">तकनीक    विश याँ</text>
+<text top="539" left="117" width="54" height="20" font="0">विश याँ  </text>
+<text top="541" left="172" width="188" height="16" font="1"><b>/Technical Specifications</b></text>
+<text top="585" left="211" width="33" height="20" font="0">ववरण</text>
+<text top="585" left="210" width="33" height="20" font="0">ववरण</text>
+<text top="587" left="244" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="585" left="619" width="27" height="20" font="0">मू य</text>
+<text top="585" left="618" width="27" height="20" font="0">मू य</text>
+<text top="587" left="646" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="625" left="70" width="20" height="20" font="0">कोर</text>
+<text top="625" left="69" width="20" height="20" font="0">कोर</text>
+<text top="626" left="90" width="49" height="16" font="1"><b> / Core</b></text>
+<text top="660" left="70" width="342" height="16" font="2">Description /Nomenclature of Service Proposed for</text>
+<text top="677" left="70" width="296" height="16" font="2">procurement using custom bid functionality</text>
+<text top="660" left="502" width="320" height="16" font="2">Revamp of radiant section including associated</text>
+<text top="677" left="502" width="166" height="16" font="2">jobs and material supply</text>
+<text top="707" left="70" width="301" height="16" font="2">Regulatory/ Statutory Compliance of Service</text>
+<text top="707" left="502" width="25" height="16" font="2">YES</text>
+<text top="738" left="70" width="299" height="16" font="2">Compliance of Service to SOW, STC, SLA etc</text>
+<text top="738" left="502" width="25" height="16" font="2">YES</text>
+<text top="770" left="70" width="39" height="20" font="0">एडऑन</text>
+<text top="770" left="69" width="46" height="20" font="0">एडऑन  </text>
+<text top="772" left="115" width="74" height="16" font="1"><b>/Addon(s)</b></text>
+<text top="846" left="68" width="16" height="20" font="0">े ता</text>
+<text top="846" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="846" left="98" width="66" height="20" font="0">ारा  िनधा रत</text>
+<text top="846" left="118" width="97" height="20" font="0">िनधा रत   यूनतम</text>
+<text top="846" left="177" width="71" height="20" font="0">यूनतम  मू य</text>
+<text top="846" left="221" width="27" height="20" font="0">मू य</text>
+<text top="848" left="249" width="296" height="16" font="1"><b>/Minimum Floor Price defined by Buyer</b></text>
+<text top="893" left="77" width="181" height="20" font="0">े ता  ारा िनधा रत  यूनतम मू य</text>
+<text top="894" left="258" width="142" height="16" font="2">/Minimum Floor Price</text>
+<text top="914" left="70" width="115" height="16" font="2">defined by Buyer</text>
+<text top="902" left="415" width="18" height="16" font="2">No</text>
+<text top="972" left="61" width="34" height="20" font="0">अित र</text>
+<text top="972" left="60" width="79" height="20" font="0">अित र    विश</text>
+<text top="972" left="116" width="88" height="20" font="0">विश   द तावेज़</text>
+<text top="972" left="158" width="54" height="20" font="0">द तावेज़  </text>
+<text top="974" left="210" width="276" height="16" font="1"><b>/Additional Specification Documents</b></text>
+<text top="1042" left="61" width="39" height="20" font="0">परे षती</text>
+<text top="1042" left="60" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="1042" left="112" width="91" height="20" font="0">रपो टग  अिधकार</text>
+<text top="1042" left="158" width="55" height="20" font="0">अिधकार   </text>
+<text top="1044" left="214" width="332" height="16" font="1"><b>/Consignees/Reporting Officer and Quantity</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">5 / 10</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="108" left="83" width="18" height="20" font="0">.सं.</text>
+<text top="108" left="82" width="18" height="20" font="0">.सं.</text>
+<text top="110" left="101" width="31" height="16" font="1"><b>/S.N</b></text>
+<text top="130" left="95" width="14" height="16" font="1"><b>o.</b></text>
+<text top="97" left="173" width="39" height="20" font="0">परे षती</text>
+<text top="97" left="173" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="97" left="225" width="39" height="20" font="0">रपो टग</text>
+<text top="121" left="149" width="45" height="20" font="0">अिधकार</text>
+<text top="121" left="149" width="55" height="20" font="0">अिधकार   </text>
+<text top="122" left="204" width="84" height="16" font="1"><b>/Consignee</b></text>
+<text top="143" left="153" width="132" height="16" font="1"><b>Reporting/Officer</b></text>
+<text top="117" left="367" width="21" height="20" font="0">पता</text>
+<text top="117" left="366" width="21" height="20" font="0">पता</text>
+<text top="119" left="387" width="66" height="16" font="1"><b>/Address</b></text>
+<text top="119" left="548" width="66" height="16" font="1"><b>Quantity</b></text>
+<text top="101" left="679" width="34" height="20" font="0">अित र</text>
+<text top="101" left="678" width="34" height="20" font="0">अित र</text>
+<text top="102" left="724" width="5" height="16" font="1"><b> </b></text>
+<text top="101" left="729" width="61" height="20" font="0">आव यकता</text>
+<text top="101" left="728" width="61" height="20" font="0">आव यकता</text>
+<text top="119" left="692" width="83" height="16" font="1"><b>/Additional</b></text>
+<text top="136" left="685" width="98" height="16" font="1"><b>Requirement</b></text>
+<text top="192" left="70" width="9" height="16" font="2">1</text>
+<text top="192" left="149" width="85" height="16" font="2">Harsh Gupta</text>
+<text top="175" left="303" width="198" height="16" font="2">400071,BHARAT PETROLEUM</text>
+<text top="192" left="303" width="208" height="16" font="2">CORPN LTD MUMBAI REFINERY</text>
+<text top="209" left="303" width="138" height="16" font="2">, MAHUL , CHEMBUR</text>
+<text top="175" left="531" width="55" height="16" font="2">Project /</text>
+<text top="192" left="531" width="66" height="16" font="2">Lumpsum</text>
+<text top="209" left="531" width="41" height="16" font="2">Based</text>
+<text top="192" left="646" width="24" height="16" font="2">N/A</text>
+<text top="250" left="61" width="739" height="18" font="3"><b>Custom Bid For Services - Revamp Of Convection Section Including Associated Jobs</b></text>
+<text top="269" left="61" width="222" height="18" font="3"><b>And Material Supply ( 1 )</b></text>
+<text top="306" left="61" width="43" height="20" font="0">तकनीक</text>
+<text top="306" left="60" width="105" height="20" font="0">तकनीक    विश याँ</text>
+<text top="306" left="117" width="54" height="20" font="0">विश याँ  </text>
+<text top="308" left="172" width="188" height="16" font="1"><b>/Technical Specifications</b></text>
+<text top="353" left="206" width="33" height="20" font="0">ववरण</text>
+<text top="353" left="206" width="33" height="20" font="0">ववरण</text>
+<text top="354" left="239" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="353" left="614" width="27" height="20" font="0">मू य</text>
+<text top="353" left="614" width="27" height="20" font="0">मू य</text>
+<text top="354" left="641" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="392" left="70" width="20" height="20" font="0">कोर</text>
+<text top="392" left="69" width="20" height="20" font="0">कोर</text>
+<text top="394" left="90" width="49" height="16" font="1"><b> / Core</b></text>
+<text top="427" left="70" width="342" height="16" font="2">Description /Nomenclature of Service Proposed for</text>
+<text top="444" left="70" width="296" height="16" font="2">procurement using custom bid functionality</text>
+<text top="427" left="493" width="269" height="16" font="2">Revamp of convection section including</text>
+<text top="444" left="493" width="243" height="16" font="2">associated jobs and material supply</text>
+<text top="475" left="70" width="301" height="16" font="2">Regulatory/ Statutory Compliance of Service</text>
+<text top="475" left="493" width="25" height="16" font="2">YES</text>
+<text top="505" left="70" width="299" height="16" font="2">Compliance of Service to SOW, STC, SLA etc</text>
+<text top="505" left="493" width="25" height="16" font="2">YES</text>
+<text top="537" left="70" width="39" height="20" font="0">एडऑन</text>
+<text top="537" left="69" width="46" height="20" font="0">एडऑन  </text>
+<text top="539" left="115" width="74" height="16" font="1"><b>/Addon(s)</b></text>
+<text top="614" left="68" width="16" height="20" font="0">े ता</text>
+<text top="614" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="614" left="98" width="66" height="20" font="0">ारा  िनधा रत</text>
+<text top="614" left="118" width="97" height="20" font="0">िनधा रत   यूनतम</text>
+<text top="614" left="177" width="71" height="20" font="0">यूनतम  मू य</text>
+<text top="614" left="221" width="27" height="20" font="0">मू य</text>
+<text top="615" left="249" width="296" height="16" font="1"><b>/Minimum Floor Price defined by Buyer</b></text>
+<text top="660" left="77" width="181" height="20" font="0">े ता  ारा िनधा रत  यूनतम मू य</text>
+<text top="661" left="258" width="142" height="16" font="2">/Minimum Floor Price</text>
+<text top="682" left="70" width="115" height="16" font="2">defined by Buyer</text>
+<text top="669" left="415" width="18" height="16" font="2">No</text>
+<text top="740" left="61" width="34" height="20" font="0">अित र</text>
+<text top="740" left="60" width="79" height="20" font="0">अित र    विश</text>
+<text top="740" left="116" width="88" height="20" font="0">विश   द तावेज़</text>
+<text top="740" left="158" width="54" height="20" font="0">द तावेज़  </text>
+<text top="741" left="210" width="276" height="16" font="1"><b>/Additional Specification Documents</b></text>
+<text top="809" left="61" width="39" height="20" font="0">परे षती</text>
+<text top="809" left="60" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="809" left="112" width="91" height="20" font="0">रपो टग  अिधकार</text>
+<text top="809" left="158" width="55" height="20" font="0">अिधकार   </text>
+<text top="811" left="214" width="332" height="16" font="1"><b>/Consignees/Reporting Officer and Quantity</b></text>
+<text top="867" left="83" width="18" height="20" font="0">.सं.</text>
+<text top="867" left="82" width="18" height="20" font="0">.सं.</text>
+<text top="868" left="101" width="31" height="16" font="1"><b>/S.N</b></text>
+<text top="889" left="95" width="14" height="16" font="1"><b>o.</b></text>
+<text top="855" left="173" width="39" height="20" font="0">परे षती</text>
+<text top="855" left="173" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="855" left="225" width="39" height="20" font="0">रपो टग</text>
+<text top="879" left="149" width="45" height="20" font="0">अिधकार</text>
+<text top="879" left="149" width="55" height="20" font="0">अिधकार   </text>
+<text top="881" left="204" width="84" height="16" font="1"><b>/Consignee</b></text>
+<text top="901" left="153" width="132" height="16" font="1"><b>Reporting/Officer</b></text>
+<text top="876" left="367" width="21" height="20" font="0">पता</text>
+<text top="876" left="366" width="21" height="20" font="0">पता</text>
+<text top="877" left="387" width="66" height="16" font="1"><b>/Address</b></text>
+<text top="877" left="548" width="66" height="16" font="1"><b>Quantity</b></text>
+<text top="859" left="679" width="34" height="20" font="0">अित र</text>
+<text top="859" left="678" width="34" height="20" font="0">अित र</text>
+<text top="860" left="724" width="5" height="16" font="1"><b> </b></text>
+<text top="859" left="729" width="61" height="20" font="0">आव यकता</text>
+<text top="859" left="728" width="61" height="20" font="0">आव यकता</text>
+<text top="877" left="692" width="83" height="16" font="1"><b>/Additional</b></text>
+<text top="894" left="685" width="98" height="16" font="1"><b>Requirement</b></text>
+<text top="950" left="70" width="9" height="16" font="2">1</text>
+<text top="950" left="149" width="85" height="16" font="2">Harsh Gupta</text>
+<text top="934" left="303" width="198" height="16" font="2">400071,BHARAT PETROLEUM</text>
+<text top="950" left="303" width="208" height="16" font="2">CORPN LTD MUMBAI REFINERY</text>
+<text top="967" left="303" width="138" height="16" font="2">, MAHUL , CHEMBUR</text>
+<text top="934" left="531" width="55" height="16" font="2">Project /</text>
+<text top="950" left="531" width="66" height="16" font="2">Lumpsum</text>
+<text top="967" left="531" width="41" height="16" font="2">Based</text>
+<text top="950" left="646" width="24" height="16" font="2">N/A</text>
+<text top="1008" left="61" width="759" height="18" font="3"><b>Custom Bid For Services - Supply And Service Cost For Electrical And Instrument Jobs</b></text>
+<text top="1027" left="61" width="36" height="18" font="3"><b>( 1 )</b></text>
+<text top="1065" left="61" width="43" height="20" font="0">तकनीक</text>
+<text top="1065" left="60" width="105" height="20" font="0">तकनीक    विश याँ</text>
+<text top="1065" left="117" width="54" height="20" font="0">विश याँ  </text>
+<text top="1066" left="172" width="188" height="16" font="1"><b>/Technical Specifications</b></text>
+<text top="1111" left="231" width="33" height="20" font="0">ववरण</text>
+<text top="1111" left="230" width="33" height="20" font="0">ववरण</text>
+<text top="1112" left="264" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="1111" left="639" width="27" height="20" font="0">मू य</text>
+<text top="1111" left="638" width="27" height="20" font="0">मू य</text>
+<text top="1112" left="666" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">6 / 10</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="133" left="70" width="20" height="20" font="0">कोर</text>
+<text top="133" left="69" width="20" height="20" font="0">कोर</text>
+<text top="135" left="90" width="49" height="16" font="1"><b> / Core</b></text>
+<text top="169" left="70" width="434" height="16" font="2">Description /Nomenclature of Service Proposed for procurement</text>
+<text top="185" left="70" width="204" height="16" font="2">using custom bid functionality</text>
+<text top="169" left="542" width="279" height="16" font="2">Supply and service cost for Electrical and</text>
+<text top="185" left="542" width="106" height="16" font="2">Instrument Jobs</text>
+<text top="216" left="70" width="301" height="16" font="2">Regulatory/ Statutory Compliance of Service</text>
+<text top="216" left="542" width="25" height="16" font="2">YES</text>
+<text top="246" left="70" width="299" height="16" font="2">Compliance of Service to SOW, STC, SLA etc</text>
+<text top="246" left="542" width="25" height="16" font="2">YES</text>
+<text top="278" left="70" width="39" height="20" font="0">एडऑन</text>
+<text top="278" left="69" width="46" height="20" font="0">एडऑन  </text>
+<text top="280" left="115" width="74" height="16" font="1"><b>/Addon(s)</b></text>
+<text top="96" left="231" width="33" height="20" font="0">ववरण</text>
+<text top="96" left="230" width="33" height="20" font="0">ववरण</text>
+<text top="98" left="264" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="96" left="639" width="27" height="20" font="0">मू य</text>
+<text top="96" left="638" width="27" height="20" font="0">मू य</text>
+<text top="98" left="666" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="355" left="68" width="16" height="20" font="0">े ता</text>
+<text top="355" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="355" left="98" width="66" height="20" font="0">ारा  िनधा रत</text>
+<text top="355" left="118" width="97" height="20" font="0">िनधा रत   यूनतम</text>
+<text top="355" left="177" width="71" height="20" font="0">यूनतम  मू य</text>
+<text top="355" left="221" width="27" height="20" font="0">मू य</text>
+<text top="356" left="249" width="296" height="16" font="1"><b>/Minimum Floor Price defined by Buyer</b></text>
+<text top="401" left="77" width="181" height="20" font="0">े ता  ारा िनधा रत  यूनतम मू य</text>
+<text top="403" left="258" width="142" height="16" font="2">/Minimum Floor Price</text>
+<text top="423" left="70" width="115" height="16" font="2">defined by Buyer</text>
+<text top="410" left="415" width="18" height="16" font="2">No</text>
+<text top="481" left="61" width="34" height="20" font="0">अित र</text>
+<text top="481" left="60" width="79" height="20" font="0">अित र    विश</text>
+<text top="481" left="116" width="88" height="20" font="0">विश   द तावेज़</text>
+<text top="481" left="158" width="54" height="20" font="0">द तावेज़  </text>
+<text top="482" left="210" width="276" height="16" font="1"><b>/Additional Specification Documents</b></text>
+<text top="551" left="61" width="39" height="20" font="0">परे षती</text>
+<text top="551" left="60" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="551" left="112" width="91" height="20" font="0">रपो टग  अिधकार</text>
+<text top="551" left="158" width="55" height="20" font="0">अिधकार   </text>
+<text top="552" left="214" width="332" height="16" font="1"><b>/Consignees/Reporting Officer and Quantity</b></text>
+<text top="608" left="83" width="18" height="20" font="0">.सं.</text>
+<text top="608" left="82" width="18" height="20" font="0">.सं.</text>
+<text top="610" left="101" width="31" height="16" font="1"><b>/S.N</b></text>
+<text top="630" left="95" width="14" height="16" font="1"><b>o.</b></text>
+<text top="597" left="173" width="39" height="20" font="0">परे षती</text>
+<text top="597" left="173" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="597" left="225" width="39" height="20" font="0">रपो टग</text>
+<text top="620" left="149" width="45" height="20" font="0">अिधकार</text>
+<text top="620" left="149" width="55" height="20" font="0">अिधकार   </text>
+<text top="622" left="204" width="84" height="16" font="1"><b>/Consignee</b></text>
+<text top="642" left="153" width="132" height="16" font="1"><b>Reporting/Officer</b></text>
+<text top="617" left="367" width="21" height="20" font="0">पता</text>
+<text top="617" left="366" width="21" height="20" font="0">पता</text>
+<text top="619" left="387" width="66" height="16" font="1"><b>/Address</b></text>
+<text top="619" left="548" width="66" height="16" font="1"><b>Quantity</b></text>
+<text top="600" left="679" width="34" height="20" font="0">अित र</text>
+<text top="600" left="678" width="34" height="20" font="0">अित र</text>
+<text top="602" left="724" width="5" height="16" font="1"><b> </b></text>
+<text top="600" left="729" width="61" height="20" font="0">आव यकता</text>
+<text top="600" left="728" width="61" height="20" font="0">आव यकता</text>
+<text top="619" left="692" width="83" height="16" font="1"><b>/Additional</b></text>
+<text top="635" left="685" width="98" height="16" font="1"><b>Requirement</b></text>
+<text top="692" left="70" width="9" height="16" font="2">1</text>
+<text top="692" left="149" width="85" height="16" font="2">Harsh Gupta</text>
+<text top="675" left="303" width="198" height="16" font="2">400071,BHARAT PETROLEUM</text>
+<text top="692" left="303" width="208" height="16" font="2">CORPN LTD MUMBAI REFINERY</text>
+<text top="709" left="303" width="138" height="16" font="2">, MAHUL , CHEMBUR</text>
+<text top="675" left="531" width="55" height="16" font="2">Project /</text>
+<text top="692" left="531" width="66" height="16" font="2">Lumpsum</text>
+<text top="709" left="531" width="41" height="16" font="2">Based</text>
+<text top="692" left="646" width="24" height="16" font="2">N/A</text>
+<text top="749" left="61" width="647" height="18" font="3"><b>Custom Bid For Services - SOR Jobs For Heater Miscellaneous Works ( 1 )</b></text>
+<text top="787" left="61" width="43" height="20" font="0">तकनीक</text>
+<text top="787" left="60" width="105" height="20" font="0">तकनीक    विश याँ</text>
+<text top="787" left="117" width="54" height="20" font="0">विश याँ  </text>
+<text top="788" left="172" width="188" height="16" font="1"><b>/Technical Specifications</b></text>
+<text top="833" left="260" width="33" height="20" font="0">ववरण</text>
+<text top="833" left="260" width="33" height="20" font="0">ववरण</text>
+<text top="835" left="293" width="108" height="16" font="1"><b>/ Specification</b></text>
+<text top="833" left="668" width="27" height="20" font="0">मू य</text>
+<text top="833" left="668" width="27" height="20" font="0">मू य</text>
+<text top="835" left="695" width="60" height="16" font="1"><b>/ Values</b></text>
+<text top="872" left="70" width="20" height="20" font="0">कोर</text>
+<text top="872" left="69" width="20" height="20" font="0">कोर</text>
+<text top="874" left="90" width="49" height="16" font="1"><b> / Core</b></text>
+<text top="908" left="70" width="475" height="16" font="2">Description /Nomenclature of Service Proposed for procurement using</text>
+<text top="925" left="70" width="163" height="16" font="2">custom bid functionality</text>
+<text top="908" left="601" width="132" height="16" font="2">SOR Jobs for heater</text>
+<text top="925" left="601" width="140" height="16" font="2">miscellaneous works</text>
+<text top="955" left="70" width="301" height="16" font="2">Regulatory/ Statutory Compliance of Service</text>
+<text top="955" left="601" width="25" height="16" font="2">YES</text>
+<text top="985" left="70" width="299" height="16" font="2">Compliance of Service to SOW, STC, SLA etc</text>
+<text top="985" left="601" width="25" height="16" font="2">YES</text>
+<text top="1017" left="70" width="39" height="20" font="0">एडऑन</text>
+<text top="1017" left="69" width="46" height="20" font="0">एडऑन  </text>
+<text top="1019" left="115" width="74" height="16" font="1"><b>/Addon(s)</b></text>
+<text top="1094" left="68" width="16" height="20" font="0">े ता</text>
+<text top="1094" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="1094" left="98" width="66" height="20" font="0">ारा  िनधा रत</text>
+<text top="1094" left="118" width="97" height="20" font="0">िनधा रत   यूनतम</text>
+<text top="1094" left="177" width="71" height="20" font="0">यूनतम  मू य</text>
+<text top="1094" left="221" width="27" height="20" font="0">मू य</text>
+<text top="1096" left="249" width="296" height="16" font="1"><b>/Minimum Floor Price defined by Buyer</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">7 / 10</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="6" size="20" family="DejaVuSans" color="#000000"/>
+<text top="97" left="77" width="181" height="20" font="0">े ता  ारा िनधा रत  यूनतम मू य</text>
+<text top="99" left="258" width="142" height="16" font="2">/Minimum Floor Price</text>
+<text top="119" left="70" width="115" height="16" font="2">defined by Buyer</text>
+<text top="107" left="415" width="18" height="16" font="2">No</text>
+<text top="177" left="61" width="34" height="20" font="0">अित र</text>
+<text top="177" left="60" width="79" height="20" font="0">अित र    विश</text>
+<text top="177" left="116" width="88" height="20" font="0">विश   द तावेज़</text>
+<text top="177" left="158" width="54" height="20" font="0">द तावेज़  </text>
+<text top="179" left="210" width="276" height="16" font="1"><b>/Additional Specification Documents</b></text>
+<text top="247" left="61" width="39" height="20" font="0">परे षती</text>
+<text top="247" left="60" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="247" left="112" width="91" height="20" font="0">रपो टग  अिधकार</text>
+<text top="247" left="158" width="55" height="20" font="0">अिधकार   </text>
+<text top="248" left="214" width="332" height="16" font="1"><b>/Consignees/Reporting Officer and Quantity</b></text>
+<text top="304" left="83" width="18" height="20" font="0">.सं.</text>
+<text top="304" left="82" width="18" height="20" font="0">.सं.</text>
+<text top="306" left="101" width="31" height="16" font="1"><b>/S.N</b></text>
+<text top="326" left="95" width="14" height="16" font="1"><b>o.</b></text>
+<text top="293" left="173" width="39" height="20" font="0">परे षती</text>
+<text top="293" left="173" width="92" height="20" font="0">परे षती// रपो टग</text>
+<text top="293" left="225" width="39" height="20" font="0">रपो टग</text>
+<text top="317" left="149" width="45" height="20" font="0">अिधकार</text>
+<text top="317" left="149" width="55" height="20" font="0">अिधकार   </text>
+<text top="318" left="204" width="84" height="16" font="1"><b>/Consignee</b></text>
+<text top="338" left="153" width="132" height="16" font="1"><b>Reporting/Officer</b></text>
+<text top="313" left="367" width="21" height="20" font="0">पता</text>
+<text top="313" left="366" width="21" height="20" font="0">पता</text>
+<text top="315" left="387" width="66" height="16" font="1"><b>/Address</b></text>
+<text top="315" left="548" width="66" height="16" font="1"><b>Quantity</b></text>
+<text top="296" left="679" width="34" height="20" font="0">अित र</text>
+<text top="296" left="678" width="34" height="20" font="0">अित र</text>
+<text top="298" left="724" width="5" height="16" font="1"><b> </b></text>
+<text top="296" left="729" width="61" height="20" font="0">आव यकता</text>
+<text top="296" left="728" width="61" height="20" font="0">आव यकता</text>
+<text top="315" left="692" width="83" height="16" font="1"><b>/Additional</b></text>
+<text top="332" left="685" width="98" height="16" font="1"><b>Requirement</b></text>
+<text top="388" left="70" width="9" height="16" font="2">1</text>
+<text top="388" left="149" width="85" height="16" font="2">Harsh Gupta</text>
+<text top="371" left="303" width="198" height="16" font="2">400071,BHARAT PETROLEUM</text>
+<text top="388" left="303" width="208" height="16" font="2">CORPN LTD MUMBAI REFINERY</text>
+<text top="405" left="303" width="138" height="16" font="2">, MAHUL , CHEMBUR</text>
+<text top="371" left="531" width="55" height="16" font="2">Project /</text>
+<text top="388" left="531" width="66" height="16" font="2">Lumpsum</text>
+<text top="405" left="531" width="41" height="16" font="2">Based</text>
+<text top="388" left="646" width="24" height="16" font="2">N/A</text>
+<text top="492" left="68" width="16" height="20" font="0">े ता</text>
+<text top="492" left="67" width="44" height="20" font="0">े ता   ारा</text>
+<text top="492" left="98" width="42" height="20" font="0">ारा  जोड़</text>
+<text top="492" left="118" width="49" height="20" font="0">जोड़   गई</text>
+<text top="492" left="150" width="44" height="20" font="0">गई   बड</text>
+<text top="492" left="177" width="33" height="20" font="0">बड  क</text>
+<text top="492" left="200" width="52" height="20" font="0">क    वशेष</text>
+<text top="492" left="225" width="52" height="20" font="0">वशेष  शत</text>
+<text top="492" left="257" width="19" height="20" font="0">शत</text>
+<text top="487" left="278" width="550" height="24" font="6"><b>/Buyer Added Bid Specific Terms and Conditions</b></text>
+<text top="532" left="83" width="83" height="16" font="2">1.  <b>Generic</b></text>
+<text top="567" left="108" width="707" height="16" font="2">OPTION CLAUSE: The buyer can increase or decrease the contract quantity or contract duration up to 25</text>
+<text top="584" left="108" width="693" height="16" font="2">percent at the time of issue of the contract. However, once the contract is issued, contract quantity or</text>
+<text top="601" left="108" width="666" height="16" font="2">contract duration can only be increased up to 25 percent. Bidders are bound to accept the revised</text>
+<text top="617" left="108" width="135" height="16" font="2">quantity or duration</text>
+<text top="652" left="83" width="250" height="16" font="2">2.  <b>Buyer Added Bid Specific ATC</b></text>
+<text top="687" left="108" width="249" height="16" font="2">Buyer Added text based ATC clauses</text>
+<text top="720" left="106" width="54" height="16" font="2">Note to </text>
+<text top="720" left="160" width="53" height="16" font="5"><a href="bidder:-">bidder:-</a></text>
+<text top="750" left="106" width="727" height="16" font="2">1) For BQC bidder need to follow details as mentioned in attachment named &#34;BID-QUALIFICATION CRITERIA</text>
+<text top="767" left="106" width="317" height="16" font="2">(BQC) AND EARNEST MONEY DEPOSIT (EMD)&#34;. </text>
+<text top="797" left="106" width="452" height="16" font="2">2) For tender drawing and other attachment follow below mention </text>
+<text top="797" left="560" width="33" height="16" font="5"><a href="link:-">link:-</a></text>
+<text top="828" left="106" width="627" height="16" font="5"><a href="https://drive.google.com/drive/folders/1LRCTrczRF5hbuOXAPSanLcHSIMOWgi7J?usp=sharing">https://drive.google.com/drive/folders/1LRCTrczRF5hbuOXAPSanLcHSIMOWgi7J?usp=sharing</a></text>
+<text top="858" left="106" width="4" height="16" font="2">.</text>
+<text top="891" left="83" width="250" height="16" font="2">3.  <b>Purchase Preference (Centre)</b></text>
+<text top="926" left="108" width="716" height="16" font="2">Purchase preference to Micro and Small Enterprises (MSEs): Purchase preference will be given to MSEs as</text>
+<text top="943" left="108" width="642" height="16" font="2">defined in Public Procurement Policy for Micro and Small Enterprises (MSEs) Order, 2012 dated</text>
+<text top="959" left="108" width="609" height="16" font="2">23.03.2012 issued by Ministry of Micro, Small and Medium Enterprises and its subsequent</text>
+<text top="976" left="108" width="700" height="16" font="2">Orders/Notifications issued by concerned Ministry. If the bidder wants to avail the Purchase preference,</text>
+<text top="993" left="108" width="719" height="16" font="2">the bidder must be the manufacturer of the offered product in case of bid for supply of goods. Traders are</text>
+<text top="1010" left="108" width="712" height="16" font="2">excluded from the purview of Public Procurement Policy for Micro and Small Enterprises. In respect of bid</text>
+<text top="1027" left="108" width="672" height="16" font="2">for Services, the bidder must be the Service provider of the offered Service. Relevant documentary</text>
+<text top="1044" left="108" width="718" height="16" font="2">evidence in this regard shall be uploaded along with the bid in respect of the offered product or service. If</text>
+<text top="1061" left="108" width="668" height="16" font="2">L-1 is not an MSE and MSE Seller (s) has/have quoted price within L-1+ 15% of margin of purchase</text>
+<text top="1078" left="108" width="684" height="16" font="2">preference /price band defined in relevant policy, such Seller shall be given opportunity to match L-1</text>
+<text top="1094" left="108" width="496" height="16" font="2">price and contract will be awarded for percentage of 100% of total value.</text>
+<text top="1129" left="83" width="250" height="16" font="2">4.  <b>Purchase Preference (Centre)</b></text>
+<text top="1220" left="824" width="26" height="10" font="4">8 / 10</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="89" left="108" width="700" height="16" font="2">Preference to Make In India products (For bids less than 200 Crore):Preference shall be given to Class 1</text>
+<text top="106" left="108" width="691" height="16" font="2">local supplier as defined in public procurement (Preference to Make in India), Order 2017 as amended</text>
+<text top="122" left="108" width="713" height="16" font="2">from time to time and its subsequent Orders/Notifications issued by concerned Nodal Ministry for specific</text>
+<text top="139" left="108" width="689" height="16" font="2">Goods/Products. The minimum local content to qualify as a Class 1 local supplier is denoted in the bid</text>
+<text top="156" left="108" width="714" height="16" font="2">document 50%. If the bidder wants to avail the Purchase preference, the bidder must upload a certificate</text>
+<text top="173" left="108" width="717" height="16" font="2">from the OEM regarding the percentage of the local content and the details of locations at which the local</text>
+<text top="190" left="108" width="718" height="16" font="2">value addition is made along with their bid, failing which no purchase preference shall be granted. In case</text>
+<text top="207" left="108" width="693" height="16" font="2">the bid value is more than Rs 10 Crore, the declaration relating to percentage of local content shall be</text>
+<text top="224" left="108" width="663" height="16" font="2">certified by the statutory auditor or cost auditor, if the OEM is a company and by a practicing cost</text>
+<text top="241" left="108" width="683" height="16" font="2">accountant or a chartered accountant for OEMs other than companies as per the Public Procurement</text>
+<text top="257" left="108" width="700" height="16" font="2">(preference to Make-in -India) order 2017 dated 04.06.2020. Only Class-I and Class-II Local suppliers as</text>
+<text top="274" left="108" width="723" height="16" font="2">per MII order dated 4.6.2020 will be eligible to bid. Non - Local suppliers as per MII order dated 04.06.2020</text>
+<text top="291" left="108" width="660" height="16" font="2">are not eligible to participate. In case Buyer has selected Purchase preference to Micro and Small</text>
+<text top="308" left="108" width="515" height="16" font="2">Enterprises clause in the bid, the same will get precedence over this clause.</text>
+<text top="372" left="61" width="57" height="20" font="0">अ वीकरण</text>
+<text top="372" left="60" width="57" height="20" font="0">अ वीकरण</text>
+<text top="367" left="118" width="127" height="24" font="6"><b>/Disclaimer</b></text>
+<text top="412" left="63" width="701" height="16" font="2">The Additional Terms and Conditions (ATC) have been incorporated by the Buyer after approval of their</text>
+<text top="428" left="63" width="761" height="16" font="2">Competent Authority. The Buyer ,is solely responsible for the impact of these clauses on the bidding process, its</text>
+<text top="445" left="63" width="746" height="16" font="2">outcome, and consequences thereof including any restriction arising in the bidding process due to these ATCs</text>
+<text top="462" left="63" width="733" height="16" font="2">and including the modification of technical specifications and / or terms and conditions governing the bid.All</text>
+<text top="479" left="63" width="745" height="16" font="2">representations / grievances pertaining to the ATC clauses shall be raised with the buyer organization directly</text>
+<text top="496" left="63" width="725" height="16" font="2">and not with GeM.If any of the clause(s) is/are incorporated by the Buyer regarding the following, the bid &amp;</text>
+<text top="513" left="63" width="764" height="16" font="2">resultant contract shall be treated as null &amp; void. Further, GeM reserves the right, at its sole discretion, to cancel</text>
+<text top="530" left="63" width="468" height="16" font="2">the bid forthwith, without issuance of any prior notice or intimation :-</text>
+<text top="565" left="83" width="699" height="16" font="2">1.  Publishing Custom / BOQ bids for items for which regular GeM categories are available (unless such</text>
+<text top="581" left="108" width="530" height="16" font="2">Custom / BOQ item is bunched with the major regular product Category Item).</text>
+<text top="603" left="83" width="733" height="16" font="2">2.  Mandating procurement of / from specific Brand / Make / Model / Manufacturer / Dealer except in case of</text>
+<text top="620" left="108" width="374" height="16" font="2">Single Bid / Proprietary Article Certificate (PAC) Buying.</text>
+<text top="641" left="83" width="677" height="16" font="2">3.  Inclusion of disqualification criteria related to suspension of seller / service provider, where such</text>
+<text top="658" left="108" width="265" height="16" font="2">suspension period has already expired.</text>
+<text top="679" left="83" width="634" height="16" font="2">4.  Mandating submission of documents in physical form as a pre-requisite to qualify bidders.</text>
+<text top="701" left="83" width="362" height="16" font="2">5.  Publishing bids on GeM for procurement of works.</text>
+<text top="722" left="83" width="497" height="16" font="2">6.  Procurement of Goods by creating a Service bid on GeM &amp; vice-versa.</text>
+<text top="743" left="83" width="743" height="16" font="2">7.  Seeking sample with bid or approval of samples during bid evaluation process. However, trial / sample, as</text>
+<text top="760" left="108" width="669" height="16" font="2">the case may be, shall be permitted in cases where trial / sample are allowed as per approved and</text>
+<text top="777" left="108" width="678" height="16" font="2">published procurement policy of the Buyers’ controlling Ministry / Department / State / Public Sector</text>
+<text top="794" left="108" width="707" height="16" font="2">Enterprises Headquarters. If there is any violation of trial / sample clause with regard to approved policy</text>
+<text top="811" left="108" width="696" height="16" font="2">of the Buyers’ Ministry / Department / State / Public Sector Enterprises Headquarters, then this is to be</text>
+<text top="828" left="108" width="473" height="16" font="2">determined and redressed by the concerned Buyer Organisation only.</text>
+<text top="849" left="83" width="695" height="16" font="2">8.  Seeking experience from specific organization / department / institute only or from foreign / export</text>
+<text top="866" left="108" width="79" height="16" font="2">experience.</text>
+<text top="887" left="83" width="352" height="16" font="2">9.  Creating bid for items from incorrect categories.</text>
+<text top="909" left="75" width="705" height="16" font="2">10.  Reference of conditions published on any external site or reference to external documents/clauses.</text>
+<text top="930" left="75" width="501" height="16" font="2">11.  Asking for any Tender fee / Bid Participation fee, as the case may be.</text>
+<text top="952" left="75" width="725" height="16" font="2">12.  Buyer added ATC Clauses which are in contravention of clauses defined in bid detail section, including</text>
+<text top="968" left="108" width="704" height="16" font="2">specifications, EMD Detail, ePBG Detail and MII and MSE Purchase Preference sections of the bid, unless</text>
+<text top="985" left="108" width="314" height="16" font="2">otherwise allowed by the applicable GeM GTC.</text>
+<text top="1007" left="75" width="722" height="16" font="2">13.  Any ATC clause in contravention with GeM GTC Clause 4 (xiii) (h) will be invalid. In case of multiple L1</text>
+<text top="1024" left="108" width="711" height="16" font="2">bidders against a service bid, the buyer shall place the Contract by selection of a bidder amongst the L-1</text>
+<text top="1040" left="108" width="431" height="16" font="2">bidders through a Random Algorithm executed by GeM system.</text>
+<text top="1062" left="75" width="689" height="16" font="2">14.  In a category based bid, adding additional items, through buyer added, additional scope of work/</text>
+<text top="1079" left="108" width="700" height="16" font="2">additional terms and conditions/or any other document. If buyer needs more items along with the main</text>
+<text top="1096" left="108" width="721" height="16" font="2">item, the same must be added through bunching category based items or by bunching custom catalogues</text>
+<text top="1112" left="108" width="714" height="16" font="2">or bunching a BoQ with the main category based item, the same must not be done through ATC or Scope</text>
+<text top="1129" left="108" width="56" height="16" font="2">of Work.</text>
+<text top="1162" left="61" width="758" height="16" font="2">Further, if any seller has any objection/grievance against these additional clauses or otherwise on any aspect of</text>
+<text top="1220" left="824" width="26" height="10" font="4">9 / 10</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="7" size="14" family="Mangal" color="#0000ee"/>
+<text top="86" left="61" width="746" height="16" font="2">this bid, they can raise their representation against the same by using the Representation window provided in</text>
+<text top="103" left="61" width="720" height="16" font="2">the bid details field in Seller dashboard after logging in as a seller. Buyer is duty bound to reply to all such</text>
+<text top="120" left="61" width="663" height="16" font="2">representations and would not be allowed to open bids if he fails to reply to such representations.</text>
+<text top="181" left="61" width="712" height="16" font="1"><b>All GeM Sellers/Service Providers shall ensure full compliance with all applicable labour laws,</b></text>
+<text top="198" left="61" width="748" height="16" font="1"><b>including the provisions, rules, schemes and guidelines under the four Labour Codes i.e. the Code</b></text>
+<text top="215" left="61" width="755" height="16" font="1"><b>on Wages, 2019; the Industrial Relations Code, 2020; the Occupational Safety, Health and Working</b></text>
+<text top="232" left="61" width="768" height="16" font="1"><b>Conditions Code, 2020; and the Code on Social Security, 2020 as and when notified and brought into</b></text>
+<text top="248" left="61" width="258" height="16" font="1"><b>force by the Government of India.</b></text>
+<text top="279" left="61" width="770" height="16" font="1"><b>For all provisions of the Labour Codes that are pending operationalisation through rules, schemes or</b></text>
+<text top="296" left="61" width="723" height="16" font="1"><b>notifications, the corresponding provisions of the pre-existing labour enactments (such as The</b></text>
+<text top="313" left="61" width="760" height="16" font="1"><b>Minimum Wages Act, 1948, The Payment of Wages Act, 1936, The Payment of Bonus Act, 1965, The</b></text>
+<text top="329" left="61" width="743" height="16" font="1"><b>Equal Remuneration Act, 1976, The Payment of Gratuity Act, 1972, etc. and relevant State Rules)</b></text>
+<text top="346" left="61" width="273" height="16" font="1"><b>shall continue to remain applicable.</b></text>
+<text top="377" left="61" width="707" height="16" font="1"><b>The Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under:</b></text>
+<text top="407" left="106" width="701" height="16" font="1"><b>All notified and enforceable provisions of the new Labour Codes as mentioned hereinabove;</b></text>
+<text top="424" left="106" width="28" height="16" font="1"><b>and</b></text>
+<text top="441" left="106" width="664" height="16" font="1"><b>All operative provisions of the erstwhile Labour Laws until their complete substitution.</b></text>
+<text top="471" left="61" width="767" height="16" font="1"><b>All obligations relating to wages, social security, safety, working conditions, industrial relations etc.</b></text>
+<text top="488" left="61" width="760" height="16" font="1"><b>and any other statutory requirements shall be strictly met by the Seller/ Service Provider. Any non-</b></text>
+<text top="505" left="61" width="758" height="16" font="1"><b>compliance shall constitute a breach of the contract and shall entitle the Buyer to take appropriate</b></text>
+<text top="522" left="61" width="445" height="16" font="1"><b>action in accordance with the contract and applicable law.</b></text>
+<text top="552" left="61" width="755" height="16" font="1"><b>This Bid is governed by the General Terms and Conditions, conditions stipulated in Bid and Service</b></text>
+<text top="569" left="61" width="711" height="16" font="1"><b>Level Agreement specific to the Service, as the case may be, as provided in the Marketplace.</b></text>
+<text top="599" left="61" width="683" height="16" font="1"><b>However, in case of Service, if any condition specified in General Terms and Conditions is</b></text>
+<text top="616" left="61" width="769" height="16" font="1"><b>contradicted by the conditions stipulated in Service Level Agreement specific to said Service, then it</b></text>
+<text top="633" left="61" width="503" height="16" font="1"><b>will over-ride the conditions in the General Terms and Conditions.</b></text>
+<text top="676" left="67" width="188" height="16" font="2">This Bid is governed by the </text>
+<text top="674" left="258" width="135" height="20" font="7"><a href="https://admin.gem.gov.in/apis/v1/gtc/pdfByDate/?date=20260409">सामा य िनयम और शत</a></text>
+<text top="676" left="393" width="209" height="16" font="5"><a href="https://admin.gem.gov.in/apis/v1/gtc/pdfByDate/?date=20260409">/General Terms and Conditions</a></text>
+<text top="676" left="604" width="222" height="16" font="2"><a href="https://admin.gem.gov.in/apis/v1/gtc/pdfByDate/?date=20260409">,</a> conditions stipulated in Bid and</text>
+<text top="695" left="61" width="169" height="16" font="5"><a href="https://bidplus.gem.gov.in/bidding/bid/bidsla/84669810624400">Service Level Agreement</a></text>
+<text top="695" left="231" width="598" height="16" font="2"><a href="https://bidplus.gem.gov.in/bidding/bid/bidsla/84669810624400"> </a>specific to this Service as provided in the Marketplace. However in case if any condition</text>
+<text top="715" left="61" width="81" height="16" font="2">specified in </text>
+<text top="714" left="142" width="135" height="20" font="0">सामा य िनयम और शत</text>
+<text top="715" left="277" width="523" height="16" font="2">/General Terms and Conditions is contradicted by the conditions stipulated in</text>
+<text top="736" left="61" width="670" height="16" font="2">Service Level Agreement, then it will over ride the conditions in the General Terms and Conditions.</text>
+<text top="768" left="61" width="770" height="20" font="0">जेम क  सामा य शत  के खंड 26 के संदभ म भारत के साथ भूिम सीमा साझा करने वाले देश के  बडर से खर द पर  ितबंध के संबंध म</text>
+<text top="791" left="61" width="771" height="20" font="0">भारत के साथ भूिम सीमा साझा करने वाले देश का कोई भी  बडर इस िन वदा म  बड देने के िलए तभी पा  होगा जब वह  बड देने वाला</text>
+<text top="815" left="61" width="770" height="20" font="0">स म  ािधकार  के पास पंजीकृत हो। बड म भाग लेते समय  बडर को इसका अनुपालन करना होगा और कोई भी गलत घोषणा  कए जाने</text>
+<text top="839" left="61" width="729" height="20" font="0">व इसका अनुपालन न करने पर अनुबंध को त काल समा  करने और कानून के अनुसार आगे क  कानूनी कारवाई का आधार होगा।</text>
+<text top="844" left="790" width="41" height="10" font="4">/In  terms</text>
+<text top="860" left="61" width="771" height="10" font="4">of GeM GTC clause 26 regarding Restrictions on procurement from a bidder of a country which shares a land border with India, any bidder from a country which shares a</text>
+<text top="871" left="61" width="769" height="10" font="4">land border with India will be eligible to bid in this tender only if the bidder is registered with the Competent Authority. While participating in bid, Bidder has to undertake</text>
+<text top="883" left="61" width="771" height="10" font="4">compliance  of  this  and  any  false  declaration  and  non-compliance  of  this  would  be  a  ground  for  immediate  termination  of  the  contract  and  further  legal  action  in</text>
+<text top="894" left="61" width="117" height="10" font="4">accordance with the laws.</text>
+<text top="929" left="354" width="20" height="18" font="3"><b>---</b></text>
+<text top="930" left="375" width="45" height="20" font="0">ध यवाद</text>
+<text top="930" left="374" width="45" height="20" font="0">ध यवाद</text>
+<text top="929" left="420" width="118" height="18" font="3"><b>/Thank You---</b></text>
+<text top="1220" left="818" width="32" height="10" font="4">10 / 10</text>
+</page>
+<outline>
+<item page="1">बिड दस्तावेज़ / Bid Document</item>
+<outline>
+<item page="1">ईएमडी विवरण/EMD Detail</item>
+<item page="2">ईपीबीजी विवरण /ePBG Detail</item>
+<item page="3">एमआईआई अनुपालन/MII Compliance</item>
+<item page="3">एमएसई खरीद वरीयता/MSE Purchase Preference</item>
+<item page="4">एक्सेल में अपलोड किए जाने की आवश्यकता /Excel Upload Required :</item>
+<item page="4">अतिरिक्त योग्यता /आवश्यक डेटा/Additional Qualification/Data Required</item>
+<item page="4">Pre Bid Detail(s)</item>
+</outline>
+<item page="4">Custom Bid For Services - Supply And Installation Of New CAPH &amp; GAPH ( 1 )</item>
+<item page="5">Custom Bid For Services - Revamp Of Radiant Section Including Associated Jobs And Material Supply ( 1 )</item>
+<item page="6">Custom Bid For Services - Revamp Of Convection Section Including Associated Jobs And Material Supply ( 1 )</item>
+<item page="6">Custom Bid For Services - Supply And Service Cost For Electrical And Instrument Jobs ( 1 )</item>
+<item page="7">Custom Bid For Services - SOR Jobs For Heater Miscellaneous Works ( 1 )</item>
+<item page="8">क्रेता द्वारा जोड़ी गई बिड की विशेष शर्तें/Buyer Added Bid Specific Terms and Conditions</item>
+<item page="9">अस्वीकरण/Disclaimer</item>
+<outline>
+<item page="10">---धन्यवाद/Thank You---</item>
+</outline>
+</outline>
+</pdf2xml>

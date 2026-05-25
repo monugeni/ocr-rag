@@ -1,0 +1,215 @@
+[
+  {
+    "heading": "41114) -",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 41114) -",
+    "seq": 0,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "Abbreviations",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 41114) - > Abbreviations",
+    "seq": 1,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 GENERAL",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 1.0 GENERAL",
+    "seq": 2,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.0 ANCHORING SYSTEM FOR BRICK WORK",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 2.0 ANCHORING SYSTEM FOR BRICK WORK",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 PRELINING INSPECTION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 3.0 PRELINING INSPECTION",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 MATERIALS",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 4.0 MATERIALS",
+    "seq": 5,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "5.0 MIXING OF MORTAR",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 5.0 MIXING OF MORTAR",
+    "seq": 6,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.0 BRICK LAYING",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 6.0 BRICK LAYING",
+    "seq": 7,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "7.0 EXPANSION JOINTS",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING > 7.0 EXPANSION JOINTS",
+    "seq": 8,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  }
+]

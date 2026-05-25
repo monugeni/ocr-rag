@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 9,
+    "top": 420.0,
+    "left": 138.0,
+    "text": "ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING",
+    "level": 1,
+    "score": 6.0,
+    "confidence": 0.667,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "numbering": "ANNEXURE 1",
+    "scheme": "appendix",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 2,
+    "line_index": 9,
+    "top": 415.0,
+    "left": 72.0,
+    "text": "3 Vendor Code in BPCL (If available)",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 3 Vendor Code in BPCL (If available)",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 4,
+    "line_index": 29,
+    "top": 787.0,
+    "left": 67.0,
+    "text": "6 Technical Specification and scope of work document.",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "6",
+    "scheme": "decimal",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 6 Technical Specification and scope of work document.",
+    "toc_match": null,
+    "warnings": [
+      "p4: top-level decimal jump 3 -> 6"
+    ]
+  },
+  {
+    "id": 4,
+    "page_num": 5,
+    "line_index": 13,
+    "top": 522.0,
+    "left": 76.0,
+    "text": " EARNEST MONEY DEPOSIT (EMD)",
+    "level": 3,
+    "score": 4.3,
+    "confidence": 0.478,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 6 Technical Specification and scope of work document. >  EARNEST MONEY DEPOSIT (EMD)",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 7,
+    "line_index": 2,
+    "top": 170.0,
+    "left": 68.0,
+    "text": "1.0 ORGANIZATION AND TAX RELATED DETAILS",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 1.0 ORGANIZATION AND TAX RELATED DETAILS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 10,
+    "line_index": 7,
+    "top": 221.0,
+    "left": 74.0,
+    "text": "2 Vendor Code Mention existing vendor code",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 2 Vendor Code Mention existing vendor code",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 11,
+    "line_index": 5,
+    "top": 210.0,
+    "left": 87.0,
+    "text": "2 Vendor Code",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "BIDDER DOCUMENT CHECKLIST > ANNEXURE 1 TO 3 VERIFICATION OF BQC DOCUMENTS (UNDERTAKING > 2 Vendor Code",
+    "toc_match": null,
+    "warnings": []
+  }
+]

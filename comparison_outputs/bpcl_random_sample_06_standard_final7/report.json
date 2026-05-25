@@ -1,0 +1,32 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 3/6-76-0002_Rev_3.pdf",
+  "document_title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+  "document_context": {
+    "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 35,
+  "body_font_size": 17.0,
+  "heading_count": 28,
+  "toc_entry_count": 0,
+  "chunk_count": 220,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 35,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 2,
+    "line_role_counts": {
+      "running": 22,
+      "body": 517,
+      "table": 64,
+      "form": 4,
+      "toc": 15,
+      "page_number": 185,
+      "caption": 7,
+      "drawing": 2770
+    }
+  }
+}

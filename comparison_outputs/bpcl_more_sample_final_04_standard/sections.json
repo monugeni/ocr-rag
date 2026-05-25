@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "SCHEDULE OF CONNECTION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "TYPE—III SECTION 3-3 > SCHEDULE OF CONNECTION",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 9.7,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TYPE—III SECTION 3-3",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  }
+]

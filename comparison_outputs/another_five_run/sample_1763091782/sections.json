@@ -1,0 +1,1663 @@
+[
+  {
+    "heading": "SCOPE OF JOB FOR SERVICE CONTRACT FOR VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > SCOPE OF JOB FOR SERVICE CONTRACT FOR VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 17.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "4.0 SITE LOCATION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 4.0 SITE LOCATION",
+    "seq": 1,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.0 BASIS OF DESIGN",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 5.0 BASIS OF DESIGN",
+    "seq": 2,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.1 EQUIPMENT SUMMARY",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.1 EQUIPMENT SUMMARY",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.1.1 Existing Heater System",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.1 EQUIPMENT SUMMARY > 6.1.1 Existing Heater System",
+    "seq": 5,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.1.2 Revamp Modifications",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.1 EQUIPMENT SUMMARY > 6.1.2 Revamp Modifications",
+    "seq": 6,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.1.3 Heater Repair jobs",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.1 EQUIPMENT SUMMARY > 6.1.3 Heater Repair jobs",
+    "seq": 7,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.2 GENERAL SCOPE",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.2 GENERAL SCOPE",
+    "seq": 8,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "6.3.6 Heater Revamp Jobs as per EIL Study",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.2 GENERAL SCOPE > 6.3.6 Heater Revamp Jobs as per EIL Study",
+    "seq": 9,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [
+      "p8: decimal heading '6.3.6' has no detected parent '6.3'"
+    ],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "6.3.7 Heater Jobs as per inspection recommendations",
+    "level": 3,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.2 GENERAL SCOPE > 6.3.7 Heater Jobs as per inspection recommendations",
+    "seq": 10,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [
+      "p9: decimal heading '6.3.7' has no detected parent '6.3'"
+    ],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "6.3.8 Miscellaneous Jobs",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.2 GENERAL SCOPE > 6.3.8 Miscellaneous Jobs",
+    "seq": 11,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [
+      "p10: decimal heading '6.3.8' has no detected parent '6.3'"
+    ],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "6.4 SCOPE OF SITE WORK AND EXECUTION",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > 6.4 SCOPE OF SITE WORK AND EXECUTION",
+    "seq": 12,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "S. Minimum",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > S. Minimum",
+    "seq": 13,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "6.4.4 Burners",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > S. Minimum > 6.4.4 Burners",
+    "seq": 14,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "6.4.5 PMI",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > S. Minimum > 6.4.5 PMI",
+    "seq": 15,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "6.4.6 HYDROTESTING",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > S. Minimum > 6.4.6 HYDROTESTING",
+    "seq": 16,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "6.4.7 PRESERVATION",
+    "level": 3,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS > S. Minimum > 6.4.7 PRESERVATION",
+    "seq": 17,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "7.0 BATTERY LIMIT",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 7.0 BATTERY LIMIT",
+    "seq": 18,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "8.0 INSPECTION AND TESTING",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 8.0 INSPECTION AND TESTING",
+    "seq": 19,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "8.9 Rejection",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 8.0 INSPECTION AND TESTING > 8.9 Rejection",
+    "seq": 20,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "9.0 GUARANTEE",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 9.0 GUARANTEE",
+    "seq": 21,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "10.0 FABRICATION & ERECTION SPARES",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 10.0 FABRICATION & ERECTION SPARES",
+    "seq": 22,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "10.1 Fabrication / erection / pre-commissioning / commissioning spares (excluding mandatory",
+    "level": 2,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 10.0 FABRICATION & ERECTION SPARES > 10.1 Fabrication / erection / pre-commissioning / commissioning spares (excluding mandatory",
+    "seq": 23,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "11.0 COMMISSIOINING",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 11.0 COMMISSIOINING",
+    "seq": 24,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "12.0 APPLICABLE CODES AND STANDARDS, DRAWINGS & SPECIFICATIONS",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 12.0 APPLICABLE CODES AND STANDARDS, DRAWINGS & SPECIFICATIONS",
+    "seq": 25,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "13.0 LIST OF DOCUMENTS ATTACHED AND ORDER OF REFERENCE",
+    "level": 1,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 13.0 LIST OF DOCUMENTS ATTACHED AND ORDER OF REFERENCE",
+    "seq": 26,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "18 Standard Specification for Skin CMRO.REL.INST.SPEC.SKIN TC",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 18 Standard Specification for Skin CMRO.REL.INST.SPEC.SKIN TC",
+    "seq": 27,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p15: top-level decimal jump 13 -> 18"
+    ],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "19 BPCL – Painting specification AE-S-5430-Rev 3",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 19 BPCL – Painting specification AE-S-5430-Rev 3",
+    "seq": 28,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "14.0 DOCUMENTATION",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 14.0 DOCUMENTATION",
+    "seq": 29,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "15.0 EVALUATION CRITERIA:",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 15.0 EVALUATION CRITERIA:",
+    "seq": 30,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "16.0 PAINTING AND SURFACE PREPARATION",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 16.0 PAINTING AND SURFACE PREPARATION",
+    "seq": 31,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "16.0 PACKING AND TRANSPORTATION",
+    "level": 1,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 16.0 PACKING AND TRANSPORTATION",
+    "seq": 32,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "17.0 WARRANTY/DEFECT LIABILTY",
+    "level": 1,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 17.0 WARRANTY/DEFECT LIABILTY",
+    "seq": 33,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "18.0 HSE",
+    "level": 1,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 18.0 HSE",
+    "seq": 34,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "19.0 BID PRESENTATION",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 19.0 BID PRESENTATION",
+    "seq": 35,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "20.0 DELIVERY / COMPLETION PERIOD",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 20.0 DELIVERY / COMPLETION PERIOD",
+    "seq": 36,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "21.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "level": 1,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 21.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "seq": 37,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "22.0 PAYMENT TERMS",
+    "level": 1,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 22.0 PAYMENT TERMS",
+    "seq": 38,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "23.0 SOR",
+    "level": 1,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 23.0 SOR",
+    "seq": 39,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "24.0 PRE-BID MEETING & SITE VISIT",
+    "level": 1,
+    "page_num": 19,
+    "page_start": 19,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT",
+    "seq": 40,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "6.4.10 MODULARIZATION / TRIAL ASSEMBY",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.10 MODULARIZATION / TRIAL ASSEMBY",
+    "seq": 41,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "6.4.11 REFRACTORY",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.11 REFRACTORY",
+    "seq": 42,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "6.4.12 Burners",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.12 Burners",
+    "seq": 43,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "6.4.13 PMI",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.13 PMI",
+    "seq": 44,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "6.4.14 HYDROTESTING",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.14 HYDROTESTING",
+    "seq": 45,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "6.4.15 PRESERVATION",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 PRE-BID MEETING & SITE VISIT > 6.4.15 PRESERVATION",
+    "seq": 46,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "11.0 BATTERY LIMIT",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 11.0 BATTERY LIMIT",
+    "seq": 47,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "12.0 INSPECTION AND TESTING",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 12.0 INSPECTION AND TESTING",
+    "seq": 48,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "12.9 Rejection",
+    "level": 2,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 12.0 INSPECTION AND TESTING > 12.9 Rejection",
+    "seq": 49,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "13.0 GUARANTEE",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 13.0 GUARANTEE",
+    "seq": 50,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "14.0 FABRICATION & ERECTION SPARES",
+    "level": 1,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 14.0 FABRICATION & ERECTION SPARES",
+    "seq": 51,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "14.1 Fabrication / erection / pre-commissioning / commissioning spares (excluding mandatory",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 14.0 FABRICATION & ERECTION SPARES > 14.1 Fabrication / erection / pre-commissioning / commissioning spares (excluding mandatory",
+    "seq": 52,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "12.0 COMMISSIOINING",
+    "level": 1,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 12.0 COMMISSIOINING",
+    "seq": 53,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "13.0 APPLICABLE CODES AND STANDARDS, DRAWINGS & SPECIFICATIONS",
+    "level": 1,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 13.0 APPLICABLE CODES AND STANDARDS, DRAWINGS & SPECIFICATIONS",
+    "seq": 54,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "14.0 LIST OF DOCUMENTS ATTACHED AND ORDER OF REFERENCE",
+    "level": 1,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 14.0 LIST OF DOCUMENTS ATTACHED AND ORDER OF REFERENCE",
+    "seq": 55,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "37 Standard Specification for Skin CMRO.REL.INST.SPEC.SKIN TC",
+    "level": 1,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 37 Standard Specification for Skin CMRO.REL.INST.SPEC.SKIN TC",
+    "seq": 56,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "numbered_1"
+    ],
+    "warnings": [
+      "p24: top-level decimal jump 14 -> 37"
+    ],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "38 BPCL – Painting specification AE-S-5430-Rev 3",
+    "level": 1,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 38 BPCL – Painting specification AE-S-5430-Rev 3",
+    "seq": 57,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "15.0 DOCUMENTATION",
+    "level": 1,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 15.0 DOCUMENTATION",
+    "seq": 58,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "17.0 EVALUATION CRITERIA:",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 17.0 EVALUATION CRITERIA:",
+    "seq": 59,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "18.0 PAINTING AND SURFACE PREPARATION",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 18.0 PAINTING AND SURFACE PREPARATION",
+    "seq": 60,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "17.0 PACKING AND TRANSPORTATION",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 17.0 PACKING AND TRANSPORTATION",
+    "seq": 61,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "18.0 WARRANTY/DEFECT LIABILTY",
+    "level": 1,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 18.0 WARRANTY/DEFECT LIABILTY",
+    "seq": 62,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "19.0 HSE",
+    "level": 1,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 19.0 HSE",
+    "seq": 63,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "20.0 BID PRESENTATION",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 20.0 BID PRESENTATION",
+    "seq": 64,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "21.0 DELIVERY / COMPLETION PERIOD",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 21.0 DELIVERY / COMPLETION PERIOD",
+    "seq": 65,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "22.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 22.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "seq": 66,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "23.0 PAYMENT TERMS",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 23.0 PAYMENT TERMS",
+    "seq": 67,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "24.0 SOR",
+    "level": 1,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 24.0 SOR",
+    "seq": 68,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "25.0 PRE-BID MEETING & SITE VISIT",
+    "level": 1,
+    "page_num": 29,
+    "page_start": 29,
+    "breadcrumb": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY > 25.0 PRE-BID MEETING & SITE VISIT",
+    "seq": 69,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 29
+  }
+]

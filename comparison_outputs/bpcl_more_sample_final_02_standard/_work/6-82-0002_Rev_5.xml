@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="0" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="9" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="3" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="5" size="44" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="37" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="29" family="Times" color="#000000"/>
+	<fontspec id="8" size="35" family="Times" color="#000000"/>
+	<fontspec id="9" size="32" family="Times" color="#000000"/>
+<text top="995" left="511" width="18" height="11" font="0">DJ </text>
+<text top="995" left="580" width="28" height="11" font="0">SNB </text>
+<text top="995" left="658" width="26" height="11" font="0">TKS </text>
+<text top="995" left="742" width="17" height="11" font="0">SC</text>
+<text top="997" left="762" width="4" height="8" font="1">. </text>
+<text top="997" left="758" width="1" height="8" font="1"> </text>
+<text top="995" left="293" width="117" height="11" font="0">Revised and updated </text>
+<text top="995" left="113" width="10" height="11" font="0">3 </text>
+<text top="995" left="148" width="65" height="11" font="0">12/10/2015 </text>
+<text top="1133" left="104" width="30" height="11" font="0">Rev. </text>
+<text top="1147" left="104" width="20" height="11" font="0">No </text>
+<text top="1141" left="165" width="30" height="11" font="2"><b>Date </b></text>
+<text top="1140" left="326" width="52" height="11" font="2"><b>Purpose </b></text>
+<text top="1132" left="492" width="130" height="11" font="0">Prepared Checked </text>
+<text top="1146" left="512" width="16" height="11" font="0">by </text>
+<text top="1146" left="586" width="17" height="11" font="0">by </text>
+<text top="1112" left="641" width="143" height="11" font="2"><b>Standards Standards </b></text>
+<text top="1126" left="639" width="66" height="11" font="0">Committee </text>
+<text top="1126" left="730" width="46" height="11" font="0">Bureau </text>
+<text top="1140" left="642" width="141" height="11" font="0">Convenor Chairman </text>
+<text top="930" left="113" width="10" height="11" font="0">5 </text>
+<text top="930" left="148" width="64" height="11" font="0">10/08/2023 </text>
+<text top="963" left="113" width="10" height="11" font="0">4 </text>
+<text top="963" left="148" width="65" height="11" font="0">23/07/2018 </text>
+<text top="929" left="293" width="116" height="11" font="0">Revised and updated </text>
+<text top="962" left="293" width="116" height="11" font="0">Revised and updated </text>
+<text top="962" left="505" width="29" height="11" font="0">SKG </text>
+<text top="1027" left="113" width="9" height="11" font="0">2 </text>
+<text top="1027" left="148" width="65" height="11" font="0">14/11/2011 </text>
+<text top="1027" left="293" width="117" height="11" font="0">Revised and updated </text>
+<text top="1027" left="509" width="21" height="11" font="0">SM </text>
+<text top="1027" left="583" width="21" height="11" font="0">SM </text>
+<text top="1027" left="656" width="31" height="11" font="0">MKG </text>
+<text top="1026" left="741" width="23" height="11" font="0">DM </text>
+<text top="1060" left="114" width="11" height="11" font="0">1 </text>
+<text top="1060" left="148" width="64" height="11" font="0">02/01/2007 </text>
+<text top="1060" left="293" width="117" height="11" font="0">Revised and updated </text>
+<text top="1059" left="510" width="20" height="11" font="0">AS </text>
+<text top="1059" left="580" width="28" height="11" font="0">MPJ </text>
+<text top="1059" left="657" width="28" height="11" font="0">VNP </text>
+<text top="1059" left="742" width="20" height="11" font="0">VC </text>
+<text top="1091" left="113" width="11" height="11" font="0">0 </text>
+<text top="1091" left="148" width="64" height="11" font="0">22/07/2002 </text>
+<text top="1091" left="263" width="178" height="11" font="0">Issued as Standard Specification </text>
+<text top="1090" left="506" width="28" height="11" font="0">MPJ </text>
+<text top="1090" left="580" width="28" height="11" font="0">MPJ </text>
+<text top="1090" left="656" width="30" height="11" font="0">RSG </text>
+<text top="1090" left="737" width="30" height="11" font="0">GRR </text>
+<text top="1160" left="674" width="76" height="11" font="0">Approved by </text>
+<text top="76" left="118" width="19" height="6" font="3">deen </text>
+<text top="32" left="351" width="207" height="13" font="4"><b>STANDARD SPECIFICATION </b></text>
+<text top="49" left="158" width="34" height="11" font="0">ziel </text>
+<text top="49" left="217" width="79" height="11" font="0">ENGINEERS </text>
+<text top="49" left="359" width="190" height="13" font="4"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="63" left="133" width="60" height="11" font="0">Ngleg </text>
+<text top="63" left="217" width="105" height="11" font="0">INDIA LIMITED </text>
+<text top="66" left="380" width="147" height="13" font="4"><b>IDENTIFICATION AT </b></text>
+<text top="77" left="218" width="91" height="6" font="3">IA Goer or !odd Undertaking) </text>
+<text top="34" left="583" width="190" height="11" font="0">STANDARD SPECIFICATION No. </text>
+<text top="56" left="616" width="125" height="13" font="4"><b>6-82-0002 Rev. 5 </b></text>
+<text top="81" left="645" width="65" height="11" font="0">Page 1 of 9 </text>
+<text top="84" left="368" width="172" height="13" font="4"><b>CONSTRUCTION SITES </b></text>
+<text top="341" left="164" width="124" height="41" font="5"><b>Wicir </b></text>
+<text top="347" left="292" width="160" height="34" font="6"><b>TZTA LTT </b></text>
+<text top="353" left="490" width="119" height="26" font="7"><b>ch IccH </b></text>
+<text top="349" left="604" width="36" height="32" font="8"><b>cn </b></text>
+<text top="341" left="653" width="117" height="41" font="5"><b>Trrmit </b></text>
+<text top="412" left="584" width="152" height="34" font="6"><b>idW </b></text>
+<text top="551" left="209" width="460" height="28" font="9"><b>STANDARD SPECIFICATION </b></text>
+<text top="589" left="401" width="78" height="28" font="9"><b>FOR </b></text>
+<text top="627" left="117" width="644" height="28" font="9"><b>POSITIVE MATERIAL IDENTIFICATION </b></text>
+<text top="665" left="412" width="54" height="28" font="9"><b>AT </b></text>
+<text top="703" left="251" width="378" height="28" font="9"><b>CONSTRUCTION SITES </b></text>
+<text top="1202" left="95" width="180" height="11" font="0">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1199" left="603" width="185" height="11" font="0">Copyright EIL — All rights reserved </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="10" size="20" family="Times" color="#000000"/>
+	<fontspec id="11" size="20" family="Times" color="#000000"/>
+	<fontspec id="12" size="20" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="14" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="15" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="16" size="14" family="Times" color="#000000"/>
+	<fontspec id="17" size="14" family="Times" color="#000000"/>
+<text top="49" left="171" width="94" height="18" font="10"><b>lafaeit4ft </b></text>
+<text top="54" left="260" width="72" height="12" font="4"><b>ENGINEERS </b></text>
+<text top="60" left="144" width="11" height="18" font="11">s</text>
+<text top="60" left="148" width="119" height="20" font="12">igzirimegw: </text>
+<text top="67" left="259" width="95" height="12" font="4"><b>INDIA LIMITED </b></text>
+<text top="78" left="169" width="65" height="6" font="13"><b>t wry A.AAtrreaAm </b></text>
+<text top="81" left="260" width="83" height="6" font="13"><b>i A G. of India Undertalongf </b></text>
+<text top="47" left="380" width="189" height="12" font="4"><b>STANDARD SPECIFICATION </b></text>
+<text top="63" left="387" width="173" height="12" font="4"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="79" left="406" width="135" height="12" font="4"><b>IDENTIFICATION AT </b></text>
+<text top="95" left="395" width="156" height="12" font="4"><b>CONSTRUCTION SITES </b></text>
+<text top="54" left="591" width="172" height="10" font="14"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="73" left="621" width="114" height="12" font="4"><b>6-82-0002 Rev. 5 </b></text>
+<text top="96" left="647" width="59" height="10" font="15">Page 2 of 9 </text>
+<text top="145" left="147" width="101" height="13" font="16"><b>Abbreviations: </b></text>
+<text top="179" left="146" width="28" height="13" font="17">API </text>
+<text top="183" left="294" width="181" height="13" font="17">American Petroleum Institute </text>
+<text top="206" left="146" width="37" height="13" font="17">ASM </text>
+<text top="209" left="294" width="177" height="13" font="17">American Society for Metals </text>
+<text top="231" left="145" width="46" height="13" font="16"><b>ASME </b></text>
+<text top="235" left="294" width="265" height="15" font="17">American Society of <b>Mechanical  </b>Engineers </text>
+<text top="258" left="145" width="46" height="13" font="17">ASTM </text>
+<text top="262" left="293" width="267" height="13" font="17">American Society for Testing and Materials </text>
+<text top="284" left="145" width="23" height="13" font="17">AS </text>
+<text top="286" left="293" width="71" height="13" font="17">Alloy Steel </text>
+<text top="310" left="144" width="23" height="13" font="17">CS </text>
+<text top="312" left="292" width="82" height="13" font="17">Carbon Steel </text>
+<text top="335" left="144" width="26" height="13" font="17">EIL </text>
+<text top="339" left="292" width="149" height="13" font="17">Engineers India Limited </text>
+<text top="362" left="144" width="26" height="13" font="17">ITP </text>
+<text top="365" left="292" width="125" height="13" font="17">Inspection Test Plan </text>
+<text top="388" left="144" width="30" height="13" font="17">PMI </text>
+<text top="392" left="291" width="191" height="13" font="17">Positive Material Identification </text>
+<text top="414" left="143" width="28" height="13" font="17">RTJ </text>
+<text top="417" left="291" width="100" height="13" font="17">Ring Type Joint </text>
+<text top="440" left="142" width="21" height="13" font="17">SS </text>
+<text top="443" left="291" width="90" height="13" font="17">Stainless Steel </text>
+<text top="466" left="142" width="68" height="13" font="17">TPI/ TPIA </text>
+<text top="471" left="290" width="328" height="13" font="17">Third Party Inspection/Third Party Inspection Agency </text>
+<text top="823" left="136" width="234" height="13" font="16"><b>Construction Standards Committee </b></text>
+<text top="857" left="136" width="74" height="13" font="16"><b>Convenor: </b></text>
+<text top="858" left="251" width="210" height="14" font="16"><b>Sh. </b>R K Singh, ED (Construction) </text>
+<text top="891" left="136" width="70" height="13" font="16"><b>Members: </b></text>
+<text top="894" left="255" width="203" height="13" font="17">Sh. Janak Kishore, ED (Projects) </text>
+<text top="911" left="254" width="223" height="13" font="17">Sh. Chinmoy Kapuria, CGM (SCM) </text>
+<text top="929" left="254" width="257" height="13" font="17">Sh. Udayan Chakravarty, Sr. GM (Piping) </text>
+<text top="946" left="252" width="252" height="13" font="17">Sh. Debasish Ghosal, GM (Construction) </text>
+<text top="964" left="253" width="272" height="13" font="17">Sh. Pankaj Kumar Rai, DGM (Construction) </text>
+<text top="1108" left="132" width="164" height="10" font="15">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1113" left="589" width="169" height="10" font="15">Copyright EIL — All rights reserved </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="18" size="15" family="Courier" color="#000000"/>
+	<fontspec id="19" size="8" family="Helvetica" color="#000000"/>
+<text top="441" left="2705" width="9" height="12" font="18"> </text>
+<text top="441" left="3240" width="9" height="12" font="18"> </text>
+<text top="441" left="3303" width="9" height="12" font="18"> </text>
+<text top="441" left="4427" width="9" height="12" font="18"> </text>
+<text top="43" left="369" width="189" height="12" font="4"><b>STANDARD SPECIFICATION </b></text>
+<text top="59" left="377" width="173" height="12" font="4"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="75" left="396" width="135" height="12" font="4"><b>IDENTIFICATION AT </b></text>
+<text top="91" left="385" width="156" height="12" font="4"><b>CONSTRUCTION SITES </b></text>
+<text top="46" left="581" width="173" height="10" font="15">STANDARD SPECIFICATION No. </text>
+<text top="66" left="611" width="114" height="12" font="4"><b>6-82-0002 Rev. 5 </b></text>
+<text top="89" left="637" width="60" height="10" font="15">Page 3 of 9 </text>
+<text top="178" left="2705" width="10" height="12" font="18"> </text>
+<text top="178" left="3240" width="10" height="12" font="18"> </text>
+<text top="178" left="3303" width="10" height="12" font="18"> </text>
+<text top="178" left="4427" width="10" height="12" font="18"> </text>
+<text top="-109" left="2705" width="10" height="12" font="18"> </text>
+<text top="-109" left="3240" width="10" height="12" font="18"> </text>
+<text top="-109" left="3303" width="10" height="12" font="18"> </text>
+<text top="79" left="258" width="76" height="8" font="19">GovEa n,Unciendlng, </text>
+<text top="144" left="406" width="87" height="13" font="17">CONTENTS </text>
+<text top="197" left="139" width="21" height="13" font="17">1.0 </text>
+<text top="197" left="216" width="50" height="13" font="17">SCOPE </text>
+<text top="196" left="749" width="11" height="13" font="17">4 </text>
+<text top="222" left="138" width="22" height="13" font="17">2.0 </text>
+<text top="222" left="216" width="97" height="13" font="17">DEFINITIONS </text>
+<text top="221" left="749" width="11" height="13" font="17">4 </text>
+<text top="248" left="138" width="22" height="13" font="17">3.0 </text>
+<text top="248" left="216" width="183" height="13" font="17">SPECIFIC APPLICABILITY </text>
+<text top="247" left="749" width="11" height="13" font="17">4 </text>
+<text top="274" left="138" width="22" height="13" font="17">4.0 </text>
+<text top="274" left="217" width="97" height="13" font="17">REFERENCES </text>
+<text top="273" left="750" width="11" height="13" font="17">5 </text>
+<text top="299" left="139" width="22" height="13" font="17">5.0 </text>
+<text top="299" left="216" width="194" height="13" font="17">GENERAL REQUIREMENTS </text>
+<text top="298" left="750" width="11" height="13" font="17">5 </text>
+<text top="325" left="138" width="22" height="13" font="17">6.0 </text>
+<text top="325" left="217" width="114" height="13" font="17">EXTENT OF PMI </text>
+<text top="324" left="750" width="11" height="13" font="17">6 </text>
+<text top="351" left="139" width="22" height="13" font="17">7.0 </text>
+<text top="350" left="216" width="349" height="13" font="17">PMI OF PIPING AND HEATER COIL COMPONENTS </text>
+<text top="350" left="750" width="11" height="13" font="17">6 </text>
+<text top="377" left="139" width="22" height="13" font="17">8.0 </text>
+<text top="376" left="216" width="186" height="13" font="17">TESTING METHODOLOGY </text>
+<text top="375" left="750" width="11" height="13" font="17">7 </text>
+<text top="402" left="139" width="22" height="13" font="17">9.0 </text>
+<text top="402" left="216" width="214" height="13" font="17">CHARACTERISTIC ELEMENTS </text>
+<text top="401" left="750" width="11" height="13" font="17">7 </text>
+<text top="428" left="139" width="29" height="13" font="17">10.0 </text>
+<text top="428" left="216" width="105" height="13" font="17">CALIBRATION </text>
+<text top="427" left="750" width="11" height="13" font="17">7 </text>
+<text top="453" left="139" width="29" height="13" font="17">11.0 </text>
+<text top="453" left="216" width="251" height="13" font="17">SITE VERIFICATION OF ANALYZER </text>
+<text top="452" left="750" width="11" height="13" font="17">8 </text>
+<text top="479" left="139" width="29" height="13" font="17">12.0 </text>
+<text top="478" left="217" width="210" height="13" font="17">PERSONNEL QUALIFICATION </text>
+<text top="478" left="750" width="12" height="13" font="17">8 </text>
+<text top="504" left="139" width="30" height="13" font="17">13.0 </text>
+<text top="504" left="216" width="175" height="13" font="17">ACCEPTANCE CRITERIA </text>
+<text top="504" left="750" width="12" height="13" font="17">8 </text>
+<text top="530" left="140" width="29" height="13" font="17">14.0 </text>
+<text top="530" left="217" width="156" height="13" font="17">REJECTION CRITERIA </text>
+<text top="529" left="751" width="11" height="13" font="17">8 </text>
+<text top="556" left="140" width="29" height="13" font="17">15.0 </text>
+<text top="555" left="216" width="135" height="13" font="17">DOCUMENTATION </text>
+<text top="555" left="751" width="11" height="13" font="17">9 </text>
+<text top="623" left="188" width="279" height="13" font="17">ATTACHMENT (REPORTING FORMAT) </text>
+<text top="658" left="189" width="473" height="13" font="17">FORMAT FOR PMI TEST REPORT - 6-82-0002-F1 REV. 4 (1 SHEET) </text>
+<text top="1105" left="595" width="170" height="10" font="15">Copyright EIL —All rights reserved </text>
+<text top="1109" left="139" width="163" height="10" font="15">Format No. 8-00-0001-F1 Rev. 0 </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="20" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="21" size="18" family="Helvetica" color="#000000"/>
+	<fontspec id="22" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="23" size="5" family="Helvetica" color="#000000"/>
+	<fontspec id="24" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="25" size="15" family="Times" color="#000000"/>
+	<fontspec id="26" size="15" family="Times" color="#000000"/>
+<text top="50" left="364" width="189" height="12" font="20"><b>STANDARD SPECIFICATION </b></text>
+<text top="66" left="372" width="173" height="12" font="20"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="82" left="391" width="134" height="12" font="20"><b>IDENTIFICATION AT </b></text>
+<text top="98" left="380" width="156" height="12" font="20"><b>CONSTRUCTION SITES </b></text>
+<text top="58" left="180" width="5" height="17" font="21">-</text>
+<text top="57" left="180" width="34" height="18" font="11">aziel</text>
+<text top="56" left="212" width="10" height="19" font="12">. </text>
+<text top="56" left="215" width="32" height="18" font="11"> Y </text>
+<text top="59" left="244" width="72" height="15" font="22">ENGINEERS </text>
+<text top="70" left="129" width="42" height="17" font="21">Oyez </text>
+<text top="72" left="168" width="54" height="15" font="22">titiiCg </text>
+<text top="72" left="244" width="96" height="15" font="22">INDIA LIMITED </text>
+<text top="88" left="247" width="30" height="5" font="23">A GOA  01 </text>
+<text top="87" left="276" width="51" height="6" font="24">inou Undettalomp </text>
+<text top="152" left="132" width="23" height="14" font="25">1.0 </text>
+<text top="152" left="181" width="55" height="14" font="25">SCOPE </text>
+<text top="187" left="132" width="23" height="14" font="25">1.1 </text>
+<text top="185" left="182" width="574" height="14" font="25">This specification applies to metallic alloy materials as well as carbon steel materials as </text>
+<text top="203" left="182" width="574" height="14" font="25">defined in this document used in piping, heater coils, storage tanks, vessels etc. at construction </text>
+<text top="220" left="182" width="575" height="14" font="25">sites. Positive Material Identification (PMI) is to be carried out on Owner supplied material as </text>
+<text top="238" left="182" width="574" height="14" font="25">well on materials purchased by the contractor after installation (before testing). PMI may be </text>
+<text top="255" left="182" width="574" height="14" font="25">carried out at the ware house also for identification / segregation of materials as per instruction </text>
+<text top="273" left="182" width="137" height="14" font="25">of Engineer in Charge </text>
+<text top="308" left="133" width="22" height="14" font="26"><b>1.2 </b></text>
+<text top="307" left="183" width="575" height="14" font="25">Any deviation from this specification must be approved by Owner/ EIL in the prescribed </text>
+<text top="326" left="183" width="48" height="14" font="25">format. </text>
+<text top="360" left="133" width="154" height="14" font="25">2.0 DEFINITIONS </text>
+<text top="395" left="134" width="297" height="14" font="26"><b>2.1 _ Positive Material Identification (PMI) </b></text>
+<text top="429" left="183" width="574" height="14" font="25">The term Positive Material Identification (PMI) refers primarily for determination/ verification </text>
+<text top="447" left="183" width="574" height="14" font="25">of alloy type or its composition using portable or mobile spectrometer/ alloy analyzer. For the </text>
+<text top="464" left="184" width="575" height="14" font="25">purpose of this specification, some carbon steel materials as defined in clause no 3.1.11 in this </text>
+<text top="481" left="184" width="575" height="14" font="25">document are also included for PMI checking to avoid mix up with Alloy steel during </text>
+<text top="500" left="184" width="75" height="14" font="25">installation. </text>
+<text top="533" left="183" width="574" height="14" font="25">Chemical spot checking, resistivity testing, eddy current testing, electromagnetic alloy sorting, </text>
+<text top="550" left="184" width="543" height="14" font="25">thermoelectric testing shall not be considered as PMI for the purpose of this specification. </text>
+<text top="586" left="134" width="23" height="14" font="25">3.0 </text>
+<text top="586" left="183" width="197" height="14" font="25">SPECIFIC <b>APPLICABILITY </b></text>
+<text top="621" left="134" width="22" height="14" font="26"><b>3.1 </b></text>
+<text top="620" left="184" width="575" height="14" font="25">The following items (AS/SS from clause 3.1.1 up to 3.1.10 and CS at clause 3.1.11) require </text>
+<text top="637" left="185" width="550" height="14" font="25">PMI unless specifically exempted through a Concession/ Deviation permit by Owner/ EIL. </text>
+<text top="672" left="135" width="624" height="14" font="25">3.1.1 All pressure containing piping components including, thermowells instrument manifolds, RTJ </text>
+<text top="689" left="185" width="303" height="14" font="25">gaskets, fasteners etc. All valves installed on line. </text>
+<text top="724" left="135" width="361" height="14" font="25">3.1.2 Tubular products used in the fabrication of heaters. </text>
+<text top="758" left="135" width="596" height="14" font="25">3.1.3 Pressure - containing instrument housings (e.g. gauge glass housings, orifice meter tubes). </text>
+<text top="793" left="135" width="624" height="14" font="25">3.1.4 Internal metallic linings/cladding, and weld overlay, done at site, used for protection against </text>
+<text top="810" left="185" width="575" height="14" font="25">corrosive environments. Weather protection jacket (cladding) materials, securement bands </text>
+<text top="828" left="186" width="416" height="14" font="25">/wires, screws, rivets, `S' &amp; `.1' — clips etc used for insulation works. </text>
+<text top="864" left="135" width="99" height="14" font="25">3.1.5 Tubing </text>
+<text top="898" left="136" width="174" height="14" font="25">3.1.6 Stud, bolts and nuts </text>
+<text top="933" left="136" width="92" height="14" font="25">3.1.7 Plates </text>
+<text top="968" left="136" width="238" height="14" font="25">3.1.8 All pressure containing welds. </text>
+<text top="1002" left="136" width="492" height="14" font="25">3.1.9 Pipe supports (welded/ bolted) such as pads, saddles, dummy pipes etc. . </text>
+<text top="1036" left="136" width="625" height="14" font="25">3.1.10 Any other components or materials specifically designated for PMI on the purchase order/ </text>
+<text top="1055" left="186" width="57" height="14" font="25">contract. </text>
+<text top="1071" left="137" width="487" height="14" font="25">3.1.11 a) Pressure containing CS piping components of rating 900# and above </text>
+<text top="1089" left="191" width="312" height="14" font="25">b) Pressure containing CS steel piping items under </text>
+<text top="1091" left="503" width="20" height="10" font="14"><b>H2 </b></text>
+<text top="1088" left="522" width="51" height="14" font="25">service. </text>
+<text top="52" left="576" width="172" height="10" font="15">STANDARD SPECIFICATION No. </text>
+<text top="73" left="605" width="114" height="12" font="20"><b>6-82-0002 Rev. 5 </b></text>
+<text top="95" left="633" width="59" height="10" font="15">Page 4 of 9 </text>
+<text top="1112" left="593" width="169" height="10" font="15">Copyright EIL — All rights reserved </text>
+<text top="1117" left="137" width="165" height="10" font="14"><b>Format No. 8-00-0001-F1 Rev. O. </b></text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="27" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="28" size="15" family="Helvetica" color="#000000"/>
+<text top="46" left="372" width="189" height="12" font="4"><b>STANDARD SPECIFICATION </b></text>
+<text top="63" left="380" width="173" height="12" font="4"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="79" left="399" width="134" height="12" font="4"><b>IDENTIFICATION AT </b></text>
+<text top="94" left="388" width="156" height="12" font="4"><b>CONSTRUCTION SITES </b></text>
+<text top="52" left="172" width="81" height="18" font="11">kilfRielff-lk, </text>
+<text top="57" left="252" width="73" height="12" font="27">ENGINEERS </text>
+<text top="70" left="138" width="18" height="11" font="0">$1z</text>
+<text top="70" left="149" width="29" height="11" font="0">5/74f </text>
+<text top="69" left="177" width="74" height="14" font="25">fadtegw</text>
+<text top="68" left="246" width="8" height="14" font="28">. </text>
+<text top="70" left="248" width="99" height="12" font="27"> INDIA UMITED </text>
+<text top="82" left="179" width="47" height="6" font="24">eistMe 1.4 1413.441 </text>
+<text top="83" left="261" width="74" height="6" font="24">GON at India Undenalong) </text>
+<text top="49" left="584" width="173" height="11" font="2"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="70" left="613" width="114" height="12" font="4"><b>6-82-0002 Rev. 5 </b></text>
+<text top="92" left="640" width="60" height="11" font="0">Page 5 of 9 </text>
+<text top="129" left="189" width="467" height="14" font="25">c) Pressure Containing CS Piping NACE MR0103 is applicable as per PMS. </text>
+<text top="164" left="140" width="23" height="14" font="25">3.2 </text>
+<text top="164" left="190" width="73" height="14" font="25">Exclusions </text>
+<text top="199" left="190" width="573" height="14" font="25">The following items are exempted unless specifically designated for PMI in the purchase </text>
+<text top="217" left="189" width="93" height="14" font="25">order/contract: </text>
+<text top="251" left="140" width="318" height="14" font="25">3.2.1 Gaskets (spiral wound or carbon steel only). </text>
+<text top="286" left="140" width="205" height="14" font="25">3.2.2 Internal instrument parts. </text>
+<text top="321" left="140" width="204" height="14" font="25">3.2.3 Internal machinery parts. </text>
+<text top="356" left="140" width="623" height="14" font="25">3.2.4 Internal non pressure - containing baffles, trays, tray clips, supports, pall-rings, support rings, </text>
+<text top="373" left="190" width="25" height="14" font="25">etc. </text>
+<text top="408" left="141" width="34" height="12" font="27">3.2.5 </text>
+<text top="408" left="190" width="141" height="14" font="25">Electrical components. </text>
+<text top="443" left="140" width="217" height="14" font="25">3.2.6 Internal valve components. </text>
+<text top="477" left="140" width="623" height="14" font="25">3.2.7 Compression-type ferrules and fittings for use with 3/4 inch (19mm) outside diameter and </text>
+<text top="495" left="190" width="94" height="14" font="25">smaller tubing. </text>
+<text top="529" left="140" width="624" height="14" font="25">3.2.8 All carbon steel piping components (including carbon steel pipe supports) other than those </text>
+<text top="547" left="190" width="118" height="14" font="25">specified at 3.1.11. </text>
+<text top="582" left="141" width="34" height="12" font="27">3.2.9 </text>
+<text top="582" left="190" width="210" height="14" font="25">All carbon steel Studs/ bolts/ nuts. </text>
+<text top="616" left="141" width="42" height="12" font="27">3.2.10 </text>
+<text top="616" left="194" width="125" height="14" font="25">Carbon Steel Plates. </text>
+<text top="651" left="141" width="155" height="14" font="25">4.0 REFERENCES </text>
+<text top="685" left="190" width="557" height="14" font="25">American Society of Mechanical Engineers (ASME) BPV Code Section-II Part A, B and C. </text>
+<text top="720" left="190" width="89" height="14" font="25">ASME B 31.3 </text>
+<text top="755" left="190" width="431" height="14" font="25">American Society for Testing and Materials (ASTM): As applicable </text>
+<text top="789" left="191" width="535" height="14" font="25">Material Verification Program for New and Existing Alloy Piping Systems: API RP 578 </text>
+<text top="824" left="190" width="463" height="14" font="25">Any other material specification referenced by the Purchase Order/Contract. </text>
+<text top="859" left="191" width="286" height="14" font="25">IS 1239, IS 3589 and other relevant BIS codes. </text>
+<text top="894" left="141" width="256" height="14" font="25">5.0 GENERAL REQUIREMENTS </text>
+<text top="928" left="141" width="23" height="14" font="25">5.1 </text>
+<text top="928" left="191" width="574" height="14" font="25">The test methods outlined in this specification are intended to identify the nominal </text>
+<text top="946" left="190" width="575" height="14" font="25">composition of alloy/ Stainless steel materials. These test methods are not intended to </text>
+<text top="963" left="190" width="412" height="14" font="25">establish the conformance of a material to a particular specification. </text>
+<text top="997" left="141" width="23" height="14" font="25">5.2 </text>
+<text top="998" left="191" width="574" height="14" font="25">PMI shall not be considered as a substitute for required mill test reports listing chemical </text>
+<text top="1015" left="191" width="574" height="14" font="25">composition. In addition, mill test reports shall not be considered as confirming alloy/ </text>
+<text top="1032" left="190" width="156" height="14" font="25">composition verification. </text>
+<text top="1067" left="141" width="24" height="14" font="25">5.3 </text>
+<text top="1067" left="191" width="574" height="14" font="25">The PMI activity shall be included in the overall quality plan and Inspection &amp; Test Plan for </text>
+<text top="1085" left="191" width="575" height="14" font="25">fabrication/ erection. The contractor shall submit to EIL/ Owner, a procedure for PMI to </text>
+<text top="1108" left="597" width="169" height="11" font="0">Copyright EIL — All rights reserved </text>
+<text top="1111" left="141" width="163" height="11" font="0">Format No. 8-00-0001-F1 Rev. 0 </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="29" size="10" family="Helvetica" color="#000000"/>
+	<fontspec id="30" size="5" family="Helvetica" color="#000000"/>
+<text top="47" left="371" width="189" height="12" font="20"><b>STANDARD SPECIFICATION </b></text>
+<text top="63" left="380" width="173" height="12" font="20"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="79" left="399" width="134" height="12" font="20"><b>IDENTIFICATION AT </b></text>
+<text top="94" left="388" width="156" height="12" font="20"><b>CONSTRUCTION SITES </b></text>
+<text top="49" left="583" width="173" height="10" font="14"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="69" left="613" width="114" height="14" font="26"><b>6-82-0002 Rev. 5 </b></text>
+<text top="93" left="640" width="60" height="9" font="29">Page 6 of 9 </text>
+<text top="52" left="171" width="44" height="18" font="11">,914i </text>
+<text top="56" left="252" width="72" height="13" font="25">ENGINEERS </text>
+<text top="70" left="137" width="11" height="14" font="25">s</text>
+<text top="69" left="143" width="32" height="14" font="28">l </text>
+<text top="69" left="159" width="20" height="14" font="25">el' </text>
+<text top="65" left="176" width="79" height="19" font="12">famegvy </text>
+<text top="69" left="252" width="95" height="14" font="25">INDIA LIMITED </text>
+<text top="82" left="164" width="61" height="6" font="24">ORM 2.e.tb1 431,14(Wi1, </text>
+<text top="85" left="252" width="23" height="4" font="30"><b>IA Gowt </b></text>
+<text top="84" left="276" width="59" height="5" font="23">of infffa Undeftalonfo </text>
+<text top="129" left="189" width="574" height="14" font="25">comply with the requirements of this specification. Approval of PMI procedure shall be </text>
+<text top="147" left="189" width="573" height="14" font="25">obtained from Owner/ EIL prior to commencement of fabrication/ erection as the case may be. </text>
+<text top="182" left="141" width="23" height="14" font="25">5.4 </text>
+<text top="182" left="189" width="575" height="14" font="25">Contractor shall engage reputed TPIA specified in the contract to witness inspection at site </text>
+<text top="199" left="189" width="574" height="14" font="25">and accordingly submit ITP for review of owner/ EIL. In case list of approved TPIA is not </text>
+<text top="217" left="189" width="481" height="14" font="25">available in contract, prior approval shall be taken before engagement of TPIA. </text>
+<text top="252" left="141" width="24" height="14" font="25">5.5 </text>
+<text top="251" left="190" width="487" height="14" font="25">A copy of PMI records duly verified by TPIA shall be submitted to Owner/ EIL. </text>
+<text top="287" left="141" width="23" height="14" font="25">5.6 </text>
+<text top="286" left="190" width="574" height="14" font="25">After installation, but prior to hydrostatic testing/ painting/ insulation, the contractor shall </text>
+<text top="303" left="190" width="574" height="14" font="25">examine all components requiring PMI for proper compliance to this specification. A record </text>
+<text top="321" left="190" width="574" height="14" font="25">of this final check duly endorsed by TPIA, as specified below, shall be submitted to EIL/ </text>
+<text top="338" left="190" width="357" height="14" font="25">Owner and made part of the permanent inspection records. </text>
+<text top="374" left="141" width="218" height="14" font="26"><b>5.6.1 Owner Supplied Material </b></text>
+<text top="408" left="190" width="575" height="14" font="25">Records signed by contractor and duly verified by TPIA (engaged by contractor)/ and </text>
+<text top="425" left="190" width="559" height="14" font="25">reviewed by EIL/ Owner shall be generated as part of the receiving inspection at warehouse. </text>
+<text top="461" left="141" width="34" height="14" font="25">5.6.2 </text>
+<text top="460" left="190" width="196" height="14" font="26"><b>Contractor Supplied Material </b></text>
+<text top="495" left="191" width="537" height="14" font="25">Records signed by contractor and certified by an approved third party inspection agency. </text>
+<text top="530" left="141" width="24" height="14" font="25">5.7 </text>
+<text top="529" left="191" width="575" height="14" font="25">After acceptance, all components shall be marked with a suitable and readily visible paint </text>
+<text top="547" left="190" width="575" height="14" font="25">mark. These markings are in addition to markings / colour coding required by other codes/ </text>
+<text top="564" left="190" width="197" height="14" font="25">specifications/ Technical Notes. </text>
+<text top="599" left="142" width="23" height="14" font="26"><b>5.8 </b></text>
+<text top="599" left="190" width="575" height="14" font="25">Controls shall be established to keep the non conforming items identified till proper resolution </text>
+<text top="617" left="190" width="118" height="14" font="25">of non conformity. </text>
+<text top="651" left="142" width="22" height="14" font="25">5.9 </text>
+<text top="651" left="191" width="461" height="14" font="25">EIL/ Owner shall have the right to witness the performance of any PMI test. </text>
+<text top="686" left="142" width="22" height="14" font="25">6.0 </text>
+<text top="686" left="190" width="123" height="14" font="26"><b>EXTENT OF PMI </b></text>
+<text top="720" left="191" width="575" height="14" font="25">PMI shall be done on each component (100 percent PMI inspection) including welds (Except </text>
+<text top="738" left="191" width="442" height="14" font="25">carbon steel Piping welds), unless specifically exempted by Owner/ EIL. </text>
+<text top="772" left="191" width="574" height="14" font="25">PMI shall be done on pipe supports (welded/ bolted) such as pads, saddles, dummy pipes etc. </text>
+<text top="789" left="191" width="412" height="14" font="25">(100 percent PMI inspection) in all piping systems of alloy material </text>
+<text top="824" left="192" width="574" height="14" font="25">PMI shall be done on all bolts and nuts (100 percent PMI inspection) of flange joints in all </text>
+<text top="842" left="192" width="201" height="14" font="25">piping systems of alloy material. </text>
+<text top="894" left="143" width="420" height="14" font="26"><b>7.0 PMI OF PIPING AND HEATER COIL COMPONENTS </b></text>
+<text top="928" left="192" width="575" height="14" font="25">PMI testing (irrespective of PMI done at earlier stages) shall be carried out when piping loops/ </text>
+<text top="946" left="192" width="575" height="14" font="25">heater coils have been cleared for hydrostatic testing by EIL/ Owner. Hydrostatic Testing </text>
+<text top="963" left="192" width="575" height="14" font="25">shall be carried out only when non conforming components have been replaced with </text>
+<text top="981" left="192" width="575" height="14" font="25">conforming components and subsequent Non Destructive Testing, Post Weld Heat-Treatment, </text>
+<text top="998" left="192" width="575" height="14" font="25">Hardness checking and re verification by PMI etc., as required by specifications have been </text>
+<text top="1015" left="192" width="575" height="14" font="25">completed. PMI records shall form a part of piping/ heater inspection records. Contractor </text>
+<text top="1032" left="192" width="575" height="14" font="25">shall demonstrate to EIL that each &amp; every component of the piping system and heater coils </text>
+<text top="1050" left="192" width="541" height="14" font="25">has been subjected to PMI by providing line wise records of PMI duly endorsed by TPIA </text>
+<text top="1113" left="143" width="163" height="9" font="29">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1109" left="599" width="169" height="9" font="29">Copyright EIL—All rights reserved </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="31" size="8" family="Times" color="#000000"/>
+	<fontspec id="32" size="19" family="Helvetica" color="#000000"/>
+	<fontspec id="33" size="23" family="Times" color="#000000"/>
+<text top="706" left="308" width="46" height="14" font="25">Gr P 11 </text>
+<text top="725" left="308" width="39" height="14" font="25">Gr P5 </text>
+<text top="725" left="491" width="47" height="14" font="25">Cr, Mo </text>
+<text top="761" left="308" width="39" height="14" font="25">Gr P9 </text>
+<text top="779" left="308" width="46" height="14" font="25">Gr P91 </text>
+<text top="779" left="491" width="66" height="14" font="25">Cr, Mo, V </text>
+<text top="670" left="266" width="146" height="12" font="20"><b>Material Specification </b></text>
+<text top="671" left="491" width="159" height="12" font="20"><b>Characteristic Elements </b></text>
+<text top="743" left="198" width="46" height="12" font="20"><b>ASTM </b></text>
+<text top="743" left="243" width="41" height="14" font="25">A 335 </text>
+<text top="742" left="308" width="47" height="14" font="25">Gr P22 </text>
+<text top="797" left="309" width="61" height="14" font="25">Type 304 </text>
+<text top="797" left="491" width="41" height="14" font="25">Cr, Ni </text>
+<text top="815" left="309" width="61" height="14" font="25">Type 316 </text>
+<text top="815" left="491" width="69" height="14" font="25">Cr, Ni, Mo </text>
+<text top="833" left="309" width="61" height="14" font="25">Type 321 </text>
+<text top="833" left="491" width="62" height="14" font="25">Cr, Ni, Ti </text>
+<text top="851" left="309" width="61" height="14" font="25">Type 347 </text>
+<text top="851" left="491" width="186" height="14" font="25">Cr. Ni, Columbium, Tantalum </text>
+<text top="824" left="199" width="86" height="14" font="25">ASTM A 312 </text>
+<text top="51" left="2482" width="9" height="12" font="18"> </text>
+<text top="51" left="3269" width="9" height="12" font="18"> </text>
+<text top="51" left="4463" width="9" height="12" font="18"> </text>
+<text top="73" left="252" width="71" height="14" font="25">ENGINEERS </text>
+<text top="86" left="252" width="93" height="14" font="25">INDIA LIMITED </text>
+<text top="98" left="251" width="68" height="8" font="19">(A Gov. &lt;A india underta</text>
+<text top="99" left="319" width="4" height="7" font="31">,</text>
+<text top="100" left="322" width="12" height="6" font="24">Pog, </text>
+<text top="64" left="371" width="189" height="12" font="20"><b>STANDARD SPECIFICATION </b></text>
+<text top="80" left="379" width="173" height="12" font="20"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="96" left="398" width="134" height="12" font="20"><b>IDENTIFICATION AT </b></text>
+<text top="111" left="387" width="156" height="12" font="20"><b>CONSTRUCTION SITES </b></text>
+<text top="67" left="583" width="173" height="10" font="15">STANDARD SPECIFICATION No. </text>
+<text top="87" left="612" width="114" height="12" font="20"><b>6-82-0002 Rev. 5 </b></text>
+<text top="110" left="639" width="60" height="10" font="15">Page 7 of 9 </text>
+<text top="84" left="136" width="43" height="17" font="32">O&amp;It </text>
+<text top="82" left="176" width="51" height="20" font="33">Ellae.g </text>
+<text top="98" left="160" width="65" height="8" font="19">WW1 ekAAA,A.ARA., </text>
+<text top="146" left="139" width="248" height="14" font="25">8.0 TESTING METHODOLOGY </text>
+<text top="181" left="139" width="22" height="14" font="25">8.1 </text>
+<text top="182" left="189" width="574" height="14" font="25">The method used for PMI examination shall provide a quantitative determination of the </text>
+<text top="199" left="189" width="574" height="14" font="25">alloying elements like chromium, nickel, molybdenum or vanadium in alloy steel items for the </text>
+<text top="216" left="189" width="278" height="14" font="25">characteristic elements specified in clause 9.0 </text>
+<text top="251" left="139" width="23" height="14" font="25">8.2 </text>
+<text top="251" left="189" width="574" height="14" font="25">Instruments or methods used for PMI examination shall be able to provide quantitative, </text>
+<text top="268" left="189" width="487" height="14" font="25">recordable, elemental composition results for positive identification of elements. </text>
+<text top="303" left="139" width="24" height="14" font="25">8.3 </text>
+<text top="303" left="189" width="573" height="14" font="25">The acceptable instruments for alloy analyzer shall be either &#34;portable X-ray Fluorescence&#34; or </text>
+<text top="321" left="188" width="575" height="14" font="25">&#34;optical Emission type each capable of verifying the percentage of elements within specified </text>
+<text top="338" left="189" width="573" height="14" font="25">range .The instruments must have the printout facility and sensitivity to detect the elements in </text>
+<text top="355" left="189" width="121" height="14" font="25">the specified range. </text>
+<text top="390" left="139" width="23" height="14" font="25">8.4 </text>
+<text top="390" left="189" width="574" height="14" font="25">Chemical spot testing, magnets, alloy sorters and other methods using eddy current or </text>
+<text top="407" left="189" width="420" height="14" font="25">triboelectric testing methods are not acceptable for PMI examination. </text>
+<text top="442" left="139" width="24" height="14" font="25">8.5 </text>
+<text top="442" left="190" width="574" height="14" font="25">All PMI instruments shall have been serviced within a 6 month period of the time of use to </text>
+<text top="460" left="190" width="574" height="14" font="25">verify the suitability of batteries, sources,etc, and the date of the last service shall be stated on </text>
+<text top="477" left="190" width="129" height="14" font="25">the PMI report form. </text>
+<text top="512" left="140" width="23" height="14" font="25">8.6 </text>
+<text top="512" left="190" width="574" height="14" font="25">The surfaces to be examined shall be prepared and cleaned by suitable means before PMI so </text>
+<text top="529" left="190" width="574" height="14" font="25">that surface be free from grease, oil, paint or oxides. Testing shall be done after proper surface </text>
+<text top="547" left="190" width="574" height="14" font="25">cleaning and other requirements as outlined by the manufacturer of the portable alloy </text>
+<text top="564" left="189" width="516" height="14" font="25">analyzer. Modification, if any, of these procedures must be approved by Owner/ ELL. </text>
+<text top="598" left="140" width="24" height="14" font="25">8.7 </text>
+<text top="599" left="190" width="550" height="14" font="25">Ring type joint gaskets shall be inspected by using portable X-ray fluorescence instrument. </text>
+<text top="633" left="144" width="275" height="14" font="26"><b>9.0 CHARACTERISTIC ELEMENTS </b></text>
+<text top="887" left="140" width="22" height="14" font="26"><b>9.1 </b></text>
+<text top="888" left="190" width="575" height="14" font="25">Carbon Steel materials under clause no 3.1.11 shall be checked to confirm that no mix up has </text>
+<text top="905" left="191" width="248" height="14" font="25">taken place with alloy steel components. </text>
+<text top="939" left="141" width="22" height="14" font="25">9.2 </text>
+<text top="940" left="190" width="575" height="14" font="25">Characteristic elements for materials not listed above shall be proposed by the contractor for </text>
+<text top="957" left="191" width="171" height="14" font="25">approval of the Owner/ EIL </text>
+<text top="992" left="141" width="162" height="14" font="25">10.0 CALIBRATION </text>
+<text top="1026" left="141" width="30" height="14" font="25">10.1 </text>
+<text top="1026" left="191" width="575" height="14" font="25">Instruments used for  <b>PMI  </b>shall have the sensitivity to detect the alloying elements in the </text>
+<text top="1044" left="191" width="575" height="14" font="25">specified ranges. Instruments or methods used for examination shall be of the type that will </text>
+<text top="1061" left="191" width="575" height="14" font="25">provide quantitative, recordable, elemental composition results for positive identification of </text>
+<text top="1078" left="191" width="164" height="14" font="25">the alloy elements present. </text>
+<text top="1129" left="141" width="164" height="10" font="15">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1126" left="597" width="169" height="10" font="15">Copyright EIL — All rights reserved </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1260" width="895">
+<text top="51" left="2418" width="9" height="12" font="18"> </text>
+<text top="51" left="3161" width="9" height="12" font="18"> </text>
+<text top="51" left="4355" width="9" height="12" font="18"> </text>
+<text top="75" left="247" width="71" height="14" font="25">ENGINEERS </text>
+<text top="88" left="247" width="94" height="14" font="25">INDIA LIMITED </text>
+<text top="102" left="249" width="12" height="5" font="23">A (, </text>
+<text top="102" left="271" width="59" height="5" font="23">of 1,14,111tlertalorq, </text>
+<text top="64" left="366" width="188" height="12" font="20"><b>STANDARD SPECIFICATION </b></text>
+<text top="80" left="374" width="173" height="12" font="20"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="96" left="393" width="134" height="12" font="20"><b>IDENTIFICATION AT </b></text>
+<text top="112" left="382" width="156" height="12" font="20"><b>CONSTRUCTION SITES </b></text>
+<text top="65" left="578" width="173" height="10" font="15">STANDARD SPECIFICATION No. </text>
+<text top="64" left="744" width="1" height="10" font="15"> </text>
+<text top="85" left="608" width="113" height="12" font="20"><b>6-82-0002 Rev. 5 </b></text>
+<text top="108" left="635" width="59" height="10" font="15">Page 8 of 9 </text>
+<text top="97" left="132" width="93" height="5" font="23">Ogar aiteg </text>
+<text top="102" left="155" width="66" height="5" font="23">1.1,7 e.e.12 naJeATR, </text>
+<text top="150" left="135" width="30" height="14" font="26"><b>10.2 </b></text>
+<text top="147" left="184" width="574" height="14" font="25">Each alloy analyzer shall be calibrated using known alloy standards for intended materials to </text>
+<text top="164" left="185" width="574" height="14" font="25">be checked by PMI. A calibration certification from the Manufacturer or his authorized </text>
+<text top="183" left="184" width="324" height="14" font="25">agency shall be submitted to EIL/ Owner for records. </text>
+<text top="219" left="136" width="31" height="14" font="26"><b>10.3 </b></text>
+<text top="217" left="185" width="574" height="14" font="25">EIL/ Owner shall review the procedure and qualification and witness sample alloy/ carbon </text>
+<text top="234" left="185" width="574" height="14" font="25">steel materials verification tests to confirm that the procedures, equipment and personnel are </text>
+<text top="252" left="185" width="575" height="14" font="25">capable of providing consistent and accurate results. Certified samples, with full traceability, </text>
+<text top="269" left="185" width="574" height="14" font="25">of a known alloy materials/ carbon steel materials shall be available for use as a random spot </text>
+<text top="288" left="186" width="217" height="14" font="25">checking on instrument calibration. </text>
+<text top="322" left="137" width="316" height="14" font="26"><b>11.0 SITE VERIFICATION OF ANALYZER </b></text>
+<text top="357" left="187" width="575" height="14" font="25">Verification using Standard samples supplied by institutes such as ASM (American Society of </text>
+<text top="375" left="187" width="574" height="14" font="25">Metals) for the intended materials type and grade shall be performed each day before using the </text>
+<text top="392" left="187" width="575" height="14" font="25">analyzer. Such verification shall be done again if PMI test is to be performed on different </text>
+<text top="412" left="187" width="156" height="14" font="25">grade or type of material. </text>
+<text top="446" left="138" width="272" height="14" font="26"><b>12.0 PERSONNEL QUALIFICATION </b></text>
+<text top="479" left="188" width="575" height="14" font="25">The persons performing the PMI test should be knowledgeable about properties of material, </text>
+<text top="496" left="188" width="574" height="14" font="25">all aspects of operation of PMI equipment including the method of testing. Qualification/ </text>
+<text top="514" left="188" width="575" height="14" font="25">experience documents of the person performing the PMI test including his training and </text>
+<text top="532" left="189" width="425" height="14" font="25">experience shall be submitted to EIL/ Owner for review and approval. </text>
+<text top="568" left="140" width="236" height="14" font="26"><b>13.0 ACCEPTANCE CRITERIA </b></text>
+<text top="603" left="140" width="126" height="14" font="26"><b>13.1 Base Metal </b></text>
+<text top="635" left="190" width="574" height="14" font="25">PMI test results showing presence of characteristic elements upto 10% less than the minimum </text>
+<text top="653" left="190" width="575" height="14" font="25">specified value in the material specification and upto 10% more than the maximum specified </text>
+<text top="671" left="190" width="328" height="14" font="25">value in the material specification shall be acceptable. </text>
+<text top="707" left="142" width="196" height="14" font="26"><b>13.2 Deposited Weld Metal </b></text>
+<text top="739" left="191" width="575" height="14" font="25">For deposited weld metal between base metals of the same specification using matching </text>
+<text top="756" left="191" width="575" height="14" font="25">consumables, the recorded presence of characteristic elements upto 12.5% less than the </text>
+<text top="774" left="191" width="575" height="14" font="25">minimum specified value in the welding consumables specification and upto 12.5% more than </text>
+<text top="791" left="191" width="549" height="14" font="25">the maximum specified value in the welding consumable specification shall be acceptable. </text>
+<text top="828" left="143" width="220" height="14" font="26"><b>14.0 REJECTION CRITERIA </b></text>
+<text top="864" left="143" width="30" height="14" font="26"><b>14.1 </b></text>
+<text top="861" left="193" width="575" height="14" font="25">If the PMI test results fall outside the acceptable range as given in 13.0 above, the contractor </text>
+<text top="878" left="193" width="575" height="14" font="25">shall obtain a quantitative check analysis performed by a laboratory acceptable to EIL/ Owner </text>
+<text top="895" left="193" width="575" height="14" font="25">for a complete chemical analysis. Results of this analysis shall be submitted to EIL/ Owner, </text>
+<text top="914" left="193" width="326" height="14" font="25">with contractor's recommendation, for final decision. </text>
+<text top="948" left="194" width="318" height="14" font="25">Decision of EIL/ Owner shall be final in this regard. </text>
+<text top="985" left="145" width="31" height="14" font="26"><b>14.2 </b></text>
+<text top="982" left="195" width="575" height="14" font="25">If any material component or weld is found unacceptable, all other represented materials (e.g. </text>
+<text top="999" left="195" width="576" height="14" font="25">in case of fasteners, supports) or welds shall be considered suspect. In such cases, the </text>
+<text top="1018" left="194" width="226" height="14" font="25">contractor has the following options: </text>
+<text top="1034" left="145" width="625" height="14" font="25">14.2.1 Scrapping all those represented materials or components and replacing with new components </text>
+<text top="1054" left="195" width="59" height="14" font="25">or welds. </text>
+<text top="1086" left="146" width="625" height="14" font="25">14.2.2 Performing 100% examination of the remainder of the represented materials/ components and </text>
+<text top="1105" left="196" width="273" height="14" font="25">replacing each item that fails the PMI check. </text>
+<text top="1132" left="146" width="163" height="10" font="15">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1124" left="602" width="169" height="10" font="15">Copyright EIL — All rights reserved </text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="34" size="16" family="Helvetica" color="#000000"/>
+<text top="76" left="188" width="28" height="13" font="4"><b>ete-7 </b></text>
+<text top="75" left="215" width="39" height="15" font="34"><b>ft </b></text>
+<text top="75" left="242" width="72" height="13" font="4"><b>ENGINEERS </b></text>
+<text top="88" left="157" width="181" height="13" font="4"><b> tai5Veg W INDIA LIMITED </b></text>
+<text top="102" left="243" width="83" height="6" font="24">(A Govl of Inds Undertalorq) </text>
+<text top="101" left="154" width="63" height="7" font="31">WTI i4241.,151,1,121,4, </text>
+<text top="101" left="212" width="1" height="7" font="31"> </text>
+<text top="63" left="361" width="189" height="13" font="4"><b>STANDARD SPECIFICATION </b></text>
+<text top="79" left="369" width="174" height="13" font="4"><b>FOR POSITIVE MATERIAL </b></text>
+<text top="95" left="389" width="135" height="13" font="4"><b>IDENTIFICATION AT </b></text>
+<text top="111" left="378" width="157" height="13" font="4"><b>CONSTRUCTION SITES </b></text>
+<text top="64" left="573" width="173" height="10" font="14"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="84" left="603" width="115" height="13" font="4"><b>6-82-0002 Rev. 5 </b></text>
+<text top="107" left="631" width="60" height="10" font="15">Page 9 of 9 </text>
+<text top="165" left="132" width="622" height="13" font="17">14.2.3 If the performance of any verification activity is unacceptable to EIL/ Owner or if any material </text>
+<text top="182" left="181" width="574" height="13" font="17">has been incorrectly identified, all further tests shall be subject to EIL/ Owner approval until </text>
+<text top="202" left="181" width="153" height="13" font="17">the problem is corrected. </text>
+<text top="237" left="133" width="191" height="13" font="16"><b>15.0 DOCUMENTATION </b></text>
+<text top="272" left="133" width="28" height="13" font="16"><b>15.1 </b></text>
+<text top="269" left="182" width="575" height="13" font="17">Print out from alloy analyzer, in original, duly verified by the TPIA engaged by contractor, </text>
+<text top="289" left="182" width="174" height="13" font="17">Contractor and PMI agency. </text>
+<text top="325" left="134" width="29" height="13" font="16"><b>15.2 </b></text>
+<text top="323" left="183" width="265" height="13" font="17">PMI report as per format No. 6-82-0002-F1 </text>
+<text top="360" left="134" width="30" height="13" font="16"><b>15.3 </b></text>
+<text top="357" left="183" width="439" height="13" font="17">Basis and action for resolving and documenting PMI non conformances. </text>
+<text top="395" left="135" width="29" height="13" font="16"><b>15.4 </b></text>
+<text top="391" left="184" width="574" height="13" font="17">Contractor shall demonstrate to EIL/ Owner that all components requiring PMI have been </text>
+<text top="410" left="184" width="236" height="13" font="17">subjected to PMI testing and accepted. </text>
+<text top="1124" left="600" width="169" height="10" font="15">Copyright El <b>L —  </b>All rights reserved </text>
+<text top="1132" left="144" width="164" height="10" font="15">Format No. 8-00-0001-F1 Rev. 0 </text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1260" width="895">
+<text top="80" left="172" width="5" height="13" font="17">`</text>
+<text top="79" left="175" width="8" height="13" font="27">-</text>
+<text top="80" left="182" width="17" height="13" font="17">lf~</text>
+<text top="80" left="198" width="29" height="12" font="4"><b>aat4 </b></text>
+<text top="80" left="251" width="73" height="12" font="27">ENGINEERS </text>
+<text top="76" left="412" width="141" height="12" font="4"><b>POSITIVE MATERIAL </b></text>
+<text top="93" left="136" width="210" height="12" font="4"><b>s*g  if 0151eg VW </b>INDIA LIMITED </text>
+<text top="92" left="376" width="212" height="12" font="4"><b>IDENTIFICATION TEST REPORT </b></text>
+<text top="106" left="283" width="52" height="6" font="24">irba Ufalettaiongl </text>
+<text top="65" left="634" width="88" height="12" font="4"><b>DOCUMENT NO. </b></text>
+<text top="105" left="649" width="60" height="10" font="15">Page 1 of 1 </text>
+<text top="106" left="161" width="65" height="5" font="30"><b>WRIT </b>er2051, 15130.31, </text>
+<text top="155" left="624" width="90" height="13" font="17">REPORT NO: </text>
+<text top="211" left="140" width="69" height="13" font="17">Contractor </text>
+<text top="209" left="485" width="78" height="13" font="17">Date of PMI </text>
+<text top="209" left="717" width="1" height="13" font="17"> </text>
+<text top="245" left="141" width="46" height="13" font="17">Project </text>
+<text top="243" left="485" width="116" height="13" font="17">Inspection Agency </text>
+<text top="243" left="722" width="1" height="13" font="17"> </text>
+<text top="280" left="141" width="61" height="13" font="17">Location  </text>
+<text top="278" left="486" width="80" height="13" font="17">PMI Agency </text>
+<text top="278" left="724" width="1" height="13" font="17"> </text>
+<text top="315" left="141" width="51" height="13" font="17">Job No. </text>
+<text top="313" left="486" width="142" height="13" font="17">PMI Equipment Model </text>
+<text top="312" left="724" width="1" height="13" font="17"> </text>
+<text top="348" left="486" width="117" height="13" font="17">Make &amp; Serial No. </text>
+<text top="347" left="724" width="1" height="13" font="17"> </text>
+<text top="383" left="464" width="106" height="13" font="17">Last Service date </text>
+<text top="448" left="155" width="24" height="13" font="16"><b>Sr. </b></text>
+<text top="465" left="154" width="26" height="13" font="16"><b>No. </b></text>
+<text top="456" left="205" width="122" height="13" font="16"><b>Part Identification </b></text>
+<text top="447" left="381" width="59" height="13" font="16"><b>Material </b></text>
+<text top="464" left="350" width="120" height="13" font="16"><b>As per Drg./ Spec. </b></text>
+<text top="446" left="509" width="59" height="13" font="16"><b>Material </b></text>
+<text top="464" left="501" width="75" height="13" font="16"><b>as per PMI </b></text>
+<text top="437" left="658" width="44" height="13" font="16"><b>Result </b></text>
+<text top="455" left="612" width="136" height="13" font="16"><b>(Accepted/ Rejected/ </b></text>
+<text top="472" left="656" width="49" height="13" font="16"><b>Retest) </b></text>
+<text top="982" left="153" width="114" height="13" font="16"><b>(PMI AGENCY) </b></text>
+<text top="980" left="377" width="123" height="13" font="16"><b>(CONTRACTOR) </b></text>
+<text top="980" left="559" width="109" height="13" font="16"><b>(TPI AGENCY) </b></text>
+<text top="1037" left="149" width="119" height="13" font="16"><b>(EIL/ OWNER *) </b></text>
+<text top="1089" left="197" width="129" height="13" font="17">*Sample verification </text>
+<text top="350" left="141" width="150" height="13" font="17">Line No./ ISO Drg. No./ </text>
+<text top="384" left="142" width="157" height="13" font="17">Heater No./ Drawing No. </text>
+<text top="384" left="396" width="1" height="13" font="17"> </text>
+<text top="1132" left="146" width="164" height="10" font="15">Format No. 6-82-0002-F1 Rev. 4 </text>
+<text top="1128" left="609" width="169" height="10" font="15">Copyright EIL — All rights reserved </text>
+</page>
+<outline>
+<item page="1">Page 1</item>
+<item page="2">Page 2</item>
+<item page="3">Page 3</item>
+<item page="4">Page 4</item>
+<item page="5">Page 5</item>
+<item page="6">Page 6</item>
+<item page="7">Page 7</item>
+<item page="8">Page 8</item>
+<item page="9">Page 9</item>
+<item page="10">Page 10</item>
+</outline>
+</pdf2xml>

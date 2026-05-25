@@ -1,0 +1,579 @@
+[
+  {
+    "heading": "ATTACHMENT S",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > ATTACHMENT S",
+    "seq": 0,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "appendix",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "_______________________________________________________________________ 00010 VDU Heater Revamp Job 19.12.2025",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00010 VDU Heater Revamp Job 19.12.2025",
+    "seq": 1,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "DESIGN, DETAILED ENGINEERING, SUPPLY AND INSTALLATION OF EQUIPMENTS FOR THE _________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00010 VDU Heater Revamp Job 19.12.2025 > DESIGN, DETAILED ENGINEERING, SUPPLY AND INSTALLATION OF EQUIPMENTS FOR THE _________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "seq": 2,
+    "confidence": 0.99,
+    "score": 10.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "_______________________________________________________________________ 00020 Replacement Job VDU Radiant Section 19.12.2025",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00020 Replacement Job VDU Radiant Section 19.12.2025",
+    "seq": 3,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "_________________________________________________________________ Installation of Equipment at site as detailed in the scope of work.",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _________________________________________________________________ Installation of Equipment at site as detailed in the scope of work.",
+    "seq": 4,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "_______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025",
+    "seq": 5,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF CARBON STEEL (NON IBR)",
+    "level": 2,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF CARBON STEEL (NON IBR)",
+    "seq": 6,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF ALLOY STEEL (NON IBR)",
+    "level": 2,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF ALLOY STEEL (NON IBR)",
+    "seq": 7,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "WELDING OF WELDOLETS, SOCKOLETS, COUPLINGS, FLANGES, VALVES AND FILLET JOINTS",
+    "level": 2,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > WELDING OF WELDOLETS, SOCKOLETS, COUPLINGS, FLANGES, VALVES AND FILLET JOINTS",
+    "seq": 8,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "RATE PER INCH DIA. FOR FABRICATION, ERECTION AND WELDING OF",
+    "level": 2,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH DIA. FOR FABRICATION, ERECTION AND WELDING OF",
+    "seq": 9,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "RATE PER INCH METER LENGTH FOR FABRICATION ,WELDING AND ERECTION OF STEM",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH METER LENGTH FOR FABRICATION ,WELDING AND ERECTION OF STEM",
+    "seq": 10,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF CARBON STEEL (IBR) PIPE",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH DIA OF WELD JOINTS FOR FABRICATION OF CARBON STEEL (IBR) PIPE",
+    "seq": 11,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "RATE PER INM FOR DISMANTLING OF PIPE LINES BY GAS CUTTING, COLD CUTTING",
+    "level": 2,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INM FOR DISMANTLING OF PIPE LINES BY GAS CUTTING, COLD CUTTING",
+    "seq": 12,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "RATE PER INCH METER LENGTH FOR ERECTION / HYDROTESTING / COMMISSIONING AND",
+    "level": 2,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER INCH METER LENGTH FOR ERECTION / HYDROTESTING / COMMISSIONING AND",
+    "seq": 13,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "SPADING/DESPADING - FOR FLANGE RATINGS UPTO 900# - RATE IN INCH DIA - SPADING",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > SPADING/DESPADING - FOR FLANGE RATINGS UPTO 900# - RATE IN INCH DIA - SPADING",
+    "seq": 14,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "JOB INVOLVES CARRYING OUT HYDROTEST OF PIPING/TUBES ETC AT THE SPECIFIED",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > JOB INVOLVES CARRYING OUT HYDROTEST OF PIPING/TUBES ETC AT THE SPECIFIED",
+    "seq": 15,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "RATE PER SQUARE METER FOR SHOTBLASTING OF EXTERNAL SURFACES OF",
+    "level": 2,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER SQUARE METER FOR SHOTBLASTING OF EXTERNAL SURFACES OF",
+    "seq": 16,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "\"REMOVAL/REFIXING OF CONTROL VALVES UPTO 600# RATING.",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > \"REMOVAL/REFIXING OF CONTROL VALVES UPTO 600# RATING.",
+    "seq": 17,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "RATE PER MT FOR FABRICATION, ERECTION AND PAINTING OF PIPING SUPPORTS OF",
+    "level": 2,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER MT FOR FABRICATION, ERECTION AND PAINTING OF PIPING SUPPORTS OF",
+    "seq": 18,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "RATE FOR REMOVAL/ERECTION OF MOVS INCLUDING MOV ACTUATORS AS DIRECTED BY THE",
+    "level": 2,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE FOR REMOVAL/ERECTION OF MOVS INCLUDING MOV ACTUATORS AS DIRECTED BY THE",
+    "seq": 19,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "RATE IN INCH DIA- CUTTING OF SPADES FROM BPCL ISSUED MATERIAL AS PER REQUIRED",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE IN INCH DIA- CUTTING OF SPADES FROM BPCL ISSUED MATERIAL AS PER REQUIRED",
+    "seq": 20,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "FABRICATION OF ADAPTOR FOR PROVIDING TESTING, FLUSHING, STEAMING, WATER",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > FABRICATION OF ADAPTOR FOR PROVIDING TESTING, FLUSHING, STEAMING, WATER",
+    "seq": 21,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "RATE PER CONNECTION FOR CONNECTING OR DISCONECTING AIR/STEAM/WATER HOSE",
+    "level": 2,
+    "page_num": 19,
+    "page_start": 19,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > RATE PER CONNECTION FOR CONNECTING OR DISCONECTING AIR/STEAM/WATER HOSE",
+    "seq": 22,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "SECURITY DEPOSIT TOWARDS PERFORMANCE / RETENTION MONEY / PBG:-",
+    "level": 2,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > SECURITY DEPOSIT TOWARDS PERFORMANCE / RETENTION MONEY / PBG:-",
+    "seq": 23,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 40
+  },
+  {
+    "heading": "9 DIGIT MICR CODE 400036002",
+    "level": 2,
+    "page_num": 41,
+    "page_start": 41,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ 00030 Replacement Job VDU Convection Section 19.12.2025 > 9 DIGIT MICR CODE 400036002",
+    "seq": 24,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 43
+  },
+  {
+    "heading": "_______________________________________________________________________ Purchase Group : N19-E&C/PROJ TECH SERV",
+    "level": 1,
+    "page_num": 44,
+    "page_start": 44,
+    "breadcrumb": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND > _______________________________________________________________________ Purchase Group : N19-E&C/PROJ TECH SERV",
+    "seq": 25,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 44
+  }
+]

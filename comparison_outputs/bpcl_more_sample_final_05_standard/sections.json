@@ -1,0 +1,26 @@
+[
+  {
+    "heading": "SCHEDULE SCH. UNLESS OTHERWISE NOTED U.O.N.",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "7 17 0705 Rev 5 > SCHEDULE SCH. UNLESS OTHERWISE NOTED U.O.N.",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 9.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "7 17 0705 Rev 5",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 3
+  }
+]

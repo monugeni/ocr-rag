@@ -1,0 +1,41 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: ED
+      - generic [ref=e6]:
+        - generic [ref=e7]: Esteem DocLens
+        - generic [ref=e8]: Tender knowledge
+    - button "New folder" [ref=e10] [cursor=pointer]
+    - searchbox "Find folder" [ref=e12]
+    - generic [ref=e13]:
+      - generic [ref=e14]:
+        - button "281 - BPCL Mumbai VDU revamp 1" [ref=e16] [cursor=pointer]:
+          - generic [ref=e18]: 281 - BPCL Mumbai VDU revamp
+          - generic [ref=e19]: "1"
+        - button "+" [ref=e20] [cursor=pointer]
+      - generic [ref=e21]:
+        - button "HPCL-Vizag-OCO-Boiler 38" [ref=e23] [cursor=pointer]:
+          - generic [ref=e25]: HPCL-Vizag-OCO-Boiler
+          - generic [ref=e26]: "38"
+        - button "+" [ref=e27] [cursor=pointer]
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]: 281 - BPCL Mumbai VDU revamp
+        - generic [ref=e32]: 1 documents | 80 pages | 0 pending
+      - navigation "Main views" [ref=e33]:
+        - button "Ask" [ref=e34] [cursor=pointer]
+        - button "Documents" [ref=e35] [cursor=pointer]
+        - button "Ingest" [ref=e36] [cursor=pointer]
+        - button "Jobs" [ref=e37] [cursor=pointer]
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]: No chat yet
+        - button "New chat" [ref=e41] [cursor=pointer]
+        - button "Refresh" [ref=e42] [cursor=pointer]
+      - generic [ref=e45]:
+        - strong [ref=e46]: Ask a question about 281 - BPCL Mumbai VDU revamp
+        - generic [ref=e47]: "Examples: scope of work, vendor requirements, LD clause, inspection requirements"
+      - generic [ref=e48]:
+        - textbox "Ask about this folder" [ref=e49]
+        - button "Send" [ref=e50] [cursor=pointer]

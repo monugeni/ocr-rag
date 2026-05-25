@@ -1,0 +1,26 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Corrigendum/GeM-Bidding-Corr-9201620-1.pdf",
+  "document_title": "Disclaimer",
+  "document_context": {
+    "title": "Disclaimer",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 2,
+  "body_font_size": 14.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 25,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 2,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 95,
+      "page_number": 2
+    }
+  }
+}

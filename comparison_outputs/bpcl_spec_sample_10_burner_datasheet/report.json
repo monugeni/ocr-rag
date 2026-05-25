@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/BURNER OIL GUN MR/BURNER Datasheet_CDU-3 Rev.0-FINAL.pdf",
+  "document_title": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101)",
+  "document_context": {
+    "title": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101)",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 8,
+  "body_font_size": 14.0,
+  "heading_count": 1,
+  "toc_entry_count": 0,
+  "chunk_count": 16,
+  "warnings": [
+    "p2: decimal heading '3.56' has no detected parent '3'"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 5,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "running": 10,
+      "body": 30,
+      "form": 3,
+      "page_number": 3
+    }
+  }
+}

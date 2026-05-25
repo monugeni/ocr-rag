@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC I II III/Sec I/C238-131-06-43-RL-S001 Job Specification for Refractory lining.pdf",
+  "document_title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+  "document_context": {
+    "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 8,
+  "body_font_size": 17.0,
+  "heading_count": 11,
+  "toc_entry_count": 0,
+  "chunk_count": 40,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 8,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "running": 38,
+      "drawing": 19,
+      "page_number": 8,
+      "toc": 9,
+      "body": 221,
+      "table": 9
+    }
+  }
+}

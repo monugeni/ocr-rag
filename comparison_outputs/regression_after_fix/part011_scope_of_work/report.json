@@ -1,0 +1,31 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/split_output/2500024832-HB-06600_3_part011_p295-308_1_SCOPE_OF_WORK.pdf",
+  "document_title": "1. SCOPE OF WORK:",
+  "document_context": {
+    "title": "1. SCOPE OF WORK:",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 14,
+  "body_font_size": 18.0,
+  "heading_count": 8,
+  "toc_entry_count": 0,
+  "chunk_count": 56,
+  "warnings": [
+    "p3: top-level decimal jump 4 -> 12"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 10,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "running": 28,
+      "body": 278,
+      "table": 3,
+      "caption": 29,
+      "toc": 36
+    }
+  }
+}

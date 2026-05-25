@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "page_num": 3,
+    "line_index": 30,
+    "top": 537.0,
+    "left": 125.0,
+    "text": "SCHEDULE SCH. UNLESS OTHERWISE NOTED U.O.N.",
+    "level": 1,
+    "score": 9.0,
+    "confidence": 0.99,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "numbering": "SCHEDULE SCH.",
+    "scheme": "appendix",
+    "breadcrumb": "7 17 0705 Rev 5 > SCHEDULE SCH. UNLESS OTHERWISE NOTED U.O.N.",
+    "toc_match": null,
+    "warnings": []
+  }
+]

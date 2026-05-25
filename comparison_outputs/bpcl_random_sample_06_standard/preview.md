@@ -1,0 +1,287 @@
+# STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS
+
+Context: `STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS`
+
+Source: `/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 3/6-76-0002_Rev_3.pdf`
+Pages: 35
+Headings: 87
+Chunks: 302
+
+## Headings
+
+- p1 L1 (0.92) APPLICATION OF TORQUE AND
+- p1 L1 (0.92) HYDRAULIC BOLT TENSION
+- p1 L1 (0.92) FOR FLANGE JOINTS
+- p2 L3 (0.64)     Abbreviations
+- p4 L1 (0.76) 1.0 PURPOSE
+- p4 L1 (0.76) 2.0 SCOPE
+- p4 L1 (0.76) 3.0 REFERENCES
+- p4 L1 (0.90) 4.0 DEFINITIONS
+- p4 L1 (0.90) 5.0 METHODOLOGIES AND CONTROL
+- p4 L2 (0.70)   5.1 Identification of joints for controlled bolt tightening
+- p4 L3 (0.56)     5.1.1 Hydraulic Bolt tensioning
+- p5 L3 (0.56)     5.1.2 Application of torque
+- p6 L2 (0.70)   5.2 Pre-bolting Operations
+- p6 L3 (0.56)     5.2.1 Design
+- p6 L3 (0.56)     5.2.2 General
+- p6 L3 (0.56)     5.2.3 Visual inspection
+- p7 L3 (0.56)     5.2.4 Corrective measures
+- p7 L3 (0.56)     5.2.5 Lubrication/anti-seize compound
+- p7 L3 (0.56)     5.2.6 Assembly
+- p7 L3 (0.56)     5.2.7 Torque/tension calculation
+- p9 L2 (0.48)   BOLT TENSION FOR FLANGE JOINTS
+- p9 L3 (0.56)     5.2.9 Torque and tension values
+- p9 L2 (0.70)   5.3 Bolting Operation
+- p9 L3 (0.56)     5.3.1 General
+- p10 L3 (0.56)     5.3.2 Hydraulic bolt tension application
+- p10 L3 (0.56)     5.3.3 Stud bolt torque application
+- p11 L3 (0.56)     5.3.4 Testing of joints
+- p11 L1 (0.90) 6.0 RESPONSIBILITIES / APPROVALS
+- p11 L1 (0.90) 7.0 DOCUMENTATION
+- p12 L1 (0.99) 4 BOLT FLANGE 8 BOLT FLANGE
+- p12 L1 (0.99) 12 BOLT I FLANGE / 16 BOLT FLANGE ⚠
+- p12 L1 (0.90) 20 BOLT FLANGE ⚠
+- p13 L3 (0.67)     Bo ur L.
+- p14 L1 (0.82) 0 W ter 55 RU 0
+- p14 L2 (0.98)   U. S ra CD 350
+- p14 L2 (0.57)   B. 40
+- p14 L2 (0.48)   I LIS I LIST
+- p15 L2 (0.48)   I I I
+- p16 L2 (0.48)   _ I
+- p16 L2 (0.48)   GR X GR 3
+- p16 L2 (0.70)   U. U) 10
+- p16 L2 (0.72)   Z.63 Co CO ,-
+- p17 L2 (0.53)   S ••• ..0 A
+- p17 L1 (0.79) 6 PM A1 ⚠
+- p18 L2 (0.99)   Z.65 V LI Cal I < <
+- p19 L2 (0.48)   ..Y SS S
+- p21 L1 (0.72) Pressure kg r
+- p21 L2 (0.33)   L. L.
+- p21 L3 (0.57)     I 03 03
+- p21 L2 (0.48)   FL 0 00
+- p22 L3 (0.99)     ION No. C) - 1 n 7 1
+- p22 L1 (0.78) 22 L. L. ⚠
+- p22 L1 (0.92) I CO CO CO
+- p23 L2 (0.48)   I I I 1
+- p23 L2 (0.50)   U. O. co rocorocoroco meilinci3r-icor-intnincninciltncnen(ilcoincocomincnin
+- p23 L2 (0.57)   E. 0
+- p24 L2 (0.48)   CO M V' -
+- p24 L1 (0.83) 2 L. p
+- p24 L2 (0.48)   PMS CL.
+- p25 L2 (0.53)   Z ° H 000
+- p26 L2 (0.53)   U 156.
+- p26 L2 (0.78)   Z.5 re o
+- p26 L2 (0.57)   E. 0
+- p27 L2 (0.48)   I I I I
+- p27 L1 (0.72) Tens L d
+- p27 L1 (0.84) 00 0 CI ID °
+- p28 L2 (0.48)   T T
+- p29 L1 (0.84) 1 CO
+- p29 L1 (0.84) 0 N
+- p29 L2 (0.48)   I LIST D-
+- p30 L2 (0.48)   E- E-
+- p30 L2 (0.48)   I I LI
+- p31 L2 (0.48)   PM 6
+- p32 L1 (0.92) 0 CD 4
+- p32 L1 (0.84) 0 0 IL 0-
+- p32 L1 (0.72) re, 38 TJ - L
+- p32 L1 (0.99) e CO c, mp —
+- p32 L1 (0.99) 0 . F- G- C 0 IS (.9
+- p33 L1 (0.33) 0 e rve
+- p33 L1 (0.84) 1 7 CO
+- p33 L2 (0.53)   S CO 2 A
+- p33 L3 (0.62)     IX IL 0
+- p33 L3 (0.57)     I E 0
+- p34 L2 (0.48)   RY S O
+- p35 L1 (0.72) ANNEXURE - II
+- p35 L2 (0.99)   SEQUENCE OF ACTIVITIES INVOLVED FOR REOPENING / MAKING / BLINDING / DEBLINDING / WEDGE OPENING OF FLANGE JOINTS
+- p35 L2 (0.59)   ACCEPTANCE BY OWNER / EIL
+
+## Chunk Samples
+
+### C1 p1-1 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS_
+
+ENGINEERS QCs INDIA umiTED APPLICATION OF TORQUE AND HYDRAULIC 6-76-0002 Rev. 3 4ge_JI I. 212ZIAZ,TAJ,10.1) IA Govt d India undenak.n9) BOLT TENSION FOR FLANGE JOINTS Page 1 of 35
+
+### C2 p1-1 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS_
+
+.11§ik fc wd-anui (aci)) MIT I1§ - nct) GI) -4111 Nett) fe#RT
+
+### C3 p1-1 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS_
+
+STANDARD SPECIFICATION FOR
+
+### C4 p1-1 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > APPLICATION OF TORQUE AND_
+
+APPLICATION OF TORQUE AND
+
+### C5 p1-1 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > HYDRAULIC BOLT TENSION_
+
+HYDRAULIC BOLT TENSION
+
+### C6 p1-1 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS_
+
+FOR FLANGE JOINTS
+
+### C7 p1-1 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS_
+
+q?./ 41 12g/L4k 3 30-06-2021 Revised and reissued for Implementation PVK PG Vitll SM 2 04-05-2016 Issued for Implementation PG SVRS RP RN 1 26-05-2008 Issued for Implementation PG KPS AA VC 0 15-05-2003 Issued for Implementation PG KPS VC SKG Standards Standar
+
+### C8 p1-1 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS_
+
+Format No. 8-00-0001-F1 Rev. 0 Copyright EIL — All rights reserved
+
+### C9 p2-2 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS_
+
+16if&re? ,: a4h ENGINEERS STANDARD SPECIFICATION FOR STANDARD SPECIFICATION NO. ogeir famegw INDIA moo) APPLICATION OF TORQUE AND HYDRAULIC 6-76-0002 Rev. 3 IA Govt of India UncleftakIng) BOLT TENSION FOR FLANGE JOINTS Page 2 of 35 "'R" °"'°°""
+
+### C10 p2-2 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+Abbreviations
+
+### C11 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+ASME American Society of Mechanical Engineers PMS Piping Material Specification
+
+### C12 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+General Engineering Standards Committee
+
+### C13 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+Convenor : Mr. Vinod Mahajan Members : Mr. Harish Kumar Mr. Amit Prakash Mr. VK Tonger Mr. Satyabrata Biswas Mr. Shishupal Choudhary Mr. Vinay Sonker Mr. Deepak Agrawal Mr. Ankul Mondal Mr. Sachin Joshi Mr. Bharat Bhushan Shukia Mr. Surojit K Gayen
+
+### C14 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+Format No. 8-00-0001-F1 Rev. 0 Copyrights EIL —A11 rights reserved
+
+### C15 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+oaeximeolv ENGINEERS INDIA ummD APPLICATION OF TORQUE AND HYDRAULIC 6-76-0002 Rev. 3 lagkweraw.3q0.1) IAGoA al WM Undertalungl BOLT TENSION FOR FLANGE JOINTS Page 3 of 35
+
+### C16 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+CONTENTS
+
+### C17 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+1.0 PURPOSE 4 2.0 SCOPE 4 3.0 REFERENCES 4 4.0 DEFINITIONS 4 5.0 METHODOLOGY AND CONTROL 4 6.0 RESPONSIBILITIES / APPROVALS 11 7.0 DOCUMENTATION 11 ANNEXURE-I 34 ANNEXURE-II 35
+
+### C18 p4-4 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > FOR FLANGE JOINTS > Abbreviations_
+
+"ilft .--; ENGINEERS sigem 16151- egW INDIA LIMITED APPLICATION OF TORQUE AND HYDRAULIC 6-76-0002 Rev. 3 IarRR eRawz all A) (A Govt of India Undertaking) BOLT TENSION FOR FLANGE JOINTS
+
+### C19 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1.0 PURPOSE_
+
+1.0 PURPOSE
+
+### C20 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1.0 PURPOSE_
+
+The purpose of this specification is to describe the methodology for preparation of bolted flange joints by controlled bolt tightening during construction and commissioning stage of process plant piping. This specification shall be used in conjunction with the
+
+### C21 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2.0 SCOPE_
+
+2.0 SCOPE
+
+### C22 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2.0 SCOPE_
+
+This specification covers ASME B16.5 and ASME B16.47 Series B bolted flanged joints, involving identical pair of flanges, which are tightened by means of either hydraulic bolt tensioning or calibrated torque wrenches.
+
+### C23 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 3.0 REFERENCES_
+
+3.0 REFERENCES
+
+### C24 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 3.0 REFERENCES_
+
+EIL Spec no. 6-44-0005 Rev 7 - Standard Piping Material Specification ASME B16.5 Pipe Flanges and Flanged Fittings (1/2" to 24" NPS) ASME B16.47 Series B Pipe Flanges and Flanged Fittings (26" to 60" NPS) ASME B31.3 Process Piping BP RP 42-2 - British Petroleu
+
+### C25 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 4.0 DEFINITIONS_
+
+4.0 DEFINITIONS
+
+### C26 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 4.0 DEFINITIONS_
+
+None.
+
+### C27 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL_
+
+5.0 METHODOLOGIES AND CONTROL
+
+### C28 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening_
+
+5.1 Identification of joints for controlled bolt tightening
+
+### C29 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening_
+
+Controlled bolt tightening can be done either by application of calculated bolt tension with hydraulic tensioner or by application of calculated bolt torque with calibrated torque wrenches. The criteria for selection of joints for these two application procedu
+
+### C30 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening > 5.1.1 Hydraulic Bolt tensioning_
+
+5.1.1 Hydraulic Bolt tensioning
+
+## Warnings
+
+- p12: top-level decimal jump 4 -> 12
+- p12: top-level decimal jump 12 -> 20
+- p17: top-level decimal jump 0 -> 6
+- p22: top-level decimal jump 6 -> 22

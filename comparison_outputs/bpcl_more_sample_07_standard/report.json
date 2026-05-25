@@ -1,0 +1,31 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-17-0481_Rev_1.pdf",
+  "document_title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+  "document_context": {
+    "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 8,
+  "body_font_size": 15.0,
+  "heading_count": 7,
+  "toc_entry_count": 0,
+  "chunk_count": 39,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 8,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "running": 18,
+      "drawing": 248,
+      "body": 47,
+      "page_number": 14,
+      "table": 13,
+      "form": 1,
+      "caption": 2
+    }
+  }
+}

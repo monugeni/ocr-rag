@@ -1,0 +1,24 @@
+[
+  {
+    "heading": "5 Undertaking:",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "Undertaking for Creation of Custom Bid for Services required on GeM > 5 Undertaking:",
+    "seq": 0,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Undertaking for Creation of Custom Bid for Services required on GeM",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 1
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091813.pdf",
+  "document_title": "TITLE OF TENDER: ………………………………………………………………………………",
+  "document_context": {
+    "title": "TITLE OF TENDER: ………………………………………………………………………………",
+    "path_parts": [],
+    "source": "heading_fallback"
+  },
+  "page_count": 80,
+  "body_font_size": 17.0,
+  "heading_count": 35,
+  "toc_entry_count": 0,
+  "chunk_count": 264,
+  "warnings": [
+    "p49: top-level decimal jump 2 -> 10",
+    "p72: top-level decimal jump 2 -> 10"
+  ],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 59,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 1,
+    "line_role_counts": {
+      "caption": 17,
+      "body": 1805,
+      "form": 41,
+      "page_number": 91,
+      "table": 241,
+      "running": 36
+    }
+  }
+}

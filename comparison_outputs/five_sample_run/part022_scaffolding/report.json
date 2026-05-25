@@ -1,0 +1,26 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/split_output/2500024832-HB-06600_3_part022_p765-770_SPECIFICATIONS_FOR_SYSTEM_SCAFFOLDING.pdf",
+  "document_title": "2 SCAFFOLDING TYPE",
+  "document_context": {
+    "title": "2 SCAFFOLDING TYPE",
+    "path_parts": [],
+    "source": "heading_fallback"
+  },
+  "page_count": 6,
+  "body_font_size": 21.0,
+  "heading_count": 10,
+  "toc_entry_count": 0,
+  "chunk_count": 45,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 6,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 2,
+    "line_role_counts": {
+      "running": 12,
+      "body": 177,
+      "page_number": 6
+    }
+  }
+}

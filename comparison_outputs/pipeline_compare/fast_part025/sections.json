@@ -1,0 +1,234 @@
+[
+  {
+    "heading": "ATTACHMENT -III to Annexure 7.1",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1",
+    "seq": 0,
+    "confidence": 0.744,
+    "score": 6.7,
+    "reasons": [
+      "appendix",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "1.0 OBJECTIVE:",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 1.0 OBJECTIVE:",
+    "seq": 1,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "2.0 DESCRIPTION OF THE OBJECTIVE",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 2.0 DESCRIPTION OF THE OBJECTIVE",
+    "seq": 2,
+    "confidence": 0.4,
+    "score": 3.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "3.0 SCOPE:",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 3.0 SCOPE:",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "4.0 DEFINITIONS",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 4.0 DEFINITIONS",
+    "seq": 4,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "5.0 RESPONSIBILITY:",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 5.0 RESPONSIBILITY:",
+    "seq": 5,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "6.0 ACTIVITIES & MINIMUM PPE REQUIREMENT:",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 6.0 ACTIVITIES & MINIMUM PPE REQUIREMENT:",
+    "seq": 6,
+    "confidence": 0.622,
+    "score": 5.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "6.1 OPERATIONAL ACTIVITIES",
+    "level": 3,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 6.0 ACTIVITIES & MINIMUM PPE REQUIREMENT: > 6.1 OPERATIONAL ACTIVITIES",
+    "seq": 7,
+    "confidence": 0.4,
+    "score": 3.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "6.2 MAINTENANCE ACTIVITIES",
+    "level": 3,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 6.0 ACTIVITIES & MINIMUM PPE REQUIREMENT: > 6.2 MAINTENANCE ACTIVITIES",
+    "seq": 8,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "7.0 RECORD OF REVISIONS:",
+    "level": 2,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES > ATTACHMENT -III to Annexure 7.1 > 7.0 RECORD OF REVISIONS:",
+    "seq": 9,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  }
+]

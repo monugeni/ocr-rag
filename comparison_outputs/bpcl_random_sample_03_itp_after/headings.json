@@ -1,0 +1,241 @@
+[
+  {
+    "id": 1,
+    "page_num": 2,
+    "line_index": 5,
+    "top": 173.0,
+    "left": 60.0,
+    "text": "Abbreviations",
+    "level": 3,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > Abbreviations",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 2,
+    "line_index": 25,
+    "top": 666.0,
+    "left": 60.0,
+    "text": "Members",
+    "level": 3,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > Members",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 3,
+    "line_index": 5,
+    "top": 174.0,
+    "left": 59.0,
+    "text": "1.0 SCOPE",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 1.0 SCOPE",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 3,
+    "line_index": 7,
+    "top": 250.0,
+    "left": 58.0,
+    "text": "2.0 REFERENCE DOCUMENTS",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 2.0 REFERENCE DOCUMENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 3,
+    "line_index": 9,
+    "top": 325.0,
+    "left": 58.0,
+    "text": "3.0 INSPECTION AND TEST REQUIREMENTS",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 INSPECTION AND TEST REQUIREMENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 3,
+    "line_index": 12,
+    "top": 397.0,
+    "left": 201.0,
+    "text": "STAGE / ACTIVITY CHARACTERISTICS RECORD",
+    "level": 2,
+    "score": 4.3,
+    "confidence": 0.478,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 INSPECTION AND TEST REQUIREMENTS > STAGE / ACTIVITY CHARACTERISTICS RECORD",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 3,
+    "line_index": 17,
+    "top": 469.0,
+    "left": 128.0,
+    "text": "1.0 Procedure",
+    "level": 1,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 1.0 Procedure",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 3,
+    "line_index": 26,
+    "top": 668.0,
+    "left": 127.0,
+    "text": "3.0 In Process Inspection",
+    "level": 1,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 In Process Inspection",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 4,
+    "line_index": 8,
+    "top": 216.0,
+    "left": 116.0,
+    "text": "NO. OF CHECK SUB",
+    "level": 2,
+    "score": 4.3,
+    "confidence": 0.478,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 In Process Inspection > NO. OF CHECK SUB",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 4,
+    "line_index": 17,
+    "top": 370.0,
+    "left": 120.0,
+    "text": "4.0 . Final Inspection",
+    "level": 1,
+    "score": 5.3,
+    "confidence": 0.589,
+    "reasons": [
+      "bold",
+      "numbered_1"
+    ],
+    "numbering": "4.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 4.0 . Final Inspection",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 11,
+    "page_num": 5,
+    "line_index": 24,
+    "top": 453.0,
+    "left": 118.0,
+    "text": "6.0 Documentation & IC",
+    "level": 1,
+    "score": 5.3,
+    "confidence": 0.589,
+    "reasons": [
+      "bold",
+      "numbered_1"
+    ],
+    "numbering": "6.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 6.0 Documentation & IC",
+    "toc_match": null,
+    "warnings": []
+  }
+]

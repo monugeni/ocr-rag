@@ -1,0 +1,47 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: ED
+      - generic [ref=e6]:
+        - generic [ref=e7]: Esteem DocLens
+        - generic [ref=e8]: Tender knowledge
+    - button "New folder" [ref=e10] [cursor=pointer]
+    - searchbox "Find folder" [ref=e12]
+    - generic [ref=e13]:
+      - generic [ref=e84]:
+        - button "281 - BPCL Mumbai VDU revamp 1" [ref=e86] [cursor=pointer]:
+          - generic [ref=e88]: 281 - BPCL Mumbai VDU revamp
+          - generic [ref=e89]: "1"
+        - button "+" [ref=e90] [cursor=pointer]
+      - generic [ref=e91]:
+        - button "Collapse" [ref=e92] [cursor=pointer]: ▸
+        - button "HPCL-Vizag-OCO-Boiler 38" [ref=e93] [cursor=pointer]:
+          - generic [ref=e95]: HPCL-Vizag-OCO-Boiler
+          - generic [ref=e96]: "38"
+        - button "+" [ref=e97] [cursor=pointer]
+      - generic [ref=e98]:
+        - button "specs 0" [ref=e100] [cursor=pointer]:
+          - generic [ref=e102]: specs
+          - generic [ref=e103]: "0"
+        - button "+" [ref=e104] [cursor=pointer]
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]: HPCL-Vizag-OCO-Boiler/specs
+        - generic [ref=e32]: 0 documents | 0 pages | 0 pending
+      - navigation "Main views" [ref=e33]:
+        - button "Ask" [ref=e34] [cursor=pointer]
+        - button "Documents" [ref=e35] [cursor=pointer]
+        - button "Ingest" [ref=e36] [cursor=pointer]
+        - button "Jobs" [ref=e37] [cursor=pointer]
+    - generic [ref=e38]:
+      - generic [ref=e72]:
+        - generic [ref=e73]: No chat yet
+        - button "New chat" [ref=e74] [cursor=pointer]
+        - button "Refresh" [ref=e75] [cursor=pointer]
+      - generic [ref=e78]:
+        - strong [ref=e79]: Ask a question about HPCL-Vizag-OCO-Boiler/specs
+        - generic [ref=e80]: "Examples: scope of work, vendor requirements, LD clause, inspection requirements"
+      - generic [ref=e81]:
+        - textbox "Ask about this folder" [ref=e82]
+        - button "Send" [ref=e83] [cursor=pointer]

@@ -1,0 +1,156 @@
+[
+  {
+    "heading": "Il s r 20 THK. PLATE [ ) ; J 2 ] (ve)",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > Il s r 20 THK. PLATE [ ) ; J 2 ] (ve)",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 22.6,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "= [ STOPPER PLT.",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > Il s r 20 THK. PLATE [ ) ; J 2 ] (ve) > = [ STOPPER PLT.",
+    "seq": 1,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "TOP OF FIXED 4",
+    "level": 3,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > Il s r 20 THK. PLATE [ ) ; J 2 ] (ve) > = [ STOPPER PLT. > TOP OF FIXED 4",
+    "seq": 2,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "SUPPORT STEEL )L— — —",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > Il s r 20 THK. PLATE [ ) ; J 2 ] (ve) > SUPPORT STEEL )L— — —",
+    "seq": 3,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "N [0 .",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > N [0 .",
+    "seq": 4,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "[ | L QL, 8",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > [ | L QL, 8",
+    "seq": 5,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "“GENERAL NOTES: - o",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT > “GENERAL NOTES: - o",
+    "seq": 6,
+    "confidence": 0.744,
+    "score": 6.7,
+    "reasons": [
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "0 22052019 ISSUED AS STANDARD ss AKJIAP MK RKT",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

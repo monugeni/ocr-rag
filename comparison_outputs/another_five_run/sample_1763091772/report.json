@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091772.pdf",
+  "document_title": "DOCUMENTS AND DATA REQUIRED WITH BID",
+  "document_context": {
+    "title": "DOCUMENTS AND DATA REQUIRED WITH BID",
+    "path_parts": [],
+    "source": "heading_fallback"
+  },
+  "page_count": 6,
+  "body_font_size": 18.0,
+  "heading_count": 2,
+  "toc_entry_count": 0,
+  "chunk_count": 28,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 6,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 3,
+    "line_role_counts": {
+      "running": 15,
+      "body": 171,
+      "table": 3,
+      "page_number": 6,
+      "form": 6
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 1/(CMRO.REL.105.IM.03) Tech Spec of Paint Coatings for BPCL Refineries.pdf",
+  "document_title": "Technical Specification of Paint Coatings for BPCL Refineries",
+  "document_context": {
+    "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+    "path_parts": [],
+    "source": "metadata"
+  },
+  "page_count": 110,
+  "body_font_size": 18.0,
+  "heading_count": 132,
+  "toc_entry_count": 111,
+  "chunk_count": 531,
+  "warnings": [
+    "p17: top-level decimal jump 2 -> 5",
+    "p76: top-level decimal jump 3 -> 15"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 110,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "body": 3485,
+      "form": 25,
+      "page_number": 23,
+      "running": 436,
+      "table": 359,
+      "toc": 116,
+      "caption": 46,
+      "drawing": 193
+    }
+  }
+}

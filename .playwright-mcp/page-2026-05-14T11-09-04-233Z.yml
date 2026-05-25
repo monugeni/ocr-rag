@@ -1,0 +1,391 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: ED
+      - generic [ref=e6]:
+        - generic [ref=e7]: Esteem DocLens
+        - generic [ref=e8]: Tender knowledge
+    - button "New folder" [ref=e10] [cursor=pointer]
+    - searchbox "Find folder" [ref=e12]
+    - generic [ref=e23]:
+      - generic [ref=e105]:
+        - button "281 - BPCL Mumbai VDU revamp 1" [ref=e107] [cursor=pointer]:
+          - generic [ref=e109]: 281 - BPCL Mumbai VDU revamp
+          - generic [ref=e110]: "1"
+        - button "+" [ref=e111] [cursor=pointer]
+      - generic [ref=e112]:
+        - button "Collapse" [ref=e113] [cursor=pointer]: ▸
+        - button "HPCL-Vizag-OCO-Boiler 38" [ref=e114] [cursor=pointer]:
+          - generic [ref=e116]: HPCL-Vizag-OCO-Boiler
+          - generic [ref=e117]: "38"
+        - button "+" [ref=e118] [cursor=pointer]
+      - generic [ref=e119]:
+        - button "specs 0" [ref=e121] [cursor=pointer]:
+          - generic [ref=e123]: specs
+          - generic [ref=e124]: "0"
+        - button "+" [ref=e125] [cursor=pointer]
+  - main [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: HPCL-Vizag-OCO-Boiler
+        - generic [ref=e38]: 38 documents | 3396 pages | 0 pending
+      - navigation "Main views" [ref=e17]:
+        - button "Ask" [ref=e18] [cursor=pointer]
+        - button "Documents" [active] [ref=e19] [cursor=pointer]
+        - button "Ingest" [ref=e20] [cursor=pointer]
+        - button "Jobs" [ref=e21] [cursor=pointer]
+    - generic [ref=e126]:
+      - generic [ref=e127]:
+        - generic [ref=e128]:
+          - heading "Documents" [level=2] [ref=e129]
+          - paragraph [ref=e130]: Indexed documents available for search and manual inspection.
+        - generic [ref=e131]:
+          - button "Refresh" [ref=e132] [cursor=pointer]
+          - button "Add documents" [ref=e133] [cursor=pointer]
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e137]: Indexed documents
+          - generic [ref=e138]: "38"
+        - generic [ref=e140]:
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]: OCOB Annexure 3.6 - Equipment Wise Weightages for Bar chart Preparation & Progress Monitoring
+              - text: 71 pages | 35 sections | fast_pdf
+            - generic [ref=e144]:
+              - button "Move" [ref=e145] [cursor=pointer]
+              - button "Inspect" [ref=e146] [cursor=pointer]
+              - link "PDF" [ref=e147] [cursor=pointer]:
+                - /url: /api/documents/39/pdf
+          - generic [ref=e148]:
+            - generic [ref=e149]:
+              - generic [ref=e150]: Annexure 5.18 - Cement Lining Procedure
+              - text: 22 pages | 0 sections | fast_pdf
+            - generic [ref=e151]:
+              - button "Move" [ref=e152] [cursor=pointer]
+              - button "Inspect" [ref=e153] [cursor=pointer]
+              - link "PDF" [ref=e154] [cursor=pointer]:
+                - /url: /api/documents/40/pdf
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - generic [ref=e157]: "Annexure 5.2: Advisory on Usage of Welding Electrodes, Preheating & PWHT"
+              - text: 24 pages | 28 sections | fast_pdf
+            - generic [ref=e158]:
+              - button "Move" [ref=e159] [cursor=pointer]
+              - button "Inspect" [ref=e160] [cursor=pointer]
+              - link "PDF" [ref=e161] [cursor=pointer]:
+                - /url: /api/documents/41/pdf
+          - generic [ref=e162]:
+            - generic [ref=e163]:
+              - generic [ref=e164]: "Annexure 5.6: Advisory to Carry Out DCSCET (Direct Current Saturated Eddy Current Test)"
+              - text: 13 pages | 21 sections | fast_pdf
+            - generic [ref=e165]:
+              - button "Move" [ref=e166] [cursor=pointer]
+              - button "Inspect" [ref=e167] [cursor=pointer]
+              - link "PDF" [ref=e168] [cursor=pointer]:
+                - /url: /api/documents/42/pdf
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - generic [ref=e171]: Annexure 5.9
+              - text: 88 pages | 2 sections | fast_pdf
+            - generic [ref=e172]:
+              - button "Move" [ref=e173] [cursor=pointer]
+              - button "Inspect" [ref=e174] [cursor=pointer]
+              - link "PDF" [ref=e175] [cursor=pointer]:
+                - /url: /api/documents/43/pdf
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - generic [ref=e178]: Annexure 7.3
+              - text: 100 pages | 7 sections | fast_pdf
+            - generic [ref=e179]:
+              - button "Move" [ref=e180] [cursor=pointer]
+              - button "Inspect" [ref=e181] [cursor=pointer]
+              - link "PDF" [ref=e182] [cursor=pointer]:
+                - /url: /api/documents/44/pdf
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - generic [ref=e185]: ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT
+              - text: 20 pages | 33 sections | fast_pdf
+            - generic [ref=e186]:
+              - button "Move" [ref=e187] [cursor=pointer]
+              - button "Inspect" [ref=e188] [cursor=pointer]
+              - link "PDF" [ref=e189] [cursor=pointer]:
+                - /url: /api/documents/45/pdf
+          - generic [ref=e190]:
+            - generic [ref=e191]:
+              - generic [ref=e192]: Contractor Job Equipment Safety Assurance - Manual of Equipment Checklist
+              - text: 44 pages | 82 sections | fast_pdf
+            - generic [ref=e193]:
+              - button "Move" [ref=e194] [cursor=pointer]
+              - button "Inspect" [ref=e195] [cursor=pointer]
+              - link "PDF" [ref=e196] [cursor=pointer]:
+                - /url: /api/documents/46/pdf
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199]: contractor safety regulations manual
+              - text: 96 pages | 184 sections | fast_pdf
+            - generic [ref=e200]:
+              - button "Move" [ref=e201] [cursor=pointer]
+              - button "Inspect" [ref=e202] [cursor=pointer]
+              - link "PDF" [ref=e203] [cursor=pointer]:
+                - /url: /api/documents/47/pdf
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]: Corrigendum to Tender No. 2500024832-HB-06600
+              - text: 6 pages | 1 sections | fast_pdf
+            - generic [ref=e207]:
+              - button "Move" [ref=e208] [cursor=pointer]
+              - button "Inspect" [ref=e209] [cursor=pointer]
+              - link "PDF" [ref=e210] [cursor=pointer]:
+                - /url: /api/documents/48/pdf
+          - generic [ref=e211]:
+            - generic [ref=e212]:
+              - generic [ref=e213]: Technical Advisory - Standard Quality Assurance Plan for Equipment
+              - text: 126 pages | 435 sections | fast_pdf
+            - generic [ref=e214]:
+              - button "Move" [ref=e215] [cursor=pointer]
+              - button "Inspect" [ref=e216] [cursor=pointer]
+              - link "PDF" [ref=e217] [cursor=pointer]:
+                - /url: /api/documents/49/pdf
+          - generic [ref=e218]:
+            - generic [ref=e219]:
+              - generic [ref=e220]: COLOUR CODE FOR REFINERY PLANTS (MECHANICAL SYSTEMS) BASE BAND S. EQUIPMENT
+              - text: 22 pages | 40 sections | fast_pdf
+            - generic [ref=e221]:
+              - button "Move" [ref=e222] [cursor=pointer]
+              - button "Inspect" [ref=e223] [cursor=pointer]
+              - link "PDF" [ref=e224] [cursor=pointer]:
+                - /url: /api/documents/50/pdf
+          - generic [ref=e225]:
+            - generic [ref=e226]:
+              - generic [ref=e227]: "F-41: Maintenance Work Procedure"
+              - text: 165 pages | 305 sections | fast_pdf
+            - generic [ref=e228]:
+              - button "Move" [ref=e229] [cursor=pointer]
+              - button "Inspect" [ref=e230] [cursor=pointer]
+              - link "PDF" [ref=e231] [cursor=pointer]:
+                - /url: /api/documents/51/pdf
+          - generic [ref=e232]:
+            - generic [ref=e233]:
+              - generic [ref=e234]: general terms conditions job contracts
+              - text: 60 pages | 12 sections | fast_pdf
+            - generic [ref=e235]:
+              - button "Move" [ref=e236] [cursor=pointer]
+              - button "Inspect" [ref=e237] [cursor=pointer]
+              - link "PDF" [ref=e238] [cursor=pointer]:
+                - /url: /api/documents/52/pdf
+          - generic [ref=e239]:
+            - generic [ref=e240]:
+              - generic [ref=e241]: JOBSCOPE FOR UNIT RATE ITEMS
+              - text: 123 pages | 157 sections | fast_pdf
+            - generic [ref=e242]:
+              - button "Move" [ref=e243] [cursor=pointer]
+              - button "Inspect" [ref=e244] [cursor=pointer]
+              - link "PDF" [ref=e245] [cursor=pointer]:
+                - /url: /api/documents/53/pdf
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - generic [ref=e248]: ANNEXURE 1
+              - text: 6 pages | 15 sections | fast_pdf
+            - generic [ref=e249]:
+              - button "Move" [ref=e250] [cursor=pointer]
+              - button "Inspect" [ref=e251] [cursor=pointer]
+              - link "PDF" [ref=e252] [cursor=pointer]:
+                - /url: /api/documents/54/pdf
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - generic [ref=e255]: LUMPSUM SCOPE OF SERVICES
+              - text: 24 pages | 14 sections | fast_pdf
+            - generic [ref=e256]:
+              - button "Move" [ref=e257] [cursor=pointer]
+              - button "Inspect" [ref=e258] [cursor=pointer]
+              - link "PDF" [ref=e259] [cursor=pointer]:
+                - /url: /api/documents/55/pdf
+          - generic [ref=e260]:
+            - generic [ref=e261]:
+              - generic [ref=e262]: OCPTSD-FR-305 Rev 2 - Format of Inspection Work List
+              - text: 78 pages | 62 sections | fast_pdf
+            - generic [ref=e263]:
+              - button "Move" [ref=e264] [cursor=pointer]
+              - button "Inspect" [ref=e265] [cursor=pointer]
+              - link "PDF" [ref=e266] [cursor=pointer]:
+                - /url: /api/documents/56/pdf
+          - generic [ref=e267]:
+            - generic [ref=e268]:
+              - generic [ref=e269]: "PSM-FR-99B: Work Permit System - Job Hazard Analysis & QAP"
+              - text: 35 pages | 19 sections | fast_pdf
+            - generic [ref=e270]:
+              - button "Move" [ref=e271] [cursor=pointer]
+              - button "Inspect" [ref=e272] [cursor=pointer]
+              - link "PDF" [ref=e273] [cursor=pointer]:
+                - /url: /api/documents/57/pdf
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e276]: PT-TPD-003 - Procedure for Jobs on Soot Blowers
+              - text: 117 pages | 173 sections | fast_pdf
+            - generic [ref=e277]:
+              - button "Move" [ref=e278] [cursor=pointer]
+              - button "Inspect" [ref=e279] [cursor=pointer]
+              - link "PDF" [ref=e280] [cursor=pointer]:
+                - /url: /api/documents/58/pdf
+          - generic [ref=e281]:
+            - generic [ref=e282]:
+              - generic [ref=e283]: Tender Schedule and Line Items - TA 2026-27 Turnaround Jobs in OCO Boiler
+              - text: 8 pages | 3 sections | fast_pdf
+            - generic [ref=e284]:
+              - button "Move" [ref=e285] [cursor=pointer]
+              - button "Inspect" [ref=e286] [cursor=pointer]
+              - link "PDF" [ref=e287] [cursor=pointer]:
+                - /url: /api/documents/59/pdf
+          - generic [ref=e288]:
+            - generic [ref=e289]:
+              - generic [ref=e290]: Specifications for System Scaffolding
+              - text: 6 pages | 10 sections | fast_pdf
+            - generic [ref=e291]:
+              - button "Move" [ref=e292] [cursor=pointer]
+              - button "Inspect" [ref=e293] [cursor=pointer]
+              - link "PDF" [ref=e294] [cursor=pointer]:
+                - /url: /api/documents/60/pdf
+          - generic [ref=e295]:
+            - generic [ref=e296]:
+              - generic [ref=e297]: Annexure 4 - Standard Turnaround Job Scopes
+              - text: 18 pages | 18 sections | fast_pdf
+            - generic [ref=e298]:
+              - button "Move" [ref=e299] [cursor=pointer]
+              - button "Inspect" [ref=e300] [cursor=pointer]
+              - link "PDF" [ref=e301] [cursor=pointer]:
+                - /url: /api/documents/61/pdf
+          - generic [ref=e302]:
+            - generic [ref=e303]:
+              - generic [ref=e304]: STJS-TPD-007 - Standard Turnaround Jobscope for Vessels
+              - text: 6 pages | 10 sections | fast_pdf
+            - generic [ref=e305]:
+              - button "Move" [ref=e306] [cursor=pointer]
+              - button "Inspect" [ref=e307] [cursor=pointer]
+              - link "PDF" [ref=e308] [cursor=pointer]:
+                - /url: /api/documents/62/pdf
+          - generic [ref=e309]:
+            - generic [ref=e310]:
+              - generic [ref=e311]: 1 GENERAL
+              - text: 8 pages | 4 sections | fast_pdf
+            - generic [ref=e312]:
+              - button "Move" [ref=e313] [cursor=pointer]
+              - button "Inspect" [ref=e314] [cursor=pointer]
+              - link "PDF" [ref=e315] [cursor=pointer]:
+                - /url: /api/documents/63/pdf
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - generic [ref=e318]: "1. SCOPE OF WORK:"
+              - text: 14 pages | 63 sections | fast_pdf
+            - generic [ref=e319]:
+              - button "Move" [ref=e320] [cursor=pointer]
+              - button "Inspect" [ref=e321] [cursor=pointer]
+              - link "PDF" [ref=e322] [cursor=pointer]:
+                - /url: /api/documents/64/pdf
+          - generic [ref=e323]:
+            - generic [ref=e324]:
+              - generic [ref=e325]: EXAMINATION OF EYESIGHT OF CERTAIN PERSONNEL
+              - text: 8 pages | 13 sections | fast_pdf
+            - generic [ref=e326]:
+              - button "Move" [ref=e327] [cursor=pointer]
+              - button "Inspect" [ref=e328] [cursor=pointer]
+              - link "PDF" [ref=e329] [cursor=pointer]:
+                - /url: /api/documents/65/pdf
+          - generic [ref=e330]:
+            - generic [ref=e331]:
+              - generic [ref=e332]: MINIMUM PERSONAL PROTECTIVE EQUIPMENT FOR VARIOUS ACTIVITIES
+              - text: 7 pages | 9 sections | fast_pdf
+            - generic [ref=e333]:
+              - button "Move" [ref=e334] [cursor=pointer]
+              - button "Inspect" [ref=e335] [cursor=pointer]
+              - link "PDF" [ref=e336] [cursor=pointer]:
+                - /url: /api/documents/66/pdf
+          - generic [ref=e337]:
+            - generic [ref=e338]:
+              - generic [ref=e339]: USAGE OF WELDING GOGLES
+              - text: 8 pages | 11 sections | fast_pdf
+            - generic [ref=e340]:
+              - button "Move" [ref=e341] [cursor=pointer]
+              - button "Inspect" [ref=e342] [cursor=pointer]
+              - link "PDF" [ref=e343] [cursor=pointer]:
+                - /url: /api/documents/67/pdf
+          - generic [ref=e344]:
+            - generic [ref=e345]:
+              - generic [ref=e346]: CONTRACTOR JOB EQUIPMENT SAFETY ASSURANCE HINDUSTAN PETROLEUM CORPORATION LTD. VISAKH REFINERY POST BOX – 15, MALKAPURAM
+              - text: 49 pages | 117 sections | fast_pdf
+            - generic [ref=e347]:
+              - button "Move" [ref=e348] [cursor=pointer]
+              - button "Inspect" [ref=e349] [cursor=pointer]
+              - link "PDF" [ref=e350] [cursor=pointer]:
+                - /url: /api/documents/68/pdf
+          - generic [ref=e351]:
+            - generic [ref=e352]:
+              - generic [ref=e353]: To put in place a procedure to be followed for inlay patching any equipment or piping.
+              - text: 8 pages | 18 sections | fast_pdf
+            - generic [ref=e354]:
+              - button "Move" [ref=e355] [cursor=pointer]
+              - button "Inspect" [ref=e356] [cursor=pointer]
+              - link "PDF" [ref=e357] [cursor=pointer]:
+                - /url: /api/documents/69/pdf
+          - generic [ref=e358]:
+            - generic [ref=e359]:
+              - generic [ref=e360]: "ADVISORY ON REPAIR & PROTECTION OF FOUNDATION BOLTS INSPECTION DIVISION Advisory no. : TSD/INSP/GEN/14"
+              - text: 122 pages | 69 sections | fast_pdf
+            - generic [ref=e361]:
+              - button "Move" [ref=e362] [cursor=pointer]
+              - button "Inspect" [ref=e363] [cursor=pointer]
+              - link "PDF" [ref=e364] [cursor=pointer]:
+                - /url: /api/documents/70/pdf
+          - generic [ref=e365]:
+            - generic [ref=e366]:
+              - generic [ref=e367]: "1 INSPECTION ADVISORY ON INTERNAL CEMENT LINING ON PRESSURE VESSELS INSPECTION DIVISION Advisory No. : TSD/INSP/GEN/25"
+              - text: 15 pages | 36 sections | fast_pdf
+            - generic [ref=e368]:
+              - button "Move" [ref=e369] [cursor=pointer]
+              - button "Inspect" [ref=e370] [cursor=pointer]
+              - link "PDF" [ref=e371] [cursor=pointer]:
+                - /url: /api/documents/71/pdf
+          - generic [ref=e372]:
+            - generic [ref=e373]:
+              - generic [ref=e374]: "I Advisory no. : TSD/MES/GEN/01"
+              - text: 25 pages | 12 sections | fast_pdf
+            - generic [ref=e375]:
+              - button "Move" [ref=e376] [cursor=pointer]
+              - button "Inspect" [ref=e377] [cursor=pointer]
+              - link "PDF" [ref=e378] [cursor=pointer]:
+                - /url: /api/documents/72/pdf
+          - generic [ref=e379]:
+            - generic [ref=e380]:
+              - generic [ref=e381]: 25 Annexure 4-Standard Turnaround Job Scope Annexure 4-Standard No
+              - text: 17 pages | 3 sections | fast_pdf
+            - generic [ref=e382]:
+              - button "Move" [ref=e383] [cursor=pointer]
+              - button "Inspect" [ref=e384] [cursor=pointer]
+              - link "PDF" [ref=e385] [cursor=pointer]:
+                - /url: /api/documents/73/pdf
+          - generic [ref=e386]:
+            - generic [ref=e387]:
+              - generic [ref=e388]: visakh refinery
+              - text: 13 pages | 6 sections | fast_pdf
+            - generic [ref=e389]:
+              - button "Move" [ref=e390] [cursor=pointer]
+              - button "Inspect" [ref=e391] [cursor=pointer]
+              - link "PDF" [ref=e392] [cursor=pointer]:
+                - /url: /api/documents/74/pdf
+          - generic [ref=e393]:
+            - generic [ref=e394]:
+              - generic [ref=e395]: Annexure 10 - Drawings Part 1 (Pages 1-1767)
+              - text: 1767 pages | 379 sections | fast_pdf
+            - generic [ref=e396]:
+              - button "Move" [ref=e397] [cursor=pointer]
+              - button "Inspect" [ref=e398] [cursor=pointer]
+              - link "PDF" [ref=e399] [cursor=pointer]:
+                - /url: /api/documents/76/pdf
+          - generic [ref=e400]:
+            - generic [ref=e401]:
+              - generic [ref=e402]: Annexure 10 - Drawings Part 2 (Pages 1768-1824)
+              - text: 57 pages | 7 sections | fast_pdf
+            - generic [ref=e403]:
+              - button "Move" [ref=e404] [cursor=pointer]
+              - button "Inspect" [ref=e405] [cursor=pointer]
+              - link "PDF" [ref=e406] [cursor=pointer]:
+                - /url: /api/documents/77/pdf

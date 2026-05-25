@@ -1,0 +1,27 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/split_output/2500024832-HB-06600_3_part001_p1-8_Basic_Information_Of_Tender.pdf",
+  "document_title": "2500024832 HB 06600 3 Basic Information Of Tender",
+  "document_context": {
+    "title": "2500024832 HB 06600 3 Basic Information Of Tender",
+    "path_parts": [],
+    "source": "filename_fallback"
+  },
+  "page_count": 8,
+  "body_font_size": 11.0,
+  "heading_count": 3,
+  "toc_entry_count": 0,
+  "chunk_count": 31,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 8,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 3,
+    "line_role_counts": {
+      "body": 214,
+      "table": 183,
+      "caption": 2,
+      "running": 187
+    }
+  }
+}

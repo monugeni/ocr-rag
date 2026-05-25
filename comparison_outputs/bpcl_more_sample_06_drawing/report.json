@@ -1,0 +1,26 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC I II III/SEC -II Drawings/C238-101-80-44-1103 REV-A-Model.pdf",
+  "document_title": "M 1623/115 1623/111 M",
+  "document_context": {
+    "title": "M 1623/115 1623/111 M",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 1,
+  "body_font_size": 17.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 13,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 1,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "drawing": 44,
+      "page_number": 9
+    }
+  }
+}

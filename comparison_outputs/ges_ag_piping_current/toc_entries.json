@@ -1,0 +1,466 @@
+[
+  {
+    "page_num": 4,
+    "text": "1 Scope",
+    "level": 1,
+    "number": "1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 4,
+    "text": "2 Units, abbreviated terms",
+    "level": 1,
+    "number": "2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 4,
+    "text": "2.1 Units",
+    "level": 2,
+    "number": "2.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 4,
+    "text": "2.2 Abbreviated terms",
+    "level": 2,
+    "number": "2.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 4,
+    "text": "3 Project specific documents",
+    "level": 1,
+    "number": "3",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 5,
+    "text": "4 General design instructions",
+    "level": 1,
+    "number": "4",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 5,
+    "text": "5 Special design instructions",
+    "level": 1,
+    "number": "5",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 5,
+    "text": "5.1 Piping at equipment",
+    "level": 2,
+    "number": "5.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 6,
+    "text": "5.1.1 Piping at machines",
+    "level": 3,
+    "number": "5.1.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 6,
+    "text": "5.1.2 Pumps",
+    "level": 3,
+    "number": "5.1.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.1.3 Compressors",
+    "level": 3,
+    "number": "5.1.3",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 6,
+    "text": "5.1.4 Blowers",
+    "level": 3,
+    "number": "5.1.4",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 6,
+    "text": "5.1.5 Piping at vessels and columns",
+    "level": 3,
+    "number": "5.1.5",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.1.6 Piping at heat exchangers",
+    "level": 3,
+    "number": "5.1.6",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.1.7 Piping at filters and strainers",
+    "level": 3,
+    "number": "5.1.7",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 8,
+    "text": "5.1.8 Piping at furnaces and heaters",
+    "level": 3,
+    "number": "5.1.8",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.1.9 Piping at tanks",
+    "level": 3,
+    "number": "5.1.9",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.2 Piping design for utilities",
+    "level": 2,
+    "number": "5.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 7,
+    "text": "5.2.1 Steam and condensate lines",
+    "level": 3,
+    "number": "5.2.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 8,
+    "text": "5.2.2 Utility station",
+    "level": 3,
+    "number": "5.2.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 8,
+    "text": "5.2.3 Fuel gas, plant air, instrument air and nitrogen",
+    "level": 3,
+    "number": "5.2.3",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "5.3 Interconnecting piping / pipe rack piping",
+    "level": 2,
+    "number": "5.3",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 8,
+    "text": "5.4 Pipe supports",
+    "level": 2,
+    "number": "5.4",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "5.5 Arrangement of valves",
+    "level": 2,
+    "number": "5.5",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "5.5.1 Operation",
+    "level": 3,
+    "number": "5.5.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 10,
+    "text": "5.5.2 Arrangement",
+    "level": 3,
+    "number": "5.5.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "5.6 Arrangement of instruments",
+    "level": 2,
+    "number": "5.6",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "5.7 Arrangement of drains and vents",
+    "level": 2,
+    "number": "5.7",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.8 Arrangement of sample connections",
+    "level": 2,
+    "number": "5.8",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.9 Insulation",
+    "level": 2,
+    "number": "5.9",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.10 Heat tracing / winterizing",
+    "level": 2,
+    "number": "5.10",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.11 Protection against electrical shock",
+    "level": 2,
+    "number": "5.11",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.11.1 Uncoated or unpainted steel piping systems",
+    "level": 3,
+    "number": "5.11.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "5.11.2 Coated or painted steel piping systems",
+    "level": 3,
+    "number": "5.11.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "5.12 Safety devices",
+    "level": 2,
+    "number": "5.12",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "5.12.1 Safety valves",
+    "level": 3,
+    "number": "5.12.1",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "5.12.2 Rupture disks",
+    "level": 3,
+    "number": "5.12.2",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "5.12.3 Safety devices for tanks",
+    "level": 3,
+    "number": "5.12.3",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 13,
+    "text": "5.13 Safety equipment",
+    "level": 2,
+    "number": "5.13",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "6 Codes and Standards",
+    "level": 1,
+    "number": "6",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 14,
+    "text": "Annex A Clearance of drains",
+    "level": 1,
+    "number": "Annex A",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 15,
+    "text": "Annex B Pipe clearance from structures",
+    "level": 1,
+    "number": "Annex B",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 15,
+    "text": "B .1 Clearance of pipes with insulation",
+    "level": 1,
+    "number": "B",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 15,
+    "text": "B .2 Clearance of pipes underneath steel beams with and without insulation",
+    "level": 1,
+    "number": "B",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 16,
+    "text": "B .3 Clearance of pipes without insulation",
+    "level": 1,
+    "number": "B",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 17,
+    "text": "Annex C Weights and allowable spans of steel pipes",
+    "level": 1,
+    "number": "Annex C",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 17,
+    "text": "C .1 Weights and allowable spans of steel pipes (SI-units)",
+    "level": 1,
+    "number": "C",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "Annex D Spacing of lines",
+    "level": 1,
+    "number": "Annex D",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "D .1 Spacing of lines (SI-units)",
+    "level": 1,
+    "number": "D",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 23,
+    "text": "Annex E Orientation of piping at columns, vertical vessels and tanks",
+    "level": 1,
+    "number": "Annex E",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 24,
+    "text": "Annex F Dewatering of steam lines",
+    "level": 1,
+    "number": "Annex F",
+    "source_page": 2,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 25,
+    "text": "Annex G Utility station arrangement",
+    "level": 1,
+    "number": "Annex G",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 25,
+    "text": "G .1 Utility station arrangement",
+    "level": 1,
+    "number": "G",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 25,
+    "text": "G .2 Utility station arrangement at platforms",
+    "level": 1,
+    "number": "G",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 26,
+    "text": "G .3 Utility hose specifications",
+    "level": 1,
+    "number": "G",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 27,
+    "text": "Annex H Valve operation",
+    "level": 1,
+    "number": "Annex H",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 28,
+    "text": "Annex I Drains and vents",
+    "level": 1,
+    "number": "Annex I",
+    "source_page": 3,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 29,
+    "text": "Annex J Safety shower",
+    "level": 1,
+    "number": "Annex J",
+    "source_page": 3,
+    "confidence": 0.85
+  }
+]

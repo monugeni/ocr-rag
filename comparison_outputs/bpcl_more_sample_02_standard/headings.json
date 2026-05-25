@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "page_num": 2,
+    "line_index": 7,
+    "top": 145.0,
+    "left": 147.0,
+    "text": "Abbreviations",
+    "level": 3,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > Abbreviations",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 4,
+    "line_index": 5,
+    "top": 152.0,
+    "left": 132.0,
+    "text": "1.0 SCOPE",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 1.0 SCOPE",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 4,
+    "line_index": 14,
+    "top": 360.0,
+    "left": 133.0,
+    "text": "2.0 DEFINITIONS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 2.0 DEFINITIONS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 4,
+    "line_index": 23,
+    "top": 586.0,
+    "left": 134.0,
+    "text": "3.0 SPECIFIC APPLICABILITY",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 4,
+    "line_index": 33,
+    "top": 864.0,
+    "left": 135.0,
+    "text": "3.1.5 Tubing",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.1.5",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.1.5 Tubing",
+    "toc_match": null,
+    "warnings": [
+      "p4: decimal heading '3.1.5' has no detected parent '3.1'"
+    ]
+  },
+  {
+    "id": 6,
+    "page_num": 4,
+    "line_index": 35,
+    "top": 933.0,
+    "left": 136.0,
+    "text": "3.1.7 Plates",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.1.7",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.1.7 Plates",
+    "toc_match": null,
+    "warnings": [
+      "p4: decimal heading '3.1.7' has no detected parent '3.1'"
+    ]
+  },
+  {
+    "id": 7,
+    "page_num": 4,
+    "line_index": 36,
+    "top": 968.0,
+    "left": 136.0,
+    "text": "3.1.8 All pressure containing welds.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.1.8",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.1.8 All pressure containing welds.",
+    "toc_match": null,
+    "warnings": [
+      "p4: decimal heading '3.1.8' has no detected parent '3.1'"
+    ]
+  },
+  {
+    "id": 8,
+    "page_num": 5,
+    "line_index": 8,
+    "top": 164.0,
+    "left": 140.0,
+    "text": "3.2 Exclusions",
+    "level": 2,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "3.2",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 5,
+    "line_index": 11,
+    "top": 251.0,
+    "left": 140.0,
+    "text": "3.2.1 Gaskets (spiral wound or carbon steel only).",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.1",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.1 Gaskets (spiral wound or carbon steel only).",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 5,
+    "line_index": 12,
+    "top": 286.0,
+    "left": 140.0,
+    "text": "3.2.2 Internal instrument parts.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.2",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.2 Internal instrument parts.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 11,
+    "page_num": 5,
+    "line_index": 13,
+    "top": 321.0,
+    "left": 140.0,
+    "text": "3.2.3 Internal machinery parts.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.3",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.3 Internal machinery parts.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 12,
+    "page_num": 5,
+    "line_index": 16,
+    "top": 408.0,
+    "left": 141.0,
+    "text": "3.2.5 Electrical components.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.5",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.5 Electrical components.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 13,
+    "page_num": 5,
+    "line_index": 17,
+    "top": 443.0,
+    "left": 140.0,
+    "text": "3.2.6 Internal valve components.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.6",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.6 Internal valve components.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 14,
+    "page_num": 5,
+    "line_index": 22,
+    "top": 582.0,
+    "left": 141.0,
+    "text": "3.2.9 All carbon steel Studs/ bolts/ nuts.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.9",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.9 All carbon steel Studs/ bolts/ nuts.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 15,
+    "page_num": 5,
+    "line_index": 23,
+    "top": 616.0,
+    "left": 141.0,
+    "text": "3.2.10 Carbon Steel Plates.",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "3.2.10",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 3.0 SPECIFIC APPLICABILITY > 3.2 Exclusions > 3.2.10 Carbon Steel Plates.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 16,
+    "page_num": 5,
+    "line_index": 24,
+    "top": 651.0,
+    "left": 141.0,
+    "text": "4.0 REFERENCES",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "4.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 4.0 REFERENCES",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 17,
+    "page_num": 5,
+    "line_index": 31,
+    "top": 894.0,
+    "left": 141.0,
+    "text": "5.0 GENERAL REQUIREMENTS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "5.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 5.0 GENERAL REQUIREMENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 18,
+    "page_num": 6,
+    "line_index": 28,
+    "top": 686.0,
+    "left": 142.0,
+    "text": "6.0 EXTENT OF PMI",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "6.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 6.0 EXTENT OF PMI",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 19,
+    "page_num": 6,
+    "line_index": 35,
+    "top": 894.0,
+    "left": 143.0,
+    "text": "7.0 PMI OF PIPING AND HEATER COIL COMPONENTS",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "7.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 7.0 PMI OF PIPING AND HEATER COIL COMPONENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 20,
+    "page_num": 8,
+    "line_index": 15,
+    "top": 322.0,
+    "left": 137.0,
+    "text": "11.0 SITE VERIFICATION OF ANALYZER",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "11.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 11.0 SITE VERIFICATION OF ANALYZER",
+    "toc_match": null,
+    "warnings": [
+      "p8: top-level decimal jump 7 -> 11"
+    ]
+  },
+  {
+    "id": 21,
+    "page_num": 8,
+    "line_index": 20,
+    "top": 446.0,
+    "left": 138.0,
+    "text": "12.0 PERSONNEL QUALIFICATION",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "12.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 12.0 PERSONNEL QUALIFICATION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 22,
+    "page_num": 8,
+    "line_index": 25,
+    "top": 568.0,
+    "left": 140.0,
+    "text": "13.0 ACCEPTANCE CRITERIA",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "13.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 13.0 ACCEPTANCE CRITERIA",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 23,
+    "page_num": 8,
+    "line_index": 26,
+    "top": 603.0,
+    "left": 140.0,
+    "text": "13.1 Base Metal",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "13.1",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 13.0 ACCEPTANCE CRITERIA > 13.1 Base Metal",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 24,
+    "page_num": 8,
+    "line_index": 30,
+    "top": 707.0,
+    "left": 142.0,
+    "text": "13.2 Deposited Weld Metal",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "13.2",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 13.0 ACCEPTANCE CRITERIA > 13.2 Deposited Weld Metal",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 25,
+    "page_num": 8,
+    "line_index": 35,
+    "top": 828.0,
+    "left": 143.0,
+    "text": "14.0 REJECTION CRITERIA",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "14.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 14.0 REJECTION CRITERIA",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 26,
+    "page_num": 9,
+    "line_index": 9,
+    "top": 237.0,
+    "left": 133.0,
+    "text": "15.0 DOCUMENTATION",
+    "level": 1,
+    "score": 8.6,
+    "confidence": 0.956,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "15.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 15.0 DOCUMENTATION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 27,
+    "page_num": 9,
+    "line_index": 12,
+    "top": 323.0,
+    "left": 134.0,
+    "text": "15.2 PMI report as per format No. 6-82-0002-F1",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "15.2",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES > 15.0 DOCUMENTATION > 15.2 PMI report as per format No. 6-82-0002-F1",
+    "toc_match": null,
+    "warnings": []
+  }
+]

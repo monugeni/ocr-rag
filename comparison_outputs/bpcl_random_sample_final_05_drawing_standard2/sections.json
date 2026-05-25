@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "seq": 0,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  }
+]

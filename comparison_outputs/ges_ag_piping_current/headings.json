@@ -1,0 +1,456 @@
+[
+  {
+    "id": 1,
+    "page_num": 6,
+    "line_index": 44,
+    "top": 1004.0,
+    "left": 676.0,
+    "text": "3 D",
+    "level": 1,
+    "score": 8.8,
+    "confidence": 0.978,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1",
+      "toc_match"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > 3 D",
+    "toc_match": "4 General design instructions",
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 9,
+    "line_index": 28,
+    "top": 737.0,
+    "left": 145.0,
+    "text": "2 Select standard pipe supports",
+    "level": 2,
+    "score": 7.0,
+    "confidence": 0.778,
+    "reasons": [
+      "numbered_1",
+      "toc_match"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > 3 D > 2 Select standard pipe supports",
+    "toc_match": "5.4 Pipe supports",
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 11,
+    "line_index": 19,
+    "top": 537.0,
+    "left": 102.0,
+    "text": "insulation tables according to ES Insulation.",
+    "level": 2,
+    "score": 3.5,
+    "confidence": 0.389,
+    "reasons": [
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > 3 D > insulation tables according to ES Insulation.",
+    "toc_match": "5.9 Insulation",
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 11,
+    "line_index": 23,
+    "top": 672.0,
+    "left": 156.0,
+    "text": "5.10 Heat tracing",
+    "level": 2,
+    "score": 10.5,
+    "confidence": 0.99,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_2",
+      "slightly_large_font",
+      "toc_match"
+    ],
+    "numbering": "5.10",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > 3 D > 5.10 Heat tracing",
+    "toc_match": "5.10 Heat tracing / winterizing",
+    "warnings": [
+      "p11: decimal heading '5.10' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 5,
+    "page_num": 14,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 431.0,
+    "text": "ANNEX A",
+    "level": 1,
+    "score": 10.2,
+    "confidence": 0.99,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEX A",
+    "scheme": "appendix",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX A",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 15,
+    "line_index": 11,
+    "top": 316.0,
+    "left": 102.0,
+    "text": "B.1 Clearance of pipes with insulation",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > B.1 Clearance of pipes with insulation",
+    "toc_match": "B .1 Clearance of pipes with insulation",
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 16,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 102.0,
+    "text": "B.3 Clearance of pipes without insulation",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > B.3 Clearance of pipes without insulation",
+    "toc_match": "B .3 Clearance of pipes without insulation",
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 16,
+    "line_index": 20,
+    "top": 440.0,
+    "left": 541.0,
+    "text": "32 1¼",
+    "level": 2,
+    "score": 7.0,
+    "confidence": 0.778,
+    "reasons": [
+      "numbered_1",
+      "toc_match",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "32",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > B.3 Clearance of pipes without insulation > 32 1¼",
+    "toc_match": "B .1 Clearance of pipes with insulation",
+    "warnings": [
+      "p16: top-level decimal jump 2 -> 32"
+    ]
+  },
+  {
+    "id": 9,
+    "page_num": 16,
+    "line_index": 21,
+    "top": 460.0,
+    "left": 541.0,
+    "text": "40 1½",
+    "level": 2,
+    "score": 7.0,
+    "confidence": 0.778,
+    "reasons": [
+      "numbered_1",
+      "toc_match",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "40",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > B.3 Clearance of pipes without insulation > 40 1½",
+    "toc_match": "B .1 Clearance of pipes with insulation",
+    "warnings": [
+      "p16: top-level decimal jump 32 -> 40"
+    ]
+  },
+  {
+    "id": 10,
+    "page_num": 16,
+    "line_index": 23,
+    "top": 503.0,
+    "left": 541.0,
+    "text": "65 2½",
+    "level": 2,
+    "score": 7.0,
+    "confidence": 0.778,
+    "reasons": [
+      "numbered_1",
+      "toc_match",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "65",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > B.3 Clearance of pipes without insulation > 65 2½",
+    "toc_match": "B .2 Clearance of pipes underneath steel beams with and without insulation",
+    "warnings": [
+      "p16: top-level decimal jump 40 -> 65"
+    ]
+  },
+  {
+    "id": 11,
+    "page_num": 17,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 431.0,
+    "text": "ANNEX C",
+    "level": 1,
+    "score": 10.2,
+    "confidence": 0.99,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEX C",
+    "scheme": "appendix",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX C",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 12,
+    "page_num": 17,
+    "line_index": 26,
+    "top": 974.0,
+    "left": 128.0,
+    "text": "15 ½ 2.2 1.5",
+    "level": 2,
+    "score": 3.0,
+    "confidence": 0.333,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "15",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX C > 15 ½ 2.2 1.5",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 13,
+    "page_num": 17,
+    "line_index": 29,
+    "top": 1012.0,
+    "left": 128.0,
+    "text": "20 ¾ 2.4 1.8",
+    "level": 2,
+    "score": 3.0,
+    "confidence": 0.333,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "20",
+    "scheme": "decimal",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX C > 20 ¾ 2.4 1.8",
+    "toc_match": null,
+    "warnings": [
+      "p17: top-level decimal jump 15 -> 20"
+    ]
+  },
+  {
+    "id": 14,
+    "page_num": 22,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 431.0,
+    "text": "ANNEX D",
+    "level": 1,
+    "score": 10.2,
+    "confidence": 0.99,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEX D",
+    "scheme": "appendix",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX D",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 15,
+    "page_num": 22,
+    "line_index": 11,
+    "top": 316.0,
+    "left": 102.0,
+    "text": "D.1 Spacing of lines (SI-units)",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > D.1 Spacing of lines (SI-units)",
+    "toc_match": "Annex D Spacing of lines",
+    "warnings": []
+  },
+  {
+    "id": 16,
+    "page_num": 25,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 431.0,
+    "text": "ANNEX G",
+    "level": 1,
+    "score": 10.2,
+    "confidence": 0.99,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEX G",
+    "scheme": "appendix",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX G",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 17,
+    "page_num": 25,
+    "line_index": 11,
+    "top": 316.0,
+    "left": 102.0,
+    "text": "G.1 Utility station arrangement",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > G.1 Utility station arrangement",
+    "toc_match": "Annex G Utility station arrangement",
+    "warnings": []
+  },
+  {
+    "id": 18,
+    "page_num": 25,
+    "line_index": 14,
+    "top": 901.0,
+    "left": 102.0,
+    "text": "G.2 Utility station arrangement at platforms",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > G.2 Utility station arrangement at platforms",
+    "toc_match": "Annex G Utility station arrangement",
+    "warnings": []
+  },
+  {
+    "id": 19,
+    "page_num": 26,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 102.0,
+    "text": "G.3 Utility hose specifications",
+    "level": 1,
+    "score": 8.3,
+    "confidence": 0.922,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > G.3 Utility hose specifications",
+    "toc_match": "G .3 Utility hose specifications",
+    "warnings": []
+  },
+  {
+    "id": 20,
+    "page_num": 28,
+    "line_index": 9,
+    "top": 245.0,
+    "left": 435.0,
+    "text": "ANNEX I",
+    "level": 1,
+    "score": 10.2,
+    "confidence": 0.99,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEX I",
+    "scheme": "appendix",
+    "breadcrumb": "6778 PIP G0000 EC 00001 R00 GES AG Piping > ANNEX I",
+    "toc_match": null,
+    "warnings": []
+  }
+]

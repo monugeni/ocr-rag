@@ -1,0 +1,45 @@
+[
+  {
+    "heading": "10 THE ANCHOR SPACING (X) SHALL BE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "7 17 0205 Rev 7 > 10 THE ANCHOR SPACING (X) SHALL BE",
+    "seq": 0,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "7 17 0205 Rev 7",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "7 MINOR VARIATION IN SPACING MAY BE REQUIRED AT",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "7 17 0205 Rev 7 > 7 MINOR VARIATION IN SPACING MAY BE REQUIRED AT",
+    "seq": 1,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "7 17 0205 Rev 7",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 2
+  }
+]

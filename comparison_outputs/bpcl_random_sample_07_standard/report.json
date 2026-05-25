@@ -1,0 +1,33 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 3/6-79-0001_Rev_3.pdf",
+  "document_title": "@g@@@mm FOR REFRACTORY STANDARD SPECIFICATION",
+  "document_context": {
+    "title": "@g@@@mm FOR REFRACTORY STANDARD SPECIFICATION",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 12,
+  "body_font_size": 14.0,
+  "heading_count": 39,
+  "toc_entry_count": 0,
+  "chunk_count": 96,
+  "warnings": [
+    "p4: top-level decimal jump 2 -> 6",
+    "p6: decimal heading '4.2.1' has no detected parent '4.2'"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 12,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "body": 305,
+      "table": 22,
+      "form": 1,
+      "running": 27,
+      "toc": 15,
+      "caption": 10
+    }
+  }
+}

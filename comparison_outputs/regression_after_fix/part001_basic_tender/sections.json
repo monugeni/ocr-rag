@@ -1,0 +1,66 @@
+[
+  {
+    "heading": "Basic Information Of Tender",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "2500024832 HB 06600 3 Basic Information Of Tender > Basic Information Of Tender",
+    "seq": 0,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2500024832 HB 06600 3 Basic Information Of Tender",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "SCHEDULE 1 Manadatory: Yes",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "2500024832 HB 06600 3 Basic Information Of Tender > SCHEDULE 1 Manadatory: Yes",
+    "seq": 1,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2500024832 HB 06600 3 Basic Information Of Tender",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "SCHEDULE 2 Manadatory: Yes",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "2500024832 HB 06600 3 Basic Information Of Tender > SCHEDULE 2 Manadatory: Yes",
+    "seq": 2,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "2500024832 HB 06600 3 Basic Information Of Tender",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 8
+  }
+]

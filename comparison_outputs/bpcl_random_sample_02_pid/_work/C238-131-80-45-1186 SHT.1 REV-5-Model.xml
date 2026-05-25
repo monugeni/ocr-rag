@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="2526" width="3576">
+	<fontspec id="0" size="14" family="ArialMT" color="#000000"/>
+<text top="1215" left="3113" width="322" height="13" font="0">THIS P&amp;ID HAS BEEN RECREATED FROM BPCL</text>
+<text top="1232" left="3112" width="323" height="13" font="0">P&amp;ID NO- BPC-131-FC-17/1 REV-0. (REVISED AS</text>
+<text top="1249" left="3112" width="178" height="13" font="0">PER MOC CDU-3-16-2567).</text>
+</page>
+<outline>
+<item>Sheets and Views</item>
+<outline>
+<item page="1">Model</item>
+</outline>
+</outline>
+</pdf2xml>

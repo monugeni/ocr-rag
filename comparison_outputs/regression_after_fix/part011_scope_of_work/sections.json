@@ -1,0 +1,177 @@
+[
+  {
+    "heading": "2 Removal of Insulation:",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "1. SCOPE OF WORK: > 2 Removal of Insulation:",
+    "seq": 0,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "3 Cleaning & Painting:",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "1. SCOPE OF WORK: > 3 Cleaning & Painting:",
+    "seq": 1,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "4 Fixing of LRB mattresses:",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "1. SCOPE OF WORK: > 4 Fixing of LRB mattresses:",
+    "seq": 2,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "12 GENERAL NOTES:",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "1. SCOPE OF WORK: > 12 GENERAL NOTES:",
+    "seq": 3,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [
+      "p3: top-level decimal jump 4 -> 12"
+    ],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "TA 2026-2027: Contract for Turnaround jobs in",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "1. SCOPE OF WORK: > TA 2026-2027: Contract for Turnaround jobs in",
+    "seq": 4,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "OCO Boiler",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "1. SCOPE OF WORK: > OCO Boiler",
+    "seq": 5,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "ANNEXURE 5A",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "1. SCOPE OF WORK: > ANNEXURE 5A",
+    "seq": 6,
+    "confidence": 0.989,
+    "score": 8.9,
+    "reasons": [
+      "appendix",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "STANDARD TECHNICAL ADVISORIES",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "1. SCOPE OF WORK: > STANDARD TECHNICAL ADVISORIES",
+    "seq": 7,
+    "confidence": 0.889,
+    "score": 8.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "1. SCOPE OF WORK:",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  }
+]

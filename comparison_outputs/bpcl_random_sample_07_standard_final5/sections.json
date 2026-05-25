@@ -1,0 +1,187 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations",
+    "seq": 0,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 SCOPE AND FIELD OF APPLICATION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION",
+    "seq": 1,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.0 STATISTICAL TERMINOLOGY AND SYMBOLS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS",
+    "seq": 2,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES",
+    "seq": 3,
+    "confidence": 0.944,
+    "score": 8.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE",
+    "seq": 4,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.2.1 Inspection by Attributes",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.2.1 Inspection by Attributes",
+    "seq": 5,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [
+      "p6: decimal heading '4.2.1' has no detected parent '4.2'"
+    ],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.2.1.1 External appearance:",
+    "level": 4,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.2.1 Inspection by Attributes > 4.2.1.1 External appearance:",
+    "seq": 6,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_4",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "5.0 ATTACHMENTS",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 5.0 ATTACHMENTS",
+    "seq": 7,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  }
+]

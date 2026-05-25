@@ -1,0 +1,205 @@
+# STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE
+
+Context: `STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE`
+
+Source: `/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 3/6-79-0001_Rev_3.pdf`
+Pages: 12
+Headings: 8
+Chunks: 58
+
+## Headings
+
+- p2 L3 (0.56)     Abbreviations
+- p4 L1 (0.81) 1.0 SCOPE AND FIELD OF APPLICATION
+- p4 L1 (0.81) 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS
+- p5 L1 (0.94) 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES
+- p6 L1 (0.81) 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE
+- p6 L3 (0.61)     4.2.1 Inspection by Attributes ⚠
+- p6 L4 (0.61)       4.2.1.1 External appearance:
+- p8 L1 (0.81) 5.0 ATTACHMENTS
+
+## Chunk Samples
+
+### C1 p1-1 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE_
+
+STANDARD SPECIFICATION STANDARD SPECIFICATION SOIIET (2 ENGINEERS FOR REFRACTORY No. sgulmg.@%@!ﬂt%[’ MATERIALS-SAMPLING, 6790001 Rev. 3 INSPECTION AND CRITERIA bago 1012 FOR ACCEPTANCE
+
+### C2 p1-1 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE_
+
+3mer A& |-, Aderor sk pfa & fav AwEs & v AEa fRAftrseant
+
+### C3 p1-1 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE_
+
+STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE
+
+### C4 p1-1 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE_
+
+Raghawss 2Garhan— / " ¥My = 3 27.01.25 REAFFIRMED & REISSUED RB BS Ps MN 2 12.04.18 REAFFIRMED & REISSUED PP Ps RKT RN 1 23.09.11 REAFFIRMED & REISSED BS PS PPL DM 0 14.10.89 ISSUED AS STANDARD SPECIFICATION PM DPC BKR " AK Standards Standards Rev. Date Purpos
+
+### C5 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE_
+
+SRS g ENGINEERS STANDARD SPECIFICATION @g@@@mm FOR REFRACTORY STANDARD SPECIFICATION No. “ e MATERIALS-SAMPLING, 6-79-0001 Rev. 3
+
+### C6 p2-2 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+Abbreviations
+
+### C7 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+ASTM : American Society for Testing and Materials BD Bulk Density BIS Bureau of Indian Standards BS British Standards Cccs Cold Crushing (compressive) Strength PLC Permanent Linear Change on Reheating RUL Refractoriness Under Load
+
+### C8 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+Refractory & Insulation Standards Committee Convenor : Mr Prasenjit Saha Members : Mr Biswarup Sarkar Mr P. Pal Mr Udayan Chakravarty (Piping) Mr Prag Goel (Fired Heaters) Mr Ayush Mathur (Projects) Mr Tarun Kumar (Equip Div) Mr Neeraj Mathur (Inspection) Dr A
+
+### C9 p2-2 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+Copyright EIL — All rights reserved Format No. 8-00-0001-F1 Rev. 0
+
+### C10 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+38&?% 9% STA’:ggRRDEgg,E?:I:IO%AYT ION stanparD SPECIFICATION ) MATERIALS-SAMPLING, 6-79-0001 Rev. 3 FOR ACCEPTANCE Page3of12
+
+### C11 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+CONTENTS
+
+### C12 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+1.0 SCOPE AND FIELD OF APPLICATION. .......ccuuuuiiiiiniiiiiniiiiieeeneeeeeeniiees 4 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS.....cccuuiiiiiiiieiiiiinereiiieees 4 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES. ..ottt et e et e e e e e neaane 5
+
+### C13 p3-3 [toc]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+Format No. 8-00-0001-H1 Rev. 0 Copyright EIL — All rights reserved
+
+### C14 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations_
+
+e NGINEERS STANDARD SPECIFICATION sTANDARD SPECIFICATION Qﬁa_rn@_ﬁ;é’g IIN.,I?I:‘\JJMTED FOR REFRACTORY No. MATERIALS-SAMPLING, 6-79-0001 Rev. 3
+
+### C15 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION_
+
+1.0 SCOPE AND FIELD OF APPLICATION
+
+### C16 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION > Clause 1.1 The purpose of this specification is to indicate the general principles for inspecting the_
+
+1.1 The purpose of this specification is to indicate the general principles for inspecting the refractory materials, during and after production, and to obtain the most precise assessment of the quality of a lot from a sample of the smallest possible size.
+
+### C17 p4-4 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION > Clause 1.2 The following standards have been referred to for the preparation of this specification:_
+
+1.2 The following standards have been referred to for the preparation of this specification: IS: 1528(PART-VII) Methods of sampling and physical tests for refractory materials Part VII: Methods of sampling and criteria for conformity. 1SO: 5022 Shaped Refracto
+
+### C18 p4-4 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION > Clause 13 The details of tests for determination of various physical characteristics have not been_
+
+13 The details of tests for determination of various physical characteristics have not been included in this specification. The following standards shall be followed for this purpose: BS: 1902(Part 1B) Basic Refractory Raw material and Fired/unfired Refractori
+
+### C19 p4-4 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS_
+
+2.0 STATISTICAL TERMINOLOGY AND SYMBOLS
+
+### C20 p4-4 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS_
+
+If N b Number of items in a lot. n = Number of items in the sample drawn from the lot XiX2... Xn = Observed values of a characteristics x in different items of the sample as a result of an observation or test. X = Average or arithmetic mean of observed values 
+
+### C21 p4-4 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS_
+
+S = VY eex P 0)}
+
+### C22 p5-5 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS_
+
+ENGINEERS STANDARD SPECIFICATION §rANDARD SPECIFIGATION gBariclaics & NDIA LMITED FOR REFRACTORY No. ” MATERIALS-SAMPLING, 6-79-0001 Rev. 3
+
+### C23 p5-5 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS_
+
+n-1 The average for a sample (x) would differ from the true average for the whole lot (). However, if the samples are judiciously taken (see clause 3.0 below) the average for the samples(x) would very closely match with the true average for the whole lot (p). 
+
+### C24 p5-5 [heading]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES_
+
+3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES
+
+### C25 p5-5 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES_
+
+31 Lots
+
+### C26 p5-5 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES > Clause 3.1 The subdivision of a consignment into lots shall be in accordance with the following,_
+
+3.1 The subdivision of a consignment into lots shall be in accordance with the following, depending on the agreement between producer and consumer. Each lot shall then be sampled and subjected to tests separately and accepted separately. “ i) Subdivision of la
+
+### C27 p5-5 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES > Clause 3.2.1 The purpose of a sample (a portion of material or a group of units) taken from a lot is to give_
+
+3.2.1 The purpose of a sample (a portion of material or a group of units) taken from a lot is to give information on the quality of the larger quantity. 322 The samples may be either random or representative. Random samples are taken without bias so that every
+
+### C28 p6-6 [table]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES_
+
+S5l - ENGINEERS STANDARD SPECIFICATION sTANDARD SPECIFICATION ¢80 clvics & INDIA UMITED FOR REFRACTORY No. T e MATERIALS-SAMPLING, 6-79-0001 Rev. 3
+
+### C29 p6-6 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES_
+
+Representative samples are obtained by systematically demarcating the lot into a convenient number of equal portions and drawing samples from each portion at random to ensure that each part of the sample represents a corresponding portion of the bulk, e.g. rep
+
+### C30 p6-6 [text]
+
+_Breadcrumb: STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES_
+
+323 The size of sample is determined by : i) Statistical uniformity "of material (this necessitates a larger sampie when dimensions are being investigated compared to when others such as refractoriness are under consideration). ii) Accuracy required in the tes
+
+## Warnings
+
+- p6: decimal heading '4.2.1' has no detected parent '4.2'

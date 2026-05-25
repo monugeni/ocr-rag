@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "ALSO REFER TO NEW FUEL OIL AND GAS CASES MENTIONED AT THE END. 0",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101) > ALSO REFER TO NEW FUEL OIL AND GAS CASES MENTIONED AT THE END. 0",
+    "seq": 0,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

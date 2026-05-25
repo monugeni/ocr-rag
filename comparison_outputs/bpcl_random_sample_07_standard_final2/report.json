@@ -1,0 +1,32 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 3/6-79-0001_Rev_3.pdf",
+  "document_title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+  "document_context": {
+    "title": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 12,
+  "body_font_size": 14.0,
+  "heading_count": 19,
+  "toc_entry_count": 0,
+  "chunk_count": 75,
+  "warnings": [
+    "p6: decimal heading '4.2.1' has no detected parent '4.2'"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 12,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "body": 305,
+      "table": 22,
+      "form": 1,
+      "running": 27,
+      "toc": 15,
+      "caption": 10
+    }
+  }
+}

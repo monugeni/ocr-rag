@@ -1,0 +1,48 @@
+[
+  {
+    "heading": "अ वीकरण अ वीकरण /Disclaimer",
+    "level": 1,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details > अ वीकरण अ वीकरण /Disclaimer",
+    "seq": 0,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "The Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details > अ वीकरण अ वीकरण /Disclaimer > The Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under",
+    "seq": 1,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  }
+]

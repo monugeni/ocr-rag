@@ -1,0 +1,31 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-17-0481_Rev_1.pdf",
+  "document_title": "SECTION - CC DUCT STIFFENER AND DUCT SUPPORT GUIDE LINE (SQUARE & RECTANGULAR DUCTS)",
+  "document_context": {
+    "title": "SECTION - CC DUCT STIFFENER AND DUCT SUPPORT GUIDE LINE (SQUARE & RECTANGULAR DUCTS)",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 8,
+  "body_font_size": 15.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 28,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 8,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "running": 18,
+      "drawing": 277,
+      "body": 25,
+      "page_number": 14,
+      "table": 6,
+      "form": 1,
+      "caption": 2
+    }
+  }
+}

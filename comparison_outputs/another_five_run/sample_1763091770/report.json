@@ -1,0 +1,41 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091770.pdf",
+  "document_title": "GENERAL CONDITIONS OF CONTRACT (GCC) BHARAT PETROLEUM CORPORATION LIMITED",
+  "document_context": {
+    "title": "GENERAL CONDITIONS OF CONTRACT (GCC) BHARAT PETROLEUM CORPORATION LIMITED",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 124,
+  "body_font_size": 12.0,
+  "heading_count": 389,
+  "toc_entry_count": 0,
+  "chunk_count": 1221,
+  "warnings": [
+    "p6: decimal heading '2.1' has no detected parent '2'",
+    "p6: decimal heading '2.2' has no detected parent '2'",
+    "p6: decimal heading '2.4' has no detected parent '2'",
+    "p11: decimal heading '16.4' has no detected parent '16'",
+    "p52: top-level decimal jump 1 -> 11",
+    "p62: top-level decimal jump 3 -> 8",
+    "p67: top-level decimal jump 3 -> 12",
+    "p73: top-level decimal jump 4 -> 8",
+    "p74: top-level decimal jump 1 -> 8",
+    "p78: top-level decimal jump 2 -> 11",
+    "p94: top-level decimal jump 1 -> 55"
+  ],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 118,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "form": 26,
+      "body": 4498,
+      "page_number": 105,
+      "toc": 142,
+      "table": 152,
+      "caption": 12
+    }
+  }
+}

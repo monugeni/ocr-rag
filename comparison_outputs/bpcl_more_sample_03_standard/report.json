@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-68-0686_Rev_1.pdf",
+  "document_title": "ENGINEERS FOR PARALLEL FLANGE BEAM",
+  "document_context": {
+    "title": "ENGINEERS FOR PARALLEL FLANGE BEAM",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 2,
+  "body_font_size": 10.0,
+  "heading_count": 1,
+  "toc_entry_count": 0,
+  "chunk_count": 18,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 2,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 8,
+    "line_role_counts": {
+      "running": 16,
+      "drawing": 126,
+      "page_number": 6,
+      "body": 1
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091782.pdf",
+  "document_title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+  "document_context": {
+    "title": "VDU HEATER REVAMPAT BPCL MUMBAI REFINERY",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 29,
+  "body_font_size": 17.0,
+  "heading_count": 70,
+  "toc_entry_count": 0,
+  "chunk_count": 311,
+  "warnings": [
+    "p8: decimal heading '6.3.6' has no detected parent '6.3'",
+    "p9: decimal heading '6.3.7' has no detected parent '6.3'",
+    "p10: decimal heading '6.3.8' has no detected parent '6.3'",
+    "p15: top-level decimal jump 13 -> 18",
+    "p24: top-level decimal jump 14 -> 37"
+  ],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 29,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 2,
+    "line_role_counts": {
+      "running": 58,
+      "body": 1048,
+      "page_number": 29,
+      "toc": 29,
+      "drawing": 60,
+      "caption": 2,
+      "table": 10
+    }
+  }
+}

@@ -1,0 +1,970 @@
+[
+  {
+    "id": 1,
+    "page_num": 6,
+    "line_index": 40,
+    "top": 967.0,
+    "left": 106.0,
+    "text": "1.16 EXPERIENCE CRITERIA FOR ACTIVITIES:",
+    "level": 2,
+    "score": 3.3,
+    "confidence": 0.367,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "1.16",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 1.16 EXPERIENCE CRITERIA FOR ACTIVITIES:",
+    "toc_match": null,
+    "warnings": [
+      "p6: decimal heading '1.16' has no detected parent '1'"
+    ]
+  },
+  {
+    "id": 2,
+    "page_num": 10,
+    "line_index": 44,
+    "top": 1081.0,
+    "left": 106.0,
+    "text": "2.0 EQUIPMENT SUMMARY",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2.0 EQUIPMENT SUMMARY",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 10,
+    "line_index": 45,
+    "top": 1121.0,
+    "left": 106.0,
+    "text": "2.1 Existing Heater system",
+    "level": 2,
+    "score": 5.8,
+    "confidence": 0.644,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "2.1",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2.0 EQUIPMENT SUMMARY > 2.1 Existing Heater system",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 11,
+    "line_index": 13,
+    "top": 341.0,
+    "left": 106.0,
+    "text": "2.2 Revamp Modifications:",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "trailing_colon"
+    ],
+    "numbering": "2.2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2.0 EQUIPMENT SUMMARY > 2.2 Revamp Modifications:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 11,
+    "line_index": 39,
+    "top": 913.0,
+    "left": 106.0,
+    "text": "3 SCOPE OF WORK AND SUPPLY",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 11,
+    "line_index": 50,
+    "top": 1178.0,
+    "left": 106.0,
+    "text": "3.2 Free issue materials:",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "trailing_colon"
+    ],
+    "numbering": "3.2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > 3.2 Free issue materials:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 12,
+    "line_index": 30,
+    "top": 785.0,
+    "left": 106.0,
+    "text": "3.3 SCOPE OF WORK (ACTIVITIES):",
+    "level": 2,
+    "score": 5.6,
+    "confidence": 0.622,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "3.3",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > 3.3 SCOPE OF WORK (ACTIVITIES):",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 13,
+    "line_index": 49,
+    "top": 1146.0,
+    "left": 106.0,
+    "text": "A. Heater Radiant:",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "A",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > A. Heater Radiant:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 14,
+    "line_index": 44,
+    "top": 910.0,
+    "left": 106.0,
+    "text": "B. Heater Convection:",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "B",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > B. Heater Convection:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 15,
+    "line_index": 19,
+    "top": 417.0,
+    "left": 106.0,
+    "text": "C. APH (Cast + Glass type):",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "C",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > C. APH (Cast + Glass type):",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 11,
+    "page_num": 15,
+    "line_index": 54,
+    "top": 1157.0,
+    "left": 119.0,
+    "text": "D. Refer instrumentation specifications for instrument related modification details. Impulse",
+    "level": 2,
+    "score": 4.0,
+    "confidence": 0.444,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "numbering": "D",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > D. Refer instrumentation specifications for instrument related modification details. Impulse",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 12,
+    "page_num": 16,
+    "line_index": 15,
+    "top": 379.0,
+    "left": 116.0,
+    "text": "F. Any other work identified and permitted by BPCL as per instruction of Engineer-In-",
+    "level": 2,
+    "score": 3.0,
+    "confidence": 0.333,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "numbering": "F",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > F. Any other work identified and permitted by BPCL as per instruction of Engineer-In-",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 13,
+    "page_num": 16,
+    "line_index": 17,
+    "top": 436.0,
+    "left": 106.0,
+    "text": "3.3.3 Associated balance works:",
+    "level": 3,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3",
+      "trailing_colon"
+    ],
+    "numbering": "3.3.3",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > F. Any other work identified and permitted by BPCL as per instruction of Engineer-In- > 3.3.3 Associated balance works:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 14,
+    "page_num": 16,
+    "line_index": 48,
+    "top": 1154.0,
+    "left": 106.0,
+    "text": "3.4 Contractor Scope of supply:",
+    "level": 2,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "trailing_colon"
+    ],
+    "numbering": "3.4",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > 3.4 Contractor Scope of supply:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 15,
+    "page_num": 17,
+    "line_index": 17,
+    "top": 417.0,
+    "left": 106.0,
+    "text": "A. Heater Radiant Section",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned"
+    ],
+    "numbering": "A",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > A. Heater Radiant Section",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 16,
+    "page_num": 17,
+    "line_index": 18,
+    "top": 455.0,
+    "left": 110.0,
+    "text": "i. Radiant Floor zone",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "numbering": "i",
+    "scheme": "roman",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > i. Radiant Floor zone",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 17,
+    "page_num": 17,
+    "line_index": 24,
+    "top": 616.0,
+    "left": 106.0,
+    "text": "ii. Radiant wall / Arch section / Radiant coils",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "numbering": "ii",
+    "scheme": "roman",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > ii. Radiant wall / Arch section / Radiant coils",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 18,
+    "page_num": 17,
+    "line_index": 43,
+    "top": 1033.0,
+    "left": 106.0,
+    "text": "B. Heater Convection section",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned"
+    ],
+    "numbering": "B",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > B. Heater Convection section",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 19,
+    "page_num": 18,
+    "line_index": 8,
+    "top": 215.0,
+    "left": 106.0,
+    "text": "C. Ducting:",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "C",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > C. Ducting:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 20,
+    "page_num": 18,
+    "line_index": 24,
+    "top": 590.0,
+    "left": 106.0,
+    "text": "D. New APH (CAPH + GAPH type):",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "D",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > D. New APH (CAPH + GAPH type):",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 21,
+    "page_num": 18,
+    "line_index": 49,
+    "top": 1156.0,
+    "left": 106.0,
+    "text": "F. Tube Supports & bolting",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned"
+    ],
+    "numbering": "F",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > F. Tube Supports & bolting",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 22,
+    "page_num": 19,
+    "line_index": 8,
+    "top": 208.0,
+    "left": 106.0,
+    "text": "G. Instrumentation",
+    "level": 2,
+    "score": 3.8,
+    "confidence": 0.422,
+    "reasons": [
+      "alpha",
+      "bold",
+      "left_aligned"
+    ],
+    "numbering": "G",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > G. Instrumentation",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 23,
+    "page_num": 19,
+    "line_index": 11,
+    "top": 322.0,
+    "left": 106.0,
+    "text": "H. Associated Items",
+    "level": 2,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "alpha",
+      "bold",
+      "gap_above",
+      "left_aligned"
+    ],
+    "numbering": "H",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > H. Associated Items",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 24,
+    "page_num": 20,
+    "line_index": 10,
+    "top": 322.0,
+    "left": 106.0,
+    "text": "I. Any other item not specifically listed in these specifications but are required to complete",
+    "level": 2,
+    "score": 3.0,
+    "confidence": 0.333,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "numbering": "I",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 3 SCOPE OF WORK AND SUPPLY > I. Any other item not specifically listed in these specifications but are required to complete",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 25,
+    "page_num": 20,
+    "line_index": 12,
+    "top": 379.0,
+    "left": 106.0,
+    "text": "4 APPLICABLE DRAWINGS, STANDARDS & SPECIFICATIONS",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "4",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 4 APPLICABLE DRAWINGS, STANDARDS & SPECIFICATIONS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 26,
+    "page_num": 21,
+    "line_index": 22,
+    "top": 569.0,
+    "left": 106.0,
+    "text": "5.2 MODULARIZATION / TRIAL ASSEMBY",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 4 APPLICABLE DRAWINGS, STANDARDS & SPECIFICATIONS > 5.2 MODULARIZATION / TRIAL ASSEMBY",
+    "toc_match": null,
+    "warnings": [
+      "p21: decimal heading '5.2' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 27,
+    "page_num": 21,
+    "line_index": 25,
+    "top": 664.0,
+    "left": 106.0,
+    "text": "5.3 REFRACTORY",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.3",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 4 APPLICABLE DRAWINGS, STANDARDS & SPECIFICATIONS > 5.3 REFRACTORY",
+    "toc_match": null,
+    "warnings": [
+      "p21: decimal heading '5.3' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 28,
+    "page_num": 22,
+    "line_index": 21,
+    "top": 569.0,
+    "left": 106.0,
+    "text": "5.14 MINIMUM INSPECTION REQUIREMENT",
+    "level": 2,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.14",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 4 APPLICABLE DRAWINGS, STANDARDS & SPECIFICATIONS > 5.14 MINIMUM INSPECTION REQUIREMENT",
+    "toc_match": null,
+    "warnings": [
+      "p22: decimal heading '5.14' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 29,
+    "page_num": 22,
+    "line_index": 31,
+    "top": 840.0,
+    "left": 220.0,
+    "text": "2 C etc.",
+    "level": 1,
+    "score": 7.4,
+    "confidence": 0.822,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "wrapped_heading"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 30,
+    "page_num": 23,
+    "line_index": 6,
+    "top": 170.0,
+    "left": 106.0,
+    "text": "5.14.2 PMI",
+    "level": 3,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "5.14.2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 5.14.2 PMI",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 31,
+    "page_num": 23,
+    "line_index": 11,
+    "top": 322.0,
+    "left": 106.0,
+    "text": "5.15 HYDROTESTING",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.15",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 5.15 HYDROTESTING",
+    "toc_match": null,
+    "warnings": [
+      "p23: decimal heading '5.15' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 32,
+    "page_num": 23,
+    "line_index": 19,
+    "top": 512.0,
+    "left": 106.0,
+    "text": "5.16 PRESERVATION",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.16",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 5.16 PRESERVATION",
+    "toc_match": null,
+    "warnings": [
+      "p23: decimal heading '5.16' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 33,
+    "page_num": 23,
+    "line_index": 25,
+    "top": 664.0,
+    "left": 106.0,
+    "text": "5.17 ERECTION OF CRITICAL EQUIPMENT",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "5.17",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 5.17 ERECTION OF CRITICAL EQUIPMENT",
+    "toc_match": null,
+    "warnings": [
+      "p23: decimal heading '5.17' has no detected parent '5'"
+    ]
+  },
+  {
+    "id": 34,
+    "page_num": 23,
+    "line_index": 33,
+    "top": 891.0,
+    "left": 106.0,
+    "text": "6.1 FABRICATION & ERECTION SPARES",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "6.1",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 6.1 FABRICATION & ERECTION SPARES",
+    "toc_match": null,
+    "warnings": [
+      "p23: decimal heading '6.1' has no detected parent '6'"
+    ]
+  },
+  {
+    "id": 35,
+    "page_num": 23,
+    "line_index": 43,
+    "top": 1157.0,
+    "left": 106.0,
+    "text": "6.2 MANDATORY SPARES",
+    "level": 2,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "numbering": "6.2",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 2 C etc. > 6.2 MANDATORY SPARES",
+    "toc_match": null,
+    "warnings": [
+      "p23: decimal heading '6.2' has no detected parent '6'"
+    ]
+  },
+  {
+    "id": 36,
+    "page_num": 25,
+    "line_index": 45,
+    "top": 1100.0,
+    "left": 106.0,
+    "text": "9 QUALITY REQUIREMENT",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "9",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 9 QUALITY REQUIREMENT",
+    "toc_match": null,
+    "warnings": [
+      "p25: top-level decimal jump 2 -> 9"
+    ]
+  },
+  {
+    "id": 37,
+    "page_num": 26,
+    "line_index": 11,
+    "top": 303.0,
+    "left": 106.0,
+    "text": "10 VENDOR DATA REQUIREMENT",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "10",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > 10 VENDOR DATA REQUIREMENT",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 38,
+    "page_num": 26,
+    "line_index": 40,
+    "top": 1028.0,
+    "left": 223.0,
+    "text": "SCHEDULE .",
+    "level": 1,
+    "score": 4.2,
+    "confidence": 0.467,
+    "reasons": [
+      "appendix"
+    ],
+    "numbering": "SCHEDULE .",
+    "scheme": "appendix",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE .",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 39,
+    "page_num": 27,
+    "line_index": 12,
+    "top": 284.0,
+    "left": 106.0,
+    "text": "10.9 Documents once given Code-2 through mail shall be considered good for fabrication",
+    "level": 3,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "10.9",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > 10.9 Documents once given Code-2 through mail shall be considered good for fabrication",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 40,
+    "page_num": 27,
+    "line_index": 44,
+    "top": 986.0,
+    "left": 160.0,
+    "text": "Electronic Documentation",
+    "level": 3,
+    "score": 4.8,
+    "confidence": 0.533,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > Electronic Documentation",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 41,
+    "page_num": 28,
+    "line_index": 7,
+    "top": 208.0,
+    "left": 106.0,
+    "text": "10.11 DRAWINGS/DOCUMENTS FOR SUBMISSION",
+    "level": 3,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "10.11",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > 10.11 DRAWINGS/DOCUMENTS FOR SUBMISSION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 42,
+    "page_num": 28,
+    "line_index": 20,
+    "top": 636.0,
+    "left": 104.0,
+    "text": "S. NO Description Review Records Remarks",
+    "level": 2,
+    "score": 6.0,
+    "confidence": 0.667,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "numbering": "S",
+    "scheme": "alpha",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > S. NO Description Review Records Remarks",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 43,
+    "page_num": 28,
+    "line_index": 41,
+    "top": 1005.0,
+    "left": 131.0,
+    "text": "6 Site / Shop Testing Procedure X",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "6",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > 6 Site / Shop Testing Procedure X",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 44,
+    "page_num": 29,
+    "line_index": 16,
+    "top": 379.0,
+    "left": 131.0,
+    "text": "19 Application Procedure for various Refractory Items X and Pre Dry out procedure at shop",
+    "level": 2,
+    "score": 4.9,
+    "confidence": 0.544,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "wrapped_heading",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "19",
+    "scheme": "decimal",
+    "breadcrumb": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF > SCHEDULE . > 19 Application Procedure for various Refractory Items X and Pre Dry out procedure at shop",
+    "toc_match": null,
+    "warnings": [
+      "p29: top-level decimal jump 6 -> 19"
+    ]
+  }
+]

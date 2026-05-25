@@ -1,0 +1,298 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 0,
+    "top": 52.0,
+    "left": 504.0,
+    "text": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+    "level": 1,
+    "score": 6.4,
+    "confidence": 0.711,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "wrapped_heading"
+    ],
+    "numbering": "ANNEXURE 2F",
+    "scheme": "appendix",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 1,
+    "line_index": 42,
+    "top": 1113.0,
+    "left": 140.0,
+    "text": "ANNEXURE s HPCL, Mumbai",
+    "level": 1,
+    "score": 4.7,
+    "confidence": 0.522,
+    "reasons": [
+      "appendix",
+      "left_aligned"
+    ],
+    "numbering": "ANNEXURE s",
+    "scheme": "appendix",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE s HPCL, Mumbai",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 2,
+    "line_index": 19,
+    "top": 462.0,
+    "left": 141.0,
+    "text": "6 Not withstanding anything contained herein above :",
+    "level": 2,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "6",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE s HPCL, Mumbai > 6 Not withstanding anything contained herein above :",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 3,
+    "line_index": 0,
+    "top": 102.0,
+    "left": 445.0,
+    "text": "ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "level": 1,
+    "score": 6.0,
+    "confidence": 0.667,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "numbering": "ANNEXURE 2M",
+    "scheme": "appendix",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 4,
+    "line_index": 23,
+    "top": 565.0,
+    "left": 115.0,
+    "text": "6 Notwithstanding anything contained herein above:",
+    "level": 2,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "6",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 6 Notwithstanding anything contained herein above:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 7,
+    "line_index": 22,
+    "top": 888.0,
+    "left": 201.0,
+    "text": "7 Not withstanding anything contained herein above :",
+    "level": 2,
+    "score": 6.0,
+    "confidence": 0.667,
+    "reasons": [
+      "gap_above",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "7",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 7 Not withstanding anything contained herein above :",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 9,
+    "line_index": 0,
+    "top": 103.0,
+    "left": 445.0,
+    "text": "ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "level": 1,
+    "score": 6.0,
+    "confidence": 0.667,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "numbering": "ANNEXURE 2M",
+    "scheme": "appendix",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 10,
+    "line_index": 23,
+    "top": 567.0,
+    "left": 115.0,
+    "text": "6 Notwithstanding anything contained herein above:",
+    "level": 2,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "6",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 6 Notwithstanding anything contained herein above:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 14,
+    "line_index": 0,
+    "top": 19.0,
+    "left": 135.0,
+    "text": "ANNEXURE - 1",
+    "level": 1,
+    "score": 6.5,
+    "confidence": 0.722,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "left_aligned"
+    ],
+    "numbering": "ANNEXURE -",
+    "scheme": "appendix",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 14,
+    "line_index": 13,
+    "top": 302.0,
+    "left": 135.0,
+    "text": "2 Supplier / Contractor Code",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 2 Supplier / Contractor Code",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 11,
+    "page_num": 14,
+    "line_index": 14,
+    "top": 336.0,
+    "left": 135.0,
+    "text": "3 Address (Including Pin Code)",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 3 Address (Including Pin Code)",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 12,
+    "page_num": 14,
+    "line_index": 20,
+    "top": 526.0,
+    "left": 135.0,
+    "text": "2 Branch Name /Branch code",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 2 Branch Name /Branch code",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 13,
+    "page_num": 14,
+    "line_index": 21,
+    "top": 560.0,
+    "left": 135.0,
+    "text": "3 Branch Address (incl Pin code)",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 3 Branch Address (incl Pin code)",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 14,
+    "page_num": 14,
+    "line_index": 25,
+    "top": 698.0,
+    "left": 135.0,
+    "text": "7 IFSC Code of the Branch (For RTGS)",
+    "level": 2,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "numbering": "7",
+    "scheme": "decimal",
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 7 IFSC Code of the Branch (For RTGS)",
+    "toc_match": null,
+    "warnings": [
+      "p14: top-level decimal jump 3 -> 7"
+    ]
+  }
+]

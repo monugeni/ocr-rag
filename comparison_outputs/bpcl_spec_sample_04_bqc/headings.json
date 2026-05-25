@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 1,
+    "top": 119.0,
+    "left": 108.0,
+    "text": "1.0 BID-QUALIFICATION CRITERIA (BQC):",
+    "level": 1,
+    "score": 9.6,
+    "confidence": 0.99,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "BID QUALIFICATION CRITERIA (BQC) > 1.0 BID-QUALIFICATION CRITERIA (BQC):",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 2,
+    "line_index": 12,
+    "top": 450.0,
+    "left": 110.0,
+    "text": "S. No. Clause Title Simplified Description",
+    "level": 2,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "numbering": "S",
+    "scheme": "alpha",
+    "breadcrumb": "BID QUALIFICATION CRITERIA (BQC) > 1.0 BID-QUALIFICATION CRITERIA (BQC): > S. No. Clause Title Simplified Description",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 4,
+    "line_index": 21,
+    "top": 584.0,
+    "left": 107.0,
+    "text": "9 DIGIT MICR CODE - 400036002",
+    "level": 1,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "9",
+    "scheme": "decimal",
+    "breadcrumb": "BID QUALIFICATION CRITERIA (BQC) > 9 DIGIT MICR CODE - 400036002",
+    "toc_match": null,
+    "warnings": [
+      "p4: top-level decimal jump 1 -> 9"
+    ]
+  }
+]

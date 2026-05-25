@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/SCOPE OF JOB.pdf",
+  "document_title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+  "document_context": {
+    "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 7,
+  "body_font_size": 17.0,
+  "heading_count": 15,
+  "toc_entry_count": 0,
+  "chunk_count": 59,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 7,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 2,
+    "line_role_counts": {
+      "running": 14,
+      "body": 178,
+      "page_number": 8,
+      "toc": 18,
+      "table": 2
+    }
+  }
+}

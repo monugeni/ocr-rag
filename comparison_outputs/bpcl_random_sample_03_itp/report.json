@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC VI ITP/6-81-0008_Rev_5.pdf",
+  "document_title": "INSPECTION AND TEST PLAN FOR GASKETS",
+  "document_context": {
+    "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 5,
+  "body_font_size": 17.0,
+  "heading_count": 14,
+  "toc_entry_count": 0,
+  "chunk_count": 42,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 5,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 4,
+    "line_role_counts": {
+      "running": 12,
+      "body": 106,
+      "table": 27,
+      "page_number": 6,
+      "form": 3
+    }
+  }
+}

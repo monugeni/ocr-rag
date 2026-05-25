@@ -1,0 +1,26 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Undertaking for Custom Bid Creation on GeM.pdf",
+  "document_title": "Undertaking for Creation of Custom Bid for Services required on GeM",
+  "document_context": {
+    "title": "Undertaking for Creation of Custom Bid for Services required on GeM",
+    "path_parts": [],
+    "source": "subject"
+  },
+  "page_count": 1,
+  "body_font_size": 17.0,
+  "heading_count": 1,
+  "toc_entry_count": 0,
+  "chunk_count": 7,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 1,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 25,
+      "form": 1
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-52-0101_Rev_4.pdf",
+  "document_title": "(A SINGLE INSTRUMENT",
+  "document_context": {
+    "title": "(A SINGLE INSTRUMENT",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 3,
+  "body_font_size": 11.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 22,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 3,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 8,
+    "line_role_counts": {
+      "running": 21,
+      "drawing": 160,
+      "page_number": 10
+    }
+  }
+}

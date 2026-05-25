@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/BURNER OIL GUN MR/C238-131-80-45-VDR-0001 Rev. A.pdf",
+  "document_title": "UNIT : CDU-3 (131)",
+  "document_context": {
+    "title": "UNIT : CDU-3 (131)",
+    "path_parts": [],
+    "source": "heading_fallback"
+  },
+  "page_count": 3,
+  "body_font_size": 17.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 8,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 3,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 3,
+    "line_role_counts": {
+      "running": 9,
+      "form": 5,
+      "page_number": 6,
+      "body": 56,
+      "table": 2,
+      "caption": 1
+    }
+  }
+}

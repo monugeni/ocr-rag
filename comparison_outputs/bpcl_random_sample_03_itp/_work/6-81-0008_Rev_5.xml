@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="0" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="5" family="Courier" color="#000000"/>
+	<fontspec id="2" size="5" family="Courier" color="#000000"/>
+	<fontspec id="3" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="5" size="18" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="17" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="35" family="Times" color="#000000"/>
+	<fontspec id="9" size="35" family="Helvetica" color="#000000"/>
+	<fontspec id="10" size="35" family="Times" color="#000000"/>
+<text top="88" left="1035" width="190" height="11" font="0"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="127" left="89" width="43" height="4" font="1"><i>MrVi,WINe </i></text>
+<text top="127" left="138" width="26" height="4" font="2">JCW . </text>
+<text top="114" left="1068" width="126" height="13" font="3"><b>6-81-0008 Rev. 5 </b></text>
+<text top="137" left="1096" width="69" height="11" font="4">Page 1 of 5 </text>
+<text top="92" left="552" width="220" height="13" font="3"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="109" left="644" width="36" height="13" font="3"><b>FOR </b></text>
+<text top="126" left="624" width="76" height="13" font="3"><b>GASKETS </b></text>
+<text top="96" left="158" width="32" height="17" font="5"> </text>
+<text top="97" left="188" width="81" height="16" font="6">ENGINEERS </text>
+<text top="110" left="63" width="101" height="16" font="6">51g-ar IFIPeg </text>
+<text top="111" left="188" width="106" height="16" font="6">INDIA LIMITED </text>
+<text top="127" left="189" width="92" height="6" font="7">IA Govt of IndA Undertalang) </text>
+<text top="553" left="80" width="9" height="11" font="4">5 </text>
+<text top="553" left="132" width="64" height="11" font="4">28.09.2022 </text>
+<text top="553" left="423" width="155" height="11" font="4">REVISED AND RE-ISSUED </text>
+<text top="560" left="812" width="27" height="11" font="4">TKK </text>
+<text top="560" left="896" width="30" height="11" font="4">PTM </text>
+<text top="585" left="80" width="10" height="11" font="4">4 </text>
+<text top="585" left="133" width="63" height="11" font="4">14.11.2018 </text>
+<text top="585" left="423" width="155" height="11" font="4">REVISED AND RE-ISSUED </text>
+<text top="592" left="815" width="21" height="11" font="4">KC </text>
+<text top="592" left="900" width="22" height="11" font="4">NM </text>
+<text top="617" left="80" width="10" height="11" font="4">3 </text>
+<text top="617" left="133" width="63" height="11" font="4">17.06.2013 </text>
+<text top="617" left="423" width="155" height="11" font="4">REVISED AND RE-ISSUED </text>
+<text top="617" left="812" width="27" height="11" font="4">TKK </text>
+<text top="617" left="897" width="29" height="11" font="4">RKS </text>
+<text top="648" left="80" width="10" height="11" font="4">2 </text>
+<text top="648" left="132" width="64" height="11" font="4">15.07.2011 </text>
+<text top="648" left="423" width="155" height="11" font="4">REVISED AND RE-ISSUED </text>
+<text top="648" left="812" width="27" height="11" font="4">TKK </text>
+<text top="649" left="897" width="30" height="11" font="4">SCG </text>
+<text top="680" left="80" width="11" height="11" font="4">1 </text>
+<text top="680" left="132" width="64" height="11" font="4">02.01.2008 </text>
+<text top="681" left="423" width="155" height="11" font="4">REVISED AND RE-ISSUED </text>
+<text top="680" left="814" width="22" height="11" font="4">AM </text>
+<text top="680" left="901" width="20" height="11" font="4">SS </text>
+<text top="722" left="70" width="29" height="11" font="0"><b>Rev. </b></text>
+<text top="736" left="73" width="23" height="11" font="0"><b>No. </b></text>
+<text top="729" left="149" width="29" height="11" font="0"><b>Date </b></text>
+<text top="729" left="474" width="52" height="11" font="0"><b>Purpose </b></text>
+<text top="722" left="798" width="56" height="11" font="0"><b>Prepared </b></text>
+<text top="736" left="816" width="20" height="11" font="0"><b>By </b></text>
+<text top="722" left="884" width="54" height="11" font="0"><b>Checked </b></text>
+<text top="736" left="902" width="19" height="11" font="0"><b>By </b></text>
+<text top="560" left="1023" width="20" height="11" font="4">RK </text>
+<text top="560" left="1164" width="22" height="11" font="4">SM </text>
+<text top="592" left="1019" width="29" height="11" font="4">RKS </text>
+<text top="591" left="1164" width="28" height="11" font="4">RKT </text>
+<text top="617" left="1019" width="30" height="11" font="4">SCG </text>
+<text top="617" left="1166" width="23" height="11" font="4">DM </text>
+<text top="648" left="1019" width="28" height="11" font="4">AKC </text>
+<text top="648" left="1166" width="23" height="11" font="4">DM </text>
+<text top="680" left="1014" width="38" height="11" font="4">MVKK </text>
+<text top="680" left="1167" width="21" height="11" font="4">VC </text>
+<text top="707" left="969" width="128" height="11" font="0"><b>Standards Committee </b></text>
+<text top="706" left="1124" width="107" height="11" font="0"><b>Standards Bureau </b></text>
+<text top="720" left="1003" width="60" height="11" font="0"><b>Convenor </b></text>
+<text top="720" left="1148" width="59" height="11" font="0"><b>Chairman </b></text>
+<text top="747" left="1059" width="78" height="11" font="0"><b>Approved by </b></text>
+<text top="237" left="518" width="122" height="31" font="8">4114-1 </text>
+<text top="283" left="441" width="123" height="33" font="9">fWfNitTr </text>
+<text top="364" left="376" width="530" height="31" font="10"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="406" left="598" width="86" height="31" font="10"><b>FOR </b></text>
+<text top="447" left="551" width="179" height="31" font="10"><b>GASKETS </b></text>
+<text top="787" left="989" width="187" height="11" font="4">Copyright EIL — All rights reserved </text>
+<text top="789" left="56" width="178" height="11" font="4">Format No. 8-00-0001-F7 Rev. 0 </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="11" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="12" size="17" family="Times" color="#000000"/>
+	<fontspec id="13" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="14" size="17" family="Times" color="#000000"/>
+<text top="126" left="191" width="93" height="6" font="7">IA Govt of Ind UndoAAongI </text>
+<text top="85" left="1034" width="190" height="10" font="11"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="109" left="1068" width="122" height="15" font="12"><b>6-81-0008 Rev. 5 </b></text>
+<text top="134" left="1096" width="65" height="10" font="13">Page 2 of 5 </text>
+<text top="96" left="192" width="79" height="15" font="14">ENGINEERS </text>
+<text top="110" left="65" width="81" height="15" font="14">Oae.11 laf j</text>
+<text top="110" left="138" width="29" height="15" font="14">eg </text>
+<text top="110" left="192" width="104" height="15" font="14">INDIA LIMITED </text>
+<text top="125" left="91" width="71" height="6" font="7">Rom eveywreactottsag, </text>
+<text top="89" left="549" width="217" height="15" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="106" left="642" width="34" height="15" font="12"><b>FOR </b></text>
+<text top="123" left="620" width="76" height="15" font="12"><b>GASKETS </b></text>
+<text top="173" left="60" width="110" height="15" font="12"><b>Abbreviations: </b></text>
+<text top="210" left="68" width="41" height="15" font="14">CEIL </text>
+<text top="211" left="271" width="303" height="15" font="14">Certification Engineers International Limited </text>
+<text top="210" left="664" width="40" height="15" font="14">MRT </text>
+<text top="211" left="833" width="146" height="15" font="14">Mechanical Run Test </text>
+<text top="230" left="68" width="56" height="15" font="14">CIMFR </text>
+<text top="230" left="271" width="298" height="15" font="14">Central Institute of Mining &amp; Fuel Research </text>
+<text top="230" left="664" width="38" height="15" font="14">NDT </text>
+<text top="230" left="832" width="168" height="15" font="14">Non Destructive Testing </text>
+<text top="249" left="68" width="25" height="15" font="14">CE </text>
+<text top="249" left="271" width="128" height="15" font="14">Carbon Equivalent </text>
+<text top="249" left="663" width="47" height="15" font="14">NPSH </text>
+<text top="249" left="832" width="180" height="15" font="14">Net Positive Suction Head </text>
+<text top="267" left="68" width="35" height="15" font="14">DFT </text>
+<text top="267" left="271" width="137" height="15" font="14">Dry Film Thickness </text>
+<text top="268" left="664" width="25" height="15" font="14">PO </text>
+<text top="267" left="833" width="107" height="15" font="14">Purchase Order </text>
+<text top="286" left="68" width="35" height="15" font="14">DPT </text>
+<text top="286" left="271" width="153" height="15" font="14">Dye Penetrant Testing </text>
+<text top="286" left="664" width="45" height="15" font="14">PESO </text>
+<text top="286" left="833" width="279" height="15" font="14">Petroleum Explosive Safety Organization </text>
+<text top="306" left="68" width="38" height="15" font="14">DHT </text>
+<text top="305" left="271" width="199" height="15" font="14">De-hydrogen Heat Treatment </text>
+<text top="305" left="664" width="37" height="15" font="14">PQR </text>
+<text top="305" left="833" width="215" height="15" font="14">Procedure Qualification Record </text>
+<text top="324" left="68" width="45" height="15" font="14">ERTL </text>
+<text top="324" left="271" width="253" height="15" font="14">Electronics Regional Test Laboratory </text>
+<text top="324" left="664" width="24" height="15" font="14">PR </text>
+<text top="324" left="833" width="144" height="15" font="14">Purchase Requisition </text>
+<text top="343" left="68" width="40" height="15" font="14">FCRI </text>
+<text top="343" left="271" width="217" height="15" font="14">Fluid Control Research Institute </text>
+<text top="343" left="664" width="33" height="15" font="14">PMI </text>
+<text top="343" left="833" width="211" height="15" font="14">Positive Material Identification </text>
+<text top="362" left="68" width="26" height="15" font="14">HT </text>
+<text top="362" left="271" width="107" height="15" font="14">Heat Treatment </text>
+<text top="362" left="664" width="25" height="15" font="14">RT </text>
+<text top="362" left="833" width="144" height="15" font="14">Radiography Testing </text>
+<text top="381" left="68" width="32" height="15" font="14">HIC </text>
+<text top="381" left="271" width="193" height="15" font="14">Hydrogen Induced Cracking </text>
+<text top="381" left="664" width="44" height="15" font="14">SSCC </text>
+<text top="381" left="833" width="242" height="15" font="14">Sulphide Stress Corrosion Cracking </text>
+<text top="400" left="68" width="28" height="15" font="14">ITP </text>
+<text top="400" left="271" width="172" height="15" font="14">Inspection and Test Plan </text>
+<text top="400" left="664" width="26" height="15" font="14">TC </text>
+<text top="400" left="833" width="107" height="15" font="14">Test Certificate </text>
+<text top="419" left="68" width="18" height="15" font="14">IP </text>
+<text top="419" left="271" width="124" height="15" font="14">Ingress Protection </text>
+<text top="419" left="664" width="88" height="15" font="14">TPI or TPIA </text>
+<text top="419" left="833" width="209" height="15" font="14">Third Party Inspection Agency </text>
+<text top="438" left="68" width="31" height="15" font="14">IHT </text>
+<text top="438" left="271" width="195" height="15" font="14">Intermediate Heat Treatment </text>
+<text top="438" left="663" width="27" height="15" font="14">UT </text>
+<text top="438" left="832" width="128" height="15" font="14">Ultrasonic Testing </text>
+<text top="457" left="68" width="20" height="15" font="14">IC </text>
+<text top="457" left="271" width="147" height="15" font="14">Inspection Certificate </text>
+<text top="456" left="663" width="39" height="15" font="14">VDR </text>
+<text top="456" left="832" width="179" height="15" font="14">Vendor Data Requirement </text>
+<text top="476" left="68" width="32" height="15" font="14">IGC </text>
+<text top="476" left="271" width="168" height="15" font="14">Inter Granular Corrosion </text>
+<text top="475" left="663" width="39" height="15" font="14">WPS </text>
+<text top="475" left="833" width="224" height="15" font="14">Welding Procedure Specification </text>
+<text top="495" left="68" width="67" height="15" font="14">MPT/MT </text>
+<text top="495" left="271" width="176" height="15" font="14">Magnetic Particle Testing </text>
+<text top="495" left="664" width="41" height="15" font="14">WPQ </text>
+<text top="494" left="833" width="240" height="15" font="14">Welders Performance Qualification </text>
+<text top="514" left="68" width="40" height="15" font="14">MTC </text>
+<text top="514" left="271" width="167" height="15" font="14">Material Test Certificate </text>
+<text top="590" left="60" width="237" height="15" font="12"><b>Inspection Standards Committee </b></text>
+<text top="627" left="60" width="82" height="15" font="12"><b>Convenor : </b></text>
+<text top="627" left="163" width="129" height="15" font="14">Mr. Rajeev Kumar </text>
+<text top="666" left="60" width="76" height="15" font="12"><b>Members: </b></text>
+<text top="684" left="169" width="120" height="15" font="14">Mr. Rajesh Sinha </text>
+<text top="684" left="356" width="141" height="15" font="14">Mr. Chandrashekhar </text>
+<text top="684" left="548" width="134" height="15" font="14">Mr. Himangshu Pal </text>
+<text top="683" left="783" width="263" height="15" font="14">Mr. R Muthu Ramalingam (RPO Rep.) </text>
+<text top="703" left="169" width="152" height="15" font="14">Mr. Avdhesh Agrawal </text>
+<text top="703" left="356" width="144" height="15" font="14">Mr. Mahendra Mittal </text>
+<text top="703" left="548" width="189" height="15" font="14">Miss Sulakshana Hundekari </text>
+<text top="788" left="59" width="179" height="10" font="13">Format No. 8-00-0001-F7 Rev. 0 </text>
+<text top="786" left="1061" width="185" height="10" font="13">Copyright EIL — All rights reserved </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="15" size="16" family="Times" color="#000000"/>
+	<fontspec id="16" size="16" family="Times" color="#000000"/>
+<text top="96" left="101" width="25" height="15" font="6">elf </text>
+<text top="97" left="189" width="80" height="15" font="6">ENGINEERS </text>
+<text top="112" left="63" width="101" height="13" font="3"><b>Ogar Offreg </b></text>
+<text top="111" left="189" width="106" height="15" font="6">INDIA LIMITED </text>
+<text top="127" left="190" width="92" height="6" font="7">IA Govt of India Undertaking) </text>
+<text top="91" left="547" width="219" height="13" font="3"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="108" left="639" width="36" height="13" font="3"><b>FOR </b></text>
+<text top="125" left="618" width="76" height="13" font="3"><b>GASKETS </b></text>
+<text top="85" left="1031" width="189" height="13" font="3"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="113" left="1066" width="120" height="13" font="3"><b>6-81-0008 Rev. 5 </b></text>
+<text top="136" left="1094" width="65" height="10" font="13">Page 3 of 5 </text>
+<text top="174" left="59" width="24" height="14" font="15"><b>1.0 </b></text>
+<text top="174" left="112" width="59" height="14" font="15"><b>SCOPE </b></text>
+<text top="212" left="111" width="558" height="14" font="15"><b>This Inspection and Test Plan covers the minimum testing requirements of Gaskets. </b></text>
+<text top="250" left="58" width="272" height="14" font="15"><b>2.0 REFERENCE DOCUMENTS </b></text>
+<text top="288" left="111" width="516" height="14" font="15"><b>PO/PR/ Standards referred there in/ Job specifications /Approved documents. </b></text>
+<text top="325" left="58" width="387" height="14" font="15"><b>3.0 INSPECTION AND TEST REQUIREMENTS </b></text>
+<text top="388" left="127" width="24" height="14" font="15"><b>SL </b></text>
+<text top="407" left="123" width="33" height="14" font="15"><b>NO. </b></text>
+<text top="397" left="201" width="156" height="14" font="15"><b>STAGE / ACTIVITY </b></text>
+<text top="397" left="419" width="166" height="14" font="15"><b>CHARACTERISTICS </b></text>
+<text top="388" left="632" width="92" height="14" font="15"><b>QUANTUM </b></text>
+<text top="407" left="631" width="93" height="14" font="15"><b>OF CHECK </b></text>
+<text top="397" left="784" width="76" height="14" font="15"><b>RECORD </b></text>
+<text top="421" left="767" width="4" height="14" font="15"><b>• </b></text>
+<text top="378" left="970" width="194" height="14" font="15"><b>SCOPE OF INSPECTION </b></text>
+<text top="412" left="936" width="37" height="14" font="15"><b>SUB </b></text>
+<text top="431" left="912" width="87" height="14" font="15"><b>SUPPLIER </b></text>
+<text top="421" left="1024" width="87" height="14" font="15"><b>SUPPLIER </b></text>
+<text top="421" left="1140" width="77" height="14" font="15"><b>EIL/TPIA </b></text>
+<text top="469" left="128" width="23" height="14" font="15"><b>1.0 </b></text>
+<text top="469" left="240" width="77" height="14" font="15"><b>Procedure </b></text>
+<text top="519" left="128" width="22" height="14" font="15"><b>1.1 </b></text>
+<text top="509" left="199" width="157" height="14" font="15"><b>HT &amp; Test Procedures, </b></text>
+<text top="528" left="233" width="90" height="14" font="15"><b>as applicable </b></text>
+<text top="519" left="418" width="167" height="14" font="15"><b>Documented Procedures </b></text>
+<text top="519" left="657" width="43" height="14" font="15"><b>100% </b></text>
+<text top="509" left="786" width="71" height="14" font="15"><b>Procedure </b></text>
+<text top="528" left="782" width="79" height="14" font="15"><b>Documents </b></text>
+<text top="519" left="949" width="12" height="14" font="15"><b>- </b></text>
+<text top="519" left="1059" width="16" height="14" font="15"><b>H </b></text>
+<text top="518" left="1171" width="15" height="14" font="15"><b>R </b></text>
+<text top="557" left="127" width="25" height="13" font="3"><b>2.0 </b></text>
+<text top="557" left="206" width="68" height="13" font="3"><b>Material </b></text>
+<text top="557" left="272" width="77" height="14" font="15"><b>Inspection </b></text>
+<text top="611" left="127" width="23" height="14" font="15"><b>2.1 </b></text>
+<text top="611" left="194" width="168" height="14" font="15"><b>Raw Material Inspection </b></text>
+<text top="582" left="402" width="199" height="14" font="15"><b>Chemical, Physical and other </b></text>
+<text top="602" left="409" width="186" height="14" font="15"><b>properties as per applicable </b></text>
+<text top="620" left="428" width="148" height="14" font="15"><b>material specification </b></text>
+<text top="611" left="657" width="43" height="14" font="15"><b>100% </b></text>
+<text top="611" left="765" width="112" height="14" font="15"><b>Test Certificates </b></text>
+<text top="611" left="946" width="16" height="14" font="15"><b>H </b></text>
+<text top="611" left="1059" width="16" height="14" font="15"><b>H </b></text>
+<text top="611" left="1174" width="12" height="14" font="15"><b>- </b></text>
+<text top="668" left="127" width="25" height="14" font="15"><b>3.0 </b></text>
+<text top="668" left="201" width="154" height="14" font="15"><b>In Process Inspection </b></text>
+<text top="710" left="127" width="23" height="14" font="16">3.1 </text>
+<text top="710" left="204" width="150" height="14" font="16">Punching &amp; Finishing </text>
+<text top="710" left="432" width="140" height="14" font="15"><b>Finish &amp; Dimension </b></text>
+<text top="710" left="657" width="43" height="14" font="15"><b>100% </b></text>
+<text top="710" left="761" width="121" height="14" font="16">Inspection Report </text>
+<text top="710" left="950" width="10" height="14" font="16">- </text>
+<text top="710" left="1060" width="13" height="14" font="16">H </text>
+<text top="710" left="1174" width="9" height="14" font="16">- </text>
+<text top="788" left="57" width="178" height="10" font="13">Format No. 8-00-0001-F7 Rev. 0 </text>
+<text top="787" left="1059" width="185" height="10" font="13">Copyright EIL — All rights reserved </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="17" size="15" family="Courier" color="#000000"/>
+	<fontspec id="18" size="8" family="Helvetica" color="#000000"/>
+	<fontspec id="19" size="19" family="Helvetica" color="#000000"/>
+	<fontspec id="20" size="21" family="Helvetica" color="#000000"/>
+	<fontspec id="21" size="5" family="Times" color="#000000"/>
+	<fontspec id="22" size="17" family="Times" color="#000000"/>
+<text top="-763" left="1008" width="9" height="12" font="17"> </text>
+<text top="-763" left="1700" width="9" height="12" font="17"> </text>
+<text top="-763" left="3008" width="9" height="12" font="17"> </text>
+<text top="97" left="181" width="80" height="15" font="6">ENGINEERS </text>
+<text top="110" left="181" width="106" height="15" font="6">INDIA LIMITED </text>
+<text top="126" left="182" width="92" height="7" font="18">IA Govt of Ind. Undettalong) </text>
+<text top="90" left="539" width="219" height="13" font="3"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="108" left="631" width="36" height="13" font="3"><b>FOR </b></text>
+<text top="124" left="610" width="76" height="13" font="3"><b>GASKETS </b></text>
+<text top="86" left="1023" width="189" height="10" font="11"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="100" left="93" width="49" height="10" font="11"><b>k31 1.1 </b></text>
+<text top="110" left="64" width="18" height="17" font="19">g.</text>
+<text top="108" left="79" width="79" height="19" font="20">zir Wes </text>
+<text top="126" left="84" width="68" height="5" font="21">NIPPI eiV8A7 431,FIUS41) </text>
+<text top="111" left="1058" width="121" height="13" font="3"><b>6-81-0008 Rev. 5 </b></text>
+<text top="135" left="1086" width="65" height="10" font="13">Page 4 of 5 </text>
+<text top="197" left="120" width="24" height="15" font="14">SL </text>
+<text top="217" left="116" width="33" height="15" font="12"><b>NO. </b></text>
+<text top="207" left="193" width="156" height="15" font="14">STAGE / ACTIVITY </text>
+<text top="207" left="412" width="166" height="15" font="14">CHARACTERISTICS </text>
+<text top="198" left="625" width="91" height="15" font="12"><b>QUANTUM </b></text>
+<text top="216" left="624" width="93" height="15" font="12"><b>OF CHECK </b></text>
+<text top="207" left="776" width="76" height="15" font="12"><b>RECORD </b></text>
+<text top="187" left="963" width="194" height="15" font="12"><b>SCOPE OF INSPECTION </b></text>
+<text top="221" left="929" width="37" height="15" font="12"><b>SUB </b></text>
+<text top="240" left="904" width="88" height="15" font="12"><b>SUPPLIER </b></text>
+<text top="230" left="1017" width="87" height="15" font="12"><b>SUPPLIER </b></text>
+<text top="230" left="1133" width="77" height="15" font="12"><b>EIL/TPIA </b></text>
+<text top="278" left="120" width="24" height="15" font="14">3.2 </text>
+<text top="259" left="190" width="162" height="15" font="14">Heat Treatment for RTJ </text>
+<text top="278" left="243" width="57" height="15" font="14">Gaskets </text>
+<text top="297" left="205" width="120" height="15" font="14">• (As applicable) </text>
+<text top="278" left="422" width="145" height="15" font="14">Time <i>&amp; </i>Temperature </text>
+<text top="278" left="649" width="43" height="15" font="14">100% </text>
+<text top="278" left="781" width="67" height="15" font="14">HT Chart </text>
+<text top="278" left="1052" width="16" height="15" font="14">H </text>
+<text top="278" left="1164" width="15" height="15" font="14">R </text>
+<text top="328" left="120" width="24" height="15" font="14">3.3 </text>
+<text top="328" left="241" width="62" height="15" font="14">Marking </text>
+<text top="319" left="397" width="196" height="15" font="14">Size, Rating, Material, Color </text>
+<text top="338" left="407" width="175" height="15" font="14">Coding etc., as applicable </text>
+<text top="328" left="649" width="43" height="15" font="14">100% </text>
+<text top="328" left="772" width="85" height="15" font="14">Test Record </text>
+<text top="328" left="942" width="11" height="15" font="14">- </text>
+<text top="328" left="1052" width="16" height="15" font="14">H </text>
+<text top="370" left="120" width="24" height="15" font="14">4.0 </text>
+<text top="370" left="201" width="129" height="15" font="14">.  <b>Final Inspection </b></text>
+<text top="569" left="120" width="22" height="15" font="14">4.1 </text>
+<text top="432" left="179" width="183" height="15" font="14">Final Visual, Dimension &amp; </text>
+<text top="451" left="244" width="54" height="15" font="14">Testing </text>
+<text top="422" left="415" width="124" height="15" font="14">•  Visual checks </text>
+<text top="441" left="443" width="126" height="15" font="14">including marking </text>
+<text top="460" left="443" width="43" height="15" font="14">check </text>
+<text top="480" left="415" width="148" height="15" font="14">•  Dimension check </text>
+<text top="450" left="650" width="40" height="15" font="14">100`)/0 </text>
+<text top="450" left="754" width="122" height="15" font="14">Inspection Report </text>
+<text top="450" left="942" width="10" height="15" font="14">- </text>
+<text top="450" left="1052" width="15" height="15" font="14">H </text>
+<text top="450" left="1164" width="12" height="15" font="14">R </text>
+<text top="569" left="167" width="207" height="15" font="14">Hardness test for RTJ Gaskets </text>
+<text top="569" left="444" width="102" height="15" font="14">Ring Hardness </text>
+<text top="540" left="637" width="66" height="15" font="14">10% (Per </text>
+<text top="560" left="613" width="115" height="15" font="14">size/Rating/Heat </text>
+<text top="578" left="617" width="107" height="15" font="14">/Heat treatment </text>
+<text top="598" left="657" width="28" height="15" font="14">lot) </text>
+<text top="569" left="776" width="76" height="15" font="14">Test report </text>
+<text top="569" left="942" width="9" height="15" font="14">- </text>
+<text top="568" left="1052" width="15" height="15" font="14">H </text>
+<text top="568" left="1164" width="13" height="15" font="14">R </text>
+<text top="669" left="178" width="186" height="15" font="14">Compressibility, Recovery, </text>
+<text top="688" left="183" width="175" height="15" font="14">Sealability tests for Spiral </text>
+<text top="707" left="217" width="109" height="15" font="14">Wound Gaskets </text>
+<text top="678" left="401" width="186" height="15" font="14">Compressibility, Recovery, </text>
+<text top="697" left="457" width="75" height="15" font="14">Sealability </text>
+<text top="678" left="641" width="58" height="15" font="14">One per </text>
+<text top="697" left="623" width="95" height="15" font="14">size/rating/lot </text>
+<text top="687" left="776" width="76" height="15" font="14">Test report </text>
+<text top="687" left="942" width="10" height="15" font="14">- </text>
+<text top="686" left="1052" width="15" height="15" font="14">H </text>
+<text top="686" left="1164" width="12" height="15" font="14">R </text>
+<text top="787" left="50" width="178" height="10" font="13">Format No. 8-00-0001-F7 Rev. 0 </text>
+<text top="786" left="1052" width="185" height="10" font="13">Copyright EIL — All rights reserved </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="23" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="24" size="8" family="Times" color="#000000"/>
+	<fontspec id="25" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="26" size="9" family="Helvetica" color="#000000"/>
+<text top="98" left="82" width="38" height="12" font="23"><b>0 </b></text>
+<text top="97" left="122" width="18" height="12" font="3"><b>el </b></text>
+<text top="98" left="180" width="80" height="12" font="3"><b>ENGINEERS </b></text>
+<text top="112" left="96" width="130" height="12" font="3"><b>lakitegWINDIA </b></text>
+<text top="111" left="225" width="59" height="15" font="14">LIMITED </text>
+<text top="124" left="80" width="71" height="7" font="24">INFMN i'VErR2 ‘151.19t1.11 </text>
+<text top="127" left="180" width="9" height="6" font="25">IA </text>
+<text top="125" left="190" width="83" height="8" font="26">Govt of Ind. UndefteloN0 </text>
+<text top="91" left="538" width="219" height="12" font="3"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="108" left="630" width="36" height="12" font="3"><b>FOR </b></text>
+<text top="125" left="609" width="77" height="12" font="3"><b>GASKETS </b></text>
+<text top="84" left="1022" width="189" height="12" font="3"><b>STANDARD SPECIFICATION No. </b></text>
+<text top="112" left="1057" width="121" height="12" font="3"><b>6-81-0008 Rev. 5 </b></text>
+<text top="136" left="1084" width="65" height="10" font="13">Page 5 of 5 </text>
+<text top="197" left="119" width="24" height="15" font="12"><b>SL </b></text>
+<text top="216" left="115" width="33" height="15" font="14">NO. </text>
+<text top="206" left="192" width="156" height="15" font="12"><b>STAGE / ACTIVITY </b></text>
+<text top="207" left="411" width="165" height="15" font="12"><b>CHARACTERISTICS </b></text>
+<text top="198" left="623" width="92" height="15" font="12"><b>QUANTUM </b></text>
+<text top="216" left="623" width="93" height="15" font="12"><b>OF CHECK </b></text>
+<text top="207" left="776" width="74" height="15" font="14">RECORD </text>
+<text top="188" left="961" width="194" height="15" font="12"><b>SCOPE OF INSPECTION </b></text>
+<text top="221" left="928" width="37" height="15" font="12"><b>SUB </b></text>
+<text top="240" left="903" width="87" height="15" font="12"><b>SUPPLIER </b></text>
+<text top="231" left="1015" width="86" height="15" font="12"><b>SUPPLIER </b></text>
+<text top="231" left="1131" width="77" height="15" font="12"><b>EIL/TPIA </b></text>
+<text top="272" left="118" width="25" height="15" font="14">4.2 </text>
+<text top="272" left="179" width="181" height="15" font="14">PMI Check (as applicable) </text>
+<text top="273" left="436" width="115" height="15" font="14">Chemical Check </text>
+<text top="263" left="630" width="78" height="15" font="14">As per EIL </text>
+<text top="282" left="616" width="105" height="15" font="14">Spec: 6-81-001 </text>
+<text top="273" left="752" width="122" height="15" font="14">Inspection Report </text>
+<text top="273" left="941" width="10" height="15" font="14">- </text>
+<text top="273" left="1050" width="17" height="15" font="14">H </text>
+<text top="273" left="1162" width="16" height="15" font="14">R </text>
+<text top="324" left="118" width="25" height="15" font="14">4.3 </text>
+<text top="315" left="178" width="183" height="15" font="14">Submission of Documents/ </text>
+<text top="334" left="232" width="74" height="15" font="14">Certificate </text>
+<text top="306" left="403" width="181" height="15" font="14">Performance Qualification </text>
+<text top="324" left="402" width="182" height="15" font="14">Test ( applicable for Spiral </text>
+<text top="344" left="437" width="112" height="15" font="14">wound Gaskets) </text>
+<text top="315" left="620" width="98" height="15" font="14">As per ASME </text>
+<text top="334" left="643" width="52" height="15" font="12"><b>B16.20  </b></text>
+<text top="325" left="759" width="109" height="15" font="14">Type test report </text>
+<text top="325" left="941" width="11" height="15" font="14">- </text>
+<text top="325" left="1050" width="16" height="15" font="14">H </text>
+<text top="325" left="1132" width="76" height="15" font="14">R (Note-3) </text>
+<text top="368" left="118" width="25" height="15" font="14">5.0 </text>
+<text top="368" left="237" width="65" height="15" font="14">Painting </text>
+<text top="409" left="118" width="22" height="15" font="14">5.1 </text>
+<text top="399" left="183" width="173" height="15" font="14">Rust Preventive &amp; Color </text>
+<text top="418" left="197" width="143" height="15" font="14">Coding as applicable </text>
+<text top="399" left="402" width="182" height="15" font="14">Visual &amp; Color Coding as </text>
+<text top="418" left="457" width="73" height="15" font="14">applicable </text>
+<text top="409" left="648" width="41" height="15" font="14">100°/0 </text>
+<text top="409" left="752" width="121" height="15" font="14">Inspection Report </text>
+<text top="409" left="941" width="10" height="15" font="14">- </text>
+<text top="409" left="1050" width="15" height="15" font="14">H </text>
+<text top="409" left="1165" width="10" height="15" font="14">- </text>
+<text top="453" left="118" width="24" height="15" font="14">6.0 </text>
+<text top="453" left="192" width="154" height="15" font="12"><b>Documentation &amp; IC </b></text>
+<text top="501" left="118" width="23" height="15" font="14">6.1 </text>
+<text top="502" left="197" width="143" height="15" font="14">Documentation &amp; IC </text>
+<text top="483" left="416" width="154" height="15" font="14">Review of test reports, </text>
+<text top="502" left="391" width="204" height="15" font="14">Inspection documents &amp; Issue </text>
+<text top="521" left="473" width="39" height="15" font="14">of IC </text>
+<text top="501" left="648" width="39" height="15" font="14">100%</text>
+<text top="511" left="802" width="20" height="15" font="14">IC  </text>
+<text top="492" left="749" width="126" height="15" font="14">Supplier Records / </text>
+<text top="502" left="941" width="10" height="15" font="14">- </text>
+<text top="502" left="1049" width="17" height="15" font="14">H </text>
+<text top="502" left="1161" width="16" height="15" font="14">H </text>
+<text top="563" left="109" width="1069" height="15" font="12"><b>Legend: H- </b>Hold (Do not proceed without approval), P-Perform, RW - Random Witness (As specified or 10% ( min.1 no. of each size and type of Bulk item)), </text>
+<text top="582" left="110" width="551" height="15" font="14">R-Review, W-Witness (Give due notice, work may proceed after scheduled date). </text>
+<text top="624" left="101" width="156" height="15" font="12"><b>Notes (as applicable): </b></text>
+<text top="643" left="102" width="1109" height="15" font="14">1.  This document describes the generic test requirements. Any additional test or Inspection scope if specified in contract documents shall also be applicable. (unless </text>
+<text top="662" left="133" width="160" height="15" font="14">otherwise agreed upon) </text>
+<text top="680" left="101" width="936" height="15" font="14">2.  Acceptance Norms for all the activities shall be as per PO/PR/STANDARDS referred therein /Job Specification /Approved Documents. </text>
+<text top="699" left="101" width="1047" height="15" font="14">3.  Performance qualification test of Spiral wound gaskets shall be carried out under reputed Third Party Inspection Agency(TPIA) arranged by the supplier </text>
+<text top="787" left="48" width="179" height="10" font="13">Format No. 8-00-0001-F7 Rev. 0 </text>
+<text top="786" left="1050" width="55" height="10" font="13">Copyright </text>
+<text top="784" left="1105" width="30" height="12" font="3"><b>EIL — </b></text>
+<text top="786" left="1136" width="99" height="10" font="13">All rights reserved </text>
+</page>
+<outline>
+<item page="1">Page 1</item>
+<item page="2">Page 2</item>
+<item page="3">Page 3</item>
+<item page="4">Page 4</item>
+<item page="5">Page 5</item>
+</outline>
+</pdf2xml>

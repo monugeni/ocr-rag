@@ -1,0 +1,747 @@
+[
+  {
+    "heading": "(IN CASE BIDDER SEEKING BENEFIT OF PPP-MAKE IN INDIA)",
+    "level": 2,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > (IN CASE BIDDER SEEKING BENEFIT OF PPP-MAKE IN INDIA)",
+    "seq": 0,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "If vendor opt to submit the",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > If vendor opt to submit the",
+    "seq": 1,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "submitted along with the",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > submitted along with the",
+    "seq": 2,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "Cover letter and checklist",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > Cover letter and checklist",
+    "seq": 3,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "attached as",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > attached as",
+    "seq": 4,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "Annexure II and Annexure III.",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > Annexure II and Annexure III.",
+    "seq": 5,
+    "confidence": 0.633,
+    "score": 5.7,
+    "reasons": [
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "ANNEXURE - II",
+    "level": 1,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE - II",
+    "seq": 6,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "BANK GUARANTEE COVER LETTER",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE - II > BANK GUARANTEE COVER LETTER",
+    "seq": 7,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "8 Vendor Reference:",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE - II > 8 Vendor Reference:",
+    "seq": 8,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "ANNEXURE - III",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE - III",
+    "seq": 9,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 29
+  },
+  {
+    "heading": "ANNEXURE",
+    "level": 1,
+    "page_num": 30,
+    "page_start": 30,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE",
+    "seq": 10,
+    "confidence": 0.711,
+    "score": 6.4,
+    "reasons": [
+      "appendix",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 34
+  },
+  {
+    "heading": "i. Assessment during bidding stage",
+    "level": 2,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE > i. Assessment during bidding stage",
+    "seq": 11,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "ii. Assessment during work execution stage",
+    "level": 2,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE > ii. Assessment during work execution stage",
+    "seq": 12,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "iii. Final Safety Assessment",
+    "level": 2,
+    "page_num": 36,
+    "page_start": 36,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE > iii. Final Safety Assessment",
+    "seq": 13,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 36
+  },
+  {
+    "heading": "iv. Holiday listing",
+    "level": 2,
+    "page_num": 36,
+    "page_start": 36,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE > iv. Holiday listing",
+    "seq": 14,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 36
+  },
+  {
+    "heading": "ANNEXURE 1",
+    "level": 1,
+    "page_num": 37,
+    "page_start": 37,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 1",
+    "seq": 15,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 43
+  },
+  {
+    "heading": "2 HSE manual",
+    "level": 2,
+    "page_num": 44,
+    "page_start": 44,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 1 > 2 HSE manual",
+    "seq": 16,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 44
+  },
+  {
+    "heading": "ANNEXURE 3",
+    "level": 1,
+    "page_num": 45,
+    "page_start": 45,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 3",
+    "seq": 17,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 48
+  },
+  {
+    "heading": "ANNEXURE 4",
+    "level": 1,
+    "page_num": 49,
+    "page_start": 49,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4",
+    "seq": 18,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 49
+  },
+  {
+    "heading": "CONTRACTORS SAFETY PERFORMANCE REPORT",
+    "level": 2,
+    "page_num": 49,
+    "page_start": 49,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > CONTRACTORS SAFETY PERFORMANCE REPORT",
+    "seq": 19,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 49
+  },
+  {
+    "heading": "10 Standard of housekeeping Very good Satisfactory",
+    "level": 2,
+    "page_num": 49,
+    "page_start": 49,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > 10 Standard of housekeeping Very good Satisfactory",
+    "seq": 20,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p49: top-level decimal jump 2 -> 10"
+    ],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 50
+  },
+  {
+    "heading": "CONTRACTORS SAFETY PERFORMANCE",
+    "level": 2,
+    "page_num": 51,
+    "page_start": 51,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > CONTRACTORS SAFETY PERFORMANCE",
+    "seq": 21,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 51
+  },
+  {
+    "heading": "2 Vendor code",
+    "level": 2,
+    "page_num": 51,
+    "page_start": 51,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > 2 Vendor code",
+    "seq": 22,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 51
+  },
+  {
+    "heading": "ANNEXURE 6",
+    "level": 1,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6",
+    "seq": 23,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 57
+  },
+  {
+    "heading": "i. Assessment during bidding stage",
+    "level": 2,
+    "page_num": 58,
+    "page_start": 58,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6 > i. Assessment during bidding stage",
+    "seq": 24,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 58
+  },
+  {
+    "heading": "ii. Assessment during work execution stage",
+    "level": 2,
+    "page_num": 58,
+    "page_start": 58,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6 > ii. Assessment during work execution stage",
+    "seq": 25,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 58
+  },
+  {
+    "heading": "iii. Final Safety Assessment",
+    "level": 2,
+    "page_num": 59,
+    "page_start": 59,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6 > iii. Final Safety Assessment",
+    "seq": 26,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 59
+  },
+  {
+    "heading": "iv. Holiday listing",
+    "level": 2,
+    "page_num": 59,
+    "page_start": 59,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6 > iv. Holiday listing",
+    "seq": 27,
+    "confidence": 0.422,
+    "score": 3.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 59
+  },
+  {
+    "heading": "ANNEXURE 1",
+    "level": 1,
+    "page_num": 60,
+    "page_start": 60,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 1",
+    "seq": 28,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 66
+  },
+  {
+    "heading": "2 HSE manual",
+    "level": 2,
+    "page_num": 67,
+    "page_start": 67,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 1 > 2 HSE manual",
+    "seq": 29,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 67
+  },
+  {
+    "heading": "ANNEXURE 3",
+    "level": 1,
+    "page_num": 68,
+    "page_start": 68,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 3",
+    "seq": 30,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 71
+  },
+  {
+    "heading": "ANNEXURE 4",
+    "level": 1,
+    "page_num": 72,
+    "page_start": 72,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4",
+    "seq": 31,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 72
+  },
+  {
+    "heading": "10 Standard of housekeeping Very good Satisfactory",
+    "level": 2,
+    "page_num": 72,
+    "page_start": 72,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > 10 Standard of housekeeping Very good Satisfactory",
+    "seq": 32,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p72: top-level decimal jump 2 -> 10"
+    ],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 73
+  },
+  {
+    "heading": "2 Vendor code",
+    "level": 2,
+    "page_num": 74,
+    "page_start": 74,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 4 > 2 Vendor code",
+    "seq": 33,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 74
+  },
+  {
+    "heading": "ANNEXURE 6",
+    "level": 1,
+    "page_num": 75,
+    "page_start": 75,
+    "breadcrumb": "TITLE OF TENDER: ……………………………………………………………………………… > ANNEXURE 6",
+    "seq": 34,
+    "confidence": 0.467,
+    "score": 4.2,
+    "reasons": [
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TITLE OF TENDER: ………………………………………………………………………………",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 80
+  }
+]

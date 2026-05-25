@@ -1,0 +1,25 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091922.pdf",
+  "document_title": "TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+  "document_context": {
+    "title": "TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+    "path_parts": [],
+    "source": "heading_fallback"
+  },
+  "page_count": 1,
+  "body_font_size": 17.0,
+  "heading_count": 1,
+  "toc_entry_count": 0,
+  "chunk_count": 9,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 1,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 27,
+      "form": 2
+    }
+  }
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "page_num": 4,
+    "line_index": 8,
+    "top": 136.0,
+    "left": 322.0,
+    "text": "SCHEDULE OF CONNECTION",
+    "level": 1,
+    "score": 9.7,
+    "confidence": 0.99,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "centered",
+      "large_font"
+    ],
+    "numbering": "SCHEDULE OF",
+    "scheme": "appendix",
+    "breadcrumb": "TYPE—III SECTION 3-3 > SCHEDULE OF CONNECTION",
+    "toc_match": null,
+    "warnings": []
+  }
+]

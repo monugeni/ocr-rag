@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 17,
+    "top": 653.0,
+    "left": 108.0,
+    "text": "5 Undertaking:",
+    "level": 1,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "5",
+    "scheme": "decimal",
+    "breadcrumb": "Undertaking for Creation of Custom Bid for Services required on GeM > 5 Undertaking:",
+    "toc_match": null,
+    "warnings": []
+  }
+]

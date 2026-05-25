@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/BID-QUALIFICATION CRITERIA (BQC).pdf",
+  "document_title": "BID QUALIFICATION CRITERIA (BQC)",
+  "document_context": {
+    "title": "BID QUALIFICATION CRITERIA (BQC)",
+    "path_parts": [],
+    "source": "filename_fallback"
+  },
+  "page_count": 6,
+  "body_font_size": 18.0,
+  "heading_count": 2,
+  "toc_entry_count": 0,
+  "chunk_count": 36,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 6,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 2,
+    "line_role_counts": {
+      "running": 12,
+      "body": 240,
+      "caption": 2,
+      "page_number": 1
+    }
+  }
+}

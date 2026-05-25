@@ -1,0 +1,62 @@
+# 7 17 0205 Rev 7
+
+Context: `7 17 0205 Rev 7`
+
+Source: `/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-17-0205 Rev 7.pdf`
+Pages: 2
+Headings: 0
+Chunks: 8
+
+## Headings
+
+- No headings detected
+
+## Chunk Samples
+
+### C1 p1-1 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: 45 ONLY_
+
+m ANCHOR SPACING AND TYPES STANDARD No. g@m@%@.ﬁ,ﬁf&#ﬁ%ﬁ?@ FOR SINGLE LAYER 7-17-0205 Rev.7 R i Gan of o et CASTABLE LINING . PLASTIC CAP @ _ROD 0 X} PLASTIC 2a =14 ~| 52 g & « g Rig g CASING PLATE IMPORTANT 0 / V5 <2-5|Dr-:s kal3 @ ONLY L 2 MIN. 20 E R 5 ¥ 'V
+
+### C2 p1-1 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: IYPE Y1 — FOOTED Y_
+
+2 & IYPE Y1 — FOOTED Y
+
+### C3 p1-1 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: 5200 FOOTED 'Y" 3_
+
+TABLE 1: ANCHOR TYPE REFRACTORY | ANCHOR THICKNESS | HEIGHT | ANCHOR TYPE |DIA ¢ A = 75-100 FOR T<150 - " A = 125 FOR T>150 50 TO 75 (,Lﬁﬁ%) PLAIN V' 6 MINIMUM _EDGE 'i'__ 75-100 T-25 | PLAN V' 6 DISTANCE 101-125 PLAIN V' 6 126-150 CORRUGATED V'] 6 151-175 COR
+
+### C4 p1-1 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: Copyright EIL - All fights reserved_
+
+JABLE 2. ANCHOR PITCH DETAILS ANCHOR PITCH DESCRIPTION ANCHOR SPACING/ PITCH FOR ROOF, X=1.5T,225<x<300 X=ANCHOR PITCH | STAGGERED SPACING/ b T=REFRACTORY | INDIVIDUAL ANCHORS N THICKNESS 45" ORIENTATION =] FOR WALL, X=2T, 250<x<300 TYPICAL ANCHOR SPACING FOR 
+
+### C5 p2-2 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: PE—V._
+
+STANDARD No. SSifeered ENGINEERS ANCHOR'SPACING AND TYPES mm@wmﬁwn@ FOR SINGLE LAYER e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7 . iy 300 s s CONVECTION TUBE ¢ CoreeL | ; r —— ‘L mp.) = ¢ 1u TUBE. & TUBE i W \ & Ri AN RS PITCH CORBEL PROJECTION A (HALF O
+
+### C6 p2-2 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: (EXCEPT THE CORBEL ANCHOR ROW) SHALL BE AS PER_
+
+RAL_NOT 1. ALL DIMENSIONS ARE IN MILLIMETRES. 10. THE ANCHOR SPACING (X) SHALL BE FOR ANCHOR MATERIAL SEE ARRANGEMENT DRAWINGS. OBTAINED BY MULTIPLYING THE CASTABLE THICKNESS (T) WITH THE VARIOUS FACTORS THE TOLERANCE ON ANCHOR SPACING SHALL BE +6. MENTIONED I
+
+### C7 p2-2 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: 3mm THK.)._
+
+TABLE-2. 6. DETAILS OF CORRUCATED V & Y LUG SHALL BE DEVELOPED BY THE CONTRACTOR & REVIEWED BY EIL UON IN ARRANGEMENT DRAWINGS. 7. MINOR VARIATION IN SPACING MAY BE REQUIRED AT OPENINGS, TERMINATIONS ETC. HOWEVER NO OF ANCHORS PER SQ. METER SHALL BE WITHIN THE
+
+### C8 p2-2 [drawing]
+
+_Breadcrumb: 7 17 0205 Rev 7 > Drawing/title block: Copyright EIL - All rights r_
+
+COMPANION STANDARDS:— SEE SHT. 1 ‘g"y 7 10062025 REVISED & ISSUED AS STANDARD MMB A&SIRF PG 7~ MN - 6 20032020 REVISED & ISSUED AS STANDARD ss RP/IPS MK 7\ RKT Row Propared Checked Stds. Commifiee Sids. Bureau N Date Purpose N . Convenor Chairman__ o v 4 Appro

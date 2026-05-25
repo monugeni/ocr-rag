@@ -1,0 +1,211 @@
+[
+  {
+    "heading": "NEFT PAYMENT",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > NEFT PAYMENT",
+    "seq": 0,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "11 BID REJECTION CRITERIA FOR TENDER:",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > 11 BID REJECTION CRITERIA FOR TENDER:",
+    "seq": 1,
+    "confidence": 0.867,
+    "score": 7.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "ATTACHMENT s",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > ATTACHMENT s",
+    "seq": 2,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "appendix",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "1 General Conditions of Contract (GCC).",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > ATTACHMENT s > 1 General Conditions of Contract (GCC).",
+    "seq": 3,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "11 SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > ATTACHMENT s > 11 SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP",
+    "seq": 4,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [
+      "p12: top-level decimal jump 1 -> 11"
+    ],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "21 JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP",
+    "level": 2,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > ATTACHMENT s > 21 JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP",
+    "seq": 5,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [
+      "p12: top-level decimal jump 11 -> 21"
+    ],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "DESIGN, DETAILED ENGINEERING, SUPPLY AND INSTALLATION OF EQUIPMENTS FOR THE _________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > DESIGN, DETAILED ENGINEERING, SUPPLY AND INSTALLATION OF EQUIPMENTS FOR THE _________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "seq": 6,
+    "confidence": 0.99,
+    "score": 10.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "_________________________________________________________________ Installation of Equipment at site as detailed in the scope of work.",
+    "level": 1,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > _________________________________________________________________ Installation of Equipment at site as detailed in the scope of work.",
+    "seq": 7,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "_________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "level": 2,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater > _________________________________________________________________ Installation of Equipment at site as detailed in the scope of work. > _________________________________________________________________ JOB AS DETAILED IN THE SCOPE OF WORK.",
+    "seq": 8,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "- Open Tender for \" #LSTK Contract for CDU-3 F-101 Crude Heater",
+      "path_parts": [],
+      "source": "subject"
+    },
+    "page_end": 39
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "page_num": 2,
+    "line_index": 4,
+    "top": 163.0,
+    "left": 289.0,
+    "text": "SCHEDULE 1 Manadatory: Yes",
+    "level": 1,
+    "score": 4.2,
+    "confidence": 0.467,
+    "reasons": [
+      "appendix"
+    ],
+    "numbering": "SCHEDULE 1",
+    "scheme": "appendix",
+    "breadcrumb": "2500024832 HB 06600 3 Basic Information Of Tender > SCHEDULE 1 Manadatory: Yes",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 2,
+    "line_index": 8,
+    "top": 223.0,
+    "left": 289.0,
+    "text": "SCHEDULE 2 Manadatory: Yes",
+    "level": 1,
+    "score": 4.2,
+    "confidence": 0.467,
+    "reasons": [
+      "appendix"
+    ],
+    "numbering": "SCHEDULE 2",
+    "scheme": "appendix",
+    "breadcrumb": "2500024832 HB 06600 3 Basic Information Of Tender > SCHEDULE 2 Manadatory: Yes",
+    "toc_match": null,
+    "warnings": []
+  }
+]

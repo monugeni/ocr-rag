@@ -1,0 +1,782 @@
+[
+  {
+    "heading": "TYPE V1 — PLAIN V",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > TYPE V1 — PLAIN V",
+    "seq": 0,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "45 ONLY",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 45 ONLY",
+    "seq": 1,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "all_caps_short",
+      "large_font",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "2 &",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 2 &",
+    "seq": 2,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "IYPE Y1 — FOOTED Y",
+    "level": 4,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 2 & > IYPE Y1 — FOOTED Y",
+    "seq": 3,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "REFRACTORY | ANCHOR",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > REFRACTORY | ANCHOR",
+    "seq": 4,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "A = 75-100 FOR T<150 - \"",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > A = 75-100 FOR T<150 - \"",
+    "seq": 5,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "DISTANCE 101-125 PLAIN V' 6",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > DISTANCE 101-125 PLAIN V' 6",
+    "seq": 6,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "126-150 CORRUGATED V'] 6",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 126-150 CORRUGATED V'] 6",
+    "seq": 7,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "151-175 CORRUGATED \"V'| 8",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 151-175 CORRUGATED \"V'| 8",
+    "seq": 8,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "176-200 CORRUGATED V| 8",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 176-200 CORRUGATED V| 8",
+    "seq": 9,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "5200 FOOTED 'Y\" 3",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 5200 FOOTED 'Y\" 3",
+    "seq": 10,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "JABLE 2. ANCHOR PITCH DETAILS",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > 5200 FOOTED 'Y\" 3 > JABLE 2. ANCHOR PITCH DETAILS",
+    "seq": 11,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "b T=REFRACTORY | INDIVIDUAL ANCHORS N",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N",
+    "seq": 12,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "=] FOR WALL, X=2T, 250<x<300",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > =] FOR WALL, X=2T, 250<x<300",
+    "seq": 13,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "ANCHOR SPACING AND TYPES FOR DUAL LAYER 7-17-206",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > ANCHOR SPACING AND TYPES FOR DUAL LAYER 7-17-206",
+    "seq": 14,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "CASTABLE LINING",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > CASTABLE LINING",
+    "seq": 15,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208",
+    "seq": 16,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "BLOCK INSULATION “ ,}’",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "@ ONLY L 2 > BLOCK INSULATION “ ,}’",
+    "seq": 17,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7",
+    "seq": 18,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "iy 300",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > iy 300",
+    "seq": 19,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "s s CONVECTION TUBE",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > iy 300 > s s CONVECTION TUBE",
+    "seq": 20,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "¢ CoreeL | ; r —— ‘L",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > ¢ CoreeL | ; r —— ‘L",
+    "seq": 21,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "CORBEL PROJECTION A (HALF OF TUBE HORIZONTAL",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > CORBEL PROJECTION A (HALF OF TUBE HORIZONTAL",
+    "seq": 22,
+    "confidence": 0.99,
+    "score": 14.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "/- PITCH UON IN GADs)",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > CORBEL PROJECTION A (HALF OF TUBE HORIZONTAL > /- PITCH UON IN GADs)",
+    "seq": 23,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "5\\ 2-sIDES P",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 5\\ 2-sIDES P",
+    "seq": 24,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "66 ROD FOR CORBEL 4 PROJECTION ‘E’ UP TO = 114 AND 8¢ ABOVE 114 S",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 66 ROD FOR CORBEL 4 PROJECTION ‘E’ UP TO = 114 AND 8¢ ABOVE 114 S",
+    "seq": 25,
+    "confidence": 0.99,
+    "score": 23.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "numbered_1",
+      "very_large_font"
+    ],
+    "warnings": [
+      "p2: top-level decimal jump 2 -> 66"
+    ],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "e 125 < DIM. C < 25",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 66 ROD FOR CORBEL 4 PROJECTION ‘E’ UP TO = 114 AND 8¢ ABOVE 114 S > e 125 < DIM. C < 25",
+    "seq": 26,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "1 ALL DIMENSIONS ARE IN MILLIMETRES.",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 1 ALL DIMENSIONS ARE IN MILLIMETRES.",
+    "seq": 27,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "10 THE ANCHOR SPACING (X) SHALL BE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 10 THE ANCHOR SPACING (X) SHALL BE",
+    "seq": 28,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p2: top-level decimal jump 1 -> 10"
+    ],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "ERESEAN MINIMUM / MAXIMUM LIMITS PROVIDED IN THIS",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > ERESEAN MINIMUM / MAXIMUM LIMITS PROVIDED IN THIS",
+    "seq": 29,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "6 DETAILS OF CORRUCATED V & Y LUG SHALL BE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 6 DETAILS OF CORRUCATED V & Y LUG SHALL BE",
+    "seq": 30,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "7 MINOR VARIATION IN SPACING MAY BE REQUIRED AT",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 7 MINOR VARIATION IN SPACING MAY BE REQUIRED AT",
+    "seq": 31,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "8 SS—ANCHORS SHALL BE SUPPLIED IN SOLUTION",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 8 SS—ANCHORS SHALL BE SUPPLIED IN SOLUTION",
+    "seq": 32,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "9 PROVIDE PLASTIC CAP ON ANCHOR TIPS (13mm LONG & 3mm THK.).",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 9 PROVIDE PLASTIC CAP ON ANCHOR TIPS (13mm LONG & 3mm THK.).",
+    "seq": 33,
+    "confidence": 0.544,
+    "score": 4.9,
+    "reasons": [
+      "left_aligned",
+      "very_large_font",
+      "wrapped_heading"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "7 10062025 REVISED & ISSUED AS STANDARD MMB",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 7 10062025 REVISED & ISSUED AS STANDARD MMB",
+    "seq": 34,
+    "confidence": 0.978,
+    "score": 8.8,
+    "reasons": [
+      "all_caps_short",
+      "large_font",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "RP/IPS MK 7\\ RKT",
+    "level": 4,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "@ ONLY L 2 > 7 10062025 REVISED & ISSUED AS STANDARD MMB > RP/IPS MK 7\\ RKT",
+    "seq": 35,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "@ ONLY L 2",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  }
+]

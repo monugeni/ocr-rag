@@ -1,0 +1,113 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 5,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "VALVES > Abbreviations",
+    "seq": 0,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VALVES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 In Process Inspection",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "VALVES > 3.0 In Process Inspection",
+    "seq": 1,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VALVES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.0 Painting",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "VALVES > 5.0 Painting",
+    "seq": 2,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VALVES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "6.0 PACKING & PROTECTION",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "VALVES > 6.0 PACKING & PROTECTION",
+    "seq": 3,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VALVES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "NOTES (As applicable)",
+    "level": 5,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "VALVES > 6.0 PACKING & PROTECTION > NOTES (As applicable)",
+    "seq": 4,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "VALVES",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

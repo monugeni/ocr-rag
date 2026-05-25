@@ -1,0 +1,347 @@
+[
+  {
+    "heading": "-125THK. INSUL. CASTABLE SAME AS THAT",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > -125THK. INSUL. CASTABLE SAME AS THAT",
+    "seq": 0,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "8 GAP TO BE TIGHTLY PACKED WITI-1",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 8 GAP TO BE TIGHTLY PACKED WITI-1",
+    "seq": 1,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "Amtmlitzkagss.4",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > Amtmlitzkagss.4",
+    "seq": 2,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "75 FLOOR INSU LATIN",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN",
+    "seq": 3,
+    "confidence": 0.911,
+    "score": 8.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "warnings": [
+      "p1: top-level decimal jump 8 -> 75"
+    ],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "F. BOARD (1260 GRADE",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > F. BOARD (1260 GRADE",
+    "seq": 4,
+    "confidence": 0.689,
+    "score": 6.2,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "centered",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "I. ,,",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,,",
+    "seq": 5,
+    "confidence": 0.867,
+    "score": 7.8,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "Y ANCHOR AT 150 MAX.",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,, > Y ANCHOR AT 150 MAX.",
+    "seq": 6,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "GENERAL NOTES:-",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,, > GENERAL NOTES:-",
+    "seq": 7,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "short_unshaped"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "5 R.F.B. OVERLAY IS REQUIRED WHEN CALLED",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 5 R.F.B. OVERLAY IS REQUIRED WHEN CALLED",
+    "seq": 8,
+    "confidence": 0.789,
+    "score": 7.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "1 ALL DIMENSIONS ARE IN MILLIMETERS.",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 1 ALL DIMENSIONS ARE IN MILLIMETERS.",
+    "seq": 9,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "2 FOR TYPES OF INSULATING CONCRETE, FLOOR BRICKS AND DIMENSIONS * SEE GENERAL ARRANGEMENT 6. ADJUST CASTABLE THICKNESS TO MEET STANDARD",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 2 FOR TYPES OF INSULATING CONCRETE, FLOOR BRICKS AND DIMENSIONS * SEE GENERAL ARRANGEMENT 6. ADJUST CASTABLE THICKNESS TO MEET STANDARD",
+    "seq": 10,
+    "confidence": 0.99,
+    "score": 11.9,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "seq": 11,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.)",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.)",
+    "seq": 12,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "COMPANION STANDARD:—",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.) > COMPANION STANDARD:—",
+    "seq": 13,
+    "confidence": 0.456,
+    "score": 4.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "large_font",
+      "left_aligned",
+      "short_unshaped"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "ANCHOR FOR VERTICAL INSULATING 7-17-0208",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.) > ANCHOR FOR VERTICAL INSULATING 7-17-0208",
+    "seq": 14,
+    "confidence": 0.678,
+    "score": 6.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD No.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 5,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > Abbreviations",
+    "seq": 0,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "1.0 SCOPE",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 1.0 SCOPE",
+    "seq": 1,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "2.0 REFERENCE DOCUMENTS",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 2.0 REFERENCE DOCUMENTS",
+    "seq": 2,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 INSPECTION AND TEST REQUIREMENTS",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 3.0 INSPECTION AND TEST REQUIREMENTS",
+    "seq": 3,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 In Process Inspection",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 3.0 In Process Inspection",
+    "seq": 4,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.0 Painting",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 5.0 Painting",
+    "seq": 5,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "6.0 PACKING & PROTECTION",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 6.0 PACKING & PROTECTION",
+    "seq": 6,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "NOTES (As applicable)",
+    "level": 5,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 6.0 PACKING & PROTECTION > NOTES (As applicable)",
+    "seq": 7,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO.",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

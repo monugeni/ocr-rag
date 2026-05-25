@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "page_num": 9,
+    "line_index": 14,
+    "top": 367.0,
+    "left": 60.0,
+    "text": "अ वीकरण अ वीकरण /Disclaimer",
+    "level": 1,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details > अ वीकरण अ वीकरण /Disclaimer",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 10,
+    "line_index": 13,
+    "top": 377.0,
+    "left": 61.0,
+    "text": "The Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under",
+    "level": 3,
+    "score": 4.0,
+    "confidence": 0.444,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details > अ वीकरण अ वीकरण /Disclaimer > The Seller/ Service Providers shall, therefore, be responsible for ensuring compliance under",
+    "toc_match": null,
+    "warnings": []
+  }
+]

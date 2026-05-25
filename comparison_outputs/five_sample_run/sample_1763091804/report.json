@@ -1,0 +1,25 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091804.pdf",
+  "document_title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY",
+  "document_context": {
+    "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY",
+    "path_parts": [],
+    "source": "metadata"
+  },
+  "page_count": 1,
+  "body_font_size": 13.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 1,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 1,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 19,
+      "table": 3
+    }
+  }
+}

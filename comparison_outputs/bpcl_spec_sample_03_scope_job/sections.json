@@ -1,0 +1,470 @@
+[
+  {
+    "heading": "6 Scope of Work and Technical Requirement",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 6 Scope of Work and Technical Requirement",
+    "seq": 0,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "10 HSE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 10 HSE",
+    "seq": 1,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p2: top-level decimal jump 6 -> 10"
+    ],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "15 SOR",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 15 SOR",
+    "seq": 2,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p2: top-level decimal jump 10 -> 15"
+    ],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "SCOPE OF JOB FOR LSTK CONTRACT FOR CDU3 HEATER F-101 REVAMP AT BPCL MUMBAI REFINERY",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 15 SOR > SCOPE OF JOB FOR LSTK CONTRACT FOR CDU3 HEATER F-101 REVAMP AT BPCL MUMBAI REFINERY",
+    "seq": 3,
+    "confidence": 0.99,
+    "score": 9.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 INTRODUCTION",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 1.0 INTRODUCTION",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "2.0 BRIEF DESCRIPTION OF THE JOB",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 2.0 BRIEF DESCRIPTION OF THE JOB",
+    "seq": 5,
+    "confidence": 0.4,
+    "score": 3.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 DESCRIPTION OF THE EQUIPMENT",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 3.0 DESCRIPTION OF THE EQUIPMENT",
+    "seq": 6,
+    "confidence": 0.4,
+    "score": 3.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 SITE LOCATION",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 4.0 SITE LOCATION",
+    "seq": 7,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.0 BASIS OF DESIGN",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 5.0 BASIS OF DESIGN",
+    "seq": 8,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 6.0 SCOPE OF WORK AND TECHNICAL REQUIREMENTS",
+    "seq": 9,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "7.0 BATTERY LIMIT",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 7.0 BATTERY LIMIT",
+    "seq": 10,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "8.0 COMMISSIOINING",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 8.0 COMMISSIOINING",
+    "seq": 11,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "9.0 EVALUATION CRITERIA:",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 9.0 EVALUATION CRITERIA:",
+    "seq": 12,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "10.0 HSE",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 10.0 HSE",
+    "seq": 13,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "11.0 BID PRESENTATION",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 11.0 BID PRESENTATION",
+    "seq": 14,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "12.0 DELIVERY / COMPLETION PERIOD",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 12.0 DELIVERY / COMPLETION PERIOD",
+    "seq": 15,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "13.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 13.0 PRICE REDUCTION SCHEDULE (PRS) FOR DELAY IN DELIVERY /",
+    "seq": 16,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "14.0 PAYMENT TERMS: As mentioned in RFQ.",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 14.0 PAYMENT TERMS: As mentioned in RFQ.",
+    "seq": 17,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "15.0 SOR",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 15.0 SOR",
+    "seq": 18,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "16.0 PRE-BID MEETING & SITE VISIT",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY > 16.0 PRE-BID MEETING & SITE VISIT",
+    "seq": 19,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SCOPE OF JOB FOR LSTK CONTRACT FOR F101 CDU3 HEATER REVAMP AT BPCL MUMBAI REFINERY",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  }
+]

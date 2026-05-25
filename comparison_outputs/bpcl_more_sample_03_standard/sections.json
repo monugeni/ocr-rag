@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "SECTION 1 1",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "ENGINEERS FOR PARALLEL FLANGE BEAM > SECTION 1 1",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 9.5,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "large_font",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ENGINEERS FOR PARALLEL FLANGE BEAM",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  }
+]

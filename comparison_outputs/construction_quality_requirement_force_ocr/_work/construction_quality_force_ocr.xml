@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1262" width="892">
+	<fontspec id="0" size="9" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="1" size="10" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="2" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="3" size="12" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="4" size="13" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="5" size="8" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="6" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="7" size="15" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="8" size="7" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="9" size="6" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="10" size="10" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="11" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="12" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="13" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="14" size="11" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="32" left="717" width="92" height="12" font="0">HPL Contract No.</text>
+<text top="38" left="127" width="470" height="13" font="1">Plant Own Contract Code Document ID</text>
+<text top="46" left="734" width="58" height="15" font="2">4010464</text>
+<text top="65" left="106" width="701" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="83" left="115" width="641" height="15" font="2">HAVEN Petrochemicals Ltd.| OCU-CPU -</text>
+<text top="116" left="221" width="597" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="132" left="714" width="105" height="11" font="5">PETROCHEMICALS LTD</text>
+<text top="136" left="204" width="464" height="18" font="4">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-</text>
+<text top="157" left="312" width="249" height="18" font="4">STEEL PIPING at HPL, Haldia</text>
+<text top="161" left="91" width="747" height="22" font="2">thyssenkrupp ’ Rev|00|Page| 1 | of | 28</text>
+<text top="347" left="127" width="530" height="17" font="4">tkiS India / Vendor tkIS India / Owner / Client</text>
+<text top="366" left="183" width="438" height="15" font="2">CI 1 For Approval C] 1 For Approval</text>
+<text top="383" left="183" width="480" height="15" font="2">CJ 2 For Review / Comments C] 2 For Review / Comments</text>
+<text top="400" left="183" width="448" height="15" font="2">CI 3 For Information C] 3 For Information</text>
+<text top="417" left="134" width="498" height="15" font="2">2 3 C] 4 For Engineering 3 3 | 4 For Engineering</text>
+<text top="434" left="134" width="482" height="15" font="2">&amp; 5 CI 5 For Enquiry 8 = C] 5 For Enquiry</text>
+<text top="450" left="137" width="515" height="16" font="3">= 5 CI 6 For Order Placement = 5 C] 6 For Order Placement</text>
+<text top="468" left="135" width="502" height="15" font="2">2 ‘3 CI] 7 Final &amp; Approved 2 3 Cl 7 Final &amp; Approved</text>
+<text top="486" left="134" width="536" height="15" font="2">S32 [[] &amp; __ Released for Construction S32 [-] &amp; _ Released for Construction</text>
+<text top="522" left="183" width="426" height="15" font="2">CI 1 Approved C] 1 Approved</text>
+<text top="538" left="136" width="593" height="15" font="2">3 CJ 2 Approved for Manufacturing / Fabrication +4 CJ] 2 Approved for Manufacturing / Fabrication</text>
+<text top="553" left="134" width="540" height="12" font="0">= with Comments as marked = with Comments as marked</text>
+<text top="564" left="133" width="536" height="20" font="7">rs 3 CI 3 Not Approved / Resubmit rs 3 C] 3 Not Approved/ Resubmit</text>
+<text top="584" left="135" width="568" height="15" font="2">s 3 CJ 4 Retained for Information / Records 5 3g C] = Retained for Information / Records</text>
+<text top="601" left="137" width="472" height="16" font="3">@ 3 CI 5 Reviewed a 5 C] 5 Reviewed</text>
+<text top="615" left="134" width="555" height="20" font="7">&lt; bE CJ 6 Reviewed as Noted / Resubmit &lt; § C] 6 Reviewed as Noted / Resubmit</text>
+<text top="647" left="126" width="296" height="9" font="8">Remarks for AC2 : This marked-up drawings is hereby approved for</text>
+<text top="659" left="126" width="296" height="9" font="8">fabrication / manufacturing and shall be re-sbumitted after revision. This</text>
+<text top="670" left="126" width="296" height="9" font="8">drawing should be revised only to the extent of tkIS India / Owner / Client</text>
+<text top="681" left="126" width="296" height="9" font="8">comments. Any other changes made by you will not be considered unless</text>
+<text top="693" left="126" width="214" height="9" font="9">clearly highlighted in covering letter asking for approval.</text>
+<text top="725" left="126" width="296" height="9" font="8">This approval / review does not absolve the supplier from the full</text>
+<text top="737" left="126" width="165" height="9" font="9">responsibility for design and fabrication.</text>
+<text top="766" left="126" width="474" height="9" font="9">Date: / / Name - Date: / / Name:</text>
+<text top="948" left="82" width="38" height="12" font="0">Classifi</text>
+<text top="963" left="83" width="33" height="12" font="0">cation:</text>
+<text top="977" left="463" width="306" height="16" font="3">Raiib= Pankaj Pasa&#34;) Pankaj penajeuh</text>
+<text top="986" left="472" width="293" height="16" font="1">ajlb= Pruthi saree Pruthi —tasssseqso:</text>
+<text top="1013" left="94" width="739" height="13" font="1">00 | Issued for Inplementation 18.10.2023 RB 18.10.2023) Pp 18.10.2023} DDY -</text>
+<text top="1041" left="90" width="750" height="13" font="1">Rev. | Status Description Date Prepared Date Checked Date Approved | AC</text>
+<text top="1059" left="89" width="82" height="12" font="0">Status Codes :</text>
+<text top="1077" left="99" width="98" height="9" font="9">O - Issued for Review /</text>
+<text top="1087" left="120" width="102" height="9" font="9">Comments / Preliminary</text>
+<text top="1098" left="99" width="100" height="9" font="9">A - Issued for Approval</text>
+<text top="1118" left="100" width="106" height="9" font="9">| - Issued for Information</text>
+<text top="1129" left="100" width="128" height="9" font="9">M - Issued for Implementation</text>
+<text top="1139" left="100" width="91" height="9" font="9">D - Issued for Desiqn</text>
+<text top="1149" left="100" width="92" height="9" font="9">H - Issued for HAZOP</text>
+<text top="1160" left="100" width="128" height="9" font="9">B - Issued for Detailed Design</text>
+<text top="1170" left="121" width="66" height="9" font="9">(only for P&amp;Ids)</text>
+<text top="1181" left="100" width="94" height="9" font="9">E - Issued for Enquiry</text>
+<text top="1191" left="100" width="101" height="9" font="9">P — Issued for Purchase</text>
+<text top="1077" left="250" width="117" height="9" font="9">R - Issued for Construction</text>
+<text top="1087" left="271" width="45" height="9" font="9">(with Hold)</text>
+<text top="1098" left="250" width="117" height="9" font="9">C - Issued for Construction</text>
+<text top="1108" left="271" width="59" height="9" font="9">(without Hold)</text>
+<text top="1118" left="250" width="80" height="9" font="9">F - Issued for Final</text>
+<text top="1129" left="250" width="80" height="9" font="9">Z-— Issued As-Built</text>
+<text top="1139" left="250" width="64" height="9" font="9">XX - Cancelled</text>
+<text top="1149" left="249" width="59" height="9" font="9">Void - Voided</text>
+<text top="1160" left="248" width="123" height="9" font="9">Superseded —Superseded by</text>
+<text top="1170" left="248" width="115" height="9" font="9">another Document Number</text>
+<text top="1187" left="548" width="256" height="9" font="9">© thyssenkrupp Industrial Solutions (India) Private Limited 2016</text>
+<text top="1192" left="839" width="0" height="15" font="11">Category</text>
+<text top="1144" left="839" width="0" height="15" font="12"> Code:</text>
+<text top="1110" left="839" width="0" height="15" font="13"> -</text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="15" size="20" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="65" left="113" width="308" height="16" font="3">PROJECT Haldia HPL</text>
+<text top="39" left="134" width="467" height="12" font="0">Plant Client Contract Code Document ID</text>
+<text top="74" left="122" width="534" height="27" font="15">HAVEN _ | Petrochemicals Ltd] Ocu-cpu | ®778-PPM-11500-CA-0001</text>
+<text top="31" left="711" width="95" height="12" font="0">HPL Contract No.</text>
+<text top="46" left="730" width="59" height="15" font="2">4010464</text>
+<text top="66" left="712" width="93" height="12" font="0">tkIS Contract No.</text>
+<text top="81" left="731" width="54" height="16" font="3">66-6778</text>
+<text top="114" left="224" width="434" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF</text>
+<text top="134" left="206" width="470" height="18" font="4">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-</text>
+<text top="119" left="710" width="104" height="12" font="0">HALDIA</text>
+<text top="131" left="709" width="105" height="11" font="5">PETROCHEMICALS LTD</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 9 | of | 98</text>
+<text top="235" left="97" width="119" height="17" font="3">1. SCOPE</text>
+<text top="274" left="97" width="736" height="17" font="3">1.1. This specification shall be followed for the fabrication of all types of welded joints of piping</text>
+<text top="293" left="160" width="302" height="17" font="4">system with in battery limits of the plant .</text>
+<text top="339" left="160" width="371" height="17" font="4">The welded pipe joints shall include the following:</text>
+<text top="386" left="160" width="673" height="17" font="3">a. All pipe joints, longitudinal butt weld (for Tanks/ Plate works), circumferencial butt weld</text>
+<text top="416" left="188" width="124" height="17" font="3">and socket weld.</text>
+<text top="448" left="161" width="462" height="17" font="3">b. Attachment of forging, flanges and other supports to pipe.</text>
+<text top="481" left="160" width="411" height="17" font="4">c. Welded manifold header and other sub assemblies.</text>
+<text top="514" left="160" width="420" height="17" font="3">d. Welded branch connections with or without RF Pads</text>
+<text top="547" left="160" width="379" height="17" font="4">e. Joints in welded /fabricated piping components</text>
+<text top="580" left="160" width="674" height="17" font="4">f. The attachment of smaller connections for vents/drains/drips/and other instrument</text>
+<text top="609" left="188" width="67" height="17" font="3">tappings.</text>
+<text top="641" left="160" width="675" height="17" font="3">Any approval granted by Owner/CONSULTANT shall not relieve the Contractor of his</text>
+<text top="670" left="161" width="227" height="17" font="3">responsibilities and guarantee.</text>
+<text top="726" left="160" width="296" height="17" font="3">APPLICABLE CODES &amp; STANDARDS</text>
+<text top="773" left="160" width="673" height="17" font="3">All welding works, equipment for welding, heat treatement, other auxillury function and the</text>
+<text top="802" left="160" width="673" height="17" font="3">welding personnel shall meet the requirement of latest edition of the following accepted</text>
+<text top="831" left="160" width="200" height="17" font="3">standards and procedures.</text>
+<text top="883" left="161" width="522" height="16" font="3">7 IBR Indian Boiler Regulations</text>
+<text top="920" left="161" width="658" height="17" font="3">7 ASME Section II, Part C Welding Rods, Electrodes and Filler Metals.</text>
+<text top="958" left="161" width="555" height="17" font="4">7 ASME Section V Non-destructive Examination.</text>
+<text top="997" left="161" width="597" height="17" font="3">7 ASME Section IX Welding and Brazing Qualifications.</text>
+<text top="1034" left="161" width="436" height="17" font="3">7 ASME B31.1 Power Piping.</text>
+<text top="1072" left="161" width="447" height="17" font="3">7 ASME B31.3 Process Piping</text>
+<text top="1119" left="161" width="580" height="17" font="3">7 ASME Section VIII Boiler and Pressure Vessel code</text>
+<text top="1166" left="161" width="338" height="17" font="3">7 All applicable Licensor’s specifications</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="52" height="15" font="2">18 of 44</text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="16" size="17" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="17" size="19" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="108" left="120" width="693" height="26" font="17">aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 3 | of | 23</text>
+<text top="425" left="97" width="27" height="17" font="3">3.1.</text>
+<text top="483" left="97" width="27" height="17" font="3">3.2.</text>
+<text top="597" left="96" width="27" height="16" font="3">4.1.</text>
+<text top="682" left="96" width="27" height="16" font="3">4.2.</text>
+<text top="738" left="96" width="27" height="16" font="3">4.3.</text>
+<text top="797" left="96" width="27" height="16" font="3">4.4.</text>
+<text top="853" left="96" width="27" height="16" font="3">4.5.</text>
+<text top="910" left="96" width="27" height="16" font="3">4.6.</text>
+<text top="1004" left="97" width="27" height="17" font="3">5.1.</text>
+<text top="1089" left="97" width="27" height="17" font="3">5.2.</text>
+<text top="1118" left="97" width="27" height="17" font="3">5.3.</text>
+<text top="1176" left="97" width="27" height="16" font="3">5.4.</text>
+<text top="217" left="161" width="672" height="17" font="4">In the event of any differences due to the additional requirements mentioned in this</text>
+<text top="245" left="160" width="672" height="17" font="4">specification over and above those obligatory as per code this specification shall be binding.</text>
+<text top="274" left="161" width="673" height="17" font="4">However in the event of any differences due to the additional requirements mentioned in any</text>
+<text top="302" left="160" width="673" height="17" font="4">applicable specification (Example:- Statutory, Licensor specification etc.) mentioned in the</text>
+<text top="330" left="160" width="389" height="17" font="3">tender, the most stringent requirement shall govern.</text>
+<text top="387" left="161" width="107" height="17" font="3">BASE METAL</text>
+<text top="425" left="161" width="672" height="17" font="4">In general, use of carbon steel, alloy steel and stainless steel is envisaged. The details of the</text>
+<text top="454" left="161" width="492" height="17" font="4">material specifications are given in the welding specification chart.</text>
+<text top="483" left="160" width="673" height="17" font="4">The Contractor shall provide manufacturer test certificate for every heat number of the</text>
+<text top="511" left="161" width="192" height="17" font="3">materials supplied by him.</text>
+<text top="558" left="160" width="214" height="17" font="3">WELDING CONSUMABLES</text>
+<text top="596" left="160" width="674" height="17" font="3">The Contractor shall provide at his own expense all the welding consumables necessary for</text>
+<text top="625" left="160" width="673" height="17" font="4">the execution of the job such as electrodes, filler wire, argon etc. and this should bear approval</text>
+<text top="653" left="160" width="202" height="17" font="4">of Owner/CONSULTANT.</text>
+<text top="682" left="160" width="672" height="17" font="3">The welding electrode and filler wire supplied by the Contractor shall conform to the class</text>
+<text top="711" left="160" width="325" height="17" font="4">specified in the welding specification chart.</text>
+<text top="738" left="160" width="673" height="17" font="4">The Contractor shall submit batch test certificate from the electrode manufacturers giving</text>
+<text top="767" left="160" width="573" height="17" font="4">details of physical and chemical test for each batch of electrodes to be used.</text>
+<text top="796" left="160" width="673" height="17" font="4">All low hydrogen type of electrode shall be rebaked at 350 deg C for one hour minimum and</text>
+<text top="825" left="160" width="592" height="17" font="4">stored in ovens kept at 80 to 100 deg C before use or as per manufactur spec.</text>
+<text top="852" left="160" width="674" height="17" font="3">The electrodes, filler wires and flux used shall be free from rust, oil, grease, earth and other</text>
+<text top="881" left="160" width="321" height="17" font="4">foreign matter affect the quality of welding.</text>
+<text top="910" left="160" width="610" height="17" font="4">Tungsten electrodes used shall confirm to ASME Sec II C SFA 5.12 specification.</text>
+<text top="967" left="160" width="255" height="17" font="3">SHIELDING AND PURGING GAS</text>
+<text top="1004" left="160" width="674" height="17" font="3">Argon gas used in GTAW welding for shielding purpose shall be 99.995% pure. The purity of</text>
+<text top="1033" left="160" width="673" height="17" font="4">the gas shall be certified by the manufacturer. The rate of flow for shielding purpose shall be</text>
+<text top="1061" left="160" width="360" height="17" font="4">established through procedure qualification test.</text>
+<text top="1089" left="160" width="500" height="17" font="4">Argon gas with a purity level of 99.995% shall be used for purging.</text>
+<text top="1118" left="160" width="673" height="17" font="3">The purging shall be maintained during root pass and first filling pass to minimize oxidation</text>
+<text top="1147" left="160" width="216" height="17" font="4">on the inner side of the pipe.</text>
+<text top="1176" left="161" width="672" height="17" font="3">Initial purging shall be maintained for the sufficient period oftime to remove trapped air. In no</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 19 of A4</text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="277" width="529" height="13" font="0">. HPL Contract No.</text>
+<text top="38" left="134" width="654" height="13" font="1">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="108" left="120" width="693" height="26" font="17">aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 4 | of | 23</text>
+<text top="274" left="97" width="27" height="16" font="3">5.5.</text>
+<text top="359" left="97" width="27" height="17" font="3">5.6.</text>
+<text top="454" left="97" width="27" height="17" font="3">6.1.</text>
+<text top="571" left="97" width="27" height="17" font="3">6.2.</text>
+<text top="627" left="97" width="27" height="17" font="3">6.3.</text>
+<text top="712" left="97" width="22" height="17" font="3">6.4</text>
+<text top="217" left="160" width="673" height="17" font="3">case the initial purging period be should be less than 10 Min. High gas pressure should be</text>
+<text top="245" left="160" width="62" height="17" font="3">avoided.</text>
+<text top="274" left="161" width="672" height="17" font="4">Dams used for conserving inert gas during purging shall be removed after completion of the</text>
+<text top="302" left="160" width="674" height="17" font="4">welding and shall be accounted for. Where ever removal of Dams is not possible, water</text>
+<text top="330" left="160" width="225" height="17" font="3">soluble Dams should be used.</text>
+<text top="359" left="161" width="379" height="17" font="4">For socket type of welding purging is not required.</text>
+<text top="415" left="160" width="164" height="17" font="3">WELDING PROCESS</text>
+<text top="454" left="160" width="673" height="17" font="3">Welding of various materials under this specification shall be carried out using one or more</text>
+<text top="483" left="160" width="135" height="17" font="3">following process.</text>
+<text top="511" left="161" width="394" height="17" font="4">° Shielded Metal Arc Welding Process (SMAW)</text>
+<text top="541" left="161" width="388" height="17" font="4">° Gas Tungsten Arc Welding Process (GT AW)</text>
+<text top="570" left="160" width="673" height="17" font="4">The welding process to be used are given in the welding specification chart. Any deviation</text>
+<text top="598" left="160" width="540" height="17" font="4">desired by the Contractor shall be approved by Owner/CONSULTANT.</text>
+<text top="627" left="160" width="676" height="17" font="4">Automatic and semi-automatic process shall be used only with the approval of Owner/</text>
+<text top="655" left="161" width="673" height="17" font="3">CONSULTANT. The welding procedure adopted and consumables used shall be specifically</text>
+<text top="683" left="160" width="73" height="17" font="3">approved.</text>
+<text top="712" left="160" width="673" height="17" font="4">Combination of different welding processes could be used for a particular joint only after duly</text>
+<text top="741" left="160" width="674" height="17" font="4">qualifying the welding procedure to be adopted and obtaining the approval of Owner /</text>
+<text top="770" left="161" width="117" height="17" font="4">CONSULTANT.</text>
+<text top="816" left="160" width="326" height="17" font="3">WELDING PROCEDURE QUALIFICATION</text>
+<text top="849" left="161" width="673" height="17" font="4">Welding procedure qualification shall be carried out in accordance with the relevant</text>
+<text top="878" left="161" width="672" height="17" font="3">requirements of ASME Sec. IX latest edition or other applicable codes and the job</text>
+<text top="906" left="161" width="674" height="17" font="4">requirements. The Contractor shall submit the proposed welding procedure specifications</text>
+<text top="934" left="161" width="674" height="17" font="4">required for the execution of the job in format as per Section IX immediately after the receipt</text>
+<text top="963" left="160" width="673" height="17" font="3">of the order. Owner/CONSULTANT inspector will review, check and approve the proposed</text>
+<text top="992" left="160" width="673" height="17" font="4">welding procedure submitted and shall release the procedure for qualification Record (PQR)</text>
+<text top="1019" left="160" width="673" height="17" font="4">tests. The procedure qualification test shall be carried out by the Contractor at his own</text>
+<text top="1048" left="160" width="673" height="17" font="4">expense. Acomplete set of test results in the format as per Section IX shall be submitted to</text>
+<text top="1077" left="160" width="673" height="17" font="3">the Owner/CONSULTANT inspector for his approval immediately after completing the</text>
+<text top="1106" left="161" width="672" height="17" font="4">procedure qualification test and at least 2 weeks before the commencement of actual work.</text>
+<text top="1133" left="161" width="673" height="17" font="4">Standard test as specified in the code shall be carried out in all cases. In addition to these</text>
+<text top="1163" left="160" width="673" height="17" font="3">tests, other test like macro/micro examination, hardness test, dye penetrant examination,</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">20 of 44</text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="18" size="12" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="19" size="44" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="20" size="14" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="65" left="113" width="72" height="16" font="3">PROJECT</text>
+<text top="39" left="134" width="27" height="12" font="0">Plant</text>
+<text top="82" left="122" width="52" height="15" font="2">HAVEN</text>
+<text top="31" left="277" width="529" height="13" font="0">. HPL Contract No.</text>
+<text top="39" left="266" width="522" height="12" font="0">Client Contract Code Document ID 4010464</text>
+<text top="66" left="259" width="545" height="16" font="3">Haldia HPL tkIS Contract No.</text>
+<text top="74" left="209" width="576" height="27" font="15">Petrochemicals Ltd] ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="109" left="120" width="53" height="60" font="19">&amp;</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 5 | of | 23</text>
+<text top="1024" left="97" width="27" height="17" font="3">9.1.</text>
+<text top="217" left="160" width="673" height="17" font="4">charpy V-notch, Corrosion tests, impact tests etc. shall be carried out on specimens</text>
+<text top="245" left="160" width="672" height="17" font="4">depending upon the type of base material, operating conditions and requirements laid down</text>
+<text top="274" left="161" width="673" height="17" font="4">in the detailed drawings and specifications. It shall be the responsibility of the Contractor</text>
+<text top="274" left="820" width="15" height="17" font="4">to</text>
+<text top="302" left="160" width="673" height="17" font="4">carry out all the tests required to the satisfaction of the Owner / Consultant inspector. Based</text>
+<text top="330" left="160" width="629" height="17" font="4">on the acceptance of PQR, WPS shall be prepared for Owner / Contractor approval.</text>
+<text top="383" left="160" width="224" height="17" font="3">WELDER’S QUALIFICATION</text>
+<text top="426" left="193" width="642" height="17" font="4">Welders shall be qualified in accordance with the ASME Section-IX or other applicable</text>
+<text top="455" left="193" width="640" height="17" font="4">codes. The Owners inspector shall witness the test and certify the qualification of each</text>
+<text top="484" left="192" width="643" height="17" font="4">welder separately. Only those welders who have been approved by the Owner /</text>
+<text top="511" left="193" width="641" height="17" font="4">Consultant Inspector shall be employed for welding. Contractor shall submit the welder</text>
+<text top="540" left="193" width="641" height="17" font="4">qualification test reports in the format as per Section IX and obtain express approval</text>
+<text top="569" left="193" width="641" height="17" font="3">before commencement of work. It shall be the responsibility of Contractor to carry out</text>
+<text top="598" left="193" width="641" height="17" font="4">qualification tests of welders. For welding of the steam piping, falling under the purview</text>
+<text top="625" left="193" width="642" height="17" font="3">of Indian Boiler Regulations only those welders with IBR Certification, qualified by Boiler</text>
+<text top="655" left="194" width="638" height="17" font="3">Inspectorate, and acceptable to the local Boiler Inspector authority shall be employed.</text>
+<text top="683" left="193" width="641" height="17" font="3">The welders shall always have in their possession the identification card as issued by</text>
+<text top="711" left="193" width="641" height="17" font="4">Contractor and shall produce it on demand by the Owner/ Consultant inspector. It shall</text>
+<text top="740" left="193" width="298" height="17" font="4">be the responsibility of the Contractor</text>
+<text top="740" left="479" width="355" height="17" font="4">to issue the identity cards after it has been duly</text>
+<text top="768" left="193" width="191" height="17" font="4">certified by the Inspector.</text>
+<text top="797" left="194" width="571" height="17" font="4">No welder shall be permitted to work without the possession of identity card.</text>
+<text top="825" left="194" width="640" height="17" font="4">If a welder is found to perform a type of welding or in a position for which he is not</text>
+<text top="853" left="193" width="640" height="17" font="4">qualified, he shall be debarred from doing any further work. All welds performed by an</text>
+<text top="882" left="193" width="640" height="17" font="4">unqualified welder shall be cut and redone by a qualified welder at the expense of the</text>
+<text top="911" left="193" width="82" height="17" font="4">Contractor.</text>
+<text top="939" left="193" width="442" height="17" font="4">Welder performance record shall be made for each welder.</text>
+<text top="987" left="161" width="170" height="17" font="3">EDGE PREPARATION</text>
+<text top="1024" left="160" width="673" height="17" font="4">The edges to be welded shall be prepared to meet joint design requirement by any of the</text>
+<text top="1053" left="160" width="131" height="17" font="3">following method.</text>
+<text top="1085" left="160" width="11" height="13" font="0">a.</text>
+<text top="1111" left="161" width="12" height="17" font="3">b.</text>
+<text top="1082" left="188" width="543" height="17" font="4">Carbon Steel — Gas cutting, machining or grinding method shall be used.</text>
+<text top="1111" left="189" width="645" height="17" font="4">Low alloy steel (Containing up to 5% chromium) - Gas cutting, machining or grinding</text>
+<text top="1139" left="188" width="163" height="17" font="3">method shall be used.</text>
+<text top="1167" left="189" width="645" height="17" font="3">High Alloy Steel (&gt; 5% chromium) and stainless steel, Nickel Alloy — Plasma cutting,</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">21 of 44</text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 6 | of | 98</text>
+<text top="217" left="188" width="335" height="16" font="3">machining, or grinding method shall be used.</text>
+<text top="245" left="160" width="554" height="16" font="3">d. For tapping magnetic drill shall be used wherever it is possible to use.</text>
+<text top="274" left="97" width="736" height="17" font="3">9.2. The ends of the weld shall be properly clean to remove paint, oil, grease, rust, oxides, sand,</text>
+<text top="302" left="160" width="642" height="17" font="4">earth and other foreign matters. The end shall be dry before the welding commences.</text>
+<text top="330" left="97" width="737" height="17" font="4">9.3. Wire brush used for cleaning stainless steel joint shall have stainless steel wires and the</text>
+<text top="359" left="160" width="672" height="17" font="3">grinding wheel used for grinding stainless steel shall be of suitable type. Separate grinding</text>
+<text top="387" left="160" width="579" height="17" font="4">wheels and wire brushes should be used for carbon steel and stainless steel.</text>
+<text top="434" left="97" width="295" height="18" font="4">10. ALINGNMENT AND SPACING</text>
+<text top="473" left="97" width="736" height="17" font="4">10.1. Components to be welded shall be aligned and spaced as per requirement laid down in</text>
+<text top="502" left="160" width="673" height="17" font="4">applicable code. Flame heating for adjustment and correction of ends is not permitted unless</text>
+<text top="529" left="160" width="333" height="17" font="4">specifically approved by Owner/ Consultant.</text>
+<text top="558" left="97" width="375" height="17" font="3">10.2. Tack welds for maintaining the alignment</text>
+<text top="558" left="457" width="376" height="17" font="3">of pipe joints shall be made only by qualified welders</text>
+<text top="587" left="161" width="673" height="17" font="4">using approved WPS. Defective tack welds must be removed prior to the actual welding of</text>
+<text top="616" left="160" width="673" height="17" font="4">the joints. Tacking cleats to be used in place of direct tacking (Pipe to Fittings / Pipe to Pipe )</text>
+<text top="643" left="160" width="468" height="17" font="4">and tacking clets shall be of same material as of pipe &amp; fittings.</text>
+<text top="672" left="97" width="598" height="17" font="4">10.3. Tack weld should be equally spaced. Minimum number of tacks shall be</text>
+<text top="701" left="160" width="300" height="17" font="4">a. 3 Tacks — for 2” and smaller dia pipe</text>
+<text top="729" left="161" width="255" height="17" font="4">b. 4 tacks — for 3 to 12” dia pipes</text>
+<text top="757" left="160" width="336" height="17" font="4">c. 6 Tacks — for 14” and above larger pipes.</text>
+<text top="786" left="97" width="619" height="17" font="3">10.4. Welding shall commence only after approval of fit up by welding inspector.</text>
+<text top="833" left="97" width="256" height="17" font="3">11. WEATHER CONDITIONS</text>
+<text top="872" left="97" width="735" height="17" font="3">11.1. The parts being welded and welding personnel should be adequately protected from rain and</text>
+<text top="900" left="160" width="609" height="17" font="4">strong winds. In the absence of such a protection no welding shall be carried out.</text>
+<text top="928" left="97" width="736" height="17" font="3">11.2. During field welding using GTAW process particular care shall be exercised to prevent any</text>
+<text top="957" left="160" width="244" height="17" font="3">air current affecting the process.</text>
+<text top="1004" left="97" width="420" height="18" font="4">12. WELDING TECHNIQUE AND WORKMANSHIP</text>
+<text top="1042" left="97" width="160" height="17" font="3">12.1. ROOT PASS</text>
+<text top="1081" left="160" width="355" height="17" font="4">a. Root pass shall be made with electrode</text>
+<text top="1081" left="506" width="327" height="17" font="4">/ filler wires recommended in the welding</text>
+<text top="1109" left="188" width="646" height="17" font="4">specification chart. Prefer size of electrode is 2.5 mm dia but in any case not less than 1.6</text>
+<text top="1137" left="188" width="208" height="17" font="3">mm or greater than 3.15mm</text>
+<text top="1166" left="161" width="648" height="17" font="4">b. Upward technic shall be adopted for welding pipe held fixed with its axis horizontal.</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 22 of A4</text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="21" size="28" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="22" size="21" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="38" font="21">THAVEN. | Petrochemicals Lta] ocu.cpu| 6778-PPM-11500-CA-0001 66.8778.</text>
+<text top="106" left="120" width="695" height="29" font="22">aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \ETODEMESS</text>
+<text top="131" left="797" width="16" height="23" font="16">©</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 7 | of | 98</text>
+<text top="217" left="160" width="672" height="17" font="4">c. The root pass of butt joint should be executed so as to achieve full penetration with</text>
+<text top="245" left="188" width="646" height="17" font="4">complete fusion of the root edges. Weld projection inside the pipe shall be as per</text>
+<text top="274" left="188" width="119" height="17" font="3">applicable code.</text>
+<text top="302" left="160" width="256" height="16" font="3">d. Welding shall be uninterrupted</text>
+<text top="330" left="160" width="226" height="16" font="3">e. Penning shall not be used.</text>
+<text top="359" left="188" width="645" height="17" font="4">Golden / Closure / Tie-inn Joints : Root pass welding shall be with GTAW process only.</text>
+<text top="387" left="189" width="464" height="17" font="3">Root visual inspection with DPT/MPT is mandatory to perform.</text>
+<text top="415" left="97" width="229" height="17" font="3">12.2. JOINT COMPLETION</text>
+<text top="454" left="160" width="672" height="17" font="4">a. Joint shall be completed using the class of electrode recommended in the approved</text>
+<text top="483" left="188" width="646" height="17" font="3">WPS. Size of electrode shall not exceed 4mm in dia for stainless steel and alloy steel</text>
+<text top="511" left="188" width="276" height="17" font="4">used for low temperature application.</text>
+<text top="539" left="161" width="672" height="17" font="4">b. Butt joints shall be completed with a covered layer that would affect good fusion at the</text>
+<text top="568" left="187" width="337" height="17" font="4">joint edges and a gradual notch free surface.</text>
+<text top="596" left="160" width="673" height="17" font="3">c. Each weld joints shall have workmanship like finish. Weld identification work shall be</text>
+<text top="729" left="97" width="36" height="16" font="3">12.3.</text>
+<text top="1014" left="97" width="21" height="16" font="3">13.</text>
+<text top="1052" left="97" width="36" height="16" font="3">13.1.</text>
+<text top="625" left="188" width="646" height="17" font="4">stamped clearly at each joint adjacent to the weld. Metal stamping shall not be used for</text>
+<text top="653" left="188" width="646" height="17" font="3">this pipe having wall thickness of less than 3.5mm. Suitable paint shall be used on thin</text>
+<text top="682" left="187" width="204" height="17" font="3">wall pipes for identification.</text>
+<text top="729" left="161" width="149" height="17" font="3">DISSIMILAR WELD</text>
+<text top="767" left="160" width="672" height="17" font="3">a. Where welds are to be produced between carbon steel and alloy steel, pre heat and</text>
+<text top="796" left="189" width="612" height="17" font="3">PWHT requirement shall be those specified for corresponding alloy steel material.</text>
+<text top="825" left="161" width="672" height="17" font="4">b. For welds between two dissimilar Cr.Mo. low alloy steel pre heat and PWHT shall be</text>
+<text top="852" left="188" width="277" height="17" font="4">those specified for higher alloy steel.</text>
+<text top="881" left="160" width="674" height="17" font="4">c. Forcarbon steel /alloy steel to stainless steel welds use of filler wire / electrodes E/ER-</text>
+<text top="910" left="188" width="289" height="17" font="3">309/E-310/ E NiCr Fe-3 shall be made.</text>
+<text top="938" left="160" width="675" height="17" font="4">d. The welding procedure, electrode filler wires to be used shall be approved by Owner/</text>
+<text top="967" left="188" width="83" height="17" font="4">Consultant.</text>
+<text top="1014" left="161" width="153" height="16" font="3">HEAT TREATMENT</text>
+<text top="1052" left="161" width="107" height="17" font="3">PREHEATING</text>
+<text top="1090" left="160" width="674" height="17" font="3">a. No welding shall be performed without pre heating the joints to 10 deg C when the ambient</text>
+<text top="1119" left="188" width="235" height="17" font="4">temperature is below 10 deg C.</text>
+<text top="1147" left="161" width="672" height="17" font="3">b. Preheating requirement of various materials shall be as per welding specification chart.</text>
+<text top="1176" left="160" width="672" height="17" font="4">c. Preheating shall be performed using resistance or induction heating method. Preheating</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">23 of 44</text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="23" size="40" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="711" width="95" height="12" font="0">HPL Contract No.</text>
+<text top="39" left="134" width="654" height="12" font="0">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="38" font="21">THAVEN. | Petrochemicals Lta] ocu.cpu| 6778-PPM-11500-CA-0001 66.8778.</text>
+<text top="106" left="224" width="591" height="29" font="22">WELDING SPECIFICATION FOR FABRICATION OF GALERIE</text>
+<text top="108" left="120" width="693" height="54" font="23">aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \SC&gt;SEESS</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 3 | of | 98</text>
+<text top="217" left="188" width="647" height="17" font="4">by gas burner with neutral flame shall be carried out only if permitted by Owner/</text>
+<text top="245" left="188" width="83" height="17" font="4">Consultant.</text>
+<text top="274" left="160" width="596" height="17" font="4">d. Preheating shall be extended not less than 50mm on both sides of the weld.</text>
+<text top="302" left="160" width="471" height="17" font="3">e. Preheating temperature shall be maintained during welding.</text>
+<text top="330" left="160" width="675" height="17" font="3">f. Approved temperature, indicating crayons, thermocouples or digital contact</text>
+<text top="359" left="188" width="566" height="17" font="3">pyrometers, shall be used to measure preheat and interpass temperatures.</text>
+<text top="387" left="160" width="676" height="17" font="3">g. Preheating for stainless steel is not recommended. Check of interpass temperature for</text>
+<text top="417" left="188" width="434" height="17" font="3">stainless steel shall be done by digital temperature gauge.</text>
+<text top="444" left="161" width="673" height="17" font="3">h. The preheat zone shall extend 75 mm or a distance equal to four (4) times the material</text>
+<text top="473" left="188" width="504" height="17" font="3">thickness, whichever is the greater, beyond each edge of the weld.</text>
+<text top="502" left="161" width="673" height="17" font="3">i. The maximum preheats and interpass temperature for carbon steel and low-alloy steel</text>
+<text top="529" left="188" width="113" height="17" font="4">shall be 300°C.</text>
+<text top="558" left="159" width="630" height="17" font="3">j. The maximum interpass temperature for austenitic stainless steel shall be 175°C</text>
+<text top="615" left="97" width="187" height="17" font="3">13.2. POST HEATING</text>
+<text top="843" left="97" width="36" height="16" font="3">13.3.</text>
+<text top="653" left="189" width="645" height="17" font="4">Unless otherwise specified more stringently in other specifications (Example:- Statutory,</text>
+<text top="682" left="189" width="645" height="17" font="4">Licensor specification etc.) for alloy steel materials such as Cr.Mo. steel, if the PWHT is</text>
+<text top="711" left="188" width="646" height="17" font="3">not performed immediately after welding, the weld joint and adjacent portion of the pipe</text>
+<text top="738" left="188" width="645" height="17" font="4">at least 50mm on either side of the weld shall be uniformly heated to 315 deg C and</text>
+<text top="767" left="188" width="645" height="17" font="3">maintained for half an hour minimum. The joint shall than be wrapped in insulation before</text>
+<text top="796" left="188" width="289" height="16" font="3">allowing it to cool to room temperature.</text>
+<text top="843" left="161" width="323" height="17" font="3">POST WELD HEAT TREATMENT (PWHT)</text>
+<text top="881" left="160" width="674" height="17" font="3">a. PWHT shall be in accordance with the referenced code and additional requirements</text>
+<text top="910" left="188" width="646" height="17" font="4">of this specification. A written procedure describing the general PWHT requirements shall</text>
+<text top="938" left="188" width="646" height="17" font="4">be submitted for review and approval to Owner/ Consultant. The PWHT procedure</text>
+<text top="967" left="188" width="646" height="17" font="4">shall include descriptions of equipment, method of heating, location and type of heating</text>
+<text top="996" left="188" width="491" height="17" font="3">elements, temperature measurement and thermocouple locations.</text>
+<text top="1024" left="189" width="646" height="17" font="4">Prior to the start of PWHT, the Contractor shall prepare a table, listing each joint or</text>
+<text top="1052" left="188" width="646" height="17" font="4">component requiring heat treatment and submit to Owner/ Consultant for review. The</text>
+<text top="1081" left="188" width="646" height="17" font="4">table shall include the following information for each joint orcomponent: Location, drawing</text>
+<text top="1110" left="188" width="646" height="16" font="3">number, diameter, wall thickness, material, heating rate, cooling rate, soak temperature</text>
+<text top="1137" left="188" width="106" height="17" font="3">and soak time.</text>
+<text top="1166" left="160" width="673" height="17" font="4">c. Heating and cooling rates shall conform to referenced code orstandard or approved</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 24 of A4</text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="24" size="45" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="25" size="6" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="39" left="134" width="27" height="12" font="0">Plant</text>
+<text top="65" left="113" width="72" height="16" font="3">PROJECT</text>
+<text top="82" left="122" width="52" height="15" font="2">HAVEN</text>
+<text top="31" left="266" width="540" height="23" font="16">Client Contract Code Document ID 4010464</text>
+<text top="66" left="259" width="545" height="16" font="3">Haldia HPL tkIS Contract No.</text>
+<text top="74" left="209" width="576" height="27" font="15">Petrochemicals Ltd) OCU-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="109" left="120" width="54" height="60" font="24">&amp;</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 9 | of | 98</text>
+<text top="217" left="188" width="40" height="17" font="3">WPS.</text>
+<text top="245" left="160" width="673" height="17" font="3">d. PWHT shall follow all welding, including support clips, and structural parts and repairs,</text>
+<text top="274" left="188" width="481" height="17" font="4">but shall be performed prior to any hydro test or other load test.</text>
+<text top="302" left="189" width="645" height="17" font="3">PWHT shall be carried out using one (1) or more of the following types of heat sources:</text>
+<text top="331" left="204" width="630" height="17" font="3">Permanent or semi-permanent furnaces using gas or electric heaters. The furnace</text>
+<text top="360" left="204" width="630" height="17" font="3">atmosphere shall be selected to avoid excessive oxidation during the heat treatment.</text>
+<text top="389" left="204" width="557" height="17" font="3">Direct flame impingement by furnace burners or torch flames is prohibited.</text>
+<text top="419" left="204" width="200" height="16" font="3">Electric resistance heaters.</text>
+<text top="447" left="188" width="646" height="17" font="3">Thermocouples and a calibrated temperature chart auto recorder shall be used to</text>
+<text top="475" left="188" width="376" height="17" font="4">provide accurate and legible record of all PWHT’s.</text>
+<text top="504" left="187" width="647" height="17" font="3">All thermocouple attachments shall be adequately insulated to avoid temperature</text>
+<text top="532" left="188" width="304" height="17" font="4">misreading caused by effect of radiation.</text>
+<text top="561" left="188" width="645" height="17" font="3">Temperature recorders shall be calibrated every six (6) months and arecord shall</text>
+<text top="589" left="188" width="647" height="17" font="4">be maintained on a recorder. The original calibration certificate shall be available for</text>
+<text top="617" left="188" width="254" height="17" font="3">the review by Owner / Consultant.</text>
+<text top="646" left="189" width="646" height="17" font="4">Prior to the start of PWHT, components shall be checked to ensure that all restraints</text>
+<text top="674" left="188" width="380" height="17" font="4">are removed and the component is free to expand.</text>
+<text top="703" left="188" width="645" height="17" font="4">Surface to the component subject to a heat treatment shall be dry and free from oil,</text>
+<text top="731" left="188" width="127" height="17" font="3">grease, paint etc.</text>
+<text top="760" left="187" width="646" height="17" font="3">All machined surfaces, such as flange faces, bolts holes, threads etc., shall be protected</text>
+<text top="789" left="188" width="305" height="17" font="3">from oxidation during the heat treatment.</text>
+<text top="816" left="187" width="613" height="17" font="3">All PWHT chart records shall be correctly identified and shall indicate as minimum:</text>
+<text top="847" left="203" width="617" height="17" font="3">The weld number and the corresponding thermocouple number with their location.</text>
+<text top="877" left="204" width="150" height="17" font="3">Heat treatment type.</text>
+<text top="906" left="203" width="220" height="17" font="3">Temperature and time scales.</text>
+<text top="936" left="204" width="152" height="17" font="3">Heat treatment date.</text>
+<text top="964" left="187" width="648" height="17" font="3">After completion of the PWHT, all thermocouples shall be removed and the attachment</text>
+<text top="992" left="188" width="604" height="17" font="3">areas shall be grounded smooth to clean sound metal and DPT to be carried out.</text>
+<text top="1021" left="188" width="648" height="17" font="3">Welding or heating after the final PWHT is not permitted without approval of Owner/</text>
+<text top="1050" left="188" width="83" height="17" font="4">Consultant.</text>
+<text top="1078" left="188" width="647" height="17" font="3">The maximum variation in temperature within the heated zone shall not exceed 30°C</text>
+<text top="1106" left="188" width="195" height="17" font="3">during the soaking period.</text>
+<text top="1135" left="188" width="646" height="17" font="3">The temperature attained by the portion under heat treatment shall be recorded by</text>
+<text top="1163" left="188" width="646" height="17" font="4">thermocouple. Adequate number of thermocouple should be attached to the pipe directly</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 25 of AA</text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="277" width="529" height="13" font="0">. HPL Contract No.</text>
+<text top="38" left="134" width="654" height="13" font="1">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 10] of | 98</text>
+<text top="217" left="188" width="646" height="17" font="4">at equally spaced location along the periphery of the pipe joint. The minimum number of</text>
+<text top="245" left="188" width="307" height="17" font="3">thermocouples attached per joint shall be</text>
+<text top="274" left="178" width="184" height="17" font="4">- One up to 6” dia pipe</text>
+<text top="302" left="178" width="195" height="17" font="3">- Two up to 10” dia Pipe</text>
+<text top="330" left="178" width="240" height="17" font="3">- Three for 12” dia and above.</text>
+<text top="359" left="160" width="672" height="17" font="4">q. Automatic temperature recorder suitably calibrated should use for measuring and</text>
+<text top="388" left="188" width="199" height="17" font="3">recording the temperature.</text>
+<text top="416" left="161" width="673" height="17" font="3">r. Immediately on completion of heat treatment PWHT chart record alomngwith hardness</text>
+<text top="444" left="188" width="619" height="17" font="4">test result on the weld joints shall be submitted to Owner/ Consultant for approval.</text>
+<text top="473" left="160" width="672" height="17" font="4">s. Each joint shall bear an identification number which shall be maintained in the piping</text>
+<text top="502" left="188" width="400" height="17" font="3">sketch / isometric and on corresponding PWHT chart.</text>
+<text top="529" left="160" width="674" height="17" font="4">t. Welding Procedure Specification is to be prepared, describing the low energy capacitor</text>
+<text top="558" left="188" width="635" height="17" font="4">discharge equipment, the combination of materials to be joined, and the technique of</text>
+<text top="587" left="188" width="489" height="17" font="4">application; qualification of the welding procedure is not required.</text>
+<text top="634" left="97" width="285" height="17" font="3">13.4. WELD HARDNESS TESTING</text>
+<text top="672" left="193" width="642" height="17" font="4">Weld hardness testing of production welds as required by ASME B31.3 shall be</text>
+<text top="701" left="193" width="328" height="17" font="4">performed in accordance with ASME B31.3.</text>
+<text top="729" left="185" width="648" height="17" font="3">i. Testing shall be conducted with portable hardness testers (Microdur or approved</text>
+<text top="758" left="214" width="86" height="17" font="3">equivalent).</text>
+<text top="786" left="181" width="654" height="17" font="4">ii. Contractor shall document the results of all hardness tests for review by Owner/</text>
+<text top="815" left="215" width="83" height="17" font="4">Consultant.</text>
+<text top="843" left="178" width="658" height="17" font="3">ili. All hardness readings in excess of values shown above shall be reported to Owner/</text>
+<text top="872" left="215" width="619" height="17" font="4">Consultant. Any corrective actions shall be reviewed with Owner/ Consultant,</text>
+<text top="900" left="215" width="143" height="17" font="4">before proceeding.</text>
+<text top="928" left="177" width="658" height="17" font="3">iv. Non ferrous materials and austenitic stainless steel welds shall not require</text>
+<text top="957" left="215" width="324" height="17" font="4">hardness testing, regardless of the service.</text>
+<text top="986" left="179" width="553" height="17" font="3">v. If PWHT is applied, hardness testing shall be performed after PWHT.</text>
+<text top="1013" left="97" width="269" height="17" font="3">13.5. FERRITE MEASUREMENT</text>
+<text top="1052" left="160" width="674" height="17" font="3">a. The ferrite content of first two (2) austenitic stainless steel production welds made by</text>
+<text top="1081" left="193" width="641" height="17" font="4">each welder using the SMAW process, shall be checked in the as welded condition</text>
+<text top="1109" left="193" width="640" height="17" font="4">using a ferrite scope. The ferrite content shall be between 3% and 10%, unless specified</text>
+<text top="1137" left="193" width="641" height="17" font="4">otherwise. Calibration of the magnetic instrument will conform to current AWS — A4.2</text>
+<text top="1166" left="193" width="61" height="17" font="3">practice.</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">26 of 44</text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="108" left="120" width="693" height="26" font="17">aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 11 | of | 23</text>
+<text top="274" left="97" width="36" height="16" font="3">13.6.</text>
+<text top="814" left="97" width="36" height="16" font="3">13.7.</text>
+<text top="986" left="97" width="36" height="16" font="3">13.8.</text>
+<text top="217" left="161" width="616" height="17" font="3">b. Aminimum of six (6) ferrite readings will be taken on the surface to be tested.</text>
+<text top="245" left="160" width="411" height="17" font="4">c. Type 310 welds are exempt from this requirement.</text>
+<text top="274" left="160" width="180" height="17" font="3">ALLOY VERIFICATION</text>
+<text top="312" left="161" width="672" height="17" font="4">Contractor shall implementa material control system to ensure that materials can be identified</text>
+<text top="339" left="160" width="673" height="17" font="4">and traced from source to their installed location and associated with the appropriate</text>
+<text top="368" left="160" width="675" height="17" font="4">certification. 100% colour code implementation forthe material shall be ensured from vendor</text>
+<text top="397" left="160" width="672" height="17" font="3">shop for all piping materials. The methods of controlling the materials to be used and erected</text>
+<text top="425" left="160" width="672" height="17" font="4">at site are to be established and implemented at site. It includes requirements for receiving,</text>
+<text top="454" left="160" width="673" height="17" font="3">storing and releasing of all materials and equipment including the field purchased materials</text>
+<text top="483" left="160" width="151" height="17" font="4">for the construction.</text>
+<text top="511" left="161" width="672" height="17" font="4">Contractor supplied materials shall be with original, or verified copies of original certification.</text>
+<text top="539" left="161" width="568" height="17" font="4">Material Certificates shall be made available to Owner/Consultant for review.</text>
+<text top="568" left="161" width="673" height="17" font="3">Full traceability of piping materials shall be formally documented and maintained throughout</text>
+<text top="596" left="160" width="673" height="17" font="4">fabrication, painting, erection and test activities. Where piping materials have not been</text>
+<text top="625" left="161" width="673" height="17" font="4">maintained by traceability, Contractor shall undertake the necessary testing to demonstrate</text>
+<text top="653" left="160" width="673" height="17" font="4">that all the material used in the pressure loop is acceptable to specification, to the satisfaction</text>
+<text top="682" left="160" width="673" height="17" font="4">of the Owner/ Consultant. Testing may include PMI and/or the chemical analysis and</text>
+<text top="711" left="161" width="673" height="17" font="4">mechanical testing of samples. Consultant/ Owner has right to have any random material</text>
+<text top="738" left="160" width="673" height="17" font="4">sample tested at third party lab at contractor cost. 100% traceability is required for all lines</text>
+<text top="767" left="160" width="559" height="17" font="4">other than carbon steel within a specified temperature and pressure range.</text>
+<text top="814" left="161" width="262" height="17" font="3">CLEANING OF THE WELD JOINT</text>
+<text top="852" left="160" width="673" height="17" font="3">All weld joint shall be free from adherent, weld spatters, slag, dirt or foreign matters. This can</text>
+<text top="882" left="161" width="672" height="17" font="3">be achieved by brushing / grinding. For stainless steel, brushes with stainless steel bristle</text>
+<text top="910" left="160" width="119" height="17" font="3">should be used.</text>
+<text top="938" left="161" width="414" height="17" font="4">Suitable re-agent shall be applied for SS Loint cleaning.</text>
+<text top="986" left="161" width="100" height="17" font="3">INSPECTION</text>
+<text top="1024" left="160" width="673" height="17" font="3">a. Priorto start of welding, inspection procedures &amp; NDT chart shall be established</text>
+<text top="1052" left="193" width="640" height="17" font="4">in accordance with reference code. A written procedure for each inspection method and</text>
+<text top="1081" left="193" width="643" height="17" font="4">technique (including acceptance criteria) to be used shall be submitted to Owner/</text>
+<text top="1109" left="193" width="641" height="17" font="4">Consultant. Inspection procedures in conformance with other standards are acceptable</text>
+<text top="1137" left="193" width="319" height="17" font="3">only with approval of Owner / Consultant.</text>
+<text top="1166" left="163" width="671" height="17" font="3">i. Non-destructive examinations (NDE) for final acceptance shall be performed after any</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 27 of A4</text>
+</page>
+<page number="12" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="39" left="134" width="27" height="12" font="0">Plant</text>
+<text top="65" left="113" width="72" height="16" font="3">PROJECT</text>
+<text top="82" left="122" width="52" height="15" font="2">HAVEN</text>
+<text top="31" left="266" width="540" height="23" font="16">Client Contract Code Document ID 4010464</text>
+<text top="66" left="259" width="545" height="16" font="3">Haldia HPL tkIS Contract No.</text>
+<text top="74" left="209" width="576" height="27" font="15">Petrochemicals Ltd) OCU-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="109" left="120" width="54" height="60" font="24">&amp;</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 12| of | 23</text>
+<text top="874" left="154" width="15" height="16" font="3">Vi.</text>
+<text top="1016" left="150" width="19" height="16" font="3">Vil.</text>
+<text top="217" left="194" width="640" height="17" font="3">PWHT. Additional NDE may be performed by Contractor prior to PWHT to ensure all</text>
+<text top="245" left="193" width="319" height="17" font="3">reject able indications have been removed.</text>
+<text top="274" left="193" width="641" height="17" font="3">Surface irregular, including cap welds, inhibiting accurate interpretation of the specified</text>
+<text top="302" left="193" width="300" height="17" font="4">method of NDE shall be ground smooth.</text>
+<text top="330" left="193" width="641" height="17" font="3">The minimum extent of examination shall be based on the requirements of ASME B31.3</text>
+<text top="359" left="193" width="191" height="17" font="4">and approved NDT Chart.</text>
+<text top="387" left="194" width="641" height="17" font="4">Random examination on a percentage basis, for example 5% of pipe welds, is</text>
+<text top="416" left="193" width="110" height="17" font="4">defined below:</text>
+<text top="444" left="194" width="641" height="17" font="3">Examination is defined as 100% inspection of 5% of the production welds for each day</text>
+<text top="473" left="193" width="640" height="17" font="4">production made by each welder. The first two (2) production welds made, by each</text>
+<text top="502" left="192" width="641" height="17" font="3">welder, shall be included in the 5%. All welders, welding processes, pipe sizes and</text>
+<text top="529" left="193" width="640" height="17" font="3">materials shall be represented as a minimum. The examination shall be concurrent</text>
+<text top="529" left="808" width="25" height="17" font="3">with</text>
+<text top="558" left="193" width="642" height="17" font="4">the fabrication. For each weld found to be defective, two (2) additional representative</text>
+<text top="587" left="192" width="642" height="17" font="4">welds shall be examined at contractor’s own cost. In case these additional welds are free</text>
+<text top="616" left="193" width="643" height="17" font="4">from defects, only the defects indicated in the first Examination shall be repaired and re-</text>
+<text top="643" left="193" width="642" height="17" font="3">examined. However, if either of the two (2) additional welds shows defects, all welds</text>
+<text top="673" left="193" width="205" height="17" font="3">represented shall be either:</text>
+<text top="703" left="193" width="539" height="16" font="3">e Fully non-destructively examined and repaired as necessary, or</text>
+<text top="731" left="193" width="220" height="17" font="4">° Completely replaced.</text>
+<text top="760" left="192" width="642" height="17" font="3">Any welder or welding operator having a weld rejection rate exceeding 10% of the</text>
+<text top="789" left="193" width="643" height="17" font="4">deposited weld length shall be disqualified from the site or be subject to 100% non-</text>
+<text top="817" left="193" width="641" height="17" font="3">destructive examination until the rejection rate reaches a level previously agreed upon</text>
+<text top="845" left="193" width="342" height="17" font="4">between Contractors and Owner / Consultant.</text>
+<text top="874" left="194" width="640" height="17" font="4">Non-destructive testing shall be performed by personnel qualified in accordance with</text>
+<text top="903" left="192" width="641" height="17" font="3">ASNT recommended practice SNT-TC -1A, minimum level 2 or approved equivalent.</text>
+<text top="930" left="193" width="642" height="17" font="4">Certification of personnel shall be made available by the Contractor. Contractor's</text>
+<text top="959" left="193" width="641" height="17" font="3">inspectors, responsible for the performance of visual inspections, shall be adequately</text>
+<text top="989" left="193" width="288" height="17" font="3">trained in both welding and inspection.</text>
+<text top="1016" left="194" width="641" height="17" font="4">Inspection at the mill, shop or fabrication yard shall not release Contractor from</text>
+<text top="1045" left="193" width="641" height="17" font="3">responsibility for repairing or replacing any defective material or workmanship that may</text>
+<text top="1073" left="193" width="299" height="17" font="4">be subsequently discovered in the field.</text>
+<text top="1102" left="192" width="167" height="17" font="3">VISUAL INSPECTION</text>
+<text top="1130" left="196" width="638" height="17" font="3">i. All welds shall be visually inspected by Contractor after completion. Each weld shall</text>
+<text top="1159" left="215" width="619" height="17" font="3">be uniformin width and size throughout its full length. In addition, the cover passes</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 28 of AA</text>
+</page>
+<page number="13" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="672" height="38" font="21">&#34;HAVEN. | Petrochemicals Ltd] ocu.cpu | _6778-PPM-11500-CA-0001 66-6778</text>
+<text top="106" left="224" width="591" height="29" font="22">WELDING SPECIFICATION FOR FABRICATION OF GALERIE</text>
+<text top="108" left="120" width="693" height="54" font="23">aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \SC&gt;SEESS</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 13] of | 98</text>
+<text top="217" left="215" width="619" height="17" font="3">(final weld layer) shall be free of course ripples, grooves, overlaps, arc strikes, abrupt</text>
+<text top="245" left="215" width="345" height="17" font="3">ridges and valleys. No undercutting is allowed.</text>
+<text top="274" left="161" width="284" height="17" font="3">c. RADIOGRAPHIC EXAMINATION</text>
+<text top="302" left="163" width="670" height="17" font="3">i. Performance of the radiography examination of welds shall be in accordance with</text>
+<text top="330" left="193" width="158" height="17" font="4">the referenced code.</text>
+<text top="359" left="160" width="491" height="17" font="3">ii. Acceptance criteria shall be conforming the referenced code.</text>
+<text top="387" left="156" width="679" height="17" font="3">ili. Radiography examination of welds in NPS 2 %&#34; pipe or smaller shall be performed by</text>
+<text top="417" left="193" width="642" height="17" font="3">the elliptical projection technique. At least two (2) separate exposures are required at</text>
+<text top="444" left="193" width="143" height="17" font="4">locations 90° apart.</text>
+<text top="473" left="155" width="679" height="17" font="3">iv. If a pressure-containing weld will not be hydro tested, with prior approval of Owner /</text>
+<text top="502" left="193" width="641" height="17" font="4">Consultant, it shall be 100% radiography examined in accordance with the referenced</text>
+<text top="529" left="193" width="40" height="17" font="3">code.</text>
+<text top="558" left="159" width="675" height="17" font="3">v. Incase radiography examination is not practical, then other NDE method shall be specified.</text>
+<text top="616" left="161" width="318" height="17" font="4">d. LIQUID PENETRANT EXAMINATION</text>
+<text top="672" left="163" width="670" height="17" font="3">i. Performance of the liquid penetrant examination of welds shall be in accordance with</text>
+<text top="701" left="193" width="158" height="17" font="4">the referenced code.</text>
+<text top="729" left="160" width="444" height="17" font="3">ii. Acceptance criteria shall conform the referenced code.</text>
+<text top="786" left="160" width="332" height="17" font="3">e. MAGNETIC PARTICLE EXAMINATION</text>
+<text top="843" left="163" width="670" height="17" font="3">i. Performance of the magnetic particle examination of welds shall be in accordance with</text>
+<text top="872" left="193" width="158" height="17" font="4">the referenced code.</text>
+<text top="900" left="160" width="491" height="17" font="3">li. Acceptance criteria shall be conforming the referenced code.</text>
+<text top="928" left="156" width="364" height="16" font="3">ili, Permanent magnet yokes are not permitted.</text>
+<text top="957" left="156" width="677" height="17" font="3">iv. Magnetic particle examination shall be performed on any structural attachments on</text>
+<text top="986" left="193" width="639" height="17" font="3">pressure-retaining components made of ferromagnetic material that are not hydro tested</text>
+<text top="1014" left="193" width="250" height="17" font="4">after making the attachment weld.</text>
+<text top="1071" left="160" width="264" height="17" font="3">f. ULTRASONIC EXAMINATION</text>
+<text top="1128" left="194" width="641" height="17" font="3">Performance of the ultrasonic examination of welds shall be in accordance with the</text>
+<text top="1156" left="193" width="128" height="17" font="3">referenced code.</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 29 of A4</text>
+</page>
+<page number="14" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="39" left="134" width="27" height="12" font="0">Plant</text>
+<text top="65" left="113" width="72" height="16" font="3">PROJECT</text>
+<text top="82" left="122" width="52" height="15" font="2">HAVEN</text>
+<text top="31" left="266" width="540" height="23" font="16">Client Contract Code Document ID 4010464</text>
+<text top="66" left="259" width="545" height="16" font="3">Haldia HPL tkIS Contract No.</text>
+<text top="74" left="209" width="576" height="27" font="15">Petrochemicals Ltd) OCU-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="109" left="120" width="53" height="60" font="19">&amp;</text>
+<text top="156" left="100" width="465" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="160" left="685" width="148" height="23" font="16">Rev|00|Page| 14| of | 23</text>
+<text top="217" left="192" width="459" height="17" font="4">Acceptance criteria shall be conforming the referenced code.</text>
+<text top="245" left="194" width="640" height="17" font="4">Ultrasonic testing may be substituted for radiography if approved by Owner/ Consultant.</text>
+<text top="274" left="97" width="135" height="17" font="3">13.9. REPAIRS</text>
+<text top="305" left="160" width="11" height="13" font="0">a.</text>
+<text top="302" left="194" width="641" height="17" font="3">No welding joints shall be repaired more than twice. If the weld is still not acceptable</text>
+<text top="330" left="193" width="642" height="17" font="4">after the second repair, Owner/ Consultant shall have the sole authority to permit</text>
+<text top="359" left="193" width="477" height="17" font="3">additional repair attempt or to require the entire weld be cut out.</text>
+<text top="387" left="193" width="345" height="17" font="4">Cracked welds shall be cut out and re-welded.</text>
+<text top="416" left="194" width="640" height="17" font="3">Repair welding shall be performed using a properly qualified and approved procedure.</text>
+<text top="444" left="194" width="640" height="17" font="3">In- process repairs (i.e. repairs performed prior to completion of the joint, using the same</text>
+<text top="473" left="192" width="642" height="17" font="3">welding procedure as for the original fabrication) during production does not require a</text>
+<text top="502" left="193" width="150" height="17" font="3">separate procedure.</text>
+<text top="529" left="192" width="641" height="16" font="3">All repaired welds shall, as a minimum, be inspected using the original testing method.</text>
+<text top="558" left="192" width="641" height="17" font="4">Additional test methods may also be required, if deemed necessary by Owner</text>
+<text top="558" left="823" width="11" height="17" font="4">/</text>
+<text top="587" left="193" width="83" height="17" font="4">Consultant.</text>
+<text top="616" left="194" width="641" height="17" font="3">Damage to the base metal or welds, including dimensional changes caused by external</text>
+<text top="643" left="193" width="643" height="17" font="4">forces, requires special repair and inspection procedures to be submitted to Owner /</text>
+<text top="672" left="193" width="502" height="17" font="4">Consultant for review and approval prior to undertaking the repairs.</text>
+<text top="701" left="192" width="642" height="17" font="4">Any weld not meeting the acceptance criteria of the referenced code or standard shall</text>
+<text top="729" left="193" width="143" height="17" font="3">cut out or repaired.</text>
+<text top="757" left="194" width="640" height="17" font="4">Repair of surface defects in welds by chipping, grinding and gouging are permitted</text>
+<text top="787" left="193" width="640" height="16" font="3">provided the minimum required wall thickness plus corrosion allowance is maintained.</text>
+<text top="815" left="194" width="640" height="17" font="4">Removal of defects shall be verified by magnetic particle or liquid penetrant examination.</text>
+<text top="843" left="194" width="641" height="17" font="3">Repair welding of minor defects, as defined below, shall be done by qualified welders</text>
+<text top="872" left="193" width="270" height="17" font="4">using a qualified welding procedure.</text>
+<text top="900" left="193" width="640" height="17" font="4">Major defects in welds and base materials, as defined in below table shall be repaired</text>
+<text top="928" left="193" width="642" height="17" font="4">only after a written procedure for each individual repair has been approved by Owner</text>
+<text top="928" left="826" width="9" height="17" font="4">/</text>
+<text top="957" left="193" width="642" height="17" font="4">Consultant. The written procedure shall include a sketch detailing extent and location of</text>
+<text top="986" left="193" width="641" height="17" font="4">the defect, how defects will be removed, how removal will be verified, qualified welding</text>
+<text top="1015" left="193" width="639" height="17" font="3">procedure to be used, subsequent heat treatment and non-destructive examination.</text>
+<text top="1071" left="193" width="143" height="17" font="3">MAJOR DEFECTS</text>
+<text top="1129" left="286" width="430" height="17" font="3">BASE METAL WELD METAL</text>
+<text top="1148" left="192" width="523" height="17" font="4">Crack Crack, except crater cracks</text>
+<text top="1169" left="193" width="591" height="17" font="3">Repair cavity greater than 10 square Repair cavity greater than 10 square</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 30 of A4</text>
+</page>
+<page number="15" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="26" size="16" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="27" size="12" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="28" size="12" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+	<fontspec id="29" size="5" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="711" width="95" height="12" font="0">HPL Contract No.</text>
+<text top="39" left="134" width="467" height="12" font="0">Plant Client Contract Code Document ID</text>
+<text top="46" left="730" width="59" height="15" font="2">4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \EOPSYSS</text>
+<text top="155" left="100" width="733" height="22" font="26">thyssenkrupp STEEL PIPING at HPL, Haldia Rev oo|Page 15 | of | 38</text>
+<text top="216" left="192" width="368" height="18" font="4">inches inches</text>
+<text top="237" left="192" width="498" height="17" font="3">(65 square centimetres) (65 square centimetres)</text>
+<text top="257" left="193" width="570" height="17" font="4">Repair cavity greater than 50% of Repair cavity greater than 50% of</text>
+<text top="276" left="191" width="391" height="17" font="3">thickness thickness</text>
+<text top="295" left="191" width="619" height="17" font="4">Weld build up to correct manufacturing Lack of fusion and/or penetration etc. at</text>
+<text top="315" left="192" width="350" height="16" font="3">errorTM root</text>
+<text top="333" left="193" width="268" height="17" font="4">Edge defect greater than 1” (25mm)</text>
+<text top="353" left="192" width="226" height="17" font="4">deep, or “t’, whichever is less.</text>
+<text top="373" left="193" width="288" height="17" font="4">Edge defect greater than 20% of edge</text>
+<text top="392" left="192" width="44" height="16" font="3">length</text>
+<text top="431" left="191" width="489" height="16" font="3">All hydro test leakages All hydro test leakages</text>
+<text top="469" left="150" width="682" height="17" font="4">Note: * All weld build up or buttering shall be 100% examined by MT, followed by RT or UT.</text>
+<text top="508" left="159" width="172" height="17" font="3">j. MINOR DEFECTS</text>
+<text top="546" left="263" width="400" height="17" font="3">BASE METAL WELD METAL</text>
+<text top="565" left="209" width="349" height="17" font="4">Repair cavities or edge defects | Porosity</text>
+<text top="585" left="208" width="358" height="16" font="3">smaller than above, excluding crack. | Undercut</text>
+<text top="604" left="498" width="110" height="17" font="4">Slag inclusions</text>
+<text top="623" left="498" width="98" height="17" font="4">Crater cracks</text>
+<text top="662" left="97" width="627" height="17" font="3">13.10. DOCUMENTS TO BE SUBMITTED BY CONTRACTOR (4 COPIES EACH)</text>
+<text top="700" left="160" width="673" height="17" font="4">a. Batch test Certificates, for the electrodes used, obtained from the Electrode</text>
+<text top="727" left="204" width="112" height="17" font="3">Manufacturers.</text>
+<text top="757" left="204" width="280" height="17" font="3">Proposed Heat Treatment Procedure.</text>
+<text top="785" left="204" width="172" height="17" font="4">Heat Treatment Charts.</text>
+<text top="814" left="203" width="240" height="16" font="3">Weld joint hardness test results.</text>
+<text top="842" left="203" width="632" height="17" font="4">Welding Procedure Specifications as per ASME Section-IX immediately after receipt of</text>
+<text top="842" left="173" width="0" height="16" font="27">o2</text>
+<text top="787" left="173" width="0" height="16" font="28">9</text>
+<text top="772" left="173" width="0" height="16" font="28"> </text>
+<text top="756" left="173" width="0" height="16" font="28">5</text>
+<text top="871" left="203" width="73" height="17" font="3">the order.</text>
+<text top="899" left="203" width="494" height="17" font="3">Welding Procedure Qualification records as per ASME Section-IX.</text>
+<text top="927" left="160" width="675" height="17" font="3">g. Welder Performance Qualification records as per ASME Section-IX immediately after</text>
+<text top="906" left="165" width="0" height="7" font="29">+</text>
+<text top="956" left="204" width="280" height="17" font="4">conducting Welder Qualification Test.</text>
+<text top="985" left="161" width="432" height="16" font="3">h. Radiography Procedure and other NDT procedures.</text>
+<text top="1014" left="161" width="585" height="17" font="3">I. Radiography test Report along with Radiography and other NDT reports.</text>
+<text top="1053" left="97" width="736" height="17" font="3">Followings are the welding specification for guidelines/ reference purpose only. Specific requirement</text>
+<text top="1082" left="97" width="736" height="17" font="3">like welding specification, preheating, post heating, PWHT, NDT etc. as per applicable codes and</text>
+<text top="1111" left="97" width="323" height="17" font="4">specification requirement shall be followed.</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1218" left="413" width="374" height="8" font="9">assirication 34 of A4</text>
+</page>
+<page number="16" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="114" left="224" width="590" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| NEOoscss*®</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 16| of | 98</text>
+<text top="340" left="259" width="552" height="14" font="1">PIPES ASTM 4 106 GR.B, API5L GR.BPSLI, SPSL GR.X-42 PSL, APISL GR.X-60 PSL2</text>
+<text top="368" left="259" width="537" height="14" font="2">FITTINGS - ASTM 4 105, ASTM 234 GR. WPB, ASTM 4 234 GR. WPB - Ww, MSS SP-75 GR.</text>
+<text top="384" left="109" width="370" height="14" font="1">MATERISL SPECIFICATIONS ‘ WPHY-42</text>
+<text top="411" left="259" width="328" height="16" font="3">FLANGES: ASTM 4 105, MSSSP-44 GR.F-42</text>
+<text top="449" left="259" width="51" height="14" font="1">OTHERS :</text>
+<text top="480" left="109" width="113" height="14" font="2">BASE METAL “P'’NO. :</text>
+<text top="480" left="539" width="2" height="14" font="1">1</text>
+<text top="535" left="128" width="105" height="14" font="2">WELDING PROCESS:</text>
+<text top="507" left="495" width="90" height="14" font="2">GROOVE JOINTS :</text>
+<text top="535" left="389" width="26" height="14" font="2">BUTT</text>
+<text top="535" left="637" width="96" height="14" font="2">OTHER THAN BUTT</text>
+<text top="564" left="294" width="101" height="14" font="1">ROOTPASS: GTAW</text>
+<text top="564" left="438" width="103" height="14" font="1">FILLER PASS : SMAW</text>
+<text top="562" left="556" width="99" height="14" font="2">ROOT PASS: GTAW</text>
+<text top="564" left="693" width="101" height="14" font="1">FILLERPASS : GTAW</text>
+<text top="628" left="122" width="118" height="15" font="2">WELDING MATERIALS :</text>
+<text top="592" left="497" width="88" height="14" font="1">GROOVE JOINTS ;</text>
+<text top="625" left="389" width="26" height="14" font="2">BUTT</text>
+<text top="625" left="589" width="194" height="14" font="2">OTHER THAN BUTT (FILLET</text>
+<text top="625" left="734" width="49" height="14" font="2">/ SOCKET)</text>
+<text top="662" left="259" width="161" height="14" font="1">ROOT PASS: ER 70SG/ER 70S2</text>
+<text top="662" left="435" width="99" height="14" font="1">FILLER PASS: E 7018</text>
+<text top="654" left="557" width="96" height="14" font="1">ROOT PASS: ER 70</text>
+<text top="669" left="574" width="63" height="14" font="2">SG/ER 70S2</text>
+<text top="654" left="667" width="155" height="14" font="1">FILLER PASS: ER 70 SG? ER 70</text>
+<text top="669" left="667" width="11" height="14" font="2">$2</text>
+<text top="699" left="325" width="383" height="13" font="1">BACKINGRING : CONSUMABLE INSERT :</text>
+<text top="727" left="109" width="212" height="16" font="3">JOINT PREPARATION : ASME B313</text>
+<text top="757" left="109" width="197" height="14" font="2">GASES PURGING</text>
+<text top="800" left="109" width="197" height="13" font="1">GAS COMPOSITION : PURGING</text>
+<text top="843" left="109" width="568" height="14" font="1">PREHEATING PREHEAT TEMP. : 10°C ( MIN.) POST HEATING</text>
+<text top="876" left="216" width="423" height="15" font="2">CONTINUITY OF WELDING AND PREHEAT : INTERPASS TEMP. :</text>
+<text top="909" left="259" width="366" height="14" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="932" left="109" width="89" height="15" font="2">POST WELD HEAT</text>
+<text top="941" left="109" width="543" height="13" font="1">TREATMENT RATE OF HEATING MIN. HOLDING TIME :</text>
+<text top="972" left="259" width="392" height="14" font="2">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="988" left="251" width="2" height="12" font="0">|</text>
+<text top="1001" left="259" width="213" height="14" font="1">CHARPY &#34;¥&#34; NOTCH IMPACT MIN.</text>
+<text top="1017" left="260" width="209" height="14" font="2">TEST VALUE ‘</text>
+<text top="1031" left="109" width="130" height="13" font="1">MECHANICAL PROPERTY</text>
+<text top="1044" left="109" width="251" height="14" font="2">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="1075" left="259" width="59" height="15" font="2">HARDNESS:</text>
+<text top="1110" left="109" width="212" height="16" font="3">CODE OF FABRICATION : ASME B 313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">32 of 44</text>
+</page>
+<page number="17" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="30" size="18" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] OCU-cpU| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD</text>
+<text top="154" left="100" width="733" height="24" font="30">thyssenkrupp STEEL PIPING at HPL, Haldia Rev[oo]Pace 17 of | 38</text>
+<text top="255" left="264" width="249" height="16" font="3">PIPES ASTM &amp; 312 TP 304</text>
+<text top="292" left="107" width="546" height="18" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.F304, ASTM 4 403 GR.WP304-S</text>
+<text top="329" left="264" width="257" height="16" font="3">FLANGES: ASTM 4 182 GR-F304</text>
+<text top="368" left="264" width="53" height="15" font="2">OTHERS :</text>
+<text top="399" left="107" width="118" height="15" font="2">BASE METAL “P'’NO. :</text>
+<text top="398" left="541" width="5" height="15" font="2">8</text>
+<text top="425" left="537" width="94" height="15" font="2">GROOVE JOINTS :</text>
+<text top="453" left="127" width="652" height="15" font="2">WELDING PROCESS: BUTT OTHER THAN BUTT [FILLET / SOCKET)</text>
+<text top="483" left="440" width="71" height="15" font="2">FILLERPASS:</text>
+<text top="490" left="285" width="510" height="14" font="2">ROOTPASS: GTAW GTAWISMAly ROOT PASS: GTAW FILLERPASS: GTAW</text>
+<text top="529" left="267" width="92" height="15" font="2">GROOVE JOINTS :</text>
+<text top="547" left="820" width="7" height="12" font="0">|</text>
+<text top="563" left="120" width="659" height="15" font="2">WELDING MATERIALS : BUTT OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="593" left="419" width="88" height="15" font="2">FILLER PASS: ER</text>
+<text top="600" left="264" width="501" height="16" font="3">ROOT PASS: ER 308 908) F 3008-15/16 ROOT PASS: ER 308 | FILLER PASS: ER 308</text>
+<text top="639" left="319" width="385" height="15" font="2">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="666" left="107" width="221" height="14" font="2">JOINT PREPSRATION : ASME B31.3</text>
+<text top="693" left="107" width="644" height="15" font="2">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="737" left="107" width="643" height="15" font="2">GAS COMPOSITION : PURGING : 99.997% SHIELDING : 99.997%</text>
+<text top="782" left="107" width="564" height="14" font="2">PREHEATING PREHEAT TEMP. : 10°C ( MIN.) POST HEATING</text>
+<text top="818" left="215" width="497" height="15" font="2">CONTINUITY OF WELDING AND PREHEAT : INTER PASS TEMP. : 176°C Max</text>
+<text top="851" left="264" width="353" height="15" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="875" left="107" width="93" height="15" font="2">POST WELD HEAT</text>
+<text top="883" left="107" width="538" height="15" font="2">TREATMENT RATE OF HEATING MIN. HOLDING TIME :</text>
+<text top="916" left="264" width="380" height="15" font="2">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="947" left="264" width="382" height="15" font="2">CHARPY &#34;V&#34; NOTCH . 7</text>
+<text top="954" left="264" width="377" height="28" font="22">IMPACT TEST VALUE iis am</text>
+<text top="980" left="107" width="135" height="15" font="2">MECHANICAL PROPERTY</text>
+<text top="995" left="107" width="262" height="16" font="3">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="1028" left="264" width="62" height="15" font="2">HARDNESS:</text>
+<text top="1064" left="107" width="221" height="16" font="3">CODE OF FABRICATION: |ASME B313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">33 of 44</text>
+</page>
+<page number="18" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] OCU-cpU| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD</text>
+<text top="154" left="100" width="733" height="24" font="30">thyssenkrupp STEEL PIPING at HPL, Haldia Rev[oo]Pace 18 of | OB</text>
+<text top="228" left="261" width="263" height="16" font="3">PIPES ASTM 4 312 TP 304H</text>
+<text top="264" left="107" width="562" height="18" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.FS04H, ASTM 4 403 GR.WP304H-S</text>
+<text top="301" left="261" width="270" height="16" font="3">FLANGES : ASTM 4 182 GR.F304H</text>
+<text top="339" left="261" width="52" height="15" font="2">OTHERS :</text>
+<text top="370" left="107" width="116" height="15" font="2">BASE METAL “P' NO. :</text>
+<text top="368" left="537" width="5" height="14" font="2">8</text>
+<text top="431" left="127" width="107" height="14" font="2">WELDING PROCESS;</text>
+<text top="395" left="534" width="92" height="14" font="2">GROOVE JOINTS :</text>
+<text top="423" left="385" width="27" height="14" font="2">BUTT</text>
+<text top="423" left="583" width="194" height="14" font="2">OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="452" left="351" width="405" height="14" font="2">| FILLERPASS: | |</text>
+<text top="459" left="287" width="504" height="14" font="2">ROOTPASS: GTAW Serres: | ROOTPASS: GTAW | FILLERPASS: GTAW</text>
+<text top="497" left="264" width="90" height="14" font="2">GROOVE JOINTS :</text>
+<text top="531" left="120" width="657" height="14" font="2">WELDING MATERIALS- BUTT OTHER THAN BUTT (FILLET</text>
+<text top="531" left="727" width="49" height="14" font="2">/ SOCKET)</text>
+<text top="560" left="423" width="184" height="14" font="2">FILLER PASS: ER |</text>
+<text top="568" left="261" width="510" height="16" font="3">ROOT PASS: ER308H PIER PASS: ER |ROOT PASS: ER 308H|FILLER PASS: ER 08H</text>
+<text top="606" left="319" width="385" height="14" font="2">BACKINGRING - CONSUMABLE INSERT-</text>
+<text top="632" left="107" width="217" height="14" font="2">JOINT PREPARATION. | ASME Baia</text>
+<text top="659" left="107" width="642" height="14" font="2">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="703" left="107" width="641" height="14" font="2">GAS COMPOSITION: PURGING : 9.997% SHIELDING : 99.97%</text>
+<text top="747" left="107" width="564" height="14" font="2">PREHEATING PREHEAT TEMP. : 10&#34;C: (MIN) POST HEATING</text>
+<text top="782" left="219" width="488" height="15" font="2">CONTINUITY OF WELDING AND PREHEAT - INTERPASS TEMP. : 175°C Max</text>
+<text top="814" left="261" width="356" height="14" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="837" left="107" width="91" height="15" font="2">POST WELDHEAT</text>
+<text top="846" left="107" width="538" height="14" font="2">TREATMENT RATE OF HEATING MIN, HOLDING TIME:</text>
+<text top="879" left="261" width="384" height="14" font="2">METHOD OF COOLING : RATE OF COOLING:</text>
+<text top="911" left="261" width="385" height="14" font="2">CHARPY &#34;W&#34; NOTCHIMPACT | ;</text>
+<text top="918" left="261" width="381" height="26" font="17">TEST VALUE MIN:- AVG:</text>
+<text top="942" left="107" width="133" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="958" left="107" width="258" height="14" font="2">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="990" left="261" width="61" height="14" font="2">HARONESS:</text>
+<text top="1025" left="107" width="217" height="16" font="3">CODEOF FABRICATION: [ASME B313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">34 of 44</text>
+</page>
+<page number="19" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- eld dL</text>
+<text top="156" left="100" width="733" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev|oo|Pacd 19 of | 38</text>
+<text top="226" left="255" width="277" height="17" font="3">PIPES ASTM 4 312 TP 304L</text>
+<text top="264" left="104" width="567" height="17" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GRF304L, ASTM 4 403 GR.WPS04L-S</text>
+<text top="301" left="255" width="284" height="16" font="3">FLANGES: ASTM 4 182 GRF3O4L</text>
+<text top="340" left="255" width="51" height="15" font="2">OTHERS :</text>
+<text top="372" left="104" width="113" height="15" font="2">BASE METAL “P'’NO. :</text>
+<text top="370" left="536" width="5" height="15" font="2">8</text>
+<text top="397" left="533" width="90" height="15" font="2">GROOVE JOINTS :</text>
+<text top="426" left="124" width="658" height="15" font="2">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET? SOCKET)</text>
+<text top="456" left="456" width="68" height="15" font="2">FILLERPASS:</text>
+<text top="463" left="292" width="505" height="15" font="2">ROOTPASS: GTAW GTAWISMAly ROOTPASS: GTAW FILLERPASS: GTAW</text>
+<text top="502" left="258" width="88" height="15" font="2">GROOVE JOINTS :</text>
+<text top="537" left="117" width="665" height="15" font="2">WELDING MATERIALS : BUTT OTHER THAN BUTT (FILLET? SOCKET)</text>
+<text top="567" left="435" width="85" height="15" font="2">FILLER PASS: ER</text>
+<text top="574" left="255" width="519" height="16" font="3">ROOT PASS: ER 308L 408L/ E 308L-15/16 ROOT PASS: ER 308L | FILLER PASS: ER 308L</text>
+<text top="613" left="323" width="386" height="15" font="2">BACKINGRING : CONSUMABLE INSERT :</text>
+<text top="640" left="104" width="212" height="15" font="2">JOINT PREPARATION : ASME B313</text>
+<text top="667" left="104" width="650" height="15" font="2">GASES PURGING ; ARGON SHIELDING : ARGON</text>
+<text top="712" left="104" width="649" height="15" font="2">GAS COMPOSITION : PURGING : 99.997% SHIELDING : 99.997%</text>
+<text top="757" left="104" width="574" height="14" font="2">PREHEATING PREHEAT TEMP. : 10°C [ MIN.) POST HEATING</text>
+<text top="793" left="225" width="477" height="15" font="2">CONTINUITY OF WELDING SND PREHEAT : INTERPASS TEMP. : 175°C Max</text>
+<text top="826" left="255" width="371" height="15" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="850" left="104" width="89" height="15" font="2">POST WELD HEAT</text>
+<text top="859" left="104" width="548" height="15" font="2">TREATMENT RATE OF HEATING MIN. HOLDING TIME :</text>
+<text top="892" left="255" width="397" height="15" font="2">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="921" left="255" width="398" height="15" font="2">CHARPY &#34;¥&#34; NOTCH IMPACT TEST MIN ANG.</text>
+<text top="937" left="255" width="32" height="14" font="2">VALUE</text>
+<text top="952" left="104" width="130" height="15" font="2">MECHANICAL PROPERTY</text>
+<text top="964" left="104" width="251" height="15" font="2">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="997" left="255" width="60" height="15" font="2">HARDNESS:</text>
+<text top="1033" left="104" width="212" height="16" font="3">CODE OF FABRICATION : ASME B 313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">35 of 44</text>
+</page>
+<page number="20" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| NEOoscss*®</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 201 of | 98</text>
+<text top="226" left="256" width="271" height="16" font="3">PIPES ASTM 4 312 TP 316</text>
+<text top="262" left="108" width="548" height="17" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.F316, ASTM 4 403 GR.WP316-S</text>
+<text top="298" left="256" width="279" height="16" font="3">FLANGES: ASTM 4 182 GRF3I6</text>
+<text top="335" left="256" width="49" height="14" font="2">OTHERS :</text>
+<text top="366" left="108" width="111" height="13" font="1">BASE METAL “P'’NO. :</text>
+<text top="364" left="535" width="5" height="14" font="1">8</text>
+<text top="426" left="127" width="102" height="14" font="1">WELDING PROCESS:</text>
+<text top="390" left="532" width="88" height="14" font="2">GROOVE JOINTS :</text>
+<text top="418" left="389" width="26" height="14" font="1">BUTT</text>
+<text top="418" left="594" width="186" height="13" font="1">OTHER THAN BUTT (FILLET SOCKET)</text>
+<text top="447" left="461" width="67" height="14" font="1">FILLERPASS ;</text>
+<text top="454" left="296" width="498" height="14" font="2">ROOTPASS: GTAW GTAWISMAly ROOTPASS: GTAW FILLER PASS: GTAW</text>
+<text top="491" left="258" width="86" height="15" font="2">GROOVE JOINTS :</text>
+<text top="524" left="389" width="390" height="14" font="2">BUTT OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="542" left="121" width="116" height="14" font="2">WELDING MATERIALS :</text>
+<text top="561" left="441" width="83" height="14" font="1">FILLER PASS: ER</text>
+<text top="568" left="256" width="551" height="26" font="17">ROOT PASS: ER 316/ER SI6L 316 /ER SI6L/E 316- ROOT ae atB FILLER PASS: ER 3167 ER SI6L</text>
+<text top="592" left="441" width="84" height="14" font="2">15/16 #7 E SIGL-15/16</text>
+<text top="627" left="327" width="382" height="14" font="1">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="653" left="108" width="207" height="14" font="1">JOINT PREPARATION : ASME B31.3</text>
+<text top="679" left="108" width="645" height="14" font="1">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="722" left="108" width="643" height="14" font="2">GAS COMPOSITION : PURGING ; 99.997% SHIELDING : 99.99%</text>
+<text top="765" left="108" width="569" height="15" font="2">PREHEATING PREHEAT TEMP. : 10°C ( MIN.) POST HEATING</text>
+<text top="800" left="231" width="466" height="14" font="1">CONTINUITY OF WELDING AND PREHEAT : INTER PASS TEMP, ; 175°C Max</text>
+<text top="831" left="256" width="371" height="15" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="855" left="108" width="87" height="14" font="1">POST WELD HEAT</text>
+<text top="863" left="108" width="545" height="14" font="1">TREATMENT RATE OF HEATING MIN. HOLDING TIME ;</text>
+<text top="895" left="256" width="397" height="14" font="1">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="925" left="256" width="398" height="14" font="2">CHARPY &#34;¥&#34; NOTCH IMPACT TEST . .</text>
+<text top="932" left="256" width="395" height="15" font="2">VALUE MIN: AVG:</text>
+<text top="957" left="108" width="127" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="971" left="108" width="246" height="16" font="3">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="1003" left="256" width="58" height="13" font="1">HARDNESS:</text>
+<text top="1038" left="108" width="207" height="16" font="3">CODE OF FABRICATION: |ASME B313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">36 of 44</text>
+</page>
+<page number="21" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- eld dL</text>
+<text top="156" left="100" width="733" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev|oo|Pacd 21 of | 38</text>
+<text top="226" left="263" width="262" height="16" font="3">PIPES ASTM 4 312 TP 316H</text>
+<text top="263" left="107" width="562" height="17" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.F3IGH, ASTM 4 403 GR.WPSIBH-S</text>
+<text top="300" left="263" width="270" height="16" font="3">FLANGES: ASTM 4 182 GRFSI6H</text>
+<text top="338" left="263" width="52" height="14" font="2">OTHERS :</text>
+<text top="369" left="107" width="117" height="15" font="2">BASE METAL “P' NO. :</text>
+<text top="367" left="542" width="5" height="14" font="1">8</text>
+<text top="431" left="127" width="108" height="15" font="2">WELDING PROCESS;</text>
+<text top="394" left="538" width="93" height="15" font="2">GROOVE JOINTS :</text>
+<text top="422" left="387" width="27" height="14" font="2">BUTT</text>
+<text top="422" left="587" width="196" height="14" font="2">OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="459" left="288" width="105" height="14" font="2">ROOTPASS: GTAW</text>
+<text top="451" left="447" width="70" height="14" font="2">FILLER PASS:</text>
+<text top="467" left="448" width="68" height="15" font="2">GTAWISMAW</text>
+<text top="459" left="551" width="102" height="14" font="2">ROOT PASS: GTAW</text>
+<text top="459" left="691" width="107" height="14" font="2">FILLER PASS: GTAW</text>
+<text top="549" left="120" width="123" height="14" font="2">WELDING MATERIALS :</text>
+<text top="497" left="265" width="91" height="14" font="2">GROOVE JOINTS :</text>
+<text top="531" left="387" width="27" height="15" font="2">BUTT</text>
+<text top="531" left="587" width="196" height="14" font="2">OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="584" left="263" width="110" height="15" font="2">ROOT PASS: ER 16H</text>
+<text top="575" left="425" width="88" height="15" font="2">FILLER PASS: ER</text>
+<text top="591" left="425" width="86" height="14" font="2">SIBH ? E 316H-15/16</text>
+<text top="582" left="546" width="229" height="16" font="2">ROOT PASS: ER 316H FILLER PASS: ER 316H</text>
+<text top="635" left="322" width="387" height="15" font="2">BACKINGRING - CONSUMABLE INSERT:</text>
+<text top="662" left="107" width="219" height="15" font="2">JOINT PREPARATION, | ASME E313</text>
+<text top="689" left="107" width="649" height="14" font="2">GASES PURGING : ARGON SHIELDING ARGON</text>
+<text top="733" left="107" width="647" height="15" font="2">GAS COMPOSITION: PURGING : 99.997% SHIELDING — : 99.97%</text>
+<text top="767" left="107" width="569" height="28" font="22">PREHEATING PREHEAT TEMP. : 10°C: (MIN) POST HEATING</text>
+<text top="812" left="219" width="493" height="15" font="2">CONTINUITY OF WELDING AND PREHEAT : INTERPASS TEMP. : 175°C Max</text>
+<text top="845" left="263" width="359" height="14" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="868" left="107" width="92" height="15" font="2">POST WELDHEAT</text>
+<text top="877" left="107" width="543" height="14" font="2">SS ETMENT RATE OF HEATING MIN, HOLDING TIME:</text>
+<text top="909" left="263" width="388" height="14" font="1">METHOD OF COOLING - RATE OF COOLING;</text>
+<text top="942" left="263" width="388" height="14" font="1">CHARPY “Y&#34; NOTCHIMPACT ; ;</text>
+<text top="948" left="263" width="384" height="28" font="22">TEST VALUE wine Ave</text>
+<text top="973" left="107" width="134" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="989" left="107" width="261" height="14" font="2">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="1021" left="263" width="62" height="14" font="1">HARDNESS:</text>
+<text top="1057" left="107" width="219" height="16" font="3">CODEOF FABRICATION: [ASME B313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">37 of 44</text>
+</page>
+<page number="22" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="31" size="19" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| NEOoscss*®</text>
+<text top="156" left="100" width="733" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev|oo|Pacd 22 | of | 38</text>
+<text top="224" left="262" width="259" height="16" font="3">PIPES &amp;STM 4 312 TP SI6L</text>
+<text top="260" left="105" width="558" height="17" font="3">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GRFSIBL, ASTM 4 403 GR.WPSIBL-S</text>
+<text top="295" left="262" width="267" height="16" font="3">FLANGES: ASTM 4 182 GRFSIBL</text>
+<text top="332" left="262" width="53" height="14" font="1">OTHERS :</text>
+<text top="362" left="105" width="118" height="14" font="2">BASE METAL “P'’NO. :</text>
+<text top="360" left="541" width="5" height="14" font="1">8</text>
+<text top="421" left="125" width="109" height="14" font="1">WELDING PROCESS :</text>
+<text top="386" left="537" width="94" height="14" font="1">GROOVE JOINTS :</text>
+<text top="413" left="385" width="28" height="14" font="2">BUTT</text>
+<text top="413" left="585" width="197" height="14" font="1">OTHER THAN BUTT (FILLET? SOCKET)</text>
+<text top="448" left="286" width="105" height="14" font="1">ROOT PASS: GTAW</text>
+<text top="441" left="444" width="71" height="14" font="1">FILLERPASS :</text>
+<text top="448" left="445" width="207" height="14" font="2">GT AWISMAy ROOT PASS: GTAW</text>
+<text top="448" left="690" width="107" height="14" font="1">FILLER PASS: GTAW</text>
+<text top="535" left="118" width="123" height="14" font="1">WELDING MATERIALS :</text>
+<text top="485" left="264" width="91" height="14" font="1">GROOVE JOINTS :</text>
+<text top="518" left="385" width="28" height="14" font="1">BUTT</text>
+<text top="518" left="585" width="197" height="14" font="1">OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="569" left="262" width="109" height="14" font="1">ROOT PASS: ER 3i6L</text>
+<text top="560" left="422" width="88" height="14" font="1">FILLER PASS: ER</text>
+<text top="567" left="422" width="232" height="25" font="17">SIL HE SI6L-15/16 ROOT PASS: ER 316L</text>
+<text top="569" left="664" width="109" height="14" font="1">FILLER PASS: ER 316L</text>
+<text top="618" left="320" width="387" height="14" font="1">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="644" left="105" width="220" height="14" font="1">JOINT PREPARATION : ASME B313</text>
+<text top="669" left="105" width="650" height="14" font="1">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="712" left="105" width="648" height="14" font="1">GAS COMPOSITION : PURGING : 99.997% SHIELDING : 9.997%</text>
+<text top="754" left="105" width="570" height="14" font="1">PREHEATING PREHEAT TEMP. : 10°C ( MIN.) POST HEATING</text>
+<text top="788" left="216" width="218" height="14" font="2">CONTINUITY OF WELDING AND PREHEAT :</text>
+<text top="788" left="548" width="164" height="14" font="1">INTER PASS TEMP. : 175°C Max</text>
+<text top="819" left="262" width="359" height="14" font="1">HOLDING TEMP HOLDING TIME:</text>
+<text top="842" left="105" width="93" height="14" font="1">POST WELD HEAT</text>
+<text top="851" left="105" width="544" height="14" font="1">TREATMENT RATE OF HEATING MIN. HOLDING TIME:</text>
+<text top="882" left="262" width="386" height="14" font="1">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="919" left="262" width="387" height="14" font="1">CHARPY &#34;y&#34; NOTCH IMPACT .</text>
+<text top="926" left="262" width="384" height="25" font="17">TEST VALUE MIN Av</text>
+<text top="949" left="105" width="135" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="964" left="105" width="261" height="20" font="7">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="1001" left="262" width="62" height="14" font="1">HARDNESS:</text>
+<text top="1035" left="105" width="220" height="16" font="3">CODEOF FABRICATION: |ASME B313</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">38 of 44</text>
+</page>
+<page number="23" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="32" size="13" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] OCU-cpU| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD</text>
+<text top="154" left="100" width="733" height="24" font="30">thyssenkrupp STEEL PIPING at HPL, Haldia Rev|oo]Paae| 23 of | OB</text>
+<text top="225" left="261" width="253" height="17" font="4">PIPES ASTM 4 312 TP 321</text>
+<text top="264" left="107" width="542" height="18" font="20">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR-F321, ASTM 4 403 GR.WP321-S</text>
+<text top="302" left="261" width="261" height="17" font="4">FLANGES: ASTM 4 182 GRF321</text>
+<text top="342" left="261" width="52" height="15" font="2">OTHERS :</text>
+<text top="375" left="107" width="116" height="15" font="2">BASE METAL “P'’NO. :</text>
+<text top="373" left="537" width="5" height="15" font="2">8</text>
+<text top="401" left="534" width="92" height="15" font="2">GROOVE JOINTS :</text>
+<text top="430" left="127" width="651" height="15" font="2">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="461" left="444" width="70" height="15" font="2">FILLERPASS:</text>
+<text top="469" left="287" width="505" height="15" font="2">ROOTPASS: GTAW GTAWISMAl ROOT PASS: GTAW FILLERPASS: GTAW</text>
+<text top="509" left="264" width="90" height="15" font="2">GROOVE JOINTS ;</text>
+<text top="544" left="385" width="393" height="15" font="2">BUTT OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="563" left="120" width="121" height="15" font="2">WELDING MATERIALS :</text>
+<text top="591" left="423" width="87" height="15" font="2">FILLER PASS: ER</text>
+<text top="598" left="261" width="503" height="17" font="4">ROOT PASS: ER 34? 347) 3947-45016 ROOT PASS: ER 34? | FILLER PASS: ER 347</text>
+<text top="653" left="320" width="384" height="15" font="2">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="682" left="107" width="217" height="15" font="2">JOINT PREPARATION ; ASME B313</text>
+<text top="709" left="107" width="643" height="16" font="3">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="755" left="107" width="642" height="15" font="2">GAS COMPOSITION : PURGING =; 99.997% SHIELDING : 99.997%</text>
+<text top="802" left="107" width="565" height="15" font="2">PREHEATING PREHEAT TEMP, : 10'C (MIN) POST HEATING</text>
+<text top="839" left="219" width="215" height="15" font="2">CONTINUITY OF WELDING AND PREHEAT :</text>
+<text top="839" left="545" width="162" height="15" font="2">INTERPASS TEMP. ; 175°C Max</text>
+<text top="872" left="261" width="357" height="15" font="2">HOLDING TEMP HOLDING TIME:</text>
+<text top="897" left="107" width="91" height="15" font="2">POST WELDHEAT</text>
+<text top="906" left="107" width="539" height="15" font="2">PATENT RATE OF HEATING MIN, HOLDING TIME:</text>
+<text top="940" left="261" width="384" height="15" font="2">METHOD OF COOLING : RATE OF COOLING :</text>
+<text top="974" left="261" width="385" height="15" font="2">CHARPY &#34;y&#34; NOTCHIMPACT ; ;</text>
+<text top="982" left="261" width="382" height="27" font="15">TEST VALUE wae Av</text>
+<text top="1007" left="107" width="133" height="15" font="2">MECHANICAL PROPERTY</text>
+<text top="1024" left="107" width="257" height="15" font="2">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="1057" left="261" width="61" height="16" font="3">HARDNESS:</text>
+<text top="1095" left="107" width="217" height="17" font="4">CODEOF FABRICATION: |ASME B31</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="734" width="53" height="15" font="2">39 of 44</text>
+</page>
+<page number="24" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] Ocu-cpu| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="114" left="224" width="590" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- Snare MD</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 24! of | 98</text>
+<text top="227" left="257" width="261" height="13" font="0">PIPES ASTM A 335 GR. P11</text>
+<text top="264" left="98" width="575" height="14" font="2">MATERIAL SPECIRICATIONS FITTINGS : ASTM A 182 GR.F11 CL.2, ASTM A 234 GR.WP11 CL.1</text>
+<text top="303" left="257" width="282" height="13" font="0">FLANGES : ASTM A 182 GR.F11 CL.2</text>
+<text top="340" left="256" width="52" height="13" font="0">OTHERS :</text>
+<text top="368" left="98" width="447" height="13" font="0">BASE METAL ’'P'’NO. : 4</text>
+<text top="390" left="497" width="93" height="13" font="0">GROOVE JOINTS :</text>
+<text top="419" left="120" width="662" height="13" font="1">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET / SOCKET)</text>
+<text top="448" left="445" width="68" height="13" font="1">FILLER PASS :</text>
+<text top="455" left="285" width="517" height="14" font="2">ROOT PASS: GTAW GTAWI/SMAW ROOT PASS: GTAW FILLER PASS : GTAW</text>
+<text top="495" left="500" width="90" height="13" font="0">GROOVE JOINTS :</text>
+<text top="539" left="114" width="121" height="13" font="0">WELDING MATERIALS :</text>
+<text top="529" left="384" width="26" height="13" font="0">BUTT</text>
+<text top="529" left="591" width="191" height="13" font="0">OTHER THAN BUTT (FILLET / SOCKET)</text>
+<text top="565" left="257" width="274" height="24" font="30">ROOT PASS: ER 808-82 PTER PASS” ER 80S:</text>
+<text top="564" left="548" width="238" height="22" font="3">ROOT PASS: ER 80S- | ER PASS: ER 808-B2</text>
+<text top="581" left="421" width="187" height="13" font="1">B2 B2</text>
+<text top="617" left="319" width="389" height="13" font="0">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="644" left="98" width="221" height="13" font="0">JOINT PREPARATION : ASME B31.3</text>
+<text top="670" left="98" width="662" height="13" font="0">GASES PURGING —_: ARGON SHIELDING : ARGON</text>
+<text top="716" left="98" width="663" height="13" font="0">GAS COMPOSITION : PURGING : 99.997% SHIELDING : 99.997%</text>
+<text top="753" left="564" width="247" height="15" font="2">POST HEATING : 300°C MIN. FOR 30MINUTES</text>
+<text top="758" left="98" width="274" height="16" font="3">PREHEATING : 450°</text>
+<text top="763" left="257" width="515" height="25" font="30">PREHEAT TEMP. : 190°C ( MIN.) FOLLOWED BY ASBESTOS COVER</text>
+<text top="794" left="175" width="579" height="18" font="20">CONTINUITY OF WELDING AND PREHEAT : INNERT PASS TEMP 250°C - 300°C DURING WELD SHALL BE MAINTAINED</text>
+<text top="830" left="257" width="513" height="15" font="2">HOLDING TEMP 705°C - 750°C HOLDING TIME: 1 HOUR PER INCH THK</text>
+<text top="855" left="98" width="311" height="13" font="0">POST WELD HEAT ;</text>
+<text top="863" left="98" width="603" height="14" font="2">TREATMENT RATE OF HEATING 200°C/HR MAX. MIN. HOLDING TIME: 2HOURS</text>
+<text top="895" left="257" width="473" height="14" font="1">METHOD OF COOLING : CONTROLLED RATE OF COOLING : 200°C/HR MAX.</text>
+<text top="932" left="256" width="395" height="13" font="0">CHARPY &#34;V&#34; NOTCH IMPACT . .</text>
+<text top="939" left="256" width="399" height="26" font="17">TEST VALUE MIN.- AVG:</text>
+<text top="964" left="98" width="125" height="13" font="0">MECHANICAL PROPERTY</text>
+<text top="981" left="98" width="256" height="16" font="3">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="1016" left="257" width="129" height="13" font="0">HARDNESS: 225 BHN MAX.</text>
+<text top="1053" left="98" width="221" height="13" font="0">CODE OF FABRICATION : ASME B 313</text>
+<text top="1098" left="97" width="84" height="13" font="1">TECHNICAL NOTES-</text>
+<text top="1136" left="99" width="373" height="13" font="1">1. POST WELD HEAT TREATMENT AND MAX HARDNESSISNOT MANDATORY</text>
+<text top="1136" left="421" width="274" height="13" font="1">ONLY WHEN THE UTSOF THE MATERIAL &lt;=71,000 PS AND THK</text>
+<text top="1136" left="685" width="46" height="13" font="1">&lt;= 12.7MM</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">40 of 44</text>
+</page>
+<page number="25" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="277" width="529" height="13" font="0">. HPL Contract No.</text>
+<text top="38" left="134" width="654" height="13" font="1">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="114" left="224" width="590" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="130" left="206" width="608" height="24" font="30">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 25| of | 98</text>
+<text top="228" left="255" width="264" height="13" font="1">PIPES ASTM A 335 GR. P11</text>
+<text top="266" left="98" width="576" height="13" font="1">MATERIAL SPECIFICATIONS FITTINGS : ASTM A 182 GR.F11 CL.2, ASTM A 234 GR.WP11 CL.1</text>
+<text top="305" left="255" width="285" height="13" font="1">FLANGES : ASTM A 182 GR.F11 CL.2</text>
+<text top="343" left="255" width="52" height="13" font="1">OTHERS :</text>
+<text top="371" left="98" width="447" height="13" font="1">BASE METAL “'P'’NO. : 4</text>
+<text top="394" left="497" width="93" height="13" font="1">GROOVE JOINTS :</text>
+<text top="424" left="120" width="662" height="13" font="1">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET</text>
+<text top="424" left="734" width="49" height="13" font="1">/ SOCKET)</text>
+<text top="453" left="448" width="68" height="13" font="1">FILLER PASS :</text>
+<text top="461" left="286" width="516" height="13" font="1">ROOT PASS: GTAW CTAWISMAW ROOT PASS : GTAW FILLER PASS: GTAW</text>
+<text top="502" left="500" width="90" height="13" font="1">GROOVE JOINTS :</text>
+<text top="546" left="113" width="120" height="13" font="1">WELDING MATERIALS :</text>
+<text top="537" left="385" width="26" height="13" font="1">BUTT</text>
+<text top="537" left="593" width="190" height="13" font="1">OTHER THAN BUTT (FILLET / SOCKET)</text>
+<text top="573" left="423" width="109" height="13" font="1">FILLER PASS: ER 80S-</text>
+<text top="581" left="255" width="179" height="13" font="1">ROOT PASS : ER 808-B2 B9</text>
+<text top="572" left="550" width="107" height="13" font="1">ROOT PASS : ER 80S-</text>
+<text top="581" left="598" width="188" height="13" font="1">B9 FILLER PASS: ER 80S-B2</text>
+<text top="626" left="321" width="82" height="13" font="1">BACKING RING :</text>
+<text top="626" left="589" width="121" height="13" font="1">CONSUMABLE INSERT :</text>
+<text top="653" left="98" width="114" height="13" font="1">JOINT PREPARATION :</text>
+<text top="653" left="257" width="95" height="13" font="1">ASME B31.31 &amp;IBR</text>
+<text top="681" left="98" width="662" height="13" font="1">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="727" left="98" width="663" height="13" font="1">GAS COMPOSITION : PURGING : 99.997% SHIELDING : 99.997%</text>
+<text top="765" left="565" width="245" height="15" font="2">POST HEATING : 300°C MIN. FOR 30MINUTES</text>
+<text top="769" left="98" width="273" height="19" font="20">PREHEATING - 450°</text>
+<text top="775" left="255" width="516" height="26" font="17">PREHEAT TEMP. &lt; 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER</text>
+<text top="808" left="177" width="575" height="17" font="4">CONTINUITY OF WELDING AND PREHEAT : INNERT PASS TEMP 250°C - 300°C DURING WELD SHALL BE MAINTAINED</text>
+<text top="844" left="255" width="515" height="15" font="2">HOLDING TEMP 705°C - 750°C HOLDING TIME: 1 HOUR PER INCH THK</text>
+<text top="869" left="98" width="547" height="13" font="1">POST WELD HEAT ; .</text>
+<text top="878" left="98" width="604" height="15" font="2">TREATMENT RATE OF HEATING 200°C/HR MAX. MIN. HOLDING TIME: 2HOURS</text>
+<text top="911" left="255" width="475" height="13" font="1">METHOD OF COOLING : CONTROLLED RATE OF COOLING : 200°C/HR MAX.</text>
+<text top="944" left="255" width="397" height="13" font="1">CHARPY &#34;V&#34; NOTCH IMPACT . .</text>
+<text top="952" left="255" width="402" height="26" font="17">TEST VALUE MIN-- NG:</text>
+<text top="978" left="98" width="124" height="13" font="1">MECHANICAL PROPERTY</text>
+<text top="994" left="98" width="254" height="14" font="1">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="1028" left="255" width="129" height="13" font="1">HARDNESS: 225 BHN MAX.</text>
+<text top="1065" left="98" width="248" height="13" font="1">CODE OF FABRICATION : ASME B31.3 &amp;IBR</text>
+<text top="1112" left="97" width="83" height="13" font="1">TECHNICAL NOTES-</text>
+<text top="1129" left="99" width="235" height="13" font="1">1. POST WELD HEAT TREATMENT</text>
+<text top="1129" left="238" width="325" height="13" font="1">SHALL BE DONE ASPER ASMESEC-IX&amp; IBR REQUIREVIENT FORALL THICKNESS</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">41 of 44</text>
+</page>
+<page number="26" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="33" size="14" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| NEOoscss*®</text>
+<text top="156" left="100" width="733" height="21" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev|oo|Pacd 26 | of | 38</text>
+<text top="226" left="263" width="261" height="16" font="3">PIPES ASTM 4,335 GR. P22</text>
+<text top="261" left="107" width="571" height="17" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.F22 CL.3, ASTM 4 234 GR.wP22 CLA</text>
+<text top="297" left="263" width="279" height="16" font="3">FLANGES : ASTM 4 182 GR.F22CL.3</text>
+<text top="334" left="263" width="52" height="14" font="1">OTHERS :</text>
+<text top="359" left="107" width="117" height="14" font="1">BASE METAL “P'?’NO. :</text>
+<text top="359" left="536" width="13" height="14" font="1">54,</text>
+<text top="381" left="495" width="93" height="14" font="1">GROOVE JOINTS :</text>
+<text top="408" left="127" width="652" height="19" font="20">WELDING PROCESS. BUTT OTHER THAN BUTT (FILLET</text>
+<text top="404" left="729" width="51" height="19" font="20">/ SOCKET)</text>
+<text top="436" left="351" width="407" height="18" font="20">| FILLERPASS: | |</text>
+<text top="443" left="287" width="507" height="14" font="1">ROOT PASS: GTAW aTavismay | ROOTPASS:GTAW | —FILLERPASS: GTAW</text>
+<text top="480" left="497" width="91" height="15" font="2">GROOVE JOINTS :</text>
+<text top="521" left="120" width="122" height="14" font="1">WELDING MATERIALS :</text>
+<text top="513" left="385" width="27" height="14" font="2">BUTT</text>
+<text top="513" left="583" width="196" height="14" font="1">OTHER THAN BUTT (FILLET / SOCKET)</text>
+<text top="555" left="263" width="128" height="14" font="1">ROOT PASS: ER 80S-B3L</text>
+<text top="563" left="422" width="76" height="14" font="1">BSL /E8018-B3L</text>
+<text top="547" left="422" width="231" height="14" font="1">FILLER PASS: ER 80S- ROOT PASS: ER 805-</text>
+<text top="554" left="589" width="201" height="15" font="2">B3L FILLER PASS: ER 80S-B3L</text>
+<text top="596" left="320" width="386" height="14" font="2">BACKINGRING ; CONSUMABLE INSERT:</text>
+<text top="622" left="107" width="219" height="14" font="1">JOINT PREPARATION: ASME B313</text>
+<text top="648" left="107" width="645" height="14" font="1">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="691" left="107" width="643" height="14" font="1">GAS COMPOSITION: PURGING : 99.997% SHIELDING : 99.97%</text>
+<text top="728" left="557" width="247" height="13" font="1">POSTHEATING — : 300°C MIN. FOR 30MINUTES</text>
+<text top="733" left="107" width="273" height="13" font="1">PREHEATING : 150&#34;</text>
+<text top="735" left="263" width="505" height="25" font="17">delenit teealbedinie FOLLOWED BY ASBESTOS COVER</text>
+<text top="766" left="167" width="594" height="16" font="3">CONTINUITY OF WELDING AND PREHEAT : INNERT PASS TEMP 250'C - 300'C DURING WELD SHALL BE MAINTAINED</text>
+<text top="799" left="263" width="501" height="16" font="3">HOLDING TEMP 705°C - 760°C HOLDING TIME: : 1HOURPERINCH THK</text>
+<text top="821" left="107" width="92" height="14" font="1">POST WELD HEAT</text>
+<text top="830" left="107" width="593" height="15" font="2">TREATMENT RATEOFHEATING : 200°C/IHRMAX. MIN. HOLDING TIME: 2HOURS</text>
+<text top="861" left="263" width="469" height="14" font="1">METHOD OF COOLING : CONTROLLED RATE OF COOLING: 200°C/HR MAX.</text>
+<text top="895" left="263" width="384" height="13" font="1">CHARPY &#34;¥&#34; NOTCHIMPACT . .</text>
+<text top="902" left="263" width="380" height="25" font="17">TEST VALUE iain iin</text>
+<text top="926" left="107" width="134" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="942" left="107" width="259" height="17" font="4">REQUIREMENTS — : AT TEMPERATURE:</text>
+<text top="976" left="263" width="136" height="14" font="1">HARDNESS: 225 BHN MAX.</text>
+<text top="1010" left="107" width="219" height="16" font="3">CODEOF FABRICATION: |ASME B 313</text>
+<text top="1056" left="107" width="104" height="14" font="1">TECHNICAL NOTES:-</text>
+<text top="1073" left="107" width="365" height="14" font="2">1,POST WELD HEAT TREATMENT SHALL BE DONE FOR ALL THICKNESS</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">42 of 44</text>
+</page>
+<page number="27" position="absolute" top="0" left="0" height="1263" width="893">
+	<fontspec id="34" size="17" family="YZIQTQ+GlyphLessFont" color="#000000"/>
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN | Petrochemicals Ltd] OCU-cpU| &amp;778-PPM-11500-CA-0001 66-6778</text>
+<text top="113" left="224" width="591" height="19" font="20">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- eld dL</text>
+<text top="154" left="100" width="733" height="24" font="30">thyssenkrupp STEEL PIPING at HPL, Haldia Rev[oo]Pace 27] of | 38</text>
+<text top="224" left="264" width="261" height="16" font="3">PIPES ASTM 4 335 GR. P5</text>
+<text top="260" left="107" width="521" height="17" font="4">MATERIAL SPECIFICATIONS FITTINGS : ASTM 4 182 GR.F5, ASTM 4 234 GR.WPS</text>
+<text top="296" left="264" width="255" height="16" font="3">FLANGES : ASTM 4 182 GR.FS</text>
+<text top="334" left="264" width="53" height="14" font="2">OTHERS :</text>
+<text top="360" left="107" width="117" height="14" font="1">BASE METAL “P'?’NO. :</text>
+<text top="360" left="540" width="13" height="14" font="1">5B</text>
+<text top="381" left="499" width="93" height="14" font="1">GROOVE JOINTS :</text>
+<text top="524" left="120" width="123" height="14" font="2">WELDING MATERIALS :</text>
+<text top="409" left="127" width="660" height="23" font="16">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="437" left="355" width="410" height="18" font="20">; FILLERPASS: . .</text>
+<text top="444" left="290" width="512" height="14" font="1">ROOTPASS: GTAW GTAWISMAY ROOT PASS: GTAW FILLERPASS: GTAW</text>
+<text top="482" left="501" width="91" height="14" font="1">GROOVE JOINTS :</text>
+<text top="515" left="389" width="28" height="14" font="2">BUTT</text>
+<text top="515" left="590" width="197" height="14" font="2">OTHER THAN BUTT (FILLET # SOCKET)</text>
+<text top="549" left="427" width="112" height="14" font="1">FILLER PASS: ER 80S-</text>
+<text top="558" left="263" width="235" height="17" font="1">ROOT PASS: ER 805-86 BG /ES018-BEL</text>
+<text top="549" left="550" width="109" height="14" font="1">ROOT PASS: ER 805-</text>
+<text top="558" left="599" width="192" height="14" font="1">BE FILLER PASS: ER 805-B6</text>
+<text top="600" left="323" width="389" height="14" font="2">BACKING RING : CONSUMABLE INSERT :</text>
+<text top="626" left="107" width="220" height="14" font="2">JOINT PREPARATION : ASME B31.3</text>
+<text top="652" left="107" width="652" height="14" font="2">GASES PURGING : ARGON SHIELDING : ARGON</text>
+<text top="695" left="107" width="650" height="14" font="2">GAS COMPOSITION : PURGING ;99.997% SHIELDING : 99.997%</text>
+<text top="748" left="601" width="174" height="14" font="2">FOLLOWED BY ASBESTOS COVER</text>
+<text top="780" left="169" width="596" height="16" font="3">CONTINUITY OF WELDING AND PREHEAT : INNERT PASS TEMP 250'C - 300'C DURING WELD SHALL BE MAINTAINED</text>
+<text top="820" left="264" width="507" height="16" font="3">HOLDING TEMP FOS*C - 760°C HOLDING TIME: : 1HOURPERINCH THK</text>
+<text top="843" left="107" width="92" height="14" font="1">POST WELD HEAT</text>
+<text top="843" left="107" width="600" height="28" font="22">SCATMENT RATEOFHEATING ©; 200‘CIMR MAX MIN, HOLDING TIME: 2HOURS</text>
+<text top="883" left="264" width="476" height="14" font="2">METHOD OF COOLING : CONTROLLED RATE OF COOLING: 200°CIHR MAX.</text>
+<text top="915" left="264" width="390" height="14" font="2">CHARPY &#34;¥&#34; NOTCH IMPACT . .</text>
+<text top="922" left="264" width="386" height="26" font="17">TEST VALUE MIN ANG!</text>
+<text top="945" left="107" width="134" height="14" font="2">MECHANICAL PROPERTY</text>
+<text top="961" left="107" width="261" height="14" font="1">REQUIREMENTS AT TEMPERATURE :</text>
+<text top="993" left="264" width="134" height="14" font="2">HARDNESS: 241 BHN MAX.</text>
+<text top="1027" left="107" width="220" height="16" font="3">CODE OF FABRICATION : ASME B 313</text>
+<text top="1073" left="107" width="105" height="14" font="2">TECHNICAL NOTES:-</text>
+<text top="1090" left="107" width="366" height="15" font="2">1, POST WELD HEAT TREATMENT SHALL BE DONE FOR ALL THICKNESS</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">43 of 44</text>
+</page>
+<page number="28" position="absolute" top="0" left="0" height="1263" width="893">
+<text top="31" left="134" width="672" height="23" font="16">Plant Client Contract Code Document ID 4010464</text>
+<text top="65" left="113" width="692" height="16" font="3">PROJECT Haldia HPL tkIS Contract No.</text>
+<text top="74" left="122" width="663" height="27" font="15">HAVEN _ | Petrochemicals Ltd] OCU-cpU| §778-PPM-11500-CA-0001 66-6778</text>
+<text top="114" left="224" width="590" height="18" font="4">WELDING SPECIFICATION FOR FABRICATION OF HALDIA</text>
+<text top="131" left="206" width="607" height="23" font="16">CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| NEOoscss*®</text>
+<text top="156" left="100" width="733" height="20" font="7">thyssenkrupp STEEL PIPING at HPL, Haldia Rev |oo|Paae 28| of | 98</text>
+<text top="220" left="267" width="247" height="13" font="1">PIPES ASTMA335GR.P9</text>
+<text top="256" left="112" width="503" height="14" font="1">MATERIAL SPECIFICATIONS FITTINGS : ASTMA 132 GR.FS9, ASTM A 234GR.WPS</text>
+<text top="292" left="267" width="243" height="13" font="1">FLANGES: ASTMAS2GR.FS</text>
+<text top="328" left="267" width="49" height="13" font="1">OTHERS :</text>
+<text top="366" left="112" width="438" height="13" font="1">BASE METAL 'P''NO, : SE</text>
+<text top="398" left="500" width="87" height="13" font="1">GROOVE JOINTS :</text>
+<text top="425" left="134" width="641" height="14" font="2">WELDING PROCESS: BUTT OTHER THAN BUTT (FILLET</text>
+<text top="425" left="726" width="50" height="14" font="2">?# SOCKET)</text>
+<text top="453" left="444" width="69" height="13" font="1">FILLERPASS:</text>
+<text top="461" left="292" width="501" height="13" font="1">ROOTPASS: GTAW GTAW/SMAW ROOTPASS: GTAW FILLERPASS: GTAW</text>
+<text top="499" left="501" width="86" height="13" font="1">GROOVE JOINTS :</text>
+<text top="538" left="129" width="116" height="13" font="1">WELDING MATERIALS :</text>
+<text top="531" left="389" width="26" height="13" font="1">BUTT</text>
+<text top="531" left="589" width="187" height="13" font="1">OTHER THAN BUTT (FILLET? SOCKET)</text>
+<text top="572" left="267" width="228" height="15" font="1">ROOTPASS:ERS0S-B$ |e ee</text>
+<text top="565" left="422" width="110" height="13" font="1">FILLERPASS: ERS0S-</text>
+<text top="563" left="547" width="106" height="13" font="1">ROOTPASS: ER 30S-</text>
+<text top="572" left="593" width="153" height="13" font="1">Bs FILLER PASS:</text>
+<text top="572" left="735" width="50" height="13" font="1">ER $05-B3</text>
+<text top="612" left="322" width="378" height="13" font="1">BACKINGRING : CONSUMABLE INSERT :</text>
+<text top="639" left="112" width="216" height="13" font="1">JOINT PREPARATION : ASME B31.</text>
+<text top="663" left="112" width="632" height="13" font="1">GASES PURGING : ARGON SHIELDING — : ARGON</text>
+<text top="701" left="112" width="634" height="21" font="26">GAS COMPOSITION ; PURGING — : 99.9977 SHIELDING —_: 99,9977</text>
+<text top="739" left="112" width="703" height="22" font="26">PREHEATING PREHEATTEMP. : 250! - 3008 POSTHEATING —: 300°C MIN. FOR 1HOUR FOLLOWED</text>
+<text top="760" left="628" width="107" height="13" font="1">BY ASBESTOS COVER</text>
+<text top="788" left="184" width="566" height="18" font="20">CONTINUITY OF WELDING AND PREHEAT ; INNERTPASS TEMP 250'C - 300&#34;C DURING WELD SHALL BE MAINTAINED</text>
+<text top="856" left="112" width="149" height="13" font="1">POST WELD HEAT TREATMENT</text>
+<text top="834" left="267" width="180" height="13" font="1">HOLDING TEMP 705°C - 760°C</text>
+<text top="832" left="542" width="205" height="13" font="1">HOLDINGTIME: : 1HOURPERINCHTHK</text>
+<text top="866" left="267" width="188" height="13" font="1">RATEOFHEATING ; 200°C/HRMAK.</text>
+<text top="864" left="542" width="151" height="13" font="1">MIN. HOLDING TIME: 2HOURS</text>
+<text top="896" left="267" width="190" height="13" font="1">METHOD OF COOLING : CONTROLLED</text>
+<text top="898" left="542" width="179" height="13" font="1">RATE OF COOLING; 200°C/HR MAR.</text>
+<text top="927" left="267" width="139" height="13" font="1">CHARPY *Y* NOTCHIMPACT</text>
+<text top="931" left="267" width="378" height="27" font="15">TEST VALUE Mitts AVG:</text>
+<text top="957" left="112" width="126" height="13" font="1">MECHANICAL PROPERTY</text>
+<text top="970" left="112" width="250" height="16" font="3">REQUIREMENTS AT TEMPERATURE:</text>
+<text top="1002" left="267" width="130" height="13" font="1">HARDNESS: 241BHN MAN.</text>
+<text top="1036" left="112" width="216" height="16" font="3">CODEOFFABRICATION: |ASMEB313</text>
+<text top="1084" left="112" width="101" height="13" font="1">TECHNICAL NOTES:</text>
+<text top="1101" left="112" width="345" height="13" font="1">1,.POST WELD HEAT TREATMENT SHALL BE DONE FOR ALL THICKNESS</text>
+<text top="1215" left="401" width="127" height="13" font="1">Classification: Internal</text>
+<text top="1224" left="733" width="53" height="15" font="2">44 of 44</text>
+</page>
+</pdf2xml>

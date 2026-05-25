@@ -1,0 +1,145 @@
+[
+  {
+    "heading": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU HEATER AT BPCL MR”.",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU HEATER AT BPCL MR”.",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 13.9,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "CONTRACT DURATION & COMPLETION PERIOD",
+    "level": 2,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > CONTRACT DURATION & COMPLETION PERIOD",
+    "seq": 1,
+    "confidence": 0.622,
+    "score": 5.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "LIQUIDATED DAMAGES FOR DELAY",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > LIQUIDATED DAMAGES FOR DELAY",
+    "seq": 2,
+    "confidence": 0.622,
+    "score": 5.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "WARRANTY/DEFECT LIABILTY",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > WARRANTY/DEFECT LIABILTY",
+    "seq": 3,
+    "confidence": 0.622,
+    "score": 5.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "PENALTY FOR NON-MOBILIZATION OF KEY CONSTRUCTION MANPOWER",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > PENALTY FOR NON-MOBILIZATION OF KEY CONSTRUCTION MANPOWER",
+    "seq": 4,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "SECURITY DEPOSIT TOWARDS PERFORMANCE / RETENTION MONEY /",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > SECURITY DEPOSIT TOWARDS PERFORMANCE / RETENTION MONEY /",
+    "seq": 5,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TENDER FOR “SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  }
+]

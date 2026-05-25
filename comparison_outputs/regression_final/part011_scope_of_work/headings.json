@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 6,
+    "top": 242.0,
+    "left": 135.0,
+    "text": "1 SCOPE OF WORK:",
+    "level": 1,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "1",
+    "scheme": "decimal",
+    "breadcrumb": "1. SCOPE OF WORK: > 1 SCOPE OF WORK:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 1,
+    "line_index": 19,
+    "top": 568.0,
+    "left": 135.0,
+    "text": "2 Removal of Insulation:",
+    "level": 1,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "1. SCOPE OF WORK: > 2 Removal of Insulation:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 1,
+    "line_index": 24,
+    "top": 720.0,
+    "left": 135.0,
+    "text": "3 Cleaning & Painting:",
+    "level": 1,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "1. SCOPE OF WORK: > 3 Cleaning & Painting:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 1,
+    "line_index": 34,
+    "top": 981.0,
+    "left": 135.0,
+    "text": "4 Fixing of LRB mattresses:",
+    "level": 1,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "4",
+    "scheme": "decimal",
+    "breadcrumb": "1. SCOPE OF WORK: > 4 Fixing of LRB mattresses:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 3,
+    "line_index": 39,
+    "top": 1111.0,
+    "left": 135.0,
+    "text": "12 GENERAL NOTES:",
+    "level": 1,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "all_caps_short",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "12",
+    "scheme": "decimal",
+    "breadcrumb": "1. SCOPE OF WORK: > 12 GENERAL NOTES:",
+    "toc_match": null,
+    "warnings": [
+      "p3: top-level decimal jump 4 -> 12"
+    ]
+  },
+  {
+    "id": 6,
+    "page_num": 8,
+    "line_index": 2,
+    "top": 531.0,
+    "left": 394.0,
+    "text": "ANNEXURE 5A",
+    "level": 1,
+    "score": 8.9,
+    "confidence": 0.989,
+    "reasons": [
+      "appendix",
+      "centered",
+      "gap_above",
+      "large_font"
+    ],
+    "numbering": "ANNEXURE 5A",
+    "scheme": "appendix",
+    "breadcrumb": "1. SCOPE OF WORK: > ANNEXURE 5A",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 8,
+    "line_index": 3,
+    "top": 635.0,
+    "left": 148.0,
+    "text": "STANDARD TECHNICAL ADVISORIES",
+    "level": 1,
+    "score": 8.0,
+    "confidence": 0.889,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "very_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "1. SCOPE OF WORK: > STANDARD TECHNICAL ADVISORIES",
+    "toc_match": null,
+    "warnings": []
+  }
+]

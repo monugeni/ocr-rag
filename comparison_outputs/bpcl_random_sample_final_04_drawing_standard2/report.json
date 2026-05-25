@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-17-0205 Rev 7.pdf",
+  "document_title": "7 17 0205 Rev 7",
+  "document_context": {
+    "title": "7 17 0205 Rev 7",
+    "path_parts": [],
+    "source": "filename_fallback"
+  },
+  "page_count": 2,
+  "body_font_size": 12.0,
+  "heading_count": 2,
+  "toc_entry_count": 0,
+  "chunk_count": 12,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 2,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 1,
+    "line_role_counts": {
+      "drawing": 127,
+      "running": 2,
+      "page_number": 3,
+      "caption": 2,
+      "body": 2
+    }
+  }
+}

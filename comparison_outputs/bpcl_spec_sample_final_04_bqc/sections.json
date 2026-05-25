@@ -1,0 +1,50 @@
+[
+  {
+    "heading": "1.0 BID-QUALIFICATION CRITERIA (BQC):",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "BID QUALIFICATION CRITERIA (BQC) > 1.0 BID-QUALIFICATION CRITERIA (BQC):",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BID QUALIFICATION CRITERIA (BQC)",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "S. No. Clause Title Simplified Description",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "BID QUALIFICATION CRITERIA (BQC) > 1.0 BID-QUALIFICATION CRITERIA (BQC): > S. No. Clause Title Simplified Description",
+    "seq": 1,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "BID QUALIFICATION CRITERIA (BQC)",
+      "path_parts": [],
+      "source": "filename_fallback"
+    },
+    "page_end": 6
+  }
+]

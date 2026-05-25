@@ -1,0 +1,179 @@
+[
+  {
+    "id": 1,
+    "page_num": 2,
+    "line_index": 6,
+    "top": 261.0,
+    "left": 120.0,
+    "text": "Abbreviations",
+    "level": 3,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > Abbreviations",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 4,
+    "line_index": 5,
+    "top": 223.0,
+    "left": 120.0,
+    "text": "1.0 SCOPE AND FIELD OF APPLICATION",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 1.0 SCOPE AND FIELD OF APPLICATION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 4,
+    "line_index": 22,
+    "top": 699.0,
+    "left": 117.0,
+    "text": "2.0 STATISTICAL TERMINOLOGY AND SYMBOLS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 2.0 STATISTICAL TERMINOLOGY AND SYMBOLS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 5,
+    "line_index": 10,
+    "top": 353.0,
+    "left": 119.0,
+    "text": "3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES",
+    "level": 1,
+    "score": 8.5,
+    "confidence": 0.944,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 3.0 SUBDIVISION OF CONSIGNMENT INTO LOTS AND DRAWING OF SAMPLES",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 6,
+    "line_index": 18,
+    "top": 563.0,
+    "left": 117.0,
+    "text": "4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "4.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 6,
+    "line_index": 25,
+    "top": 761.0,
+    "left": 116.0,
+    "text": "4.2.1 Inspection by Attributes",
+    "level": 3,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "numbering": "4.2.1",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.2.1 Inspection by Attributes",
+    "toc_match": null,
+    "warnings": [
+      "p6: decimal heading '4.2.1' has no detected parent '4.2'"
+    ]
+  },
+  {
+    "id": 7,
+    "page_num": 6,
+    "line_index": 32,
+    "top": 922.0,
+    "left": 115.0,
+    "text": "4.2.1.1 External appearance:",
+    "level": 4,
+    "score": 5.5,
+    "confidence": 0.611,
+    "reasons": [
+      "left_aligned",
+      "numbered_4",
+      "trailing_colon"
+    ],
+    "numbering": "4.2.1.1",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.0 INSPECTION AND CRITERIA FOR ACCEPTANCE > 4.2.1 Inspection by Attributes > 4.2.1.1 External appearance:",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 8,
+    "line_index": 15,
+    "top": 656.0,
+    "left": 117.0,
+    "text": "5.0 ATTACHMENTS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "5.0",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD SPECIFICATION FOR REFRACTORY MATERIALS- SAMPLING, INSPECTION AND CRITERIA FOR ACCEPTANCE > 5.0 ATTACHMENTS",
+    "toc_match": null,
+    "warnings": []
+  }
+]

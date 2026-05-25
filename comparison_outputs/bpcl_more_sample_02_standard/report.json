@@ -1,0 +1,35 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 2/6-82-0002_Rev_5.pdf",
+  "document_title": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES",
+  "document_context": {
+    "title": "STANDARD SPECIFICATION FOR POSITIVE MATERIAL IDENTIFICATION AT CONSTRUCTION SITES",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 10,
+  "body_font_size": 15.0,
+  "heading_count": 27,
+  "toc_entry_count": 0,
+  "chunk_count": 96,
+  "warnings": [
+    "p4: decimal heading '3.1.5' has no detected parent '3.1'",
+    "p4: decimal heading '3.1.7' has no detected parent '3.1'",
+    "p4: decimal heading '3.1.8' has no detected parent '3.1'",
+    "p8: top-level decimal jump 7 -> 11"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 10,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 9,
+    "line_role_counts": {
+      "running": 44,
+      "body": 224,
+      "table": 10,
+      "form": 4,
+      "toc": 62,
+      "drawing": 6
+    }
+  }
+}

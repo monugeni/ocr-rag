@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "T -",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "6 040325 REVISED & ISSUED AS STANDARD Tpx ™ sH == MN > T -",
+    "seq": 0,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "6 040325 REVISED & ISSUED AS STANDARD Tpx ™ sH == MN",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 1
+  }
+]

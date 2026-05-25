@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="17" family="BCDEEE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="1" size="15" family="BCDFEE+Arial" color="#000000"/>
+	<fontspec id="2" size="12" family="BCDGEE+ArialMT" color="#000000"/>
+	<fontspec id="3" size="12" family="BCDFEE+Arial" color="#000000"/>
+	<fontspec id="4" size="12" family="BCDHEE+ArialMT" color="#000000"/>
+	<fontspec id="5" size="18" family="BCDIEE+TimesNewRomanPS" color="#000000"/>
+	<fontspec id="6" size="33" family="BCDIEE+TimesNewRomanPS" color="#000000"/>
+	<fontspec id="7" size="30" family="BCDIEE+TimesNewRomanPS" color="#000000"/>
+	<fontspec id="8" size="18" family="BCDEEE+TimesNewRomanPSMT" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="403" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="65" height="13" font="2">Page 1 of 7 </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1019" left="128" width="3" height="13" font="2"> </text>
+<text top="1019" left="188" width="3" height="13" font="2"> </text>
+<text top="1019" left="397" width="3" height="13" font="2"> </text>
+<text top="1019" left="603" width="3" height="13" font="2"> </text>
+<text top="1019" left="680" width="3" height="13" font="2"> </text>
+<text top="1019" left="761" width="3" height="13" font="2"> </text>
+<text top="1048" left="128" width="3" height="13" font="2"> </text>
+<text top="1048" left="188" width="3" height="13" font="2"> </text>
+<text top="1048" left="397" width="3" height="13" font="2"> </text>
+<text top="1048" left="603" width="3" height="13" font="2"> </text>
+<text top="1048" left="680" width="3" height="13" font="2"> </text>
+<text top="1048" left="761" width="3" height="13" font="2"> </text>
+<text top="1078" left="128" width="3" height="13" font="2"> </text>
+<text top="1078" left="188" width="3" height="13" font="2"> </text>
+<text top="1078" left="397" width="3" height="13" font="2"> </text>
+<text top="1078" left="603" width="3" height="13" font="2"> </text>
+<text top="1078" left="680" width="3" height="13" font="2"> </text>
+<text top="1078" left="761" width="3" height="13" font="2"> </text>
+<text top="1108" left="128" width="3" height="13" font="2"> </text>
+<text top="1108" left="188" width="3" height="13" font="2"> </text>
+<text top="1108" left="397" width="3" height="13" font="2"> </text>
+<text top="1108" left="574" width="3" height="13" font="2"> </text>
+<text top="1108" left="680" width="3" height="13" font="2"> </text>
+<text top="1108" left="761" width="3" height="13" font="2"> </text>
+<text top="1138" left="124" width="11" height="13" font="2">A </text>
+<text top="1138" left="158" width="63" height="13" font="2">05.01.2026 </text>
+<text top="1138" left="311" width="174" height="13" font="2">ISSUED FOR PROCUREMENT </text>
+<text top="1138" left="574" width="43" height="13" font="2">       AS </text>
+<text top="1138" left="671" width="22" height="13" font="2">RM </text>
+<text top="1138" left="753" width="19" height="13" font="2">SS </text>
+<text top="1160" left="115" width="29" height="13" font="3"><b>Rev. </b></text>
+<text top="1174" left="115" width="19" height="13" font="3"><b>No </b></text>
+<text top="1167" left="175" width="29" height="13" font="3"><b>Date </b></text>
+<text top="1167" left="373" width="51" height="13" font="3"><b>Purpose </b></text>
+<text top="1160" left="576" width="56" height="13" font="3"><b>Prepared </b></text>
+<text top="1174" left="596" width="17" height="13" font="3"><b>by </b></text>
+<text top="1160" left="655" width="53" height="13" font="3"><b>Checked </b></text>
+<text top="1174" left="673" width="17" height="13" font="3"><b>by </b></text>
+<text top="1160" left="733" width="59" height="13" font="3"><b>Approved </b></text>
+<text top="1174" left="754" width="17" height="13" font="3"><b>by </b></text>
+<text top="1188" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1207" left="755" width="3" height="13" font="2"> </text>
+<text top="1206" left="613" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1206" left="689" width="7" height="13" font="4">–</text>
+<text top="1206" left="695" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1202" left="795" width="4" height="18" font="0"> </text>
+<text top="136" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="157" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="178" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="216" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="254" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="292" left="331" width="271" height="36" font="6"><b>SPECIFICATION </b></text>
+<text top="330" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="368" left="428" width="78" height="36" font="6"><b>FOR </b></text>
+<text top="406" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="444" left="230" width="472" height="36" font="6"><b>PROCUREMENT OF BURNER </b></text>
+<text top="482" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="520" left="382" width="169" height="36" font="6"><b>OIL GUNS </b></text>
+<text top="558" left="462" width="8" height="36" font="6"><b> </b></text>
+<text top="596" left="106" width="8" height="36" font="6"><b> </b></text>
+<text top="634" left="106" width="8" height="36" font="6"><b> </b></text>
+<text top="672" left="106" width="8" height="33" font="7"><b> </b></text>
+<text top="706" left="160" width="116" height="33" font="7"><b>UNIT    </b></text>
+<text top="706" left="322" width="18" height="33" font="7"><b>: </b></text>
+<text top="706" left="376" width="170" height="33" font="7"><b>CDU-3 (131) </b></text>
+<text top="740" left="106" width="8" height="33" font="7"><b> </b></text>
+<text top="775" left="160" width="688" height="33" font="7"><b>PROJECT   :  CAPACITY  AND  RELIABILITY </b></text>
+<text top="809" left="372" width="390" height="33" font="7"><b>IMPROVEMENT PROJECT </b></text>
+<text top="844" left="106" width="8" height="33" font="7"><b> </b></text>
+<text top="879" left="160" width="123" height="33" font="7"><b>CLIENT </b></text>
+<text top="879" left="322" width="18" height="33" font="7"><b>: </b></text>
+<text top="879" left="376" width="394" height="33" font="7"><b>BPCL-MUMBAI REFINERY </b></text>
+<text top="913" left="106" width="8" height="36" font="6"><b> </b></text>
+<text top="950" left="201" width="5" height="20" font="8"> </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="9" size="12" family="BCDEEE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="10" size="18" family="BCDJEE+TimesNewRomanPSMT" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 2 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="106" width="227" height="20" font="5"><b>LIST OF ATTACHMENTS: </b></text>
+<text top="157" left="106" width="5" height="20" font="5"><b> </b></text>
+<text top="178" left="106" width="5" height="20" font="5"><b> </b></text>
+<text top="206" left="99" width="160" height="20" font="5"><b>Sl. No.  Description </b></text>
+<text top="206" left="528" width="114" height="20" font="5"><b>Document No. </b></text>
+<text top="206" left="747" width="39" height="20" font="5"><b>Rev. </b></text>
+<text top="226" left="747" width="31" height="20" font="5"><b>No. </b></text>
+<text top="261" left="103" width="15" height="20" font="8">I. </text>
+<text top="261" left="170" width="130" height="20" font="8">Burner Datasheet </text>
+<text top="261" left="531" width="178" height="20" font="8">C238-131-80-45-DS-72 </text>
+<text top="261" left="762" width="13" height="20" font="8">1 </text>
+<text top="295" left="103" width="21" height="20" font="8">II. </text>
+<text top="295" left="170" width="182" height="20" font="8">Checklist for the bidders </text>
+<text top="295" left="531" width="196" height="20" font="8">C238-131-80-45-CL-0001 </text>
+<text top="295" left="760" width="17" height="20" font="8">A </text>
+<text top="329" left="103" width="27" height="20" font="8">III. </text>
+<text top="329" left="170" width="350" height="20" font="8">Standard  Specification  for  Forced  Draft </text>
+<text top="350" left="170" width="189" height="20" font="8">Burners for Fired Heaters </text>
+<text top="329" left="531" width="80" height="20" font="8">6-17-0008 </text>
+<text top="340" left="762" width="13" height="20" font="8">5 </text>
+<text top="385" left="103" width="28" height="20" font="8">IV. </text>
+<text top="387" left="170" width="350" height="20" font="8">Specification  for  documentation  requirements </text>
+<text top="408" left="170" width="112" height="20" font="8">from Suppliers </text>
+<text top="397" left="531" width="80" height="20" font="8">6-78-0003 </text>
+<text top="397" left="762" width="13" height="20" font="8">2 </text>
+<text top="445" left="103" width="28" height="20" font="8">VI. </text>
+<text top="445" left="170" width="350" height="20" font="8">Inspection  &amp;  Test  Plan  for  Burners  of  Fired </text>
+<text top="465" left="170" width="59" height="20" font="8">Heaters </text>
+<text top="455" left="531" width="80" height="20" font="8">6-81-0114 </text>
+<text top="455" left="762" width="13" height="20" font="8">3 </text>
+<text top="493" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="514" left="106" width="256" height="20" font="8">Refer Doc: C238-131-80-45-VDR-</text>
+<text top="514" left="363" width="75" height="20" font="10">0001 for ‘</text>
+<text top="514" left="437" width="199" height="20" font="8">Vendor Data Requirements</text>
+<text top="514" left="636" width="187" height="20" font="10">’ for documents required </text>
+<text top="535" left="106" width="91" height="20" font="8">for Burners. </text>
+<text top="555" left="106" width="5" height="20" font="8"> </text>
+<text top="576" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="597" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="617" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="638" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="659" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="680" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="700" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="721" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="742" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="762" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="783" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="804" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="825" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="845" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="866" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="887" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="907" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="928" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="949" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="969" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="990" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1011" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1032" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1052" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1073" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1094" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1114" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1135" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1156" left="462" width="5" height="20" font="5"><b> </b></text>
+<text top="1176" left="462" width="5" height="20" font="5"><b> </b></text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="11" size="18" family="BCDGEE+ArialMT" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 3 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="106" width="27" height="20" font="8">1.0 </text>
+<text top="136" left="160" width="89" height="20" font="5"><b>GENERAL</b></text>
+<text top="136" left="250" width="5" height="20" font="8"> </text>
+<text top="157" left="106" width="5" height="20" font="8"> </text>
+<text top="178" left="106" width="23" height="20" font="8">1.1</text>
+<text top="178" left="129" width="5" height="20" font="11"> </text>
+<text top="178" left="160" width="662" height="20" font="8">This  requisition  together  with  the  burner  data  sheet  and  specifications  attached  to  this </text>
+<text top="199" left="160" width="662" height="20" font="8">requisition  forms  the  minimum  requirements  for  the  selection,  design,  engineering, </text>
+<text top="219" left="160" width="573" height="20" font="8">manufacture, material, packing and supply of components for existing burners. </text>
+<text top="240" left="106" width="5" height="20" font="8"> </text>
+<text top="261" left="106" width="23" height="20" font="8">1.2</text>
+<text top="260" left="129" width="5" height="20" font="11"> </text>
+<text top="261" left="160" width="662" height="20" font="8">Any conflict between the requirements contained in this requisition, data sheets, sketches </text>
+<text top="281" left="160" width="662" height="20" font="8">and specifications attached to this requisition shall be brought to the immediate attention of </text>
+<text top="302" left="160" width="207" height="20" font="8">the purchaser for resolution. </text>
+<text top="323" left="106" width="5" height="20" font="8"> </text>
+<text top="343" left="106" width="23" height="20" font="8">1.3</text>
+<text top="343" left="129" width="5" height="20" font="11"> </text>
+<text top="343" left="160" width="662" height="20" font="8">Under no circumstances may the bidder present deviations and/or alternatives by means of </text>
+<text top="364" left="160" width="422" height="20" font="10">sending documents required “for review” to the purchaser.</text>
+<text top="364" left="582" width="5" height="20" font="8"> </text>
+<text top="385" left="106" width="5" height="20" font="8"> </text>
+<text top="405" left="106" width="27" height="20" font="8">2.0 </text>
+<text top="405" left="160" width="302" height="20" font="5"><b>SCOPE OF SUPPLY AND SERVICES</b></text>
+<text top="405" left="462" width="5" height="20" font="8"> </text>
+<text top="426" left="106" width="5" height="20" font="8"> </text>
+<text top="447" left="106" width="27" height="20" font="8">2.1 </text>
+<text top="447" left="160" width="663" height="20" font="8">Necessary modified burner oil guns for 24 Nos. FD, Tri-fuel fired, Low NOx, round flame </text>
+<text top="468" left="160" width="663" height="20" font="8">burners of BPCL-Mumbai Refinery CDU-3 Heater 131-F-101. Bidder shall supply 24 oil </text>
+<text top="488" left="160" width="249" height="20" font="8">guns for regular Heater operation. </text>
+<text top="509" left="106" width="5" height="20" font="8"> </text>
+<text top="530" left="106" width="23" height="20" font="8">2.2</text>
+<text top="529" left="129" width="5" height="20" font="11"> </text>
+<text top="530" left="160" width="462" height="20" font="8">In addition to the gas tips for Heater operation, OEM to supply: </text>
+<text top="550" left="214" width="36" height="20" font="8">2.2.1</text>
+<text top="550" left="250" width="5" height="20" font="11"> </text>
+<text top="550" left="268" width="554" height="20" font="8"> 8  nos  oil  tip  assembly  (including  cone  tip,  outer  tip,  mixing  core  and </text>
+<text top="571" left="268" width="129" height="20" font="8">sleeve) as spares. </text>
+<text top="592" left="214" width="36" height="20" font="8">2.2.2</text>
+<text top="591" left="250" width="5" height="20" font="11"> </text>
+<text top="592" left="268" width="555" height="20" font="8">Consumables /  soft spares (like gaskets,  O-ring  etc.)  required for carrying </text>
+<text top="612" left="268" width="388" height="20" font="8">out the burner modification work at site. [If required] </text>
+<text top="633" left="160" width="5" height="20" font="8"> </text>
+<text top="654" left="106" width="23" height="20" font="8">2.3</text>
+<text top="654" left="129" width="5" height="20" font="11"> </text>
+<text top="654" left="160" width="126" height="20" font="8">OEM to  provide </text>
+<text top="654" left="289" width="534" height="20" font="5"><b>detail modification and site execution procedure for removal  of  old </b></text>
+<text top="675" left="160" width="53" height="20" font="5"><b>oil gun</b></text>
+<text top="675" left="213" width="595" height="20" font="8"> from the existing burner and insertion guidelines / critical points for the new gun. </text>
+<text top="695" left="160" width="5" height="20" font="8"> </text>
+<text top="716" left="106" width="23" height="20" font="8">2.4</text>
+<text top="716" left="129" width="5" height="20" font="11"> </text>
+<text top="716" left="160" width="174" height="20" font="5"><b>Third party inspection</b></text>
+<text top="716" left="335" width="331" height="20" font="8"> of the burner components (Refer clause 6.0). </text>
+<text top="737" left="160" width="5" height="20" font="8"> </text>
+<text top="757" left="106" width="23" height="20" font="8">2.5</text>
+<text top="757" left="129" width="5" height="20" font="11"> </text>
+<text top="757" left="160" width="501" height="20" font="8">Packing, forwarding of oil guns and tip assembly. (Refer clause 8.0). </text>
+<text top="778" left="160" width="5" height="20" font="8"> </text>
+<text top="799" left="106" width="23" height="20" font="8">2.6</text>
+<text top="799" left="129" width="5" height="20" font="11"> </text>
+<text top="799" left="160" width="335" height="20" font="5"><b>Transportation of oil guns and tip assembly</b></text>
+<text top="799" left="496" width="285" height="20" font="8"> upto BPCL Mumbai Refinery job site. </text>
+<text top="819" left="106" width="5" height="20" font="8"> </text>
+<text top="840" left="106" width="23" height="20" font="8">2.7</text>
+<text top="840" left="129" width="5" height="20" font="11"> </text>
+<text top="840" left="160" width="550" height="20" font="8">Review/  supervision  of  installed  burner  components  at  site  (considering </text>
+<text top="840" left="714" width="109" height="20" font="5"><b>experienced  / </b></text>
+<text top="861" left="160" width="301" height="20" font="5"><b>skilled  qualified  Indian  representative</b></text>
+<text top="861" left="462" width="361" height="20" font="8">)  and  supervision  of  the  oil  gun  /  tip  assembly </text>
+<text top="882" left="160" width="517" height="20" font="8">removal  and  replacement  work  (to  be  performed  by  others).  OEM</text>
+<text top="882" left="677" width="146" height="20" font="10">’s  qualified  Indian </text>
+<text top="902" left="160" width="663" height="20" font="8">Representative  shall  continuously  monitor  the  modification  work  and  certify  the  same </text>
+<text top="923" left="160" width="224" height="20" font="8">upon completion to meet OEM</text>
+<text top="923" left="384" width="94" height="20" font="10">’s guarantees</text>
+<text top="923" left="479" width="9" height="20" font="8">. </text>
+<text top="944" left="160" width="5" height="20" font="8"> </text>
+<text top="964" left="106" width="23" height="20" font="8">2.8</text>
+<text top="964" left="129" width="5" height="20" font="11"> </text>
+<text top="964" left="160" width="663" height="20" font="8">Assistance during commissioning/ burner start-up at site (considering experienced / skilled </text>
+<text top="985" left="160" width="366" height="20" font="8">qualified Indian representative) on per diem basis. </text>
+<text top="1006" left="160" width="5" height="20" font="8"> </text>
+<text top="1027" left="106" width="23" height="20" font="8">2.9</text>
+<text top="1026" left="129" width="5" height="20" font="11"> </text>
+<text top="1027" left="160" width="663" height="20" font="8">Drawings and documents as per VDR no. C238-131-80-45-VDR-0001 for all supplies and </text>
+<text top="1047" left="160" width="67" height="20" font="8">services. </text>
+<text top="1068" left="160" width="5" height="20" font="8"> </text>
+<text top="1089" left="160" width="5" height="20" font="8"> </text>
+<text top="1109" left="160" width="5" height="20" font="8"> </text>
+<text top="1130" left="160" width="5" height="20" font="8"> </text>
+<text top="1151" left="160" width="5" height="20" font="8"> </text>
+<text top="1171" left="160" width="5" height="20" font="8"> </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 4 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="106" width="32" height="20" font="8"> 3.0 </text>
+<text top="136" left="160" width="250" height="20" font="5"><b>DESCRIPTION OF HEATERS </b></text>
+<text top="154" left="160" width="5" height="20" font="5"><b> </b></text>
+<text top="174" left="106" width="27" height="20" font="8">3.1 </text>
+<text top="174" left="160" width="591" height="20" font="8">Brief description of the heaters is noted below for general reference of the OEM . </text>
+<text top="194" left="106" width="5" height="20" font="8"> </text>
+<text top="215" left="106" width="5" height="20" font="8"> </text>
+<text top="237" left="135" width="24" height="20" font="8">Sl. </text>
+<text top="257" left="135" width="22" height="20" font="8">No</text>
+<text top="278" left="135" width="9" height="20" font="8">. </text>
+<text top="237" left="175" width="52" height="20" font="8">Heater </text>
+<text top="257" left="175" width="31" height="20" font="8">No. </text>
+<text top="237" left="263" width="41" height="20" font="8">Type </text>
+<text top="237" left="338" width="20" height="20" font="8">of </text>
+<text top="257" left="263" width="59" height="20" font="8">furnace </text>
+<text top="237" left="370" width="41" height="20" font="8">Type </text>
+<text top="237" left="441" width="20" height="20" font="8">of </text>
+<text top="257" left="370" width="44" height="20" font="8">firing </text>
+<text top="237" left="472" width="68" height="20" font="8">Location </text>
+<text top="257" left="472" width="19" height="20" font="8">of </text>
+<text top="278" left="472" width="59" height="20" font="8">burners </text>
+<text top="237" left="553" width="49" height="20" font="8">Firing </text>
+<text top="237" left="634" width="73" height="20" font="8">Arrangem</text>
+<text top="257" left="634" width="26" height="20" font="8">ent </text>
+<text top="257" left="698" width="19" height="20" font="8">of </text>
+<text top="278" left="634" width="59" height="20" font="8">burners </text>
+<text top="237" left="729" width="58" height="20" font="8">Service </text>
+<text top="300" left="135" width="14" height="20" font="8">1 </text>
+<text top="300" left="175" width="49" height="20" font="8">131-F-</text>
+<text top="320" left="175" width="32" height="20" font="8">101 </text>
+<text top="300" left="263" width="51" height="20" font="8">Multi- </text>
+<text top="320" left="263" width="93" height="20" font="8">cellular Box </text>
+<text top="300" left="370" width="65" height="20" font="8">Existing </text>
+<text top="320" left="370" width="54" height="20" font="8">Forced </text>
+<text top="341" left="370" width="47" height="20" font="8">Draft  </text>
+<text top="300" left="472" width="62" height="20" font="8">Furnace </text>
+<text top="320" left="472" width="39" height="20" font="8">floor </text>
+<text top="300" left="553" width="62" height="20" font="8">Vertical </text>
+<text top="320" left="553" width="53" height="20" font="8">upshot </text>
+<text top="300" left="634" width="19" height="20" font="8">In </text>
+<text top="300" left="704" width="13" height="20" font="8">a </text>
+<text top="320" left="634" width="73" height="20" font="8">staggered </text>
+<text top="341" left="634" width="33" height="20" font="8">row </text>
+<text top="300" left="729" width="57" height="20" font="8">CDU-3 </text>
+<text top="320" left="729" width="52" height="20" font="8">Heater </text>
+<text top="363" left="133" width="5" height="20" font="8"> </text>
+<text top="384" left="106" width="23" height="20" font="8">3.2</text>
+<text top="384" left="129" width="5" height="20" font="11"> </text>
+<text top="384" left="160" width="245" height="20" font="8">Electrical Area Classification   : </text>
+<text top="384" left="450" width="91" height="20" font="8">As existing  </text>
+<text top="405" left="106" width="5" height="20" font="8"> </text>
+<text top="405" left="160" width="41" height="20" font="8">Zone </text>
+<text top="405" left="288" width="5" height="20" font="8"> </text>
+<text top="405" left="342" width="5" height="20" font="8"> </text>
+<text top="405" left="396" width="10" height="20" font="8">: </text>
+<text top="405" left="450" width="86" height="20" font="8">As existing </text>
+<text top="425" left="106" width="5" height="20" font="8"> </text>
+<text top="446" left="106" width="27" height="20" font="5"><b>4.0 </b></text>
+<text top="446" left="160" width="320" height="20" font="5"><b>INSTRUCTIONS TO VENDOR (OEM): </b></text>
+<text top="467" left="140" width="5" height="20" font="5"><b> </b></text>
+<text top="487" left="113" width="27" height="20" font="8">4.1 </text>
+<text top="487" left="160" width="663" height="20" font="8">Existing CDU-3 Heater of BPCL-MR is provided with total 24 nos. Low NOx, FD, round </text>
+<text top="508" left="160" width="663" height="20" font="8">flame, tri-fuel fired burners supplied by M/s OEM (HCEL) vide Order ref. GUED0190 in </text>
+<text top="529" left="160" width="663" height="20" font="8">the year 2002. As part of the capacity and reliability improvement project, CDU-3 heater is </text>
+<text top="549" left="160" width="663" height="20" font="8">being revamped to a higher capacity. Subsequent to higher capacity operation anticipated, </text>
+<text top="570" left="160" width="509" height="20" font="8">the heat duty of existing oil guns are required to be enhanced by 10%. </text>
+<text top="591" left="106" width="5" height="20" font="8"> </text>
+<text top="612" left="106" width="27" height="20" font="8">4.2 </text>
+<text top="612" left="160" width="662" height="20" font="8">It is required to modify the existing burners to suit the revamp objective as stated in clause </text>
+<text top="632" left="160" width="497" height="20" font="8">4.1. As a part of this modification, following changes are envisaged: </text>
+<text top="653" left="106" width="5" height="20" font="8"> </text>
+<text top="674" left="192" width="14" height="20" font="8">a)</text>
+<text top="673" left="206" width="5" height="20" font="11"> </text>
+<text top="674" left="214" width="507" height="20" font="8">Supply of new oil guns complete with all components and auxiliaries. </text>
+<text top="694" left="219" width="5" height="20" font="8"> </text>
+<text top="715" left="106" width="27" height="20" font="8">4.3 </text>
+<text top="715" left="160" width="663" height="20" font="8">No change allowed in the existing burner floor cutout and the burner fuel  oil / atomising </text>
+<text top="736" left="160" width="291" height="20" font="8">steam connection flanges and locations. </text>
+<text top="756" left="106" width="5" height="20" font="8"> </text>
+<text top="777" left="106" width="27" height="20" font="8">4.4 </text>
+<text top="777" left="160" width="663" height="20" font="8">OEM  to  ensure  that  the  new  oil  guns  can  be  retrofitted  into  the  existing  oil  gun  flanges </text>
+<text top="798" left="160" width="663" height="20" font="8">post removal of the oil guns currently installed. Size of the new oil guns should fit into the </text>
+<text top="818" left="160" width="663" height="20" font="8">existing  burner  oil  gun  flanges  /  sleeves  and  shall  not  require  any  modification  in  the </text>
+<text top="839" left="160" width="207" height="20" font="8">burner front plate assembly. </text>
+<text top="860" left="106" width="5" height="20" font="8"> </text>
+<text top="881" left="106" width="27" height="20" font="8">4.5 </text>
+<text top="881" left="160" width="663" height="20" font="8">OEM shall limit flame dimensions as in the original supply. Burner flame dia shall be 1m </text>
+<text top="901" left="160" width="413" height="20" font="8">maximum with maximum allowed flame length as 5.5m. </text>
+<text top="922" left="106" width="5" height="20" font="8"> </text>
+<text top="943" left="106" width="27" height="20" font="8">4.6 </text>
+<text top="943" left="160" width="663" height="20" font="8">OEM  shall  provide  a  detail  modification  procedure  for  removal  of  the  oil  gun  assembly </text>
+<text top="963" left="160" width="662" height="20" font="8">from  the  existing  burners.  Actual  modification  work  shall  be  performed  by  others, </text>
+<text top="984" left="160" width="663" height="20" font="8">however,  OEM  Qualifed  Indian  Representative  shall  supervise  and  monitor  this </text>
+<text top="1005" left="160" width="662" height="20" font="8">modification  work  on  continuous  basis  during  shutdown  and  certify  the  same  upon </text>
+<text top="1025" left="160" width="183" height="20" font="8">completion to meet OEM</text>
+<text top="1025" left="344" width="99" height="20" font="10">’s guarantees.</text>
+<text top="1025" left="443" width="5" height="20" font="8"> </text>
+<text top="1046" left="106" width="5" height="20" font="8"> </text>
+<text top="1067" left="106" width="27" height="20" font="8">4.7 </text>
+<text top="1067" left="160" width="550" height="20" font="8">Transportation of oil guns and spares to BPCL-MR job site shall be in OEM</text>
+<text top="1067" left="710" width="58" height="20" font="10">’s scope</text>
+<text top="1067" left="768" width="9" height="20" font="8">. </text>
+<text top="1088" left="106" width="5" height="20" font="8"> </text>
+<text top="1108" left="106" width="27" height="20" font="8">4.8 </text>
+<text top="1108" left="160" width="662" height="20" font="8">The safe handling procedure and precaution requirement shall be clearly spelt out  in  the </text>
+<text top="1129" left="160" width="662" height="20" font="8">installation, operation and maintenance manual to ensure that the components are safe and </text>
+<text top="1150" left="160" width="356" height="20" font="8">intact during transport, installation and handling. </text>
+<text top="1170" left="106" width="5" height="20" font="8"> </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="12" size="18" family="BCDKEE+TimesNewRomanPS" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 5 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="106" width="27" height="20" font="8">4.9 </text>
+<text top="136" left="160" width="663" height="20" font="8">TPI  of  the  new  oil  guns  and  spares  shall  be  arranged  by  OEM  considering  reputed  TPI </text>
+<text top="157" left="160" width="538" height="20" font="8">agency. OEM shall include a separate line item specifying the TPI quotes. </text>
+<text top="178" left="106" width="5" height="20" font="8"> </text>
+<text top="199" left="106" width="716" height="20" font="8">4.10        OEM  shall  submit  the  filled  in  vendor Drawings/Documents  submission  schedule  along </text>
+<text top="219" left="160" width="544" height="20" font="8">with first revision of drawings/GAD within 15 days of release of LOI/FOI. </text>
+<text top="240" left="106" width="5" height="20" font="8"> </text>
+<text top="261" left="106" width="717" height="20" font="8">4.11  The  guaranteed  period  clause  of  Standard  Specification  No.  6-17-0008  Rev.5  shall  get </text>
+<text top="281" left="160" width="357" height="20" font="8">superseded by GPC and other commercial terms. </text>
+<text top="302" left="106" width="5" height="20" font="8"> </text>
+<text top="323" left="106" width="717" height="20" font="8">4.12  OEM  shall  provide  the  modified  general  arrangement  drawings  and  updated  datasheets/ </text>
+<text top="343" left="160" width="520" height="20" font="8">documents clearly indicating the components being replaced/ modified. </text>
+<text top="364" left="106" width="5" height="20" font="8"> </text>
+<text top="385" left="106" width="716" height="20" font="8">4.13  OEM to note that sequence of document submission / review at post order stage shall be as </text>
+<text top="405" left="160" width="64" height="20" font="8">follows: </text>
+<text top="426" left="133" width="6" height="20" font="8">-</text>
+<text top="426" left="139" width="5" height="20" font="11"> </text>
+<text top="426" left="160" width="233" height="20" font="8">Document submission schedule </text>
+<text top="447" left="133" width="6" height="20" font="8">-</text>
+<text top="447" left="139" width="5" height="20" font="11"> </text>
+<text top="447" left="160" width="487" height="20" font="8">Review of burner datasheets, draft loss curves and capacity curves. </text>
+<text top="468" left="133" width="6" height="20" font="8">-</text>
+<text top="467" left="139" width="5" height="20" font="11"> </text>
+<text top="468" left="160" width="392" height="20" font="8">Review of assembly removal / re-insertion procedure. </text>
+<text top="488" left="133" width="6" height="20" font="8">-</text>
+<text top="488" left="139" width="5" height="20" font="11"> </text>
+<text top="488" left="160" width="198" height="20" font="8">GAD review / finalization. </text>
+<text top="509" left="133" width="6" height="20" font="8">-</text>
+<text top="509" left="139" width="5" height="20" font="11"> </text>
+<text top="509" left="160" width="604" height="20" font="8">Documentary evidence of source/ place of supply and material original certificates. </text>
+<text top="530" left="133" width="6" height="20" font="8">-</text>
+<text top="529" left="139" width="5" height="20" font="11"> </text>
+<text top="530" left="160" width="446" height="20" font="8">Submission of Installation, operation &amp; maintenance manual  </text>
+<text top="550" left="133" width="6" height="20" font="8">-</text>
+<text top="550" left="139" width="5" height="20" font="11"> </text>
+<text top="550" left="160" width="332" height="20" font="8">Submission of final documents / data dossier. </text>
+<text top="571" left="106" width="5" height="20" font="8"> </text>
+<text top="592" left="160" width="662" height="20" font="8">OEM shall strictly adhere to the above sequence. However, complete set of documents as </text>
+<text top="612" left="160" width="296" height="20" font="8">per VDR are to be submitted for review. </text>
+<text top="633" left="106" width="5" height="20" font="8"> </text>
+<text top="654" left="106" width="716" height="20" font="8">4.14  Since  the  components  identified  for  replacement  are  critical,  hence  same  shall  be </text>
+<text top="675" left="160" width="662" height="20" font="8">manufactured  &amp;  supplied  from  EIL  approved  facility.  Documentary  evidence  of  supply </text>
+<text top="695" left="160" width="410" height="20" font="8">source for these components shall be provided by OEM. </text>
+<text top="716" left="106" width="5" height="20" font="8"> </text>
+<text top="737" left="106" width="717" height="20" font="8">4.15  OEM to ensure that Manday charges for the supervision services shall be separately quoted </text>
+<text top="757" left="160" width="662" height="20" font="8">per man day for 7 days for all days of week during shutdown including over time charges. </text>
+<text top="778" left="160" width="662" height="20" font="8">OEM  to  also  ensure  that  per  diem  charges  shall  be  inclusive  of  charges  for  Travel  (air </text>
+<text top="799" left="160" width="657" height="20" font="8">travel by economy class within India, local conveyance etc.) accommodation and food etc. </text>
+<text top="819" left="106" width="5" height="20" font="5"><b> </b></text>
+<text top="840" left="106" width="27" height="20" font="5"><b>5.0 </b></text>
+<text top="840" left="160" width="126" height="20" font="5"><b>GUARANTEE: </b></text>
+<text top="861" left="106" width="5" height="20" font="8"> </text>
+<text top="882" left="106" width="5" height="20" font="8"> </text>
+<text top="882" left="160" width="663" height="20" font="8">Burner should be guaranteed for performance and workmanship as detailed in clause no. 6 </text>
+<text top="902" left="160" width="400" height="20" font="8">of Burner Standard Specification no. 6-17-0008 Rev.5. </text>
+<text top="923" left="106" width="5" height="20" font="8"> </text>
+<text top="944" left="106" width="27" height="20" font="5"><b>6.0 </b></text>
+<text top="944" left="160" width="127" height="20" font="5"><b>INSPECTION : </b></text>
+<text top="964" left="106" width="5" height="20" font="8"> </text>
+<text top="985" left="106" width="27" height="20" font="8">6.1 </text>
+<text top="985" left="160" width="663" height="20" font="8">Inspection  shall  be  carried  out  by  a  reputed  third  party  inspection  agency,  based  on </text>
+<text top="1006" left="160" width="658" height="20" font="8">approved vendor documents per VDR, as per clause no. 5 of Burner Specification no. 6-</text>
+<text top="1027" left="160" width="394" height="20" font="8">17-0008 rev.5 at the supplier's work before dispatch. </text>
+<text top="1027" left="556" width="267" height="20" font="12"><i><b>OEM shall arrange for third party </b></i></text>
+<text top="1047" left="160" width="310" height="20" font="12"><i><b>inspection of the new oil guns and spares.</b></i></text>
+<text top="1047" left="471" width="9" height="20" font="8">  </text>
+<text top="1068" left="106" width="103" height="20" font="8">                       </text>
+<text top="1089" left="160" width="663" height="20" font="8">Any rejection made by the inspection authority will be final. However, his inspection will </text>
+<text top="1109" left="160" width="663" height="20" font="8">in no way release the supplier from the guarantee as to materials, design, workmanship and </text>
+<text top="1130" left="160" width="361" height="20" font="8">performance of the equipments inspected by him. </text>
+<text top="1151" left="106" width="189" height="20" font="8">                                          </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="13" size="18" family="BCDLEE+TimesNewRomanPS" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 6 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="106" width="27" height="20" font="8">6.2 </text>
+<text top="136" left="160" width="662" height="20" font="8">All  test  reports,  material  certificates  etc.  duly  certified  by  third  party  agency  shall  be </text>
+<text top="157" left="160" width="333" height="20" font="8">submitted by supplier for purchaser's records. </text>
+<text top="178" left="160" width="5" height="20" font="8"> </text>
+<text top="199" left="106" width="27" height="20" font="8">6.3 </text>
+<text top="199" left="160" width="488" height="20" font="8">Third party inspection agency shall certify the dispatch documents. </text>
+<text top="219" left="106" width="5" height="20" font="8"> </text>
+<text top="240" left="106" width="27" height="20" font="8">6.4 </text>
+<text top="240" left="160" width="662" height="20" font="8">Third party inspection agency shall also issue the release order after ensuring compliance </text>
+<text top="261" left="160" width="662" height="20" font="8">to  requisition  /  approved  documents  as  well  as  scope  of  supply  including  spares  and </text>
+<text top="281" left="160" width="145" height="20" font="8">various documents. </text>
+<text top="302" left="106" width="5" height="20" font="8"> </text>
+<text top="323" left="106" width="27" height="20" font="8">7.0 </text>
+<text top="323" left="160" width="94" height="20" font="5"><b>PAINTING </b></text>
+<text top="343" left="106" width="5" height="20" font="8"> </text>
+<text top="364" left="106" width="5" height="20" font="8"> </text>
+<text top="364" left="160" width="627" height="20" font="10">Burner components shall be painted with heat resistant paint as per supplier’s standard.</text>
+<text top="364" left="788" width="5" height="20" font="8"> </text>
+<text top="385" left="106" width="5" height="20" font="8"> </text>
+<text top="405" left="106" width="27" height="20" font="8">8.0 </text>
+<text top="405" left="160" width="5" height="20" font="8"> </text>
+<text top="405" left="165" width="201" height="20" font="5"><b>PACKING &amp; SHIPPING </b></text>
+<text top="426" left="106" width="5" height="20" font="8"> </text>
+<text top="447" left="106" width="5" height="20" font="8"> </text>
+<text top="447" left="160" width="203" height="20" font="12"><i><b>Transportation to BPCL-M</b></i></text>
+<text top="447" left="363" width="259" height="20" font="13"><i><b>R job site shall be in OEM’s scope.</b></i></text>
+<text top="447" left="623" width="5" height="20" font="12"><i><b> </b></i></text>
+<text top="468" left="106" width="5" height="20" font="8"> </text>
+<text top="488" left="106" width="5" height="20" font="8"> </text>
+<text top="488" left="160" width="658" height="20" font="8">Packing and shipping shall be detailed in clause no. 10.0 of Burner Specification no. 6-17-</text>
+<text top="509" left="160" width="367" height="20" font="8">0008 rev.5, in addition to the clauses given below: </text>
+<text top="530" left="106" width="5" height="20" font="8"> </text>
+<text top="530" left="160" width="5" height="20" font="8"> </text>
+<text top="550" left="106" width="27" height="20" font="8">8.1 </text>
+<text top="550" left="160" width="662" height="20" font="8">Equipment  shall  be  packed  as  per  the  requirements  of  Roadworthy/Seaworthy  Packing. </text>
+<text top="571" left="160" width="662" height="20" font="8">The burner components shall be adequately packed inside plastic covers for transportation </text>
+<text top="592" left="160" width="480" height="20" font="8">/ handling and suitable for opening at dockside/site for inspection. </text>
+<text top="612" left="106" width="5" height="20" font="8"> </text>
+<text top="633" left="106" width="27" height="20" font="8">8.2 </text>
+<text top="633" left="160" width="662" height="20" font="8">Internals of all burner components and machined surfaces shall be protected from material </text>
+<text top="654" left="160" width="662" height="20" font="8">corrosion with internal plastic envelopes, which will protect the equipment for a period of </text>
+<text top="675" left="160" width="201" height="20" font="8">12 months outdoor storage. </text>
+<text top="695" left="106" width="5" height="20" font="8"> </text>
+<text top="716" left="106" width="27" height="20" font="8">8.3 </text>
+<text top="716" left="160" width="662" height="20" font="8">All flanged facings shall be protected by wooden or metal covers which shall be securely </text>
+<text top="737" left="160" width="571" height="20" font="8">fastened to flange to prevent any entry of foreign matter and damage to flange. </text>
+<text top="757" left="106" width="5" height="20" font="8"> </text>
+<text top="778" left="106" width="27" height="20" font="8">8.4 </text>
+<text top="778" left="160" width="662" height="20" font="8">All threaded connections on burner components shall be protected by installing solid bar </text>
+<text top="799" left="160" width="663" height="20" font="8">stock  plugs.  When  alloy  equipment  with  threaded  opening  is  protected  in  this  manner, </text>
+<text top="819" left="160" width="629" height="20" font="8">choice of bar stock &amp; material shall be such that galling of the equipment is prevented. </text>
+<text top="840" left="106" width="5" height="20" font="8"> </text>
+<text top="861" left="106" width="27" height="20" font="8">8.5 </text>
+<text top="861" left="160" width="662" height="20" font="8">The safe handling procedure and precaution requirement shall be clearly spelt out  in  the </text>
+<text top="882" left="160" width="662" height="20" font="8">installation, operation and maintenance manual or in a separate manual to ensure that the </text>
+<text top="902" left="160" width="538" height="20" font="8">components are safe and intact during transport, installation and handling. </text>
+<text top="923" left="106" width="5" height="20" font="8"> </text>
+<text top="944" left="106" width="27" height="20" font="8">9.0 </text>
+<text top="944" left="160" width="390" height="20" font="5"><b>CORRESPONDENCE AND DOCUMENTATION</b></text>
+<text top="944" left="551" width="5" height="20" font="8"> </text>
+<text top="964" left="214" width="5" height="20" font="8"> </text>
+<text top="985" left="106" width="27" height="20" font="8">9.1 </text>
+<text top="985" left="160" width="658" height="20" font="8">OEM shall furnish drawings/ documents/ data as detailed  as per VDR (C238-131-80-45-</text>
+<text top="1006" left="160" width="408" height="20" font="8">VDR-0001) at various stages of execution of the job.      </text>
+<text top="1027" left="106" width="5" height="20" font="8"> </text>
+<text top="1047" left="106" width="27" height="20" font="8">9.2 </text>
+<text top="1047" left="160" width="564" height="20" font="8">In addition to this, soft copies of all final as-built drawings are to be supplied. </text>
+<text top="1068" left="106" width="5" height="20" font="8"> </text>
+<text top="1089" left="106" width="27" height="20" font="8">9.3 </text>
+<text top="1089" left="160" width="662" height="20" font="8">Each drawing shall have following information in the title block and each component shall </text>
+<text top="1109" left="160" width="271" height="20" font="8">be tagged with following particulars: </text>
+<text top="1130" left="160" width="5" height="20" font="8"> </text>
+<text top="1151" left="160" width="137" height="20" font="8">A.  PROJECT   : </text>
+<text top="1151" left="342" width="437" height="20" font="8">CAPACITY / RELIABILITY IMPROVEMENT PROJECT </text>
+<text top="1171" left="160" width="94" height="20" font="8">B.  CLIENT </text>
+<text top="1171" left="288" width="5" height="20" font="8"> </text>
+<text top="1171" left="342" width="10" height="20" font="8">: </text>
+<text top="1171" left="396" width="50" height="20" font="8">BPCL </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="106" width="4" height="18" font="0"> </text>
+<text top="53" left="380" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="71" left="351" width="215" height="17" font="1"><b>PROCUREMENT OF BURNER </b></text>
+<text top="88" left="402" width="112" height="17" font="1"><b>COMPONENTS </b></text>
+<text top="45" left="623" width="119" height="17" font="1"><b>DOCUMENT No. </b></text>
+<text top="66" left="594" width="181" height="17" font="1"><b>C238-131-80-45-SP-0001  </b></text>
+<text top="83" left="657" width="51" height="17" font="1"><b>Rev. A </b></text>
+<text top="102" left="650" width="55" height="13" font="2">Page 7 of </text>
+<text top="102" left="705" width="6" height="13" font="9">7</text>
+<text top="102" left="711" width="3" height="13" font="2"> </text>
+<text top="117" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="184" height="13" font="2">Format No. EIL 1641-1924 Rev. 1 </text>
+<text top="1207" left="430" width="3" height="13" font="2"> </text>
+<text top="1203" left="755" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="76" height="13" font="2">Copyright EIL </text>
+<text top="1204" left="682" width="7" height="13" font="4">–</text>
+<text top="1204" left="689" width="99" height="13" font="2"> All rights reserved</text>
+<text top="1200" left="788" width="4" height="18" font="0"> </text>
+<text top="136" left="160" width="129" height="20" font="8">C.  EIL JOB NO. </text>
+<text top="136" left="342" width="10" height="20" font="8">: </text>
+<text top="136" left="396" width="44" height="20" font="8">C238 </text>
+<text top="157" left="160" width="112" height="20" font="8">D.  PART NO. </text>
+<text top="157" left="342" width="10" height="20" font="8">: </text>
+<text top="157" left="396" width="141" height="20" font="8">AS APPLICABLE </text>
+<text top="178" left="160" width="132" height="20" font="8">E.  HEATER     </text>
+<text top="178" left="342" width="10" height="20" font="8">: </text>
+<text top="178" left="396" width="138" height="20" font="8">CDU-3 HEATER  </text>
+<text top="199" left="160" width="5" height="20" font="8"> </text>
+<text top="199" left="214" width="5" height="20" font="8"> </text>
+<text top="199" left="268" width="24" height="20" font="8">   </text>
+<text top="199" left="342" width="5" height="20" font="8"> </text>
+<text top="199" left="396" width="93" height="20" font="8">(131-F-101) </text>
+<text top="219" left="160" width="95" height="20" font="8">F.  P.O. NO. </text>
+<text top="219" left="343" width="10" height="20" font="8">: </text>
+<text top="219" left="397" width="141" height="20" font="8">AS APPLICABLE </text>
+<text top="240" left="160" width="5" height="20" font="8"> </text>
+</page>
+</pdf2xml>

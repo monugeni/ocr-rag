@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="0" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="15" family="Helvetica" color="#000000"/>
+	<fontspec id="3" size="15" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="17" family="Helvetica" color="#000000"/>
+	<fontspec id="5" size="23" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="36" family="Times" color="#000000"/>
+	<fontspec id="8" size="36" family="Helvetica" color="#000000"/>
+	<fontspec id="9" size="23" family="Helvetica" color="#000000"/>
+<text top="88" left="1017" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="125" left="70" width="69" height="6" font="1">4.177,1 eaonme DtJfdlai </text>
+<text top="126" left="116" width="1" height="6" font="1"> </text>
+<text top="116" left="1053" width="121" height="14" font="2"><b>6-81-0004 Rev. </b>7 </text>
+<text top="141" left="1080" width="66" height="11" font="0">Page 1 of 8 </text>
+<text top="92" left="532" width="219" height="14" font="2"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="109" left="624" width="36" height="14" font="2"><b>FOR </b></text>
+<text top="127" left="609" width="64" height="14" font="2"><b>VALVES </b></text>
+<text top="96" left="168" width="80" height="15" font="4">ENGINEERS </text>
+<text top="111" left="42" width="47" height="14" font="2"><b>Ogal </b></text>
+<text top="105" left="85" width="60" height="22" font="5">fdajeg </text>
+<text top="111" left="167" width="106" height="15" font="4">INDIA LIMITED </text>
+<text top="128" left="168" width="41" height="6" font="1">,A Go, </text>
+<text top="128" left="191" width="70" height="6" font="1"> of  nd!a  Undena.n91 </text>
+<text top="530" left="901" width="19" height="11" font="0">AK </text>
+<text top="530" left="1019" width="20" height="11" font="0">RK </text>
+<text top="530" left="1152" width="21" height="11" font="0">SM </text>
+<text top="562" left="901" width="23" height="11" font="0">NM </text>
+<text top="562" left="1016" width="28" height="11" font="0">RKS </text>
+<text top="562" left="1149" width="28" height="11" font="0">RKT </text>
+<text top="587" left="900" width="28" height="11" font="0">RKS </text>
+<text top="587" left="1015" width="30" height="11" font="0">SCG </text>
+<text top="587" left="1152" width="22" height="11" font="0">DM </text>
+<text top="619" left="900" width="30" height="11" font="0">SCG </text>
+<text top="619" left="1016" width="28" height="11" font="0">AKC </text>
+<text top="619" left="1152" width="22" height="11" font="0">DM </text>
+<text top="651" left="902" width="25" height="11" font="0">VKJ </text>
+<text top="651" left="1016" width="27" height="11" font="0">SKP </text>
+<text top="651" left="1153" width="21" height="11" font="0">ND </text>
+<text top="683" left="905" width="19" height="11" font="0">SS </text>
+<text top="683" left="1011" width="37" height="11" font="0">MVKK </text>
+<text top="682" left="1153" width="20" height="11" font="0">VC </text>
+<text top="724" left="888" width="54" height="11" font="0">Checked </text>
+<text top="738" left="906" width="17" height="11" font="6"><b>by </b></text>
+<text top="708" left="966" width="251" height="11" font="6"><b>Standards Committee Standards Bureau </b></text>
+<text top="721" left="1000" width="60" height="11" font="6"><b>Convenor </b></text>
+<text top="721" left="1133" width="60" height="11" font="6"><b>Chairman </b></text>
+<text top="747" left="1053" width="78" height="11" font="6"><b>Approved by </b></text>
+<text top="245" left="542" width="16" height="32" font="7"><b>a</b></text>
+<text top="244" left="557" width="5" height="33" font="8"><b>-</b></text>
+<text top="253" left="561" width="38" height="22" font="9"><b>F0-</b></text>
+<text top="245" left="587" width="31" height="32" font="7"><b>41. </b></text>
+<text top="245" left="665" width="60" height="32" font="7"><b>fAv </b></text>
+<text top="295" left="454" width="110" height="32" font="7"><b>WATur </b></text>
+<text top="296" left="620" width="96" height="32" font="7"><b>trtraTur </b></text>
+<text top="303" left="724" width="86" height="22" font="9"><b>441,7101 </b></text>
+<text top="361" left="369" width="530" height="32" font="7"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="403" left="591" width="86" height="32" font="7"><b>FOR </b></text>
+<text top="444" left="555" width="156" height="32" font="7"><b>VALVES </b></text>
+<text top="524" left="55" width="10" height="11" font="0">7 </text>
+<text top="524" left="91" width="68" height="11" font="0">08.05..2023 </text>
+<text top="524" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="530" left="816" width="20" height="11" font="0">NK </text>
+<text top="556" left="55" width="10" height="11" font="0">6 </text>
+<text top="556" left="92" width="64" height="11" font="0">14.11.2018 </text>
+<text top="556" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="562" left="816" width="20" height="11" font="0">KC </text>
+<text top="588" left="55" width="10" height="11" font="0">5 </text>
+<text top="588" left="92" width="64" height="11" font="0">17.06.2013 </text>
+<text top="587" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="587" left="813" width="27" height="11" font="0">TKK </text>
+<text top="620" left="55" width="10" height="11" font="0">4 </text>
+<text top="620" left="92" width="64" height="11" font="0">15.07.2011 </text>
+<text top="619" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="619" left="813" width="26" height="11" font="0">TKK </text>
+<text top="652" left="55" width="10" height="11" font="0">3 </text>
+<text top="652" left="92" width="64" height="11" font="0">30.06.2010 </text>
+<text top="651" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="651" left="812" width="28" height="11" font="0">RKB </text>
+<text top="684" left="55" width="10" height="11" font="0">2 </text>
+<text top="684" left="92" width="64" height="11" font="0">31.01.2008 </text>
+<text top="683" left="396" width="155" height="11" font="0">REVISED AND RE-ISSUED </text>
+<text top="683" left="816" width="20" height="11" font="0">CS </text>
+<text top="725" left="45" width="29" height="11" font="6"><b>Rev. </b></text>
+<text top="739" left="49" width="23" height="11" font="6"><b>No. </b></text>
+<text top="732" left="109" width="29" height="11" font="6"><b>Date </b></text>
+<text top="731" left="448" width="52" height="11" font="6"><b>Purpose </b></text>
+<text top="724" left="798" width="56" height="11" font="0">Prepared </text>
+<text top="738" left="818" width="17" height="11" font="0">by </text>
+<text top="788" left="1018" width="187" height="11" font="0">Copyright EIL — Ail rights reserved </text>
+<text top="791" left="37" width="179" height="11" font="0">Format No. 8-00-0001-F7 Rev. 0 </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="10" size="15" family="Courier" color="#000000"/>
+	<fontspec id="11" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="12" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="13" family="Times" color="#000000"/>
+	<fontspec id="14" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="15" size="17" family="Times" color="#000000"/>
+	<fontspec id="16" size="16" family="Helvetica" color="#000000"/>
+<text top="-673" left="653" width="9" height="12" font="10"> </text>
+<text top="-673" left="1620" width="9" height="12" font="10"> </text>
+<text top="-673" left="2930" width="17" height="12" font="10">  </text>
+<text top="91" left="178" width="79" height="15" font="11">ENGINEERS </text>
+<text top="106" left="177" width="106" height="15" font="11">INDIA LIMITED </text>
+<text top="122" left="178" width="92" height="6" font="1">IA GoN of India Undeflakmg) </text>
+<text top="87" left="540" width="220" height="13" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="105" left="632" width="36" height="13" font="12"><b>FOR </b></text>
+<text top="123" left="618" width="63" height="13" font="12"><b>VALVES </b></text>
+<text top="79" left="1014" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="106" left="1050" width="121" height="13" font="12"><b>6-81-0004 Rev. 7 </b></text>
+<text top="133" left="1077" width="65" height="11" font="0">Page 2 of 8 </text>
+<text top="109" left="52" width="45" height="11" font="0">Ogat </text>
+<text top="109" left="95" width="4" height="11" font="13">t</text>
+<text top="109" left="98" width="3" height="12" font="14">r</text>
+<text top="109" left="98" width="15" height="11" font="13">af</text>
+<text top="109" left="112" width="4" height="12" font="14">-</text>
+<text top="107" left="112" width="42" height="15" font="11">AS </text>
+<text top="116" left="77" width="20" height="11" font="0">,4irel </text>
+<text top="120" left="97" width="52" height="6" font="1">&lt;wave tislJacirsil </text>
+<text top="-956" left="2937" width="9" height="12" font="10"> </text>
+<text top="-1273" left="2937" width="9" height="12" font="10"> </text>
+<text top="194" left="48" width="110" height="15" font="15">Abbreviations: </text>
+<text top="231" left="57" width="40" height="15" font="15">CELL </text>
+<text top="232" left="247" width="304" height="15" font="15">Certification Engineers International Limited </text>
+<text top="232" left="640" width="40" height="15" font="15">MRT </text>
+<text top="232" left="809" width="162" height="15" font="15">Mechanical Run Test . </text>
+<text top="250" left="57" width="56" height="15" font="15">CIMFR </text>
+<text top="251" left="247" width="298" height="15" font="15">Central Institute of Mining &amp; Fuel Research </text>
+<text top="250" left="640" width="38" height="15" font="15">NDT </text>
+<text top="251" left="809" width="168" height="15" font="15">Non Destructive Testing </text>
+<text top="270" left="57" width="25" height="15" font="15">CE </text>
+<text top="270" left="247" width="128" height="15" font="15">Carbon Equivalent </text>
+<text top="270" left="640" width="46" height="15" font="15">NPSH </text>
+<text top="270" left="809" width="180" height="15" font="15">Net Positive Suction Head </text>
+<text top="289" left="57" width="35" height="15" font="15">DFT </text>
+<text top="289" left="247" width="137" height="15" font="15">Dry Film Thickness </text>
+<text top="289" left="640" width="25" height="15" font="15">PO </text>
+<text top="289" left="809" width="107" height="15" font="15">Purchase Order </text>
+<text top="308" left="57" width="36" height="15" font="15">DPT </text>
+<text top="308" left="247" width="153" height="15" font="15">Dye Penetrant Testing </text>
+<text top="308" left="640" width="44" height="15" font="15">PESO </text>
+<text top="308" left="809" width="281" height="15" font="15">Petroleum Explosive Safety Organization </text>
+<text top="327" left="57" width="38" height="15" font="15">DHT </text>
+<text top="327" left="247" width="199" height="15" font="15">De-hydrogen Heat Treatment </text>
+<text top="326" left="640" width="36" height="15" font="15">PQR </text>
+<text top="327" left="809" width="215" height="15" font="15">Procedure Qualification Record </text>
+<text top="346" left="57" width="45" height="15" font="15">ERTL </text>
+<text top="346" left="247" width="253" height="15" font="15">Electronics Regional Test Laboratory </text>
+<text top="346" left="640" width="24" height="15" font="15">PR </text>
+<text top="346" left="809" width="145" height="15" font="15">Purchase Requisition </text>
+<text top="365" left="57" width="41" height="15" font="15">FCRI </text>
+<text top="365" left="117" width="5" height="15" font="15">• </text>
+<text top="365" left="247" width="218" height="15" font="15">Fluid Control Research Institute </text>
+<text top="365" left="640" width="33" height="15" font="15">PMI </text>
+<text top="365" left="809" width="212" height="15" font="15">Positive Material Identification </text>
+<text top="384" left="57" width="26" height="15" font="15">HT </text>
+<text top="384" left="247" width="107" height="15" font="15">Heat Treatment </text>
+<text top="384" left="640" width="25" height="15" font="15">RT </text>
+<text top="384" left="809" width="144" height="15" font="15">Radiography Testing </text>
+<text top="403" left="57" width="32" height="15" font="15">HIC </text>
+<text top="403" left="247" width="193" height="15" font="15">Hydrogen Induced Cracking </text>
+<text top="403" left="640" width="44" height="15" font="15">SSCC </text>
+<text top="403" left="810" width="243" height="15" font="15">Sulphide Stress Corrosion Cracking </text>
+<text top="422" left="57" width="28" height="15" font="15">ITP </text>
+<text top="422" left="247" width="172" height="15" font="15">Inspection and Test Plan </text>
+<text top="422" left="640" width="25" height="15" font="15">TC </text>
+<text top="422" left="809" width="107" height="15" font="15">Test Certificate </text>
+<text top="441" left="57" width="18" height="15" font="15">IP </text>
+<text top="441" left="247" width="124" height="15" font="15">Ingress Protection </text>
+<text top="441" left="639" width="88" height="15" font="15">TPI or TPIA </text>
+<text top="441" left="809" width="210" height="15" font="15">Third Party Inspection Agency </text>
+<text top="460" left="57" width="31" height="15" font="15">IHT </text>
+<text top="460" left="247" width="195" height="15" font="15">Intermediate Heat Treatment </text>
+<text top="460" left="639" width="26" height="15" font="15">UT </text>
+<text top="460" left="809" width="128" height="15" font="15">Ultrasonic Testing </text>
+<text top="479" left="57" width="20" height="15" font="15">IC </text>
+<text top="479" left="247" width="147" height="15" font="15">Inspection Certificate </text>
+<text top="479" left="640" width="39" height="15" font="15">VDR </text>
+<text top="479" left="809" width="179" height="15" font="15">Vendor Data Requirement </text>
+<text top="499" left="57" width="32" height="15" font="15">IGC </text>
+<text top="498" left="247" width="169" height="15" font="15">Inter Granular Corrosion </text>
+<text top="498" left="640" width="38" height="15" font="15">WPS </text>
+<text top="498" left="809" width="224" height="15" font="15">Welding Procedure Specification </text>
+<text top="517" left="56" width="68" height="15" font="15">MPT/MT </text>
+<text top="517" left="247" width="176" height="15" font="15">Magnetic Particle Testing </text>
+<text top="517" left="640" width="40" height="15" font="15">WPQ </text>
+<text top="517" left="809" width="240" height="15" font="15">Welders Performance Qualification </text>
+<text top="536" left="56" width="40" height="15" font="15">MTC </text>
+<text top="536" left="247" width="167" height="15" font="15">Material Test Certificate </text>
+<text top="612" left="36" width="236" height="15" font="15">Inspection Standards Committee </text>
+<text top="650" left="35" width="233" height="15" font="15">Convenor : Mr. Rajeev Kumar </text>
+<text top="688" left="34" width="78" height="15" font="16"><b>Members: </b></text>
+<text top="707" left="145" width="119" height="15" font="15">Mr. Rajesh Sinha </text>
+<text top="707" left="332" width="134" height="15" font="15">Mr. Himangshu Pal </text>
+<text top="706" left="523" width="140" height="15" font="15">Mr. Chandrashekhar </text>
+<text top="706" left="759" width="264" height="15" font="15">Mr. R Muthu Ramalingam (RPO Rep.) </text>
+<text top="726" left="145" width="153" height="15" font="15">Mr. Avdhesh Agrawal </text>
+<text top="726" left="331" width="144" height="15" font="15">Mr. Mahendra Mittal </text>
+<text top="726" left="524" width="171" height="15" font="15">Ms Sulakshna Hundekari </text>
+<text top="744" left="523" width="59" height="15" font="15">(Piping) </text>
+<text top="787" left="35" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="785" left="1033" width="187" height="11" font="0">Copyright EIL - All rights reserved </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="17" size="14" family="Times" color="#000000"/>
+	<fontspec id="18" size="5" family="Times" color="#000000"/>
+	<fontspec id="19" size="5" family="Times" color="#000000"/>
+	<fontspec id="20" size="5" family="Helvetica" color="#000000"/>
+	<fontspec id="21" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="22" size="8" family="Courier" color="#000000"/>
+	<fontspec id="23" size="16" family="Times" color="#000000"/>
+	<fontspec id="24" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="25" size="8" family="Helvetica" color="#000000"/>
+	<fontspec id="26" size="12" family="Times" color="#000000"/>
+<text top="99" left="100" width="21" height="13" font="17">tlf6i</text>
+<text top="106" left="121" width="34" height="4" font="18">ei  </text>
+<text top="122" left="97" width="41" height="4" font="19"><i>faW </i></text>
+<text top="129" left="79" width="49" height="4" font="20">1.704 tqed/r,hI</text>
+<text top="128" left="128" width="18" height="6" font="21"><i>.940 I4</i></text>
+<text top="127" left="145" width="8" height="6" font="22">) </text>
+<text top="127" left="145" width="1" height="6" font="22"> </text>
+<text top="99" left="180" width="79" height="14" font="23">ENGINEERS </text>
+<text top="113" left="179" width="104" height="14" font="23">INDIA LIMITED </text>
+<text top="129" left="179" width="51" height="6" font="24">I A Govt ol inctia </text>
+<text top="127" left="231" width="40" height="7" font="25">undettakIng, </text>
+<text top="93" left="541" width="219" height="12" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="82" left="1015" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="82" left="1201" width="1" height="11" font="0"> </text>
+<text top="110" left="633" width="35" height="12" font="12"><b>FOR </b></text>
+<text top="109" left="1051" width="121" height="12" font="12"><b>6-81-0004 Rev. 7 </b></text>
+<text top="128" left="619" width="63" height="12" font="12"><b>VALVES </b></text>
+<text top="136" left="1080" width="64" height="11" font="26">Page 3 of 8 </text>
+<text top="220" left="36" width="117" height="14" font="23">1.0 SCOPE </text>
+<text top="257" left="90" width="553" height="14" font="23">This Inspection and Test Plan covers the minimum testing requirements of Valves. </text>
+<text top="294" left="37" width="273" height="14" font="23">2.0 REFERENCE DOCUMENTS </text>
+<text top="331" left="91" width="509" height="14" font="23">PO/PR/Standards referred therein/ Job specifications /Approved documents. </text>
+<text top="369" left="36" width="389" height="14" font="23">3.0 INSPECTION AND TEST REQUIREMENTS </text>
+<text top="426" left="102" width="24" height="14" font="23">SL </text>
+<text top="445" left="100" width="29" height="14" font="23">NO </text>
+<text top="435" left="202" width="156" height="14" font="23">STAGE / ACTIVITY </text>
+<text top="434" left="432" width="166" height="14" font="23">CHARACTERISTICS </text>
+<text top="424" left="623" width="91" height="14" font="23">QUANTUM </text>
+<text top="443" left="623" width="92" height="14" font="23">OF CHECK </text>
+<text top="433" left="776" width="75" height="14" font="23">RECORD </text>
+<text top="414" left="901" width="13" height="14" font="23">• </text>
+<text top="413" left="962" width="194" height="14" font="23">SCOPE OF INSPECTION </text>
+<text top="440" left="934" width="37" height="14" font="23">SUB </text>
+<text top="459" left="909" width="87" height="14" font="23">SUPPLIER </text>
+<text top="449" left="1021" width="87" height="14" font="23">SUPPLIER </text>
+<text top="449" left="1133" width="77" height="14" font="23">EIL/TPIA </text>
+<text top="490" left="101" width="25" height="14" font="23">1.0 </text>
+<text top="489" left="202" width="9" height="14" font="23">' </text>
+<text top="489" left="242" width="77" height="14" font="23">Procedure </text>
+<text top="574" left="102" width="24" height="14" font="23">1.1 </text>
+<text top="517" left="221" width="118" height="14" font="23">Hydrostatic Test, </text>
+<text top="535" left="203" width="154" height="14" font="23">Heat Treatment, NDT, </text>
+<text top="554" left="152" width="257" height="14" font="23">Helium Leak Test, Fugitive Emission </text>
+<text top="573" left="173" width="214" height="14" font="23">Test, Internal/ External Coating </text>
+<text top="592" left="233" width="94" height="14" font="23">Procedures &amp; </text>
+<text top="611" left="144" width="275" height="14" font="23">Other Procedures (Wherever applicable, </text>
+<text top="630" left="226" width="108" height="14" font="23">as per MR/ PR) </text>
+<text top="553" left="464" width="101" height="14" font="23">NDT Level III </text>
+<text top="572" left="435" width="159" height="14" font="23">Approved Documented </text>
+<text top="591" left="476" width="78" height="14" font="23">Procedures </text>
+<text top="572" left="648" width="43" height="14" font="23">100% </text>
+<text top="552" left="763" width="101" height="14" font="23">NDT Level III </text>
+<text top="571" left="742" width="142" height="14" font="23">Approved Procedure </text>
+<text top="590" left="773" width="80" height="14" font="23">Documents </text>
+<text top="571" left="948" width="9" height="14" font="23">- </text>
+<text top="570" left="1057" width="15" height="14" font="23">H </text>
+<text top="570" left="1164" width="15" height="14" font="23">R </text>
+<text top="674" left="102" width="24" height="14" font="23">1.2 </text>
+<text top="664" left="149" width="262" height="14" font="23">WPS, PQR &amp; WPQ and NDT operator </text>
+<text top="683" left="208" width="143" height="14" font="23">Qualification Record </text>
+<text top="663" left="437" width="155" height="14" font="23">Welding Parameters &amp; </text>
+<text top="682" left="443" width="144" height="14" font="23">Qualification Record </text>
+<text top="672" left="648" width="43" height="14" font="23">100% </text>
+<text top="672" left="748" width="132" height="14" font="23">WPS, PQR &amp;WPQ </text>
+<text top="671" left="948" width="10" height="14" font="23">- </text>
+<text top="671" left="1057" width="16" height="14" font="23">H </text>
+<text top="661" left="1142" width="61" height="14" font="23">W- New </text>
+<text top="680" left="1132" width="81" height="14" font="23">R- Existing </text>
+<text top="791" left="37" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="786" left="1036" width="187" height="11" font="0">Copyright EIL — All rights reserved </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="27" size="22" family="Helvetica" color="#000000"/>
+	<fontspec id="28" size="22" family="Times" color="#000000"/>
+	<fontspec id="29" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="30" size="5" family="Helvetica" color="#000000"/>
+<text top="129" left="180" width="5" height="5" font="20">A </text>
+<text top="128" left="187" width="82" height="6" font="24">Govt of India Undertaking) </text>
+<text top="83" left="1013" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="110" left="1049" width="121" height="13" font="12"><b>6-81-0004 Rev. 7 </b></text>
+<text top="137" left="1077" width="66" height="11" font="0">Page 4 of 8 </text>
+<text top="97" left="118" width="17" height="15" font="15">zi </text>
+<text top="98" left="178" width="78" height="15" font="15">ENGINEERS </text>
+<text top="108" left="51" width="47" height="20" font="27">ogai </text>
+<text top="108" left="94" width="35" height="20" font="28">faiA </text>
+<text top="112" left="178" width="104" height="15" font="15">INDIA LIMITED </text>
+<text top="127" left="79" width="17" height="6" font="24">egad </text>
+<text top="127" left="99" width="19" height="6" font="29"><i>.te-d,re </i></text>
+<text top="128" left="118" width="8" height="5" font="30"><i>,151 </i></text>
+<text top="92" left="539" width="219" height="13" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="110" left="631" width="35" height="13" font="12"><b>FOR </b></text>
+<text top="128" left="617" width="63" height="13" font="12"><b>VALVES </b></text>
+<text top="198" left="99" width="24" height="15" font="15">SL </text>
+<text top="217" left="97" width="29" height="15" font="15">NO </text>
+<text top="207" left="199" width="156" height="15" font="15">STAGE / ACTIVITY </text>
+<text top="206" left="429" width="166" height="15" font="15">CHARACTERISTICS </text>
+<text top="196" left="621" width="91" height="15" font="15">QUANTUM </text>
+<text top="216" left="620" width="93" height="15" font="15">OF CHECK </text>
+<text top="205" left="760" width="89" height="15" font="15"> RECORD </text>
+<text top="186" left="960" width="194" height="15" font="15">SCOPE OF INSPECTION </text>
+<text top="213" left="931" width="38" height="15" font="15">SUB </text>
+<text top="232" left="906" width="87" height="15" font="15">SUPPLIER </text>
+<text top="222" left="1019" width="87" height="15" font="15">SUPPLIER </text>
+<text top="221" left="1131" width="77" height="15" font="15">EIL/TPIA </text>
+<text top="301" left="99" width="24" height="15" font="15">1.3 </text>
+<text top="300" left="198" width="158" height="15" font="15">Pre-Qualification Tests </text>
+<text top="252" left="479" width="66" height="15" font="15">Fire safe, </text>
+<text top="271" left="443" width="137" height="15" font="15">Cryogenic, Fugitive </text>
+<text top="290" left="433" width="158" height="15" font="15">Emission Test, Internal </text>
+<text top="309" left="438" width="149" height="15" font="15">Epoxy Coating, Glass </text>
+<text top="328" left="431" width="162" height="15" font="15">Lined Coating &amp; Other </text>
+<text top="347" left="450" width="123" height="15" font="15">Test as applicable </text>
+<text top="280" left="626" width="80" height="15" font="15">As per PR / </text>
+<text top="299" left="635" width="64" height="15" font="15">Purchase </text>
+<text top="318" left="621" width="91" height="15" font="15">Specification </text>
+<text top="328" left="589" width="1" height="15" font="15"> </text>
+<text top="299" left="745" width="131" height="15" font="15">Acceptance Report </text>
+<text top="299" left="945" width="9" height="15" font="15">- </text>
+<text top="298" left="1054" width="16" height="15" font="15">H </text>
+<text top="288" left="1161" width="16" height="15" font="15">H </text>
+<text top="298" left="1065" width="1" height="15" font="15"> </text>
+<text top="307" left="1140" width="59" height="15" font="15">(If new) </text>
+<text top="384" left="99" width="25" height="13" font="12"><b>2.0 </b></text>
+<text top="384" left="205" width="145" height="13" font="12"><b>Material Inspection </b></text>
+<text top="465" left="99" width="23" height="15" font="15">2.1 </text>
+<text top="455" left="206" width="141" height="15" font="15">Castings &amp; Forgings </text>
+<text top="474" left="145" width="264" height="15" font="15">(Body, Bonnet, Disc, Stem, Body ring) </text>
+<text top="417" left="435" width="153" height="15" font="15">Chemical, Mechanical </text>
+<text top="436" left="446" width="132" height="15" font="15">(Tensile, Hardness, </text>
+<text top="455" left="432" width="158" height="15" font="15">Impact Test etc. ), Heat </text>
+<text top="473" left="428" width="168" height="15" font="15">Treatment, NDT, IGC &amp; </text>
+<text top="492" left="446" width="131" height="15" font="15">Other Properties as </text>
+<text top="511" left="476" width="73" height="15" font="15">applicable </text>
+<text top="464" left="645" width="43" height="15" font="15">100% </text>
+<text top="464" left="754" width="114" height="15" font="15">Test Certificates </text>
+<text top="463" left="942" width="15" height="15" font="15">H </text>
+<text top="463" left="1055" width="15" height="15" font="15">R </text>
+<text top="463" left="1162" width="14" height="15" font="15">R </text>
+<text top="553" left="99" width="24" height="15" font="15">2.2 </text>
+<text top="544" left="206" width="141" height="15" font="15">Castings &amp; Forgings </text>
+<text top="562" left="145" width="264" height="15" font="15">(Body, Bonnet, Disc, Stem, Body ring) </text>
+<text top="552" left="441" width="141" height="15" font="15">Visual &amp; Dimension </text>
+<text top="552" left="645" width="43" height="15" font="15">100% </text>
+<text top="552" left="750" width="122" height="15" font="15">Inspection Report </text>
+<text top="551" left="942" width="16" height="15" font="15">H </text>
+<text top="551" left="1039" width="34" height="15" font="15"> H </text>
+<text top="551" left="1164" width="10" height="15" font="15">- </text>
+<text top="625" left="99" width="25" height="15" font="15">2.3 </text>
+<text top="624" left="187" width="182" height="15" font="15">Body and Bonnet Castings </text>
+<text top="605" left="467" width="90" height="15" font="15">Radiography </text>
+<text top="623" left="433" width="158" height="15" font="15">Examination after Heat </text>
+<text top="643" left="476" width="72" height="15" font="15">Treatment </text>
+<text top="604" left="626" width="80" height="15" font="15">As per PR / </text>
+<text top="623" left="635" width="64" height="15" font="15">Purchase </text>
+<text top="642" left="621" width="91" height="15" font="15">Specification </text>
+<text top="613" left="744" width="134" height="15" font="15">RT Films and NDT </text>
+<text top="632" left="786" width="50" height="15" font="15">reports </text>
+<text top="622" left="942" width="16" height="15" font="15">H </text>
+<text top="622" left="1055" width="15" height="15" font="15">R </text>
+<text top="622" left="1162" width="15" height="15" font="15">R </text>
+<text top="697" left="99" width="25" height="15" font="15">2.4 </text>
+<text top="697" left="201" width="153" height="15" font="15">Bars for Trim material </text>
+<text top="697" left="447" width="130" height="15" font="15">Chemical Analysis </text>
+<text top="696" left="631" width="72" height="15" font="15">Each Heat </text>
+<text top="686" left="745" width="131" height="15" font="15">Test Certificates &amp; </text>
+<text top="705" left="772" width="78" height="15" font="15">Lab Report </text>
+<text top="695" left="942" width="16" height="15" font="15">H </text>
+<text top="695" left="1055" width="14" height="15" font="15">R </text>
+<text top="695" left="1164" width="10" height="15" font="15">- </text>
+<text top="790" left="35" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="787" left="1033" width="187" height="11" font="0">Copyright EIL — All rights reserved </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="31" size="20" family="Helvetica" color="#000000"/>
+	<fontspec id="32" size="16" family="Times" color="#000000"/>
+<text top="96" left="92" width="8" height="15" font="4"> </text>
+<text top="95" left="171" width="80" height="15" font="4">ENGINEERS </text>
+<text top="109" left="46" width="101" height="18" font="31">Og-ar tawG </text>
+<text top="110" left="171" width="106" height="15" font="4">INDIA LIMITED </text>
+<text top="126" left="172" width="92" height="6" font="1">IA Govi of India Undenalom </text>
+<text top="90" left="534" width="219" height="13" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="108" left="626" width="36" height="13" font="12"><b>FOR </b></text>
+<text top="125" left="612" width="63" height="13" font="12"><b>VALVES </b></text>
+<text top="81" left="1008" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="80" left="1194" width="1" height="11" font="0"> </text>
+<text top="108" left="1044" width="8" height="13" font="12"><b>6</b></text>
+<text top="109" left="1053" width="4" height="11" font="6"><b>-</b></text>
+<text top="108" left="1058" width="16" height="13" font="12"><b>81</b></text>
+<text top="109" left="1074" width="5" height="11" font="6"><b>-</b></text>
+<text top="108" left="1080" width="86" height="13" font="12"><b>0004 Rev. 7 </b></text>
+<text top="134" left="1072" width="65" height="11" font="0">Page 5 of 8 </text>
+<text top="196" left="95" width="24" height="14" font="23">SL </text>
+<text top="215" left="93" width="29" height="14" font="23">NO </text>
+<text top="205" left="194" width="155" height="14" font="23">STAGE / ACTIVITY </text>
+<text top="204" left="425" width="166" height="14" font="23">CHARACTERISTICS </text>
+<text top="195" left="616" width="91" height="14" font="32"><b>QUANTUM </b></text>
+<text top="213" left="616" width="93" height="14" font="32"><b>OF CHECK </b></text>
+<text top="204" left="768" width="76" height="14" font="23">RECORD </text>
+<text top="184" left="955" width="194" height="14" font="32"><b>SCOPE OF INSPECTION </b></text>
+<text top="211" left="927" width="37" height="14" font="32"><b>SUB </b></text>
+<text top="230" left="902" width="87" height="14" font="32"><b>SUPPLIER </b></text>
+<text top="220" left="1014" width="87" height="14" font="32"><b>SUPPLIER </b></text>
+<text top="220" left="1126" width="77" height="14" font="32"><b>EIL/TPIA </b></text>
+<text top="279" left="95" width="25" height="14" font="23">2.5 </text>
+<text top="269" left="144" width="257" height="14" font="23">Gaskets, Gear units, Fasteners, Gland, </text>
+<text top="288" left="225" width="96" height="14" font="23">Packings, etc. </text>
+<text top="268" left="439" width="137" height="14" font="23">Physical / Chemical </text>
+<text top="287" left="472" width="72" height="14" font="23">Properties </text>
+<text top="273" left="617" width="8" height="14" font="23">. </text>
+<text top="277" left="640" width="43" height="14" font="23">100% </text>
+<text top="267" left="741" width="131" height="14" font="23">Test Certificates &amp; </text>
+<text top="286" left="767" width="78" height="14" font="23">Lab Report </text>
+<text top="276" left="937" width="16" height="14" font="23">H </text>
+<text top="276" left="1050" width="14" height="14" font="23">R </text>
+<text top="275" left="1160" width="10" height="14" font="23">- </text>
+<text top="354" left="95" width="25" height="14" font="23">2.6 </text>
+<text top="354" left="193" width="159" height="14" font="23">Actuators as applicable </text>
+<text top="325" left="461" width="93" height="14" font="23">Performance, </text>
+<text top="344" left="435" width="146" height="14" font="23">Statutory Certificates </text>
+<text top="363" left="438" width="138" height="14" font="23">etc. As per EIL ITP. </text>
+<text top="382" left="471" width="72" height="14" font="23">6-81-1091 </text>
+<text top="388" left="631" width="1" height="14" font="23"> </text>
+<text top="353" left="641" width="43" height="14" font="23">100% </text>
+<text top="343" left="747" width="118" height="14" font="23">Test Certificates, </text>
+<text top="362" left="748" width="116" height="14" font="23">Inspection report </text>
+<text top="352" left="937" width="16" height="14" font="23">H </text>
+<text top="352" left="1049" width="15" height="14" font="23">H </text>
+<text top="351" left="1158" width="14" height="14" font="23">R </text>
+<text top="418" left="94" width="25" height="14" font="32"><b>3.0 </b></text>
+<text top="417" left="196" width="155" height="14" font="32"><b>In Process Inspection </b></text>
+<text top="473" left="95" width="24" height="14" font="23">3.1 </text>
+<text top="463" left="155" width="235" height="14" font="23">Welding, Weld Overlay, Stelliting, </text>
+<text top="482" left="181" width="184" height="14" font="23">Hardfacing (As applicable) </text>
+<text top="463" left="429" width="157" height="14" font="23">Welding Parameters as </text>
+<text top="482" left="454" width="108" height="14" font="23">per WPS / PQR </text>
+<text top="472" left="641" width="43" height="14" font="23">100% </text>
+<text top="471" left="742" width="129" height="14" font="23">Inspection Reports </text>
+<text top="471" left="940" width="9" height="14" font="23">- </text>
+<text top="471" left="1049" width="16" height="14" font="23">H </text>
+<text top="471" left="1160" width="9" height="14" font="23">- </text>
+<text top="535" left="95" width="24" height="14" font="23">3.2 </text>
+<text top="535" left="184" width="178" height="14" font="23">Machining of components </text>
+<text top="534" left="441" width="133" height="14" font="23">Visual / Dimension </text>
+<text top="534" left="641" width="43" height="14" font="23">100% </text>
+<text top="533" left="742" width="129" height="14" font="23">Inspection Reports </text>
+<text top="533" left="940" width="10" height="14" font="23">- </text>
+<text top="532" left="1051" width="13" height="14" font="23">H </text>
+<text top="532" left="1160" width="9" height="14" font="23">- </text>
+<text top="597" left="95" width="25" height="14" font="23">3.3 </text>
+<text top="587" left="141" width="264" height="14" font="23">DP Test for all weld joints, Bevel Ends </text>
+<text top="606" left="188" width="171" height="14" font="23">&amp; Bypass (as applicable) </text>
+<text top="596" left="442" width="131" height="14" font="23">Dye Penetrant Test </text>
+<text top="595" left="641" width="43" height="14" font="23">100% </text>
+<text top="595" left="763" width="83" height="14" font="23">NDT Report</text>
+<text top="594" left="941" width="9" height="14" font="23">- </text>
+<text top="594" left="1050" width="14" height="14" font="23">H </text>
+<text top="594" left="1150" width="30" height="14" font="23">RW </text>
+<text top="658" left="95" width="24" height="14" font="23">3.4 </text>
+<text top="658" left="217" width="112" height="14" font="23">Hardness Check </text>
+<text top="639" left="438" width="140" height="14" font="23">Heat Treat Castings, </text>
+<text top="657" left="442" width="132" height="14" font="23">Weld Joints, Grove </text>
+<text top="676" left="473" width="71" height="14" font="23">Joints etc. </text>
+<text top="669" left="715" width="1" height="14" font="23"> </text>
+<text top="657" left="641" width="43" height="14" font="23">100% </text>
+<text top="657" left="742" width="129" height="14" font="23">Inspection Reports </text>
+<text top="656" left="941" width="9" height="14" font="23">- </text>
+<text top="656" left="1050" width="14" height="14" font="23">H </text>
+<text top="656" left="1158" width="15" height="14" font="23">R </text>
+<text top="712" left="95" width="24" height="14" font="23">4.0 </text>
+<text top="712" left="215" width="117" height="14" font="23">Final Inspection </text>
+<text top="699" left="948" width="4" height="14" font="23">• </text>
+<text top="787" left="31" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="779" left="780" width="14" height="11" font="0">• </text>
+<text top="783" left="1029" width="187" height="11" font="0">Copyright EIL — All rights reserved </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="895" width="1260">
+<text top="-643" left="1475" width="9" height="12" font="10"> </text>
+<text top="-643" left="2814" width="9" height="12" font="10"> </text>
+<text top="96" left="173" width="79" height="14" font="23">ENGINEERS </text>
+<text top="110" left="173" width="104" height="14" font="23">INDIA LIMITED </text>
+<text top="127" left="173" width="8" height="5" font="20">IA </text>
+<text top="126" left="182" width="82" height="6" font="1">Govt Olinda Uncleflaking) </text>
+<text top="90" left="534" width="219" height="13" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="107" left="627" width="35" height="13" font="12"><b>FOR </b></text>
+<text top="125" left="612" width="63" height="13" font="12"><b>VALVES </b></text>
+<text top="79" left="1008" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="106" left="1045" width="121" height="13" font="12"><b>6-81-0004 Rev. 7 </b></text>
+<text top="133" left="1072" width="65" height="11" font="0">Page 6 of 8 </text>
+<text top="125" left="113" width="31" height="6" font="1">nmJvassi, </text>
+<text top="198" left="95" width="24" height="14" font="23">SL </text>
+<text top="216" left="93" width="29" height="14" font="23">NO </text>
+<text top="206" left="195" width="156" height="14" font="23">STAGE / ACTIVITY </text>
+<text top="205" left="425" width="165" height="14" font="23">CHARACTERISTICS </text>
+<text top="195" left="616" width="91" height="14" font="23">QUANTUM </text>
+<text top="214" left="616" width="93" height="14" font="23">OF CHECK </text>
+<text top="204" left="769" width="75" height="14" font="23">RECORD </text>
+<text top="184" left="955" width="194" height="14" font="23">SCOPE OF INSPECTION </text>
+<text top="211" left="927" width="37" height="14" font="23">SUB </text>
+<text top="230" left="902" width="87" height="14" font="23">SUPPLIER </text>
+<text top="220" left="1014" width="87" height="14" font="23">SUPPLIER </text>
+<text top="219" left="1126" width="77" height="14" font="23">EIL/TPIA </text>
+<text top="290" left="95" width="23" height="14" font="23">4.1 </text>
+<text top="252" left="162" width="135" height="14" font="23">a.  Shell Hydrotest </text>
+<text top="290" left="162" width="218" height="14" font="23">c.  Backseat Hydrotest (Gate &amp; </text>
+<text top="309" left="189" width="100" height="14" font="23">Globe Valves) </text>
+<text top="328" left="162" width="197" height="14" font="23">d.  Seat Pneumatic/ Air Test </text>
+<text top="271" left="162" width="222" height="14" font="23">b.  Seat Hydro Test (Both Sides)</text>
+<text top="278" left="733" width="61" height="14" font="23">Pressure </text>
+<text top="289" left="466" width="83" height="14" font="23">Leak Check </text>
+<text top="288" left="641" width="43" height="14" font="23">100% </text>
+<text top="278" left="794" width="86" height="14" font="23">Test Report, </text>
+<text top="297" left="734" width="144" height="14" font="23">Water quality Report </text>
+<text top="286" left="1048" width="18" height="14" font="23">H </text>
+<text top="276" left="1149" width="31" height="14" font="23">RW </text>
+<text top="295" left="1135" width="61" height="14" font="23">(Note 1) </text>
+<text top="375" left="95" width="24" height="14" font="23">4.2 </text>
+<text top="365" left="149" width="248" height="14" font="23">Helium Leak test / Vacuum Test ( as </text>
+<text top="384" left="234" width="78" height="14" font="23">applicable) </text>
+<text top="374" left="466" width="84" height="14" font="23">Leak Check </text>
+<text top="354" left="622" width="80" height="14" font="23">As per PR / </text>
+<text top="373" left="631" width="64" height="14" font="23">Purchase </text>
+<text top="392" left="617" width="91" height="14" font="23">Specification </text>
+<text top="373" left="765" width="82" height="14" font="23">Test Report </text>
+<text top="372" left="941" width="9" height="14" font="23">- </text>
+<text top="372" left="1050" width="16" height="14" font="23">H </text>
+<text top="361" left="1150" width="31" height="14" font="23">RW </text>
+<text top="381" left="1135" width="61" height="14" font="23">(Note 1) </text>
+<text top="450" left="96" width="24" height="14" font="23">4.3 </text>
+<text top="450" left="174" width="199" height="14" font="23">Visual &amp; Dimensional Check </text>
+<text top="430" left="430" width="155" height="14" font="23">Surface Verification &amp; </text>
+<text top="449" left="470" width="77" height="14" font="23">Dimension </text>
+<text top="468" left="461" width="94" height="14" font="23">Measurement </text>
+<text top="448" left="642" width="43" height="14" font="23">100% </text>
+<text top="447" left="766" width="81" height="14" font="23">Test Report </text>
+<text top="447" left="941" width="9" height="14" font="23">- </text>
+<text top="446" left="1050" width="15" height="14" font="23">H </text>
+<text top="437" left="1132" width="50" height="14" font="23">. RW </text>
+<text top="455" left="1119" width="77" height="14" font="23">•  (Note 1) </text>
+<text top="539" left="96" width="25" height="14" font="23">4.4 </text>
+<text top="529" left="152" width="243" height="14" font="23">Functional Test for Motor/ Actuator </text>
+<text top="548" left="216" width="115" height="14" font="23">Operated Valves </text>
+<text top="528" left="467" width="83" height="14" font="23">Satisfactory </text>
+<text top="547" left="465" width="89" height="14" font="23">Performance </text>
+<text top="527" left="642" width="43" height="14" font="23">100% </text>
+<text top="536" left="766" width="82" height="14" font="23">Test Report </text>
+<text top="536" left="941" width="10" height="14" font="23">- </text>
+<text top="535" left="1050" width="16" height="14" font="23">H </text>
+<text top="535" left="1150" width="31" height="14" font="23">RW </text>
+<text top="622" left="96" width="24" height="14" font="23">4.5 </text>
+<text top="621" left="201" width="146" height="14" font="23">Marking Verification </text>
+<text top="601" left="425" width="168" height="14" font="23">Verification of Marking, </text>
+<text top="620" left="427" width="164" height="14" font="23">Valve Tagging &amp; Name </text>
+<text top="639" left="457" width="105" height="14" font="23">Plate Checking </text>
+<text top="619" left="642" width="43" height="14" font="23">100% </text>
+<text top="609" left="738" width="138" height="14" font="23">Marking &amp; Tagging </text>
+<text top="628" left="783" width="49" height="14" font="23">Report </text>
+<text top="617" left="1050" width="16" height="14" font="23">H </text>
+<text top="608" left="1150" width="31" height="14" font="23">RW </text>
+<text top="626" left="1135" width="62" height="14" font="23">(Note-1) </text>
+<text top="682" left="96" width="25" height="14" font="23">4.6 </text>
+<text top="681" left="235" width="79" height="14" font="23">PMI Check </text>
+<text top="680" left="452" width="114" height="14" font="23">Chemical Check </text>
+<text top="660" left="625" width="77" height="14" font="23">As per EIL </text>
+<text top="679" left="643" width="41" height="14" font="23">Spec. </text>
+<text top="698" left="627" width="72" height="14" font="23">6-81-0001 </text>
+<text top="679" left="766" width="83" height="14" font="23">PMI Report </text>
+<text top="678" left="941" width="10" height="14" font="23">- </text>
+<text top="678" left="1051" width="15" height="14" font="23">H </text>
+<text top="677" left="1151" width="30" height="14" font="23">RW </text>
+<text top="783" left="1030" width="187" height="11" font="0">Copyright EIL — All rights reserved </text>
+<text top="789" left="32" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="895" width="1260">
+	<fontspec id="33" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="34" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="35" size="8" family="Times" color="#000000"/>
+<text top="98" left="84" width="19" height="13" font="33">01 </text>
+<text top="100" left="96" width="7" height="10" font="34"> </text>
+<text top="97" left="172" width="80" height="15" font="11">ENGINEERS </text>
+<text top="111" left="46" width="101" height="15" font="11">ligzu farAs </text>
+<text top="111" left="172" width="106" height="15" font="11">INDIA LIMITED </text>
+<text top="126" left="73" width="68" height="7" font="35">t *OFF NVIII,W .14t15. </text>
+<text top="127" left="173" width="92" height="6" font="1">in Govt 0 ina.a Undertaiong) </text>
+<text top="90" left="534" width="220" height="15" font="11">INSPECTION AND TEST PLAN </text>
+<text top="107" left="627" width="36" height="15" font="11">FOR </text>
+<text top="125" left="613" width="64" height="15" font="11">VALVES </text>
+<text top="81" left="1009" width="193" height="10" font="34">STANDARD SPECIFICATION NO. </text>
+<text top="81" left="1194" width="1" height="10" font="34"> </text>
+<text top="106" left="1045" width="109" height="15" font="11">6-81-0004 Rev. </text>
+<text top="107" left="1155" width="11" height="14" font="23">7 </text>
+<text top="135" left="1073" width="66" height="10" font="34">Page 7 of 8 </text>
+<text top="199" left="96" width="24" height="14" font="23">SL </text>
+<text top="218" left="93" width="29" height="14" font="23">NO </text>
+<text top="207" left="196" width="156" height="14" font="23">STAGE /ACTIVITY </text>
+<text top="206" left="426" width="166" height="14" font="23">CHARACTERISTICS </text>
+<text top="196" left="617" width="91" height="14" font="23">QUANTUM </text>
+<text top="216" left="617" width="93" height="14" font="23">OF CHECK </text>
+<text top="204" left="768" width="77" height="15" font="11">RECORD </text>
+<text top="185" left="956" width="194" height="14" font="23">SCOPE OF INSPECTION </text>
+<text top="212" left="927" width="38" height="14" font="23">SUB </text>
+<text top="231" left="903" width="87" height="14" font="23">SUPPLIER </text>
+<text top="221" left="1015" width="87" height="14" font="23">SUPPLIER </text>
+<text top="221" left="1127" width="77" height="14" font="23">EIL/TPIA </text>
+<text top="292" left="96" width="25" height="14" font="23">4.7 </text>
+<text top="291" left="180" width="188" height="14" font="23">Strip Check (As applicable) </text>
+<text top="252" left="429" width="159" height="14" font="23">Verify Components for </text>
+<text top="271" left="428" width="160" height="14" font="23">wear, damage , harmful </text>
+<text top="290" left="474" width="68" height="14" font="23">defects &amp; </text>
+<text top="309" left="428" width="162" height="14" font="23">Differential hardness as </text>
+<text top="328" left="472" width="73" height="14" font="23">applicable </text>
+<text top="270" left="623" width="80" height="14" font="23">As per PR / </text>
+<text top="289" left="631" width="64" height="14" font="23">Purchase </text>
+<text top="308" left="617" width="91" height="14" font="23">Specification </text>
+<text top="289" left="746" width="122" height="14" font="23">Inspection Report </text>
+<text top="288" left="941" width="10" height="14" font="23">- </text>
+<text top="287" left="1049" width="20" height="15" font="11">H </text>
+<text top="277" left="1149" width="32" height="15" font="11">RW </text>
+<text top="297" left="1135" width="62" height="14" font="23">(Note-1) </text>
+<text top="401" left="96" width="25" height="14" font="23">4.8 </text>
+<text top="400" left="221" width="106" height="14" font="23">Final Stamping </text>
+<text top="390" left="433" width="152" height="14" font="23">Stamping of Accepted </text>
+<text top="409" left="484" width="51" height="14" font="23">Valves </text>
+<text top="370" left="621" width="86" height="14" font="23">Stamping of </text>
+<text top="389" left="616" width="95" height="14" font="23">Valves which </text>
+<text top="408" left="606" width="115" height="14" font="23">are witnessed by </text>
+<text top="427" left="626" width="75" height="14" font="23">EIL/TPIA. </text>
+<text top="398" left="746" width="122" height="14" font="23">Inspection Report </text>
+<text top="397" left="941" width="10" height="14" font="23">- </text>
+<text top="396" left="1051" width="15" height="14" font="23">H </text>
+<text top="387" left="1161" width="14" height="14" font="23">H </text>
+<text top="406" left="1135" width="62" height="14" font="23">(Note-1) </text>
+<text top="482" left="96" width="24" height="15" font="11">5.0 </text>
+<text top="481" left="242" width="66" height="15" font="11">Painting </text>
+<text top="537" left="97" width="23" height="14" font="23">5.1 </text>
+<text top="527" left="148" width="253" height="14" font="23">Painting/ Pickling &amp; Passivation and </text>
+<text top="545" left="184" width="181" height="14" font="23">Color coding as applicable </text>
+<text top="535" left="440" width="138" height="14" font="23">Visual / DFT Check </text>
+<text top="534" left="642" width="43" height="14" font="23">100% </text>
+<text top="534" left="747" width="122" height="14" font="23">Inspection Report </text>
+<text top="533" left="942" width="10" height="14" font="23">- </text>
+<text top="532" left="1050" width="21" height="15" font="11">H </text>
+<text top="532" left="1161" width="10" height="15" font="11">- </text>
+<text top="607" left="97" width="24" height="15" font="11">6.0 </text>
+<text top="607" left="166" width="102" height="15" font="11">PACKING &amp; </text>
+<text top="607" left="268" width="114" height="14" font="23">PROTECTION </text>
+<text top="678" left="97" width="23" height="14" font="23">6.1 </text>
+<text top="678" left="202" width="147" height="14" font="23">Packing &amp; Protection </text>
+<text top="658" left="428" width="164" height="14" font="23">Dispatch Instructions as </text>
+<text top="676" left="429" width="161" height="14" font="23">per Technical Notes for </text>
+<text top="696" left="485" width="50" height="14" font="23">Valves </text>
+<text top="676" left="643" width="43" height="14" font="23">100% </text>
+<text top="666" left="741" width="134" height="14" font="23">Compliance Report </text>
+<text top="685" left="748" width="120" height="14" font="23">with photographs </text>
+<text top="684" left="957" width="6" height="14" font="23">. </text>
+<text top="674" left="1052" width="15" height="14" font="23">H </text>
+<text top="674" left="1152" width="29" height="14" font="23">RW </text>
+<text top="734" left="97" width="24" height="14" font="23">7.0 </text>
+<text top="724" left="171" width="208" height="14" font="23">Documentation &amp; Inspection </text>
+<text top="743" left="235" width="80" height="14" font="23">Certificate </text>
+<text top="790" left="32" width="175" height="10" font="34">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="785" left="1031" width="186" height="10" font="34">Copyright EIL — All rights reserved </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="895" width="1260">
+<text top="90" left="125" width="19" height="16" font="4">ei </text>
+<text top="92" left="186" width="78" height="15" font="15">ENGINEERS </text>
+<text top="88" left="547" width="219" height="13" font="12"><b>INSPECTION AND TEST PLAN </b></text>
+<text top="80" left="1021" width="193" height="11" font="0">STANDARD SPECIFICATION NO. </text>
+<text top="108" left="81" width="18" height="13" font="33">L7f</text>
+<text top="106" left="101" width="57" height="15" font="15">fa  Ws </text>
+<text top="106" left="185" width="104" height="15" font="15">INDIA LIMITED </text>
+<text top="106" left="639" width="36" height="13" font="12"><b>FOR </b></text>
+<text top="107" left="1057" width="120" height="13" font="12"><b>6-81-0004 Rev. </b>7 </text>
+<text top="119" left="84" width="70" height="8" font="25">INTi71 errome JW1511 </text>
+<text top="121" left="188" width="89" height="8" font="25">A Govt of Ind. unoettai.g) </text>
+<text top="123" left="625" width="63" height="13" font="12"><b>VALVES </b></text>
+<text top="134" left="1085" width="65" height="11" font="0">Page 8 of 8 </text>
+<text top="192" left="107" width="24" height="15" font="15">SL </text>
+<text top="211" left="105" width="29" height="15" font="15">NO </text>
+<text top="202" left="207" width="155" height="15" font="15">STAGE / ACTIVITY </text>
+<text top="202" left="437" width="166" height="15" font="15">CHARACTERISTICS </text>
+<text top="193" left="628" width="91" height="15" font="15">QUANTUM </text>
+<text top="212" left="628" width="93" height="15" font="15">OF CHECK </text>
+<text top="202" left="781" width="75" height="15" font="15">RECORD </text>
+<text top="184" left="967" width="194" height="15" font="15">SCOPE OF INSPECTION </text>
+<text top="210" left="939" width="38" height="15" font="15">SUB </text>
+<text top="229" left="914" width="87" height="15" font="15">SUPPLIER </text>
+<text top="220" left="1026" width="87" height="15" font="15">SUPPLIER </text>
+<text top="220" left="1138" width="77" height="15" font="15">EIL/TPIA </text>
+<text top="276" left="107" width="23" height="15" font="15">7.1 </text>
+<text top="267" left="149" width="271" height="15" font="15">Documentation &amp; Inspection Certificate </text>
+<text top="286" left="268" width="32" height="15" font="15">(IC) </text>
+<text top="248" left="463" width="114" height="15" font="15">Review of Stage </text>
+<text top="267" left="451" width="137" height="15" font="15">Inspection Reports / </text>
+<text top="286" left="439" width="162" height="15" font="15">Test Reports &amp; Issue of </text>
+<text top="305" left="509" width="20" height="15" font="15">IC </text>
+<text top="277" left="653" width="43" height="15" font="15">100% </text>
+<text top="277" left="756" width="123" height="15" font="15">Supplier TC &amp; IC </text>
+<text top="277" left="952" width="10" height="15" font="15">- </text>
+<text top="277" left="1061" width="16" height="15" font="15">H </text>
+<text top="277" left="1169" width="15" height="15" font="15">H </text>
+<text top="386" left="93" width="1070" height="15" font="15">Legend: H- Hold (Do not proceed without approval), P-Perform, RW - Random Witness (As specified or 10% ( min.1 no. of each size and type of Bulk item)), </text>
+<text top="405" left="93" width="555" height="15" font="15">R-Review, W-Witness, (Give due notice, work may proceed after scheduled date).  </text>
+<text top="444" left="84" width="61" height="13" font="12"><b>NOTES </b></text>
+<text top="443" left="145" width="116" height="15" font="15">(As applicable): </text>
+<text top="481" left="95" width="1136" height="16" font="15">1.  Non NACE &amp; Non Hydrogen service Carbon Steel Cast Valves up to size 12&#34;-300ANSI Class and Carbon Steel Forged Valves up to size 1.5&#34;- 800 ANSI Class will </text>
+<text top="500" left="127" width="348" height="15" font="15">be accepted on review of Supplier Test Certificates. </text>
+<text top="519" left="127" width="545" height="15" font="15">Supplier Test Certificate along with back up reports to be reviewed by EIL/TPIA. </text>
+<text top="538" left="95" width="1137" height="15" font="15">2.  This document describes the generic test requirements. Any additional test or Inspection scope if specified in contract documents shall also be applicable. (Unless </text>
+<text top="557" left="127" width="160" height="15" font="15">otherwise agreed upon) </text>
+<text top="576" left="95" width="938" height="15" font="15">3.  Acceptance Norms for all the activities shall be as per PO/PR/STANDARDS referred therein /Job Specification /Approved Documents. </text>
+<text top="787" left="41" width="175" height="11" font="0">Format No. 8-00-0001-F7 Rev.O </text>
+<text top="785" left="1039" width="187" height="11" font="0">Copyright EIL — All rights reserved </text>
+</page>
+<outline>
+<item page="1">Page 1</item>
+<item page="2">Page 2</item>
+<item page="3">Page 3</item>
+<item page="4">Page 4</item>
+<item page="5">Page 5</item>
+<item page="6">Page 6</item>
+<item page="7">Page 7</item>
+<item page="8">Page 8</item>
+</outline>
+</pdf2xml>

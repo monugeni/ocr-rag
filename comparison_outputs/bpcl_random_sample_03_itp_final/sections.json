@@ -1,0 +1,230 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > Abbreviations",
+    "seq": 0,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "Members",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > Members",
+    "seq": 1,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "1.0 SCOPE",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 1.0 SCOPE",
+    "seq": 2,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "2.0 REFERENCE DOCUMENTS",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 2.0 REFERENCE DOCUMENTS",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 INSPECTION AND TEST REQUIREMENTS",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 INSPECTION AND TEST REQUIREMENTS",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 Procedure",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 1.0 Procedure",
+    "seq": 5,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 In Process Inspection",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 In Process Inspection",
+    "seq": 6,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "NO. OF CHECK SUB",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 3.0 In Process Inspection > NO. OF CHECK SUB",
+    "seq": 7,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 . Final Inspection",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 4.0 . Final Inspection",
+    "seq": 8,
+    "confidence": 0.589,
+    "score": 5.3,
+    "reasons": [
+      "bold",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "6.0 Documentation & IC",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "INSPECTION AND TEST PLAN FOR GASKETS > 6.0 Documentation & IC",
+    "seq": 9,
+    "confidence": 0.589,
+    "score": 5.3,
+    "reasons": [
+      "bold",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "INSPECTION AND TEST PLAN FOR GASKETS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  }
+]

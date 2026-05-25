@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763111922.pdf",
+  "document_title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+  "document_context": {
+    "title": "SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND",
+    "path_parts": [],
+    "source": "subject"
+  },
+  "page_count": 44,
+  "body_font_size": 15.0,
+  "heading_count": 26,
+  "toc_entry_count": 0,
+  "chunk_count": 515,
+  "warnings": [],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 44,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 3,
+    "line_role_counts": {
+      "body": 1335,
+      "running": 79,
+      "form": 6,
+      "caption": 3,
+      "table": 101
+    }
+  }
+}

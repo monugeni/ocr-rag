@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/BURNER OIL GUN MR/Specification for Procurement of Burner Components-C238-131-80-45-SP-0001.pdf",
+  "document_title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+  "document_context": {
+    "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 7,
+  "body_font_size": 18.0,
+  "heading_count": 10,
+  "toc_entry_count": 0,
+  "chunk_count": 63,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 7,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "running": 35,
+      "page_number": 8,
+      "drawing": 12,
+      "body": 154,
+      "table": 5
+    }
+  }
+}

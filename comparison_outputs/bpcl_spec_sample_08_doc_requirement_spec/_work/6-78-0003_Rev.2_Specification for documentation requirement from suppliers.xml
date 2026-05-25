@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1261" width="892">
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="0" size="16" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="1" size="15" family="GHHNBE+Arial" color="#000000"/>
+	<fontspec id="2" size="12" family="GHHNBE+Arial" color="#000000"/>
+	<fontspec id="3" size="12" family="GHHNBF+ArialMT" color="#000000"/>
+	<fontspec id="4" size="16" family="GHHNFI+TimesNewRomanPS" color="#000000"/>
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 2 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="106" width="105" height="18" font="4"><b>Abbreviations:</b></text>
+<text top="133" left="212" width="4" height="18" font="0"> </text>
+<text top="151" left="106" width="4" height="18" font="0"> </text>
+<text top="170" left="106" width="64" height="18" font="0">DCI   - </text>
+<text top="170" left="214" width="169" height="18" font="0">Document Control Index </text>
+<text top="199" left="106" width="64" height="18" font="0">eDMS   - </text>
+<text top="199" left="214" width="288" height="18" font="0">Electronic Document Management System </text>
+<text top="199" left="538" width="4" height="18" font="0"> </text>
+<text top="227" left="106" width="64" height="18" font="0">FOA  - </text>
+<text top="227" left="214" width="128" height="18" font="0">Fax of Acceptance </text>
+<text top="255" left="106" width="21" height="18" font="0">IC </text>
+<text top="255" left="160" width="10" height="18" font="0">- </text>
+<text top="255" left="214" width="147" height="18" font="0">Inspection Certificate </text>
+<text top="284" left="106" width="33" height="18" font="0">IRN </text>
+<text top="284" left="160" width="10" height="18" font="0">- </text>
+<text top="284" left="214" width="164" height="18" font="0">Inspection Release Note </text>
+<text top="312" left="106" width="29" height="18" font="0">ITP </text>
+<text top="312" left="160" width="10" height="18" font="0">- </text>
+<text top="312" left="214" width="167" height="18" font="0">Inspection and Test Plan </text>
+<text top="341" left="106" width="64" height="18" font="0">LOA  - </text>
+<text top="341" left="214" width="143" height="18" font="0">Letter of Acceptance </text>
+<text top="369" left="106" width="30" height="18" font="0">MR </text>
+<text top="369" left="160" width="10" height="18" font="0">- </text>
+<text top="369" left="214" width="140" height="18" font="0">Material Requisition </text>
+<text top="398" left="106" width="25" height="18" font="0">PO </text>
+<text top="398" left="160" width="10" height="18" font="0">- </text>
+<text top="398" left="214" width="106" height="18" font="0">Purchase Order </text>
+<text top="426" left="106" width="24" height="18" font="0">PR </text>
+<text top="426" left="160" width="10" height="18" font="0">- </text>
+<text top="426" left="214" width="144" height="18" font="0">Purchase Requisition </text>
+<text top="455" left="106" width="64" height="18" font="0">PVC  - </text>
+<text top="455" left="214" width="130" height="18" font="0">Polyvinyl Chloride </text>
+<text top="483" left="106" width="64" height="18" font="0">QAP  - </text>
+<text top="483" left="214" width="160" height="18" font="0">Quality Assurance Plan </text>
+<text top="512" left="106" width="64" height="18" font="0">QMS  - </text>
+<text top="512" left="214" width="197" height="18" font="0">Quality Management System </text>
+<text top="540" left="106" width="64" height="18" font="0">RPO     - </text>
+<text top="540" left="214" width="198" height="18" font="0">Regional Procurement Office </text>
+<text top="569" left="106" width="64" height="18" font="0">TPIA  - </text>
+<text top="569" left="214" width="208" height="18" font="0">Third Party Inspection Agency </text>
+<text top="597" left="106" width="64" height="18" font="0">URL  - </text>
+<text top="597" left="214" width="189" height="18" font="0">Universal Resource Locator </text>
+<text top="625" left="106" width="71" height="18" font="0">V-Portal-  </text>
+<text top="625" left="214" width="97" height="18" font="0">Vendor Portal </text>
+<text top="654" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="673" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="692" left="106" width="4" height="18" font="0"> </text>
+<text top="711" left="106" width="4" height="18" font="0"> </text>
+<text top="730" left="106" width="4" height="18" font="0"> </text>
+<text top="749" left="106" width="4" height="18" font="0"> </text>
+<text top="768" left="106" width="4" height="18" font="0"> </text>
+<text top="787" left="106" width="4" height="18" font="0"> </text>
+<text top="806" left="106" width="4" height="18" font="0"> </text>
+<text top="825" left="106" width="4" height="18" font="0"> </text>
+<text top="844" left="106" width="4" height="18" font="0"> </text>
+<text top="863" left="106" width="4" height="18" font="0"> </text>
+<text top="881" left="106" width="4" height="18" font="0"> </text>
+<text top="900" left="106" width="4" height="18" font="0"> </text>
+<text top="920" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="939" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="958" left="106" width="200" height="18" font="4"><b>QMS Standards Committee </b></text>
+<text top="958" left="307" width="4" height="18" font="0"> </text>
+<text top="976" left="106" width="4" height="18" font="0"> </text>
+<text top="995" left="106" width="78" height="18" font="4"><b>Convener: </b></text>
+<text top="995" left="214" width="117" height="18" font="0">Mr. S.K. Badlani </text>
+<text top="1014" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="1033" left="106" width="76" height="18" font="4"><b>Members: </b></text>
+<text top="1033" left="214" width="207" height="18" font="0">Mr. Sanjay Mazumdar (Engg.) </text>
+<text top="1052" left="214" width="156" height="18" font="0">Mr. R.K. Singh (SCM) </text>
+<text top="1071" left="214" width="150" height="18" font="0">Mr. B. Biswas (SCM) </text>
+<text top="1090" left="106" width="4" height="18" font="0"> </text>
+<text top="1090" left="160" width="4" height="18" font="0"> </text>
+<text top="1090" left="214" width="201" height="18" font="0">Mr. Ravindra Kumar (Const.) </text>
+<text top="1109" left="106" width="4" height="18" font="0"> </text>
+<text top="1109" left="160" width="4" height="18" font="0"> </text>
+<text top="1109" left="214" width="174" height="18" font="0">Mr. Vinod Kumar (CQA) </text>
+<text top="1128" left="106" width="4" height="18" font="0"> </text>
+<text top="1128" left="160" width="4" height="18" font="0"> </text>
+<text top="1128" left="214" width="221" height="18" font="0">Mr. Swapnil Vaishnav (Projects) </text>
+<text top="1147" left="106" width="4" height="18" font="0"> </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 3 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="401" width="95" height="18" font="4"><b>CONTENTS </b></text>
+<text top="152" left="446" width="4" height="18" font="4"><b> </b></text>
+<text top="189" left="106" width="58" height="18" font="0">Clause   </text>
+<text top="189" left="214" width="35" height="18" font="0">Title </text>
+<text top="189" left="268" width="4" height="18" font="0"> </text>
+<text top="189" left="322" width="4" height="18" font="0"> </text>
+<text top="189" left="376" width="4" height="18" font="0"> </text>
+<text top="189" left="430" width="4" height="18" font="0"> </text>
+<text top="189" left="484" width="4" height="18" font="0"> </text>
+<text top="189" left="538" width="4" height="18" font="0"> </text>
+<text top="189" left="592" width="4" height="18" font="0"> </text>
+<text top="189" left="646" width="4" height="18" font="0"> </text>
+<text top="189" left="700" width="89" height="18" font="0">      Page No. </text>
+<text top="221" left="106" width="25" height="18" font="0">1.0 </text>
+<text top="221" left="156" width="634" height="18" font="0">SCOPE ........................................................................................................................................ 4 </text>
+<text top="250" left="106" width="25" height="18" font="0">2.0 </text>
+<text top="250" left="156" width="634" height="18" font="0">DEFINITIONS ............................................................................................................................ 4 </text>
+<text top="278" left="106" width="25" height="18" font="0">3.0 </text>
+<text top="278" left="156" width="634" height="18" font="0">REFERENCE DOCUMENTS .................................................................................................... 4 </text>
+<text top="307" left="106" width="25" height="18" font="0">4.0 </text>
+<text top="307" left="156" width="634" height="18" font="0">DOCUMENTATION REQUIREMENTS .................................................................................. 4 </text>
+<text top="335" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="354" left="106" width="4" height="18" font="0"> </text>
+<text top="373" left="106" width="4" height="18" font="0"> </text>
+<text top="392" left="106" width="87" height="18" font="0">Attachments </text>
+<text top="411" left="106" width="4" height="18" font="0"> </text>
+<text top="430" left="106" width="330" height="18" font="0">Format for completeness of Final Documentation </text>
+<text top="430" left="484" width="4" height="18" font="0"> </text>
+<text top="430" left="538" width="9" height="18" font="0">: </text>
+<text top="430" left="592" width="153" height="18" font="0">Format No. 3-78-0004 </text>
+</page>
+<page number="4" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="5" size="16" family="GHHNBE+Arial" color="#000000"/>
+	<fontspec id="6" size="20" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="7" size="24" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="8" size="21" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="9" size="21" family="GHHNFI+TimesNewRomanPS" color="#000000"/>
+	<fontspec id="10" size="16" family="GHHNBF+ArialMT" color="#000000"/>
+	<fontspec id="11" size="23" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 4 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="113" width="21" height="18" font="4"><b>1.0</b></text>
+<text top="132" left="133" width="5" height="18" font="5"><b> </b></text>
+<text top="133" left="174" width="59" height="18" font="4"><b>SCOPE </b></text>
+<text top="162" left="174" width="530" height="18" font="0">This specification establishes the Documentation Requirements from Suppliers. </text>
+<text top="192" left="174" width="616" height="18" font="0">All documents / data against the PO / PR / MR shall be developed and submitted to EIL / </text>
+<text top="213" left="174" width="504" height="18" font="0">Owner by the suppliers for review / records, in line with this specification.   </text>
+<text top="255" left="113" width="21" height="18" font="4"><b>2.0</b></text>
+<text top="255" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="255" left="174" width="113" height="18" font="4"><b>DEFINITIONS </b></text>
+<text top="276" left="106" width="5" height="22" font="6"> </text>
+<text top="301" left="113" width="21" height="18" font="4"><b>2.1</b></text>
+<text top="300" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="301" left="167" width="69" height="18" font="4"><b> Supplier </b></text>
+<text top="342" left="177" width="614" height="18" font="0">For  the  purpose  of  this  specification,  the  word  “SUPPLIER”  means  the  person(s),  firm, </text>
+<text top="363" left="177" width="614" height="18" font="0">company or organization who has entered into a contract with EIL / Owner for delivery of </text>
+<text top="384" left="177" width="614" height="18" font="0">some products (including service).  The word is considered synonymous to bidder, contractor </text>
+<text top="405" left="177" width="72" height="18" font="0">or vendor. </text>
+<text top="447" left="113" width="21" height="18" font="4"><b>2.2</b></text>
+<text top="447" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="447" left="167" width="4" height="18" font="0"> </text>
+<text top="447" left="171" width="53" height="18" font="4"><b>Owner </b></text>
+<text top="489" left="174" width="617" height="18" font="0">Owner means the owner of the project for which services / products are being purchased and </text>
+<text top="510" left="177" width="373" height="18" font="0">includes their representatives, successors and assignees. </text>
+<text top="552" left="113" width="21" height="18" font="4"><b>3.0</b></text>
+<text top="551" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="552" left="174" width="217" height="18" font="4"><b>REFERENCE DOCUMENTS </b></text>
+<text top="572" left="170" width="4" height="18" font="0"> </text>
+<text top="593" left="174" width="73" height="18" font="0">6-78-0001 </text>
+<text top="593" left="322" width="469" height="18" font="0"> Specification  for  Quality  Management  System  Requirements  from </text>
+<text top="614" left="322" width="55" height="18" font="0">Bidders </text>
+<text top="635" left="106" width="6" height="27" font="7"> </text>
+<text top="665" left="113" width="21" height="18" font="4"><b>4.0</b></text>
+<text top="665" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="665" left="174" width="296" height="18" font="4"><b>DOCUMENTATION REQUIREMENTS </b></text>
+<text top="686" left="106" width="4" height="18" font="0"> </text>
+<text top="707" left="113" width="21" height="18" font="4"><b>4.1</b></text>
+<text top="707" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="707" left="174" width="410" height="18" font="4"><b>Order Acknowledgement and Assigning Project Manager </b></text>
+<text top="728" left="181" width="4" height="18" font="4"><b> </b></text>
+<text top="749" left="181" width="610" height="18" font="0">After placement of order, Supplier shall acknowledge order through V-Portal within 7 days </text>
+<text top="770" left="181" width="610" height="18" font="0">of receipt of FOA / PO. Supplier shall assign a Project Manager for that order though online </text>
+<text top="791" left="181" width="610" height="18" font="0">portal  and  provide requisite  details. Project Manager details shall  include e-mail  address, </text>
+<text top="811" left="181" width="610" height="18" font="0">mailing  address,  mobile/telephone  nos.,  fax  nos.  and  name  of  Project  Manager.  All  the </text>
+<text top="832" left="181" width="610" height="18" font="0">system  generated  emails  pertaining  to  that  order  shall  be  sent  to  the  assigned  Project </text>
+<text top="853" left="181" width="67" height="18" font="0">Manager. </text>
+<text top="874" left="106" width="5" height="23" font="8"> </text>
+<text top="898" left="113" width="21" height="18" font="4"><b>4.2</b></text>
+<text top="898" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="898" left="174" width="355" height="18" font="4"><b>Documents / Data to be submitted by the Supplier </b></text>
+<text top="919" left="170" width="5" height="23" font="9"><b> </b></text>
+<text top="946" left="113" width="33" height="18" font="0">4.2.1</text>
+<text top="945" left="146" width="5" height="18" font="10"> </text>
+<text top="946" left="174" width="617" height="18" font="0">The Supplier shall submit the documents and data against the PO / PR / MR as per the list </text>
+<text top="967" left="174" width="230" height="18" font="0">given in respective PO / PR / MR. </text>
+<text top="988" left="106" width="6" height="25" font="11"> </text>
+<text top="1016" left="113" width="33" height="18" font="0">4.2.2</text>
+<text top="1016" left="146" width="5" height="18" font="10"> </text>
+<text top="1016" left="174" width="617" height="18" font="0">Review  of  the  supplier  drawings  /  documents  by  EIL  would  be  only  to  review  the </text>
+<text top="1037" left="174" width="617" height="18" font="0">compatibility  with  basic  designs  and  concepts  and  in  no  way  absolve  the  supplier  of  his </text>
+<text top="1058" left="174" width="617" height="18" font="0">responsibility  /  contractual  obligation  to  comply  with  PR  requirements,  applicable  codes, </text>
+<text top="1078" left="174" width="617" height="18" font="0">specifications  and statutory  rules  /  regulations.   Any  error / deficiency  noticed during any </text>
+<text top="1099" left="174" width="617" height="18" font="0">stage of manufacturing / execution / inspection/ installation shall be promptly corrected by </text>
+<text top="1120" left="174" width="617" height="18" font="0">the supplier without any time and cost implications, irrespective of  comments on the same </text>
+<text top="1141" left="174" width="447" height="18" font="0">were received from EIL during the drawing review stage or not.      </text>
+<text top="1162" left="106" width="4" height="18" font="0"> </text>
+</page>
+<page number="5" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="12" size="14" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 5 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="113" width="33" height="18" font="0">4.2.3</text>
+<text top="132" left="146" width="5" height="18" font="10"> </text>
+<text top="133" left="174" width="617" height="18" font="0">Unless otherwise specified, submission of documents for Review / Records shall commence </text>
+<text top="153" left="174" width="617" height="18" font="0">as follows from the date of Fax of Intent / Letter of Intent / Fax of Acceptance (FOA) / Letter </text>
+<text top="174" left="174" width="153" height="18" font="0">of Acceptance (LOA): </text>
+<text top="204" left="120" width="4" height="18" font="0"> </text>
+<text top="204" left="174" width="317" height="18" font="0">QMS                                                    - 1 week </text>
+<text top="225" left="120" width="4" height="18" font="0"> </text>
+<text top="225" left="174" width="173" height="18" font="0">Document Control Index  </text>
+<text top="225" left="376" width="4" height="18" font="0"> </text>
+<text top="225" left="430" width="67" height="18" font="0">- 2 weeks </text>
+<text top="246" left="106" width="4" height="18" font="0"> </text>
+<text top="246" left="174" width="207" height="18" font="0">Other Documents / Drawings   </text>
+<text top="246" left="431" width="292" height="18" font="0">- As per approved Document Control Index </text>
+<text top="267" left="106" width="4" height="18" font="0"> </text>
+<text top="288" left="113" width="33" height="18" font="0">4.2.4</text>
+<text top="287" left="146" width="5" height="18" font="10"> </text>
+<text top="288" left="174" width="617" height="18" font="0">Documents as specified in PO / PR / MR are minimum requirements.  Supplier shall submit </text>
+<text top="309" left="174" width="617" height="18" font="0">any other document / data required for completion of the job as per EIL / Owner instructions. </text>
+<text top="329" left="106" width="4" height="18" font="0"> </text>
+<text top="348" left="113" width="21" height="18" font="4"><b>4.3</b></text>
+<text top="348" left="133" width="5" height="18" font="5"><b> </b></text>
+<text top="348" left="167" width="154" height="18" font="4"><b>Style and Formatting </b></text>
+<text top="385" left="113" width="33" height="18" font="0">4.3.1</text>
+<text top="385" left="146" width="5" height="18" font="10"> </text>
+<text top="385" left="167" width="523" height="18" font="0">All Documents shall be in ENGLISH language and in M.K.S System of units.  </text>
+<text top="422" left="113" width="33" height="18" font="0">4.3.2</text>
+<text top="422" left="146" width="5" height="18" font="10"> </text>
+<text top="422" left="167" width="624" height="18" font="0">Before  forwarding  the  drawings  and  documents,  contractor  shall  ensure  that  the  following </text>
+<text top="441" left="167" width="354" height="18" font="0">information are properly mentioned in each drawing: </text>
+<text top="474" left="106" width="4" height="18" font="0"> </text>
+<text top="474" left="160" width="220" height="18" font="0">  Purchase Requisition Number   </text>
+<text top="474" left="430" width="4" height="18" font="0"> </text>
+<text top="474" left="484" width="4" height="18" font="0"> </text>
+<text top="493" left="106" width="4" height="18" font="0"> </text>
+<text top="493" left="160" width="220" height="18" font="0">  Name of Equipment / Package   </text>
+<text top="493" left="430" width="4" height="18" font="0"> </text>
+<text top="512" left="106" width="4" height="18" font="0"> </text>
+<text top="512" left="160" width="220" height="18" font="0">  Equipment / Package Tag No.   </text>
+<text top="512" left="430" width="4" height="18" font="0"> </text>
+<text top="531" left="106" width="4" height="18" font="0"> </text>
+<text top="531" left="160" width="119" height="18" font="0">  Name of Project </text>
+<text top="531" left="322" width="4" height="18" font="0"> </text>
+<text top="531" left="376" width="4" height="18" font="0"> </text>
+<text top="531" left="430" width="4" height="18" font="0"> </text>
+<text top="531" left="484" width="4" height="18" font="0"> </text>
+<text top="550" left="106" width="4" height="18" font="0"> </text>
+<text top="550" left="160" width="58" height="18" font="0">  Client   </text>
+<text top="550" left="268" width="4" height="18" font="0"> </text>
+<text top="550" left="322" width="4" height="18" font="0"> </text>
+<text top="550" left="376" width="4" height="18" font="0"> </text>
+<text top="550" left="430" width="4" height="18" font="0"> </text>
+<text top="550" left="484" width="4" height="18" font="0"> </text>
+<text top="569" left="106" width="4" height="18" font="0"> </text>
+<text top="569" left="160" width="185" height="18" font="0">  Drawing / Document Title </text>
+<text top="569" left="376" width="4" height="18" font="0"> </text>
+<text top="569" left="430" width="4" height="18" font="0"> </text>
+<text top="569" left="484" width="4" height="18" font="0"> </text>
+<text top="588" left="106" width="4" height="18" font="0"> </text>
+<text top="588" left="160" width="178" height="18" font="0">  Drawing / Document No. </text>
+<text top="588" left="376" width="4" height="18" font="0"> </text>
+<text top="588" left="430" width="4" height="18" font="0"> </text>
+<text top="588" left="484" width="4" height="18" font="0"> </text>
+<text top="607" left="106" width="4" height="18" font="0"> </text>
+<text top="607" left="160" width="305" height="18" font="0">  Drawing / Document Revision No. and Date </text>
+<text top="607" left="484" width="4" height="18" font="0"> </text>
+<text top="625" left="106" width="4" height="18" font="0"> </text>
+<text top="625" left="160" width="11" height="18" font="0">   </text>
+<text top="645" left="113" width="21" height="18" font="4"><b>4.4</b></text>
+<text top="644" left="134" width="5" height="18" font="5"><b> </b></text>
+<text top="645" left="167" width="344" height="18" font="4"><b>Review and Approval of Documents by Supplier </b></text>
+<text top="681" left="113" width="33" height="18" font="0">4.4.1</text>
+<text top="681" left="146" width="5" height="18" font="10"> </text>
+<text top="681" left="167" width="624" height="18" font="0">The Drawing / Documents shall be reviewed, checked, approved and duly signed / stamped by </text>
+<text top="700" left="167" width="624" height="18" font="0">supplier  before  submission.    Revision  number  shall  be  changed  during  submission  of  the </text>
+<text top="719" left="167" width="624" height="18" font="0">revised  supplier  documents  and  all  revisions  shall  be  highlighted  by  clouds.  Whenever  the </text>
+<text top="738" left="167" width="624" height="18" font="0">supplier require any sub-supplier drawings to be reviewed by EIL, the same shall be submitted </text>
+<text top="757" left="167" width="624" height="18" font="0">by the supplier duly reviewed, approved and stamped by the supplier.  Direct submission of </text>
+<text top="776" left="167" width="605" height="18" font="0">sub-supplier’s drawings without contractor’s / suppliers’ approval shall not be entertained.  </text>
+<text top="809" left="113" width="21" height="18" font="4"><b>4.5</b></text>
+<text top="809" left="133" width="5" height="18" font="5"><b> </b></text>
+<text top="809" left="167" width="146" height="18" font="4"><b>Document Category </b></text>
+<text top="846" left="113" width="33" height="18" font="0">4.5.1</text>
+<text top="846" left="146" width="5" height="18" font="10"> </text>
+<text top="846" left="154" width="138" height="18" font="4"><b>   Review Category </b></text>
+<text top="883" left="106" width="4" height="18" font="0"> </text>
+<text top="883" left="167" width="565" height="18" font="0">Following review codes shall be used for review of supplier Drawings / Documents:  </text>
+<text top="902" left="187" width="4" height="18" font="0"> </text>
+<text top="921" left="167" width="106" height="18" font="0">Review Code 1 </text>
+<text top="921" left="322" width="4" height="18" font="0"> </text>
+<text top="921" left="376" width="10" height="18" font="0">- </text>
+<text top="921" left="430" width="292" height="18" font="0">No comments. Proceed with Manufacture /  </text>
+<text top="940" left="167" width="4" height="18" font="0"> </text>
+<text top="940" left="322" width="4" height="18" font="0"> </text>
+<text top="940" left="376" width="4" height="18" font="0"> </text>
+<text top="940" left="430" width="220" height="18" font="0">Fabrication as per the document. </text>
+<text top="968" left="167" width="106" height="18" font="0">Review Code 2 </text>
+<text top="968" left="322" width="4" height="18" font="0"> </text>
+<text top="968" left="376" width="10" height="18" font="0">- </text>
+<text top="968" left="430" width="314" height="18" font="0">Proceed with Manufacture / Fabrication as per  </text>
+<text top="987" left="160" width="4" height="18" font="0"> </text>
+<text top="987" left="214" width="4" height="18" font="0"> </text>
+<text top="987" left="268" width="4" height="18" font="0"> </text>
+<text top="987" left="322" width="4" height="18" font="0"> </text>
+<text top="987" left="376" width="4" height="18" font="0"> </text>
+<text top="987" left="430" width="285" height="18" font="0">commented document. Revised document  </text>
+<text top="1006" left="430" width="63" height="18" font="0">required. </text>
+<text top="1034" left="167" width="106" height="18" font="0">Review Code 3 </text>
+<text top="1034" left="322" width="4" height="18" font="0"> </text>
+<text top="1034" left="376" width="10" height="18" font="0">- </text>
+<text top="1034" left="430" width="360" height="18" font="0">Document does not conform to basic requirements as </text>
+<text top="1053" left="187" width="4" height="18" font="0"> </text>
+<text top="1053" left="214" width="4" height="18" font="0"> </text>
+<text top="1053" left="268" width="4" height="18" font="0"> </text>
+<text top="1053" left="322" width="4" height="18" font="0"> </text>
+<text top="1053" left="376" width="4" height="18" font="0"> </text>
+<text top="1053" left="430" width="202" height="18" font="0">marked. Resubmit for review. </text>
+<text top="1071" left="167" width="3" height="15" font="12"> </text>
+<text top="1087" left="167" width="15" height="18" font="0">R </text>
+<text top="1087" left="214" width="4" height="18" font="0"> </text>
+<text top="1087" left="268" width="4" height="18" font="0"> </text>
+<text top="1087" left="322" width="4" height="18" font="0"> </text>
+<text top="1087" left="376" width="10" height="18" font="0">- </text>
+<text top="1087" left="430" width="326" height="18" font="0">Document is retained for Records. Proceed with  </text>
+<text top="1106" left="160" width="4" height="18" font="0"> </text>
+<text top="1106" left="214" width="4" height="18" font="0"> </text>
+<text top="1106" left="268" width="4" height="18" font="0"> </text>
+<text top="1106" left="322" width="4" height="18" font="0"> </text>
+<text top="1106" left="376" width="4" height="18" font="0"> </text>
+<text top="1106" left="430" width="321" height="18" font="0">Manufacturing / Fabrication as per PR / Tender  </text>
+<text top="1125" left="160" width="4" height="18" font="0"> </text>
+<text top="1125" left="214" width="4" height="18" font="0"> </text>
+<text top="1125" left="268" width="4" height="18" font="0"> </text>
+<text top="1125" left="322" width="4" height="18" font="0"> </text>
+<text top="1125" left="376" width="4" height="18" font="0"> </text>
+<text top="1125" left="430" width="94" height="18" font="0">requirements. </text>
+<text top="1153" left="167" width="16" height="18" font="0">V </text>
+<text top="1153" left="376" width="10" height="18" font="0">- </text>
+<text top="1153" left="430" width="37" height="18" font="0">Void </text>
+<text top="1172" left="430" width="4" height="18" font="0"> </text>
+</page>
+<page number="6" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="13" size="11" family="GHHNAE+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="14" size="16" family="GHHNFI+TimesNewRomanPS" color="#1a1a1a"/>
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 6 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="106" width="21" height="18" font="4"><b>4.6</b></text>
+<text top="132" left="127" width="5" height="18" font="5"><b> </b></text>
+<text top="133" left="167" width="415" height="18" font="4"><b>Methodology for Submission of Documents to EIL/Owner  </b></text>
+<text top="152" left="106" width="4" height="18" font="0"> </text>
+<text top="172" left="106" width="33" height="18" font="0">4.6.1</text>
+<text top="172" left="139" width="5" height="18" font="10"> </text>
+<text top="172" left="167" width="226" height="18" font="4"><b>Document Control Index (DCI) </b></text>
+<text top="210" left="167" width="624" height="18" font="0">Supplier shall create and submit Document Control Index (DCI) for review based on PO / PR </text>
+<text top="230" left="167" width="624" height="18" font="0">/  MR  along  with  schedule  date  of  submission  of  each  drawing  /  document  on  EIL  Vendor </text>
+<text top="250" left="167" width="624" height="18" font="0">Portal.  The DCI shall be specific with regard to drawing / document no. and the exact title. </text>
+<text top="270" left="167" width="624" height="18" font="0">Proper  sequencing  of  the  drawings  /  documents  should  be  ensured  in  schedule  date  of </text>
+<text top="290" left="167" width="87" height="18" font="0">submission.  </text>
+<text top="310" left="106" width="4" height="18" font="0"> </text>
+<text top="330" left="106" width="33" height="18" font="0">4.6.2</text>
+<text top="330" left="139" width="5" height="18" font="10"> </text>
+<text top="330" left="167" width="317" height="18" font="4"><b>Submission of Drawings / Documents / Data  </b></text>
+<text top="359" left="92" width="4" height="18" font="0"> </text>
+<text top="359" left="167" width="624" height="18" font="0">Drawings  /  documents,  data  and  DCI  shall  be  uploaded  on  the  EIL  Vendor  Portal  as  per </text>
+<text top="379" left="167" width="624" height="18" font="0">approved  DCI.  The  detailed  guidelines  for  uploading  documents  on  EIL  Vendor  Portal  are </text>
+<text top="399" left="167" width="190" height="18" font="0">available on following URL </text>
+<text top="418" left="106" width="3" height="12" font="13"> </text>
+<text top="431" left="167" width="198" height="18" font="14"><b>http://edocx.eil.co.in/vportal</b></text>
+<text top="431" left="366" width="4" height="18" font="4"><b> </b></text>
+<text top="451" left="167" width="4" height="18" font="4"><b> </b></text>
+<text top="471" left="106" width="33" height="18" font="0">4.6.3</text>
+<text top="471" left="139" width="5" height="18" font="10"> </text>
+<text top="471" left="167" width="149" height="18" font="4"><b>Statutory Approvals </b></text>
+<text top="511" left="167" width="624" height="18" font="0">Wherever approval by any statutory body is required to be taken by Supplier, the Supplier shall </text>
+<text top="530" left="167" width="329" height="18" font="0">submit copy of approval by the authority to EIL.  </text>
+<text top="570" left="106" width="33" height="18" font="0">4.6.4</text>
+<text top="570" left="139" width="5" height="18" font="10"> </text>
+<text top="570" left="167" width="179" height="18" font="4"><b>Manufacturing Schedule </b></text>
+<text top="590" left="106" width="4" height="18" font="4"><b> </b></text>
+<text top="610" left="167" width="624" height="18" font="0">Supplier shall prepare manufacturing schedule for the order, with key milestone activities (such </text>
+<text top="630" left="167" width="624" height="18" font="0">as  document  submission,  sub  ordering,  manufacturing,  Inspection,  dispatches,  etc)  to  meet </text>
+<text top="650" left="167" width="624" height="18" font="0">delivery as per FOA / PO terms. Supplier shall submit manufacturing schedule to concerned </text>
+<text top="670" left="167" width="624" height="18" font="0">Regional Procurement Office (RPO) of EIL / Owner for review within 2 weeks from date of </text>
+<text top="689" left="167" width="79" height="18" font="0">FOA / PO.  </text>
+<text top="709" left="177" width="4" height="18" font="4"><b> </b></text>
+<text top="729" left="106" width="33" height="18" font="0">4.6.5</text>
+<text top="729" left="139" width="5" height="18" font="10"> </text>
+<text top="729" left="167" width="239" height="18" font="4"><b>Schedule and Progress Reporting </b></text>
+<text top="749" left="106" width="4" height="18" font="0"> </text>
+<text top="769" left="167" width="624" height="18" font="0">Supplier shall submit monthly progress (MPR) report and updated procurement, engineering, </text>
+<text top="789" left="167" width="624" height="18" font="0">manufacturing  status,  Inspection  and  dispatch  status  (schedule  vs.  actual)  and  highlight </text>
+<text top="809" left="167" width="624" height="18" font="0">constraints,  if  any,  along  with  action  plan  for  mitigation,  to  the  concerned  Regional </text>
+<text top="829" left="167" width="624" height="18" font="0">Procurement Office (RPO) of EIL / Owner by 1st week of every month., First MPR shall be </text>
+<text top="849" left="167" width="624" height="18" font="0">submitted within  2 weeks from FOA / LOA.  In case of exigencies, EIL / Owner can ask for </text>
+<text top="869" left="167" width="624" height="18" font="0">report submission as required on weekly / fortnightly / adhoc basis depending upon supply </text>
+<text top="889" left="167" width="624" height="18" font="0">status and supplier shall furnish such reports promptly without any price implication.  Format </text>
+<text top="909" left="167" width="624" height="18" font="0">for progress report shall be submitted by the Supplier during kick off meeting or within 2 weeks </text>
+<text top="929" left="167" width="318" height="18" font="0">of receiving FOA / LOA, whichever is earlier.   </text>
+<text top="949" left="167" width="4" height="18" font="0"> </text>
+<text top="968" left="106" width="21" height="18" font="4"><b>4.7</b></text>
+<text top="968" left="127" width="5" height="18" font="5"><b> </b></text>
+<text top="968" left="167" width="160" height="18" font="4"><b>Inspection and Testing</b></text>
+<text top="968" left="328" width="4" height="18" font="0"> </text>
+<text top="1002" left="106" width="33" height="18" font="0">4.7.1</text>
+<text top="1002" left="139" width="5" height="18" font="10"> </text>
+<text top="1002" left="167" width="358" height="18" font="4"><b>Quality Assurance Plan / Inspection and Test Plan </b></text>
+<text top="1034" left="167" width="624" height="18" font="0">If Inspection and test plans (ITP) are attached with MR / PR same shall be followed along with </text>
+<text top="1053" left="167" width="624" height="18" font="0">additional tests requirement (if any) mentioned in MR/ PR. However for cases wherein EIL </text>
+<text top="1072" left="167" width="624" height="18" font="0">Standard  ITPs  not  available  /  have  not been  attached  with  MR  /  PR,  Supplier  shall  submit </text>
+<text top="1091" left="167" width="624" height="18" font="0">within one week of receiving FOA / LOA, the Quality Assurance Plan for inspection &amp; testing </text>
+<text top="1110" left="167" width="624" height="18" font="0">at various stages of production, quality control records for critical bought out items / materials </text>
+<text top="1129" left="167" width="624" height="18" font="0">and site assembly &amp; testing as may be applicable to the specific order and obtain approval from </text>
+<text top="1148" left="167" width="624" height="18" font="0">concerned Regional procurement Office of EIL / third party inspection agency, as applicable.  </text>
+</page>
+<page number="7" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 7 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="167" width="624" height="18" font="0">For Package equipment contracts, the supplier shall prepare a list of items / equipment and </text>
+<text top="151" left="167" width="624" height="18" font="0">their inspection categorization plan for all items included in the scope of supply immediately </text>
+<text top="170" left="167" width="624" height="18" font="0">after  receipt  of  order  and  obtains  approval  for  the  same  from  EIL.  The  items  shall  be </text>
+<text top="189" left="167" width="624" height="18" font="0">categorized into different categories depending upon their criticality for the scope of inspection </text>
+<text top="208" left="167" width="147" height="18" font="0">of TPIA and / or EIL. </text>
+<text top="249" left="106" width="33" height="18" font="0">4.7.2</text>
+<text top="248" left="139" width="5" height="18" font="10"> </text>
+<text top="249" left="170" width="168" height="18" font="4"><b>Inspection Requisition: </b></text>
+<text top="288" left="167" width="624" height="18" font="0">Supplier shall perform internal inspection as per ITP/ approved QAP at their works based on </text>
+<text top="307" left="167" width="624" height="18" font="0">approved  documents  /  drawings.  Upon  satisfactory  internal  inspection,  supplier  shall  raise </text>
+<text top="326" left="167" width="624" height="18" font="0">inspection call to concerned Regional Procurement Office (RPO) of EIL / TPIA / Owner with </text>
+<text top="345" left="167" width="414" height="18" font="0">advance notice as per contract along with Internal test reports. </text>
+<text top="385" left="167" width="624" height="18" font="0">All changes w.r.t. PR shall be recorded through agreed variations or Concessions &amp; Deviations. </text>
+<text top="404" left="167" width="624" height="18" font="0">Conflict, if any, between PR / Job specifications and approved drawings, shall be brought to </text>
+<text top="423" left="167" width="624" height="18" font="0">the notice of EIL / owner by the supplier / contractor. Decision of EIL / owner will be binding </text>
+<text top="442" left="167" width="469" height="18" font="0">on the supplier and to be complied without time and cost implications. </text>
+<text top="482" left="167" width="560" height="18" font="0">Identified bought out items/ raw material shall be procured under TPIA as per ITP.   </text>
+<text top="522" left="106" width="33" height="18" font="0">4.7.3</text>
+<text top="522" left="139" width="5" height="18" font="10"> </text>
+<text top="522" left="167" width="412" height="18" font="4"><b>Inspection Release Note (IRN)/ Inspection Certificate (IC) </b></text>
+<text top="562" left="167" width="624" height="18" font="0">IRN  /  IC  shall  be  issued  by  EIL  Inspector  /  third  party  inspection  agency  on  successful </text>
+<text top="581" left="167" width="624" height="18" font="0">inspection, review of test reports / certificates as per specifications &amp; ITP / agreed quality plan </text>
+<text top="600" left="167" width="624" height="18" font="0">(as applicable) and only after all the drawings / documents as per DCI are submitted and are </text>
+<text top="619" left="167" width="624" height="18" font="0">accepted  under  review  code-1  or  code  R.  Supplier  shall  ensure  that  necessary  documents  / </text>
+<text top="638" left="167" width="601" height="18" font="0">manufacturing and test certificates are made available to EIL / TPIA as and when desired.  </text>
+<text top="678" left="167" width="624" height="18" font="0">Note 1: Non fulfilling above requirement shall result into appropriate penalty or with- holding </text>
+<text top="697" left="167" width="318" height="18" font="0">of payment as per conditions of PO / PR / MR.  </text>
+<text top="737" left="167" width="624" height="18" font="0">Note  2:  For  items  where  IRN/IC  is  issued  by  TPIA,  supplier  to  ensure  that  following  as  a </text>
+<text top="756" left="231" width="338" height="18" font="0">minimum must be mentioned by TPIA in IRN / IC </text>
+<text top="796" left="214" width="13" height="18" font="0">a)</text>
+<text top="796" left="227" width="5" height="18" font="10"> </text>
+<text top="796" left="241" width="152" height="18" font="0">PR document number  </text>
+<text top="815" left="214" width="14" height="18" font="0">b)</text>
+<text top="815" left="228" width="5" height="18" font="10"> </text>
+<text top="815" left="241" width="357" height="18" font="0">List of drawings / documents with EIL approval code </text>
+<text top="834" left="214" width="13" height="18" font="0">c)</text>
+<text top="834" left="227" width="5" height="18" font="10"> </text>
+<text top="834" left="241" width="253" height="18" font="0">Tests witnessed, documents reviewed </text>
+<text top="853" left="214" width="14" height="18" font="0">d)</text>
+<text top="853" left="228" width="5" height="18" font="10"> </text>
+<text top="853" left="241" width="549" height="18" font="0">Compliance statement by TPIA that product meets the requirement as specified in </text>
+<text top="872" left="241" width="549" height="18" font="0">EIL  PR,  standard  specifications,  Inspection  Test  Plan  /  QAP  and  approved </text>
+<text top="891" left="241" width="80" height="18" font="0">documents. </text>
+<text top="931" left="106" width="21" height="18" font="4"><b>4.8</b></text>
+<text top="931" left="127" width="5" height="18" font="5"><b> </b></text>
+<text top="931" left="170" width="148" height="18" font="4"><b>Transportation Plan </b></text>
+<text top="963" left="167" width="624" height="18" font="0">Transportation Plan for Over Dimensional Consignments (ODC), if any, shall be submitted </text>
+<text top="982" left="167" width="624" height="18" font="0">within 2 weeks of receiving FOA / LOA, for approval. Consignment with parameters greater </text>
+<text top="1001" left="167" width="372" height="18" font="0">than following shall be considered as over dimensional. </text>
+<text top="1041" left="167" width="434" height="18" font="0">Dimensions: 4 meters width x 4 meters height x 20 meters length </text>
+<text top="1081" left="106" width="4" height="18" font="0"> </text>
+<text top="1081" left="160" width="61" height="18" font="0">  Weight </text>
+<text top="1081" left="268" width="62" height="18" font="0"> : 32 MT </text>
+<text top="1121" left="167" width="624" height="18" font="0">Dimensions and weight provided above are inclusive of all nozzles, attachments, transportation </text>
+<text top="1140" left="167" width="80" height="18" font="0">saddles etc. </text>
+</page>
+<page number="8" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 8 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="106" width="4" height="18" font="0"> </text>
+<text top="133" left="160" width="630" height="18" font="0">Physical  Rout  survey  for  ODC  movement  shall  be  submitted  to  EIL  within  8  weeks  of </text>
+<text top="152" left="106" width="4" height="18" font="0"> </text>
+<text top="152" left="160" width="154" height="18" font="0">receiving FOA / LOA. </text>
+<text top="192" left="106" width="21" height="18" font="4"><b>4.9</b></text>
+<text top="191" left="127" width="5" height="18" font="5"><b> </b></text>
+<text top="192" left="167" width="119" height="18" font="4"><b>Dispatch Details </b></text>
+<text top="224" left="167" width="624" height="18" font="0">Upon receipt of IRN / IC from EIL inspector / TPIA, supplier shall dispatch items within 2 </text>
+<text top="243" left="167" width="624" height="18" font="0">days. Supplier shall submit dispatch details to concerned RPO of EIL / Owner within a day of </text>
+<text top="262" left="167" width="624" height="18" font="0">dispatch.  Dispatch  details  shall  include  Lorry  Receipt  (LR)  number  /  Dispatch  Number, </text>
+<text top="281" left="167" width="444" height="18" font="0">Transporter Name, Date of dispatch, Packing list, Invoice copy etc.</text>
+<text top="281" left="611" width="4" height="18" font="4"><b> </b></text>
+<text top="313" left="106" width="29" height="18" font="4"><b>4.10</b></text>
+<text top="313" left="135" width="5" height="18" font="5"><b> </b></text>
+<text top="313" left="167" width="157" height="18" font="4"><b>Final Documentation  </b></text>
+<text top="346" left="106" width="41" height="18" font="0">4.10.1</text>
+<text top="346" left="148" width="5" height="18" font="10"> </text>
+<text top="346" left="170" width="621" height="18" font="0">Supplier shall prepare final documents in line with VDR (Vendor Document Requirements) </text>
+<text top="365" left="170" width="621" height="18" font="0">attached  with  PR/Tender.  A  copy  of  final  document  along  with  filled  in  Format  for </text>
+<text top="384" left="170" width="621" height="18" font="0">Completeness  of  Final  Documentation  (Format  No.  3-78-0004)  to  be  submitted  to  EIL </text>
+<text top="403" left="170" width="621" height="18" font="0">Inspector  /  TPIA  for  review  &amp;  approval  within  2  weeks  from  dispatch.  Upon  receipt  of </text>
+<text top="422" left="170" width="621" height="18" font="0">EIL/TPIA endorsement on Completeness of Final Documents, supplier shall submit soft / hard </text>
+<text top="441" left="170" width="621" height="18" font="0">copies of Final documents to EIL / Owner in requisite quantity as per PO / PR details, along </text>
+<text top="460" left="170" width="621" height="18" font="0">with  covering  letter.  A  copy  of  covering  letter  to  be  submitted  to  the  concerned  Regional </text>
+<text top="479" left="170" width="283" height="18" font="0">Procurement Office (RPO) of EIL/Owner. </text>
+<text top="511" left="106" width="41" height="18" font="0">4.10.2</text>
+<text top="511" left="148" width="5" height="18" font="10"> </text>
+<text top="511" left="167" width="133" height="18" font="4"><b>As Built Drawings </b></text>
+<text top="544" left="167" width="624" height="18" font="0">Minor Shop changes made by Supplier after approval of drawings under ‘Code 1’ by EIL and </text>
+<text top="563" left="167" width="624" height="18" font="0">deviations granted through online system ,if any, shall be marked in hard copies of drawings </text>
+<text top="581" left="167" width="624" height="18" font="0">which shall then be stamped ‘As-built’ by the supplier.  These ‘As-built’ drawings shall be </text>
+<text top="600" left="167" width="624" height="18" font="0">reviewed and stamped by EIL Inspector / TPIA.  Supplier shall prepare scanned images files </text>
+<text top="619" left="167" width="624" height="18" font="0">of all marked – up ‘As – built’ drawings. Simultaneously Supplier shall incorporate the shop </text>
+<text top="638" left="167" width="346" height="18" font="0">changes in the native soft files of the drawings also. </text>
+<text top="671" left="106" width="41" height="18" font="0">4.10.3</text>
+<text top="671" left="148" width="5" height="18" font="10"> </text>
+<text top="671" left="167" width="304" height="18" font="4"><b>Packing / Presentation of Final Documents </b></text>
+<text top="703" left="167" width="624" height="18" font="0">Final Documents shall be legible photocopies in A4, A3 size only.  Drawings will be inserted </text>
+<text top="722" left="167" width="624" height="18" font="0">in plastic pockets (both sides transparent, sheet thickness minimum 0.1 mm) with an extra strip </text>
+<text top="741" left="167" width="422" height="18" font="0">of 12 mm wide for punching so that drawings are well placed.   </text>
+<text top="774" left="167" width="624" height="18" font="0">Final Documentation shall be bound in Hard board Plastic folder(s) of size 265 mm x 315 mm </text>
+<text top="793" left="167" width="22" height="18" font="0">(10</text>
+<text top="791" left="189" width="5" height="12" font="13">1</text>
+<text top="800" left="194" width="11" height="12" font="13">/2 </text>
+<text top="793" left="205" width="62" height="18" font="0">inch x 12</text>
+<text top="791" left="267" width="5" height="12" font="13">1</text>
+<text top="800" left="273" width="8" height="12" font="13">/2</text>
+<text top="793" left="281" width="510" height="18" font="0"> inch) and shall not be more that 75 mm thick. It may be of several volumes </text>
+<text top="812" left="167" width="624" height="18" font="0">and each volume shall have a volume number, index of volumes and index of contents of that </text>
+<text top="831" left="167" width="624" height="18" font="0">particular volume.  Where number of volumes are more, 90mm thickness can be used.  Each </text>
+<text top="850" left="167" width="624" height="18" font="0">volume shall have top PVC sheet of minimum 0.15 mm thick duly fixed and pressed on folder </text>
+<text top="869" left="167" width="624" height="18" font="0">cover and will have 2 lever clip.  In case of imported items documents, 4 lever clip shall also </text>
+<text top="888" left="167" width="624" height="18" font="0">be accepted.  All four corners of folders shall be properly metal clamped.  Indexing of contents </text>
+<text top="907" left="167" width="624" height="18" font="0">with page numbering must be incorporated by supplier.  Spiral/Spico bound documents shall </text>
+<text top="926" left="167" width="624" height="18" font="0">not be acceptable.  As mentioned above, books should be in hard board plastic folders with </text>
+<text top="945" left="167" width="370" height="18" font="0">sheets punched and having 2/4 lever clips arrangement. </text>
+<text top="973" left="167" width="624" height="18" font="0">Each volume shall contain on cover a Title Block indicating package Equipment Tag No. &amp; </text>
+<text top="992" left="167" width="624" height="18" font="0">Name, PO / Purchase Requisition No., Name of Project and Name of Customer.  Each volume </text>
+<text top="1011" left="167" width="624" height="18" font="0">will have hard front cover and a reinforced spine to fit thickness of book.  These spines will </text>
+<text top="1030" left="167" width="627" height="18" font="0">also have the title printed on them.  Title shall include also volume number (say 11 of 15) etc.  </text>
+<text top="1062" left="106" width="41" height="18" font="0">4.10.4</text>
+<text top="1062" left="148" width="5" height="18" font="10"> </text>
+<text top="1062" left="167" width="187" height="18" font="4"><b>Submission of Soft Copies </b></text>
+<text top="1094" left="167" width="624" height="18" font="0">Supplier shall submit to EIL, the scanned images files as well as the native files of drawings / </text>
+<text top="1113" left="167" width="246" height="18" font="0">documents, along with proper index. </text>
+<text top="1141" left="167" width="624" height="18" font="0">In  addition  to  hard  copies,  Supplier  shall  submit  soft  copies  of  all  the  final  drawings  and </text>
+<text top="1160" left="167" width="624" height="18" font="0">documents in pen drive or any other specified medium with proper identification tag, all text </text>
+<text top="1179" left="167" width="624" height="18" font="0">documents prepared on computer, scanned images of all important documents (not available </text>
+</page>
+<page number="9" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="114" width="4" height="18" font="0"> </text>
+<text top="43" left="394" width="156" height="17" font="1"><b>SPECIFICATION FOR </b></text>
+<text top="60" left="403" width="138" height="17" font="1"><b>DOCUMENTATION </b></text>
+<text top="77" left="385" width="173" height="17" font="1"><b>REQUIREMENTS FROM </b></text>
+<text top="95" left="428" width="89" height="17" font="1"><b>SUPPLIERS </b></text>
+<text top="46" left="603" width="186" height="13" font="2"><b>STANDARD SPECIFICATION No.</b></text>
+<text top="68" left="636" width="125" height="17" font="1"><b>6-78-0003  Rev. 2 </b></text>
+<text top="93" left="665" width="65" height="13" font="3">Page 9 of 9 </text>
+<text top="114" left="106" width="4" height="18" font="0"> </text>
+<text top="1207" left="106" width="177" height="13" font="3">Format No. 8-00-0001-F1 Rev. 0 </text>
+<text top="1207" left="430" width="3" height="13" font="3"> </text>
+<text top="1203" left="754" width="4" height="18" font="0"> </text>
+<text top="1204" left="606" width="182" height="13" font="3">Copyright EIL – All rights reserved</text>
+<text top="133" left="167" width="624" height="18" font="0">as  soft  files),  all  relevant  catalogues,  manuals  available  as  soft  files  (editable  copies  of </text>
+<text top="151" left="167" width="624" height="18" font="0">drawings/text documents, while for catalogues / manuals / proprietary information and data, </text>
+<text top="170" left="167" width="190" height="18" font="0">PDF files can be furnished). </text>
+<text top="203" left="167" width="624" height="18" font="0">All the above documents shall also be uploaded on the EIL Vendor Portal and if applicable on </text>
+<text top="222" left="167" width="126" height="18" font="0">Client Server also. </text>
+<text top="255" left="106" width="41" height="18" font="0">4.10.5</text>
+<text top="254" left="148" width="5" height="18" font="10"> </text>
+<text top="255" left="170" width="272" height="18" font="4"><b>Completeness of Final Documentation </b></text>
+<text top="287" left="167" width="624" height="18" font="0">Supplier  shall  get  the  completeness  of  final  documentation  verified  by  EIL  /  TPIA,  as </text>
+<text top="306" left="167" width="620" height="18" font="0">applicable, and attach the Format for Completeness of Final Documentation (Format No. 3-78-</text>
+<text top="325" left="167" width="580" height="18" font="0">0004) duly signed by EIL Inspector or TPIA as applicable to the final document folder. </text>
+<text top="325" left="747" width="4" height="18" font="4"><b> </b></text>
+</page>
+<page number="10" position="absolute" top="0" left="0" height="1263" width="892">
+	<fontspec id="15" size="16" family="GIFPAH+TimesNewRomanPSMT" color="#000000"/>
+	<fontspec id="16" size="15" family="GIFPBI+Arial" color="#000000"/>
+	<fontspec id="17" size="12" family="GIFPCI+ArialMT" color="#000000"/>
+	<fontspec id="18" size="16" family="GIFPEK+Univers" color="#000000"/>
+	<fontspec id="19" size="21" family="GIFPEL+TimesNewRomanPS" color="#000000"/>
+	<fontspec id="20" size="16" family="GIFPEL+TimesNewRomanPS" color="#000000"/>
+<text top="43" left="106" width="4" height="18" font="15"> </text>
+<text top="42" left="399" width="202" height="17" font="16"><b>COMPLETENESS OF FINAL </b></text>
+<text top="60" left="431" width="137" height="17" font="16"><b>DOCUMENTATION </b></text>
+<text top="77" left="498" width="4" height="18" font="15"> </text>
+<text top="43" left="674" width="4" height="18" font="15"> </text>
+<text top="62" left="674" width="4" height="18" font="15"> </text>
+<text top="82" left="713" width="61" height="13" font="17">Page 1 of 2</text>
+<text top="102" left="106" width="4" height="18" font="15"> </text>
+<text top="1195" left="106" width="3" height="13" font="17"> </text>
+<text top="1209" left="106" width="229" height="13" font="17">Format No. 3-78-0004, Rev. 2/ 12.06.2020 </text>
+<text top="1209" left="430" width="3" height="13" font="17"> </text>
+<text top="1205" left="754" width="4" height="18" font="15"> </text>
+<text top="1206" left="605" width="182" height="13" font="17">Copyright EIL – All rights reserved</text>
+<text top="120" left="106" width="5" height="20" font="18"><b> </b></text>
+<text top="140" left="106" width="5" height="20" font="18"><b> </b></text>
+<text top="161" left="208" width="482" height="23" font="19"><b>COMPLETENESS OF FINAL DOCUMENTATION </b></text>
+<text top="185" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="204" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="223" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="242" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="261" left="106" width="197" height="18" font="15">Name of Supplier/Contractor </text>
+<text top="261" left="338" width="25" height="18" font="15">:   </text>
+<text top="289" left="106" width="68" height="18" font="15">Customer </text>
+<text top="289" left="338" width="25" height="18" font="15">:   </text>
+<text top="318" left="106" width="51" height="18" font="15">Project </text>
+<text top="318" left="338" width="25" height="18" font="15">:   </text>
+<text top="346" left="106" width="97" height="18" font="15">EIL’s Job No. </text>
+<text top="346" left="338" width="25" height="18" font="15">:   </text>
+<text top="374" left="106" width="139" height="18" font="15">Purchase Order No./ </text>
+<text top="393" left="106" width="89" height="18" font="15">Contract No. </text>
+<text top="412" left="106" width="4" height="18" font="15"> </text>
+<text top="374" left="338" width="9" height="18" font="15">: </text>
+<text top="389" left="359" width="4" height="18" font="15"> </text>
+<text top="431" left="106" width="177" height="18" font="15">Purchase Requisition No./ </text>
+<text top="450" left="106" width="79" height="18" font="15">Tender No. </text>
+<text top="469" left="106" width="4" height="18" font="15"> </text>
+<text top="431" left="338" width="9" height="18" font="15">: </text>
+<text top="446" left="359" width="319" height="18" font="15">                                                            Rev. No. : </text>
+<text top="488" left="106" width="209" height="18" font="15">Name of the Work/ Equipment </text>
+<text top="507" left="106" width="4" height="18" font="15"> </text>
+<text top="488" left="338" width="25" height="23" font="15">:   </text>
+<text top="526" left="106" width="62" height="18" font="15">Tag. No. </text>
+<text top="526" left="338" width="25" height="18" font="15">:   </text>
+<text top="555" left="106" width="215" height="18" font="15">Supplier’s / Contractor’s Works </text>
+<text top="574" left="106" width="71" height="18" font="15">Order No. </text>
+<text top="555" left="338" width="25" height="23" font="15">:   </text>
+<text top="593" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="612" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="631" left="106" width="4" height="18" font="20"><b> </b></text>
+<text top="650" left="106" width="685" height="18" font="15">Certified  that  the  Engineering  Documents  /  Manufacturing  &amp;  Test  Certificates  submitted  by  the </text>
+<text top="669" left="106" width="686" height="18" font="15">supplier  (as  per  Index  sheet  mentioned in  Annexure-1) are  complete  in  accordance with the  Vendor </text>
+<text top="688" left="106" width="357" height="18" font="15">Data Requirements of Purchase Requisition / Tender. </text>
+<text top="706" left="106" width="4" height="18" font="15"> </text>
+<text top="725" left="106" width="4" height="18" font="15"> </text>
+<text top="744" left="106" width="4" height="18" font="15"> </text>
+<text top="763" left="106" width="4" height="18" font="15"> </text>
+<text top="782" left="106" width="67" height="18" font="15">Signature </text>
+<text top="782" left="214" width="215" height="18" font="15">: ………………………………. </text>
+<text top="811" left="106" width="35" height="18" font="15">Date </text>
+<text top="811" left="160" width="4" height="18" font="15"> </text>
+<text top="811" left="214" width="215" height="18" font="15">: ………………………………. </text>
+<text top="839" left="106" width="300" height="18" font="15">Name              : …………………………….. </text>
+<text top="868" left="106" width="84" height="18" font="15">Designation </text>
+<text top="868" left="214" width="211" height="18" font="15">: ……………………………… </text>
+<text top="896" left="106" width="82" height="18" font="15">Department </text>
+<text top="896" left="214" width="211" height="18" font="15">: ……………………………… </text>
+<text top="925" left="106" width="4" height="18" font="15"> </text>
+<text top="782" left="455" width="67" height="18" font="15">Signature </text>
+<text top="782" left="563" width="215" height="18" font="15">: ………………………………. </text>
+<text top="811" left="455" width="35" height="18" font="15">Date </text>
+<text top="811" left="509" width="4" height="18" font="15"> </text>
+<text top="811" left="563" width="215" height="18" font="15">: ………………………………. </text>
+<text top="839" left="455" width="300" height="18" font="15">Name              : …………………………….. </text>
+<text top="868" left="455" width="84" height="18" font="15">Designation </text>
+<text top="868" left="563" width="211" height="18" font="15">: ……………………………… </text>
+<text top="896" left="455" width="82" height="18" font="15">Department </text>
+<text top="896" left="563" width="211" height="18" font="15">: ……………………………… </text>
+<text top="944" left="202" width="143" height="18" font="15">Supplier / Contractor </text>
+<text top="944" left="583" width="79" height="18" font="15">EIL / TPIA </text>
+<text top="963" left="106" width="4" height="18" font="15"> </text>
+<text top="982" left="106" width="4" height="18" font="15"> </text>
+<text top="1001" left="106" width="4" height="18" font="15"> </text>
+<text top="1020" left="106" width="4" height="18" font="15"> </text>
+<text top="1039" left="106" width="4" height="18" font="15"> </text>
+<text top="1057" left="106" width="4" height="18" font="15"> </text>
+<text top="1076" left="106" width="4" height="18" font="15"> </text>
+<text top="1095" left="106" width="4" height="18" font="15"> </text>
+<text top="1114" left="106" width="4" height="18" font="15"> </text>
+<text top="1133" left="106" width="4" height="18" font="15"> </text>
+<text top="1152" left="106" width="4" height="18" font="15"> </text>
+<text top="1171" left="106" width="4" height="18" font="15"> </text>
+</page>
+<page number="11" position="absolute" top="0" left="0" height="1263" width="892">
+<text top="43" left="106" width="4" height="18" font="15"> </text>
+<text top="42" left="399" width="202" height="17" font="16"><b>COMPLETENESS OF FINAL </b></text>
+<text top="60" left="431" width="137" height="17" font="16"><b>DOCUMENTATION </b></text>
+<text top="77" left="498" width="4" height="18" font="15"> </text>
+<text top="43" left="674" width="4" height="18" font="15"> </text>
+<text top="62" left="674" width="4" height="18" font="15"> </text>
+<text top="82" left="713" width="61" height="13" font="17">Page 2 of 2</text>
+<text top="102" left="106" width="4" height="18" font="15"> </text>
+<text top="1195" left="106" width="3" height="13" font="17"> </text>
+<text top="1209" left="106" width="229" height="13" font="17">Format No. 3-78-0004, Rev. 2/ 12.06.2020 </text>
+<text top="1209" left="430" width="3" height="13" font="17"> </text>
+<text top="1205" left="754" width="4" height="18" font="15"> </text>
+<text top="1206" left="605" width="182" height="13" font="17">Copyright EIL – All rights reserved</text>
+<text top="120" left="106" width="4" height="18" font="15"> </text>
+<text top="139" left="704" width="88" height="18" font="20"><b>Annexure-1 </b></text>
+<text top="158" left="106" width="4" height="18" font="15"> </text>
+<text top="178" left="328" width="240" height="18" font="20"><b>Final Documentation Index Sheet </b></text>
+<text top="207" left="106" width="101" height="18" font="15">PR/PO/Tender </text>
+<text top="236" left="106" width="28" height="18" font="15">No. </text>
+<text top="207" left="219" width="4" height="18" font="15"> </text>
+<text top="207" left="522" width="63" height="18" font="15">Rev. No. </text>
+<text top="207" left="679" width="4" height="18" font="15"> </text>
+<text top="265" left="106" width="4" height="18" font="15"> </text>
+<text top="285" left="106" width="71" height="18" font="15">Serial No. </text>
+<text top="285" left="219" width="108" height="18" font="15">Document Title </text>
+<text top="285" left="522" width="41" height="18" font="15">Page/ </text>
+<text top="304" left="522" width="76" height="18" font="15">Folder No. </text>
+<text top="285" left="679" width="89" height="18" font="15">No. of Pages </text>
+<text top="324" left="106" width="4" height="18" font="15"> </text>
+<text top="324" left="219" width="4" height="18" font="15"> </text>
+<text top="324" left="522" width="4" height="18" font="15"> </text>
+<text top="324" left="679" width="4" height="18" font="15"> </text>
+<text top="353" left="106" width="4" height="18" font="15"> </text>
+<text top="353" left="219" width="4" height="18" font="15"> </text>
+<text top="353" left="522" width="4" height="18" font="15"> </text>
+<text top="353" left="679" width="4" height="18" font="15"> </text>
+<text top="382" left="106" width="4" height="18" font="15"> </text>
+<text top="382" left="219" width="4" height="18" font="15"> </text>
+<text top="382" left="522" width="4" height="18" font="15"> </text>
+<text top="382" left="679" width="4" height="18" font="15"> </text>
+<text top="411" left="106" width="4" height="18" font="15"> </text>
+<text top="411" left="219" width="4" height="18" font="15"> </text>
+<text top="411" left="522" width="4" height="18" font="15"> </text>
+<text top="411" left="679" width="4" height="18" font="15"> </text>
+<text top="440" left="106" width="4" height="18" font="15"> </text>
+<text top="440" left="219" width="4" height="18" font="15"> </text>
+<text top="440" left="522" width="4" height="18" font="15"> </text>
+<text top="440" left="679" width="4" height="18" font="15"> </text>
+<text top="470" left="106" width="4" height="18" font="15"> </text>
+<text top="470" left="219" width="4" height="18" font="15"> </text>
+<text top="470" left="522" width="4" height="18" font="15"> </text>
+<text top="470" left="679" width="4" height="18" font="15"> </text>
+<text top="499" left="106" width="4" height="18" font="15"> </text>
+<text top="499" left="219" width="4" height="18" font="15"> </text>
+<text top="499" left="522" width="4" height="18" font="15"> </text>
+<text top="499" left="679" width="4" height="18" font="15"> </text>
+<text top="528" left="106" width="4" height="18" font="15"> </text>
+<text top="528" left="219" width="4" height="18" font="15"> </text>
+<text top="528" left="522" width="4" height="18" font="15"> </text>
+<text top="528" left="679" width="4" height="18" font="15"> </text>
+<text top="557" left="106" width="4" height="18" font="15"> </text>
+<text top="557" left="219" width="4" height="18" font="15"> </text>
+<text top="557" left="522" width="4" height="18" font="15"> </text>
+<text top="557" left="679" width="4" height="18" font="15"> </text>
+<text top="586" left="106" width="4" height="18" font="15"> </text>
+<text top="586" left="219" width="4" height="18" font="15"> </text>
+<text top="586" left="522" width="4" height="18" font="15"> </text>
+<text top="586" left="679" width="4" height="18" font="15"> </text>
+<text top="616" left="106" width="4" height="18" font="15"> </text>
+<text top="616" left="219" width="4" height="18" font="15"> </text>
+<text top="616" left="522" width="4" height="18" font="15"> </text>
+<text top="616" left="679" width="4" height="18" font="15"> </text>
+<text top="645" left="106" width="4" height="18" font="15"> </text>
+<text top="645" left="219" width="4" height="18" font="15"> </text>
+<text top="645" left="522" width="4" height="18" font="15"> </text>
+<text top="645" left="679" width="4" height="18" font="15"> </text>
+<text top="674" left="106" width="4" height="18" font="15"> </text>
+<text top="674" left="219" width="4" height="18" font="15"> </text>
+<text top="674" left="522" width="4" height="18" font="15"> </text>
+<text top="674" left="679" width="4" height="18" font="15"> </text>
+<text top="703" left="106" width="4" height="18" font="15"> </text>
+<text top="703" left="219" width="4" height="18" font="15"> </text>
+<text top="703" left="522" width="4" height="18" font="15"> </text>
+<text top="703" left="679" width="4" height="18" font="15"> </text>
+<text top="733" left="106" width="4" height="18" font="15"> </text>
+<text top="733" left="219" width="4" height="18" font="15"> </text>
+<text top="733" left="522" width="4" height="18" font="15"> </text>
+<text top="733" left="679" width="4" height="18" font="15"> </text>
+<text top="762" left="106" width="4" height="18" font="15"> </text>
+<text top="762" left="219" width="4" height="18" font="15"> </text>
+<text top="762" left="522" width="4" height="18" font="15"> </text>
+<text top="762" left="679" width="4" height="18" font="15"> </text>
+<text top="791" left="106" width="4" height="18" font="15"> </text>
+<text top="791" left="219" width="4" height="18" font="15"> </text>
+<text top="791" left="522" width="4" height="18" font="15"> </text>
+<text top="791" left="679" width="4" height="18" font="15"> </text>
+<text top="820" left="106" width="4" height="18" font="15"> </text>
+<text top="820" left="219" width="4" height="18" font="15"> </text>
+<text top="820" left="522" width="4" height="18" font="15"> </text>
+<text top="820" left="679" width="4" height="18" font="15"> </text>
+<text top="849" left="106" width="4" height="18" font="15"> </text>
+<text top="868" left="106" width="4" height="18" font="15"> </text>
+<text top="887" left="106" width="4" height="18" font="15"> </text>
+<text top="906" left="106" width="67" height="18" font="15">Signature </text>
+<text top="906" left="214" width="215" height="18" font="15">: ………………………………. </text>
+<text top="935" left="106" width="35" height="18" font="15">Date </text>
+<text top="935" left="160" width="4" height="18" font="15"> </text>
+<text top="935" left="214" width="215" height="18" font="15">: ………………………………. </text>
+<text top="963" left="106" width="300" height="18" font="15">Name              : …………………………….. </text>
+<text top="992" left="106" width="84" height="18" font="15">Designation </text>
+<text top="992" left="214" width="211" height="18" font="15">: ……………………………… </text>
+<text top="1020" left="106" width="82" height="18" font="15">Department </text>
+<text top="1020" left="214" width="211" height="18" font="15">: ……………………………… </text>
+<text top="1048" left="106" width="4" height="18" font="15"> </text>
+<text top="906" left="455" width="67" height="18" font="15">Signature </text>
+<text top="906" left="563" width="215" height="18" font="15">: ………………………………. </text>
+<text top="935" left="455" width="35" height="18" font="15">Date </text>
+<text top="935" left="509" width="4" height="18" font="15"> </text>
+<text top="935" left="563" width="215" height="18" font="15">: ………………………………. </text>
+<text top="963" left="455" width="300" height="18" font="15">Name              : …………………………….. </text>
+<text top="992" left="455" width="84" height="18" font="15">Designation </text>
+<text top="992" left="563" width="211" height="18" font="15">: ……………………………… </text>
+<text top="1020" left="455" width="82" height="18" font="15">Department </text>
+<text top="1020" left="563" width="211" height="18" font="15">: ……………………………… </text>
+<text top="1067" left="202" width="143" height="18" font="15">Supplier / Contractor </text>
+<text top="1067" left="583" width="79" height="18" font="15">EIL / TPIA </text>
+<text top="1086" left="106" width="4" height="18" font="15"> </text>
+<text top="1105" left="106" width="4" height="18" font="15"> </text>
+</page>
+</pdf2xml>

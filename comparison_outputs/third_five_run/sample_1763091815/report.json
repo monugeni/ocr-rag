@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/1763091815.pdf",
+  "document_title": "BIDDER DOCUMENT CHECKLIST",
+  "document_context": {
+    "title": "BIDDER DOCUMENT CHECKLIST",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 11,
+  "body_font_size": 16.0,
+  "heading_count": 7,
+  "toc_entry_count": 0,
+  "chunk_count": 61,
+  "warnings": [
+    "p4: top-level decimal jump 3 -> 6"
+  ],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 11,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "body": 279,
+      "table": 42,
+      "caption": 1,
+      "form": 8,
+      "page_number": 7
+    }
+  }
+}

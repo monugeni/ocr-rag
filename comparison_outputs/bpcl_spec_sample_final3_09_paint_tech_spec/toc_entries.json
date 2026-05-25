@@ -1,0 +1,890 @@
+[
+  {
+    "page_num": 2,
+    "text": "D OCUMENT RELEASE NOTE",
+    "level": 2,
+    "number": "D",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 3,
+    "text": "A MENDMENT SHEET",
+    "level": 2,
+    "number": "A",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 4,
+    "text": "A BBREVIATIONS",
+    "level": 2,
+    "number": "A",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 5,
+    "text": "C ONTENTS",
+    "level": 2,
+    "number": "C",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 8,
+    "text": "LI ST OF TABLES",
+    "level": 2,
+    "number": "LI",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 9,
+    "text": "LI ST OF ANNEXURES",
+    "level": 2,
+    "number": "LI",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 10,
+    "text": "1 . Introduction",
+    "level": 1,
+    "number": "1",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 10,
+    "text": "2 . Scope Overview",
+    "level": 1,
+    "number": "2",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "3 . Reference Codes & Standards",
+    "level": 1,
+    "number": "3",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 11,
+    "text": "3.1 . American Society for Testing and Materials (ASTM):",
+    "level": 2,
+    "number": "3.1",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 12,
+    "text": "3.2 . Steel Structures Painting Council (SSPC)",
+    "level": 2,
+    "number": "3.2",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 13,
+    "text": "3.3 . Association for Materials Protection and Performance (AMPP)",
+    "level": 2,
+    "number": "3.3",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 13,
+    "text": "3.4 . International Organization for Standardization (ISO):",
+    "level": 2,
+    "number": "3.4",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 13,
+    "text": "3.5 . Other Standards",
+    "level": 2,
+    "number": "3.5",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 14,
+    "text": "4 . Criteria for Paint Coatings",
+    "level": 1,
+    "number": "4",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 14,
+    "text": "4.1 . Materials",
+    "level": 2,
+    "number": "4.1",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 14,
+    "text": "4.2 . Paint Approval Requirements",
+    "level": 2,
+    "number": "4.2",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 15,
+    "text": "4.3 . Painting Contractor Responsibilities",
+    "level": 2,
+    "number": "4.3",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 16,
+    "text": "4.4 . Qualification of Painters and Blasters:",
+    "level": 2,
+    "number": "4.4",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 17,
+    "text": "5 . Surface Preparation",
+    "level": 1,
+    "number": "5",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 18,
+    "text": "5.1 . Surface Finish Grades",
+    "level": 2,
+    "number": "5.1",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 19,
+    "text": "5.2 . Pictorial Standards of Different Surface Preparation",
+    "level": 2,
+    "number": "5.2",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 20,
+    "text": "5.3 . Surface Preparation by Blast Cleaning",
+    "level": 2,
+    "number": "5.3",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 20,
+    "text": "5.3.1 . General",
+    "level": 3,
+    "number": "5.3.1",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 20,
+    "text": "5.3.2 . Blast Cleaning Equipment",
+    "level": 3,
+    "number": "5.3.2",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 21,
+    "text": "5.3.3 . Abrasives",
+    "level": 3,
+    "number": "5.3.3",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "5.4 . Surface Preparation by Hand and Power Tool Cleaning",
+    "level": 2,
+    "number": "5.4",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "5.5 . Surface Preparation of Stainless Steel, Hot Galvanized Steel, and Non-Ferrous Metals",
+    "level": 2,
+    "number": "5.5",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "5.6 . Surface Preparation of Concrete",
+    "level": 2,
+    "number": "5.6",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 22,
+    "text": "6 . Paint Application",
+    "level": 1,
+    "number": "6",
+    "source_page": 5,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 23,
+    "text": "6.1 . Application Restrictions",
+    "level": 2,
+    "number": "6.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 24,
+    "text": "6.2 . Mixing and Painting",
+    "level": 2,
+    "number": "6.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 24,
+    "text": "6.2.1 . Mixing & Thinning",
+    "level": 3,
+    "number": "6.2.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 24,
+    "text": "6.2.2 . Application of Paint/Primer:",
+    "level": 3,
+    "number": "6.2.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 26,
+    "text": "6.3 . Application Method",
+    "level": 2,
+    "number": "6.3",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 26,
+    "text": "6.3.1 . Common Air Spray Painting Faults and Their Remedies",
+    "level": 3,
+    "number": "6.3.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 27,
+    "text": "6.3.2 . Comparison: Airless vs. Conventional Air Spray",
+    "level": 3,
+    "number": "6.3.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 28,
+    "text": "6.4 . Compatibility of Different Paints",
+    "level": 2,
+    "number": "6.4",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 28,
+    "text": "7 . Inspection and Testing of Painting Material & Painting Applications",
+    "level": 1,
+    "number": "7",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 28,
+    "text": "7.1 . Approved Manufacturers for Paint Materials",
+    "level": 2,
+    "number": "7.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 29,
+    "text": "7.2 . Material & Inspection Requirements",
+    "level": 2,
+    "number": "7.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 31,
+    "text": "7.3 . Acceptance Criteria for Painting Work",
+    "level": 2,
+    "number": "7.3",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 32,
+    "text": "7.4 . General Inspection Guidelines",
+    "level": 2,
+    "number": "7.4",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 32,
+    "text": "7.5 . ckaging & Labelling",
+    "level": 2,
+    "number": "7.5",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 33,
+    "text": "7.6 . Records & Reports",
+    "level": 2,
+    "number": "7.6",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 33,
+    "text": "7.7 . Procedure for Measurement of Dry Film Coating Thickness",
+    "level": 2,
+    "number": "7.7",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 34,
+    "text": "8 . Frequency & Guarantee of Painting",
+    "level": 1,
+    "number": "8",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 34,
+    "text": "8.1 . Frequency of Painting",
+    "level": 2,
+    "number": "8.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 35,
+    "text": "8.2 . Guarantee of Painting",
+    "level": 2,
+    "number": "8.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 35,
+    "text": "9 . Storage",
+    "level": 1,
+    "number": "9",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 36,
+    "text": "10 . Paint Monitoring System",
+    "level": 1,
+    "number": "10",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 36,
+    "text": "11 . Maintenance Painting",
+    "level": 1,
+    "number": "11",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 36,
+    "text": "12 . Quality Control, Inspection and Testing",
+    "level": 1,
+    "number": "12",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 37,
+    "text": "12.1 . Tests to be Carried Out During Surface Preparation:",
+    "level": 2,
+    "number": "12.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 38,
+    "text": "12.2 . Final Inspection of Finished Coating:",
+    "level": 2,
+    "number": "12.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 39,
+    "text": "13 . Detailed Paint Specifications",
+    "level": 1,
+    "number": "13",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 39,
+    "text": "13.1 . Code Names for Different Paints",
+    "level": 2,
+    "number": "13.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 41,
+    "text": "13.2 . Technical Parameters - Primers",
+    "level": 2,
+    "number": "13.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 44,
+    "text": "13.3 . Technical Parameters - Finish Paints",
+    "level": 2,
+    "number": "13.3",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 46,
+    "text": "13.4 . Technical Parameters – High Temperature Paints",
+    "level": 2,
+    "number": "13.4",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 48,
+    "text": "13.5 . Technical Parameters – Other Miscellaneous Paints",
+    "level": 2,
+    "number": "13.5",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 50,
+    "text": "13.6 . General Notes for Paint Material Tables:",
+    "level": 2,
+    "number": "13.6",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 52,
+    "text": "14 . Selection of Coating Systems:",
+    "level": 1,
+    "number": "14",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 52,
+    "text": "14.1 . Procedure for Paint System Selection:",
+    "level": 2,
+    "number": "14.1",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 53,
+    "text": "14.2 . Selection of Paint Coating System:",
+    "level": 2,
+    "number": "14.2",
+    "source_page": 6,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 58,
+    "text": "14.3 . Description of Paint Coating Systems:",
+    "level": 2,
+    "number": "14.3",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 66,
+    "text": "14.4 . General Notes for Paint System Description Tables:",
+    "level": 2,
+    "number": "14.4",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 69,
+    "text": "14.5 . Procedure for Paint Coating Systems Selection for Tanks Internals:",
+    "level": 2,
+    "number": "14.5",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 73,
+    "text": "14.6 . Procedure for Paint Coating Systems Selection for Tanks Externals:",
+    "level": 2,
+    "number": "14.6",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 75,
+    "text": "14.7 . General Notes for Tanks Internal & External Painting System Tables:",
+    "level": 2,
+    "number": "14.7",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 76,
+    "text": "15 . Pre-Qualification/Acceptance Criteria for Paint Coating System",
+    "level": 1,
+    "number": "15",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 76,
+    "text": "15.1 . Pre-Qualification of Paint Coating Manufacturer and Their Products",
+    "level": 2,
+    "number": "15.1",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 76,
+    "text": "15.2 . Pre-Qualification Testing Procedure:",
+    "level": 2,
+    "number": "15.2",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 79,
+    "text": "16 . Method of Sampling & Dispatch for Laboratory Testing",
+    "level": 1,
+    "number": "16",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 79,
+    "text": "17 . Standard for Colour Coding of Pipelines/Equipments",
+    "level": 1,
+    "number": "17",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 81,
+    "text": "17.1 . Lettering Writing/Stencilling",
+    "level": 2,
+    "number": "17.1",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 82,
+    "text": "17.2 . Colour Code for Pipelines/Equipment in BPCL Refineries",
+    "level": 2,
+    "number": "17.2",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 86,
+    "text": "17.3 . Standard Colour Coding for Storage Tanks:",
+    "level": 2,
+    "number": "17.3",
+    "source_page": 7,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 18,
+    "text": "T able 1: Surface Preparation Specifications",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 26,
+    "text": "T able 2: Common Air Spray Painting Faults and Their Remedies",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 27,
+    "text": "T able 3: Comparison: Airless vs. Conventional Air Spray",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 28,
+    "text": "T able 4: Compatibility of Different Paints",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 31,
+    "text": "T able 5: Acceptance Criteria for Painting Work",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 32,
+    "text": "T able 6: General Inspection Guidelines",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 34,
+    "text": "T able 7: Frequency of Painting",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 39,
+    "text": "T able 8: Code Names for Different Paints",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 41,
+    "text": "T able 9: Technical Parameters - Primers",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 44,
+    "text": "T able 10: Technical Parameters - Finish Paints",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 46,
+    "text": "T able 11: Technical Parameters - High Temperature Paints",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 48,
+    "text": "T able 12: Technical Parameters - Other Miscellaneous Paints",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 53,
+    "text": "T able 13: Selection of Coating Systems",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 58,
+    "text": "T able 14: Coating System Description",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 69,
+    "text": "T able 15: Tanks Internal Painting System",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 73,
+    "text": "T able 16: Tanks External Painting System",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 77,
+    "text": "T able 17: Pre-Qualification Testing",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 80,
+    "text": "T able 18: Shades of Colours (IS 2379)",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 81,
+    "text": "T able 19: Size of Colour Bands",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 81,
+    "text": "T able 20: Lettering Sizes",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 82,
+    "text": "T able 21: Dimensions of Arrow in Pipe Painting",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 82,
+    "text": "T able 22: Colour Codes for Pipelines/Equipment in BPCL Refineries",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 86,
+    "text": "T able 23: Standard Colour Coding for Storage Tanks",
+    "level": 1,
+    "number": "T",
+    "source_page": 8,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 88,
+    "text": "P ainting of Tanks, Vessels & Pipelines",
+    "level": 1,
+    "number": "P",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 91,
+    "text": "Annexure 2 : Paint Performance Guarantee Requirements",
+    "level": 1,
+    "number": "Annexure 2",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 93,
+    "text": "Annexure 3 : Proforma of Performance Bank Guarantee",
+    "level": 1,
+    "number": "Annexure 3",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 99,
+    "text": "Annexure 5 : Procedure for Measurement of Dry Film Coating Thickness",
+    "level": 1,
+    "number": "Annexure 5",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 104,
+    "text": "Annexure 6 : Format for Approval of Paint Materials (Before Procurement)",
+    "level": 1,
+    "number": "Annexure 6",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 105,
+    "text": "Annexure 7 : Paint - Material Inspection Report",
+    "level": 1,
+    "number": "Annexure 7",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 106,
+    "text": "Annexure 8 : Surface Preparation and Painting Inspection Report",
+    "level": 1,
+    "number": "Annexure 8",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 107,
+    "text": "Annexure 9 : DFT Inspection Report",
+    "level": 1,
+    "number": "Annexure 9",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 108,
+    "text": "Annexure 10 : Painting Inspection Checklist",
+    "level": 1,
+    "number": "Annexure 10",
+    "source_page": 9,
+    "confidence": 0.85
+  },
+  {
+    "page_num": 110,
+    "text": "Annexure 11 : Brand Names of Paints",
+    "level": 1,
+    "number": "Annexure 11",
+    "source_page": 9,
+    "confidence": 0.85
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "5 Undertaking:",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > 5 Undertaking:",
+    "seq": 0,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  }
+]

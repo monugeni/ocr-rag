@@ -1,0 +1,31 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/BURNER OIL GUN MR/6-78-0003_Rev.2_Specification for documentation requirement from suppliers.pdf",
+  "document_title": "ITP - Inspection and Test Plan",
+  "document_context": {
+    "title": "ITP - Inspection and Test Plan",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 11,
+  "body_font_size": 16.0,
+  "heading_count": 28,
+  "toc_entry_count": 4,
+  "chunk_count": 76,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 10,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 6,
+    "line_role_counts": {
+      "running": 50,
+      "body": 258,
+      "toc": 8,
+      "form": 12,
+      "caption": 4,
+      "table": 1,
+      "page_number": 2
+    }
+  }
+}

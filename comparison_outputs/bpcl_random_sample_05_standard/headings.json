@@ -1,0 +1,332 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 5,
+    "top": 146.0,
+    "left": 99.0,
+    "text": "-125THK. INSUL. CASTABLE SAME AS THAT",
+    "level": 3,
+    "score": 4.5,
+    "confidence": 0.5,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "slightly_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > -125THK. INSUL. CASTABLE SAME AS THAT",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 1,
+    "line_index": 10,
+    "top": 197.0,
+    "left": 117.0,
+    "text": "8 GAP TO BE TIGHTLY PACKED WITI-1",
+    "level": 1,
+    "score": 7.5,
+    "confidence": 0.833,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "numbering": "8",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 8 GAP TO BE TIGHTLY PACKED WITI-1",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 1,
+    "line_index": 17,
+    "top": 274.0,
+    "left": 401.0,
+    "text": "Amtmlitzkagss.4",
+    "level": 1,
+    "score": 5.2,
+    "confidence": 0.578,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > Amtmlitzkagss.4",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 1,
+    "line_index": 19,
+    "top": 303.0,
+    "left": 272.0,
+    "text": "75 FLOOR INSU LATIN",
+    "level": 1,
+    "score": 8.2,
+    "confidence": 0.911,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "slightly_large_font"
+    ],
+    "numbering": "75",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN",
+    "toc_match": null,
+    "warnings": [
+      "p1: top-level decimal jump 8 -> 75"
+    ]
+  },
+  {
+    "id": 5,
+    "page_num": 1,
+    "line_index": 22,
+    "top": 342.0,
+    "left": 397.0,
+    "text": "F. BOARD (1260 GRADE",
+    "level": 2,
+    "score": 6.2,
+    "confidence": 0.689,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "centered",
+      "slightly_large_font"
+    ],
+    "numbering": "F",
+    "scheme": "alpha",
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > F. BOARD (1260 GRADE",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 1,
+    "line_index": 32,
+    "top": 438.0,
+    "left": 654.0,
+    "text": "I. ,,",
+    "level": 2,
+    "score": 7.8,
+    "confidence": 0.867,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "very_large_font"
+    ],
+    "numbering": "I",
+    "scheme": "alpha",
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,,",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 1,
+    "line_index": 46,
+    "top": 577.0,
+    "left": 612.0,
+    "text": "Y ANCHOR AT 150 MAX.",
+    "level": 3,
+    "score": 5.8,
+    "confidence": 0.644,
+    "reasons": [
+      "all_caps_short",
+      "very_large_font"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,, > Y ANCHOR AT 150 MAX.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 1,
+    "line_index": 52,
+    "top": 868.0,
+    "left": 111.0,
+    "text": "GENERAL NOTES:-",
+    "level": 3,
+    "score": 5.1,
+    "confidence": 0.567,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "short_unshaped"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > 75 FLOOR INSU LATIN > I. ,, > GENERAL NOTES:-",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 9,
+    "page_num": 1,
+    "line_index": 53,
+    "top": 884.0,
+    "left": 494.0,
+    "text": "5 R.F.B. OVERLAY IS REQUIRED WHEN CALLED",
+    "level": 1,
+    "score": 7.1,
+    "confidence": 0.789,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "numbered_1"
+    ],
+    "numbering": "5",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 5 R.F.B. OVERLAY IS REQUIRED WHEN CALLED",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 10,
+    "page_num": 1,
+    "line_index": 54,
+    "top": 889.0,
+    "left": 112.0,
+    "text": "1 ALL DIMENSIONS ARE IN MILLIMETERS.",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 1 ALL DIMENSIONS ARE IN MILLIMETERS.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 11,
+    "page_num": 1,
+    "line_index": 56,
+    "top": 909.0,
+    "left": 111.0,
+    "text": "2 FOR TYPES OF INSULATING CONCRETE, FLOOR BRICKS AND DIMENSIONS * SEE GENERAL ARRANGEMENT 6. ADJUST CASTABLE THICKNESS TO MEET STANDARD",
+    "level": 1,
+    "score": 11.9,
+    "confidence": 0.99,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 2 FOR TYPES OF INSULATING CONCRETE, FLOOR BRICKS AND DIMENSIONS * SEE GENERAL ARRANGEMENT 6. ADJUST CASTABLE THICKNESS TO MEET STANDARD",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 12,
+    "page_num": 1,
+    "line_index": 59,
+    "top": 960.0,
+    "left": 112.0,
+    "text": "3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 13,
+    "page_num": 1,
+    "line_index": 62,
+    "top": 1010.0,
+    "left": 112.0,
+    "text": "4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.)",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "4",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.)",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 14,
+    "page_num": 1,
+    "line_index": 64,
+    "top": 1050.0,
+    "left": 109.0,
+    "text": "COMPANION STANDARD:—",
+    "level": 3,
+    "score": 4.1,
+    "confidence": 0.456,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "large_font",
+      "left_aligned",
+      "short_unshaped"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.) > COMPANION STANDARD:—",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 15,
+    "page_num": 1,
+    "line_index": 65,
+    "top": 1071.0,
+    "left": 105.0,
+    "text": "ANCHOR FOR VERTICAL INSULATING 7-17-0208",
+    "level": 3,
+    "score": 6.1,
+    "confidence": 0.678,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "large_font",
+      "left_aligned"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "STANDARD No. > 4 THE ONLY CUTTING OF REFRACTORY FIRE BRICKS (R.F.B.) > ANCHOR FOR VERTICAL INSULATING 7-17-0208",
+    "toc_match": null,
+    "warnings": []
+  }
+]

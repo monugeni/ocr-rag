@@ -1,0 +1,261 @@
+[
+  {
+    "heading": "1.0 INTRODUCTION",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 1.0 INTRODUCTION",
+    "seq": 0,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "2.0 LIST OF EXPECTED REFRACTORY JOBS",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 2.0 LIST OF EXPECTED REFRACTORY JOBS",
+    "seq": 1,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 REFERENCE DRAWINGS AND STANDARDS / SPECIFICATIONS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 3.0 REFERENCE DRAWINGS AND STANDARDS / SPECIFICATIONS",
+    "seq": 2,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 TECHNICAL REQUIREMENTS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 4.0 TECHNICAL REQUIREMENTS",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.0 QUALITY ASSURANCE",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 5.0 QUALITY ASSURANCE",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "5.1 CASTABLE APPLICATION",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 5.0 QUALITY ASSURANCE > 5.1 CASTABLE APPLICATION",
+    "seq": 5,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "5.2 BRICK LINING",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 5.0 QUALITY ASSURANCE > 5.2 BRICK LINING",
+    "seq": 6,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.3 CERAMIC FIBER LINING",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 5.0 QUALITY ASSURANCE > 5.3 CERAMIC FIBER LINING",
+    "seq": 7,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "6.0 INSPECTION & TESTING",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 6.0 INSPECTION & TESTING",
+    "seq": 8,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "7.0 HSE REQUIREMENT",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 7.0 HSE REQUIREMENT",
+    "seq": 9,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "8.0 VENDOR DATA REQUIREMENT",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "JOB SPECIFICATION OF REFRACTORY LINING FOR > 8.0 VENDOR DATA REQUIREMENT",
+    "seq": 10,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "JOB SPECIFICATION OF REFRACTORY LINING FOR",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

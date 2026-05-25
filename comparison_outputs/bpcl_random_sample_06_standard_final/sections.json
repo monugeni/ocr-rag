@@ -1,0 +1,1859 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Abbreviations",
+    "seq": 0,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 PURPOSE",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1.0 PURPOSE",
+    "seq": 1,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.0 SCOPE",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2.0 SCOPE",
+    "seq": 2,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 REFERENCES",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 3.0 REFERENCES",
+    "seq": 3,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 DEFINITIONS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 4.0 DEFINITIONS",
+    "seq": 4,
+    "confidence": 0.9,
+    "score": 8.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.0 METHODOLOGIES AND CONTROL",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL",
+    "seq": 5,
+    "confidence": 0.9,
+    "score": 8.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.1 Identification of joints for controlled bolt tightening",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening",
+    "seq": 6,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.1.1 Hydraulic Bolt tensioning",
+    "level": 3,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening > 5.1.1 Hydraulic Bolt tensioning",
+    "seq": 7,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.1.2 Application of torque",
+    "level": 3,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.1 Identification of joints for controlled bolt tightening > 5.1.2 Application of torque",
+    "seq": 8,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "5.2 Pre-bolting Operations",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations",
+    "seq": 9,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.2.1 Design",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.1 Design",
+    "seq": 10,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.2.2 General",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.2 General",
+    "seq": 11,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.2.3 Visual inspection",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.3 Visual inspection",
+    "seq": 12,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "5.2.4 Corrective measures",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.4 Corrective measures",
+    "seq": 13,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "5.2.5 Lubrication/anti-seize compound",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.5 Lubrication/anti-seize compound",
+    "seq": 14,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "5.2.6 Assembly",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.6 Assembly",
+    "seq": 15,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "5.2.7 Torque/tension calculation",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.7 Torque/tension calculation",
+    "seq": 16,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "5.2.9 Torque and tension values",
+    "level": 3,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.2 Pre-bolting Operations > 5.2.9 Torque and tension values",
+    "seq": 17,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "5.3 Bolting Operation",
+    "level": 2,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.3 Bolting Operation",
+    "seq": 18,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "5.3.1 General",
+    "level": 3,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.3 Bolting Operation > 5.3.1 General",
+    "seq": 19,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "5.3.2 Hydraulic bolt tension application",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.3 Bolting Operation > 5.3.2 Hydraulic bolt tension application",
+    "seq": 20,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "5.3.3 Stud bolt torque application",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.3 Bolting Operation > 5.3.3 Stud bolt torque application",
+    "seq": 21,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "5.3.4 Testing of joints",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 5.0 METHODOLOGIES AND CONTROL > 5.3 Bolting Operation > 5.3.4 Testing of joints",
+    "seq": 22,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "gap_above",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "6.0 RESPONSIBILITIES / APPROVALS",
+    "level": 1,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 6.0 RESPONSIBILITIES / APPROVALS",
+    "seq": 23,
+    "confidence": 0.9,
+    "score": 8.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "7.0 DOCUMENTATION",
+    "level": 1,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 7.0 DOCUMENTATION",
+    "seq": 24,
+    "confidence": 0.9,
+    "score": 8.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "4 BOLT FLANGE 8 BOLT FLANGE",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 4 BOLT FLANGE 8 BOLT FLANGE",
+    "seq": 25,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "12 BOLT I FLANGE / 16 BOLT FLANGE",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 12 BOLT I FLANGE / 16 BOLT FLANGE",
+    "seq": 26,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p12: top-level decimal jump 4 -> 12"
+    ],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "20 BOLT FLANGE",
+    "level": 1,
+    "page_num": 12,
+    "page_start": 12,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 20 BOLT FLANGE",
+    "seq": 27,
+    "confidence": 0.9,
+    "score": 8.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p12: top-level decimal jump 12 -> 20"
+    ],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "Bo ur L.",
+    "level": 3,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 20 BOLT FLANGE > Bo ur L.",
+    "seq": 28,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "0 W ter 55 RU 0",
+    "level": 1,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0",
+    "seq": 29,
+    "confidence": 0.822,
+    "score": 7.4,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1",
+      "wrapped_heading"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "U. S ra CD 350",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > U. S ra CD 350",
+    "seq": 30,
+    "confidence": 0.978,
+    "score": 8.8,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "B. 40",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > B. 40",
+    "seq": 31,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "bold"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "I LIS I LIST",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > I LIS I LIST",
+    "seq": 32,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "I I I",
+    "level": 2,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > I I I",
+    "seq": 33,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "_ I",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > _ I",
+    "seq": 34,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "GR X GR 3",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > GR X GR 3",
+    "seq": 35,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "U. U) 10",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > U. U) 10",
+    "seq": 36,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "Z.63 Co CO ,-",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > Z.63 Co CO ,-",
+    "seq": 37,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "S ••• ..0 A",
+    "level": 2,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 W ter 55 RU 0 > S ••• ..0 A",
+    "seq": 38,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "6 PM A1",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 6 PM A1",
+    "seq": 39,
+    "confidence": 0.789,
+    "score": 7.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p17: top-level decimal jump 0 -> 6"
+    ],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "Z.65 V LI Cal I < <",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 6 PM A1 > Z.65 V LI Cal I < <",
+    "seq": 40,
+    "confidence": 0.99,
+    "score": 14.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "numbered_2",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "..Y SS S",
+    "level": 2,
+    "page_num": 19,
+    "page_start": 19,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 6 PM A1 > ..Y SS S",
+    "seq": 41,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "Pressure kg r",
+    "level": 1,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Pressure kg r",
+    "seq": 42,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "L. L.",
+    "level": 2,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Pressure kg r > L. L.",
+    "seq": 43,
+    "confidence": 0.333,
+    "score": 3.0,
+    "reasons": [
+      "all_caps_short",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "I 03 03",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Pressure kg r > L. L. > I 03 03",
+    "seq": 44,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "FL 0 00",
+    "level": 2,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Pressure kg r > FL 0 00",
+    "seq": 45,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "ION No. C) - 1 n 7 1",
+    "level": 3,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Pressure kg r > FL 0 00 > ION No. C) - 1 n 7 1",
+    "seq": 46,
+    "confidence": 0.99,
+    "score": 10.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "22 L. L.",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 22 L. L.",
+    "seq": 47,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "numbered_1"
+    ],
+    "warnings": [
+      "p22: top-level decimal jump 6 -> 22"
+    ],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "I CO CO CO",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > I CO CO CO",
+    "seq": 48,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "I I I 1",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > I CO CO CO > I I I 1",
+    "seq": 49,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "U. O. co rocorocoroco meilinci3r-icor-intnincninciltncnen(ilcoincocomincnin",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > I CO CO CO > U. O. co rocorocoroco meilinci3r-icor-intnincninciltncnen(ilcoincocomincnin",
+    "seq": 50,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "E. 0",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > I CO CO CO > E. 0",
+    "seq": 51,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "bold"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "CO M V' -",
+    "level": 2,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > I CO CO CO > CO M V' -",
+    "seq": 52,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "2 L. p",
+    "level": 1,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p",
+    "seq": 53,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "numbered_1",
+      "wrapped_heading"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "PMS CL.",
+    "level": 2,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > PMS CL.",
+    "seq": 54,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "Z ° H 000",
+    "level": 2,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > Z ° H 000",
+    "seq": 55,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "U 156.",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > U 156.",
+    "seq": 56,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "Z.5 re o",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > Z.5 re o",
+    "seq": 57,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "slightly_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "E. 0",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > E. 0",
+    "seq": 58,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "alpha",
+      "bold"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "I I I I",
+    "level": 2,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 2 L. p > I I I I",
+    "seq": 59,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "Tens L d",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > Tens L d",
+    "seq": 60,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "00 0 CI ID °",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 00 0 CI ID °",
+    "seq": 61,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "T T",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 00 0 CI ID ° > T T",
+    "seq": 62,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "1 CO",
+    "level": 1,
+    "page_num": 29,
+    "page_start": 29,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 CO",
+    "seq": 63,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 29
+  },
+  {
+    "heading": "0 N",
+    "level": 1,
+    "page_num": 29,
+    "page_start": 29,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 N",
+    "seq": 64,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 29
+  },
+  {
+    "heading": "I LIST D-",
+    "level": 2,
+    "page_num": 29,
+    "page_start": 29,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 N > I LIST D-",
+    "seq": 65,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 29
+  },
+  {
+    "heading": "E- E-",
+    "level": 2,
+    "page_num": 30,
+    "page_start": 30,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 N > E- E-",
+    "seq": 66,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 30
+  },
+  {
+    "heading": "I I LI",
+    "level": 2,
+    "page_num": 30,
+    "page_start": 30,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 N > I I LI",
+    "seq": 67,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 30
+  },
+  {
+    "heading": "PM 6",
+    "level": 2,
+    "page_num": 31,
+    "page_start": 31,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 N > PM 6",
+    "seq": 68,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 31
+  },
+  {
+    "heading": "0 CD 4",
+    "level": 1,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 CD 4",
+    "seq": 69,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "0 0 IL 0-",
+    "level": 1,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 0 IL 0-",
+    "seq": 70,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "re, 38 TJ - L",
+    "level": 1,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > re, 38 TJ - L",
+    "seq": 71,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "e CO c, mp —",
+    "level": 1,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > e CO c, mp —",
+    "seq": 72,
+    "confidence": 0.99,
+    "score": 13.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "0 . F- G- C 0 IS (.9",
+    "level": 1,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 . F- G- C 0 IS (.9",
+    "seq": 73,
+    "confidence": 0.99,
+    "score": 16.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "numbered_1",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "0 e rve",
+    "level": 1,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 0 e rve",
+    "seq": 74,
+    "confidence": 0.333,
+    "score": 3.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "1 7 CO",
+    "level": 1,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 7 CO",
+    "seq": 75,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "S CO 2 A",
+    "level": 2,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 7 CO > S CO 2 A",
+    "seq": 76,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "IX IL 0",
+    "level": 3,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 7 CO > S CO 2 A > IX IL 0",
+    "seq": 77,
+    "confidence": 0.622,
+    "score": 5.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "I E 0",
+    "level": 3,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 7 CO > S CO 2 A > I E 0",
+    "seq": 78,
+    "confidence": 0.567,
+    "score": 5.1,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "short_unshaped",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "RY S O",
+    "level": 2,
+    "page_num": 34,
+    "page_start": 34,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > 1 7 CO > RY S O",
+    "seq": 79,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 34
+  },
+  {
+    "heading": "ANNEXURE - II",
+    "level": 1,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > ANNEXURE - II",
+    "seq": 80,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "appendix",
+      "bold",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "SEQUENCE OF ACTIVITIES INVOLVED FOR REOPENING / MAKING / BLINDING / DEBLINDING / WEDGE OPENING OF FLANGE JOINTS",
+    "level": 2,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > ANNEXURE - II > SEQUENCE OF ACTIVITIES INVOLVED FOR REOPENING / MAKING / BLINDING / DEBLINDING / WEDGE OPENING OF FLANGE JOINTS",
+    "seq": 81,
+    "confidence": 0.99,
+    "score": 9.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "ACCEPTANCE BY OWNER / EIL",
+    "level": 2,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS > ANNEXURE - II > ACCEPTANCE BY OWNER / EIL",
+    "seq": 82,
+    "confidence": 0.589,
+    "score": 5.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "STANDARD SPECIFICATION FOR APPLICATION OF TORQUE AND HYDRAULIC BOLT TENSION FOR FLANGE JOINTS",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 35
+  }
+]

@@ -1,0 +1,631 @@
+[
+  {
+    "heading": "Abbreviations",
+    "level": 3,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "ITP - Inspection and Test Plan > Abbreviations",
+    "seq": 0,
+    "confidence": 0.589,
+    "score": 5.3,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "1.0 SCOPE",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 1.0 SCOPE",
+    "seq": 1,
+    "confidence": 0.99,
+    "score": 10.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.0 DEFINITIONS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 2.0 DEFINITIONS",
+    "seq": 2,
+    "confidence": 0.99,
+    "score": 10.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.1 Supplier",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 2.0 DEFINITIONS > 2.1 Supplier",
+    "seq": 3,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "2.2 Owner",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 2.0 DEFINITIONS > 2.2 Owner",
+    "seq": 4,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "3.0 REFERENCE DOCUMENTS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 3.0 REFERENCE DOCUMENTS",
+    "seq": 5,
+    "confidence": 0.99,
+    "score": 10.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 DOCUMENTATION REQUIREMENTS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS",
+    "seq": 6,
+    "confidence": 0.99,
+    "score": 11.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.1 Order Acknowledgement and Assigning Project Manager",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.1 Order Acknowledgement and Assigning Project Manager",
+    "seq": 7,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.2 Documents / Data to be submitted by the Supplier",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.2 Documents / Data to be submitted by the Supplier",
+    "seq": 8,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.3 Style and Formatting",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.3 Style and Formatting",
+    "seq": 9,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "4.4 Review and Approval of Documents by Supplier",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.4 Review and Approval of Documents by Supplier",
+    "seq": 10,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "4.5 Document Category",
+    "level": 2,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.5 Document Category",
+    "seq": 11,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "4.5.1 Review Category",
+    "level": 3,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.5 Document Category > 4.5.1 Review Category",
+    "seq": 12,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "4.6 Methodology for Submission of Documents to EIL/Owner",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.6 Methodology for Submission of Documents to EIL/Owner",
+    "seq": 13,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.6.1 Document Control Index (DCI)",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.6 Methodology for Submission of Documents to EIL/Owner > 4.6.1 Document Control Index (DCI)",
+    "seq": 14,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.6.2 Submission of Drawings / Documents / Data",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.6 Methodology for Submission of Documents to EIL/Owner > 4.6.2 Submission of Drawings / Documents / Data",
+    "seq": 15,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.6.3 Statutory Approvals",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.6 Methodology for Submission of Documents to EIL/Owner > 4.6.3 Statutory Approvals",
+    "seq": 16,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.7 Inspection and Testing",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.7 Inspection and Testing",
+    "seq": 17,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.7.1 Quality Assurance Plan / Inspection and Test Plan",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.7 Inspection and Testing > 4.7.1 Quality Assurance Plan / Inspection and Test Plan",
+    "seq": 18,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "4.7.2 Inspection Requisition:",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.7 Inspection and Testing > 4.7.2 Inspection Requisition:",
+    "seq": 19,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "4.7.3 Inspection Release Note (IRN)/ Inspection Certificate (IC)",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.7 Inspection and Testing > 4.7.3 Inspection Release Note (IRN)/ Inspection Certificate (IC)",
+    "seq": 20,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "4.9 Dispatch Details",
+    "level": 2,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.9 Dispatch Details",
+    "seq": 21,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "4.10 Final Documentation",
+    "level": 2,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.10 Final Documentation",
+    "seq": 22,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "4.10.2 As Built Drawings",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.10 Final Documentation > 4.10.2 As Built Drawings",
+    "seq": 23,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "4.10.3 Packing / Presentation of Final Documents",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.10 Final Documentation > 4.10.3 Packing / Presentation of Final Documents",
+    "seq": 24,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "4.10.4 Submission of Soft Copies",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.10 Final Documentation > 4.10.4 Submission of Soft Copies",
+    "seq": 25,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "4.10.5 Completeness of Final Documentation",
+    "level": 3,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "ITP - Inspection and Test Plan > 4.0 DOCUMENTATION REQUIREMENTS > 4.10 Final Documentation > 4.10.5 Completeness of Final Documentation",
+    "seq": 26,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_3"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "ANNEXURE -1",
+    "level": 1,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "ITP - Inspection and Test Plan > ANNEXURE -1",
+    "seq": 27,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "appendix",
+      "bold",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ITP - Inspection and Test Plan",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  }
+]

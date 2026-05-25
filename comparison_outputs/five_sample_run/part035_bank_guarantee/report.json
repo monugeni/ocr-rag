@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/source/mcp/ocr-rag/samples/split_output/2500024832-HB-06600_3_part035_p1547-1566_ANNEXURE_2F_BANK_GUARANTEE_FOR.pdf",
+  "document_title": "ANNEXURE 2F: BANK GUARANTEE FOR SECURITY DEPOSIT",
+  "document_context": {
+    "title": "ANNEXURE 2F: BANK GUARANTEE FOR SECURITY DEPOSIT",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 20,
+  "body_font_size": 18.0,
+  "heading_count": 39,
+  "toc_entry_count": 0,
+  "chunk_count": 125,
+  "warnings": [
+    "p2: top-level decimal jump 6 -> 9",
+    "p14: top-level decimal jump 3 -> 7"
+  ],
+  "extractor": {
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 20,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "caption": 8,
+      "body": 603,
+      "table": 11,
+      "form": 5
+    }
+  }
+}

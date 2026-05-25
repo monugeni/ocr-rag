@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="0" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="17" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="23" family="Helvetica" color="#000000"/>
+	<fontspec id="3" size="8" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="5" size="15" family="Courier" color="#000000"/>
+<text top="64" left="681" width="109" height="12" font="0">STANDARD No. </text>
+<text top="93" left="405" width="178" height="12" font="0">LIST OF ABBREVIATIONS </text>
+<text top="93" left="675" width="120" height="12" font="0">7-17-0705 Rev. 5 </text>
+<text top="119" left="705" width="59" height="12" font="0">Page 1 of 3 </text>
+<text top="83" left="211" width="6" height="15" font="1"><b>-</b></text>
+<text top="83" left="205" width="4" height="15" font="1"><b>a</b></text>
+<text top="78" left="207" width="39" height="21" font="2"><b>ft </b></text>
+<text top="82" left="234" width="80" height="15" font="1"><b>ENGINEERS </b></text>
+<text top="92" left="107" width="132" height="21" font="2"><b>ogzu imegwv </b></text>
+<text top="96" left="235" width="106" height="15" font="1"><b>INDIA LIMITED </b></text>
+<text top="111" left="134" width="73" height="8" font="3">Ofierf epasiem3oto. </text>
+<text top="111" left="235" width="93" height="8" font="3">IA GUN. of Enda Uodertakngi </text>
+<text top="147" left="103" width="214" height="12" font="4"><b>AVERAGE ARITHMETIC ROOT MEAN </b></text>
+<text top="161" left="103" width="41" height="12" font="4"><b>ALLOY </b></text>
+<text top="175" left="103" width="297" height="12" font="4"><b>AMERICAN INSTITUTE OF STEEL CONSTRUCTION </b></text>
+<text top="190" left="103" width="243" height="12" font="4"><b>AMERICAN IRON AND STEEL INSTITUTE </b></text>
+<text top="204" left="103" width="272" height="12" font="4"><b>AMERICAN NATIONAL STANDARDS INSTITUTE </b></text>
+<text top="219" left="103" width="263" height="12" font="4"><b>AMERICAN NATIONAL TAPER PIPE THREAD </b></text>
+<text top="233" left="103" width="209" height="12" font="4"><b>AMERICAN PETROLEUM INSTITUTE </b></text>
+<text top="248" left="103" width="302" height="12" font="4"><b>AMERICAN SOCIETY OF MECHANICAL ENGINEERS </b></text>
+<text top="262" left="103" width="280" height="12" font="4"><b>AMERICAN SOCIETY FOR TESTING MATERIALS </b></text>
+<text top="277" left="103" width="156" height="12" font="4"><b>AND SO ON (ETCETERA) </b></text>
+<text top="291" left="103" width="182" height="12" font="4"><b>ANGLE (STRUCTURAL STEEL) </b></text>
+<text top="306" left="103" width="129" height="12" font="4"><b>APPROXIMATE (—LY) </b></text>
+<text top="321" left="103" width="91" height="12" font="4"><b>ARRANGEMENT </b></text>
+<text top="335" left="103" width="100" height="12" font="4"><b>AS OTHER END </b></text>
+<text top="353" left="103" width="67" height="12" font="4"><b>ASSEMBLY </b></text>
+<text top="368" left="103" width="18" height="12" font="4"><b>AT </b></text>
+<text top="382" left="104" width="69" height="12" font="4"><b>AUTOMATIC </b></text>
+<text top="395" left="104" width="57" height="12" font="4"><b>AVERAGE </b></text>
+<text top="411" left="104" width="96" height="12" font="4"><b>AVERAGE WALL </b></text>
+<text top="456" left="104" width="77" height="12" font="4"><b>BACK MARK </b></text>
+<text top="470" left="104" width="100" height="12" font="4"><b>BACK TO BACK </b></text>
+<text top="486" left="104" width="56" height="12" font="4"><b>BEARING </b></text>
+<text top="499" left="104" width="42" height="12" font="4"><b>BEVEL </b></text>
+<text top="514" left="104" width="122" height="12" font="4"><b>BEVEL BOTH ENDS </b></text>
+<text top="528" left="104" width="120" height="12" font="4"><b>BEVEL LARGE END </b></text>
+<text top="543" left="104" width="107" height="12" font="4"><b>BEVEL ONE END </b></text>
+<text top="557" left="104" width="120" height="12" font="4"><b>BEVEL SMALL END </b></text>
+<text top="571" left="104" width="105" height="12" font="4"><b>BEVELLED ENDS </b></text>
+<text top="586" left="104" width="163" height="12" font="4"><b>BIRMINGHAM WIRE GAUGE </b></text>
+<text top="601" left="104" width="39" height="12" font="4"><b>BLIND </b></text>
+<text top="615" left="104" width="150" height="12" font="4"><b>BOLT CIRCLE DIAMETER </b></text>
+<text top="629" left="105" width="106" height="12" font="4"><b>BOLTED BONNET </b></text>
+<text top="643" left="105" width="146" height="12" font="4"><b>BOTH ENDS THREADED </b></text>
+<text top="658" left="105" width="51" height="12" font="4"><b>BOTTOM </b></text>
+<text top="672" left="105" width="112" height="12" font="4"><b>BOTTOM OF PIPE </b></text>
+<text top="686" left="105" width="56" height="12" font="4"><b>BRACING </b></text>
+<text top="700" left="105" width="58" height="12" font="4"><b>BRACKET </b></text>
+<text top="713" left="105" width="196" height="12" font="4"><b>BURNER MANAGEMENT SYSTEM </b></text>
+<text top="728" left="105" width="120" height="12" font="4"><b>BRITISH STANDARD </b></text>
+<text top="742" left="105" width="155" height="12" font="4"><b>BRITISH STANDARD FINE </b></text>
+<text top="757" left="105" width="197" height="12" font="4"><b>BRITISH STANDARD WHITWORTH </b></text>
+<text top="771" left="105" width="147" height="12" font="4"><b>BRITISH THERMAL UNIT </b></text>
+<text top="786" left="105" width="74" height="12" font="4"><b>BUTT WELD </b></text>
+<text top="800" left="105" width="157" height="12" font="4"><b>BRINNEL HARDNESS NO. </b></text>
+<text top="814" left="105" width="210" height="12" font="4"><b>BRITISH STANDARD PIPE THREAD </b></text>
+<text top="839" left="106" width="121" height="12" font="4"><b>CALCULATE (—ION) </b></text>
+<text top="856" left="106" width="138" height="12" font="4"><b>CAST AIR PREHEATER </b></text>
+<text top="870" left="106" width="53" height="12" font="4"><b>CARBON </b></text>
+<text top="884" left="106" width="98" height="12" font="4"><b>CARBON STEEL </b></text>
+<text top="899" left="106" width="71" height="12" font="4"><b>CAST IRON </b></text>
+<text top="913" left="106" width="146" height="12" font="4"><b>CENTIGRADE (CELSIUS) </b></text>
+<text top="928" left="107" width="77" height="12" font="4"><b>CENTIMETRE </b></text>
+<text top="942" left="107" width="85" height="12" font="4"><b>CENTRE LINE </b></text>
+<text top="957" left="107" width="129" height="12" font="4"><b>CENTER TO CENTER </b></text>
+<text top="971" left="107" width="113" height="12" font="4"><b>CENTER TO FACE </b></text>
+<text top="985" left="107" width="58" height="12" font="4"><b>CENTRES </b></text>
+<text top="1000" left="107" width="76" height="12" font="4"><b>CHAMFERED </b></text>
+<text top="1014" left="107" width="155" height="12" font="4"><b>CHANNEL (STRUCTURAL) </b></text>
+<text top="1029" left="107" width="61" height="12" font="4"><b>CHECKED </b></text>
+<text top="1043" left="107" width="122" height="12" font="4"><b>CHEQUERED PLATE </b></text>
+<text top="1057" left="107" width="92" height="12" font="4"><b>CHEESE HEAD </b></text>
+<text top="1071" left="107" width="69" height="12" font="4"><b>CHROMIUM </b></text>
+<text top="1086" left="107" width="74" height="12" font="4"><b>CLEARANCE </b></text>
+<text top="1100" left="107" width="54" height="12" font="4"><b>COLUMN </b></text>
+<text top="1115" left="107" width="84" height="12" font="4"><b>COMBINATION </b></text>
+<text top="146" left="429" width="34" height="12" font="4"><b>AARH </b></text>
+<text top="160" left="429" width="25" height="12" font="4"><b>ALY </b></text>
+<text top="175" left="429" width="29" height="12" font="4"><b>AISC </b></text>
+<text top="189" left="429" width="25" height="12" font="4"><b>AISI </b></text>
+<text top="204" left="429" width="31" height="12" font="4"><b>ANSI </b></text>
+<text top="218" left="430" width="27" height="12" font="4"><b>NPT </b></text>
+<text top="232" left="429" width="22" height="12" font="4"><b>API </b></text>
+<text top="247" left="429" width="35" height="12" font="4"><b>ASME </b></text>
+<text top="262" left="429" width="34" height="12" font="4"><b>ASTM </b></text>
+<text top="276" left="430" width="25" height="12" font="4"><b>ETC </b></text>
+<text top="291" left="430" width="11" height="12" font="0">L </text>
+<text top="305" left="430" width="55" height="12" font="4"><b>APPROX. </b></text>
+<text top="319" left="429" width="45" height="12" font="4"><b>ARRGT. </b></text>
+<text top="334" left="430" width="38" height="12" font="4"><b>A.O.E. </b></text>
+<text top="352" left="430" width="37" height="12" font="4"><b>ASSY. </b></text>
+<text top="366" left="431" width="17" height="12" font="4"><b>0 </b></text>
+<text top="381" left="430" width="38" height="12" font="4"><b>AUTO. </b></text>
+<text top="395" left="430" width="30" height="12" font="4"><b>AVG. </b></text>
+<text top="410" left="430" width="19" height="12" font="4"><b>AW </b></text>
+<text top="455" left="431" width="28" height="12" font="4"><b>B.M. </b></text>
+<text top="469" left="431" width="30" height="12" font="4"><b>B/B </b></text>
+<text top="484" left="431" width="31" height="12" font="4"><b>BRG. </b></text>
+<text top="498" left="431" width="29" height="12" font="4"><b>BEV. </b></text>
+<text top="513" left="431" width="28" height="12" font="4"><b>BBE </b></text>
+<text top="527" left="431" width="26" height="12" font="4"><b>LEB </b></text>
+<text top="542" left="431" width="28" height="12" font="4"><b>BOE </b></text>
+<text top="556" left="432" width="27" height="12" font="4"><b>SEB </b></text>
+<text top="570" left="431" width="20" height="12" font="4"><b>BE </b></text>
+<text top="585" left="431" width="40" height="12" font="4"><b>B.W.G. </b></text>
+<text top="600" left="431" width="30" height="12" font="4"><b>BLD. </b></text>
+<text top="614" left="431" width="28" height="12" font="4"><b>BCD </b></text>
+<text top="628" left="431" width="27" height="12" font="4"><b>B.B. </b></text>
+<text top="642" left="431" width="37" height="12" font="4"><b>B.E.T. </b></text>
+<text top="657" left="431" width="30" height="12" font="4"><b>BOT. </b></text>
+<text top="671" left="432" width="28" height="12" font="4"><b>BOP </b></text>
+<text top="686" left="432" width="39" height="12" font="4"><b>BRCG. </b></text>
+<text top="700" left="432" width="30" height="12" font="4"><b>BKT. </b></text>
+<text top="714" left="432" width="29" height="12" font="4"><b>BMS </b></text>
+<text top="727" left="432" width="20" height="12" font="4"><b>BS </b></text>
+<text top="741" left="432" width="27" height="12" font="4"><b>BSF </b></text>
+<text top="755" left="432" width="28" height="12" font="4"><b>BSW </b></text>
+<text top="770" left="432" width="26" height="12" font="4"><b>BTU </b></text>
+<text top="784" left="432" width="28" height="12" font="4"><b>B.W. </b></text>
+<text top="799" left="432" width="41" height="12" font="4"><b>B.H.N. </b></text>
+<text top="813" left="432" width="28" height="12" font="4"><b>BSP </b></text>
+<text top="838" left="433" width="36" height="12" font="4"><b>CALC. </b></text>
+<text top="854" left="433" width="35" height="12" font="4"><b>CAPH </b></text>
+<text top="869" left="433" width="11" height="12" font="0">C </text>
+<text top="884" left="433" width="20" height="12" font="4"><b>CS </b></text>
+<text top="898" left="433" width="15" height="12" font="4"><b>CI </b></text>
+<text top="912" left="434" width="11" height="12" font="0">C </text>
+<text top="927" left="434" width="20" height="12" font="4"><b>CM </b></text>
+<text top="941" left="434" width="50" height="12" font="4"><b>CL </b>(t) </text>
+<text top="941" left="449" width="1" height="12" font="0"> </text>
+<text top="956" left="434" width="51" height="12" font="4"><b>C TO C </b></text>
+<text top="970" left="434" width="51" height="12" font="4"><b>C TO F </b></text>
+<text top="984" left="434" width="31" height="12" font="4"><b>CRS. </b></text>
+<text top="999" left="434" width="40" height="12" font="4"><b>CHAM. </b></text>
+<text top="1014" left="434" width="11" height="12" font="0">C </text>
+<text top="1028" left="434" width="40" height="12" font="4"><b>CHK'D </b></text>
+<text top="1042" left="434" width="65" height="12" font="4"><b>CHQD.PLT. </b></text>
+<text top="1056" left="434" width="44" height="12" font="4"><b>CH.HD. </b></text>
+<text top="1070" left="434" width="20" height="12" font="4"><b>Cr. </b></text>
+<text top="1085" left="434" width="30" height="12" font="4"><b>CLR. </b></text>
+<text top="1099" left="434" width="30" height="12" font="4"><b>COL. </b></text>
+<text top="1114" left="434" width="41" height="12" font="4"><b>COMB. </b></text>
+<text top="160" left="524" width="61" height="12" font="4"><b>COMPANY </b></text>
+<text top="174" left="524" width="101" height="12" font="4"><b>COMPLETE WITH </b></text>
+<text top="188" left="524" width="79" height="12" font="4"><b>CONCENTRIC </b></text>
+<text top="203" left="524" width="67" height="12" font="4"><b>CONCRETE </b></text>
+<text top="218" left="525" width="66" height="12" font="4"><b>CONDITION </b></text>
+<text top="232" left="525" width="79" height="12" font="4"><b>CONNECTION </b></text>
+<text top="246" left="525" width="142" height="12" font="4"><b>CONTINUED (—UATION) </b></text>
+<text top="261" left="525" width="78" height="12" font="4"><b>CONVECTION </b></text>
+<text top="275" left="525" width="87" height="12" font="4"><b>CORPORATION </b></text>
+<text top="290" left="525" width="151" height="12" font="4"><b>CORROSION ALLOWANCE </b></text>
+<text top="304" left="525" width="138" height="12" font="4"><b>CORRUGATED (—TION) </b></text>
+<text top="319" left="525" width="101" height="12" font="4"><b>COUNTER BORE </b></text>
+<text top="333" left="525" width="100" height="12" font="4"><b>COUNTER SUNK </b></text>
+<text top="348" left="525" width="140" height="12" font="4"><b>COUNTER SUNK HEAD </b></text>
+<text top="362" left="525" width="110" height="12" font="4"><b>COUNTER WEIGHT </b></text>
+<text top="377" left="525" width="64" height="12" font="4"><b>COUPLING </b></text>
+<text top="391" left="525" width="84" height="12" font="4"><b>CROSS OVER </b></text>
+<text top="406" left="525" width="76" height="12" font="4"><b>CUBIC FEET </b></text>
+<text top="420" left="525" width="87" height="12" font="4"><b>CUBIC METRE </b></text>
+<text top="435" left="525" width="68" height="12" font="4"><b>CUSTOMER </b></text>
+<text top="449" left="525" width="170" height="12" font="4"><b>CYLINDER OR CYLINDRICAL </b></text>
+<text top="483" left="526" width="51" height="12" font="4"><b>DEGREE </b></text>
+<text top="497" left="526" width="80" height="12" font="4"><b>DEPARTMENT </b></text>
+<text top="511" left="526" width="47" height="12" font="4"><b>DESIGN </b></text>
+<text top="526" left="526" width="43" height="12" font="4"><b>DETAIL </b></text>
+<text top="540" left="526" width="62" height="12" font="4"><b>DIAGONAL </b></text>
+<text top="554" left="526" width="54" height="12" font="4"><b>DIAGRAM </b></text>
+<text top="569" left="526" width="60" height="12" font="4"><b>DIAMETER </b></text>
+<text top="583" left="526" width="68" height="12" font="4"><b>DIMENSION </b></text>
+<text top="598" left="526" width="36" height="12" font="4"><b>DITTO </b></text>
+<text top="612" left="526" width="38" height="12" font="4"><b>DOWN </b></text>
+<text top="626" left="526" width="153" height="12" font="4"><b>DOUBLE EXTRA STRONG </b></text>
+<text top="641" left="526" width="38" height="12" font="4"><b>DRAIN </b></text>
+<text top="655" left="526" width="107" height="12" font="4"><b>DRAUGHT GAUGE </b></text>
+<text top="670" left="526" width="83" height="12" font="4"><b>DRAWING (S) </b></text>
+<text top="684" left="526" width="98" height="12" font="4"><b>DRILL AND TAP </b></text>
+<text top="706" left="527" width="35" height="12" font="4"><b>EACH </b></text>
+<text top="721" left="527" width="32" height="12" font="4"><b>EAST </b></text>
+<text top="735" left="527" width="69" height="12" font="4"><b>ECCENTRIC </b></text>
+<text top="749" left="527" width="157" height="12" font="4"><b>EFFECTIVE TUBE LENGTH </b></text>
+<text top="761" left="527" width="112" height="12" font="4"><b>EXPANSION JOINT </b></text>
+<text top="775" left="527" width="44" height="12" font="4"><b>ELBOW </b></text>
+<text top="789" left="527" width="65" height="12" font="4"><b>ELEVATION </b></text>
+<text top="804" left="527" width="77" height="12" font="4"><b>ELLIPSOIDAL </b></text>
+<text top="819" left="527" width="71" height="12" font="4"><b>EQUIPMENT </b></text>
+<text top="833" left="527" width="58" height="12" font="4"><b>ESTIMATE </b></text>
+<text top="848" left="527" width="75" height="12" font="4"><b>EXCHANGER </b></text>
+<text top="862" left="527" width="56" height="12" font="4"><b>EXISTING </b></text>
+<text top="877" left="527" width="71" height="12" font="4"><b>EXPANSION </b></text>
+<text top="892" left="527" width="69" height="12" font="4"><b>EXTENSION </b></text>
+<text top="906" left="527" width="97" height="12" font="4"><b>EXTRA STRONG </b></text>
+<text top="920" left="528" width="142" height="12" font="4"><b>ENGINEERS INDIA LTD. </b></text>
+<text top="957" left="528" width="66" height="12" font="4"><b>FABRICATE </b></text>
+<text top="971" left="528" width="95" height="12" font="4"><b>FACE TO FACE </b></text>
+<text top="985" left="528" width="76" height="12" font="4"><b>FAHRENHEIT </b></text>
+<text top="1000" left="528" width="62" height="12" font="4"><b>FAR SIDE </b></text>
+<text top="1014" left="528" width="101" height="12" font="4"><b>FIELD FIT WELD </b></text>
+<text top="1029" left="528" width="76" height="12" font="4"><b>FIELD WELD </b></text>
+<text top="1043" left="528" width="47" height="12" font="4"><b>FIGURE </b></text>
+<text top="1056" left="529" width="102" height="12" font="4"><b>FIXED SUPPORT </b></text>
+<text top="1069" left="529" width="48" height="12" font="4"><b>FLANGE </b></text>
+<text top="1084" left="529" width="58" height="12" font="4"><b>FLEXIBLE </b></text>
+<text top="1098" left="529" width="43" height="12" font="4"><b>FLOOR </b></text>
+<text top="1113" left="529" width="34" height="12" font="4"><b>FOOT </b></text>
+<text top="159" left="731" width="24" height="12" font="4"><b>CO. </b></text>
+<text top="173" left="731" width="30" height="12" font="4"><b>C/W </b></text>
+<text top="188" left="731" width="57" height="12" font="4"><b>CONCEN. </b></text>
+<text top="202" left="731" width="41" height="12" font="4"><b>CONC. </b></text>
+<text top="217" left="731" width="41" height="12" font="4"><b>COND. </b></text>
+<text top="232" left="732" width="41" height="12" font="4"><b>CONN. </b></text>
+<text top="246" left="732" width="39" height="12" font="4"><b>CONT. </b></text>
+<text top="260" left="732" width="39" height="12" font="4"><b>CONV. </b></text>
+<text top="274" left="732" width="40" height="12" font="4"><b>CORP. </b></text>
+<text top="289" left="732" width="18" height="12" font="4"><b>CA </b></text>
+<text top="304" left="732" width="37" height="12" font="4"><b>CORR </b></text>
+<text top="318" left="732" width="45" height="12" font="4"><b>CBORE </b></text>
+<text top="333" left="732" width="32" height="12" font="4"><b>CSK. </b></text>
+<text top="347" left="732" width="61" height="12" font="4"><b>CSK. HD. </b></text>
+<text top="361" left="732" width="28" height="12" font="4"><b>C.W. </b></text>
+<text top="376" left="732" width="38" height="12" font="4"><b>CPLG. </b></text>
+<text top="391" left="732" width="30" height="12" font="4"><b>C/O </b></text>
+<text top="405" left="732" width="69" height="12" font="4"><b>CU.FT (OR </b></text>
+<text top="420" left="732" width="65" height="12" font="4"><b>CU.M (OR </b></text>
+<text top="434" left="733" width="37" height="12" font="4"><b>CUST. </b></text>
+<text top="448" left="733" width="28" height="12" font="4"><b>CYL. </b></text>
+<text top="481" left="733" width="63" height="12" font="4"><b>DEG OR ° </b></text>
+<text top="496" left="733" width="37" height="12" font="4"><b>DEPT. </b></text>
+<text top="510" left="733" width="62" height="12" font="4"><b>DSN/DGN </b></text>
+<text top="525" left="733" width="28" height="12" font="4"><b>DET. </b></text>
+<text top="539" left="733" width="33" height="12" font="4"><b>DIAG. </b></text>
+<text top="554" left="733" width="43" height="12" font="4"><b>DIAGM. </b></text>
+<text top="568" left="733" width="64" height="12" font="4"><b>DIA OR 0 </b></text>
+<text top="583" left="733" width="27" height="12" font="4"><b>DIM. </b></text>
+<text top="597" left="733" width="57" height="12" font="4"><b>DO  ( )7) </b></text>
+<text top="611" left="733" width="20" height="12" font="4"><b>DN </b></text>
+<text top="626" left="734" width="27" height="12" font="4"><b>XXS </b></text>
+<text top="640" left="733" width="20" height="12" font="4"><b>DR </b></text>
+<text top="655" left="733" width="20" height="12" font="4"><b>DG </b></text>
+<text top="669" left="734" width="71" height="12" font="0">DRG./DWG. </text>
+<text top="684" left="734" width="48" height="12" font="0">D &amp;  <b>T. </b></text>
+<text top="705" left="734" width="18" height="12" font="4"><b>EA </b></text>
+<text top="720" left="734" width="12" height="12" font="0">E </text>
+<text top="734" left="734" width="27" height="12" font="4"><b>ECC </b></text>
+<text top="749" left="734" width="24" height="12" font="4"><b>ETL </b></text>
+<text top="760" left="734" width="17" height="12" font="4"><b>EJ </b></text>
+<text top="774" left="734" width="29" height="12" font="4"><b>ELB. </b></text>
+<text top="789" left="734" width="21" height="12" font="4"><b>EL. </b></text>
+<text top="804" left="734" width="34" height="12" font="4"><b>ELPS </b></text>
+<text top="818" left="734" width="43" height="12" font="4"><b>EQUIP. </b></text>
+<text top="833" left="734" width="28" height="12" font="4"><b>EST. </b></text>
+<text top="847" left="734" width="39" height="12" font="4"><b>EXCH. </b></text>
+<text top="862" left="734" width="39" height="12" font="4"><b>EXIST. </b></text>
+<text top="876" left="734" width="31" height="12" font="4"><b>EXP. </b></text>
+<text top="890" left="735" width="28" height="12" font="4"><b>EXT. </b></text>
+<text top="905" left="735" width="19" height="12" font="4"><b>XS </b></text>
+<text top="920" left="735" width="21" height="12" font="4"><b>EIL </b></text>
+<text top="956" left="735" width="29" height="12" font="4"><b>FAB. </b></text>
+<text top="970" left="735" width="51" height="12" font="4"><b>F TO F </b></text>
+<text top="985" left="735" width="12" height="12" font="0">F </text>
+<text top="999" left="735" width="28" height="12" font="4"><b>F/S </b></text>
+<text top="1014" left="735" width="27" height="12" font="4"><b>FFW </b></text>
+<text top="1028" left="735" width="20" height="12" font="4"><b>FW </b></text>
+<text top="1043" left="736" width="25" height="12" font="4"><b>FIG. </b></text>
+<text top="1055" left="736" width="18" height="12" font="4"><b>FS </b></text>
+<text top="1069" left="736" width="29" height="12" font="4"><b>FLG. </b></text>
+<text top="1083" left="736" width="36" height="12" font="4"><b>FLEX. </b></text>
+<text top="1097" left="736" width="29" height="12" font="4"><b>FLR. </b></text>
+<text top="1112" left="736" width="42" height="12" font="4"><b>FT OR </b></text>
+<text top="405" left="805" width="32" height="12" font="4"><b>FT3) </b></text>
+<text top="419" left="802" width="28" height="12" font="4"><b>M3) </b></text>
+<text top="1142" left="121" width="10" height="12" font="4"><b>5 </b></text>
+<text top="1142" left="155" width="61" height="12" font="4"><b>20.09.2021 </b></text>
+<text top="1141" left="235" width="221" height="12" font="0">REAFFIRMED &amp; ISSUED AS STANDARD </text>
+<text top="1163" left="120" width="10" height="12" font="0">4 </text>
+<text top="1163" left="155" width="61" height="12" font="0">25.01.2017 </text>
+<text top="1162" left="248" width="197" height="12" font="0">REVISED &amp; ISSUED AS STANDARD </text>
+<text top="1141" left="469" width="55" height="12" font="0">4e,0MB </text>
+<text top="1162" left="503" width="21" height="12" font="0">MB </text>
+<text top="1141" left="574" width="53" height="12" font="0">P P </text>
+<text top="1140" left="683" width="21" height="12" font="0">MK </text>
+<text top="-21536" left="14922" width="8" height="12" font="5"> </text>
+<text top="1161" left="577" width="41" height="12" font="0">PG/MK </text>
+<text top="1161" left="683" width="27" height="12" font="0">RKT </text>
+<text top="1161" left="784" width="20" height="12" font="0">RN </text>
+<text top="1185" left="111" width="28" height="12" font="0">Rev. </text>
+<text top="1202" left="115" width="22" height="12" font="0">No. </text>
+<text top="1195" left="173" width="28" height="12" font="0">Date </text>
+<text top="1194" left="309" width="47" height="12" font="0">Purpose </text>
+<text top="1183" left="489" width="51" height="12" font="0">Prepared </text>
+<text top="1200" left="507" width="15" height="12" font="0">by </text>
+<text top="1183" left="578" width="49" height="12" font="0">Checked </text>
+<text top="1200" left="595" width="16" height="12" font="0">by </text>
+<text top="1179" left="652" width="88" height="12" font="0">Stds. Committee </text>
+<text top="1178" left="759" width="71" height="12" font="0">Stds. Bureau </text>
+<text top="1192" left="669" width="53" height="12" font="0">Convenor </text>
+<text top="1192" left="768" width="54" height="12" font="0">Chairman </text>
+<text top="1206" left="709" width="68" height="12" font="0">Approved by </text>
+<text top="1222" left="103" width="152" height="12" font="0">Format No. 8-00-0001-F4 Rev.O </text>
+<text top="1220" left="685" width="158" height="12" font="0">Copyright EIL - All rights reserved </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="6" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="9" family="Helvetica" color="#000000"/>
+	<fontspec id="9" size="17" family="Times" color="#000000"/>
+	<fontspec id="10" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="11" size="17" family="Helvetica" color="#000000"/>
+<text top="82" left="143" width="82" height="15" font="1"><b>lo91;k.AC</b></text>
+<text top="83" left="214" width="99" height="15" font="1"><b>IIA ENGINEERS </b></text>
+<text top="96" left="116" width="222" height="15" font="1"><b>slges Klieg WNDIA LIMITED </b></text>
+<text top="111" left="142" width="69" height="6" font="6"><b>1012,1 24101,12 0513%D.11 </b></text>
+<text top="65" left="684" width="109" height="12" font="4"><b>STANDARD No. </b></text>
+<text top="94" left="679" width="120" height="12" font="4"><b>7-17-0705 Rev. 5 </b></text>
+<text top="120" left="708" width="60" height="12" font="0">Page 2 of 3 </text>
+<text top="92" left="408" width="178" height="12" font="4"><b>LIST OF ABBREVIATIONS </b></text>
+<text top="113" left="238" width="49" height="6" font="7">IA Govt of India </text>
+<text top="111" left="287" width="38" height="8" font="8">lift:1.1.110,1w </text>
+<text top="1184" left="490" width="51" height="12" font="0">Prepared </text>
+<text top="1201" left="508" width="16" height="12" font="0">by </text>
+<text top="1184" left="579" width="48" height="12" font="0">Checked </text>
+<text top="1201" left="595" width="16" height="12" font="0">by </text>
+<text top="1180" left="652" width="89" height="12" font="0">Stds. Committee </text>
+<text top="1180" left="760" width="70" height="12" font="0">Stds. Bureau </text>
+<text top="1193" left="670" width="53" height="12" font="0">Convenor </text>
+<text top="1193" left="768" width="57" height="12" font="0">Chairman  </text>
+<text top="1207" left="709" width="71" height="12" font="0">Approved by  </text>
+<text top="1221" left="685" width="158" height="12" font="0">Copyright EIL - All rights reserved </text>
+<text top="1184" left="113" width="28" height="12" font="0">Rev. </text>
+<text top="1201" left="116" width="22" height="12" font="0">No. </text>
+<text top="1195" left="173" width="28" height="12" font="0">Date </text>
+<text top="1195" left="309" width="47" height="12" font="0">Purpose </text>
+<text top="1222" left="104" width="151" height="12" font="0">Format No. 8-00-0001-F4 Rev.O </text>
+<text top="173" left="125" width="90" height="12" font="4"><b>FOR EXAMPLE </b></text>
+<text top="188" left="125" width="116" height="12" font="4"><b>FORCED DRAUGHT </b></text>
+<text top="202" left="125" width="96" height="12" font="4"><b>FORGED STEEL </b></text>
+<text top="217" left="125" width="78" height="12" font="4"><b>FOUNDATION </b></text>
+<text top="232" left="125" width="109" height="12" font="4"><b>FREE ON BOARD </b></text>
+<text top="246" left="125" width="143" height="12" font="4"><b>FULL STRENGTH WELD </b></text>
+<text top="271" left="126" width="50" height="12" font="4"><b>GALLON </b></text>
+<text top="285" left="126" width="75" height="12" font="4"><b>GALVANISED </b></text>
+<text top="300" left="126" width="145" height="12" font="4"><b>GLASS AIR PREHEATER </b></text>
+<text top="313" left="126" width="49" height="12" font="4"><b>GASKET </b></text>
+<text top="328" left="126" width="99" height="12" font="4"><b>GAUGE (METAL) </b></text>
+<text top="342" left="126" width="58" height="12" font="4"><b>GENERAL </b></text>
+<text top="357" left="126" width="152" height="12" font="4"><b>GENERAL ARRANGEMENT </b></text>
+<text top="371" left="126" width="74" height="12" font="4"><b>GENERATOR </b></text>
+<text top="386" left="126" width="43" height="12" font="4"><b>GRADE </b></text>
+<text top="400" left="126" width="54" height="12" font="4"><b>GRATING </b></text>
+<text top="415" left="126" width="46" height="12" font="4"><b>GROUP </b></text>
+<text top="437" left="126" width="62" height="12" font="4"><b>HANDRAIL </b></text>
+<text top="452" left="126" width="51" height="12" font="4"><b>HEADER </b></text>
+<text top="466" left="126" width="84" height="12" font="4"><b>HEADER BOX </b></text>
+<text top="480" left="126" width="49" height="12" font="4"><b>HEATER </b></text>
+<text top="495" left="126" width="103" height="12" font="4"><b>HEXAGON (—AL) </b></text>
+<text top="510" left="127" width="100" height="12" font="4"><b>HEXAGON HEAD </b></text>
+<text top="522" left="127" width="76" height="12" font="4"><b>HIGH POINT </b></text>
+<text top="536" left="126" width="256" height="12" font="4"><b>HIGH STRENGTH FRICTION GRIP (BOLTS) </b></text>
+<text top="550" left="127" width="78" height="12" font="4"><b>HORIZONTAL </b></text>
+<text top="565" left="126" width="87" height="12" font="4"><b>HORSEPOWER </b></text>
+<text top="579" left="127" width="69" height="12" font="4"><b>HYDRAULIC </b></text>
+<text top="593" left="127" width="191" height="12" font="4"><b>HYDROSTATIC TEST PRESSURE </b></text>
+<text top="173" left="413" width="26" height="12" font="0">e.g. </text>
+<text top="188" left="413" width="29" height="12" font="0">F/D </text>
+<text top="202" left="413" width="27" height="12" font="0">F.S. </text>
+<text top="217" left="413" width="31" height="12" font="4"><b>FDN. </b></text>
+<text top="231" left="413" width="36" height="12" font="4"><b>F.O.B </b></text>
+<text top="246" left="413" width="39" height="12" font="4"><b>F.S.W. </b></text>
+<text top="271" left="413" width="28" height="12" font="4"><b>GAL. </b></text>
+<text top="285" left="413" width="35" height="12" font="4"><b>GALV. </b></text>
+<text top="299" left="413" width="35" height="12" font="4"><b>GAPH </b></text>
+<text top="313" left="413" width="34" height="12" font="4"><b>GSKT </b></text>
+<text top="328" left="413" width="22" height="12" font="4"><b>GA. </b></text>
+<text top="342" left="413" width="31" height="12" font="4"><b>GEN. </b></text>
+<text top="357" left="413" width="19" height="12" font="4"><b>GA </b></text>
+<text top="371" left="413" width="27" height="12" font="4"><b>GEN </b></text>
+<text top="385" left="413" width="23" height="12" font="4"><b>GR. </b></text>
+<text top="400" left="413" width="37" height="12" font="4"><b>GRTG. </b></text>
+<text top="415" left="413" width="31" height="12" font="4"><b>GRP. </b></text>
+<text top="437" left="414" width="24" height="12" font="4"><b>HR. </b></text>
+<text top="451" left="414" width="32" height="12" font="4"><b>HDR. </b></text>
+<text top="466" left="414" width="31" height="12" font="4"><b>H/B </b></text>
+<text top="480" left="414" width="30" height="12" font="4"><b>HTR. </b></text>
+<text top="495" left="414" width="31" height="12" font="4"><b>HEX. </b></text>
+<text top="509" left="414" width="52" height="12" font="4"><b>HEX.HD. </b></text>
+<text top="522" left="414" width="20" height="12" font="4"><b>HP </b></text>
+<text top="536" left="414" width="50" height="12" font="4"><b>H.S.F.G. </b></text>
+<text top="550" left="414" width="32" height="12" font="4"><b>HOR. </b></text>
+<text top="564" left="414" width="28" height="12" font="4"><b>H.P. </b></text>
+<text top="579" left="414" width="31" height="12" font="4"><b>HYD. </b></text>
+<text top="593" left="414" width="27" height="12" font="4"><b>HTP </b></text>
+<text top="174" left="763" width="31" height="12" font="0">M/C </text>
+<text top="188" left="763" width="42" height="12" font="0">M/CD. </text>
+<text top="203" left="763" width="32" height="12" font="0">MFR. </text>
+<text top="217" left="763" width="27" height="12" font="0">MK. </text>
+<text top="232" left="763" width="37" height="12" font="0">MATL. </text>
+<text top="246" left="763" width="31" height="12" font="0">MAX. </text>
+<text top="261" left="763" width="41" height="12" font="0">MECH. </text>
+<text top="275" left="763" width="33" height="12" font="0">MED. </text>
+<text top="290" left="763" width="30" height="12" font="0">M.W. </text>
+<text top="304" left="763" width="17" height="12" font="0">M. </text>
+<text top="318" left="763" width="27" height="12" font="0">MM. </text>
+<text top="333" left="763" width="29" height="12" font="0">MIN. </text>
+<text top="347" left="763" width="30" height="12" font="0">MSW </text>
+<text top="362" left="763" width="22" height="12" font="0">MW </text>
+<text top="391" left="764" width="36" height="12" font="0">MISC. </text>
+<text top="406" left="764" width="20" height="12" font="0">Mo </text>
+<text top="420" left="764" width="29" height="12" font="0">M.C. </text>
+<text top="435" left="764" width="31" height="12" font="0">MTD. </text>
+<text top="449" left="764" width="31" height="12" font="0">MTG. </text>
+<text top="487" left="764" width="30" height="12" font="4"><b>N/S </b></text>
+<text top="501" left="764" width="19" height="12" font="4"><b>Ni. </b></text>
+<text top="515" left="764" width="27" height="12" font="4"><b>NIP. </b></text>
+<text top="530" left="764" width="34" height="12" font="4"><b>NOM. </b></text>
+<text top="544" left="764" width="20" height="12" font="4"><b>NB </b></text>
+<text top="559" left="764" width="12" height="12" font="0">N </text>
+<text top="574" left="764" width="26" height="12" font="4"><b>NTS </b></text>
+<text top="588" left="764" width="24" height="12" font="4"><b>NO. </b></text>
+<text top="174" left="504" width="55" height="12" font="4"><b>MACHINE </b></text>
+<text top="189" left="504" width="63" height="12" font="4"><b>MACHINED </b></text>
+<text top="203" left="504" width="97" height="12" font="4"><b>MANUFACTURER </b></text>
+<text top="218" left="504" width="35" height="12" font="4"><b>MARK </b></text>
+<text top="232" left="504" width="58" height="12" font="4"><b>MATERIAL </b></text>
+<text top="247" left="504" width="57" height="12" font="4"><b>MAXIMUM </b></text>
+<text top="261" left="504" width="78" height="12" font="4"><b>MECHANICAL </b></text>
+<text top="276" left="504" width="49" height="12" font="4"><b>MEDIUM </b></text>
+<text top="290" left="504" width="182" height="12" font="4"><b>MEDIUM WEIGHT (CONCRETE) </b></text>
+<text top="305" left="504" width="42" height="12" font="4"><b>METRE </b></text>
+<text top="319" left="504" width="78" height="12" font="4"><b>MILLIMETRES </b></text>
+<text top="334" left="504" width="55" height="12" font="4"><b>MINIMUM </b></text>
+<text top="348" left="503" width="144" height="12" font="4"><b>MINIMUM SOUND WALL </b></text>
+<text top="363" left="504" width="93" height="12" font="4"><b>MINIMUM WALL </b></text>
+<text top="377" left="504" width="128" height="12" font="4"><b>MINUTE (OF ANGLE) </b></text>
+<text top="392" left="504" width="100" height="12" font="4"><b>MISCELLANEOUS </b></text>
+<text top="406" left="504" width="85" height="12" font="4"><b>MOLYBDENUM </b></text>
+<text top="421" left="504" width="137" height="12" font="4"><b>MOMENT CONNECTION </b></text>
+<text top="435" left="504" width="60" height="12" font="4"><b>MOUNTED </b></text>
+<text top="449" left="504" width="64" height="12" font="4"><b>MOUNTING </b></text>
+<text top="487" left="504" width="70" height="12" font="4"><b>NEAR SIDE </b></text>
+<text top="501" left="504" width="46" height="12" font="4"><b>NICKEL </b></text>
+<text top="516" left="504" width="46" height="12" font="4"><b>NIPPLE </b></text>
+<text top="530" left="504" width="56" height="12" font="4"><b>NOMINAL </b></text>
+<text top="545" left="504" width="96" height="12" font="4"><b>NOMINAL BORE </b></text>
+<text top="559" left="504" width="44" height="12" font="4"><b>NORTH </b></text>
+<text top="574" left="504" width="95" height="12" font="4"><b>NOT TO SCALE </b></text>
+<text top="589" left="504" width="53" height="12" font="4"><b>NUMBER </b></text>
+<text top="624" left="127" width="174" height="12" font="4"><b>INDIAN BOILER REGULATION </b></text>
+<text top="637" left="127" width="32" height="12" font="4"><b>INCH </b></text>
+<text top="651" left="127" width="110" height="12" font="4"><b>INCLUDE (—SIVE) </b></text>
+<text top="665" left="127" width="95" height="12" font="4"><b>INCORPORATED </b></text>
+<text top="679" left="127" width="36" height="12" font="4"><b>INLET </b></text>
+<text top="694" left="127" width="115" height="12" font="4"><b>INDICATOR (—ION) </b></text>
+<text top="708" left="127" width="121" height="12" font="4"><b>INDUCED DRAUGHT </b></text>
+<text top="723" left="127" width="108" height="12" font="4"><b>INSIDE DIAMETER </b></text>
+<text top="737" left="127" width="74" height="12" font="4"><b>INSPECTION </b></text>
+<text top="751" left="127" width="78" height="12" font="4"><b>INSTRUMENT </b></text>
+<text top="766" left="127" width="170" height="12" font="4"><b>INSULATED OR INSULATION </b></text>
+<text top="780" left="127" width="150" height="12" font="4"><b>INSULATING FIRE BRICK </b></text>
+<text top="795" left="127" width="86" height="12" font="4"><b>INTERMEDIATE </b></text>
+<text top="809" left="127" width="60" height="12" font="4"><b>INTERNAL </b></text>
+<text top="823" left="127" width="82" height="12" font="4"><b>INFORMATION </b></text>
+<text top="854" left="127" width="37" height="12" font="4"><b>JOINT </b></text>
+<text top="869" left="126" width="132" height="12" font="4"><b>JOIST (STRUCTURAL) </b></text>
+<text top="884" left="127" width="62" height="12" font="4"><b>JUNCTION </b></text>
+<text top="925" left="127" width="63" height="12" font="4"><b>KILOGRAM </b></text>
+<text top="939" left="127" width="233" height="12" font="4"><b>KILOGRAM PER SQUARE CENTIMETRE </b></text>
+<text top="954" left="127" width="83" height="12" font="4"><b>KNEE BRACE </b></text>
+<text top="978" left="127" width="72" height="12" font="4"><b>LEFT HAND </b></text>
+<text top="993" left="127" width="49" height="12" font="4"><b>LENGTH </b></text>
+<text top="1007" left="127" width="88" height="12" font="4"><b>LIGHT WEIGHT </b></text>
+<text top="1022" left="127" width="61" height="12" font="4"><b>LOCATION </b></text>
+<text top="1037" left="127" width="36" height="12" font="4"><b>LONG </b></text>
+<text top="1051" left="127" width="88" height="12" font="4"><b>LONGITUDINAL </b></text>
+<text top="1066" left="127" width="147" height="12" font="4"><b>LONG RADIUS (ELBOW) </b></text>
+<text top="1082" left="127" width="72" height="12" font="4"><b>LOW POINT </b></text>
+<text top="623" left="414" width="23" height="12" font="4"><b>IBR </b></text>
+<text top="636" left="414" width="59" height="12" font="4"><b>IN OR&#34; </b></text>
+<text top="651" left="414" width="33" height="12" font="4"><b>INCL. </b></text>
+<text top="665" left="414" width="27" height="12" font="4"><b>INC. </b></text>
+<text top="679" left="414" width="15" height="12" font="4"><b>IN </b></text>
+<text top="694" left="414" width="27" height="12" font="4"><b>IND. </b></text>
+<text top="708" left="414" width="25" height="12" font="4"><b>I/D </b></text>
+<text top="722" left="414" width="25" height="12" font="4"><b>I/D </b></text>
+<text top="737" left="414" width="35" height="12" font="4"><b>INSP. </b></text>
+<text top="751" left="414" width="33" height="12" font="4"><b>INST. </b></text>
+<text top="766" left="414" width="41" height="12" font="4"><b>INSUL. </b></text>
+<text top="780" left="414" width="61" height="12" font="4"><b>I.F.B./IFB </b></text>
+<text top="794" left="414" width="41" height="12" font="4"><b>INTER. </b></text>
+<text top="809" left="414" width="25" height="12" font="4"><b>INT. </b></text>
+<text top="823" left="414" width="34" height="12" font="4"><b>INFO. </b></text>
+<text top="854" left="414" width="20" height="12" font="4"><b>JT. </b></text>
+<text top="867" left="416" width="11" height="15" font="9">I </text>
+<text top="884" left="414" width="28" height="12" font="4"><b>JCT. </b></text>
+<text top="924" left="414" width="24" height="12" font="4"><b>KG. </b></text>
+<text top="939" left="414" width="55" height="12" font="4"><b>KG/CM2  </b></text>
+<text top="954" left="414" width="20" height="12" font="4"><b>KB </b></text>
+<text top="978" left="414" width="19" height="12" font="4"><b>LH </b></text>
+<text top="993" left="415" width="22" height="12" font="4"><b>LG. </b></text>
+<text top="1007" left="415" width="27" height="12" font="4"><b>L.W. </b></text>
+<text top="1022" left="415" width="30" height="12" font="4"><b>LOC. </b></text>
+<text top="1037" left="415" width="22" height="12" font="4"><b>LG. </b></text>
+<text top="1051" left="415" width="45" height="12" font="4"><b>LONGT. </b></text>
+<text top="1065" left="415" width="18" height="12" font="4"><b>LR  </b></text>
+<text top="1082" left="415" width="18" height="12" font="4"><b>LP </b></text>
+<text top="627" left="505" width="101" height="12" font="4"><b>OCTAGON (—AL) </b></text>
+<text top="641" left="505" width="62" height="12" font="4"><b>OPPOSITE </b></text>
+<text top="656" left="505" width="49" height="12" font="4"><b>ORIFICE </b></text>
+<text top="670" left="505" width="62" height="12" font="4"><b>OUT SIDE </b></text>
+<text top="685" left="505" width="47" height="12" font="4"><b>OUTLET </b></text>
+<text top="699" left="505" width="127" height="12" font="4"><b>OUT SIDE DIAMETER </b></text>
+<text top="713" left="505" width="183" height="12" font="4"><b>OUT SIDE SCREW AND YOKE </b></text>
+<text top="728" left="505" width="64" height="12" font="4"><b>OVER ALL </b></text>
+<text top="767" left="504" width="74" height="12" font="4"><b>PARAGRAPH </b></text>
+<text top="782" left="504" width="61" height="12" font="4"><b>PARALLEL </b></text>
+<text top="796" left="504" width="55" height="12" font="4"><b>PATTERN </b></text>
+<text top="811" left="504" width="80" height="12" font="4"><b>PERCENTAGE </b></text>
+<text top="825" left="504" width="38" height="12" font="4"><b>PIECE </b></text>
+<text top="840" left="504" width="95" height="12" font="4"><b>PIPE SUPPORT </b></text>
+<text top="854" left="504" width="154" height="12" font="4"><b>PITCH CIRCLE DIAMETER </b></text>
+<text top="868" left="504" width="70" height="12" font="4"><b>PLAIN END </b></text>
+<text top="883" left="505" width="39" height="12" font="4"><b>PLATE </b></text>
+<text top="898" left="505" width="64" height="12" font="4"><b>PLATFORM </b></text>
+<text top="912" left="505" width="70" height="12" font="4"><b>PNEUMATIC </b></text>
+<text top="926" left="505" width="38" height="12" font="4"><b>POINT </b></text>
+<text top="941" left="505" width="58" height="12" font="4"><b>POSITION </b></text>
+<text top="956" left="505" width="46" height="12" font="4"><b>POUND </b></text>
+<text top="970" left="505" width="178" height="12" font="4"><b>POUNDS PER SQUARE INCH </b></text>
+<text top="984" left="505" width="178" height="12" font="4"><b>POUNDS PER SQUARE INCH </b></text>
+<text top="998" left="505" width="68" height="12" font="4"><b>PRESSURE </b></text>
+<text top="1013" left="505" width="28" height="12" font="4"><b>PER </b></text>
+<text top="1027" left="505" width="77" height="12" font="4"><b>PROJECTION </b></text>
+<text top="1066" left="505" width="51" height="12" font="4"><b>QUALITY </b></text>
+<text top="1080" left="506" width="58" height="12" font="4"><b>QUANTITY </b></text>
+<text top="627" left="764" width="30" height="12" font="4"><b>OCT. </b></text>
+<text top="641" left="764" width="32" height="12" font="4"><b>OPP. </b></text>
+<text top="655" left="764" width="31" height="12" font="4"><b>ORF. </b></text>
+<text top="670" left="765" width="30" height="12" font="4"><b>0/S </b></text>
+<text top="684" left="764" width="28" height="12" font="4"><b>OUT </b></text>
+<text top="699" left="765" width="31" height="12" font="4"><b>0/D </b></text>
+<text top="713" left="765" width="59" height="12" font="4"><b>0.S &amp; Y </b></text>
+<text top="727" left="765" width="29" height="12" font="4"><b>0/A </b></text>
+<text top="767" left="764" width="34" height="12" font="4"><b>PARA </b></text>
+<text top="781" left="764" width="31" height="12" font="4"><b>PAR. </b></text>
+<text top="796" left="764" width="35" height="12" font="4"><b>PATT. </b></text>
+<text top="825" left="765" width="23" height="12" font="4"><b>PC. </b></text>
+<text top="839" left="765" width="27" height="12" font="4"><b>P.S. </b></text>
+<text top="854" left="764" width="29" height="12" font="4"><b>PCD </b></text>
+<text top="868" left="765" width="20" height="12" font="4"><b>PE </b></text>
+<text top="883" left="765" width="28" height="12" font="4"><b>PLT. </b></text>
+<text top="897" left="765" width="35" height="12" font="4"><b>PLTF. </b></text>
+<text top="912" left="765" width="40" height="12" font="4"><b>PNEU. </b></text>
+<text top="926" left="765" width="24" height="12" font="4"><b>PT. </b></text>
+<text top="940" left="765" width="28" height="12" font="4"><b>POS </b></text>
+<text top="955" left="765" width="14" height="12" font="4"><b>lb </b></text>
+<text top="969" left="765" width="23" height="12" font="4"><b>PSI </b></text>
+<text top="984" left="688" width="43" height="12" font="4"><b>GAUGE </b></text>
+<text top="984" left="765" width="31" height="12" font="4"><b>PSIG </b></text>
+<text top="998" left="765" width="46" height="12" font="4"><b>PRESS. </b></text>
+<text top="1015" left="765" width="16" height="12" font="0">/ </text>
+<text top="1027" left="765" width="38" height="12" font="4"><b>PROJ. </b></text>
+<text top="1065" left="765" width="38" height="12" font="4"><b>QUAL. </b></text>
+<text top="1079" left="765" width="29" height="12" font="4"><b>QTY. </b></text>
+<text top="1142" left="122" width="10" height="12" font="0">5 </text>
+<text top="1141" left="156" width="62" height="12" font="0">20.09.2021 </text>
+<text top="1162" left="121" width="10" height="12" font="0">4 </text>
+<text top="1162" left="156" width="61" height="12" font="0">25.01.2017 </text>
+<text top="1142" left="236" width="232" height="12" font="0">REAFFIRMED &amp; ISSUED AS STANDARD  <i>t</i></text>
+<text top="1139" left="468" width="33" height="15" font="11"><i>/gfr\&#34; </i></text>
+<text top="1141" left="504" width="21" height="12" font="0">MB </text>
+<text top="1141" left="574" width="47" height="12" font="0">PKA/ P </text>
+<text top="1163" left="249" width="196" height="12" font="0">REVISED &amp; ISSUED AS STANDARD </text>
+<text top="1162" left="504" width="21" height="12" font="0">MB </text>
+<text top="1162" left="577" width="40" height="12" font="0">PG/MK </text>
+<text top="1162" left="683" width="27" height="12" font="0">RKT </text>
+<text top="1141" left="683" width="21" height="12" font="0">MK </text>
+</page>
+<page number="3" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="12" size="24" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="5" family="Helvetica" color="#000000"/>
+<text top="76" left="206" width="33" height="22" font="12"><b> </b></text>
+<text top="81" left="238" width="83" height="16" font="1"><b>ENGINEERS </b></text>
+<text top="91" left="149" width="66" height="22" font="12"><b>Mieg </b></text>
+<text top="96" left="238" width="109" height="16" font="1"><b>INDIA LIMITED </b></text>
+<text top="112" left="133" width="73" height="7" font="6"><b>1.11e7r 2120517 C1,13,10WI </b></text>
+<text top="112" left="239" width="95" height="8" font="3">(A Govt of India linden:310.g) </text>
+<text top="63" left="680" width="109" height="12" font="4"><b>STANDARD No. </b></text>
+<text top="93" left="675" width="120" height="12" font="4"><b>7-17-0705 Rev. 5 </b></text>
+<text top="118" left="706" width="56" height="12" font="0">Page 3 of 3 </text>
+<text top="90" left="404" width="178" height="12" font="4"><b>LIST OF ABBREVIATIONS </b></text>
+<text top="176" left="124" width="53" height="12" font="4"><b>RADIANT </b></text>
+<text top="190" left="124" width="47" height="12" font="4"><b>RADIUS </b></text>
+<text top="205" left="124" width="85" height="12" font="4"><b>RAISED FACE </b></text>
+<text top="219" left="124" width="111" height="12" font="4"><b>REDUCER (—ING) </b></text>
+<text top="234" left="124" width="75" height="12" font="4"><b>REFERENCE </b></text>
+<text top="248" left="124" width="81" height="12" font="4"><b>REFRACTORY </b></text>
+<text top="263" left="124" width="158" height="12" font="4"><b>REFRACTORY FIRE BRICK </b></text>
+<text top="277" left="124" width="85" height="12" font="4"><b>REINFORCING </b></text>
+<text top="292" left="124" width="74" height="12" font="4"><b>REMOVABLE </b></text>
+<text top="306" left="124" width="64" height="12" font="4"><b>REQUIRED </b></text>
+<text top="321" left="124" width="78" height="12" font="4"><b>REQUISITION </b></text>
+<text top="335" left="124" width="135" height="12" font="4"><b>RESTRICTION ORIFICE </b></text>
+<text top="349" left="124" width="61" height="12" font="4"><b>RETAINER </b></text>
+<text top="364" left="124" width="52" height="12" font="4"><b>RETURN </b></text>
+<text top="379" left="125" width="93" height="12" font="4"><b>RETURN BEND </b></text>
+<text top="393" left="125" width="95" height="12" font="4"><b>REVISE (—ION) </b></text>
+<text top="407" left="125" width="162" height="12" font="4"><b>REVOLUTION PER MINUTE </b></text>
+<text top="422" left="125" width="80" height="12" font="4"><b>RIGHT HAND </b></text>
+<text top="436" left="125" width="112" height="12" font="4"><b>RING TYPE JOINT </b></text>
+<text top="451" left="125" width="136" height="12" font="4"><b>ROLLED STEEL JOINT </b></text>
+<text top="465" left="125" width="87" height="12" font="4"><b>ROUND HEAD </b></text>
+<text top="508" left="125" width="91" height="12" font="4"><b>SAFETY CHAIN </b></text>
+<text top="523" left="125" width="84" height="12" font="4"><b>SAFETY GATE </b></text>
+<text top="538" left="125" width="67" height="12" font="4"><b>SCHEDULE </b></text>
+<text top="552" left="125" width="115" height="12" font="4"><b>SCREW, SCREWED </b></text>
+<text top="566" left="125" width="77" height="12" font="4"><b>SCREW CAP </b></text>
+<text top="581" left="125" width="65" height="12" font="4"><b>SEAMLESS </b></text>
+<text top="595" left="126" width="110" height="12" font="4"><b>SECOND (ANGLE) </b></text>
+<text top="610" left="126" width="54" height="12" font="4"><b>SECTION </b></text>
+<text top="624" left="126" width="127" height="12" font="4"><b>SETTING OUT POINT </b></text>
+<text top="638" left="126" width="42" height="12" font="4"><b>SHEET </b></text>
+<text top="653" left="126" width="155" height="12" font="4"><b>SHORT RADIUS (ELBOW) </b></text>
+<text top="667" left="126" width="51" height="12" font="4"><b>SKETCH </b></text>
+<text top="683" left="126" width="172" height="12" font="4"><b>SKINPOINT THERMOCOUPLE </b></text>
+<text top="698" left="126" width="115" height="12" font="4"><b>SLIDING SUPPORT </b></text>
+<text top="714" left="126" width="57" height="12" font="4"><b>SLIP—ON </b></text>
+<text top="729" left="126" width="144" height="12" font="4"><b>SMALL END THREADED </b></text>
+<text top="743" left="126" width="91" height="12" font="4"><b>SOCKET WELD </b></text>
+<text top="758" left="126" width="84" height="12" font="4"><b>SOOTBLOWER </b></text>
+<text top="772" left="126" width="44" height="12" font="4"><b>SOUTH </b></text>
+<text top="786" left="126" width="91" height="12" font="4"><b>SPECIFICATION </b></text>
+<text top="801" left="126" width="52" height="12" font="4"><b>SQUARE </b></text>
+<text top="815" left="126" width="140" height="12" font="4"><b>SQUARE CENTIMETRES </b></text>
+<text top="830" left="126" width="89" height="12" font="4"><b>SQUARE FEET </b></text>
+<text top="844" left="126" width="93" height="12" font="4"><b>SQUARE INCH. </b></text>
+<text top="859" left="126" width="100" height="12" font="4"><b>SQUARE METRE </b></text>
+<text top="873" left="127" width="111" height="12" font="4"><b>STAINLESS STEEL </b></text>
+<text top="888" left="127" width="69" height="12" font="4"><b>STAIR WAY </b></text>
+<text top="902" left="127" width="65" height="12" font="4"><b>STANDARD </b></text>
+<text top="917" left="127" width="117" height="12" font="4"><b>STANDARD WEIGHT </b></text>
+<text top="931" left="127" width="222" height="12" font="4"><b>STANDARD (IMPERIAL) WIRE GAUGE </b></text>
+<text top="946" left="127" width="42" height="12" font="4"><b>STEAM </b></text>
+<text top="960" left="127" width="107" height="12" font="4"><b>STEAM SMOTHER </b></text>
+<text top="974" left="127" width="39" height="12" font="4"><b>STEEL </b></text>
+<text top="989" left="127" width="82" height="12" font="4"><b>STEEL WORK </b></text>
+<text top="1003" left="127" width="67" height="12" font="4"><b>STIFFENER </b></text>
+<text top="1018" left="127" width="55" height="12" font="4"><b>SUCTION </b></text>
+<text top="1032" left="127" width="63" height="12" font="4"><b>SUPPLIED </b></text>
+<text top="1046" left="127" width="60" height="12" font="4"><b>SUPPORT </b></text>
+<text top="1061" left="127" width="52" height="12" font="4"><b>SWAGED </b></text>
+<text top="1075" left="127" width="85" height="12" font="4"><b>SYMMETRICAL </b></text>
+<text top="1090" left="127" width="81" height="12" font="4"><b>STRUCTURAL </b></text>
+<text top="175" left="367" width="30" height="12" font="4"><b>RAD. </b></text>
+<text top="190" left="366" width="12" height="12" font="0">R </text>
+<text top="204" left="367" width="19" height="12" font="4"><b>RF </b></text>
+<text top="219" left="367" width="31" height="12" font="4"><b>RED. </b></text>
+<text top="233" left="367" width="30" height="12" font="4"><b>REF. </b></text>
+<text top="247" left="367" width="38" height="12" font="4"><b>REFR. </b></text>
+<text top="262" left="367" width="28" height="12" font="4"><b>RFB </b></text>
+<text top="276" left="367" width="41" height="12" font="4"><b>REINF. </b></text>
+<text top="291" left="367" width="32" height="12" font="4"><b>REM. </b></text>
+<text top="306" left="367" width="44" height="12" font="4"><b>REVD. </b></text>
+<text top="320" left="367" width="40" height="12" font="4"><b>REQ'N </b></text>
+<text top="334" left="367" width="20" height="12" font="4"><b>RO </b></text>
+<text top="349" left="367" width="29" height="12" font="4"><b>RET. </b></text>
+<text top="363" left="367" width="29" height="12" font="4"><b>RET. </b></text>
+<text top="378" left="367" width="27" height="12" font="4"><b>R.B. </b></text>
+<text top="392" left="367" width="30" height="12" font="4"><b>REV. </b></text>
+<text top="407" left="367" width="29" height="12" font="4"><b>RPM </b></text>
+<text top="421" left="367" width="21" height="12" font="4"><b>RH </b></text>
+<text top="435" left="367" width="24" height="12" font="4"><b>RTJ </b></text>
+<text top="450" left="367" width="26" height="12" font="4"><b>RSJ </b></text>
+<text top="464" left="367" width="44" height="12" font="4"><b>RD.HD. </b></text>
+<text top="508" left="368" width="19" height="12" font="4"><b>SC </b></text>
+<text top="523" left="368" width="20" height="12" font="4"><b>SG </b></text>
+<text top="537" left="368" width="31" height="12" font="4"><b>SCH. </b></text>
+<text top="551" left="368" width="31" height="12" font="4"><b>SCR. </b></text>
+<text top="566" left="368" width="19" height="12" font="4"><b>SC </b></text>
+<text top="580" left="368" width="39" height="12" font="4"><b>SMLS. </b></text>
+<text top="597" left="381" width="8" height="5" font="13"><b>PP </b></text>
+<text top="609" left="368" width="37" height="12" font="4"><b>SECT. </b></text>
+<text top="623" left="368" width="40" height="12" font="4"><b>S.O.P. </b></text>
+<text top="637" left="368" width="30" height="12" font="4"><b>SHT. </b></text>
+<text top="652" left="368" width="20" height="12" font="4"><b>SR </b></text>
+<text top="666" left="368" width="23" height="12" font="4"><b>SK. </b></text>
+<text top="682" left="368" width="35" height="12" font="4"><b>TE SK </b></text>
+<text top="697" left="368" width="19" height="12" font="4"><b>SS </b></text>
+<text top="714" left="368" width="20" height="12" font="4"><b>SO </b></text>
+<text top="728" left="368" width="36" height="12" font="4"><b>S.E.T. </b></text>
+<text top="742" left="368" width="20" height="12" font="4"><b>SW </b></text>
+<text top="757" left="368" width="30" height="12" font="4"><b>S/B </b></text>
+<text top="772" left="368" width="12" height="12" font="0">S </text>
+<text top="786" left="368" width="39" height="12" font="4"><b>SPEC. </b></text>
+<text top="800" left="369" width="23" height="12" font="4"><b>SQ. </b></text>
+<text top="815" left="369" width="113" height="12" font="4"><b>SQ. CM. OR CM2  </b></text>
+<text top="829" left="369" width="105" height="12" font="4"><b>SQ. FT. OR FT2  </b></text>
+<text top="843" left="369" width="103" height="12" font="4"><b>SQ. IN. OR IN 2  </b></text>
+<text top="858" left="369" width="98" height="12" font="4"><b>SQ. M. OR M 2  </b></text>
+<text top="872" left="369" width="19" height="12" font="4"><b>SS </b></text>
+<text top="887" left="369" width="37" height="12" font="4"><b>STWY. </b></text>
+<text top="902" left="369" width="29" height="12" font="4"><b>STD. </b></text>
+<text top="916" left="369" width="48" height="12" font="4"><b>STD.WT. </b></text>
+<text top="930" left="369" width="32" height="12" font="4"><b>SWG. </b></text>
+<text top="945" left="369" width="27" height="12" font="4"><b>STM </b></text>
+<text top="959" left="369" width="27" height="12" font="4"><b>S.S. </b></text>
+<text top="973" left="369" width="27" height="12" font="4"><b>STL. </b></text>
+<text top="988" left="369" width="45" height="12" font="4"><b>STL.WK </b></text>
+<text top="1002" left="369" width="38" height="12" font="4"><b>STIFF. </b></text>
+<text top="1017" left="369" width="38" height="12" font="4"><b>SUCT. </b></text>
+<text top="1031" left="369" width="40" height="12" font="4"><b>SUPP. </b></text>
+<text top="1046" left="370" width="46" height="12" font="4"><b>SUPPT. </b></text>
+<text top="1060" left="370" width="32" height="12" font="4"><b>SWG. </b></text>
+<text top="1074" left="370" width="31" height="12" font="4"><b>SYM. </b></text>
+<text top="1089" left="370" width="29" height="12" font="4"><b>STR. </b></text>
+<text top="175" left="502" width="102" height="12" font="4"><b>TANGENT (—IAL) </b></text>
+<text top="189" left="502" width="119" height="12" font="4"><b>TEE (STRUCTURAL) </b></text>
+<text top="204" left="502" width="88" height="12" font="4"><b>TEMPERATURE </b></text>
+<text top="218" left="502" width="158" height="12" font="4"><b>TEMPERATURE INDICATOR </b></text>
+<text top="233" left="502" width="60" height="12" font="4"><b>TERMINAL </b></text>
+<text top="247" left="502" width="51" height="12" font="4"><b>THAT IS </b></text>
+<text top="262" left="502" width="100" height="12" font="4"><b>THERMOCOUPLE </b></text>
+<text top="276" left="502" width="130" height="12" font="4"><b>THREADED (THREAD) </b></text>
+<text top="291" left="503" width="97" height="12" font="4"><b>THREADED END </b></text>
+<text top="305" left="503" width="126" height="12" font="4"><b>THREADS PER INCH </b></text>
+<text top="319" left="502" width="99" height="12" font="4"><b>THICK (—NESS) </b></text>
+<text top="334" left="503" width="109" height="12" font="4"><b>TOE PLATE ONLY </b></text>
+<text top="348" left="503" width="95" height="12" font="4"><b>TOP OF STEEL </b></text>
+<text top="363" left="503" width="43" height="12" font="4"><b>TONNE </b></text>
+<text top="377" left="503" width="80" height="12" font="4"><b>TUBE SHEET </b></text>
+<text top="392" left="503" width="50" height="12" font="4"><b>TYPICAL </b></text>
+<text top="406" left="503" width="82" height="12" font="4"><b>THERMOWELL </b></text>
+<text top="451" left="502" width="76" height="12" font="4"><b>UNDER CUT </b></text>
+<text top="465" left="502" width="71" height="12" font="4"><b>UNDERSIDE </b></text>
+<text top="479" left="502" width="224" height="12" font="4"><b>UNIFIRD NATIONAL COARSE THREAD </b></text>
+<text top="493" left="502" width="202" height="12" font="4"><b>UNIFIED NATIONAL FINE THREAD </b></text>
+<text top="508" left="502" width="108" height="12" font="4"><b>UNIVERSAL BEAM </b></text>
+<text top="523" left="502" width="126" height="12" font="4"><b>UNIVERSAL COLUMN </b></text>
+<text top="537" left="503" width="172" height="12" font="4"><b>UNLESS OTHERWISE NOTED </b></text>
+<text top="581" left="502" width="52" height="12" font="4"><b>VACUUM </b></text>
+<text top="595" left="502" width="58" height="12" font="4"><b>VELOCITY </b></text>
+<text top="610" left="502" width="58" height="12" font="4"><b>VERTICAL </b></text>
+<text top="624" left="503" width="51" height="12" font="4"><b>VOLUME </b></text>
+<text top="667" left="503" width="90" height="12" font="4"><b>WATER GAUGE </b></text>
+<text top="682" left="503" width="47" height="12" font="4"><b>WEIGHT </b></text>
+<text top="696" left="503" width="140" height="12" font="4"><b>WELD NECK (FLANGE) </b></text>
+<text top="711" left="503" width="35" height="12" font="4"><b>WEST </b></text>
+<text top="725" left="503" width="101" height="12" font="4"><b>WORKING POINT </b></text>
+<text top="174" left="755" width="29" height="12" font="4"><b>TAN. </b></text>
+<text top="189" left="755" width="10" height="12" font="0">T </text>
+<text top="203" left="755" width="39" height="12" font="4"><b>TEMP. </b></text>
+<text top="218" left="755" width="13" height="12" font="4"><b>TI </b></text>
+<text top="232" left="755" width="39" height="12" font="4"><b>TERM. </b></text>
+<text top="246" left="756" width="22" height="12" font="0">i.e. </text>
+<text top="261" left="755" width="18" height="12" font="4"><b>TC </b></text>
+<text top="275" left="755" width="36" height="12" font="4"><b>THRD </b></text>
+<text top="290" left="755" width="22" height="12" font="4"><b>T.E </b></text>
+<text top="304" left="755" width="22" height="12" font="4"><b>TPI </b></text>
+<text top="319" left="756" width="30" height="12" font="4"><b>THK. </b></text>
+<text top="333" left="756" width="27" height="12" font="4"><b>TPO </b></text>
+<text top="348" left="756" width="26" height="12" font="4"><b>TOS </b></text>
+<text top="362" left="756" width="11" height="12" font="0">T </text>
+<text top="376" left="756" width="46" height="12" font="4"><b>T/SHT. </b></text>
+<text top="391" left="756" width="29" height="12" font="4"><b>TYP. </b></text>
+<text top="406" left="756" width="19" height="12" font="4"><b>TW  </b></text>
+<text top="450" left="755" width="40" height="12" font="4"><b>U'CUT </b></text>
+<text top="464" left="755" width="30" height="12" font="4"><b>U/S </b></text>
+<text top="479" left="755" width="41" height="12" font="4"><b>U.N.C. </b></text>
+<text top="493" left="755" width="40" height="12" font="4"><b>U.N.F. </b></text>
+<text top="507" left="755" width="28" height="12" font="4"><b>U. B. </b></text>
+<text top="522" left="756" width="28" height="12" font="4"><b>U.C. </b></text>
+<text top="537" left="756" width="41" height="12" font="4"><b>U.O.N. </b></text>
+<text top="580" left="755" width="30" height="12" font="4"><b>VAC. </b></text>
+<text top="594" left="755" width="29" height="12" font="4"><b>VEL. </b></text>
+<text top="609" left="756" width="33" height="12" font="4"><b>VERT </b></text>
+<text top="624" left="756" width="30" height="12" font="4"><b>VOL. </b></text>
+<text top="666" left="756" width="28" height="12" font="4"><b>W.G. </b></text>
+<text top="681" left="756" width="22" height="12" font="4"><b>WT. </b></text>
+<text top="695" left="757" width="21" height="12" font="4"><b>WN </b></text>
+<text top="710" left="756" width="12" height="12" font="0">W </text>
+<text top="724" left="757" width="21" height="12" font="4"><b>WP </b></text>
+<text top="1141" left="120" width="9" height="12" font="4"><b>5 </b></text>
+<text top="1140" left="154" width="370" height="12" font="4"><b>20.09.2021 REAFFIRMED &amp; ISSUED AS STANDARD (904f/ MB </b></text>
+<text top="1139" left="681" width="79" height="12" font="0">MK 1k/ </text>
+<text top="1162" left="119" width="10" height="12" font="0">4 </text>
+<text top="1162" left="154" width="62" height="12" font="0">25.01.2017 </text>
+<text top="1161" left="246" width="196" height="12" font="0">REVISED &amp; ISSUED AS STANDARD </text>
+<text top="1160" left="502" width="21" height="12" font="0">MB </text>
+<text top="1160" left="575" width="41" height="12" font="0">PG/MK </text>
+<text top="1160" left="681" width="27" height="12" font="0">RKT </text>
+<text top="1160" left="783" width="20" height="12" font="0">RN </text>
+<text top="1183" left="110" width="28" height="12" font="0">Rev. </text>
+<text top="1200" left="113" width="22" height="12" font="0">No. </text>
+<text top="1194" left="171" width="28" height="12" font="0">Date </text>
+<text top="1193" left="307" width="47" height="12" font="0">Purpose </text>
+<text top="1182" left="488" width="51" height="12" font="0">Prepared </text>
+<text top="1199" left="506" width="16" height="12" font="0">by </text>
+<text top="1182" left="576" width="49" height="12" font="0">Checked </text>
+<text top="1199" left="593" width="15" height="12" font="0">by </text>
+<text top="1178" left="650" width="88" height="12" font="0">Stds. Committee </text>
+<text top="1178" left="758" width="71" height="12" font="0">Stds. Bureau </text>
+<text top="1191" left="668" width="53" height="12" font="0">Convenor </text>
+<text top="1191" left="767" width="54" height="12" font="0">Chairman </text>
+<text top="1205" left="708" width="68" height="12" font="0">Approved by </text>
+<text top="1221" left="102" width="151" height="12" font="0">Format No. 8-00-0001-F4 Rev.O </text>
+<text top="1219" left="683" width="158" height="12" font="0">Copyright EIL - All rights reserved </text>
+</page>
+<outline>
+<item page="1">Page 1</item>
+<item page="2">Page 2</item>
+<item page="3">Page 3</item>
+</outline>
+</pdf2xml>

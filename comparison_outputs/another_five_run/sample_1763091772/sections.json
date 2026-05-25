@@ -1,0 +1,49 @@
+[
+  {
+    "heading": "TENDER FOR SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU HEATER AT BPCL MR.",
+    "level": 3,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "DOCUMENTS AND DATA REQUIRED WITH BID > TENDER FOR SERVICE CONTRACT FOR RADIANT TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU HEATER AT BPCL MR.",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 14.4,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "DOCUMENTS AND DATA REQUIRED WITH BID",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "UNDERTAKING BY BIDDER TOWARDS SUBMISSION OF TPIA* VERIFIED DOCUMENTS",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "DOCUMENTS AND DATA REQUIRED WITH BID > UNDERTAKING BY BIDDER TOWARDS SUBMISSION OF TPIA* VERIFIED DOCUMENTS",
+    "seq": 1,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "DOCUMENTS AND DATA REQUIRED WITH BID",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 6
+  }
+]

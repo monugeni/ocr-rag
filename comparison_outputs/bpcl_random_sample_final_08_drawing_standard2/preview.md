@@ -1,0 +1,146 @@
+# (A SINGLE INSTRUMENT
+
+Context: `(A SINGLE INSTRUMENT`
+
+Source: `/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-52-0101_Rev_4.pdf`
+Pages: 3
+Headings: 0
+Chunks: 22
+
+## Headings
+
+- No headings detected
+
+## Chunk Samples
+
+### C1 p1-1 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: (TYP.)_
+
+latig0:10 r ENGINEERS INSTRUMENT SUPPORT &.ir Wes INDIA LIMITED 7-52-0101 Rev. 4 mane SINGLE INSTRUMENT WPM 30;1114) IA Govt of India Undertaking) TYPE 11 SINGLE INSTRUMENT SUPPORT - GENERAL ARRANGEMENT CAP PLATE 6 T AT END OF PIPE (TYP.)
+
+### C2 p1-1 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: • .4 .•=1••••=11•• MINNIN•MINEMO_
+
+2" PIPE WEL : 110 HOLES FOR U-BOLTS l i gailika ANGLE 50X50X6 REFER DE AIL"P" WELD WEEP HOLE(TYP.) 6mm THK. A (TYP.) REFER NOTE-3 I SHT. 3 OF 3 6 mm THICK MS-PLATE STIFFNER PLATE SIDE VIEW FRONT VIEW DETAIL"P" TYPE 11-1 TYPE 11-2 Ai iA Ar---4A 2" PIPE 2" PIPE 
+
+### C3 p1-1 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: TYPE 11-3 TYPE 11-4_
+
+MS PLATE MS PLATE e. 6mm THK. ,.. 1 40./ 6mm THK. o o o o Lo ilk LO CO 0 CO •IF CV N - — 0.1 I- 14 DIA HOLES 14 DIA HOLES 180 • 180 (4 NOS.) (' 1 • ) 250 250 ,-- VIEW A-A VIEW A-A PAVED AREA MOUNTING PLATFORM MOUNTING TYPE 11-3 TYPE 11-4
+
+### C4 p1-1 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: Rev. Prepared Checked Stds. Committee Stds. Bureau_
+
+7 PIPE 2" PIPE o STANCHION xi- M12 SUPPOR T 0 0 ANCHOR BOLTS o STRIPS (WELD) ,- 4 I 50Lx25Wx6T) (QTY. 04 NOS.) G. LEVEL.• 1111O111.1 G. LEVEL . : .. ,v:74`).4:11. 11111111 -. ; .ttiVtrtt '.4 4' .:3::::1 ....1.84? -•.;,'s ,,k•l? . ? ..:;ki:, ,.... . • EARL COMP
+
+### C5 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: TYPE 12 CONCRETE COLUMN MOUNTING_
+
+150-Zid ENGINEERS INSTRUMENT SUPPORT Ogar fafReg INDIA LIMITED 7-52-0101 Rev. 4 (A SINGLE INSTRUMENT Govt of India Undertaking) TYPE 12 CONCRETE COLUMN MOUNTING
+
+### C6 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: WEEP HOLE_
+
+WEEP HOLE
+
+### C7 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 6mm THK. CONCRETE COLUMN_
+
+M12 CINCH ANCHOR BOLTS QUAINTITY 04 NOS. MS PLATE 6mm THK. CONCRETE COLUMN
+
+### C8 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: FRONT VIEW SIDE VIEW_
+
+FRONT VIEW SIDE VIEW
+
+### C9 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: TYPE 13 CONCRETE COLUMN (WITH ANGLE INSERT) MOUNTING_
+
+TYPE 13 CONCRETE COLUMN (WITH ANGLE INSERT) MOUNTING
+
+### C10 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 2" PIPE T_
+
+ISMC 100 MEMBER TO BE WELDED WITH EXISTING 300 STEEL MEMBER 2" PIPE T
+
+### C11 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: FRONT VIEW SIDE VIEW_
+
+EXISTING COLUMN DETAIL WEEP HOLE STEEL MEMBER WITH ANGLE INSERT (BY STRUCTURAL) WELD(TYP.) CONCRETE COLUMN (WITH ANGLE INSERT) FRONT VIEW SIDE VIEW
+
+### C12 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: TYPE-14 CONCRETE COLUMN (WITH INSERT PLATE) MOUNTING_
+
+TYPE-14 CONCRETE COLUMN (WITH INSERT PLATE) MOUNTING
+
+### C13 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 7 PIPE_
+
+7 PIPE
+
+### C14 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: FRONT VIEW SIDE VIEW_
+
+COLUMN DETAIL WITH INSERT PLATE WELD TYP. (BY STRUCTURAL) CONCRETE COLUMN (WITH INSERT PLATE) FRONT VIEW SIDE VIEW
+
+### C15 p2-2 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 4 22.03.22 Revised & Reissued SM / Manoj MN_
+
+4 22.03.22 Revised & Reissued SM / Manoj MN
+
+### C16 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: I C.I 'D_
+
+ENGINEERS INSTRUMENT SUPPORT fa Res INDIA LIMITED 7-52-0101 Rev. 4 SINGLE INSTRUMENT wpm mare M1 3,1?1,31) I A Govt of India Undertaking) Page 3 of 3* TYPE 15 STEEL COLUMN MOUNTING (FLANGE FACE) I C.I 'D
+
+### C17 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 1111 WELD(TYP. )_
+
+1111 WELD(TYP. )
+
+### C18 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: SIDE VIEW FRONT VIEW_
+
+SIDE VIEW FRONT VIEW
+
+### C19 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: TYPE 18 STEEL COLUMN MOUNTING (WEB FACE)_
+
+TYPE 18 STEEL COLUMN MOUNTING (WEB FACE)
+
+### C20 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: SIDE VIEW FRONT VIEW_
+
+SIDE VIEW FRONT VIEW
+
+### C21 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: 300 Lx 150 W x 6 1 71_
+
+TYPE 17 PIPE BRACKET MOUNTING TYPE 17.1 (VERTICAL PIPE) TYPE 17.2 (HORIZONTAL PIPE) 2" PIPE STANCHION A MOUNTING MS PLATE BASE PLATE 6mm THICK 300 Lx 150 W x 6 1 71
+
+### C22 p3-3 [drawing]
+
+_Breadcrumb: (A SINGLE INSTRUMENT > Drawing/title block: Format No. 8 - 00 - 0001 - F4 Rev.0 Copyright EIL - AIJ rights reserved_
+
+0 U-BOLT ASSY. U-BOLT ASSY. ( 0 REFER NOTE-4 REFER NOTE-4 C.) 0 O ul CO WEEP HOLE WELD TYP. STIFFNER PLATE to 14 * A H S 4" MIN. PIPE SIZE WEEP HOLE NOTE:- WELD TYP. DIMENSIONS • & PIPE CLAMPS SIZES SHALL BE AS PER PIPE DIMENSIONS. 4" MIN PIPE SIZE VIEW-AA FRO

@@ -1,0 +1,1378 @@
+[
+  {
+    "heading": "1 SCOPE",
+    "level": 1,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > 1 SCOPE",
+    "seq": 0,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+    "seq": 1,
+    "confidence": 0.633,
+    "score": 5.7,
+    "reasons": [
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "Petrochemicals Ltd] ocu-cpu| &778-PPM-11500-CA-0001 66-6778",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > Petrochemicals Ltd] ocu-cpu| &778-PPM-11500-CA-0001 66-6778",
+    "seq": 2,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "& WELDING SPECIFICATION FOR FABRICATION OF HALDIA",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > & WELDING SPECIFICATION FOR FABRICATION OF HALDIA",
+    "seq": 3,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "10 ALINGNMENT AND SPACING",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > & WELDING SPECIFICATION FOR FABRICATION OF HALDIA > 10 ALINGNMENT AND SPACING",
+    "seq": 4,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [
+      "p6: top-level decimal jump 1 -> 10"
+    ],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "11 WEATHER CONDITIONS",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > & WELDING SPECIFICATION FOR FABRICATION OF HALDIA > 11 WEATHER CONDITIONS",
+    "seq": 5,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "12 WELDING TECHNIQUE AND WORKMANSHIP",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > & WELDING SPECIFICATION FOR FABRICATION OF HALDIA > 12 WELDING TECHNIQUE AND WORKMANSHIP",
+    "seq": 6,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "12.1 ROOT PASS",
+    "level": 3,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > & WELDING SPECIFICATION FOR FABRICATION OF HALDIA > 12 WELDING TECHNIQUE AND WORKMANSHIP > 12.1 ROOT PASS",
+    "seq": 7,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS ©",
+    "level": 1,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS ©",
+    "seq": 8,
+    "confidence": 0.99,
+    "score": 11.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "12.2 JOINT COMPLETION",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS © > 12.2 JOINT COMPLETION",
+    "seq": 9,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "12.3 DISSIMILAR WELD",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS © > 12.3 DISSIMILAR WELD",
+    "seq": 10,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "13 HEAT TREATMENT",
+    "level": 2,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS © > 13 HEAT TREATMENT",
+    "seq": 11,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "13.1 PREHEATING",
+    "level": 3,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN WELDING SPECIFICATION FOR FABRICATION OF GALERIE CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\ETODEMESS © > 13 HEAT TREATMENT > 13.1 PREHEATING",
+    "seq": 12,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  },
+  {
+    "heading": "aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE",
+    "level": 1,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE",
+    "seq": 13,
+    "confidence": 0.633,
+    "score": 5.7,
+    "reasons": [
+      "centered",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "13.2 POST HEATING",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.2 POST HEATING",
+    "seq": 14,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "13.3 POST WELD HEAT TREATMENT (PWHT)",
+    "level": 3,
+    "page_num": 8,
+    "page_start": 8,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.3 POST WELD HEAT TREATMENT (PWHT)",
+    "seq": 15,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "13.4 WELD HARDNESS TESTING",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.4 WELD HARDNESS TESTING",
+    "seq": 16,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "13.5 FERRITE MEASUREMENT",
+    "level": 3,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.5 FERRITE MEASUREMENT",
+    "seq": 17,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "13.6 ALLOY VERIFICATION",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.6 ALLOY VERIFICATION",
+    "seq": 18,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "13.7 CLEANING OF THE WELD JOINT",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.7 CLEANING OF THE WELD JOINT",
+    "seq": 19,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 11
+  },
+  {
+    "heading": "13.8 INSPECTION",
+    "level": 3,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.8 INSPECTION",
+    "seq": 20,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "13.9 REPAIRS",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.9 REPAIRS",
+    "seq": 21,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "all_caps_short",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "13.10 DOCUMENTS TO BE SUBMITTED BY CONTRACTOR (4 COPIES EACH)",
+    "level": 2,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > 13.10 DOCUMENTS TO BE SUBMITTED BY CONTRACTOR (4 COPIES EACH)",
+    "seq": 22,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "numbered_2"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "BACKINGRING : CONSUMABLE INSERT",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > BACKINGRING : CONSUMABLE INSERT",
+    "seq": 23,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "HOLDING TEMP HOLDING TIME",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > HOLDING TEMP HOLDING TIME",
+    "seq": 24,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "TREATMENT RATE OF HEATING MIN. HOLDING TIME",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > aN CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS-| \\SC>SEESS WELDING SPECIFICATION FOR FABRICATION OF GALERIE > TREATMENT RATE OF HEATING MIN. HOLDING TIME",
+    "seq": 25,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD",
+    "seq": 26,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "PIPES ASTM & 312 TP 304",
+    "level": 2,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD > PIPES ASTM & 312 TP 304",
+    "seq": 27,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "FILLERPASS",
+    "level": 2,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD > FILLERPASS",
+    "seq": 28,
+    "confidence": 0.522,
+    "score": 4.7,
+    "reasons": [
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "BACKING RING : CONSUMABLE INSERT",
+    "level": 2,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CARBON, LOW-ALLOY AND AUSTENITIC STAINLESS- PETROCHEMICALS UTD > BACKING RING : CONSUMABLE INSERT",
+    "seq": 29,
+    "confidence": 0.833,
+    "score": 7.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "IMPACT TEST VALUE iis am",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > IMPACT TEST VALUE iis am",
+    "seq": 30,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "PIPES ASTM 4 312 TP 304H",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > IMPACT TEST VALUE iis am > PIPES ASTM 4 312 TP 304H",
+    "seq": 31,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "WELDING MATERIALS- BUTT OTHER THAN BUTT (FILLET / SOCKET)",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > IMPACT TEST VALUE iis am > WELDING MATERIALS- BUTT OTHER THAN BUTT (FILLET / SOCKET)",
+    "seq": 32,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "TEST VALUE MIN:- AVG",
+    "level": 1,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG",
+    "seq": 33,
+    "confidence": 0.99,
+    "score": 10.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "PIPES ASTM 4 312 TP 304L",
+    "level": 2,
+    "page_num": 19,
+    "page_start": 19,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG > PIPES ASTM 4 312 TP 304L",
+    "seq": 34,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 19
+  },
+  {
+    "heading": "PIPES ASTM 4 312 TP 316",
+    "level": 2,
+    "page_num": 20,
+    "page_start": 20,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG > PIPES ASTM 4 312 TP 316",
+    "seq": 35,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "VALUE MIN: AVG",
+    "level": 2,
+    "page_num": 20,
+    "page_start": 20,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG > VALUE MIN: AVG",
+    "seq": 36,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "PIPES ASTM 4 312 TP 316H",
+    "level": 2,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG > PIPES ASTM 4 312 TP 316H",
+    "seq": 37,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "SS ETMENT RATE OF HEATING MIN, HOLDING TIME",
+    "level": 2,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN:- AVG > SS ETMENT RATE OF HEATING MIN, HOLDING TIME",
+    "seq": 38,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "TEST VALUE wine Ave",
+    "level": 1,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE wine Ave",
+    "seq": 39,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "PIPES &STM 4 312 TP SI6L",
+    "level": 2,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE wine Ave > PIPES &STM 4 312 TP SI6L",
+    "seq": 40,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "TEST VALUE MIN Av",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN Av",
+    "seq": 41,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "REQUIREMENTS AT TEMPERATURE",
+    "level": 3,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN Av > REQUIREMENTS AT TEMPERATURE",
+    "seq": 42,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "all_caps_short",
+      "compact_colon_heading",
+      "left_aligned",
+      "repeated_text",
+      "slightly_large_font",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "PIPES ASTM 4 312 TP 321",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN Av > PIPES ASTM 4 312 TP 321",
+    "seq": 43,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "PATENT RATE OF HEATING MIN, HOLDING TIME",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN Av > PATENT RATE OF HEATING MIN, HOLDING TIME",
+    "seq": 44,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "TEST VALUE wae Av",
+    "level": 1,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE wae Av",
+    "seq": 45,
+    "confidence": 0.578,
+    "score": 5.2,
+    "reasons": [
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "PIPES ASTM A 335 GR. P11",
+    "level": 2,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE wae Av > PIPES ASTM A 335 GR. P11",
+    "seq": 46,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "CHARPY \"V\" NOTCH IMPACT . . TEST VALUE MIN.- AVG",
+    "level": 2,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE wae Av > CHARPY \"V\" NOTCH IMPACT . . TEST VALUE MIN.- AVG",
+    "seq": 47,
+    "confidence": 0.99,
+    "score": 14.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER",
+    "level": 1,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER",
+    "seq": 48,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "CHARPY \"V\" NOTCH IMPACT . . TEST VALUE MIN-- NG",
+    "level": 2,
+    "page_num": 25,
+    "page_start": 25,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER > CHARPY \"V\" NOTCH IMPACT . . TEST VALUE MIN-- NG",
+    "seq": 49,
+    "confidence": 0.99,
+    "score": 14.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "PIPES ASTM 4,335 GR. P22",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER > PIPES ASTM 4,335 GR. P22",
+    "seq": 50,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "CHARPY \"¥\" NOTCHIMPACT . . TEST VALUE iain iin",
+    "level": 3,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER > PIPES ASTM 4,335 GR. P22 > CHARPY \"¥\" NOTCHIMPACT . . TEST VALUE iain iin",
+    "seq": 51,
+    "confidence": 0.99,
+    "score": 9.2,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "PIPES ASTM 4 335 GR. P5",
+    "level": 2,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER > PIPES ASTM 4 335 GR. P5",
+    "seq": 52,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "HOLDING TEMP FOS*C - 760°C HOLDING TIME: : 1HOURPERINCH THK POST WELD HEAT SCATMENT RATEOFHEATING ©; 200‘CIMR MAX MIN, HOLDING TIME: 2HOURS",
+    "level": 3,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > PREHEAT TEMP. < 150°C ( MIN.) FOLLOWED BY ASBESTOS COVER > PIPES ASTM 4 335 GR. P5 > HOLDING TEMP FOS*C - 760°C HOLDING TIME: : 1HOURPERINCH THK POST WELD HEAT SCATMENT RATEOFHEATING ©; 200‘CIMR MAX MIN, HOLDING TIME: 2HOURS",
+    "seq": 53,
+    "confidence": 0.99,
+    "score": 11.5,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "TEST VALUE MIN ANG!",
+    "level": 1,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN ANG!",
+    "seq": 54,
+    "confidence": 0.778,
+    "score": 7.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "PIPES ASTMA335GR.P9",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN ANG! > PIPES ASTMA335GR.P9",
+    "seq": 55,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "PREHEATING PREHEATTEMP. : 250! - 3008 POSTHEATING —: 300°C MIN. FOR 1HOUR FOLLOWED",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN ANG! > PREHEATING PREHEATTEMP. : 250! - 3008 POSTHEATING —: 300°C MIN. FOR 1HOUR FOLLOWED",
+    "seq": 56,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "HOLDING TEMP 705°C - 760°C HOLDINGTIME: : 1HOURPERINCHTHK",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > TEST VALUE MIN ANG! > HOLDING TEMP 705°C - 760°C HOLDINGTIME: : 1HOURPERINCHTHK",
+    "seq": 57,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "all_caps_short",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "CHARPY *Y* NOTCHIMPACT TEST VALUE Mitts AVG",
+    "level": 1,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CHARPY *Y* NOTCHIMPACT TEST VALUE Mitts AVG",
+    "seq": 58,
+    "confidence": 0.967,
+    "score": 8.7,
+    "reasons": [
+      "centered",
+      "compact_colon_heading",
+      "trailing_colon",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "TECHNICAL NOTES",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA > CHARPY *Y* NOTCHIMPACT TEST VALUE Mitts AVG > TECHNICAL NOTES",
+    "seq": 59,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "aN WELDING SPECIFICATION FOR FABRICATION OF (2 ALDIA",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 28
+  }
+]

@@ -1,0 +1,3139 @@
+[
+  {
+    "heading": "DOCUMENT RELEASE NOTE",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > DOCUMENT RELEASE NOTE",
+    "seq": 0,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "A. B. Gadekar",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > A. B. Gadekar",
+    "seq": 1,
+    "confidence": 0.367,
+    "score": 3.3,
+    "reasons": [
+      "alpha",
+      "bold"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "AMENDMENT SHEET",
+    "level": 2,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > AMENDMENT SHEET",
+    "seq": 2,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "Tracking Amendment Amendment",
+    "level": 3,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > AMENDMENT SHEET > Tracking Amendment Amendment",
+    "seq": 3,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "ABBREVIATIONS",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ABBREVIATIONS",
+    "seq": 4,
+    "confidence": 0.556,
+    "score": 5.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "1 Introduction",
+    "level": 1,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 1 Introduction",
+    "seq": 5,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "2 Scope Overview",
+    "level": 1,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 2 Scope Overview",
+    "seq": 6,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 10
+  },
+  {
+    "heading": "3 Reference Codes & Standards",
+    "level": 1,
+    "page_num": 11,
+    "page_start": 11,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 3 Reference Codes & Standards",
+    "seq": 7,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 12
+  },
+  {
+    "heading": "3.5 Other Standards",
+    "level": 2,
+    "page_num": 13,
+    "page_start": 13,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 3 Reference Codes & Standards > 3.5 Other Standards",
+    "seq": 8,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "4 Criteria for Paint Coatings",
+    "level": 1,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings",
+    "seq": 9,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "4.1 Materials",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings > 4.1 Materials",
+    "seq": 10,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "4.2 Paint Approval Requirements",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings > 4.2 Paint Approval Requirements",
+    "seq": 11,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "4.3 Painting Contractor Responsibilities",
+    "level": 2,
+    "page_num": 15,
+    "page_start": 15,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings > 4.3 Painting Contractor Responsibilities",
+    "seq": 12,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 15
+  },
+  {
+    "heading": "4.4 Qualification of Painters and Blasters:",
+    "level": 2,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings > 4.4 Qualification of Painters and Blasters:",
+    "seq": 13,
+    "confidence": 0.99,
+    "score": 10.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "Qualification Process",
+    "level": 3,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 4 Criteria for Paint Coatings > 4.4 Qualification of Painters and Blasters: > Qualification Process",
+    "seq": 14,
+    "confidence": 0.589,
+    "score": 5.3,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "1 Verification of Experience and Training:",
+    "level": 1,
+    "page_num": 16,
+    "page_start": 16,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 1 Verification of Experience and Training:",
+    "seq": 15,
+    "confidence": 0.7,
+    "score": 6.3,
+    "reasons": [
+      "bold",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 16
+  },
+  {
+    "heading": "2 Demonstration on Test Panels:",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 2 Demonstration on Test Panels:",
+    "seq": 16,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "5 Surface Preparation",
+    "level": 1,
+    "page_num": 17,
+    "page_start": 17,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation",
+    "seq": 17,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [
+      "p17: top-level decimal jump 2 -> 5"
+    ],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 17
+  },
+  {
+    "heading": "5.1 Surface Finish Grades",
+    "level": 2,
+    "page_num": 18,
+    "page_start": 18,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.1 Surface Finish Grades",
+    "seq": 18,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 18
+  },
+  {
+    "heading": "5.2 Pictorial Standards of Different Surface Preparation",
+    "level": 2,
+    "page_num": 19,
+    "page_start": 19,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.2 Pictorial Standards of Different Surface Preparation",
+    "seq": 19,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 19
+  },
+  {
+    "heading": "5.3 Surface Preparation by Blast Cleaning",
+    "level": 2,
+    "page_num": 20,
+    "page_start": 20,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.3 Surface Preparation by Blast Cleaning",
+    "seq": 20,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "5.3.1 General",
+    "level": 3,
+    "page_num": 20,
+    "page_start": 20,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.3 Surface Preparation by Blast Cleaning > 5.3.1 General",
+    "seq": 21,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "bold",
+      "numbered_3",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "5.3.2 Blast Cleaning Equipment",
+    "level": 3,
+    "page_num": 20,
+    "page_start": 20,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.3 Surface Preparation by Blast Cleaning > 5.3.2 Blast Cleaning Equipment",
+    "seq": 22,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_3",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 20
+  },
+  {
+    "heading": "5.3.3 Abrasives",
+    "level": 3,
+    "page_num": 21,
+    "page_start": 21,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.3 Surface Preparation by Blast Cleaning > 5.3.3 Abrasives",
+    "seq": 23,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_3",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 21
+  },
+  {
+    "heading": "5.6 Surface Preparation of Concrete",
+    "level": 2,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 5 Surface Preparation > 5.6 Surface Preparation of Concrete",
+    "seq": 24,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "6 Paint Application",
+    "level": 1,
+    "page_num": 22,
+    "page_start": 22,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application",
+    "seq": 25,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 22
+  },
+  {
+    "heading": "6.1 Application Restrictions",
+    "level": 2,
+    "page_num": 23,
+    "page_start": 23,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.1 Application Restrictions",
+    "seq": 26,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 23
+  },
+  {
+    "heading": "6.2 Mixing and Painting",
+    "level": 2,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.2 Mixing and Painting",
+    "seq": 27,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 24
+  },
+  {
+    "heading": "6.2.1 Mixing & Thinning",
+    "level": 3,
+    "page_num": 24,
+    "page_start": 24,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.2 Mixing and Painting > 6.2.1 Mixing & Thinning",
+    "seq": 28,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "bold",
+      "numbered_3",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 25
+  },
+  {
+    "heading": "6.3 Application Method",
+    "level": 2,
+    "page_num": 26,
+    "page_start": 26,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.3 Application Method",
+    "seq": 29,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 26
+  },
+  {
+    "heading": "6.3.2 Comparison: Airless vs. Conventional Air Spray",
+    "level": 3,
+    "page_num": 27,
+    "page_start": 27,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.3 Application Method > 6.3.2 Comparison: Airless vs. Conventional Air Spray",
+    "seq": 30,
+    "confidence": 0.99,
+    "score": 10.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above",
+      "numbered_3",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 27
+  },
+  {
+    "heading": "6.4 Compatibility of Different Paints",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 6 Paint Application > 6.4 Compatibility of Different Paints",
+    "seq": 31,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "7 Inspection and Testing of Painting Material & Painting Applications",
+    "level": 1,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications",
+    "seq": 32,
+    "confidence": 0.944,
+    "score": 8.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "7.1 Approved Manufacturers for Paint Materials",
+    "level": 2,
+    "page_num": 28,
+    "page_start": 28,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.1 Approved Manufacturers for Paint Materials",
+    "seq": 33,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 28
+  },
+  {
+    "heading": "7.2 Material & Inspection Requirements",
+    "level": 2,
+    "page_num": 29,
+    "page_start": 29,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.2 Material & Inspection Requirements",
+    "seq": 34,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 30
+  },
+  {
+    "heading": "7.3 Acceptance Criteria for Painting Work",
+    "level": 2,
+    "page_num": 31,
+    "page_start": 31,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.3 Acceptance Criteria for Painting Work",
+    "seq": 35,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 31
+  },
+  {
+    "heading": "7.4 General Inspection Guidelines",
+    "level": 2,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.4 General Inspection Guidelines",
+    "seq": 36,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "7.5 ckaging & Labelling",
+    "level": 2,
+    "page_num": 32,
+    "page_start": 32,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.5 ckaging & Labelling",
+    "seq": 37,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 32
+  },
+  {
+    "heading": "7.6 Records & Reports",
+    "level": 2,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.6 Records & Reports",
+    "seq": 38,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "7.7 Procedure for Measurement of Dry Film Coating Thickness",
+    "level": 2,
+    "page_num": 33,
+    "page_start": 33,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 7 Inspection and Testing of Painting Material & Painting Applications > 7.7 Procedure for Measurement of Dry Film Coating Thickness",
+    "seq": 39,
+    "confidence": 0.99,
+    "score": 11.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 33
+  },
+  {
+    "heading": "8 Frequency & Guarantee of Painting",
+    "level": 1,
+    "page_num": 34,
+    "page_start": 34,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 8 Frequency & Guarantee of Painting",
+    "seq": 40,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 34
+  },
+  {
+    "heading": "8.1 Frequency of Painting",
+    "level": 2,
+    "page_num": 34,
+    "page_start": 34,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 8 Frequency & Guarantee of Painting > 8.1 Frequency of Painting",
+    "seq": 41,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 34
+  },
+  {
+    "heading": "10 Manual Cleaning St2",
+    "level": 1,
+    "page_num": 34,
+    "page_start": 34,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 10 Manual Cleaning St2",
+    "seq": 42,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 34
+  },
+  {
+    "heading": "8.2 Guarantee of Painting",
+    "level": 2,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 10 Manual Cleaning St2 > 8.2 Guarantee of Painting",
+    "seq": 43,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "9 Storage",
+    "level": 1,
+    "page_num": 35,
+    "page_start": 35,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 9 Storage",
+    "seq": 44,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 35
+  },
+  {
+    "heading": "10 Paint Monitoring System",
+    "level": 1,
+    "page_num": 36,
+    "page_start": 36,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 10 Paint Monitoring System",
+    "seq": 45,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 36
+  },
+  {
+    "heading": "11 Maintenance Painting",
+    "level": 1,
+    "page_num": 36,
+    "page_start": 36,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 11 Maintenance Painting",
+    "seq": 46,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 36
+  },
+  {
+    "heading": "12 Quality Control, Inspection and Testing",
+    "level": 1,
+    "page_num": 36,
+    "page_start": 36,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 12 Quality Control, Inspection and Testing",
+    "seq": 47,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 37
+  },
+  {
+    "heading": "12.2 Final Inspection of Finished Coating:",
+    "level": 2,
+    "page_num": 38,
+    "page_start": 38,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 12 Quality Control, Inspection and Testing > 12.2 Final Inspection of Finished Coating:",
+    "seq": 48,
+    "confidence": 0.99,
+    "score": 10.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 38
+  },
+  {
+    "heading": "13 Detailed Paint Specifications",
+    "level": 1,
+    "page_num": 39,
+    "page_start": 39,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications",
+    "seq": 49,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 39
+  },
+  {
+    "heading": "13.1 Code Names for Different Paints",
+    "level": 2,
+    "page_num": 39,
+    "page_start": 39,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.1 Code Names for Different Paints",
+    "seq": 50,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 39
+  },
+  {
+    "heading": "FINISH PAINTS",
+    "level": 2,
+    "page_num": 40,
+    "page_start": 40,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > FINISH PAINTS",
+    "seq": 51,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 40
+  },
+  {
+    "heading": "HIGH TEMPERATURE PAINTS",
+    "level": 2,
+    "page_num": 40,
+    "page_start": 40,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > HIGH TEMPERATURE PAINTS",
+    "seq": 52,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 40
+  },
+  {
+    "heading": "13.2 Technical Parameters - Primers",
+    "level": 2,
+    "page_num": 41,
+    "page_start": 41,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.2 Technical Parameters - Primers",
+    "seq": 53,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 43
+  },
+  {
+    "heading": "13.3 Technical Parameters - Finish Paints",
+    "level": 2,
+    "page_num": 44,
+    "page_start": 44,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.3 Technical Parameters - Finish Paints",
+    "seq": 54,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 45
+  },
+  {
+    "heading": "13.4 Technical Parameters – High Temperature Paints",
+    "level": 2,
+    "page_num": 46,
+    "page_start": 46,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.4 Technical Parameters – High Temperature Paints",
+    "seq": 55,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 47
+  },
+  {
+    "heading": "13.5 Technical Parameters – Other Miscellaneous Paints",
+    "level": 2,
+    "page_num": 48,
+    "page_start": 48,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.5 Technical Parameters – Other Miscellaneous Paints",
+    "seq": 56,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 49
+  },
+  {
+    "heading": "13.6 General Notes for Paint Material Tables:",
+    "level": 2,
+    "page_num": 50,
+    "page_start": 50,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 13 Detailed Paint Specifications > 13.6 General Notes for Paint Material Tables:",
+    "seq": 57,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 51
+  },
+  {
+    "heading": "14 Selection of Coating Systems:",
+    "level": 1,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 14 Selection of Coating Systems:",
+    "seq": 58,
+    "confidence": 0.99,
+    "score": 12.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 52
+  },
+  {
+    "heading": "14.1 Procedure for Paint System Selection:",
+    "level": 2,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 14 Selection of Coating Systems: > 14.1 Procedure for Paint System Selection:",
+    "seq": 59,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 52
+  },
+  {
+    "heading": "1 Determine the Type of Work:",
+    "level": 1,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 1 Determine the Type of Work:",
+    "seq": 60,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 52
+  },
+  {
+    "heading": "2 Refer to the Appropriate Table:",
+    "level": 1,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 2 Refer to the Appropriate Table:",
+    "seq": 61,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 52
+  },
+  {
+    "heading": "3 Select the Paint System Number:",
+    "level": 1,
+    "page_num": 52,
+    "page_start": 52,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 3 Select the Paint System Number:",
+    "seq": 62,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 52
+  },
+  {
+    "heading": "14.2 Selection of Paint Coating System:",
+    "level": 2,
+    "page_num": 53,
+    "page_start": 53,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 3 Select the Paint System Number: > 14.2 Selection of Paint Coating System:",
+    "seq": 63,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 57
+  },
+  {
+    "heading": "14.3 Description of Paint Coating Systems:",
+    "level": 2,
+    "page_num": 58,
+    "page_start": 58,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 3 Select the Paint System Number: > 14.3 Description of Paint Coating Systems:",
+    "seq": 64,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 59
+  },
+  {
+    "heading": "PART D GI Surfaces",
+    "level": 1,
+    "page_num": 60,
+    "page_start": 60,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART D GI Surfaces",
+    "seq": 65,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 60
+  },
+  {
+    "heading": "PART E Thermal Indicative Paint",
+    "level": 1,
+    "page_num": 61,
+    "page_start": 61,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART E Thermal Indicative Paint",
+    "seq": 66,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 61
+  },
+  {
+    "heading": "PART F RCC Surfaces / Fireproofing / Building Painting",
+    "level": 1,
+    "page_num": 61,
+    "page_start": 61,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART F RCC Surfaces / Fireproofing / Building Painting",
+    "seq": 67,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 61
+  },
+  {
+    "heading": "PART G External Surfaces",
+    "level": 1,
+    "page_num": 62,
+    "page_start": 62,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART G External Surfaces",
+    "seq": 68,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "section"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 65
+  },
+  {
+    "heading": "14.4 General Notes for Paint System Description Tables:",
+    "level": 2,
+    "page_num": 66,
+    "page_start": 66,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART G External Surfaces > 14.4 General Notes for Paint System Description Tables:",
+    "seq": 69,
+    "confidence": 0.756,
+    "score": 6.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 68
+  },
+  {
+    "heading": "14.5 Procedure for Paint Coating Systems Selection for Tanks Internals:",
+    "level": 2,
+    "page_num": 69,
+    "page_start": 69,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART G External Surfaces > 14.5 Procedure for Paint Coating Systems Selection for Tanks Internals:",
+    "seq": 70,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 72
+  },
+  {
+    "heading": "14.6 Procedure for Paint Coating Systems Selection for Tanks Externals:",
+    "level": 2,
+    "page_num": 73,
+    "page_start": 73,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART G External Surfaces > 14.6 Procedure for Paint Coating Systems Selection for Tanks Externals:",
+    "seq": 71,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 74
+  },
+  {
+    "heading": "14.7 General Notes for Tanks Internal & External Painting System Tables:",
+    "level": 2,
+    "page_num": 75,
+    "page_start": 75,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PART G External Surfaces > 14.7 General Notes for Tanks Internal & External Painting System Tables:",
+    "seq": 72,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 75
+  },
+  {
+    "heading": "15 Pre-Qualification/Acceptance Criteria for Paint Coating System",
+    "level": 1,
+    "page_num": 76,
+    "page_start": 76,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 15 Pre-Qualification/Acceptance Criteria for Paint Coating System",
+    "seq": 73,
+    "confidence": 0.99,
+    "score": 12.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [
+      "p76: top-level decimal jump 3 -> 15"
+    ],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 76
+  },
+  {
+    "heading": "15.2 Pre-Qualification Testing Procedure:",
+    "level": 2,
+    "page_num": 76,
+    "page_start": 76,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 15 Pre-Qualification/Acceptance Criteria for Paint Coating System > 15.2 Pre-Qualification Testing Procedure:",
+    "seq": 74,
+    "confidence": 0.99,
+    "score": 10.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 77
+  },
+  {
+    "heading": "S. For System Acceptance",
+    "level": 2,
+    "page_num": 78,
+    "page_start": 78,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 15 Pre-Qualification/Acceptance Criteria for Paint Coating System > S. For System Acceptance",
+    "seq": 75,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "alpha",
+      "bold",
+      "centered",
+      "gap_above",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 78
+  },
+  {
+    "heading": "16 Method of Sampling & Dispatch for Laboratory Testing",
+    "level": 1,
+    "page_num": 79,
+    "page_start": 79,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 16 Method of Sampling & Dispatch for Laboratory Testing",
+    "seq": 76,
+    "confidence": 0.99,
+    "score": 12.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 79
+  },
+  {
+    "heading": "17 Standard for Colour Coding of Pipelines/Equipments",
+    "level": 1,
+    "page_num": 79,
+    "page_start": 79,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments",
+    "seq": 77,
+    "confidence": 0.99,
+    "score": 13.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 79
+  },
+  {
+    "heading": "C. Identification: The system of colour coding consists of ground colour and colour",
+    "level": 2,
+    "page_num": 80,
+    "page_start": 80,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > C. Identification: The system of colour coding consists of ground colour and colour",
+    "seq": 78,
+    "confidence": 0.389,
+    "score": 3.5,
+    "reasons": [
+      "bold",
+      "centered",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 80
+  },
+  {
+    "heading": "D. Application",
+    "level": 2,
+    "page_num": 80,
+    "page_start": 80,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > D. Application",
+    "seq": 79,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "alpha",
+      "bold",
+      "gap_above"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 80
+  },
+  {
+    "heading": "ii. Location of Colour Bands:",
+    "level": 2,
+    "page_num": 80,
+    "page_start": 80,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > ii. Location of Colour Bands:",
+    "seq": 80,
+    "confidence": 0.478,
+    "score": 4.3,
+    "reasons": [
+      "bold",
+      "roman",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 80
+  },
+  {
+    "heading": "i. Lettering",
+    "level": 2,
+    "page_num": 81,
+    "page_start": 81,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > i. Lettering",
+    "seq": 81,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 81
+  },
+  {
+    "heading": "ii. Direction of Flow",
+    "level": 2,
+    "page_num": 82,
+    "page_start": 82,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > ii. Direction of Flow",
+    "seq": 82,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 82
+  },
+  {
+    "heading": "iii. Visibility Markings",
+    "level": 2,
+    "page_num": 82,
+    "page_start": 82,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > iii. Visibility Markings",
+    "seq": 83,
+    "confidence": 0.533,
+    "score": 4.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "roman"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 85
+  },
+  {
+    "heading": "17.3 Standard Colour Coding for Storage Tanks:",
+    "level": 2,
+    "page_num": 86,
+    "page_start": 86,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > 17 Standard for Colour Coding of Pipelines/Equipments > 17.3 Standard Colour Coding for Storage Tanks:",
+    "seq": 84,
+    "confidence": 0.99,
+    "score": 10.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "left_aligned",
+      "numbered_2",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 87
+  },
+  {
+    "heading": "ANNEXURE 1 Technical Specification for Dehumidification During",
+    "level": 1,
+    "page_num": 88,
+    "page_start": 88,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During",
+    "seq": 85,
+    "confidence": 0.99,
+    "score": 9.7,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 88
+  },
+  {
+    "heading": "1 Relative Humidity Control :",
+    "level": 2,
+    "page_num": 88,
+    "page_start": 88,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 1 Relative Humidity Control :",
+    "seq": 86,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 88
+  },
+  {
+    "heading": "2 Dew Point and Surface Temperature :",
+    "level": 2,
+    "page_num": 88,
+    "page_start": 88,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 2 Dew Point and Surface Temperature :",
+    "seq": 87,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 88
+  },
+  {
+    "heading": "3 Moisture Removal Rate :",
+    "level": 2,
+    "page_num": 88,
+    "page_start": 88,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 3 Moisture Removal Rate :",
+    "seq": 88,
+    "confidence": 0.367,
+    "score": 3.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 88
+  },
+  {
+    "heading": "4 Partitioning of Large Tanks :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 4 Partitioning of Large Tanks :",
+    "seq": 89,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "5 Air Change Rate :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 5 Air Change Rate :",
+    "seq": 90,
+    "confidence": 0.367,
+    "score": 3.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "6 Temperature Control :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 6 Temperature Control :",
+    "seq": 91,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "7 Continuous Dehumidification :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 7 Continuous Dehumidification :",
+    "seq": 92,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "8 Equipment Breakdown :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 8 Equipment Breakdown :",
+    "seq": 93,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "9 Performance Compliance :",
+    "level": 2,
+    "page_num": 89,
+    "page_start": 89,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 9 Performance Compliance :",
+    "seq": 94,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 89
+  },
+  {
+    "heading": "10 Data Logging :",
+    "level": 2,
+    "page_num": 90,
+    "page_start": 90,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 1 Technical Specification for Dehumidification During > 10 Data Logging :",
+    "seq": 95,
+    "confidence": 0.811,
+    "score": 7.3,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 90
+  },
+  {
+    "heading": "ANNEXURE 2 Paint Performance Guarantee Requirements",
+    "level": 1,
+    "page_num": 91,
+    "page_start": 91,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 2 Paint Performance Guarantee Requirements",
+    "seq": 96,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 91
+  },
+  {
+    "heading": "5 Submission of Guarantees:",
+    "level": 2,
+    "page_num": 92,
+    "page_start": 92,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 2 Paint Performance Guarantee Requirements > 5 Submission of Guarantees:",
+    "seq": 97,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "large_font",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 92
+  },
+  {
+    "heading": "6 Joint Inspections and Maintenance During Guarantee Period:",
+    "level": 2,
+    "page_num": 92,
+    "page_start": 92,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 2 Paint Performance Guarantee Requirements > 6 Joint Inspections and Maintenance During Guarantee Period:",
+    "seq": 98,
+    "confidence": 0.99,
+    "score": 10.0,
+    "reasons": [
+      "bold",
+      "centered",
+      "large_font",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 92
+  },
+  {
+    "heading": "ANNEXURE 3 Proforma of Performance Bank Guarantee",
+    "level": 1,
+    "page_num": 93,
+    "page_start": 93,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 3 Proforma of Performance Bank Guarantee",
+    "seq": 99,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 94
+  },
+  {
+    "heading": "ANNEXURE 4 Corporate Guarantee in the Form of Indemnity Bond for Painting Works",
+    "level": 1,
+    "page_num": 95,
+    "page_start": 95,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 4 Corporate Guarantee in the Form of Indemnity Bond for Painting Works",
+    "seq": 100,
+    "confidence": 0.99,
+    "score": 14.7,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 95
+  },
+  {
+    "heading": "1.0 Framework and Purpose of This Contract",
+    "level": 2,
+    "page_num": 96,
+    "page_start": 96,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 4 Corporate Guarantee in the Form of Indemnity Bond for Painting Works > 1.0 Framework and Purpose of This Contract",
+    "seq": 101,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 96
+  },
+  {
+    "heading": "2.0 The Guarantee",
+    "level": 2,
+    "page_num": 96,
+    "page_start": 96,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 4 Corporate Guarantee in the Form of Indemnity Bond for Painting Works > 2.0 The Guarantee",
+    "seq": 102,
+    "confidence": 0.922,
+    "score": 8.3,
+    "reasons": [
+      "bold",
+      "large_font",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 98
+  },
+  {
+    "heading": "ANNEXURE 5 Procedure for Measurement of Dry Film Coating Thickness",
+    "level": 1,
+    "page_num": 99,
+    "page_start": 99,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 5 Procedure for Measurement of Dry Film Coating Thickness",
+    "seq": 103,
+    "confidence": 0.99,
+    "score": 17.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 99
+  },
+  {
+    "heading": "Definitions",
+    "level": 3,
+    "page_num": 99,
+    "page_start": 99,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 5 Procedure for Measurement of Dry Film Coating Thickness > Definitions",
+    "seq": 104,
+    "confidence": 0.867,
+    "score": 7.8,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "large_font",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 99
+  },
+  {
+    "heading": "Spot Measurement Procedure",
+    "level": 3,
+    "page_num": 99,
+    "page_start": 99,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 5 Procedure for Measurement of Dry Film Coating Thickness > Spot Measurement Procedure",
+    "seq": 105,
+    "confidence": 0.978,
+    "score": 8.8,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "large_font",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 103
+  },
+  {
+    "heading": "ANNEXURE 6 Format for Approval of Paint Materials (Before Procurement)",
+    "level": 1,
+    "page_num": 104,
+    "page_start": 104,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 6 Format for Approval of Paint Materials (Before Procurement)",
+    "seq": 106,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 104
+  },
+  {
+    "heading": "FORMAT FOR APPROVAL OF PAINT MATERIALS (BEFORE PROCUREMENT) Details of Structures/Pipeline/Tank/Vessel: Contractor Name",
+    "level": 1,
+    "page_num": 104,
+    "page_start": 104,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > FORMAT FOR APPROVAL OF PAINT MATERIALS (BEFORE PROCUREMENT) Details of Structures/Pipeline/Tank/Vessel: Contractor Name",
+    "seq": 107,
+    "confidence": 0.99,
+    "score": 16.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "compact_colon_heading",
+      "large_font",
+      "left_aligned",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 104
+  },
+  {
+    "heading": "ANNEXURE 7 Paint - Material Inspection Report",
+    "level": 1,
+    "page_num": 105,
+    "page_start": 105,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 7 Paint - Material Inspection Report",
+    "seq": 108,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 105
+  },
+  {
+    "heading": "PAINT - MATERIAL INSPECTION REPORT",
+    "level": 1,
+    "page_num": 105,
+    "page_start": 105,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINT - MATERIAL INSPECTION REPORT",
+    "seq": 109,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 105
+  },
+  {
+    "heading": "ANNEXURE 8 Surface Preparation and Painting Inspection Report",
+    "level": 1,
+    "page_num": 106,
+    "page_start": 106,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 8 Surface Preparation and Painting Inspection Report",
+    "seq": 110,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 106
+  },
+  {
+    "heading": "SURFACE PREPARATION AND PAINTING INSPECTION REPORT",
+    "level": 1,
+    "page_num": 106,
+    "page_start": 106,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > SURFACE PREPARATION AND PAINTING INSPECTION REPORT",
+    "seq": 111,
+    "confidence": 0.99,
+    "score": 10.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "gap_above",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 106
+  },
+  {
+    "heading": "Surface Preparation Specification",
+    "level": 3,
+    "page_num": 106,
+    "page_start": 106,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > SURFACE PREPARATION AND PAINTING INSPECTION REPORT > Surface Preparation Specification",
+    "seq": 112,
+    "confidence": 0.444,
+    "score": 4.0,
+    "reasons": [
+      "compact_colon_heading",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 106
+  },
+  {
+    "heading": "ANNEXURE 9 DFT Inspection Report",
+    "level": 1,
+    "page_num": 107,
+    "page_start": 107,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 9 DFT Inspection Report",
+    "seq": 113,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 107
+  },
+  {
+    "heading": "DFT INSPECTION REPORT",
+    "level": 1,
+    "page_num": 107,
+    "page_start": 107,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > DFT INSPECTION REPORT",
+    "seq": 114,
+    "confidence": 0.99,
+    "score": 9.8,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 107
+  },
+  {
+    "heading": "ANNEXURE 10 Painting Inspection Checklist",
+    "level": 1,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 10 Painting Inspection Checklist",
+    "seq": 115,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "PAINTING INSPECTION CHECKLIST",
+    "level": 1,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST",
+    "seq": 116,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "toc_match",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "1 Materials Inspection Report (MIR): -",
+    "level": 2,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 1 Materials Inspection Report (MIR): -",
+    "seq": 117,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "2 Calibration of Inspection Instrument: -",
+    "level": 2,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 2 Calibration of Inspection Instrument: -",
+    "seq": 118,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "3 Blasting & Painting Equipments Inspection: -",
+    "level": 2,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 3 Blasting & Painting Equipments Inspection: -",
+    "seq": 119,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "4 Applicator Qualification: -",
+    "level": 2,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 4 Applicator Qualification: -",
+    "seq": 120,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "5 Weather Condition Inspection: -",
+    "level": 2,
+    "page_num": 108,
+    "page_start": 108,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 5 Weather Condition Inspection: -",
+    "seq": 121,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 108
+  },
+  {
+    "heading": "PAINTING INSPECTION CHECKLIST",
+    "level": 1,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST",
+    "seq": 122,
+    "confidence": 0.99,
+    "score": 11.3,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "centered",
+      "toc_match",
+      "very_large_font"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "6 Surface Preparation Inspection: -",
+    "level": 2,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 6 Surface Preparation Inspection: -",
+    "seq": 123,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "7 During Paint Application Inspection: -",
+    "level": 2,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 7 During Paint Application Inspection: -",
+    "seq": 124,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "8 Painting Inspection: -",
+    "level": 2,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 8 Painting Inspection: -",
+    "seq": 125,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "9 Adhesion Test Inspection: -",
+    "level": 2,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 9 Adhesion Test Inspection: -",
+    "seq": 126,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "9.1 Test Pannel (As per Specification Requirement).",
+    "level": 3,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 9 Adhesion Test Inspection: - > 9.1 Test Pannel (As per Specification Requirement).",
+    "seq": 127,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "10 Holiday Test Inspection: -",
+    "level": 2,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 10 Holiday Test Inspection: -",
+    "seq": 128,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "10.2 Voltage Setting (As per Specification Requirement).",
+    "level": 3,
+    "page_num": 109,
+    "page_start": 109,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > PAINTING INSPECTION CHECKLIST > 10 Holiday Test Inspection: - > 10.2 Voltage Setting (As per Specification Requirement).",
+    "seq": 129,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_2",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 109
+  },
+  {
+    "heading": "ANNEXURE 11 Brand Names of Paints",
+    "level": 1,
+    "page_num": 110,
+    "page_start": 110,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > ANNEXURE 11 Brand Names of Paints",
+    "seq": 130,
+    "confidence": 0.99,
+    "score": 12.2,
+    "reasons": [
+      "appendix",
+      "bold",
+      "centered",
+      "large_font",
+      "toc_match"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 110
+  },
+  {
+    "heading": "Brand Names of Paints",
+    "level": 1,
+    "page_num": 110,
+    "page_start": 110,
+    "breadcrumb": "Technical Specification of Paint Coatings for BPCL Refineries > Brand Names of Paints",
+    "seq": 131,
+    "confidence": 0.99,
+    "score": 9.3,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "toc_match",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "Technical Specification of Paint Coatings for BPCL Refineries",
+      "path_parts": [],
+      "source": "metadata"
+    },
+    "page_end": 110
+  }
+]

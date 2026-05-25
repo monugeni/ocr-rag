@@ -1,0 +1,174 @@
+[
+  {
+    "id": 1,
+    "page_num": 2,
+    "line_index": 6,
+    "top": 194.0,
+    "left": 48.0,
+    "text": "Abbreviations",
+    "level": 5,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "compact_colon_heading",
+      "gap_above",
+      "left_aligned",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > Abbreviations",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 2,
+    "page_num": 3,
+    "line_index": 7,
+    "top": 220.0,
+    "left": 36.0,
+    "text": "1.0 SCOPE",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "1.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 1.0 SCOPE",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 3,
+    "page_num": 3,
+    "line_index": 9,
+    "top": 294.0,
+    "left": 37.0,
+    "text": "2.0 REFERENCE DOCUMENTS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "2.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 2.0 REFERENCE DOCUMENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 4,
+    "page_num": 3,
+    "line_index": 11,
+    "top": 369.0,
+    "left": 36.0,
+    "text": "3.0 INSPECTION AND TEST REQUIREMENTS",
+    "level": 1,
+    "score": 7.3,
+    "confidence": 0.811,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 3.0 INSPECTION AND TEST REQUIREMENTS",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 5,
+    "page_num": 5,
+    "line_index": 19,
+    "top": 417.0,
+    "left": 94.0,
+    "text": "3.0 In Process Inspection",
+    "level": 1,
+    "score": 6.3,
+    "confidence": 0.7,
+    "reasons": [
+      "bold",
+      "gap_above",
+      "numbered_1"
+    ],
+    "numbering": "3.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 3.0 In Process Inspection",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 6,
+    "page_num": 7,
+    "line_index": 24,
+    "top": 481.0,
+    "left": 96.0,
+    "text": "5.0 Painting",
+    "level": 1,
+    "score": 5.0,
+    "confidence": 0.556,
+    "reasons": [
+      "gap_above",
+      "numbered_1"
+    ],
+    "numbering": "5.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 5.0 Painting",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 7,
+    "page_num": 7,
+    "line_index": 27,
+    "top": 607.0,
+    "left": 97.0,
+    "text": "6.0 PACKING & PROTECTION",
+    "level": 1,
+    "score": 6.8,
+    "confidence": 0.756,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "numbered_1"
+    ],
+    "numbering": "6.0",
+    "scheme": "decimal",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 6.0 PACKING & PROTECTION",
+    "toc_match": null,
+    "warnings": []
+  },
+  {
+    "id": 8,
+    "page_num": 8,
+    "line_index": 18,
+    "top": 443.0,
+    "left": 84.0,
+    "text": "NOTES (As applicable)",
+    "level": 5,
+    "score": 5.8,
+    "confidence": 0.644,
+    "reasons": [
+      "bold",
+      "compact_colon_heading",
+      "gap_above",
+      "trailing_colon"
+    ],
+    "numbering": "",
+    "scheme": "",
+    "breadcrumb": "INSPECTION AND TEST PLAN STANDARD SPECIFICATION NO. > 6.0 PACKING & PROTECTION > NOTES (As applicable)",
+    "toc_match": null,
+    "warnings": []
+  }
+]

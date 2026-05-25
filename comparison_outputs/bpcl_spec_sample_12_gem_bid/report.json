@@ -1,0 +1,29 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/GeM-Bidding-9201620.pdf",
+  "document_title": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details",
+  "document_context": {
+    "title": "बड बड द तावेज़ द तावेज़ / Bid Document बड ववरण बड ववरण// Bid Details",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 10,
+  "body_font_size": 14.0,
+  "heading_count": 2,
+  "toc_entry_count": 0,
+  "chunk_count": 59,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 10,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 0,
+    "line_role_counts": {
+      "drawing": 47,
+      "body": 296,
+      "form": 2,
+      "page_number": 13,
+      "table": 53
+    }
+  }
+}

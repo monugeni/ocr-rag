@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf2xml SYSTEM "pdf2xml.dtd">
+
+<pdf2xml producer="poppler" version="25.04.0">
+<page number="1" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="0" size="12" family="Helvetica" color="#000000"/>
+	<fontspec id="1" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="2" size="10" family="Helvetica" color="#000000"/>
+	<fontspec id="3" size="23" family="Helvetica" color="#000000"/>
+	<fontspec id="4" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="5" size="16" family="Helvetica" color="#000000"/>
+	<fontspec id="6" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="7" size="14" family="Helvetica" color="#000000"/>
+	<fontspec id="8" size="18" family="Helvetica" color="#000000"/>
+	<fontspec id="9" size="15" family="Courier" color="#000000"/>
+<text top="197" left="361" width="14" height="11" font="0">1</text>
+<text top="197" left="366" width="47" height="10" font="1">17  T.O.S. </text>
+<text top="244" left="138" width="58" height="9" font="2">REFER NOTE </text>
+<text top="269" left="366" width="27" height="21" font="3">71 </text>
+<text top="288" left="144" width="88" height="9" font="2">3 NOS 220 HOLES </text>
+<text top="299" left="143" width="76" height="9" font="2">FOR M20 BOLTS </text>
+<text top="198" left="647" width="27" height="9" font="2">(Typ) </text>
+<text top="199" left="689" width="12" height="9" font="2">1</text>
+<text top="197" left="694" width="38" height="11" font="1">17,  T.O.S. </text>
+<text top="271" left="460" width="87" height="9" font="2">3 NOS 220 HOLES </text>
+<text top="282" left="459" width="76" height="9" font="2">FOR M20 BOLTS </text>
+<text top="300" left="531" width="30" height="9" font="2">MAIN </text>
+<text top="206" left="609" width="10" height="9" font="2">5 </text>
+<text top="93" left="335" width="261" height="12" font="4"><b>WELDED SHEAR CONNECTION DETAILS </b></text>
+<text top="105" left="129" width="170" height="15" font="5"><b>nirgre ENGINEERS </b></text>
+<text top="107" left="365" width="198" height="15" font="5"><b>FOR PARALLEL FLANGE BEAM </b></text>
+<text top="118" left="108" width="25" height="15" font="5"><b>dig</b></text>
+<text top="117" left="223" width="99" height="15" font="5"><b>MA LIMITM </b></text>
+<text top="132" left="132" width="66" height="6" font="6"><b>1411111CIAMIWOL11•0 </b></text>
+<text top="132" left="223" width="99" height="6" font="6"><b>(A Govt. of Indio Und•rtakip) </b></text>
+<text top="124" left="363" width="203" height="15" font="5"><b>WITH PARALLEL FLANGE BEAM </b></text>
+<text top="84" left="639" width="102" height="15" font="5"><b>STANDARD No. </b></text>
+<text top="111" left="647" width="91" height="15" font="5"><b>7-68-0686 Rev. 1 </b></text>
+<text top="140" left="655" width="56" height="9" font="2">Page 1 of 2 </text>
+<text top="380" left="279" width="60" height="12" font="7">TYPE-1  </text>
+<text top="380" left="584" width="57" height="12" font="7">TYPE-II </text>
+<text top="401" left="177" width="258" height="12" font="7">(SECONDARY BEAM &lt; MAIN BEAM) </text>
+<text top="401" left="484" width="258" height="12" font="7">(SECONDARY BEAM = MAIN BEAM) </text>
+<text top="436" left="294" width="305" height="12" font="7">TYPICAL DETAILS OF SHEAR CONNECTION </text>
+<text top="458" left="310" width="274" height="12" font="7">BETWEEN PARALLEL FLANGED BEAMS </text>
+<text top="556" left="516" width="108" height="17" font="8"><b>LEGENDS :- </b></text>
+<text top="601" left="518" width="183" height="9" font="2">fy = SHEAR STRENGTH OF STEEL. </text>
+<text top="614" left="518" width="187" height="9" font="2">t = THICKNESS OF CLEAT ANGLE. </text>
+<text top="628" left="517" width="108" height="9" font="2">dW = BEAM DEPTH. </text>
+<text top="642" left="518" width="174" height="9" font="2">tw = WEB THICKNESS OF BEAM. </text>
+<text top="687" left="228" width="108" height="12" font="7">SECTION 1-1  </text>
+<text top="-12191" left="10332" width="11" height="12" font="9"> </text>
+<text top="-12191" left="12383" width="11" height="12" font="9"> </text>
+<text top="-12716" left="4500" width="11" height="12" font="9"> </text>
+<text top="-12716" left="6507" width="11" height="12" font="9"> </text>
+<text top="-12716" left="10332" width="11" height="12" font="9"> </text>
+<text top="-12716" left="12383" width="11" height="12" font="9"> </text>
+<text top="790" left="113" width="84" height="17" font="8"><b>NOTES :- </b></text>
+<text top="835" left="113" width="14" height="9" font="2">1. </text>
+<text top="835" left="156" width="159" height="9" font="2">ALL DIMENSIONS ARE IN mm. </text>
+<text top="849" left="114" width="13" height="9" font="2">2. </text>
+<text top="849" left="155" width="317" height="9" font="2">PARALLEL FLANGE SECTIONS SHALL CONFORM TO IS:12778. </text>
+<text top="863" left="114" width="13" height="9" font="2">3. </text>
+<text top="863" left="155" width="611" height="9" font="2">STRUCTURAL STEEL FOR CONNECTION PLATES SHALL BE OF SAME GRADE AS THAT OF THE CONNECTING MEMBERS. </text>
+<text top="877" left="114" width="13" height="9" font="2">4. </text>
+<text top="877" left="155" width="439" height="9" font="2">CONNECTION DETAIL FOR SECONDARY BEAM &gt; MAIN BEAM ARE NOT SHOWN HERE. </text>
+<text top="890" left="114" width="13" height="9" font="2">5. </text>
+<text top="891" left="155" width="587" height="9" font="2">CONNECTION DETAILS SHOWN HERE ARE FOR FIELD CONNECTION ONLY, SAME SHALL BE FOLLOWED FOR SHOP </text>
+<text top="905" left="155" width="101" height="9" font="2">CONNECTION ALSO. </text>
+<text top="919" left="114" width="13" height="9" font="2">6. </text>
+<text top="919" left="156" width="350" height="9" font="2">ALL FIELD WELDS SHALL BE MINIMUM 6 mm FILLET WELD (UNO). </text>
+<text top="933" left="114" width="13" height="9" font="2">7. </text>
+<text top="933" left="156" width="374" height="9" font="2">ALL HOLES ARE SHOWN THUS 143- ARE 220 FOR M20 ERECTION BOLTS. </text>
+<text top="947" left="114" width="13" height="9" font="2">8. </text>
+<text top="947" left="155" width="424" height="9" font="2">ERECTION BOLTS SHALL BE OF PROPERTY CLASS 4.6 CONFORMING TO IS:1367. </text>
+<text top="961" left="114" width="13" height="9" font="2">9. </text>
+<text top="961" left="155" width="316" height="9" font="2">CENTRAL BOLT TO BE PROVIDED FOR BEAM DEPTH &gt; 600. </text>
+<text top="974" left="113" width="19" height="9" font="2">10. </text>
+<text top="975" left="155" width="513" height="9" font="2">FOR SHEAR CONNECTIONS OF ISMB SECTIONS, EIL STANDARD 7-68-0689 SHALL BE FOLLOWED. </text>
+<text top="988" left="113" width="19" height="9" font="2">11. </text>
+<text top="988" left="155" width="594" height="9" font="2">SHEAR CAPACITY OF THE CONNECTION IS THE MINIMUM OF THE SHEAR CAPACITY FOR WELD. CLEAT ANGLE AND </text>
+<text top="1002" left="155" width="279" height="9" font="2">BEAM. WHICH HAS BEEN WORKED OUT AS FOLLOWS: </text>
+<text top="1016" left="155" width="247" height="9" font="2">o. CLEAT CAPACITY =2 x L x t x 0.4 x fy </text>
+<text top="1030" left="155" width="13" height="9" font="2">b. </text>
+<text top="1030" left="177" width="219" height="9" font="2">BEAM CAPACITY = dW x tw x 0.4 x fy </text>
+<text top="1045" left="156" width="12" height="9" font="2">c. </text>
+<text top="1045" left="177" width="443" height="9" font="2">WELD CAPACITY = BEAM CAPACITY x (WELD SIZE PROVIDED/WELD SIZE REQUIRED). </text>
+<text top="1105" left="110" width="9" height="9" font="2">1 </text>
+<text top="1104" left="150" width="42" height="9" font="2">22.09.20 </text>
+<text top="1105" left="245" width="171" height="9" font="2">REAFFIRMED &amp; ISSUED AS STANDARD </text>
+<text top="1105" left="465" width="28" height="9" font="2">JEETU </text>
+<text top="1105" left="555" width="19" height="9" font="2">AVM </text>
+<text top="1105" left="641" width="13" height="9" font="2">AS </text>
+<text top="1105" left="733" width="14" height="9" font="2">SM </text>
+<text top="1125" left="110" width="10" height="9" font="2">0 </text>
+<text top="1124" left="150" width="42" height="9" font="2">15.07.14 </text>
+<text top="1124" left="245" width="100" height="9" font="2">ISSUED AS STANDARD </text>
+<text top="1124" left="470" width="19" height="9" font="2">VPS </text>
+<text top="1124" left="556" width="13" height="9" font="2">AS </text>
+<text top="1124" left="636" width="21" height="9" font="2">PKM </text>
+<text top="1124" left="730" width="14" height="9" font="2">SC </text>
+<text top="1144" left="454" width="48" height="9" font="2">Prepared </text>
+<text top="1144" left="538" width="46" height="9" font="2">Checked </text>
+<text top="1141" left="601" width="82" height="9" font="2">Stds. Committee </text>
+<text top="1141" left="706" width="66" height="9" font="2">Stds. Bureau </text>
+<text top="1153" left="623" width="50" height="9" font="2">Convenor </text>
+<text top="1153" left="716" width="50" height="9" font="2">Chairman </text>
+<text top="1144" left="100" width="25" height="9" font="2">Rev. </text>
+<text top="1160" left="103" width="19" height="9" font="2">No. </text>
+<text top="1154" left="156" width="27" height="9" font="2">Date </text>
+<text top="1154" left="284" width="44" height="9" font="2">Purpose </text>
+<text top="1160" left="473" width="15" height="9" font="2">by </text>
+<text top="1160" left="555" width="15" height="9" font="2">by </text>
+<text top="1167" left="658" width="64" height="9" font="2">Approved by </text>
+<text top="1179" left="92" width="143" height="9" font="2">Format No. 8-00-0001-F4 Rev.O </text>
+<text top="1179" left="598" width="148" height="9" font="2">Copyright EIL - All rights reserved </text>
+</page>
+<page number="2" position="absolute" top="0" left="0" height="1260" width="895">
+	<fontspec id="10" size="13" family="Helvetica" color="#000000"/>
+	<fontspec id="11" size="19" family="Helvetica" color="#000000"/>
+	<fontspec id="12" size="17" family="Helvetica" color="#000000"/>
+	<fontspec id="13" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="14" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="15" size="6" family="Helvetica" color="#000000"/>
+	<fontspec id="16" size="9" family="Helvetica" color="#000000"/>
+	<fontspec id="17" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="18" size="6" family="Times" color="#000000"/>
+	<fontspec id="19" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="20" size="8" family="Times" color="#000000"/>
+	<fontspec id="21" size="11" family="Helvetica" color="#000000"/>
+	<fontspec id="22" size="7" family="Helvetica" color="#000000"/>
+	<fontspec id="23" size="9" family="Helvetica" color="#000000"/>
+	<fontspec id="24" size="9" family="Times" color="#000000"/>
+	<fontspec id="25" size="8" family="Times" color="#000000"/>
+	<fontspec id="26" size="7" family="Times" color="#000000"/>
+	<fontspec id="27" size="19" family="Helvetica" color="#000000"/>
+<text top="1139" left="455" width="47" height="10" font="1">Prepared </text>
+<text top="1139" left="539" width="46" height="10" font="1">Checked </text>
+<text top="1136" left="601" width="82" height="10" font="1">Stds. Committee </text>
+<text top="1136" left="705" width="65" height="10" font="1">Stds. Bureau </text>
+<text top="1155" left="474" width="14" height="10" font="1">by </text>
+<text top="1155" left="555" width="14" height="10" font="1">by </text>
+<text top="1148" left="623" width="50" height="10" font="1">Convenor </text>
+<text top="1148" left="715" width="50" height="10" font="1">Chairman </text>
+<text top="1139" left="104" width="26" height="10" font="1">Rev. </text>
+<text top="1155" left="108" width="20" height="10" font="1">No. </text>
+<text top="1149" left="160" width="27" height="10" font="1">Date </text>
+<text top="1149" left="286" width="44" height="10" font="1">Purpose </text>
+<text top="1161" left="657" width="63" height="10" font="1">Approved by </text>
+<text top="97" left="336" width="258" height="12" font="10"><b>WELDED SHEAR CONNECTION DETAILS </b></text>
+<text top="110" left="226" width="73" height="13" font="4"><b>ENGINEERS </b></text>
+<text top="113" left="367" width="196" height="13" font="4"><b>FOR PARALLEL FLANGE BEAM </b></text>
+<text top="119" left="111" width="40" height="17" font="11"><b>Oliki</b></text>
+<text top="119" left="136" width="19" height="17" font="11"><b>l</b></text>
+<text top="123" left="146" width="177" height="13" font="4"><b>WgeNDIA LIMITED </b></text>
+<text top="136" left="135" width="65" height="6" font="6"><b>1.110111MAIROLPIIM/ </b></text>
+<text top="136" left="226" width="98" height="6" font="6"><b>(A Got&amp; AI India Undertaking) </b></text>
+<text top="129" left="364" width="202" height="13" font="4"><b>WITH PARALLEL FLANGE BEAM </b></text>
+<text top="90" left="638" width="102" height="13" font="7">STANDARD No. </text>
+<text top="117" left="647" width="90" height="13" font="4"><b>7-68-0686 Rev. 1 </b></text>
+<text top="143" left="654" width="55" height="10" font="1">Page 2 of 2 </text>
+<text top="849" left="168" width="0" height="15" font="12">SHEAR </text>
+<text top="788" left="168" width="0" height="15" font="12">CON</text>
+<text top="752" left="175" width="0" height="15" font="12">NE</text>
+<text top="730" left="168" width="0" height="15" font="12">CTI</text>
+<text top="704" left="175" width="0" height="15" font="12">ON B</text>
+<text top="664" left="175" width="0" height="15" font="12">ETWEEN PARALLEL FLANG</text>
+<text top="449" left="175" width="0" height="15" font="12">E BEAMS </text>
+<text top="378" left="175" width="0" height="15" font="12"> </text>
+<text top="286" left="198" width="0" height="10" font="13">% </text>
+<text top="278" left="202" width="0" height="10" font="13"> SH</text>
+<text top="258" left="202" width="0" height="10" font="13">EAR C</text>
+<text top="226" left="198" width="0" height="10" font="13">APACI</text>
+<text top="193" left="202" width="0" height="10" font="13">TY </text>
+<text top="292" left="211" width="0" height="10" font="13">O</text>
+<text top="283" left="215" width="0" height="10" font="13">F </text>
+<text top="274" left="211" width="0" height="10" font="13">CO</text>
+<text top="257" left="211" width="0" height="10" font="13">NNECTI</text>
+<text top="217" left="215" width="0" height="10" font="13">ON </text>
+<text top="198" left="215" width="0" height="10" font="13">WR</text>
+<text top="180" left="215" width="0" height="10" font="13">T </text>
+<text top="297" left="228" width="0" height="10" font="13">BEAM S</text>
+<text top="256" left="228" width="0" height="10" font="13">HEAR C</text>
+<text top="215" left="228" width="0" height="10" font="13">APAC</text>
+<text top="185" left="228" width="0" height="10" font="13">ITY </text>
+<text top="239" left="248" width="0" height="10" font="13">85 </text>
+<text top="235" left="270" width="12" height="6" font="14">sl-  </text>
+<text top="242" left="270" width="12" height="6" font="14">03 </text>
+<text top="239" left="300" width="0" height="10" font="13">77 </text>
+<text top="159" left="312" width="0" height="10" font="13">I </text>
+<text top="239" left="324" width="0" height="10" font="13">80 </text>
+<text top="235" left="345" width="13" height="6" font="14">0) </text>
+<text top="242" left="345" width="14" height="6" font="14">(0 </text>
+<text top="235" left="372" width="11" height="6" font="14">CNI </text>
+<text top="242" left="371" width="15" height="6" font="14">N </text>
+<text top="235" left="396" width="14" height="6" font="14">(0 </text>
+<text top="242" left="396" width="14" height="6" font="14">N. </text>
+<text top="239" left="424" width="0" height="10" font="13">78 </text>
+<text top="158" left="436" width="0" height="10" font="13">I </text>
+<text top="232" left="443" width="14" height="10" font="1">a) </text>
+<text top="242" left="443" width="15" height="6" font="14">N </text>
+<text top="232" left="466" width="10" height="10" font="1">— </text>
+<text top="242" left="466" width="11" height="6" font="14">CO </text>
+<text top="235" left="488" width="13" height="6" font="14">c0 </text>
+<text top="242" left="488" width="11" height="6" font="14">(C3 </text>
+<text top="240" left="516" width="0" height="10" font="13">6</text>
+<text top="232" left="521" width="0" height="10" font="13">8 </text>
+<text top="167" left="527" width="0" height="10" font="13">] </text>
+<text top="235" left="535" width="14" height="6" font="14">0) </text>
+<text top="242" left="535" width="15" height="6" font="14">N </text>
+<text top="240" left="564" width="0" height="10" font="13">80 </text>
+<text top="235" left="583" width="15" height="6" font="14">N </text>
+<text top="242" left="583" width="14" height="6" font="14">(0 </text>
+<text top="239" left="610" width="0" height="10" font="13">68 </text>
+<text top="235" left="629" width="11" height="6" font="14">cD </text>
+<text top="242" left="628" width="13" height="6" font="14">(0 </text>
+<text top="235" left="652" width="12" height="6" font="14">c0 </text>
+<text top="242" left="652" width="12" height="6" font="14">VD </text>
+<text top="411" left="202" width="0" height="10" font="13">MINIMU</text>
+<text top="371" left="202" width="0" height="10" font="13">M SHEAR </text>
+<text top="406" left="210" width="0" height="10" font="13">C</text>
+<text top="399" left="215" width="0" height="10" font="13">APAC</text>
+<text top="368" left="215" width="0" height="10" font="13">ITY (</text>
+<text top="345" left="215" width="0" height="10" font="13">MT) </text>
+<text top="327" left="215" width="0" height="10" font="13"> </text>
+<text top="411" left="228" width="0" height="10" font="13">OF </text>
+<text top="393" left="228" width="0" height="10" font="13">CONNE</text>
+<text top="354" left="223" width="0" height="10" font="13">CTI</text>
+<text top="337" left="228" width="0" height="10" font="13">ON </text>
+<text top="366" left="243" width="13" height="10" font="1">0) </text>
+<text top="376" left="243" width="11" height="6" font="14">CNI </text>
+<text top="373" left="274" width="0" height="10" font="13">29 </text>
+<text top="373" left="300" width="0" height="10" font="13">53 </text>
+<text top="366" left="319" width="14" height="10" font="1">U) </text>
+<text top="375" left="319" width="14" height="6" font="14">U) </text>
+<text top="373" left="350" width="0" height="10" font="13">53 </text>
+<text top="373" left="376" width="0" height="10" font="13">55 </text>
+<text top="369" left="396" width="12" height="6" font="14">CD </text>
+<text top="376" left="396" width="12" height="6" font="14">(.0 </text>
+<text top="373" left="424" width="0" height="10" font="13">68 </text>
+<text top="373" left="447" width="0" height="10" font="13">78 </text>
+<text top="369" left="466" width="11" height="6" font="14">— </text>
+<text top="372" left="465" width="14" height="10" font="1">a) </text>
+<text top="369" left="488" width="12" height="6" font="14">CO </text>
+<text top="372" left="488" width="16" height="10" font="1">N </text>
+<text top="372" left="498" width="1" height="10" font="1"> </text>
+<text top="369" left="512" width="10" height="6" font="14">— </text>
+<text top="372" left="511" width="12" height="10" font="1">co </text>
+<text top="373" left="540" width="0" height="10" font="13">9</text>
+<text top="366" left="544" width="0" height="10" font="13">4 </text>
+<text top="369" left="559" width="14" height="6" font="14">U) </text>
+<text top="373" left="559" width="14" height="10" font="1">0) </text>
+<text top="366" left="583" width="11" height="10" font="1">-4- </text>
+<text top="373" left="583" width="14" height="10" font="1">0) </text>
+<text top="366" left="605" width="15" height="10" font="1">in </text>
+<text top="373" left="605" width="14" height="10" font="1">0) </text>
+<text top="366" left="628" width="15" height="10" font="1">°' </text>
+<text top="373" left="629" width="16" height="6" font="14">0 </text>
+<text top="380" left="628" width="11" height="6" font="14">,— </text>
+<text top="366" left="651" width="16" height="10" font="1">°' </text>
+<text top="373" left="652" width="16" height="6" font="14">0 </text>
+<text top="380" left="652" width="11" height="6" font="14">.— </text>
+<text top="442" left="206" width="11" height="6" font="14">LLI </text>
+<text top="450" left="206" width="10" height="6" font="14">Cl_ </text>
+<text top="498" left="256" width="12" height="6" font="14">CO </text>
+<text top="495" left="307" width="16" height="6" font="14">0 </text>
+<text top="495" left="358" width="16" height="6" font="14">0 </text>
+<text top="495" left="408" width="16" height="6" font="14">0 </text>
+<text top="495" left="454" width="12" height="6" font="14">CN </text>
+<text top="495" left="500" width="12" height="6" font="14">CN </text>
+<text top="501" left="499" width="11" height="6" font="14">..— </text>
+<text top="495" left="547" width="12" height="6" font="14">CNI </text>
+<text top="495" left="594" width="12" height="6" font="14">Cs1 </text>
+<text top="495" left="640" width="12" height="6" font="14">Cs1 </text>
+<text top="541" left="205" width="13" height="6" font="14">ILI </text>
+<text top="537" left="256" width="16" height="6" font="14">0 </text>
+<text top="545" left="256" width="13" height="6" font="15"><i><b>U) </b></i></text>
+<text top="537" left="306" width="14" height="6" font="14">U) </text>
+<text top="545" left="307" width="12" height="6" font="14">cD </text>
+<text top="537" left="358" width="13" height="6" font="14">U) </text>
+<text top="545" left="358" width="12" height="6" font="14">cD </text>
+<text top="537" left="408" width="13" height="6" font="14">U) </text>
+<text top="545" left="408" width="12" height="6" font="14">6.0 </text>
+<text top="537" left="454" width="13" height="6" font="14">cil </text>
+<text top="545" left="454" width="13" height="6" font="14">(D </text>
+<text top="537" left="499" width="14" height="6" font="14">U) </text>
+<text top="544" left="500" width="11" height="6" font="14">CO </text>
+<text top="537" left="547" width="16" height="6" font="14">0 </text>
+<text top="543" left="547" width="13" height="8" font="16"><i>a) </i></text>
+<text top="537" left="594" width="16" height="6" font="14">0 </text>
+<text top="543" left="594" width="12" height="8" font="16"><i>a) </i></text>
+<text top="537" left="640" width="16" height="6" font="14">0 </text>
+<text top="542" left="640" width="14" height="10" font="1">0) </text>
+<text top="583" left="208" width="12" height="10" font="1">0 </text>
+<text top="580" left="256" width="13" height="10" font="1">to </text>
+<text top="588" left="257" width="11" height="10" font="1">— </text>
+<text top="580" left="307" width="13" height="10" font="1">to </text>
+<text top="588" left="308" width="11" height="10" font="1">— </text>
+<text top="580" left="358" width="14" height="10" font="1">ir) </text>
+<text top="588" left="359" width="11" height="10" font="1">— </text>
+<text top="580" left="408" width="15" height="10" font="1">in </text>
+<text top="588" left="409" width="10" height="10" font="1">— </text>
+<text top="580" left="454" width="15" height="10" font="1">in </text>
+<text top="588" left="455" width="11" height="10" font="1">— </text>
+<text top="580" left="499" width="15" height="10" font="1">in </text>
+<text top="588" left="500" width="10" height="10" font="1">— </text>
+<text top="580" left="547" width="15" height="10" font="1">in </text>
+<text top="588" left="548" width="11" height="10" font="1">— </text>
+<text top="580" left="594" width="15" height="10" font="1">in </text>
+<text top="588" left="595" width="10" height="10" font="1">— </text>
+<text top="580" left="640" width="15" height="10" font="1">in </text>
+<text top="588" left="641" width="10" height="10" font="1">— </text>
+<text top="642" left="207" width="8" height="6" font="17"><i><b>CO </b></i></text>
+<text top="635" left="243" width="12" height="10" font="1">to </text>
+<text top="645" left="243" width="12" height="6" font="17"><i><b>(0 </b></i></text>
+<text top="635" left="269" width="13" height="10" font="1">to </text>
+<text top="643" left="269" width="14" height="10" font="1">rn </text>
+<text top="635" left="295" width="13" height="10" font="1">to </text>
+<text top="643" left="295" width="12" height="10" font="1">co </text>
+<text top="637" left="319" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="646" left="320" width="6" height="6" font="15"><i><b>NI</b></i></text>
+<text top="646" left="326" width="4" height="5" font="18"><i><b>- </b></i></text>
+<text top="646" left="328" width="1" height="6" font="15"><i><b> </b></i></text>
+<text top="637" left="344" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="645" left="345" width="12" height="6" font="17"><i><b>(0 </b></i></text>
+<text top="638" left="371" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="645" left="371" width="13" height="6" font="17"><i><b>(0 </b></i></text>
+<text top="638" left="396" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="645" left="396" width="12" height="6" font="17"><i><b>(0 </b></i></text>
+<text top="638" left="419" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="646" left="420" width="11" height="6" font="6"><b>NI-  </b></text>
+<text top="638" left="442" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="645" left="443" width="12" height="6" font="19"><b>tO </b></text>
+<text top="638" left="465" width="13" height="6" font="17"><i><b>U) </b></i></text>
+<text top="643" left="465" width="15" height="10" font="1">in </text>
+<text top="643" left="493" width="0" height="10" font="13">65 </text>
+<text top="639" left="511" width="14" height="6" font="17"><i><b>0 </b></i></text>
+<text top="643" left="511" width="12" height="10" font="1">co </text>
+<text top="643" left="540" width="0" height="10" font="13">65 </text>
+<text top="639" left="559" width="15" height="6" font="15"><i><b>0 </b></i></text>
+<text top="646" left="559" width="12" height="6" font="14">cD </text>
+<text top="639" left="582" width="13" height="6" font="15"><i><b>U) </b></i></text>
+<text top="646" left="583" width="12" height="6" font="14">co </text>
+<text top="643" left="610" width="0" height="10" font="13">65 </text>
+<text top="639" left="628" width="12" height="6" font="15"><i><b>U) </b></i></text>
+<text top="646" left="628" width="12" height="6" font="14">(.0 </text>
+<text top="639" left="651" width="13" height="6" font="15"><i><b>U) </b></i></text>
+<text top="646" left="652" width="11" height="6" font="14">CO </text>
+<text top="707" left="206" width="13" height="6" font="14">_1 </text>
+<text top="701" left="242" width="12" height="6" font="15"><i><b>(I) </b></i></text>
+<text top="708" left="243" width="11" height="6" font="14">.— </text>
+<text top="714" left="243" width="11" height="6" font="14">PO </text>
+<text top="701" left="269" width="16" height="6" font="14">0 </text>
+<text top="708" left="269" width="15" height="6" font="14">in </text>
+<text top="715" left="270" width="13" height="6" font="14">to </text>
+<text top="701" left="295" width="16" height="6" font="14">0 </text>
+<text top="708" left="295" width="14" height="6" font="14">NI </text>
+<text top="715" left="295" width="10" height="6" font="15"><i><b>Nt </b></i></text>
+<text top="701" left="319" width="16" height="6" font="14">0 </text>
+<text top="716" left="319" width="11" height="6" font="6"><b>NI-  </b></text>
+<text top="707" left="320" width="9" height="7" font="20">U))</text>
+<text top="708" left="345" width="18" height="6" font="14">rl </text>
+<text top="701" left="345" width="16" height="6" font="14">0 </text>
+<text top="716" left="345" width="11" height="6" font="6"><b>at </b></text>
+<text top="701" left="372" width="16" height="6" font="14">0 </text>
+<text top="708" left="371" width="13" height="6" font="14">111 </text>
+<text top="716" left="372" width="11" height="6" font="6"><b>NI-  </b></text>
+<text top="713" left="401" width="0" height="10" font="13">530 </text>
+<text top="713" left="424" width="0" height="10" font="13">550 </text>
+<text top="701" left="443" width="16" height="6" font="14">0 </text>
+<text top="708" left="442" width="13" height="6" font="14">N) </text>
+<text top="715" left="442" width="13" height="6" font="6"><b>U) </b></text>
+<text top="713" left="470" width="0" height="10" font="13">550 </text>
+<text top="713" left="493" width="0" height="10" font="13">530 </text>
+<text top="701" left="511" width="16" height="6" font="14">0 </text>
+<text top="708" left="511" width="15" height="6" font="14">in </text>
+<text top="715" left="511" width="13" height="6" font="19"><b>U) </b></text>
+<text top="713" left="540" width="0" height="10" font="13">630 </text>
+<text top="713" left="564" width="0" height="10" font="13">640 </text>
+<text top="713" left="588" width="0" height="10" font="13">630 </text>
+<text top="713" left="610" width="0" height="10" font="13">640 </text>
+<text top="713" left="633" width="0" height="10" font="13">730 </text>
+<text top="670" left="638" width="0" height="10" font="13">I </text>
+<text top="713" left="656" width="0" height="10" font="13">730 </text>
+<text top="818" left="215" width="0" height="10" font="13">CL</text>
+<text top="804" left="215" width="0" height="10" font="13">EA</text>
+<text top="789" left="215" width="0" height="10" font="13">T </text>
+<text top="780" left="215" width="0" height="10" font="13">SI</text>
+<text top="770" left="210" width="0" height="10" font="13">ZE </text>
+<text top="762" left="256" width="13" height="6" font="14">O </text>
+<text top="774" left="257" width="12" height="6" font="14">X </text>
+<text top="780" left="256" width="15" height="6" font="14">o </text>
+<text top="785" left="256" width="13" height="6" font="14">0) </text>
+<text top="791" left="259" width="10" height="6" font="14">x </text>
+<text top="797" left="256" width="15" height="6" font="14">o </text>
+<text top="818" left="256" width="13" height="10" font="21"><i>u) </i></text>
+<text top="803" left="268" width="0" height="6" font="22">O)</text>
+<text top="802" left="367" width="6" height="8" font="22">,—   </text>
+<text top="826" left="316" width="0" height="10" font="13">ISA 11</text>
+<text top="794" left="316" width="0" height="10" font="13">0x</text>
+<text top="782" left="316" width="0" height="10" font="13">11</text>
+<text top="771" left="316" width="0" height="10" font="13">0x</text>
+<text top="759" left="316" width="0" height="10" font="13">12 </text>
+<text top="756" left="358" width="11" height="6" font="14">&lt;NI </text>
+<text top="768" left="359" width="12" height="6" font="14">X </text>
+<text top="774" left="359" width="15" height="6" font="14">0 </text>
+<text top="780" left="358" width="10" height="6" font="14">s—  </text>
+<text top="791" left="359" width="12" height="6" font="14">X </text>
+<text top="797" left="358" width="13" height="6" font="14">c) </text>
+<text top="816" left="358" width="13" height="10" font="21"><i>&lt; </i></text>
+<text top="756" left="408" width="11" height="6" font="14">cN </text>
+<text top="768" left="408" width="12" height="6" font="14">X </text>
+<text top="774" left="408" width="15" height="6" font="14">o </text>
+<text top="780" left="408" width="10" height="6" font="14">6—  </text>
+<text top="792" left="408" width="12" height="6" font="14">X </text>
+<text top="803" left="408" width="15" height="6" font="14">o </text>
+<text top="804" left="408" width="11" height="6" font="14">,— </text>
+<text top="818" left="408" width="13" height="10" font="21"><i>&lt; </i></text>
+<text top="756" left="454" width="12" height="6" font="14">(N </text>
+<text top="768" left="455" width="13" height="6" font="14">X </text>
+<text top="774" left="454" width="15" height="6" font="14">0 </text>
+<text top="780" left="454" width="11" height="6" font="14">c6&#34;) </text>
+<text top="791" left="455" width="13" height="6" font="14">X </text>
+<text top="803" left="454" width="10" height="6" font="14">0</text>
+<text top="803" left="454" width="11" height="6" font="17"><i><b>en </b></i></text>
+<text top="818" left="454" width="13" height="10" font="21"><i>&lt; </i></text>
+<text top="827" left="505" width="0" height="10" font="13">IS</text>
+<text top="817" left="509" width="0" height="10" font="13">A </text>
+<text top="806" left="505" width="0" height="10" font="13">130x</text>
+<text top="782" left="509" width="0" height="10" font="13">130x</text>
+<text top="759" left="509" width="0" height="10" font="13">1</text>
+<text top="753" left="509" width="0" height="10" font="13">2 </text>
+<text top="827" left="556" width="0" height="10" font="13">ISA 150x</text>
+<text top="782" left="556" width="0" height="10" font="13">15</text>
+<text top="771" left="556" width="0" height="10" font="13">0x</text>
+<text top="759" left="556" width="0" height="10" font="13">15 </text>
+<text top="756" left="595" width="11" height="6" font="14">co </text>
+<text top="768" left="595" width="13" height="6" font="14">X </text>
+<text top="774" left="595" width="15" height="6" font="14">0 </text>
+<text top="779" left="594" width="12" height="6" font="14">U) </text>
+<text top="792" left="595" width="13" height="6" font="14">X </text>
+<text top="801" left="594" width="10" height="8" font="16"><i>t</i>0</text>
+<text top="801" left="597" width="10" height="8" font="16"><i>0 </i></text>
+<text top="800" left="594" width="11" height="10" font="21"><i>u-) </i></text>
+<text top="818" left="594" width="13" height="10" font="21"><i>&lt; </i></text>
+<text top="830" left="595" width="11" height="10" font="1">— </text>
+<text top="756" left="640" width="13" height="6" font="14">U) </text>
+<text top="768" left="641" width="12" height="6" font="14">X </text>
+<text top="774" left="641" width="15" height="6" font="14">0 </text>
+<text top="780" left="641" width="11" height="6" font="14">co </text>
+<text top="792" left="641" width="12" height="6" font="14">X </text>
+<text top="800" left="640" width="10" height="10" font="21"><i>t</i>0</text>
+<text top="800" left="642" width="10" height="10" font="21"><i>0 </i></text>
+<text top="800" left="640" width="12" height="10" font="21"><i>.r) </i></text>
+<text top="817" left="640" width="13" height="10" font="21"><i>&lt; </i></text>
+<text top="829" left="641" width="10" height="10" font="1">— </text>
+<text top="910" left="208" width="0" height="10" font="13">MAIN BEAM </text>
+<text top="892" left="221" width="0" height="10" font="13">SI</text>
+<text top="882" left="221" width="0" height="10" font="13">ZE </text>
+<text top="885" left="277" width="352" height="10" font="1">3ZIS INV38 AI:IVONOD3S NVH1 1:131-10IH W) 3INVS 3ZIS 1AN38 NMAI </text>
+<text top="1025" left="215" width="0" height="10" font="13">SE</text>
+<text top="1011" left="215" width="0" height="10" font="13">C. </text>
+<text top="1002" left="215" width="0" height="10" font="13"> </text>
+<text top="996" left="215" width="0" height="10" font="13">BEAM </text>
+<text top="963" left="215" width="0" height="10" font="13">SI</text>
+<text top="953" left="215" width="0" height="10" font="13">ZE </text>
+<text top="941" left="257" width="11" height="8" font="24">U) </text>
+<text top="956" left="257" width="14" height="6" font="14">N </text>
+<text top="963" left="257" width="11" height="6" font="14">cD </text>
+<text top="974" left="257" width="9" height="6" font="14">O</text>
+<text top="974" left="259" width="9" height="6" font="14">X </text>
+<text top="974" left="257" width="15" height="6" font="14">0 </text>
+<text top="982" left="257" width="12" height="6" font="14">O </text>
+<text top="992" left="257" width="12" height="6" font="14">X </text>
+<text top="997" left="257" width="15" height="6" font="14">0 </text>
+<text top="1003" left="257" width="11" height="6" font="14">cc) </text>
+<text top="1010" left="257" width="11" height="6" font="14">sr </text>
+<text top="1017" left="257" width="11" height="10" font="1">co </text>
+<text top="1032" left="257" width="15" height="10" font="1">z </text>
+<text top="935" left="307" width="12" height="8" font="16"><i>a) </i></text>
+<text top="940" left="308" width="11" height="10" font="1">t--- </text>
+<text top="949" left="307" width="13" height="10" font="1">ai </text>
+<text top="958" left="308" width="11" height="6" font="14">cm </text>
+<text top="970" left="308" width="12" height="6" font="14">X </text>
+<text top="975" left="308" width="15" height="6" font="14">0 </text>
+<text top="982" left="308" width="15" height="6" font="14">0 </text>
+<text top="993" left="310" width="10" height="6" font="14">x </text>
+<text top="993" left="308" width="12" height="6" font="14">X </text>
+<text top="999" left="308" width="15" height="6" font="14">o </text>
+<text top="1005" left="308" width="15" height="6" font="14">0 </text>
+<text top="1011" left="308" width="11" height="6" font="14">co </text>
+<text top="1018" left="307" width="13" height="10" font="1">a) </text>
+<text top="940" left="358" width="18" height="10" font="1">N  </text>
+<text top="970" left="359" width="12" height="6" font="14">X </text>
+<text top="975" left="359" width="15" height="6" font="14">0 </text>
+<text top="982" left="358" width="16" height="6" font="14">0 </text>
+<text top="987" left="359" width="9" height="6" font="14">v.</text>
+<text top="987" left="364" width="7" height="6" font="14">) </text>
+<text top="993" left="361" width="10" height="6" font="14">x </text>
+<text top="999" left="359" width="15" height="6" font="14">o </text>
+<text top="1005" left="359" width="15" height="6" font="14">0 </text>
+<text top="1011" left="358" width="12" height="6" font="14">(D </text>
+<text top="1018" left="358" width="13" height="10" font="1">o) </text>
+<text top="955" left="358" width="14" height="10" font="1">N </text>
+<text top="955" left="367" width="1" height="10" font="1"> </text>
+<text top="935" left="408" width="12" height="8" font="16"><i>a) </i></text>
+<text top="941" left="408" width="12" height="8" font="24">0) </text>
+<text top="940" left="417" width="1" height="10" font="1"> </text>
+<text top="949" left="408" width="14" height="10" font="1">ai </text>
+<text top="959" left="408" width="11" height="6" font="14">•zt </text>
+<text top="970" left="408" width="12" height="6" font="14">X </text>
+<text top="975" left="408" width="15" height="6" font="14">0 </text>
+<text top="982" left="408" width="15" height="6" font="14">0 </text>
+<text top="988" left="409" width="9" height="6" font="14">v.</text>
+<text top="988" left="414" width="6" height="6" font="14">) </text>
+<text top="993" left="410" width="11" height="6" font="14">x </text>
+<text top="999" left="408" width="15" height="6" font="14">0 </text>
+<text top="1005" left="408" width="15" height="6" font="14">0 </text>
+<text top="1011" left="408" width="14" height="6" font="14">N </text>
+<text top="1018" left="408" width="11" height="10" font="1">co </text>
+<text top="941" left="454" width="11" height="10" font="1">-4- </text>
+<text top="951" left="454" width="11" height="8" font="16"><i>-4 </i></text>
+<text top="959" left="454" width="16" height="6" font="14">0 </text>
+<text top="964" left="454" width="12" height="6" font="14">cy </text>
+<text top="970" left="457" width="10" height="6" font="14">x </text>
+<text top="975" left="454" width="15" height="6" font="14">o </text>
+<text top="982" left="454" width="15" height="6" font="14">0 </text>
+<text top="988" left="454" width="14" height="6" font="14">el </text>
+<text top="993" left="457" width="10" height="6" font="14">x </text>
+<text top="999" left="454" width="15" height="6" font="14">0 </text>
+<text top="1005" left="454" width="15" height="6" font="14">0 </text>
+<text top="1011" left="454" width="14" height="6" font="14">N </text>
+<text top="1019" left="454" width="12" height="8" font="16"><i>co </i></text>
+<text top="942" left="501" width="11" height="8" font="24">U) </text>
+<text top="949" left="500" width="13" height="10" font="1">ci </text>
+<text top="956" left="500" width="3" height="8" font="23">6</text>
+<text top="957" left="503" width="9" height="6" font="14">4-  </text>
+<text top="969" left="501" width="12" height="6" font="14">X </text>
+<text top="975" left="500" width="15" height="6" font="14">0 </text>
+<text top="981" left="500" width="15" height="6" font="14">0 </text>
+<text top="987" left="501" width="13" height="6" font="14">c•-) </text>
+<text top="992" left="503" width="10" height="6" font="14">x </text>
+<text top="998" left="500" width="15" height="6" font="14">0 </text>
+<text top="1004" left="500" width="15" height="6" font="14">0 </text>
+<text top="1010" left="500" width="14" height="6" font="14">N </text>
+<text top="1020" left="501" width="11" height="6" font="19"><b>03 </b></text>
+<text top="934" left="454" width="12" height="10" font="1">co </text>
+<text top="934" left="603" width="1" height="10" font="1"> </text>
+<text top="940" left="548" width="11" height="10" font="1">co </text>
+<text top="950" left="548" width="11" height="10" font="1">-4 </text>
+<text top="958" left="547" width="11" height="6" font="14">(Ni </text>
+<text top="964" left="509" width="57" height="6" font="14"> es </text>
+<text top="970" left="550" width="10" height="6" font="14">x </text>
+<text top="970" left="556" width="0" height="6" font="14"> </text>
+<text top="964" left="554" width="13" height="6" font="14">i </text>
+<text top="976" left="548" width="15" height="6" font="14">0 </text>
+<text top="982" left="548" width="16" height="6" font="14">0 </text>
+<text top="987" left="548" width="12" height="7" font="25"><i>el </i></text>
+<text top="993" left="550" width="10" height="6" font="14">x </text>
+<text top="999" left="548" width="16" height="6" font="14">0 </text>
+<text top="1005" left="548" width="15" height="6" font="14">o </text>
+<text top="1011" left="548" width="12" height="6" font="14">co </text>
+<text top="1021" left="548" width="11" height="6" font="19"><b>03 </b></text>
+<text top="940" left="594" width="12" height="10" font="1">co </text>
+<text top="958" left="594" width="4" height="6" font="14">(</text>
+<text top="958" left="595" width="9" height="6" font="26">N</text>
+<text top="958" left="597" width="10" height="6" font="14">D </text>
+<text top="964" left="595" width="11" height="6" font="14">csi </text>
+<text top="970" left="597" width="10" height="6" font="14">x </text>
+<text top="975" left="595" width="15" height="6" font="14">o </text>
+<text top="982" left="594" width="16" height="6" font="14">0 </text>
+<text top="988" left="595" width="17" height="6" font="14">c61 </text>
+<text top="993" left="597" width="10" height="6" font="14">x </text>
+<text top="999" left="595" width="11" height="6" font="14">cD </text>
+<text top="1005" left="595" width="15" height="6" font="14">o </text>
+<text top="1011" left="595" width="11" height="6" font="14">co </text>
+<text top="1021" left="595" width="11" height="6" font="19"><b>03 </b></text>
+<text top="934" left="641" width="12" height="10" font="1">to </text>
+<text top="941" left="641" width="11" height="10" font="1">Tr </text>
+<text top="958" left="641" width="13" height="6" font="14">0) </text>
+<text top="964" left="641" width="11" height="6" font="14">csi </text>
+<text top="970" left="643" width="9" height="6" font="14">X </text>
+<text top="975" left="641" width="15" height="6" font="14">o </text>
+<text top="982" left="641" width="15" height="6" font="14">0 </text>
+<text top="988" left="641" width="13" height="6" font="14">c•-) </text>
+<text top="993" left="643" width="10" height="6" font="14">x </text>
+<text top="999" left="641" width="15" height="6" font="14">0 </text>
+<text top="1005" left="641" width="15" height="6" font="14">o </text>
+<text top="1011" left="641" width="13" height="6" font="14">0) </text>
+<text top="1018" left="640" width="11" height="10" font="1">co </text>
+<text top="1062" left="200" width="11" height="10" font="1">—i </text>
+<text top="1056" left="212" width="13" height="17" font="27"><i>b </i></text>
+<text top="1070" left="199" width="26" height="10" font="1">co z </text>
+<text top="1056" left="255" width="20" height="17" font="27"><i>- </i></text>
+<text top="1066" left="307" width="12" height="6" font="14">C \I </text>
+<text top="1066" left="358" width="14" height="6" font="14">r.-) </text>
+<text top="1067" left="408" width="13" height="6" font="14">V </text>
+<text top="1066" left="454" width="13" height="6" font="14">U) </text>
+<text top="1067" left="500" width="13" height="6" font="14">c0 </text>
+<text top="1066" left="547" width="13" height="6" font="14">N. </text>
+<text top="1078" left="552" width="15" height="10" font="1">. </text>
+<text top="1064" left="594" width="12" height="10" font="1">co </text>
+<text top="1064" left="640" width="13" height="10" font="1">a) </text>
+<text top="1076" left="652" width="14" height="10" font="1">_. </text>
+<text top="1102" left="115" width="7" height="8" font="24">1 </text>
+<text top="1100" left="154" width="42" height="10" font="1">22.09.20 </text>
+<text top="1101" left="248" width="169" height="10" font="1">REAFFIRMED &amp; ISSUED AS STANDARD </text>
+<text top="1101" left="466" width="28" height="10" font="1">JEETU </text>
+<text top="1100" left="555" width="20" height="10" font="1">AVM </text>
+<text top="1120" left="114" width="10" height="10" font="1">0 </text>
+<text top="1119" left="154" width="41" height="10" font="1">15.07.14 </text>
+<text top="1122" left="254" width="99" height="6" font="14">ISSUED AS STANDARD </text>
+<text top="1122" left="471" width="19" height="6" font="14">VPS </text>
+<text top="1122" left="557" width="13" height="6" font="14">AS </text>
+<text top="1122" left="636" width="21" height="6" font="14">PKM </text>
+<text top="1121" left="729" width="14" height="8" font="23">SC </text>
+<text top="1174" left="96" width="142" height="10" font="1">Format No. 8-00-0001-F4 Rev.0 </text>
+<text top="1174" left="599" width="147" height="10" font="1">Copyright EIL - All rights reserved </text>
+</page>
+<outline>
+<item page="1">Page 1</item>
+<item page="2">Page 2</item>
+</outline>
+</pdf2xml>

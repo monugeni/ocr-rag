@@ -1,0 +1,28 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC I II III/Sec I/C238-131-16-51-VL-1001_Vendor List.pdf",
+  "document_title": "Item Code : 15CA Description : THERMO COUPLE EXTENSION CABLES",
+  "document_context": {
+    "title": "Item Code : 15CA Description : THERMO COUPLE EXTENSION CABLES",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 10,
+  "body_font_size": 12.0,
+  "heading_count": 0,
+  "toc_entry_count": 0,
+  "chunk_count": 18,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 10,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "running": 50,
+      "page_number": 10,
+      "body": 39,
+      "table": 165
+    }
+  }
+}

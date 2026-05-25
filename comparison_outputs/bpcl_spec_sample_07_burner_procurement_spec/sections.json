@@ -1,0 +1,232 @@
+[
+  {
+    "heading": "1.0 GENERAL",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 1.0 GENERAL",
+    "seq": 0,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "2.0 SCOPE OF SUPPLY AND SERVICES",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 2.0 SCOPE OF SUPPLY AND SERVICES",
+    "seq": 1,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "3.0 DESCRIPTION OF HEATERS",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 3.0 DESCRIPTION OF HEATERS",
+    "seq": 2,
+    "confidence": 0.4,
+    "score": 3.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "4.0 INSTRUCTIONS TO VENDOR (OEM):",
+    "level": 1,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 4.0 INSTRUCTIONS TO VENDOR (OEM):",
+    "seq": 3,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 4
+  },
+  {
+    "heading": "5.0 GUARANTEE:",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 5.0 GUARANTEE:",
+    "seq": 4,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "6.0 INSPECTION :",
+    "level": 1,
+    "page_num": 5,
+    "page_start": 5,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 6.0 INSPECTION :",
+    "seq": 5,
+    "confidence": 0.956,
+    "score": 8.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 5
+  },
+  {
+    "heading": "7.0 PAINTING",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 7.0 PAINTING",
+    "seq": 6,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "8.0 PACKING & SHIPPING",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 8.0 PACKING & SHIPPING",
+    "seq": 7,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "9.0 CORRESPONDENCE AND DOCUMENTATION",
+    "level": 1,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 9.0 CORRESPONDENCE AND DOCUMENTATION",
+    "seq": 8,
+    "confidence": 0.844,
+    "score": 7.6,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "A. PROJECT : CAPACITY / RELIABILITY IMPROVEMENT PROJECT",
+    "level": 2,
+    "page_num": 6,
+    "page_start": 6,
+    "breadcrumb": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131) > 9.0 CORRESPONDENCE AND DOCUMENTATION > A. PROJECT : CAPACITY / RELIABILITY IMPROVEMENT PROJECT",
+    "seq": 9,
+    "confidence": 0.333,
+    "score": 3.0,
+    "reasons": [
+      "all_caps_short",
+      "centered"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "SPECIFICATION FOR PROCUREMENT OF BURNER OIL GUNS UNIT : CDU-3 (131)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 7
+  }
+]

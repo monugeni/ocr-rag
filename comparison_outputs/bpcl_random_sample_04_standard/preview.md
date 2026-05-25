@@ -1,0 +1,234 @@
+# @ ONLY L 2
+
+Context: `@ ONLY L 2`
+
+Source: `/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC V STANDARDS/7-17-0205 Rev 7.pdf`
+Pages: 2
+Headings: 36
+Chunks: 65
+
+## Headings
+
+- p1 L3 (0.64)     TYPE V1 — PLAIN V
+- p1 L1 (0.92) 45 ONLY
+- p1 L1 (0.56) 2 &
+- p1 L4 (0.48)       IYPE Y1 — FOOTED Y
+- p1 L1 (0.78) REFRACTORY | ANCHOR
+- p1 L1 (0.64) A = 75-100 FOR T<150 - "
+- p1 L1 (0.78) DISTANCE 101-125 PLAIN V' 6
+- p1 L1 (0.64) 126-150 CORRUGATED V'] 6
+- p1 L1 (0.64) 151-175 CORRUGATED "V'| 8
+- p1 L1 (0.64) 176-200 CORRUGATED V| 8
+- p1 L1 (0.64) 5200 FOOTED 'Y" 3
+- p1 L2 (0.58)   JABLE 2. ANCHOR PITCH DETAILS
+- p1 L1 (0.58) b T=REFRACTORY | INDIVIDUAL ANCHORS N
+- p1 L2 (0.44)   =] FOR WALL, X=2T, 250<x<300
+- p1 L2 (0.70)   ANCHOR SPACING AND TYPES FOR DUAL LAYER 7-17-206
+- p1 L2 (0.48)   CASTABLE LINING
+- p1 L2 (0.70)   ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208
+- p1 L1 (0.83) BLOCK INSULATION “ ,}’
+- p2 L1 (0.58) e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7
+- p2 L1 (0.58) iy 300
+- p2 L3 (0.44)     s s CONVECTION TUBE
+- p2 L1 (0.58) ¢ CoreeL | ; r —— ‘L
+- p2 L1 (0.99) CORBEL PROJECTION A (HALF OF TUBE HORIZONTAL
+- p2 L2 (0.44)   /- PITCH UON IN GADs)
+- p2 L1 (0.58) 5\ 2-sIDES P
+- p2 L1 (0.99) 66 ROD FOR CORBEL 4 PROJECTION ‘E’ UP TO = 114 AND 8¢ ABOVE 114 S ⚠
+- p2 L3 (0.44)     e 125 < DIM. C < 25
+- p2 L1 (0.70) 1 ALL DIMENSIONS ARE IN MILLIMETRES.
+- p2 L1 (0.64) 10 THE ANCHOR SPACING (X) SHALL BE ⚠
+- p2 L1 (0.83) ERESEAN MINIMUM / MAXIMUM LIMITS PROVIDED IN THIS
+- p2 L1 (0.70) 6 DETAILS OF CORRUCATED V & Y LUG SHALL BE
+- p2 L1 (0.70) 7 MINOR VARIATION IN SPACING MAY BE REQUIRED AT
+- p2 L1 (0.70) 8 SS—ANCHORS SHALL BE SUPPLIED IN SOLUTION
+- p2 L1 (0.54) 9 PROVIDE PLASTIC CAP ON ANCHOR TIPS (13mm LONG & 3mm THK.).
+- p2 L1 (0.98) 7 10062025 REVISED & ISSUED AS STANDARD MMB
+- p2 L4 (0.48)       RP/IPS MK 7\ RKT
+
+## Chunk Samples
+
+### C1 p1-1 [table]
+
+_Breadcrumb: @ ONLY L 2_
+
+m ANCHOR SPACING AND TYPES STANDARD No. g@m@%@.ﬁ,ﬁf&#ﬁ%ﬁ?@ FOR SINGLE LAYER 7-17-0205 Rev.7 R i Gan of o et CASTABLE LINING . PLASTIC CAP @ _ROD 0 X} PLASTIC 2a =14 ~| 52 g & « g Rig g CASING PLATE IMPORTANT 0 / V5 <2-5|Dr-:s kal3 @ ONLY L 2 MIN. 20 E R 5 ¥ 'V
+
+### C2 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > TYPE V1 — PLAIN V_
+
+TYPE V1 — PLAIN V
+
+### C3 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > TYPE V1 — PLAIN V_
+
+WELDING S oN OUTER> 5T\
+
+### C4 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 45 ONLY_
+
+45 ONLY
+
+### C5 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 2 &_
+
+2 &
+
+### C6 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 2 & > IYPE Y1 — FOOTED Y_
+
+IYPE Y1 — FOOTED Y
+
+### C7 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > 2 & > IYPE Y1 — FOOTED Y > TABLE 1: ANCHOR TYPE_
+
+TABLE 1: ANCHOR TYPE
+
+### C8 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > REFRACTORY | ANCHOR_
+
+REFRACTORY | ANCHOR
+
+### C9 p1-1 [table]
+
+_Breadcrumb: @ ONLY L 2 > REFRACTORY | ANCHOR > TABLE 1: ANCHOR TYPE_
+
+THICKNESS | HEIGHT | ANCHOR TYPE |DIA ¢
+
+### C10 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > A = 75-100 FOR T<150 - "_
+
+A = 75-100 FOR T<150 - "
+
+### C11 p1-1 [table]
+
+_Breadcrumb: @ ONLY L 2 > A = 75-100 FOR T<150 - " > TABLE 1: ANCHOR TYPE_
+
+A = 125 FOR T>150 50 TO 75 (,Lﬁﬁ%) PLAIN V' 6 MINIMUM _EDGE 'i'__ 75-100 T-25 | PLAN V' 6
+
+### C12 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > DISTANCE 101-125 PLAIN V' 6_
+
+DISTANCE 101-125 PLAIN V' 6
+
+### C13 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 126-150 CORRUGATED V'] 6_
+
+126-150 CORRUGATED V'] 6
+
+### C14 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 151-175 CORRUGATED "V'| 8_
+
+151-175 CORRUGATED "V'| 8
+
+### C15 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 176-200 CORRUGATED V| 8_
+
+176-200 CORRUGATED V| 8
+
+### C16 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 5200 FOOTED 'Y" 3_
+
+5200 FOOTED 'Y" 3
+
+### C17 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > 5200 FOOTED 'Y" 3 > JABLE 2. ANCHOR PITCH DETAILS_
+
+JABLE 2. ANCHOR PITCH DETAILS
+
+### C18 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > 5200 FOOTED 'Y" 3 > JABLE 2. ANCHOR PITCH DETAILS > TABLE 1: ANCHOR TYPE_
+
+ANCHOR PITCH DESCRIPTION ANCHOR SPACING/ PITCH FOR ROOF, X=1.5T,225<x<300 X=ANCHOR PITCH | STAGGERED SPACING/
+
+### C19 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N_
+
+b T=REFRACTORY | INDIVIDUAL ANCHORS N
+
+### C20 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > TABLE 1: ANCHOR TYPE_
+
+THICKNESS 45" ORIENTATION
+
+### C21 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > =] FOR WALL, X=2T, 250<x<300_
+
+=] FOR WALL, X=2T, 250<x<300
+
+### C22 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > =] FOR WALL, X=2T, 250<x<300 > TABLE 1: ANCHOR TYPE_
+
+TYPICAL ANCHOR SPACING FOR FLOOR, X=2.5T, 300<x<400 GENERAL NOTES:— COMPANION STANDARDS:—
+
+### C23 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > ANCHOR SPACING AND TYPES FOR DUAL LAYER 7-17-206_
+
+ANCHOR SPACING AND TYPES FOR DUAL LAYER 7-17-206
+
+### C24 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > CASTABLE LINING_
+
+CASTABLE LINING
+
+### C25 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208_
+
+ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208
+
+### C26 p1-1 [text]
+
+_Breadcrumb: @ ONLY L 2 > b T=REFRACTORY | INDIVIDUAL ANCHORS N > ANCHOR FOR HOT FACE CASTABLE AND BACK UP7-17-208 > TABLE 1: ANCHOR TYPE_
+
+<
+
+### C27 p1-1 [heading]
+
+_Breadcrumb: @ ONLY L 2 > BLOCK INSULATION “ ,}’_
+
+BLOCK INSULATION “ ,}’
+
+### C28 p1-1 [table]
+
+_Breadcrumb: @ ONLY L 2 > BLOCK INSULATION “ ,}’ > TABLE 1: ANCHOR TYPE_
+
+7 10.06.2025 REVISED & ISSUED AS STANDARD _glySMB QKRS | RPT Ve MN 6 20032000 REVISED & ISSUED AS STANDARD ss RPIPS MK RKT Rev Prepared Checked 5105 Commitiee Stds. Bureau N Date Purpose b ) Convenor Chairman o Yy Y Approved by Format No_ B-00-0001-F4 Rev.0 Co
+
+### C29 p2-2 [text]
+
+_Breadcrumb: @ ONLY L 2 > BLOCK INSULATION “ ,}’_
+
+STANDARD No. SSifeered ENGINEERS ANCHOR'SPACING AND TYPES mm@wmﬁwn@ FOR SINGLE LAYER
+
+### C30 p2-2 [heading]
+
+_Breadcrumb: @ ONLY L 2 > e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7_
+
+e ) hGon o nos st CASTABLE LINING 7-17-0205 Rev.7
+
+## Warnings
+
+- p2: top-level decimal jump 2 -> 66
+- p2: top-level decimal jump 1 -> 10

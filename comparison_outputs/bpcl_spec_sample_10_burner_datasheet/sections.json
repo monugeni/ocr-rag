@@ -1,0 +1,25 @@
+[
+  {
+    "heading": "3.56 FOR GAS (AS EXISTING) / 3.916 FOR OIL",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101) > 3.56 FOR GAS (AS EXISTING) / 3.916 FOR OIL",
+    "seq": 0,
+    "confidence": 0.644,
+    "score": 5.8,
+    "reasons": [
+      "all_caps_short",
+      "numbered_2"
+    ],
+    "warnings": [
+      "p2: decimal heading '3.56' has no detected parent '3'"
+    ],
+    "document_context": {
+      "title": "DATASHEET FOR CDU-3 CRUDE HEATER FUEL OIL GUN REPLACEMENT (131-F-101)",
+      "path_parts": [],
+      "source": "inferred"
+    },
+    "page_end": 8
+  }
+]

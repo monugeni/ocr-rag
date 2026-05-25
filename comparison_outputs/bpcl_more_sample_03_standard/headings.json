@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 23,
+    "top": 687.0,
+    "left": 228.0,
+    "text": "SECTION 1 1",
+    "level": 1,
+    "score": 9.5,
+    "confidence": 0.99,
+    "reasons": [
+      "all_caps_short",
+      "gap_above",
+      "large_font",
+      "section"
+    ],
+    "numbering": "SECTION 1",
+    "scheme": "section",
+    "breadcrumb": "ENGINEERS FOR PARALLEL FLANGE BEAM > SECTION 1 1",
+    "toc_match": null,
+    "warnings": []
+  }
+]

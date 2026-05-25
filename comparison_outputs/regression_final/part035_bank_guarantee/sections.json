@@ -1,0 +1,312 @@
+[
+  {
+    "heading": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+    "seq": 0,
+    "confidence": 0.711,
+    "score": 6.4,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "wrapped_heading"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "ANNEXURE s HPCL, Mumbai",
+    "level": 1,
+    "page_num": 1,
+    "page_start": 1,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE s HPCL, Mumbai",
+    "seq": 1,
+    "confidence": 0.522,
+    "score": 4.7,
+    "reasons": [
+      "appendix",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 1
+  },
+  {
+    "heading": "6 Not withstanding anything contained herein above :",
+    "level": 2,
+    "page_num": 2,
+    "page_start": 2,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE s HPCL, Mumbai > 6 Not withstanding anything contained herein above :",
+    "seq": 2,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 2
+  },
+  {
+    "heading": "ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "level": 1,
+    "page_num": 3,
+    "page_start": 3,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "seq": 3,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 3
+  },
+  {
+    "heading": "6 Notwithstanding anything contained herein above:",
+    "level": 2,
+    "page_num": 4,
+    "page_start": 4,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 6 Notwithstanding anything contained herein above:",
+    "seq": 4,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 6
+  },
+  {
+    "heading": "7 Not withstanding anything contained herein above :",
+    "level": 2,
+    "page_num": 7,
+    "page_start": 7,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 7 Not withstanding anything contained herein above :",
+    "seq": 5,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "gap_above",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 8
+  },
+  {
+    "heading": "ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "level": 1,
+    "page_num": 9,
+    "page_start": 9,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND",
+    "seq": 6,
+    "confidence": 0.667,
+    "score": 6.0,
+    "reasons": [
+      "all_caps_short",
+      "appendix"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 9
+  },
+  {
+    "heading": "6 Notwithstanding anything contained herein above:",
+    "level": 2,
+    "page_num": 10,
+    "page_start": 10,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE 2M COMPOSITE INSURANCE SURETY BOND > 6 Notwithstanding anything contained herein above:",
+    "seq": 7,
+    "confidence": 0.611,
+    "score": 5.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 13
+  },
+  {
+    "heading": "ANNEXURE - 1",
+    "level": 1,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1",
+    "seq": 8,
+    "confidence": 0.722,
+    "score": 6.5,
+    "reasons": [
+      "all_caps_short",
+      "appendix",
+      "left_aligned"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "2 Supplier / Contractor Code",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 2 Supplier / Contractor Code",
+    "seq": 9,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "3 Address (Including Pin Code)",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 3 Address (Including Pin Code)",
+    "seq": 10,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "2 Branch Name /Branch code",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 2 Branch Name /Branch code",
+    "seq": 11,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "3 Branch Address (incl Pin code)",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 3 Branch Address (incl Pin code)",
+    "seq": 12,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 14
+  },
+  {
+    "heading": "7 IFSC Code of the Branch (For RTGS)",
+    "level": 2,
+    "page_num": 14,
+    "page_start": 14,
+    "breadcrumb": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT > ANNEXURE - 1 > 7 IFSC Code of the Branch (For RTGS)",
+    "seq": 13,
+    "confidence": 0.5,
+    "score": 4.5,
+    "reasons": [
+      "left_aligned",
+      "numbered_1",
+      "mixed_doc_anchor"
+    ],
+    "warnings": [
+      "p14: top-level decimal jump 3 -> 7"
+    ],
+    "document_context": {
+      "title": "ANNEXURE 2F BANK GUARANTEE FOR SECURITY DEPOSIT",
+      "path_parts": [],
+      "source": "heading_fallback"
+    },
+    "page_end": 20
+  }
+]

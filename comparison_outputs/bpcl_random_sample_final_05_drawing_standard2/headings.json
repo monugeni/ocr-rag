@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 59,
+    "top": 960.0,
+    "left": 112.0,
+    "text": "3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "level": 1,
+    "score": 7.6,
+    "confidence": 0.844,
+    "reasons": [
+      "all_caps_short",
+      "bold",
+      "left_aligned",
+      "numbered_1"
+    ],
+    "numbering": "3",
+    "scheme": "decimal",
+    "breadcrumb": "STANDARD No. > 3 FOR DETAILS OF Y ANCHOR REFER STANDARD NO.",
+    "toc_match": null,
+    "warnings": []
+  }
+]

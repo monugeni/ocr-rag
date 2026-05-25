@@ -1,0 +1,30 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/Attachment/SEC IV PART 1/6-17-0011_Rev_2.pdf",
+  "document_title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+  "document_context": {
+    "title": "STANDARD SPECIFICATION FOR INSTALLATION OF BRICK LINING",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 7,
+  "body_font_size": 15.0,
+  "heading_count": 8,
+  "toc_entry_count": 0,
+  "chunk_count": 72,
+  "warnings": [],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 7,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 5,
+    "line_role_counts": {
+      "running": 21,
+      "body": 187,
+      "table": 9,
+      "page_number": 5,
+      "form": 4,
+      "toc": 11
+    }
+  }
+}

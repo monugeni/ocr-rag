@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "page_num": 1,
+    "line_index": 17,
+    "top": 680.0,
+    "left": 108.0,
+    "text": "5 Undertaking:",
+    "level": 1,
+    "score": 6.5,
+    "confidence": 0.722,
+    "reasons": [
+      "gap_above",
+      "left_aligned",
+      "numbered_1",
+      "trailing_colon"
+    ],
+    "numbering": "5",
+    "scheme": "decimal",
+    "breadcrumb": "TUBE SUPPORT MODIFICATION AND ENHANCEMENT OF HEAT DUTY FOR VDU > 5 Undertaking:",
+    "toc_match": null,
+    "warnings": []
+  }
+]

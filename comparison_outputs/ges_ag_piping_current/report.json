@@ -1,0 +1,37 @@
+{
+  "source_pdf": "/Users/tan/Downloads/6778-PIP-G0000-EC-00001_R00_GES AG Piping.pdf",
+  "document_title": "6778 PIP G0000 EC 00001 R00 GES AG Piping",
+  "document_context": {
+    "title": "6778 PIP G0000 EC 00001 R00 GES AG Piping",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 29,
+  "body_font_size": 15.0,
+  "heading_count": 20,
+  "toc_entry_count": 58,
+  "chunk_count": 153,
+  "warnings": [
+    "p11: decimal heading '5.10' has no detected parent '5'",
+    "p16: top-level decimal jump 2 -> 32",
+    "p16: top-level decimal jump 32 -> 40",
+    "p16: top-level decimal jump 40 -> 65",
+    "p17: top-level decimal jump 15 -> 20"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 29,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 9,
+    "line_role_counts": {
+      "running": 275,
+      "body": 540,
+      "form": 27,
+      "table": 142,
+      "page_number": 5,
+      "toc": 114,
+      "caption": 29
+    }
+  }
+}

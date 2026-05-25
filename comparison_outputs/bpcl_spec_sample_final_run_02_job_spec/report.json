@@ -1,0 +1,42 @@
+{
+  "source_pdf": "/Users/tan/Work/BPCL/CDU heater revamp/Tender downloaded/JOB SPECIFICATION,.pdf",
+  "document_title": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF",
+  "document_context": {
+    "title": "JOB SPECIFICATION, SCOPE OF SUPPLY & WORK FOR CDU3 F-101 HEATER REVAMP CDU3 F-101 REVAMP FOR IMPLEMENTATION OF",
+    "path_parts": [],
+    "source": "inferred"
+  },
+  "page_count": 29,
+  "body_font_size": 17.0,
+  "heading_count": 43,
+  "toc_entry_count": 0,
+  "chunk_count": 210,
+  "warnings": [
+    "p6: decimal heading '1.16' has no detected parent '1'",
+    "p21: decimal heading '5.2' has no detected parent '5'",
+    "p21: decimal heading '5.3' has no detected parent '5'",
+    "p22: decimal heading '5.14' has no detected parent '5'",
+    "p23: decimal heading '5.15' has no detected parent '5'",
+    "p23: decimal heading '5.16' has no detected parent '5'",
+    "p23: decimal heading '5.17' has no detected parent '5'",
+    "p23: decimal heading '6.1' has no detected parent '6'",
+    "p23: decimal heading '6.2' has no detected parent '6'",
+    "p25: top-level decimal jump 2 -> 9",
+    "p29: top-level decimal jump 6 -> 19"
+  ],
+  "extractor": {
+    "ocr": "not_requested",
+    "layout_text": "pdftotext_layout",
+    "layout_page_count": 29,
+    "geometry": "pdftohtml_xml",
+    "running_line_count": 6,
+    "line_role_counts": {
+      "drawing": 21,
+      "running": 172,
+      "toc": 11,
+      "body": 1156,
+      "table": 7,
+      "caption": 6
+    }
+  }
+}
