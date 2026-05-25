@@ -529,6 +529,10 @@ function renderJobs() {
 }
 
 function renderJob(job) {
+  const canRetry = job.status === 'failed' || job.status === 'cancelled';
+  const retryBtn = canRetry
+    ? `<button class="secondary small" type="button" data-action="reingest-job" data-job-id="${escapeHtml(job.id)}">Re-ingest</button>`
+    : '';
   return `
     <div class="list-row">
       <span class="row-main">
@@ -536,6 +540,7 @@ function renderJob(job) {
         <span class="job-meta">${escapeHtml(job.stage || '')}${job.error ? ` | ${escapeHtml(job.error)}` : ''}</span>
       </span>
       <span class="status-pill ${escapeHtml(job.status)}">${escapeHtml(job.status)}</span>
+      ${retryBtn}
     </div>
   `;
 }
@@ -848,6 +853,19 @@ async function ingestSingle(folder, filename) {
   }
 }
 
+async function reingestJob(jobId) {
+  if (!jobId) return;
+  try {
+    await api(`/api/ingestion/jobs/${enc(jobId)}/retry`, { method: 'POST', body: JSON.stringify({}) });
+    showToast('Re-ingestion started');
+    state.tab = 'jobs';
+    setHash();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
 function formatBytes(bytes) {
   if (!bytes) return '0 B';
   const units = ['B', 'KB', 'MB', 'GB'];
@@ -1035,6 +1053,7 @@ function handleClick(event) {
   if (action === 'clear-staged') clearStaged();
   if (action === 'ingest-all') void ingestAll();
   if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '');
+  if (action === 'reingest-job') void reingestJob(target.dataset.jobId || '');
   if (action === 'refresh-jobs') void loadJobs().then(renderJobs);
   if (action === 'inspect-doc') void openInspection(target.dataset.docId);
   if (action === 'set-inspect-panel') {

@@ -248,10 +248,11 @@ CREATE INDEX IF NOT EXISTS idx_chat_messages_thread ON chat_messages(thread_id, 
 
 
 def init_db(db_path: str) -> sqlite3.Connection:
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=30.0)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA foreign_keys=ON")
+    conn.execute("PRAGMA busy_timeout=30000")
     conn.executescript(SCHEMA)
     _ensure_table_columns(conn, "ingestion_jobs", {
         "source_path": "TEXT",

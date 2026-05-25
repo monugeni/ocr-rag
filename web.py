@@ -116,15 +116,22 @@ def parse_split_info(filename: str) -> Optional[dict]:
 DB_PATH = "docs.db"
 UPLOADS_DIR = "./uploads"
 MCP_SERVER_URL = "http://127.0.0.1:8200/mcp"
-executor = ThreadPoolExecutor(max_workers=2)
+# Single worker: SQLite allows only one writer at a time (even in WAL mode),
+# so running ingestions in parallel just produced "database is locked"
+# failures rather than real throughput. Serialize ingestion writes.
+executor = ThreadPoolExecutor(max_workers=1)
 
 app = FastAPI(title="Esteem Folder Knowledge", docs_url="/api/docs")
 
 
 def get_conn():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys=ON")
+    # Wait up to 30s for a write lock instead of failing instantly with
+    # "database is locked" — ingestion writers and frequent job-status
+    # updates contend for SQLite's single writer even in WAL mode.
+    conn.execute("PRAGMA busy_timeout=30000")
     return conn
 
 
@@ -496,9 +503,7 @@ def _rollback_split_ingestion(
 ):
     """Undo partial split ingestion so the original upload can be retried cleanly."""
     if created_doc_ids:
-        conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
-        conn.execute("PRAGMA foreign_keys=ON")
+        conn = get_conn()
         try:
             for doc_id in created_doc_ids:
                 _delete_document_data(conn, doc_id)
@@ -1826,9 +1831,7 @@ class IngestionTracker:
     reloads and server restarts."""
 
     def _conn(self):
-        conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
-        return conn
+        return get_conn()
 
     def create(self, filename, project, source_path=None):
         jid = str(uuid4())[:8]
@@ -2762,9 +2765,7 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
     ext = Path(filename).suffix.lower()
 
     # Duplicate check
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys=ON")
+    conn = get_conn()
     dup_id = _is_duplicate(conn, project, filename, str(file_path))
     conn.close()
     if dup_id:
@@ -2774,9 +2775,7 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
         return None  # return None so _run_ingestion doesn't overwrite stage
 
     doc_id = None
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA foreign_keys=ON")
+    conn = get_conn()
     try:
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if ext == ".pdf":
@@ -2982,6 +2981,48 @@ async def ingest_single(folder: str, filename: str):
 @app.get("/api/ingestion/jobs")
 def get_jobs():
     return tracker.all()
+
+
+@app.post("/api/ingestion/jobs/{job_id}/retry")
+async def retry_ingestion_job(job_id: str):
+    """Re-run a failed/cancelled ingestion from its original source file.
+
+    A failed split ingestion may have left the original PDF parked in the
+    folder's ``_originals/`` directory (where it no longer shows up under
+    pending uploads), so restore it before re-dispatching.
+    """
+    job = tracker.get(job_id)
+    if not job:
+        raise HTTPException(404, "Ingestion job not found")
+    if job["status"] not in {"failed", "cancelled"}:
+        raise HTTPException(400, "Only failed or cancelled jobs can be re-ingested")
+
+    source_path = job.get("source_path")
+    if not source_path:
+        raise HTTPException(400, "This job has no recorded source file to re-ingest")
+
+    project = _validate_folder_name(job["project"], "Folder name")
+    basename = Path(source_path).name
+    file_path = _folder_disk_path(project) / basename
+
+    # Restore the original from _originals/ if a split ingestion parked it there.
+    if not file_path.exists():
+        archived = _folder_disk_path(project) / "_originals" / basename
+        if archived.exists():
+            file_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.move(str(archived), str(file_path))
+
+    if not file_path.exists():
+        raise HTTPException(
+            404,
+            "Source file not found — it may have been ingested already or removed. "
+            "Re-upload the file to ingest it.",
+        )
+
+    new_jid = tracker.create(basename, project, source_path=source_path)
+    loop = asyncio.get_event_loop()
+    loop.run_in_executor(executor, _run_ingestion, new_jid, str(file_path), project, basename)
+    return {"status": "started", "job_id": new_jid}
 
 
 @app.post("/api/ingestion/jobs/{job_id}/cancel")
