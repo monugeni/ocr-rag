@@ -2319,25 +2319,9 @@ def bulk_move_documents(data: dict):
 
 @app.get("/api/documents/{doc_id}/pdf")
 def download_file(doc_id: int):
-    conn = get_conn()
-    try:
-        doc = conn.execute(
-            "SELECT id, project, title, filename, pdf_path FROM documents WHERE id = ?",
-            (doc_id,)
-        ).fetchone()
-        if not doc:
-            raise HTTPException(404, "Document not found")
-        file_path = _resolve_document_source_path(conn, doc)
-        if not file_path:
-            raise HTTPException(404, "Source file not found on disk")
-        conn.commit()
-        download_name = doc["filename"] or f"{doc['title']}"
-        return FileResponse(
-            file_path,
-            filename=download_name,
-        )
-    finally:
-        conn.close()
+    # Downloading / accessing the original source files is intentionally disabled.
+    # End users must not be able to retrieve the original PDFs via the API or GUI.
+    raise HTTPException(403, "Access to original source files is disabled")
 
 
 @app.post("/api/documents/bulk-delete")

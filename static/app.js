@@ -419,7 +419,6 @@ function renderDoc(doc) {
       <span class="row-actions">
         <button class="ghost small" type="button" data-action="move-doc" data-doc-id="${doc.id}">Move</button>
         <button class="ghost small" type="button" data-action="inspect-doc" data-doc-id="${doc.id}">Inspect</button>
-        <a class="ghost small" href="/api/documents/${doc.id}/pdf" target="_blank" rel="noopener">PDF</a>
       </span>
     </div>
   `;
@@ -563,7 +562,6 @@ function renderInspect() {
   view.innerHTML = `
     ${pageHeader(info.title || info.filename || 'Inspect document', info.filename || '', `
       <button class="ghost" type="button" data-action="go-documents">Back to documents</button>
-      <a class="ghost" href="/api/documents/${info.id}/pdf" target="_blank" rel="noopener">Open PDF</a>
     `)}
     <div class="inspect-tabs" aria-label="Document inspection views">
       ${renderInspectTab('metadata', 'Metadata')}
