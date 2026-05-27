@@ -419,6 +419,7 @@ function renderDoc(doc) {
       <span class="row-actions">
         <button class="ghost small" type="button" data-action="move-doc" data-doc-id="${doc.id}">Move</button>
         <button class="ghost small" type="button" data-action="inspect-doc" data-doc-id="${doc.id}">Inspect</button>
+        <button class="ghost small danger" type="button" data-action="delete-doc" data-doc-id="${doc.id}" data-doc-title="${escapeHtml(doc.title || doc.filename || '')}">Delete</button>
       </span>
     </div>
   `;
@@ -497,7 +498,11 @@ function renderPending(file) {
         <span class="row-title">${escapeHtml(file.relative_path || file.filename)}</span>
         <span class="doc-meta">${escapeHtml(file.folder || state.folder)}</span>
       </span>
-      <button class="secondary small" type="button" data-action="ingest-single" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest</button>
+      <span class="row-actions">
+        <button class="secondary small" type="button" data-action="ingest-single" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest</button>
+        <button class="secondary small" type="button" data-action="ingest-single-nosplit" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest (no split)</button>
+        <button class="ghost small danger" type="button" data-action="delete-pending" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Delete</button>
+      </span>
     </div>
   `;
 }
@@ -839,12 +844,38 @@ async function ingestAll() {
   }
 }
 
-async function ingestSingle(folder, filename) {
+async function ingestSingle(folder, filename, noSplit = false) {
   try {
-    await api(`/api/folders/${enc(folder)}/ingest/${enc(filename)}`, { method: 'POST', body: JSON.stringify({}) });
-    showToast('Ingestion started');
+    const query = noSplit ? '?no_split=true' : '';
+    await api(`/api/folders/${enc(folder)}/ingest/${enc(filename)}${query}`, { method: 'POST', body: JSON.stringify({}) });
+    showToast(noSplit ? 'Ingestion started (no split)' : 'Ingestion started');
     state.tab = 'jobs';
     setHash();
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function deleteDoc(docId, title) {
+  if (!docId) return;
+  const label = title ? `"${title}"` : 'this document';
+  if (!confirm(`Delete ${label}? This removes all of its data from the database. The source file stays on disk and will reappear under pending.`)) return;
+  try {
+    await api(`/api/documents/${enc(docId)}`, { method: 'DELETE' });
+    showToast('Document deleted');
+    await refreshActiveData();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
+async function deletePending(folder, filename) {
+  if (!filename) return;
+  if (!confirm(`Delete pending file "${filename}"? This permanently removes the file from disk.`)) return;
+  try {
+    await api(`/api/folders/${enc(folder)}/pending/${enc(filename)}/discard`, { method: 'POST', body: JSON.stringify({}) });
+    showToast('Pending file deleted');
     await refreshActiveData();
   } catch (err) {
     showToast(err.message, 'error');
@@ -1051,6 +1082,9 @@ function handleClick(event) {
   if (action === 'clear-staged') clearStaged();
   if (action === 'ingest-all') void ingestAll();
   if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '');
+  if (action === 'ingest-single-nosplit') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '', true);
+  if (action === 'delete-pending') void deletePending(target.dataset.folder || state.folder, target.dataset.filename || '');
+  if (action === 'delete-doc') void deleteDoc(target.dataset.docId || '', target.dataset.docTitle || '');
   if (action === 'reingest-job') void reingestJob(target.dataset.jobId || '');
   if (action === 'refresh-jobs') void loadJobs().then(renderJobs);
   if (action === 'inspect-doc') void openInspection(target.dataset.docId);

@@ -380,6 +380,7 @@ def _delete_document_data(conn, doc_id: int):
     conn.execute("DELETE FROM corrections WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM cross_references WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM quality_flags WHERE doc_id = ?", (doc_id,))
+    conn.execute("DELETE FROM ingestion_jobs WHERE doc_id = ?", (doc_id,))
     conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
 
 
@@ -2818,20 +2819,22 @@ def _ingest_one(jid, file_path, project, filename, stage_prefix=""):
         conn.close()
 
 
-def _run_ingestion(jid, file_path, project, filename):
+def _run_ingestion(jid, file_path, project, filename, no_split=False):
     """Run in thread pool. Splits large PDFs first, then ingests each part.
 
     Non-PDF files (images, DOC/DOCX, XLS/XLSX) are ingested directly — splitting
-    only applies to PDFs.
+    only applies to PDFs. When ``no_split`` is set the PDF is ingested whole,
+    bypassing document-boundary detection.
     """
     try:
         project_dir = Path(UPLOADS_DIR) / project
         ext = Path(filename).suffix.lower()
         _raise_if_cancel_requested(jid)
 
-        # Only PDFs go through the splitting pipeline
-        if ext != '.pdf':
-            tracker.update(jid, status="running", stage="Extracting content")
+        # Non-PDFs never split; ``no_split`` forces a PDF in as one document too.
+        if ext != '.pdf' or no_split:
+            stage = "Extracting content (splitting disabled)" if no_split else "Extracting content"
+            tracker.update(jid, status="running", stage=stage)
             doc_id = _ingest_one(jid, file_path, project, filename)
             if doc_id is not None:
                 tracker.update(jid, status="completed", stage="Done", doc_id=doc_id)
@@ -2942,7 +2945,7 @@ async def ingest_all(folder: str):
 
 @app.post("/api/projects/{folder:path}/ingest/{filename:path}")
 @app.post("/api/folders/{folder:path}/ingest/{filename:path}")
-async def ingest_single(folder: str, filename: str):
+async def ingest_single(folder: str, filename: str, no_split: bool = False):
     folder = _validate_folder_name(folder, "Folder name")
     relative_name = _normalize_folder_name(filename)
     file_path = _folder_disk_path(folder) / relative_name
@@ -2957,7 +2960,7 @@ async def ingest_single(folder: str, filename: str):
     )
     loop = asyncio.get_event_loop()
     loop.run_in_executor(
-        executor, _run_ingestion, jid, str(file_path), target_folder, file_path.name
+        executor, _run_ingestion, jid, str(file_path), target_folder, file_path.name, no_split
     )
     return {"status": "started", "job_id": jid}
 
