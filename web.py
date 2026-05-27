@@ -2914,6 +2914,25 @@ def _run_ingestion(jid, file_path, project, filename, no_split=False):
         tracker.update(jid, status="failed", error=str(e))
 
 
+def _active_job_id_for_source(source_rel: str) -> str | None:
+    """Id of a queued/running job for this upload-relative path, if any.
+
+    A file stays in 'pending' until its ingestion finishes, so without this
+    guard clicking Ingest repeatedly (or Ingest pending while a job runs) would
+    queue duplicate jobs for the same file.
+    """
+    conn = get_conn()
+    try:
+        row = conn.execute(
+            "SELECT id FROM ingestion_jobs WHERE source_path = ? "
+            "AND status IN ('queued', 'running') ORDER BY started_at DESC LIMIT 1",
+            (source_rel,),
+        ).fetchone()
+    finally:
+        conn.close()
+    return row["id"] if row else None
+
+
 @app.post("/api/projects/{folder:path}/ingest")
 @app.post("/api/folders/{folder:path}/ingest")
 async def ingest_all(folder: str):
@@ -2929,18 +2948,23 @@ async def ingest_all(folder: str):
 
     loop = asyncio.get_event_loop()
     jobs = []
+    skipped = 0
     for pending in pending_files:
         file_path = _folder_disk_path(pending["folder"]) / pending["filename"]
+        source_rel = _folder_relative_path(file_path, Path(UPLOADS_DIR))
+        if _active_job_id_for_source(source_rel):
+            skipped += 1  # already queued/running — don't duplicate
+            continue
         jid = tracker.create(
             pending["relative_path"],
             pending["folder"],
-            source_path=_folder_relative_path(file_path, Path(UPLOADS_DIR)),
+            source_path=source_rel,
         )
         loop.run_in_executor(
             executor, _run_ingestion, jid, str(file_path), pending["folder"], pending["filename"]
         )
         jobs.append(jid)
-    return {"status": "started", "jobs": jobs, "count": len(jobs)}
+    return {"status": "started", "jobs": jobs, "count": len(jobs), "already_running": skipped}
 
 
 @app.post("/api/projects/{folder:path}/ingest/{filename:path}")
@@ -2953,10 +2977,14 @@ async def ingest_single(folder: str, filename: str, no_split: bool = False):
         raise HTTPException(404, f"File not found: {filename}")
 
     target_folder = _folder_relative_path(file_path.parent, Path(UPLOADS_DIR))
+    source_rel = _folder_relative_path(file_path, Path(UPLOADS_DIR))
+    existing = _active_job_id_for_source(source_rel)
+    if existing:
+        return {"status": "already_running", "job_id": existing}
     jid = tracker.create(
         relative_name,
         target_folder,
-        source_path=_folder_relative_path(file_path, Path(UPLOADS_DIR)),
+        source_path=source_rel,
     )
     loop = asyncio.get_event_loop()
     loop.run_in_executor(

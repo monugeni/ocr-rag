@@ -73,6 +73,8 @@ function setActionBusy(el, label) {
   if (row) {
     row.classList.add('busy');
     row.querySelectorAll('button').forEach((btn) => { btn.disabled = true; });
+  } else {
+    el.disabled = true;
   }
   if (label) el.textContent = label;
 }
@@ -445,6 +447,8 @@ function renderIngest() {
     view.innerHTML = `<div class="empty-state">Select a folder to ingest documents.</div>`;
     return;
   }
+  const ingestingCount = state.pending.filter((f) => activeJobForPending(f)).length;
+  const idlePendingCount = state.pending.length - ingestingCount;
   view.innerHTML = `
     ${pageHeader('Ingest', 'Upload new files and start ingestion for pending documents.', `
       <button class="ghost" type="button" data-action="refresh">Refresh</button>
@@ -481,9 +485,9 @@ function renderIngest() {
         <div class="panel-header">
           <div>
             <div class="panel-title">Pending ingestion</div>
-            <div class="muted">${state.pending.length} pending</div>
+            <div class="muted">${state.pending.length} pending${ingestingCount ? ` · ${ingestingCount} ingesting` : ''}</div>
           </div>
-          <button class="primary small" type="button" data-action="ingest-all" ${state.pending.length ? '' : 'disabled'}>Ingest pending</button>
+          <button class="primary small" type="button" data-action="ingest-all" ${idlePendingCount ? '' : 'disabled'}>Ingest pending</button>
         </div>
         <div class="panel-body">
           <div class="list">
@@ -505,18 +509,35 @@ function renderStagedFiles() {
   `).join('') : '';
 }
 
+// Find a queued/running ingestion job for a pending file so the row can show
+// progress and hide its action buttons (preventing duplicate ingestion).
+function activeJobForPending(file) {
+  const folder = file.folder || state.folder;
+  const src = `${folder}/${file.filename}`;
+  return state.jobs.find((job) =>
+    (job.status === 'queued' || job.status === 'running') &&
+    (job.source_path === src ||
+      (job.project === folder && (job.filename === file.filename || job.filename === file.relative_path)))
+  );
+}
+
 function renderPending(file) {
+  const folder = file.folder || state.folder;
+  const job = activeJobForPending(file);
+  const actions = job
+    ? `<span class="status-pill ${escapeHtml(job.status)}" title="${escapeHtml(job.stage || '')}">${escapeHtml(job.stage || 'Ingesting…')}</span>`
+    : `
+        <button class="secondary small" type="button" data-action="ingest-single" data-folder="${escapeHtml(folder)}" data-filename="${escapeHtml(file.filename)}">Ingest</button>
+        <button class="secondary small" type="button" data-action="ingest-single-nosplit" data-folder="${escapeHtml(folder)}" data-filename="${escapeHtml(file.filename)}">Ingest (no split)</button>
+        <button class="ghost small danger" type="button" data-action="delete-pending" data-folder="${escapeHtml(folder)}" data-filename="${escapeHtml(file.filename)}">Delete</button>
+      `;
   return `
-    <div class="list-row">
+    <div class="list-row${job ? ' ingesting' : ''}">
       <span class="row-main">
         <span class="row-title">${escapeHtml(file.relative_path || file.filename)}</span>
-        <span class="doc-meta">${escapeHtml(file.folder || state.folder)}</span>
+        <span class="doc-meta">${escapeHtml(folder)}</span>
       </span>
-      <span class="row-actions">
-        <button class="secondary small" type="button" data-action="ingest-single" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest</button>
-        <button class="secondary small" type="button" data-action="ingest-single-nosplit" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Ingest (no split)</button>
-        <button class="ghost small danger" type="button" data-action="delete-pending" data-folder="${escapeHtml(file.folder || state.folder)}" data-filename="${escapeHtml(file.filename)}">Delete</button>
-      </span>
+      <span class="row-actions">${actions}</span>
     </div>
   `;
 }
@@ -845,29 +866,31 @@ async function uploadStaged() {
   }
 }
 
-async function ingestAll() {
+async function ingestAll(btn) {
   if (!state.pending.length) return;
+  setActionBusy(btn, 'Starting…');
   try {
     await api(`/api/folders/${enc(state.folder)}/ingest`, { method: 'POST', body: JSON.stringify({}) });
     showToast('Ingestion started');
-    state.tab = 'jobs';
-    setHash();
-    await refreshActiveData();
   } catch (err) {
     showToast(err.message, 'error');
+  } finally {
+    // Stay on the Ingest tab: pending rows flip to a live "ingesting" status.
+    await refreshActiveData();
   }
 }
 
-async function ingestSingle(folder, filename, noSplit = false) {
+async function ingestSingle(folder, filename, noSplit = false, btn) {
+  setActionBusy(btn, 'Ingesting…');
   try {
     const query = noSplit ? '?no_split=true' : '';
-    await api(`/api/folders/${enc(folder)}/ingest/${enc(filename)}${query}`, { method: 'POST', body: JSON.stringify({}) });
-    showToast(noSplit ? 'Ingestion started (no split)' : 'Ingestion started');
-    state.tab = 'jobs';
-    setHash();
-    await refreshActiveData();
+    const res = await api(`/api/folders/${enc(folder)}/ingest/${enc(filename)}${query}`, { method: 'POST', body: JSON.stringify({}) });
+    if (res && res.status === 'already_running') showToast('Already ingesting this file');
+    else showToast(noSplit ? 'Ingestion started (no split)' : 'Ingestion started');
   } catch (err) {
     showToast(err.message, 'error');
+  } finally {
+    await refreshActiveData();
   }
 }
 
@@ -1100,9 +1123,9 @@ function handleClick(event) {
   if (action === 'go-ingest') setTab('ingest');
   if (action === 'upload-staged') void uploadStaged();
   if (action === 'clear-staged') clearStaged();
-  if (action === 'ingest-all') void ingestAll();
-  if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '');
-  if (action === 'ingest-single-nosplit') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '', true);
+  if (action === 'ingest-all') void ingestAll(target);
+  if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '', false, target);
+  if (action === 'ingest-single-nosplit') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '', true, target);
   if (action === 'delete-pending') void deletePending(target.dataset.folder || state.folder, target.dataset.filename || '', target);
   if (action === 'delete-doc') void deleteDoc(target.dataset.docId || '', target.dataset.docTitle || '', target);
   if (action === 'reingest-job') void reingestJob(target.dataset.jobId || '');
