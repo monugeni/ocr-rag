@@ -657,6 +657,11 @@ a:hover {
   background: #fff;
 }
 
+.list-row.busy {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .row-main,
 .list-row > span {
   min-width: 0;

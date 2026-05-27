@@ -65,6 +65,18 @@ function showToast(message, type = '') {
   setTimeout(() => toast.classList.add('hidden'), 3500);
 }
 
+// Mark the row owning a clicked button as busy: dim it, disable its buttons,
+// and relabel the clicked button. Cleared on the next render (refreshActiveData).
+function setActionBusy(el, label) {
+  if (!el) return;
+  const row = el.closest('.list-row');
+  if (row) {
+    row.classList.add('busy');
+    row.querySelectorAll('button').forEach((btn) => { btn.disabled = true; });
+  }
+  if (label) el.textContent = label;
+}
+
 function setHash() {
   if (!state.folder) return;
   const params = new URLSearchParams();
@@ -138,7 +150,9 @@ async function selectFolder(folder) {
 
 async function refreshActiveData() {
   if (!state.folder) return;
-  await Promise.all([loadDocuments(), loadChats(), loadJobs()]);
+  // loadFolders refreshes the sidebar document/pending counts; without it the
+  // counts stay stale after deletes/ingests until a manual page reload.
+  await Promise.all([loadFolders(), loadDocuments(), loadChats(), loadJobs()]);
   if (state.tab === 'inspect' && state.inspectDocId && !state.inspectInfo) {
     await loadInspection(state.inspectDocId);
   }
@@ -857,28 +871,34 @@ async function ingestSingle(folder, filename, noSplit = false) {
   }
 }
 
-async function deleteDoc(docId, title) {
+async function deleteDoc(docId, title, btn) {
   if (!docId) return;
   const label = title ? `"${title}"` : 'this document';
   if (!confirm(`Delete ${label}? This removes all of its data from the database. The source file stays on disk and will reappear under pending.`)) return;
+  setActionBusy(btn, 'Deleting…');
+  showToast('Deleting document…');
   try {
     await api(`/api/documents/${enc(docId)}`, { method: 'DELETE' });
     showToast('Document deleted');
-    await refreshActiveData();
   } catch (err) {
     showToast(err.message, 'error');
+  } finally {
+    await refreshActiveData();
   }
 }
 
-async function deletePending(folder, filename) {
+async function deletePending(folder, filename, btn) {
   if (!filename) return;
   if (!confirm(`Delete pending file "${filename}"? This permanently removes the file from disk.`)) return;
+  setActionBusy(btn, 'Deleting…');
+  showToast('Deleting pending file…');
   try {
     await api(`/api/folders/${enc(folder)}/pending/${enc(filename)}/discard`, { method: 'POST', body: JSON.stringify({}) });
     showToast('Pending file deleted');
-    await refreshActiveData();
   } catch (err) {
     showToast(err.message, 'error');
+  } finally {
+    await refreshActiveData();
   }
 }
 
@@ -1083,8 +1103,8 @@ function handleClick(event) {
   if (action === 'ingest-all') void ingestAll();
   if (action === 'ingest-single') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '');
   if (action === 'ingest-single-nosplit') void ingestSingle(target.dataset.folder || state.folder, target.dataset.filename || '', true);
-  if (action === 'delete-pending') void deletePending(target.dataset.folder || state.folder, target.dataset.filename || '');
-  if (action === 'delete-doc') void deleteDoc(target.dataset.docId || '', target.dataset.docTitle || '');
+  if (action === 'delete-pending') void deletePending(target.dataset.folder || state.folder, target.dataset.filename || '', target);
+  if (action === 'delete-doc') void deleteDoc(target.dataset.docId || '', target.dataset.docTitle || '', target);
   if (action === 'reingest-job') void reingestJob(target.dataset.jobId || '');
   if (action === 'refresh-jobs') void loadJobs().then(renderJobs);
   if (action === 'inspect-doc') void openInspection(target.dataset.docId);
