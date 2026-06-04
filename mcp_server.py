@@ -1105,6 +1105,12 @@ Search and navigate engineering folder documents (specifications, procedures, QA
 All searches are scoped by folder. A folder search includes all of its sub-folders. Use list_folders first.
 Use list_folder_entries when you need folders/files within a specific folder.
 
+Every search and navigation tool takes a REQUIRED `project` argument: set it to the
+folder path you want to search. That folder path is the `project` (== `folder`) value
+returned by list_folders / list_folder_entries — they are the same string. So the call
+flow is: list_folders -> pick a folder path -> pass it as `project` to ranked_search,
+search_chunks, search_pages, semantic_search, search_sections, list_documents, etc.
+
 === SEARCH STRATEGY ===
 
 Use ranked chunk search first, then page/section/semantic tools only as needed:
