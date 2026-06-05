@@ -1491,6 +1491,7 @@ function renderTrace(t) {
   const limRow = `<div class="trace-limits">`
     + `<span><b>${lim.candidates ?? '?'}</b> raised → <b>${lim.confirmed ?? '?'}</b> confirmed, <b>${lim.dropped ?? 0}</b> pruned</span>`
     + `<span>submitted: <b>${(lim.submitted_chars ?? 0).toLocaleString()}</b> chars${lim.submitted_truncated ? ' <span class="trace-warn">(TRUNCATED)</span>' : ''}</span>`
+    + (lim.compare_output_truncated ? '<span class="trace-warn">output budget reached — findings may be missing</span>' : '')
     + (t.model ? `<span>model: ${escapeHtml(t.model)}${t.effort ? ' · effort ' + escapeHtml(t.effort) : ''}</span>` : '')
     + `</div>`;
   const verify = (t.verify || []).map((v) => {

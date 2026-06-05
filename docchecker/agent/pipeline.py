@@ -90,20 +90,51 @@ _INCORP_TOOL = {
 
 
 def _plan_queries(ctx: CheckContext, llm: LLM, sub_text: str) -> list[str]:
-    out = llm.call_tool(
-        system="You plan retrieval queries to find the requirements that govern a submitted document.",
-        user_text=(
-            "Given the submitted document below, list up to 8 concise search queries to find the "
-            "governing requirements (specs, clauses, quantities, materials, dimensions) in a "
-            "reference knowledge base.\n\n" + sub_text[:8000]
-        ),
-        tool_name="plan_queries",
-        tool_description="Emit search queries for the reference knowledge base.",
-        input_schema=_PLAN_TOOL,
-        model=ctx.fast_model,
-        max_tokens=800,
-    )
-    return [q for q in (out.get("queries") or []) if q][:8]
+    """Plan reference-retrieval queries across the WHOLE submitted document.
+
+    Previously this only saw the first 8k chars (~first 2-3 pages), so reference
+    requirements governing later pages were never fetched and those pages went
+    under-checked. We now plan over the full doc in windows (in parallel), then
+    union + dedupe, so coverage scales with document length."""
+    WINDOW = 7000          # chars per planning window
+    PER_WINDOW = 6         # queries requested per window
+    MAX_WINDOWS = 12       # bound cost on very large docs (~84k chars planned)
+    MAX_TOTAL = 24         # cap total reference queries
+
+    windows = [sub_text[i:i + WINDOW] for i in range(0, len(sub_text), WINDOW)][:MAX_WINDOWS]
+    if not windows:
+        windows = [sub_text[:WINDOW]]
+
+    def plan(seg: str) -> list[str]:
+        out = llm.call_tool(
+            system="You plan retrieval queries to find the requirements that govern a submitted document.",
+            user_text=(
+                f"Given this section of a submitted document, list up to {PER_WINDOW} concise search "
+                "queries to find the governing requirements (specs, clauses, quantities, materials, "
+                "dimensions) in a reference knowledge base.\n\n" + seg
+            ),
+            tool_name="plan_queries",
+            tool_description="Emit search queries for the reference knowledge base.",
+            input_schema=_PLAN_TOOL,
+            model=ctx.fast_model,
+            max_tokens=800,
+        )
+        return [q for q in (out.get("queries") or []) if q][:PER_WINDOW]
+
+    if len(windows) == 1:
+        planned = plan(windows[0])
+    else:
+        with ThreadPoolExecutor(max_workers=min(6, len(windows)), thread_name_prefix="plan") as ex:
+            planned = [q for lst in ex.map(plan, windows) for q in lst]
+
+    seen: set[str] = set()
+    uniq: list[str] = []
+    for q in planned:
+        key = q.strip().lower()
+        if key and key not in seen:
+            seen.add(key)
+            uniq.append(q.strip())
+    return uniq[:MAX_TOTAL]
 
 
 def _reference_block(ctx: CheckContext, llm: LLM, sub_text: str) -> str:
@@ -144,7 +175,7 @@ def _compare(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> list[Find
         model=ctx.model,
         deep=True,
         effort=ctx.effort,
-        max_tokens=16000,
+        max_tokens=24000,
         emit=ctx.emit,
     )
     findings = []
@@ -303,8 +334,19 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
 
     ctx.emit = _capturing_emit
 
+    sub_truncated = "[... truncated at" in sub_text
+    if sub_truncated:
+        result.warnings.append(
+            "Submitted document was truncated for analysis (very long document) — later pages may be under-checked."
+        )
+
     ctx.emit({"stage": "Comparing against reference", "type": "phase"})
     candidates = _compare(ctx, llm, submitted, sub_text)
+    compare_truncated = getattr(llm, "last_stop_reason", None) == "max_tokens"
+    if compare_truncated:
+        result.warnings.append(
+            "The comparison hit its output budget — some findings may be missing. Re-run or split the document."
+        )
     ctx.emit({"stage": f"{len(candidates)} candidate finding(s)", "type": "phase"})
 
     ctx.emit({"stage": "Self-verifying findings", "type": "phase"})
@@ -344,11 +386,12 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
         "verify": verdicts,
         "limits": {
             "submitted_chars": len(sub_text),
-            "submitted_truncated": "[... truncated at" in sub_text,
+            "submitted_truncated": sub_truncated,
             "candidates": len(candidates),
             "confirmed": len(confirmed),
             "dropped": sum(1 for v in verdicts if v.get("verdict") == "dropped"),
-            "compare_max_output_tokens": 16000,
+            "compare_max_output_tokens": 24000,
+            "compare_output_truncated": compare_truncated,
         },
         "warnings": list(result.warnings),
     }
