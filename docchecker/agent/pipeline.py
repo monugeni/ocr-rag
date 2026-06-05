@@ -144,15 +144,16 @@ def _reference_block(ctx: CheckContext, llm: LLM, sub_text: str) -> str:
         text = document_text(ctx.docs_db_path, ref.doc_id)
         blocks.append(f"=== REFERENCE (uploaded): {ref.title} (doc {ref.doc_id}) ===\n{text}")
 
-    # Existing company knowledge base, via the running company MCP.
-    if ctx.company_mcp_url and ctx.reference_project:
+    # Existing company knowledge base(s), via the running company MCP — one or
+    # more reference folders (e.g. the tender folder + a Standards folder).
+    ref_folders = ctx.reference_projects or ([ctx.reference_project] if ctx.reference_project else [])
+    if ctx.company_mcp_url and ref_folders:
         ctx.emit({"stage": "Retrieving existing reference requirements", "type": "phase"})
         queries = _plan_queries(ctx, llm, sub_text)
-        retrieved = fetch_reference_context(ctx.company_mcp_url, ctx.reference_project, queries)
-        if retrieved:
-            blocks.append(
-                f"=== REFERENCE (existing KB: {ctx.reference_project}) ===\n{retrieved}"
-            )
+        for folder in ref_folders:
+            retrieved = fetch_reference_context(ctx.company_mcp_url, folder, queries)
+            if retrieved:
+                blocks.append(f"=== REFERENCE (existing KB: {folder}) ===\n{retrieved}")
 
     return "\n\n".join(blocks) if blocks else "(no reference documents provided)"
 

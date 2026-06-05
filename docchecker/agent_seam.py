@@ -70,6 +70,17 @@ def build_context(run_id: str) -> CheckContext:
             title=Path(p["filename"]).stem,
         )
 
+    # Reference folders: a JSON list (additive) or a legacy single string.
+    ref_raw = run.get("reference_project")
+    reference_projects: list[str] = []
+    if ref_raw:
+        try:
+            parsed = json.loads(ref_raw)
+            reference_projects = parsed if isinstance(parsed, list) else [ref_raw]
+        except (ValueError, TypeError):
+            reference_projects = [ref_raw]
+    reference_projects = [p for p in reference_projects if p]
+
     annotated_dir = Path(config.ANNOTATED_DIR) / run_id
 
     run_meta = json.loads(run["metadata"]) if run.get("metadata") else {}
@@ -87,7 +98,8 @@ def build_context(run_id: str) -> CheckContext:
         run_id=run_id,
         submitted=submitted,
         references=references,
-        reference_project=run.get("reference_project"),
+        reference_project=reference_projects[0] if reference_projects else None,
+        reference_projects=reference_projects,
         company_mcp_url=config.COMPANY_MCP_URL,
         old_commented=old_commented,
         metadata={

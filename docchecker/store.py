@@ -117,7 +117,11 @@ def create_run(data: dict, created_by: int) -> dict:
                 1 if data.get("is_revision") else 0,
                 data.get("prior_run_id"),
                 data.get("reference_mode", "fresh"),
-                data.get("reference_project"),
+                # Additive references stored as a JSON list in reference_project;
+                # falls back to the legacy single value for back-compat.
+                (json.dumps(data["reference_projects"])
+                 if data.get("reference_projects")
+                 else data.get("reference_project")),
                 ocrrag_project,
                 created_by,
             ),

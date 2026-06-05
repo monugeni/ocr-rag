@@ -15,8 +15,13 @@ class RunCreate(BaseModel):
     guiding_prompt: Optional[str] = None
     is_revision: bool = False
     prior_run_id: Optional[str] = None
-    reference_mode: str = "fresh"          # existing | fresh | both
+    reference_mode: str = "fresh"          # existing | fresh | both (legacy)
     reference_project: Optional[str] = None
+    # Additive references: any combination of reference folders (the tender
+    # folder, another folder like Standards, ...) queried via the company KB,
+    # plus uploaded reference files. reference_projects supersedes the single
+    # reference_project when provided.
+    reference_projects: Optional[list[str]] = None
 
 
 class TemplateIn(BaseModel):

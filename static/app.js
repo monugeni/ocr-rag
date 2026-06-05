@@ -1283,16 +1283,16 @@ function renderCheckNew() {
           <ul id="chk-submitted-list" class="filelist"></ul>
         </div>
         <div class="check-col">
-          <div class="check-col-head">Reference <span class="muted">tender / PO / PR</span></div>
+          <div class="check-col-head">Reference <span class="muted">tender / PO / PR — combine any</span></div>
           <div class="ref-choice">
-            <label class="radio"><input type="radio" name="chk-ref" value="existing" checked> Library: <b>${escapeHtml(state.folder)}</b></label>
-            <label class="radio"><input type="radio" name="chk-ref" value="other"> Another folder</label>
-            <label class="radio"><input type="radio" name="chk-ref" value="fresh"> Upload files</label>
-          </div>
-          <select id="chk-ref-folder" class="hidden"></select>
-          <div id="chk-ref-upload" class="hidden">
-            <label class="dropzone"><input id="chk-reference" type="file" multiple><span class="dz-text">Drop reference files or <b>browse</b></span></label>
-            <ul id="chk-reference-list" class="filelist"></ul>
+            <label class="radio"><input type="checkbox" id="chk-ref-this" checked> This folder: <b>${escapeHtml(state.folder)}</b></label>
+            <label class="radio"><input type="checkbox" id="chk-ref-other"> Another folder</label>
+            <select id="chk-ref-folder" class="hidden"></select>
+            <label class="radio"><input type="checkbox" id="chk-ref-upload-on"> Upload files</label>
+            <div id="chk-ref-upload" class="hidden">
+              <label class="dropzone"><input id="chk-reference" type="file" multiple><span class="dz-text">Drop reference files or <b>browse</b></span></label>
+              <ul id="chk-reference-list" class="filelist"></ul>
+            </div>
           </div>
         </div>
       </div>
@@ -1310,12 +1310,11 @@ function renderCheckNew() {
   bindFileList('chk-submitted', 'chk-submitted-list');
   bindFileList('chk-reference', 'chk-reference-list');
   bindFileList('chk-prior-file', 'chk-prior-list');
-  view.querySelectorAll('input[name=chk-ref]').forEach((r) => r.addEventListener('change', () => {
-    const v = view.querySelector('input[name=chk-ref]:checked').value;
-    $('chk-ref-folder').classList.toggle('hidden', v !== 'other');
-    $('chk-ref-upload').classList.toggle('hidden', v !== 'fresh');
-  }));
-  $('chk-ref-folder').innerHTML = state.folders.map((f) => `<option value="${escapeHtml(f.folder)}">${escapeHtml(f.folder)}</option>`).join('');
+  $('chk-ref-other').addEventListener('change', (e) => $('chk-ref-folder').classList.toggle('hidden', !e.target.checked));
+  $('chk-ref-upload-on').addEventListener('change', (e) => $('chk-ref-upload').classList.toggle('hidden', !e.target.checked));
+  $('chk-ref-folder').innerHTML = state.folders
+    .filter((f) => f.folder !== state.folder)
+    .map((f) => `<option value="${escapeHtml(f.folder)}">${escapeHtml(f.folder)}</option>`).join('');
   $('chk-revision').addEventListener('change', (e) => $('chk-prior').classList.toggle('hidden', !e.target.checked));
   $('chk-run').addEventListener('click', startCheck);
   loadRecentChecks();
@@ -1362,22 +1361,29 @@ async function loadRecentChecks() {
 async function startCheck() {
   const btn = $('chk-run'); btn.disabled = true;
   try {
-    const refMode = document.querySelector('input[name=chk-ref]:checked').value;
     const submitted = Array.from($('chk-submitted').files || []);
     if (!submitted.length) { showToast('Add at least one document to check', 'error'); btn.disabled = false; return; }
-    let reference_mode = 'existing'; let reference_project = state.folder;
-    if (refMode === 'other') reference_project = $('chk-ref-folder').value;
-    if (refMode === 'fresh') { reference_mode = 'fresh'; reference_project = null; }
+
+    // Additive reference sources: any combination of folders + uploads.
+    const refFolders = [];
+    if ($('chk-ref-this').checked) refFolders.push(state.folder);
+    if ($('chk-ref-other').checked && $('chk-ref-folder').value) refFolders.push($('chk-ref-folder').value);
+    const uploadRefs = $('chk-ref-upload-on').checked ? Array.from($('chk-reference').files || []) : [];
+    if (!refFolders.length && !uploadRefs.length) {
+      showToast('Select at least one reference source (a folder or uploaded files)', 'error');
+      btn.disabled = false; return;
+    }
     const run = await api('/api/runs', { method: 'POST', body: JSON.stringify({
       project_number: state.folder,
       document_type: $('chk-doctype').value || null,
       originator: $('chk-originator').value || null,
       guiding_prompt: $('chk-prompt').value || null,
-      reference_mode, reference_project,
+      reference_mode: uploadRefs.length ? 'both' : 'existing',
+      reference_projects: refFolders,
       is_revision: $('chk-revision').checked,
     }) });
     for (const f of submitted) await uploadCheckFile(run.id, 'submitted', f);
-    if (refMode === 'fresh') for (const f of Array.from($('chk-reference').files || [])) await uploadCheckFile(run.id, 'reference', f);
+    for (const f of uploadRefs) await uploadCheckFile(run.id, 'reference', f);
     if ($('chk-revision').checked && $('chk-prior-file').files[0]) await uploadCheckFile(run.id, 'prior_commented', $('chk-prior-file').files[0]);
     openCheckRun(run.id);
   } catch (e) { showToast(e.message, 'error'); btn.disabled = false; }

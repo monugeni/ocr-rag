@@ -44,7 +44,8 @@ class CheckContext:
     run_id: str
     submitted: list[DocRef]
     references: list[DocRef] = field(default_factory=list)
-    reference_project: Optional[str] = None       # company ocr-rag folder, if any
+    reference_project: Optional[str] = None       # legacy single company folder
+    reference_projects: list[str] = field(default_factory=list)  # additive: one or more company folders
     company_mcp_url: Optional[str] = None          # running company ocr-rag MCP, if any
     old_commented: Optional[DocRef] = None
     metadata: dict[str, Any] = field(default_factory=dict)
