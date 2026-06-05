@@ -165,7 +165,7 @@ a:hover {
 
 .folder-row-wrap {
   display: grid;
-  grid-template-columns: 20px minmax(0, 1fr) 24px;
+  grid-template-columns: 32px minmax(0, 1fr) 24px;
   align-items: center;
   gap: 2px;
   padding-inline-start: calc(var(--depth, 0) * 14px);
@@ -214,15 +214,18 @@ a:hover {
 .folder-chevron {
   display: grid;
   place-items: center;
-  width: 20px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border: none;
   background: transparent;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 20px;
+  line-height: 1;
   cursor: pointer;
   padding: 0;
 }
+
+.folder-chevron:hover { color: var(--accent-dark); }
 
 .folder-chevron::before {
   content: '▸';
