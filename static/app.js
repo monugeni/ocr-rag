@@ -1323,9 +1323,29 @@ function renderCheckNew() {
 function bindFileList(inputId, listId) {
   const input = $(inputId); const list = $(listId);
   if (!input || !list) return;
-  input.addEventListener('change', () => {
+  const render = () => {
     list.innerHTML = Array.from(input.files || []).map((f) => `<li>${escapeHtml(f.name)} <span class="muted">${(f.size / 1024) | 0} KB</span></li>`).join('');
-  });
+  };
+  input.addEventListener('change', render);
+
+  // The input is a hidden child of a label.dropzone; clicking opens the picker,
+  // but dragging files onto it did nothing. Wire drag-and-drop onto the zone.
+  const zone = input.closest('.dropzone');
+  if (zone) {
+    ['dragenter', 'dragover'].forEach((ev) => zone.addEventListener(ev, (e) => {
+      e.preventDefault(); e.stopPropagation(); zone.classList.add('dragover');
+    }));
+    ['dragleave', 'dragend'].forEach((ev) => zone.addEventListener(ev, (e) => {
+      e.preventDefault(); e.stopPropagation(); zone.classList.remove('dragover');
+    }));
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault(); e.stopPropagation(); zone.classList.remove('dragover');
+      const files = e.dataTransfer && e.dataTransfer.files;
+      if (!files || !files.length) return;
+      try { input.files = files; } catch (_) { /* unsupported: ignore */ }
+      render();
+    });
+  }
 }
 
 async function loadRecentChecks() {
