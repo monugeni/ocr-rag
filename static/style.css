@@ -1320,19 +1320,7 @@ a:hover {
   font-size: 32px; line-height: 1.14; letter-spacing: -0.02em;
   margin: 14px 0 10px;
 }
-.ask-empty-lede { font-family: var(--serif); font-size: 17px; color: var(--ink-soft); margin: 0 auto 24px; max-width: 480px; }
-.ask-examples { display: flex; flex-direction: column; border-top: 1px solid var(--line); text-align: left; max-width: 520px; margin: 0 auto; }
-.ask-example {
-  display: flex; align-items: center; gap: 14px;
-  padding: 15px 8px; border-bottom: 1px solid var(--line);
-  color: var(--text); background: transparent; text-align: left; width: 100%;
-  transition: padding-left 0.14s ease, color 0.14s ease;
-}
-.ask-example:hover { padding-left: 16px; color: var(--accent-dark); }
-.ask-example .qx { font-family: var(--serif); font-size: 16px; flex: 1; min-width: 0; }
-.ask-example .arw { color: var(--muted); display: grid; place-items: center; transition: transform 0.14s ease, color 0.14s ease; }
-.ask-example:hover .arw { color: var(--accent); transform: translateX(3px); }
-.ask-example .arw svg { width: 16px; height: 16px; }
+.ask-empty-lede { font-family: var(--serif); font-size: 17px; color: var(--ink-soft); margin: 0 auto; max-width: 480px; }
 
 /* ---- Buttons (shared) ---- */
 .primary {

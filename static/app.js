@@ -336,15 +336,7 @@ const ICON = {
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`,
   refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5"/></svg>`,
   send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
-  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
 };
-
-const ASK_EXAMPLES = [
-  'What is the scope of work?',
-  'What are the vendor qualification requirements?',
-  'Summarise the liquidated-damages (LD) clause.',
-  'What inspection & test requirements apply?',
-];
 
 function renderAsk() {
   const view = $('ask-view');
@@ -403,13 +395,6 @@ function renderAskEmpty() {
         <div class="ask-empty-kicker">Ask the folder</div>
         <h1>What would you like to know about ${escapeHtml(state.folder)}?</h1>
         <p class="ask-empty-lede">${escapeHtml(grounding)}</p>
-        <div class="ask-examples">
-          ${ASK_EXAMPLES.map((q) => `
-            <button class="ask-example" type="button" data-action="ask-example" data-q="${escapeHtml(q)}">
-              <span class="qx">${escapeHtml(q)}</span>
-              <span class="arw">${ICON.arrow}</span>
-            </button>`).join('')}
-        </div>
       </div>
     </div>
   `;
@@ -868,13 +853,6 @@ async function newChat() {
   }
 }
 
-async function askExample(question) {
-  if (!question || state.sending) return;
-  const input = $('message-input');
-  if (input) input.value = question;
-  await sendMessage({ preventDefault() {} });
-}
-
 async function sendMessage(event) {
   event.preventDefault();
   const input = $('message-input');
@@ -1197,7 +1175,6 @@ function handleClick(event) {
   if (action === 'cancel-move') closeMoveDialog();
   if (action === 'confirm-move') void confirmMove();
   if (action === 'new-chat') void newChat();
-  if (action === 'ask-example') void askExample(target.dataset.q || '');
   if (action === 'refresh') void refreshActiveData();
   if (action === 'go-documents') setTab('documents');
   if (action === 'go-ingest') setTab('ingest');
