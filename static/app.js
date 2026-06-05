@@ -338,7 +338,7 @@ const ICON = {
   send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
 };
 
-function renderAsk() {
+function renderAsk(opts = {}) {
   const view = $('ask-view');
   if (!state.folder) {
     view.innerHTML = `<div class="empty-state">Select a folder to ask questions.</div>`;
@@ -366,8 +366,25 @@ function renderAsk() {
     </form>
   `;
   const messages = $('messages');
-  messages.scrollTop = messages.scrollHeight;
+  scrollMessages(messages, opts.scroll || 'bottom');
   renderMath(view);
+}
+
+// 'answer' aligns the top of the latest assistant message to the top of the
+// scroll viewport (so the reader starts where the response begins); 'bottom'
+// jumps to the end (used for loading/switching threads).
+function scrollMessages(container, mode) {
+  if (!container) return;
+  if (mode === 'answer') {
+    const items = container.querySelectorAll('.message.assistant');
+    const last = items[items.length - 1];
+    if (last) {
+      const offset = last.getBoundingClientRect().top - container.getBoundingClientRect().top;
+      container.scrollTop += offset - 12;
+      return;
+    }
+  }
+  container.scrollTop = container.scrollHeight;
 }
 
 function renderThreadControl() {
@@ -863,7 +880,7 @@ async function sendMessage(event) {
     if (!state.threadId) await createChatThread();
     state.messages.push({ role: 'user', content, sources: [] });
     state.messages.push({ role: 'assistant', content: 'Working...', sources: [] });
-    renderAsk();
+    renderAsk({ scroll: 'answer' });
     const data = await api(`/api/chats/${enc(state.threadId)}/messages`, {
       method: 'POST',
       body: JSON.stringify({ content }),
@@ -874,7 +891,7 @@ async function sendMessage(event) {
     showToast(err.message, 'error');
   } finally {
     state.sending = false;
-    renderAsk();
+    renderAsk({ scroll: 'answer' });
   }
 }
 
