@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esteem DocLens</title>
-<link rel="stylesheet" href="/static/style.css?v=20260514h">
+<link rel="stylesheet" href="/static/style.css?v=checker3">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
 <body>
@@ -37,14 +37,20 @@
         </div>
         <nav class="mode-tabs" aria-label="Main views">
           <button id="ask-tab" class="mode-tab active">Ask</button>
+          <button id="check-tab" class="mode-tab">Check</button>
           <button id="documents-tab" class="mode-tab">Documents</button>
           <button id="ingest-tab" class="mode-tab">Ingest</button>
           <button id="jobs-tab" class="mode-tab">Jobs</button>
           <button id="inspect-tab" class="mode-tab hidden">Inspect</button>
         </nav>
+        <div class="topbar-user">
+          <span id="user-chip" class="user-chip hidden"></span>
+          <a id="signout-btn" class="ghost signout hidden" href="#">Sign out</a>
+        </div>
       </header>
 
       <section id="ask-view" class="view ask-view"></section>
+      <section id="check-view" class="view page-view hidden"></section>
       <section id="documents-view" class="view page-view hidden"></section>
       <section id="ingest-view" class="view page-view hidden"></section>
       <section id="jobs-view" class="view page-view hidden"></section>
@@ -58,6 +64,6 @@
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="/static/app.js?v=20260514h"></script>
+  <script src="/static/app.js?v=checker3"></script>
 </body>
 </html>

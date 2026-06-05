@@ -8,3 +8,12 @@ uploads/
 samples/
 __pycache__/
 *.pyc
+
+# merge: runtime + backups (not source)
+venv/
+data/
+.snaps/
+.cache/
+.local/
+*.premerge
+static.premerge/

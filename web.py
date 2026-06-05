@@ -1517,7 +1517,7 @@ def _retrieve_folder_context(
 
 
 def _chat_model_name() -> str:
-    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-20250514")
+    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-opus-4-8")
 
 
 def _chat_api_key() -> Optional[str]:
@@ -3214,6 +3214,16 @@ def main():
     print(f"  Uploads:   {UPLOADS_DIR}")
     print(f"  Web GUI:   http://0.0.0.0:{args.port}")
     print(f"  MCP:       http://0.0.0.0:{args.mcp_port}/mcp")
+
+    # Document checker (Byom whole-app login + Check tab). Additive & isolated;
+    # if it fails to load, ocr-rag still runs exactly as before.
+    try:
+        import docchecker
+        docchecker.register(app)
+        print(f"  Checker:   enabled (model {docchecker.config.CHECKER_MODEL})")
+    except Exception as exc:
+        import traceback; traceback.print_exc()
+        print(f"  Checker:   DISABLED -- {exc}")
 
     uvicorn.run(app, host="0.0.0.0", port=args.port)
 

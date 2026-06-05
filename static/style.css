@@ -1018,3 +1018,55 @@ a:hover {
     overflow-x: auto;
   }
 }
+
+/* ===================== Check tab ===================== */
+.topbar-user { display:flex; align-items:center; gap:10px; margin-left:auto; }
+.user-chip { font-weight:600; font-size:13px; color:var(--ink,#1a2231); }
+.signout { cursor:pointer; }
+#check-view .status-pill { text-transform:capitalize; padding:3px 11px; border-radius:999px; background:#eef1f5; font-weight:600; font-size:12px; color:#1a2231; }
+#check-view .status-pill[data-s="done"] { background:#e7f6ec; color:#15803d; }
+#check-view .status-pill[data-s="failed"] { background:#fdecec; color:#b91c1c; }
+#check-view .status-pill[data-s="running"], #check-view .status-pill[data-s="queued"] { background:#fdf2e3; color:#b45309; }
+#check-view .check-card { background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:20px; display:flex; flex-direction:column; gap:16px; }
+#check-view .check-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+#check-view .check-col { border:1px solid #e5e7eb; border-radius:10px; padding:14px; display:flex; flex-direction:column; gap:10px; }
+#check-view .check-col-head { font-weight:650; font-size:13.5px; }
+#check-view .check-col-head .muted { font-weight:400; }
+#check-view .dropzone { border:1.5px dashed #d4d7dd; border-radius:8px; background:#f6f7f9; padding:18px; text-align:center; cursor:pointer; display:block; }
+#check-view .dropzone:hover { border-color:#4f46e5; background:#eef2ff; }
+#check-view .dropzone input[type=file] { display:none; }
+#check-view .dz-text { font-size:13px; color:#6b7280; } #check-view .dz-text b { color:#4f46e5; }
+#check-view .filelist { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; }
+#check-view .filelist li { font-size:13px; background:#f3f4f6; border:1px solid #e5e7eb; border-radius:6px; padding:5px 9px; }
+#check-view .ref-choice { display:flex; flex-direction:column; gap:6px; }
+#check-view .radio { display:flex; align-items:center; gap:7px; font-size:13.5px; }
+#check-view .check-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+/* NOTE: ocr-rag's base CSS uses .field as an input with height:38px — override it here. */
+#check-view .field { display:flex; flex-direction:column; gap:5px; font-weight:600; font-size:13px; height:auto; min-height:0; background:transparent; border:0; padding:0; }
+#check-view .field .muted { font-weight:400; }
+#check-view input[type=text], #check-view select, #check-view textarea { padding:9px 11px; border:1px solid #d4d7dd; border-radius:8px; font:inherit; width:100%; height:auto; min-height:38px; box-sizing:border-box; background:#fff; }
+#check-view textarea { resize:vertical; min-height:76px; line-height:1.45; }
+#check-view .switch-row { display:flex; align-items:center; gap:9px; font-weight:600; font-size:13.5px; }
+#check-view .check-actions { display:flex; justify-content:flex-end; }
+#check-view .check-recent { margin-top:22px; }
+#check-view .recent-row { display:flex; align-items:center; gap:12px; padding:7px 0; border-bottom:1px solid #eef0f3; font-size:13.5px; }
+#check-view .run-status { margin:6px 0 12px; }
+#check-view .run-log { margin-top:18px; } #check-view .run-log ul { list-style:none; padding:0; margin:0; font-family:ui-monospace,monospace; font-size:12.5px; }
+#check-view .run-log li { padding:3px 0; border-bottom:1px dashed #e5e7eb; color:#6b7280; }
+#check-view table.grid { width:100%; border-collapse:collapse; }
+#check-view table.grid td { padding:7px 10px; border-bottom:1px solid #eef0f3; font-size:13.5px; }
+#check-view .ing.ok { color:#15803d; font-weight:600; } #check-view .ing.bad { color:#b91c1c; } #check-view .ing.wait { color:#b45309; }
+#check-view .check-split { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:6px; }
+#check-view .findings { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; }
+#check-view .finding { border:1px solid #e5e7eb; border-radius:8px; padding:12px 14px; }
+#check-view .finding.dim { opacity:.5; }
+#check-view .finding-head { display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap; }
+#check-view .dot { width:10px; height:10px; border-radius:3px; display:inline-block; }
+#check-view .tag { font-size:11px; background:#eef1f5; border-radius:5px; padding:1px 7px; text-transform:capitalize; color:#4b5563; }
+#check-view .tag.ok { color:#15803d; } #check-view .tag.bad { color:#b91c1c; } #check-view .tag.wait { color:#b45309; }
+#check-view .actions { margin-top:8px; display:flex; align-items:center; gap:8px; }
+#check-view .actions button { font:inherit; font-size:12px; padding:4px 11px; border:1px solid #d4d7dd; border-radius:7px; background:#fff; cursor:pointer; }
+#check-view .pdf-pane { display:flex; flex-direction:column; gap:6px; }
+#check-view .pdf-pane iframe { width:100%; height:70vh; border:1px solid #e5e7eb; border-radius:8px; }
+#check-view .small { font-size:12px; }
+@media (max-width:860px) { #check-view .check-grid, #check-view .check-row, #check-view .check-split { grid-template-columns:1fr; } }

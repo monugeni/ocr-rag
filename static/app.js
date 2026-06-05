@@ -21,7 +21,7 @@ const state = {
   inspecting: false,
 };
 
-const VALID_TABS = new Set(['ask', 'documents', 'ingest', 'jobs', 'inspect']);
+const VALID_TABS = new Set(['ask', 'check', 'documents', 'ingest', 'jobs', 'inspect']);
 const INSPECT_PANELS = new Set(['metadata', 'toc', 'page', 'search']);
 const $ = (id) => document.getElementById(id);
 
@@ -290,11 +290,16 @@ function renderShell() {
     if (view) view.classList.toggle('hidden', state.tab !== tab);
   }
   $('inspect-tab').classList.toggle('hidden', !state.inspectDocId);
+  for (const t of ['documents', 'ingest', 'jobs']) {
+    const b = $(`${t}-tab`);
+    if (b) b.classList.toggle('hidden', !state.isAdmin);
+  }
 }
 
 function setTab(tab) {
   if (!VALID_TABS.has(tab)) return;
   if (tab === 'inspect' && !state.inspectDocId) return;
+  if (['documents', 'ingest', 'jobs'].includes(tab) && !state.isAdmin) return;
   state.tab = tab;
   setHash();
   renderShell();
@@ -304,6 +309,7 @@ function setTab(tab) {
 function renderActiveView() {
   renderShell();
   if (state.tab === 'ask') renderAsk();
+  if (state.tab === 'check') renderCheck();
   if (state.tab === 'documents') renderDocuments();
   if (state.tab === 'ingest') renderIngest();
   if (state.tab === 'jobs') renderJobs();
@@ -1162,6 +1168,207 @@ async function init() {
   await refreshActiveData();
   startPolling();
 }
+
+// ===================== Check tab =====================
+const CHECK_DOC_TYPES = ['Drawing', 'Datasheet', 'Vendor document', 'Procedure', 'Specification', 'Calculation', 'Material requisition', 'Inspection / test report', 'Report', 'Other'];
+const SEV_COLORS = { critical: '#D7263D', major: '#E8A33D', minor: '#F4D35E', observation: '#4C9BE8' };
+const checkState = { sub: 'new', runId: null, sse: null, resultsLoaded: false };
+
+function renderCheck() {
+  const view = $('check-view');
+  if (!state.folder) {
+    view.innerHTML = `<div class="empty-state">Select a folder (the reference library) to check documents against.</div>`;
+    return;
+  }
+  if (checkState.sub === 'run' && checkState.runId) { renderCheckRun(); return; }
+  renderCheckNew();
+}
+
+function renderCheckNew() {
+  const view = $('check-view');
+  view.innerHTML = `
+    ${pageHeader('Check documents', `against ${state.folder}`)}
+    <div class="check-card">
+      <div class="check-grid">
+        <div class="check-col">
+          <div class="check-col-head">Documents to check <span class="muted">your submission</span></div>
+          <label class="dropzone"><input id="chk-submitted" type="file" multiple><span class="dz-text">Drop files or <b>browse</b></span></label>
+          <ul id="chk-submitted-list" class="filelist"></ul>
+        </div>
+        <div class="check-col">
+          <div class="check-col-head">Reference <span class="muted">tender / PO / PR</span></div>
+          <div class="ref-choice">
+            <label class="radio"><input type="radio" name="chk-ref" value="existing" checked> Library: <b>${escapeHtml(state.folder)}</b></label>
+            <label class="radio"><input type="radio" name="chk-ref" value="other"> Another folder</label>
+            <label class="radio"><input type="radio" name="chk-ref" value="fresh"> Upload files</label>
+          </div>
+          <select id="chk-ref-folder" class="hidden"></select>
+          <div id="chk-ref-upload" class="hidden">
+            <label class="dropzone"><input id="chk-reference" type="file" multiple><span class="dz-text">Drop reference files or <b>browse</b></span></label>
+            <ul id="chk-reference-list" class="filelist"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="check-row">
+        <label class="field"><span>Document type</span><select id="chk-doctype"><option value="">Select…</option>${CHECK_DOC_TYPES.map((d) => `<option>${d}</option>`).join('')}</select></label>
+        <label class="field"><span>Prepared by <span class="muted">optional</span></span><input id="chk-originator" type="text" placeholder="e.g. ACME Pumps"></label>
+      </div>
+      <label class="field"><span>What to check <span class="muted">in your words</span></span><textarea id="chk-prompt" rows="3" placeholder="e.g. Verify design pressure, materials and BOM quantities against the PO; flag deviations."></textarea></label>
+      <label class="switch-row"><input id="chk-revision" type="checkbox"> This is a new revision — check that prior comments were incorporated</label>
+      <div id="chk-prior" class="hidden"><label class="dropzone"><input id="chk-prior-file" type="file"><span class="dz-text">Old commented PDF — <b>browse</b></span></label><ul id="chk-prior-list" class="filelist"></ul></div>
+      <div class="check-actions"><button id="chk-run" class="primary">Run check</button></div>
+    </div>
+    <div class="check-recent"><h3>Recent checks</h3><div id="chk-recent" class="muted">Loading…</div></div>
+  `;
+  bindFileList('chk-submitted', 'chk-submitted-list');
+  bindFileList('chk-reference', 'chk-reference-list');
+  bindFileList('chk-prior-file', 'chk-prior-list');
+  view.querySelectorAll('input[name=chk-ref]').forEach((r) => r.addEventListener('change', () => {
+    const v = view.querySelector('input[name=chk-ref]:checked').value;
+    $('chk-ref-folder').classList.toggle('hidden', v !== 'other');
+    $('chk-ref-upload').classList.toggle('hidden', v !== 'fresh');
+  }));
+  $('chk-ref-folder').innerHTML = state.folders.map((f) => `<option value="${escapeHtml(f.folder)}">${escapeHtml(f.folder)}</option>`).join('');
+  $('chk-revision').addEventListener('change', (e) => $('chk-prior').classList.toggle('hidden', !e.target.checked));
+  $('chk-run').addEventListener('click', startCheck);
+  loadRecentChecks();
+}
+
+function bindFileList(inputId, listId) {
+  const input = $(inputId); const list = $(listId);
+  if (!input || !list) return;
+  input.addEventListener('change', () => {
+    list.innerHTML = Array.from(input.files || []).map((f) => `<li>${escapeHtml(f.name)} <span class="muted">${(f.size / 1024) | 0} KB</span></li>`).join('');
+  });
+}
+
+async function loadRecentChecks() {
+  try {
+    const runs = await api(`/api/runs?project_number=${enc(state.folder)}`);
+    const el = $('chk-recent'); if (!el) return;
+    if (!runs.length) { el.innerHTML = '<div class="muted">No checks yet for this folder.</div>'; return; }
+    el.innerHTML = runs.map((r) => `<div class="recent-row"><span class="status-pill" data-s="${r.status}">${r.status}</span><span>${escapeHtml(r.document_type || 'document')}</span><span class="muted">${escapeHtml(r.created_at || '')}</span><a href="#" class="open-run" data-runid="${r.id}">open</a></div>`).join('');
+    el.querySelectorAll('.open-run').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); openCheckRun(a.dataset.runid); }));
+  } catch (_) { /* ignore */ }
+}
+
+async function startCheck() {
+  const btn = $('chk-run'); btn.disabled = true;
+  try {
+    const refMode = document.querySelector('input[name=chk-ref]:checked').value;
+    const submitted = Array.from($('chk-submitted').files || []);
+    if (!submitted.length) { showToast('Add at least one document to check', 'error'); btn.disabled = false; return; }
+    let reference_mode = 'existing'; let reference_project = state.folder;
+    if (refMode === 'other') reference_project = $('chk-ref-folder').value;
+    if (refMode === 'fresh') { reference_mode = 'fresh'; reference_project = null; }
+    const run = await api('/api/runs', { method: 'POST', body: JSON.stringify({
+      project_number: state.folder,
+      document_type: $('chk-doctype').value || null,
+      originator: $('chk-originator').value || null,
+      guiding_prompt: $('chk-prompt').value || null,
+      reference_mode, reference_project,
+      is_revision: $('chk-revision').checked,
+    }) });
+    for (const f of submitted) await uploadCheckFile(run.id, 'submitted', f);
+    if (refMode === 'fresh') for (const f of Array.from($('chk-reference').files || [])) await uploadCheckFile(run.id, 'reference', f);
+    if ($('chk-revision').checked && $('chk-prior-file').files[0]) await uploadCheckFile(run.id, 'prior_commented', $('chk-prior-file').files[0]);
+    openCheckRun(run.id);
+  } catch (e) { showToast(e.message, 'error'); btn.disabled = false; }
+}
+
+async function uploadCheckFile(runId, role, file) {
+  const form = new FormData(); form.append('role', role); form.append('file', file);
+  await api(`/api/runs/${runId}/uploads`, { method: 'POST', body: form });
+}
+
+function openCheckRun(runId) { checkState.sub = 'run'; checkState.runId = runId; renderCheckRun(); }
+
+function renderCheckRun() {
+  checkState.resultsLoaded = false;
+  const view = $('check-view'); const runId = checkState.runId;
+  view.innerHTML = `
+    ${pageHeader('Check run', '', '<button class="ghost" id="chk-back">&larr; New check</button>')}
+    <div id="chk-status" class="run-status"></div>
+    <div id="chk-uploads"></div>
+    <div id="chk-start" class="hidden"><button id="chk-start-btn" class="primary">Run check</button></div>
+    <div id="chk-progress" class="run-log hidden"><h3>Progress</h3><ul id="chk-log"></ul></div>
+    <div id="chk-results" class="hidden"></div>
+  `;
+  $('chk-back').addEventListener('click', () => { if (checkState.sse) { checkState.sse.close(); checkState.sse = null; } checkState.sub = 'new'; renderCheck(); });
+  $('chk-start-btn')?.addEventListener('click', () => startRun(runId));
+  pollCheckRun(runId);
+}
+
+async function startRun(runId) {
+  $('chk-start-btn').disabled = true;
+  try { await api(`/api/runs/${runId}/start`, { method: 'POST' }); connectCheckSSE(runId); pollCheckRun(runId); }
+  catch (e) { showToast(e.message, 'error'); }
+}
+
+function connectCheckSSE(runId) {
+  if (checkState.sse) return;
+  $('chk-progress').classList.remove('hidden');
+  const sse = new EventSource(`/api/runs/${runId}/stream`);
+  checkState.sse = sse;
+  sse.addEventListener('progress', (e) => { const ev = JSON.parse(e.data); const li = document.createElement('li'); li.textContent = ev.stage || ev.type || ''; $('chk-log')?.appendChild(li); });
+  sse.addEventListener('end', () => { sse.close(); checkState.sse = null; loadCheckResults(runId); pollCheckRun(runId); });
+}
+
+async function pollCheckRun(runId) {
+  let run; try { run = await api(`/api/runs/${runId}`); } catch (e) { return; }
+  if (checkState.runId !== runId) return;
+  const sp = $('chk-status'); if (sp) sp.innerHTML = `<span class="status-pill" data-s="${run.status}">${run.status}</span>`;
+  const up = $('chk-uploads'); if (up) up.innerHTML = `<table class="grid">${run.uploads.map((u) => `<tr><td>${u.role}</td><td>${escapeHtml(u.filename)}</td><td class="ing ${u.ingest_status === 'done' ? 'ok' : u.ingest_status === 'failed' ? 'bad' : 'wait'}">${u.ingest_status}${u.page_count ? ' · ' + u.page_count + 'p' : ''}</td></tr>`).join('')}</table>`;
+  const subs = run.uploads.filter((u) => u.role === 'submitted');
+  const ready = subs.length && run.uploads.every((u) => ['done', 'failed'].includes(u.ingest_status)) && subs.some((u) => u.ingest_status === 'done' && u.doc_id);
+  if (run.status === 'created') { $('chk-start').classList.toggle('hidden', !ready); if (!ready) setTimeout(() => pollCheckRun(runId), 1500); }
+  else if (run.status === 'queued' || run.status === 'running') { $('chk-start').classList.add('hidden'); connectCheckSSE(runId); setTimeout(() => pollCheckRun(runId), 2000); }
+  else if (run.status === 'done') { $('chk-start').classList.add('hidden'); loadCheckResults(runId); }
+  else if (run.status === 'failed') { $('chk-progress').classList.remove('hidden'); const li = document.createElement('li'); li.textContent = 'Failed: ' + (run.error || 'unknown'); $('chk-log')?.appendChild(li); }
+}
+
+async function loadCheckResults(runId) {
+  if (checkState.resultsLoaded) return; checkState.resultsLoaded = true;
+  const res = await api(`/api/runs/${runId}/results`);
+  const el = $('chk-results'); el.classList.remove('hidden');
+  const findings = res.findings || []; const comments = res.comment_results || [];
+  el.innerHTML = `
+    <h3>Findings <span class="muted">(${findings.length})</span></h3>
+    <div class="check-split">
+      <ul class="findings">${findings.map(checkFindingCard).join('') || '<li class="muted">No findings.</li>'}</ul>
+      <div class="pdf-pane"><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a><iframe src="/api/runs/${runId}/annotated.pdf"></iframe></div>
+    </div>
+    ${comments.length ? `<h3>Prior comment incorporation</h3><ul class="findings">${comments.map(checkCommentCard).join('')}</ul>` : ''}
+  `;
+  el.querySelectorAll('.finding [data-act]').forEach((b) => b.addEventListener('click', async () => {
+    const li = b.closest('.finding');
+    await api(`/api/findings/${li.dataset.id}/status?status=${b.dataset.act}`, { method: 'POST' });
+    li.querySelector('.fstatus').textContent = b.dataset.act; li.classList.toggle('dim', b.dataset.act === 'dismissed');
+  }));
+}
+
+function checkFindingCard(f) {
+  const col = SEV_COLORS[f.severity] || '#888';
+  const cite = f.citation && (f.citation.doc_title || f.citation.heading) ? `<div class="muted small">ref: ${escapeHtml([f.citation.doc_title, f.citation.heading].filter(Boolean).join(' — '))}</div>` : '';
+  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span><span class="muted small">p${f.page_num ?? '?'}</span></div><div>${escapeHtml(f.detail || '')}</div>${cite}<div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
+}
+
+function checkCommentCard(c) {
+  const cls = { incorporated: 'ok', partially: 'wait', not_incorporated: 'bad', not_applicable: 'muted' }[c.verdict] || '';
+  return `<li class="finding"><div class="finding-head"><strong>${escapeHtml(c.prior_comment_text || '(comment)')}</strong><span class="tag ${cls}">${escapeHtml(c.verdict)}</span><span class="muted small">p${c.prior_page ?? '?'}</span></div><div>${escapeHtml(c.detail || '')}</div></li>`;
+}
+
+(async function initChecker() {
+  try {
+    const me = await api('/api/me');
+    state.isAdmin = !!me.is_admin;
+    const chip = $('user-chip'); if (chip) { chip.textContent = me.display_name || me.email || ''; chip.classList.remove('hidden'); }
+    const out = $('signout-btn'); if (out) { out.classList.remove('hidden'); out.addEventListener('click', async (e) => { e.preventDefault(); try { await fetch('/logout', { method: 'POST' }); } catch (_) {} location.href = '/login'; }); }
+    if (!state.isAdmin && ['documents', 'ingest', 'jobs'].includes(state.tab)) state.tab = 'ask';
+    renderShell();
+    renderActiveView();
+  } catch (_) { /* not logged in / endpoint missing */ }
+})();
 
 init().catch((err) => {
   console.error(err);
