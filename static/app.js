@@ -279,9 +279,13 @@ function renderShell() {
 
   const active = state.folders.find((f) => f.folder === state.folder);
   $('active-folder').textContent = active ? active.folder : 'Select a folder';
-  $('folder-stats').textContent = active
-    ? `${active.docs || 0} documents | ${active.pages || 0} pages | ${active.pending || 0} pending`
-    : '';
+  if (active) {
+    $('folder-stats').innerHTML = `<b>${active.docs || 0}</b> document${(active.docs || 0) === 1 ? '' : 's'}`
+      + ` &nbsp;·&nbsp; <b>${active.pages || 0}</b> pages`
+      + ` &nbsp;·&nbsp; <b>${active.pending || 0}</b> pending`;
+  } else {
+    $('folder-stats').textContent = '';
+  }
 
   for (const tab of VALID_TABS) {
     const btn = $(`${tab}-tab`);
@@ -328,6 +332,20 @@ function pageHeader(title, subtitle = '', actions = '') {
   `;
 }
 
+const ICON = {
+  plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`,
+  refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5"/></svg>`,
+  send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
+  arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
+};
+
+const ASK_EXAMPLES = [
+  'What is the scope of work?',
+  'What are the vendor qualification requirements?',
+  'Summarise the liquidated-damages (LD) clause.',
+  'What inspection & test requirements apply?',
+];
+
 function renderAsk() {
   const view = $('ask-view');
   if (!state.folder) {
@@ -335,18 +353,24 @@ function renderAsk() {
     return;
   }
 
+  const hasMessages = state.messages.length > 0;
   view.innerHTML = `
     <div class="ask-toolbar">
-      ${renderThreadControl()}
-      <button class="ghost" type="button" data-action="new-chat">New chat</button>
-      <button class="ghost" type="button" data-action="refresh">Refresh</button>
+      <div class="ask-toolbar-title">${renderThreadControl()}</div>
+      <div class="ask-toolbar-actions">
+        <button class="chip-btn" type="button" data-action="new-chat">${ICON.plus}New chat</button>
+        <button class="chip-btn" type="button" data-action="refresh">${ICON.refresh}Refresh</button>
+      </div>
     </div>
     <div class="messages" id="messages">
-      ${state.messages.length ? state.messages.map(renderMessage).join('') : renderAskEmpty()}
+      ${hasMessages ? `<div class="thread-col">${state.messages.map(renderMessage).join('')}</div>` : renderAskEmpty()}
     </div>
     <form class="chat-input" id="chat-form">
-      <textarea id="message-input" placeholder="Ask about this folder" ${state.sending ? 'disabled' : ''}></textarea>
-      <button class="primary" type="submit" ${state.sending ? 'disabled' : ''}>Send</button>
+      <div class="composer-wrap">
+        <textarea id="message-input" placeholder="Ask about this folder…" ${state.sending ? 'disabled' : ''}></textarea>
+        <button class="send-btn" type="submit" ${state.sending ? 'disabled' : ''} aria-label="Send">${ICON.send}</button>
+      </div>
+      <div class="composer-hint">DocLens answers only from documents in this folder, with citations.</div>
     </form>
   `;
   const messages = $('messages');
@@ -368,36 +392,78 @@ function renderThreadControl() {
 }
 
 function renderAskEmpty() {
+  const active = state.folders.find((f) => f.folder === state.folder);
+  const pages = (active && active.pages) || 0;
+  const grounding = pages
+    ? `Every answer is grounded in the ${pages} pages of this folder, with citations back to the exact clause and page.`
+    : `Every answer is grounded in this folder's documents, with citations back to the exact clause and page.`;
   return `
-    <div class="empty-state">
-      <div>
-        <strong>Ask a question about ${escapeHtml(state.folder)}</strong>
-        <div class="muted">Examples: scope of work, vendor requirements, LD clause, inspection requirements</div>
+    <div class="ask-empty">
+      <div class="ask-empty-card">
+        <div class="ask-empty-kicker">Ask the folder</div>
+        <h1>What would you like to know about ${escapeHtml(state.folder)}?</h1>
+        <p class="ask-empty-lede">${escapeHtml(grounding)}</p>
+        <div class="ask-examples">
+          ${ASK_EXAMPLES.map((q) => `
+            <button class="ask-example" type="button" data-action="ask-example" data-q="${escapeHtml(q)}">
+              <span class="qx">${escapeHtml(q)}</span>
+              <span class="arw">${ICON.arrow}</span>
+            </button>`).join('')}
+        </div>
       </div>
     </div>
   `;
 }
 
+// Turn inline [1], [2,3] style citation markers into superscripts keyed to source cards.
+function markCitations(text) {
+  return (text || '').replace(/\[(\d+(?:\s*[,–-]\s*\d+)*)\]/g, '<sup class="cite">$1</sup>');
+}
+
 function renderMessage(message) {
   const sources = Array.isArray(message.sources) ? message.sources : [];
+  const isUser = message.role === 'user';
+  const body = isUser
+    ? renderMarkdown(message.content || '')
+    : renderMarkdown(markCitations(message.content || ''));
+  const meta = !isUser && sources.length ? `<span class="msg-meta">· ${sources.length} source${sources.length > 1 ? 's' : ''}</span>` : '';
   return `
-    <article class="message ${message.role === 'user' ? 'user' : 'assistant'}">
-      <div class="message-role">${message.role === 'user' ? 'You' : 'Answer'}</div>
-      <div class="message-body">${renderMarkdown(message.content || '')}</div>
-      ${sources.length ? `<div class="sources">${sources.map(renderSource).join('')}</div>` : ''}
+    <article class="message ${isUser ? 'user' : 'assistant'}">
+      <div class="msg-who">
+        <span class="msg-avatar ${isUser ? 'you' : 'ai'}">${isUser ? 'You' : 'E'}</span>
+        <span class="msg-name">${isUser ? 'You' : 'DocLens'}</span>
+        ${meta}
+      </div>
+      <div class="message-body">${body}</div>
+      ${sources.length ? `<div class="sources"><div class="sources-label">Sources</div>${sources.map(renderSource).join('')}</div>` : ''}
     </article>
   `;
+}
+
+// Pull a leading clause/section number (e.g. "6.2.1", "B31.3") out of a breadcrumb.
+function clauseFromBreadcrumb(breadcrumb) {
+  if (!breadcrumb) return '';
+  const last = breadcrumb.split(/\s*[›>|/]\s*/).pop().trim();
+  const m = last.match(/^([A-Z]?\d+(?:\.\d+)*[A-Za-z]?)\b/);
+  return m ? m[1] : '';
 }
 
 function renderSource(source) {
   const title = source.doc_title || source.filename || 'Source';
   const page = source.page_num ? `Page ${source.page_num}` : '';
   const breadcrumb = source.breadcrumb || '';
+  const clause = clauseFromBreadcrumb(breadcrumb);
+  const metaText = [title, page].filter(Boolean).join(' · ');
   return `
-    <div class="source">
-      <div class="source-title">[${escapeHtml(source.id || '')}] ${escapeHtml(title)}</div>
-      <div class="source-meta">${escapeHtml([page, breadcrumb].filter(Boolean).join(' | '))}</div>
-      ${source.snippet ? `<div class="source-meta">${escapeHtml(source.snippet)}</div>` : ''}
+    <div class="source-card">
+      <div class="source-num">${escapeHtml(String(source.id || ''))}</div>
+      <div class="source-main">
+        <div class="source-meta">
+          ${clause ? `<span class="clause-pill">§ ${escapeHtml(clause)}</span>` : ''}
+          <span>${escapeHtml(metaText)}</span>
+        </div>
+        ${source.snippet ? `<div class="source-snippet">${escapeHtml(source.snippet)}</div>` : ''}
+      </div>
     </div>
   `;
 }
@@ -802,6 +868,13 @@ async function newChat() {
   }
 }
 
+async function askExample(question) {
+  if (!question || state.sending) return;
+  const input = $('message-input');
+  if (input) input.value = question;
+  await sendMessage({ preventDefault() {} });
+}
+
 async function sendMessage(event) {
   event.preventDefault();
   const input = $('message-input');
@@ -1124,6 +1197,7 @@ function handleClick(event) {
   if (action === 'cancel-move') closeMoveDialog();
   if (action === 'confirm-move') void confirmMove();
   if (action === 'new-chat') void newChat();
+  if (action === 'ask-example') void askExample(target.dataset.q || '');
   if (action === 'refresh') void refreshActiveData();
   if (action === 'go-documents') setTab('documents');
   if (action === 'go-ingest') setTab('ingest');

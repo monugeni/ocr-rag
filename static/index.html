@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Esteem DocLens</title>
-<link rel="stylesheet" href="/static/style.css?v=checker3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css?v=editorial1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
 <body>
@@ -26,12 +29,14 @@
         <input id="folder-search" type="search" placeholder="Find folder">
       </div>
 
+      <div class="rail-label">Folders</div>
       <div id="folder-list" class="folder-list"></div>
     </aside>
 
     <main class="work-area">
       <header class="topbar">
-        <div>
+        <div class="topbar-heading">
+          <div class="topbar-kicker">Folder</div>
           <div id="active-folder" class="active-folder">Select a folder</div>
           <div id="folder-stats" class="folder-stats"></div>
         </div>
@@ -64,6 +69,6 @@
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="/static/app.js?v=checker3"></script>
+  <script src="/static/app.js?v=editorial1"></script>
 </body>
 </html>
