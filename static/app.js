@@ -1457,7 +1457,7 @@ async function loadCheckResults(runId) {
     <h3>Findings <span class="muted">(${findings.length})</span></h3>
     <div class="check-split">
       <ul class="findings">${findings.map(checkFindingCard).join('') || '<li class="muted">No findings.</li>'}</ul>
-      <div class="pdf-pane"><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a><iframe src="/api/runs/${runId}/annotated.pdf"></iframe></div>
+      <div class="pdf-pane"><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a><iframe src="/static/pdfjs/web/viewer.html?file=${encodeURIComponent('/api/runs/' + runId + '/annotated.pdf')}"></iframe></div>
     </div>
     ${comments.length ? `<h3>Prior comment incorporation</h3><ul class="findings">${comments.map(checkCommentCard).join('')}</ul>` : ''}
     <div class="check-trace"><button class="chip-btn" id="chk-trace-btn">Show debug trace</button><div id="chk-trace-body" class="trace-body hidden"></div></div>
@@ -1505,9 +1505,10 @@ function renderTrace(t) {
 }
 
 function checkFindingCard(f) {
+  // Compact index only — the full comment text lives on the annotated PDF
+  // (shown in the viewer), so it is not duplicated here.
   const col = SEV_COLORS[f.severity] || '#888';
-  const cite = f.citation && (f.citation.doc_title || f.citation.heading) ? `<div class="muted small">ref: ${escapeHtml([f.citation.doc_title, f.citation.heading].filter(Boolean).join(' — '))}</div>` : '';
-  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span><span class="muted small">p${f.page_num ?? '?'}</span></div><div>${escapeHtml(f.detail || '')}</div>${cite}<div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
+  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span><span class="muted small">p${f.page_num ?? '?'}</span></div><div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
 }
 
 function checkCommentCard(c) {
