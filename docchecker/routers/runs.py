@@ -118,4 +118,13 @@ def annotated_pdf(run_id: str, request: Request):
     pdfs = sorted(out_dir.glob("*.annotated.pdf")) if out_dir.is_dir() else []
     if not pdfs:
         raise HTTPException(status_code=404, detail="no annotated PDF for this run")
-    return FileResponse(str(pdfs[0]), media_type="application/pdf", filename=pdfs[0].name)
+    # Serve inline so the in-page <iframe> viewer displays the PDF. Passing
+    # filename= alone makes FileResponse send Content-Disposition: attachment,
+    # which forced the browser to download the PDF every time the results
+    # re-rendered (e.g. each time the user returned to the Check page).
+    return FileResponse(
+        str(pdfs[0]),
+        media_type="application/pdf",
+        filename=pdfs[0].name,
+        content_disposition_type="inline",
+    )
