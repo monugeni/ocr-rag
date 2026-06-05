@@ -50,17 +50,25 @@ def fetch_reference_context(
     max_results: int = 6,
     max_chars: int = 40_000,
 ) -> str:
-    """Run each query against the company MCP and concatenate deduped chunks."""
+    """Run each query against the company MCP and concatenate deduped chunks.
+
+    Queries run concurrently (bounded) instead of one-at-a-time — this stage was
+    a serial loop of connect+initialize+search per query, so wall-clock scaled
+    linearly with the (now larger, whole-document) query set and dominated run
+    time. Concurrency makes it the slowest batch rather than the sum."""
     async def run() -> list[dict]:
-        out = []
-        for q in queries:
+        sem = asyncio.Semaphore(6)
+
+        async def one(q: str) -> dict:
             if not q:
-                continue
-            try:
-                out.append(await _ranked_search(url, project, q, max_results))
-            except Exception:  # noqa: BLE001 — one bad query shouldn't sink the rest
-                out.append({})
-        return out
+                return {}
+            async with sem:
+                try:
+                    return await _ranked_search(url, project, q, max_results)
+                except Exception:  # noqa: BLE001 — one bad query shouldn't sink the rest
+                    return {}
+
+        return list(await asyncio.gather(*(one(q) for q in queries)))
 
     payloads = asyncio.run(run())
 
