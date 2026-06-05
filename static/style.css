@@ -1228,6 +1228,7 @@ a:hover {
 }
 .chip-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
 .chip-btn svg { width: 13px; height: 13px; }
+.chip-btn.danger:hover { border-color: var(--danger); color: var(--danger); }
 
 .messages { padding: 4px 0 8px; display: block; }
 .thread-col { max-width: 760px; margin: 0 auto; padding: 4px 40px 8px; }

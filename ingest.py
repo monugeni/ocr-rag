@@ -266,7 +266,33 @@ def init_db(db_path: str) -> sqlite3.Connection:
         "chunk_id": "INTEGER",
         "metadata": "TEXT",
     })
+    _migrate_chat_ownership(conn)
     return conn
+
+
+def _migrate_chat_ownership(conn: sqlite3.Connection):
+    """Per-user chat ownership. Adds owner_key/owner_email to chat_threads. On
+    the FIRST run with these columns, the pre-existing ownerless (shared) chats
+    are deleted as a one-time cutover so chat history starts scoped per user."""
+    existing = {
+        row["name"] for row in conn.execute("PRAGMA table_info(chat_threads)").fetchall()
+    }
+    if "owner_key" not in existing:
+        conn.execute("ALTER TABLE chat_threads ADD COLUMN owner_key TEXT")
+        conn.execute("ALTER TABLE chat_threads ADD COLUMN owner_email TEXT")
+        # Cutover: drop legacy shared threads (and their messages) so they are
+        # not visible to anyone now that chats are private per user.
+        conn.execute(
+            "DELETE FROM chat_messages WHERE thread_id IN "
+            "(SELECT id FROM chat_threads WHERE owner_key IS NULL)"
+        )
+        conn.execute("DELETE FROM chat_threads WHERE owner_key IS NULL")
+        conn.commit()
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_chat_threads_owner "
+        "ON chat_threads(owner_key, project, updated_at DESC)"
+    )
+    conn.commit()
 
 
 def _ensure_table_columns(conn: sqlite3.Connection, table: str, columns: dict[str, str]):

@@ -336,6 +336,7 @@ const ICON = {
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`,
   refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5"/></svg>`,
   send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
+  trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>`,
 };
 
 function renderAsk(opts = {}) {
@@ -351,6 +352,7 @@ function renderAsk(opts = {}) {
       <div class="ask-toolbar-title">${renderThreadControl()}</div>
       <div class="ask-toolbar-actions">
         <button class="chip-btn" type="button" data-action="new-chat">${ICON.plus}New chat</button>
+        ${state.threadId ? `<button class="chip-btn danger" type="button" data-action="delete-chat" title="Delete this chat">${ICON.trash}Delete</button>` : ''}
         <button class="chip-btn" type="button" data-action="refresh">${ICON.refresh}Refresh</button>
       </div>
     </div>
@@ -870,6 +872,21 @@ async function newChat() {
   }
 }
 
+async function deleteChat() {
+  if (!state.threadId) return;
+  if (!confirm('Delete this chat? This permanently removes the conversation and cannot be undone.')) return;
+  try {
+    await api(`/api/chats/${enc(state.threadId)}`, { method: 'DELETE' });
+    state.threadId = '';
+    state.messages = [];
+    await loadChats();
+    renderAsk();
+    showToast('Chat deleted');
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
+}
+
 async function sendMessage(event) {
   event.preventDefault();
   const input = $('message-input');
@@ -1192,6 +1209,7 @@ function handleClick(event) {
   if (action === 'cancel-move') closeMoveDialog();
   if (action === 'confirm-move') void confirmMove();
   if (action === 'new-chat') void newChat();
+  if (action === 'delete-chat') void deleteChat();
   if (action === 'refresh') void refreshActiveData();
   if (action === 'go-documents') setTab('documents');
   if (action === 'go-ingest') setTab('ingest');

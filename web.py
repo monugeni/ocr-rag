@@ -42,7 +42,7 @@ from typing import Optional
 from uuid import uuid4
 
 import uvicorn
-from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -664,6 +664,34 @@ def _thread_title_from_message(text: str) -> str:
     return clean[:57] + "..." if len(clean) > 60 else clean
 
 
+def _current_owner(request: Request) -> tuple[str, Optional[str]]:
+    """Return (owner_key, owner_email) for the request.
+
+    Uses the docchecker session user (oidc_sub) when login is active. Falls back
+    to a shared 'anon' bucket when no session is present (e.g. local dev with
+    auth disabled) so chat still works — but that bucket is NOT user-isolated."""
+    user = None
+    try:
+        if "session" in request.scope:
+            user = request.session.get("user")
+    except Exception:
+        user = None
+    if user and user.get("oidc_sub"):
+        return str(user["oidc_sub"]), user.get("email")
+    return "anon", None
+
+
+def _thread_for_owner(conn, thread_id: str, owner_key: str):
+    """Fetch a thread the caller owns, or raise 404 (404 not 403 to avoid
+    revealing that someone else's thread id exists)."""
+    row = conn.execute(
+        "SELECT * FROM chat_threads WHERE id = ?", (thread_id,)
+    ).fetchone()
+    if not row or (row["owner_key"] or "anon") != owner_key:
+        raise HTTPException(404, "Chat thread not found")
+    return row
+
+
 def _fetch_chat_messages(conn, thread_id: str):
     rows = conn.execute(
         "SELECT id, role, content, sources, created_at "
@@ -678,7 +706,7 @@ def _fetch_chat_messages(conn, thread_id: str):
     return messages
 
 
-def _list_chat_threads(conn, folder: str):
+def _list_chat_threads(conn, folder: str, owner_key: str):
     rows = conn.execute(
         """
         SELECT t.id, t.project, t.title, t.created_at, t.updated_at,
@@ -697,10 +725,10 @@ def _list_chat_threads(conn, folder: str):
                    WHERE m.thread_id = t.id
                ) AS message_count
         FROM chat_threads t
-        WHERE t.project = ?
+        WHERE t.project = ? AND t.owner_key = ?
         ORDER BY datetime(t.updated_at) DESC, t.id DESC
         """,
-        (folder,)
+        (folder, owner_key)
     ).fetchall()
     threads = []
     for row in rows:
@@ -710,12 +738,19 @@ def _list_chat_threads(conn, folder: str):
     return threads
 
 
-def _create_chat_thread(conn, folder: str, title: Optional[str] = None) -> dict:
+def _create_chat_thread(
+    conn,
+    folder: str,
+    title: Optional[str] = None,
+    owner_key: str = "anon",
+    owner_email: Optional[str] = None,
+) -> dict:
     thread_id = str(uuid4())
     clean_title = (title or "New chat").strip() or "New chat"
     conn.execute(
-        "INSERT INTO chat_threads (id, project, title) VALUES (?, ?, ?)",
-        (thread_id, folder, clean_title)
+        "INSERT INTO chat_threads (id, project, title, owner_key, owner_email) "
+        "VALUES (?, ?, ?, ?, ?)",
+        (thread_id, folder, clean_title, owner_key, owner_email)
     )
     conn.commit()
     return {
@@ -2107,25 +2142,29 @@ def list_documents(folder: str):
 
 @app.get("/api/projects/{folder:path}/chats")
 @app.get("/api/folders/{folder:path}/chats")
-def list_folder_chats(folder: str):
+def list_folder_chats(folder: str, request: Request):
     folder = _validate_folder_name(folder, "Folder name")
+    owner_key, _ = _current_owner(request)
     conn = get_conn()
     try:
-        return _list_chat_threads(conn, folder)
+        return _list_chat_threads(conn, folder, owner_key)
     finally:
         conn.close()
 
 
 @app.post("/api/projects/{folder:path}/chats")
 @app.post("/api/folders/{folder:path}/chats")
-def create_folder_chat(folder: str, data: Optional[dict] = None):
+def create_folder_chat(folder: str, request: Request, data: Optional[dict] = None):
     folder = _validate_folder_name(folder, "Folder name")
+    owner_key, owner_email = _current_owner(request)
     conn = get_conn()
     try:
         created = _create_chat_thread(
             conn,
             folder,
             title=(data or {}).get("title"),
+            owner_key=owner_key,
+            owner_email=owner_email,
         )
         return created
     finally:
@@ -2376,15 +2415,11 @@ def delete_document(doc_id: int):
 
 
 @app.get("/api/chats/{thread_id}")
-def get_chat_thread(thread_id: str):
+def get_chat_thread(thread_id: str, request: Request):
+    owner_key, _ = _current_owner(request)
     conn = get_conn()
     try:
-        row = conn.execute(
-            "SELECT * FROM chat_threads WHERE id = ?",
-            (thread_id,)
-        ).fetchone()
-        if not row:
-            raise HTTPException(404, "Chat thread not found")
+        row = _thread_for_owner(conn, thread_id, owner_key)
         result = dict(row)
         result["folder"] = result["project"]
         return result
@@ -2393,15 +2428,11 @@ def get_chat_thread(thread_id: str):
 
 
 @app.get("/api/chats/{thread_id}/messages")
-def get_chat_messages(thread_id: str):
+def get_chat_messages(thread_id: str, request: Request):
+    owner_key, _ = _current_owner(request)
     conn = get_conn()
     try:
-        thread = conn.execute(
-            "SELECT * FROM chat_threads WHERE id = ?",
-            (thread_id,)
-        ).fetchone()
-        if not thread:
-            raise HTTPException(404, "Chat thread not found")
+        thread = _thread_for_owner(conn, thread_id, owner_key)
         return {
             "thread": {**dict(thread), "folder": thread["project"]},
             "messages": _fetch_chat_messages(conn, thread_id),
@@ -2410,20 +2441,30 @@ def get_chat_messages(thread_id: str):
         conn.close()
 
 
+@app.delete("/api/chats/{thread_id}")
+def delete_chat_thread(thread_id: str, request: Request):
+    owner_key, _ = _current_owner(request)
+    conn = get_conn()
+    try:
+        _thread_for_owner(conn, thread_id, owner_key)
+        conn.execute("DELETE FROM chat_messages WHERE thread_id = ?", (thread_id,))
+        conn.execute("DELETE FROM chat_threads WHERE id = ?", (thread_id,))
+        conn.commit()
+        return {"ok": True, "deleted": thread_id}
+    finally:
+        conn.close()
+
+
 @app.post("/api/chats/{thread_id}/messages")
-def create_chat_message(thread_id: str, data: dict):
+def create_chat_message(thread_id: str, data: dict, request: Request):
     content = (data.get("content") or "").strip()
     if not content:
         raise HTTPException(400, "Message content required")
 
+    owner_key, _ = _current_owner(request)
     conn = get_conn()
     try:
-        thread = conn.execute(
-            "SELECT * FROM chat_threads WHERE id = ?",
-            (thread_id,)
-        ).fetchone()
-        if not thread:
-            raise HTTPException(404, "Chat thread not found")
+        thread = _thread_for_owner(conn, thread_id, owner_key)
 
         _insert_chat_message(conn, thread_id, "user", content)
 
@@ -2461,20 +2502,17 @@ def create_chat_message(thread_id: str, data: dict):
 @app.post("/api/chats/{thread_id}/review-document")
 def review_chat_document(
     thread_id: str,
+    request: Request,
     file: UploadFile = File(...),
     content: str = Form(""),
 ):
     attachment = _prepare_chat_review_attachment(file)
     question = (content or "").strip() or _default_attachment_review_question(attachment["filename"])
 
+    owner_key, _ = _current_owner(request)
     conn = get_conn()
     try:
-        thread = conn.execute(
-            "SELECT * FROM chat_threads WHERE id = ?",
-            (thread_id,)
-        ).fetchone()
-        if not thread:
-            raise HTTPException(404, "Chat thread not found")
+        thread = _thread_for_owner(conn, thread_id, owner_key)
 
         _insert_chat_message(
             conn,
