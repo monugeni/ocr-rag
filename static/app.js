@@ -1398,6 +1398,7 @@ function renderCheckRun() {
     <div id="chk-uploads"></div>
     <div id="chk-start" class="hidden"><button id="chk-start-btn" class="primary">Run check</button></div>
     <div id="chk-progress" class="run-log hidden"><h3>Progress</h3><ul id="chk-log"></ul></div>
+    <div id="chk-thinking" class="run-thinking hidden"><div class="rt-label">Model reasoning <span class="rt-live">live</span></div><div id="chk-thinking-body" class="rt-body"></div></div>
     <div id="chk-results" class="hidden"></div>
   `;
   $('chk-back').addEventListener('click', () => { if (checkState.sse) { checkState.sse.close(); checkState.sse = null; } checkState.sub = 'new'; renderCheck(); });
@@ -1416,8 +1417,21 @@ function connectCheckSSE(runId) {
   $('chk-progress').classList.remove('hidden');
   const sse = new EventSource(`/api/runs/${runId}/stream`);
   checkState.sse = sse;
-  sse.addEventListener('progress', (e) => { const ev = JSON.parse(e.data); const li = document.createElement('li'); li.textContent = ev.stage || ev.type || ''; $('chk-log')?.appendChild(li); });
+  sse.addEventListener('progress', (e) => {
+    const ev = JSON.parse(e.data);
+    if (ev.type === 'thinking') { appendThinking(ev.delta || ''); return; }
+    const li = document.createElement('li'); li.textContent = ev.stage || ev.type || ''; $('chk-log')?.appendChild(li);
+  });
   sse.addEventListener('end', () => { sse.close(); checkState.sse = null; loadCheckResults(runId); pollCheckRun(runId); });
+}
+
+function appendThinking(text) {
+  if (!text) return;
+  const panel = $('chk-thinking'); const body = $('chk-thinking-body');
+  if (!panel || !body) return;
+  panel.classList.remove('hidden');
+  body.textContent += text;
+  body.scrollTop = body.scrollHeight;
 }
 
 async function pollCheckRun(runId) {

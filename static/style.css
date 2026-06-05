@@ -1075,6 +1075,10 @@ a:hover {
 #check-view .run-status { margin:6px 0 12px; }
 #check-view .run-log { margin-top:18px; } #check-view .run-log ul { list-style:none; padding:0; margin:0; font-family:ui-monospace,monospace; font-size:12.5px; }
 #check-view .run-log li { padding:3px 0; border-bottom:1px dashed #e5e7eb; color:#6b7280; }
+#check-view .run-thinking { margin-top:14px; border:1px solid var(--line); border-radius:var(--radius-card); background:var(--surface-card); overflow:hidden; }
+#check-view .rt-label { display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--line); font-family:var(--display); font-weight:600; font-size:13px; color:var(--ink-soft); }
+#check-view .rt-live { font-family:var(--sans); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); background:var(--accent-tint); padding:1px 7px; border-radius:999px; }
+#check-view .rt-body { max-height:240px; overflow:auto; padding:12px 14px; margin:0; white-space:pre-wrap; font-family:var(--serif); font-size:13.5px; line-height:1.6; color:var(--muted); }
 #check-view table.grid { width:100%; border-collapse:collapse; }
 #check-view table.grid td { padding:7px 10px; border-bottom:1px solid #eef0f3; font-size:13.5px; }
 #check-view .ing.ok { color:#15803d; font-weight:600; } #check-view .ing.bad { color:#b91c1c; } #check-view .ing.wait { color:#b45309; }

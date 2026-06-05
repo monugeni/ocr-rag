@@ -7,6 +7,7 @@ pdf-annotator library (see ``annotate.py``).
 from __future__ import annotations
 
 import shutil
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from .annotate import annotate_finding
@@ -143,6 +144,7 @@ def _compare(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> list[Find
         deep=True,
         effort=ctx.effort,
         max_tokens=16000,
+        emit=ctx.emit,
     )
     findings = []
     for f in out.get("findings", []):
@@ -193,6 +195,35 @@ def _verify(ctx: CheckContext, llm: LLM, submitted, finding: Finding) -> bool:
     return bool(out.get("verified")) and finding.confidence in ("high", "medium")
 
 
+def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result) -> list[Finding]:
+    """Verify candidates concurrently (each is an independent fast-model call), then
+    fold results back in candidate order. Replaces the old sequential loop so wall-
+    clock no longer scales linearly with the number of candidate findings."""
+    if not candidates:
+        return []
+
+    def work(f: Finding):
+        try:
+            return f, ("keep" if _verify(ctx, llm, submitted, f) else "drop"), None
+        except Exception as exc:  # noqa: BLE001
+            return f, "error", str(exc)
+
+    with ThreadPoolExecutor(max_workers=min(6, len(candidates)),
+                            thread_name_prefix="verify") as ex:
+        outcomes = list(ex.map(work, candidates))  # ex.map preserves input order
+
+    confirmed: list[Finding] = []
+    for f, verdict, err in outcomes:
+        if verdict == "keep":
+            confirmed.append(f)
+        elif verdict == "drop":
+            result.warnings.append(f"Dropped unverified finding: {f.title}")
+        else:
+            result.warnings.append(f"Verification error for '{f.title}': {err}")
+            confirmed.append(f)  # keep rather than silently lose
+    return confirmed
+
+
 def _judge_comments(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> list[CommentStatus]:
     comments = read_prior_comments(ctx.old_commented.pdf_path)
     results = []
@@ -222,6 +253,7 @@ def _judge_comments(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> li
             deep=True,
             effort="high",
             max_tokens=16000,
+            emit=ctx.emit,
         )
         results.append(
             CommentStatus(
@@ -250,16 +282,7 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
     ctx.emit({"stage": f"{len(candidates)} candidate finding(s)", "type": "phase"})
 
     ctx.emit({"stage": "Self-verifying findings", "type": "phase"})
-    confirmed = []
-    for f in candidates:
-        try:
-            if _verify(ctx, llm, submitted, f):
-                confirmed.append(f)
-            else:
-                result.warnings.append(f"Dropped unverified finding: {f.title}")
-        except Exception as exc:  # noqa: BLE001
-            result.warnings.append(f"Verification error for '{f.title}': {exc}")
-            confirmed.append(f)  # keep rather than silently lose
+    confirmed = _verify_all(ctx, llm, submitted, candidates, result)
 
     # Annotate confirmed findings onto a copy of the submitted PDF.
     ctx.emit({"stage": f"Annotating {len(confirmed)} finding(s)", "type": "phase"})

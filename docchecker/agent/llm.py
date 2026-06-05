@@ -19,7 +19,7 @@ from __future__ import annotations
 import copy
 import json
 import re
-from typing import Optional, Protocol
+from typing import Callable, Optional, Protocol
 
 
 class LLM(Protocol):
@@ -36,8 +36,12 @@ class LLM(Protocol):
         cache_context: str | None = None,
         deep: bool = False,
         effort: str = "high",
+        emit: Optional[Callable[[dict], None]] = None,
     ) -> dict:
-        """Return the structured result dict (tool input, or parsed json_schema output)."""
+        """Return the structured result dict (tool input, or parsed json_schema output).
+
+        ``emit``, when given, receives streamed reasoning as
+        ``{"type": "thinking", "delta": <text>}`` during deep calls."""
         ...
 
 
@@ -109,11 +113,12 @@ class AnthropicLLM:
         cache_context: str | None = None,
         deep: bool = False,
         effort: str = "high",
+        emit: Optional[Callable[[dict], None]] = None,
     ) -> dict:
         sys_blocks = self._system_blocks(system, cache_context)
         mdl = model or self._default_model
         if deep:
-            return self._structured(mdl, sys_blocks, user_text, input_schema, effort, max_tokens)
+            return self._structured(mdl, sys_blocks, user_text, input_schema, effort, max_tokens, emit)
 
         resp = self._client.messages.create(
             model=mdl,
@@ -131,7 +136,7 @@ class AnthropicLLM:
                 return dict(block.input)
         return {}
 
-    def _structured(self, model, sys_blocks, user_text, schema, effort, max_tokens) -> dict:
+    def _structured(self, model, sys_blocks, user_text, schema, effort, max_tokens, emit=None) -> dict:
         # Stream so large max_tokens (thinking + output) doesn't trip the SDK timeout guard.
         with self._client.messages.stream(
             model=model,
@@ -141,7 +146,39 @@ class AnthropicLLM:
             output_config={"effort": effort, "format": {"type": "json_schema", "schema": _strictify(schema)}},
             messages=[{"role": "user", "content": user_text}],
         ) as stream:
+            if emit is not None:
+                self._stream_thinking(stream, emit)
             msg = stream.get_final_message()
         self._record_usage(msg.usage)
         txt = next((b.text for b in msg.content if getattr(b, "type", None) == "text"), None)
         return _loads_loose(txt) if txt else {}
+
+    @staticmethod
+    def _stream_thinking(stream, emit) -> None:
+        """Forward the model's reasoning to ``emit`` as it streams. Deltas arrive
+        in tiny pieces, so coalesce them into ~120-char chunks (or on newline) to
+        avoid flooding the per-run event bus."""
+        buf = ""
+
+        def flush():
+            nonlocal buf
+            if buf.strip():
+                try:
+                    emit({"type": "thinking", "delta": buf})
+                except Exception:  # noqa: BLE001 — never let telemetry break a run
+                    pass
+            buf = ""
+
+        try:
+            for event in stream:
+                if getattr(event, "type", None) != "content_block_delta":
+                    continue
+                delta = getattr(event, "delta", None)
+                if getattr(delta, "type", None) != "thinking_delta":
+                    continue
+                buf += getattr(delta, "thinking", "") or ""
+                if len(buf) >= 120 or "\n" in buf:
+                    flush()
+            flush()
+        except Exception:  # noqa: BLE001 — fall back to non-streamed final message
+            pass
