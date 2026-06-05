@@ -1079,6 +1079,16 @@ a:hover {
 #check-view .rt-label { display:flex; align-items:center; gap:8px; padding:10px 14px; border-bottom:1px solid var(--line); font-family:var(--display); font-weight:600; font-size:13px; color:var(--ink-soft); }
 #check-view .rt-live { font-family:var(--sans); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); background:var(--accent-tint); padding:1px 7px; border-radius:999px; }
 #check-view .rt-body { max-height:240px; overflow:auto; padding:12px 14px; margin:0; white-space:pre-wrap; font-family:var(--serif); font-size:13.5px; line-height:1.6; color:var(--muted); }
+#check-view .check-trace { margin-top:18px; }
+#check-view .trace-body { margin-top:12px; border:1px solid var(--line); border-radius:var(--radius-card); background:var(--surface-card); padding:16px; }
+#check-view .trace-limits { display:flex; flex-wrap:wrap; gap:16px; font-size:12.5px; color:var(--ink-soft); padding-bottom:12px; border-bottom:1px solid var(--line); }
+#check-view .trace-limits b { font-variant-numeric:tabular-nums; }
+#check-view .trace-warn { color:var(--danger); font-weight:600; }
+#check-view .trace-section { margin-top:14px; }
+#check-view .trace-h { font-family:var(--display); font-weight:600; font-size:13px; margin-bottom:8px; }
+#check-view .trace-think { max-height:320px; overflow:auto; white-space:pre-wrap; font-family:var(--serif); font-size:13.5px; line-height:1.6; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:12px; }
+#check-view .trace-verify { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; font-size:13px; }
+#check-view .trace-verify li { padding:5px 0; border-bottom:1px dashed var(--line); }
 #check-view table.grid { width:100%; border-collapse:collapse; }
 #check-view table.grid td { padding:7px 10px; border-bottom:1px solid #eef0f3; font-size:13.5px; }
 #check-view .ing.ok { color:#15803d; font-weight:600; } #check-view .ing.bad { color:#b91c1c; } #check-view .ing.wait { color:#b45309; }

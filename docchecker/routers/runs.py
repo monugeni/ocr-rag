@@ -106,6 +106,24 @@ async def run_stream(run_id: str, request: Request):
     return EventSourceResponse(gen())
 
 
+@router.get("/{run_id}/trace")
+def run_trace(run_id: str, request: Request):
+    """Debug trace for a run: model reasoning, raw vs confirmed findings, what
+    self-verification pruned (and why), and limits hit."""
+    auth.require_user(request)
+    if not store.get_run(run_id):
+        raise HTTPException(status_code=404, detail="run not found")
+    from .. import config
+
+    path = Path(config.ANNOTATED_DIR) / run_id / "trace.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return {}
+
+
 @router.get("/{run_id}/annotated.pdf")
 def annotated_pdf(run_id: str, request: Request):
     auth.require_user(request)

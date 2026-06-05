@@ -1460,12 +1460,47 @@ async function loadCheckResults(runId) {
       <div class="pdf-pane"><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a><iframe src="/api/runs/${runId}/annotated.pdf"></iframe></div>
     </div>
     ${comments.length ? `<h3>Prior comment incorporation</h3><ul class="findings">${comments.map(checkCommentCard).join('')}</ul>` : ''}
+    <div class="check-trace"><button class="chip-btn" id="chk-trace-btn">Show debug trace</button><div id="chk-trace-body" class="trace-body hidden"></div></div>
   `;
   el.querySelectorAll('.finding [data-act]').forEach((b) => b.addEventListener('click', async () => {
     const li = b.closest('.finding');
     await api(`/api/findings/${li.dataset.id}/status?status=${b.dataset.act}`, { method: 'POST' });
     li.querySelector('.fstatus').textContent = b.dataset.act; li.classList.toggle('dim', b.dataset.act === 'dismissed');
   }));
+  $('chk-trace-btn')?.addEventListener('click', () => toggleTrace(runId));
+}
+
+async function toggleTrace(runId) {
+  const body = $('chk-trace-body'); const btn = $('chk-trace-btn');
+  if (!body) return;
+  if (!body.classList.contains('hidden')) { body.classList.add('hidden'); btn.textContent = 'Show debug trace'; return; }
+  btn.textContent = 'Loading…';
+  try {
+    const t = await api(`/api/runs/${enc(runId)}/trace`);
+    body.innerHTML = renderTrace(t);
+    body.classList.remove('hidden');
+    btn.textContent = 'Hide debug trace';
+  } catch (e) { btn.textContent = 'Show debug trace'; showToast(e.message, 'error'); }
+}
+
+function renderTrace(t) {
+  if (!t || (!t.thinking && !(t.verify || []).length && !t.limits)) {
+    return '<div class="muted">No trace recorded for this run.</div>';
+  }
+  const lim = t.limits || {};
+  const limRow = `<div class="trace-limits">`
+    + `<span><b>${lim.candidates ?? '?'}</b> raised → <b>${lim.confirmed ?? '?'}</b> confirmed, <b>${lim.dropped ?? 0}</b> pruned</span>`
+    + `<span>submitted: <b>${(lim.submitted_chars ?? 0).toLocaleString()}</b> chars${lim.submitted_truncated ? ' <span class="trace-warn">(TRUNCATED)</span>' : ''}</span>`
+    + (t.model ? `<span>model: ${escapeHtml(t.model)}${t.effort ? ' · effort ' + escapeHtml(t.effort) : ''}</span>` : '')
+    + `</div>`;
+  const verify = (t.verify || []).map((v) => {
+    const cls = v.verdict === 'kept' ? 'ok' : v.verdict === 'dropped' ? 'bad' : 'wait';
+    return `<li><span class="tag ${cls}">${escapeHtml(v.verdict || '')}</span> <span class="muted small">p${v.page ?? '?'} · ${escapeHtml(v.confidence || '')}</span> ${escapeHtml(v.title || '')}${v.reason ? ` <span class="muted small">— ${escapeHtml(v.reason)}</span>` : ''}</li>`;
+  }).join('');
+  return limRow
+    + (t.thinking ? `<div class="trace-section"><div class="trace-h">Model reasoning</div><div class="trace-think">${escapeHtml(t.thinking)}</div></div>` : '')
+    + (verify ? `<div class="trace-section"><div class="trace-h">Self-verification (kept / dropped / error)</div><ul class="trace-verify">${verify}</ul></div>` : '')
+    + ((t.warnings || []).length ? `<div class="trace-section"><div class="trace-h">Warnings</div><ul class="trace-verify">${t.warnings.map((w) => `<li class="muted small">${escapeHtml(w)}</li>`).join('')}</ul></div>` : '');
 }
 
 function checkFindingCard(f) {

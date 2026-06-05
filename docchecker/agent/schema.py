@@ -98,3 +98,4 @@ class CheckResult:
     stats: dict[str, Any] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
     usage: dict[str, Any] = field(default_factory=dict)   # model -> token totals
+    trace: dict[str, Any] = field(default_factory=dict)   # debug trace (thinking, raw/pruned findings, limits)

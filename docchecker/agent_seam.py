@@ -128,6 +128,17 @@ def run_check_for_run(run_id: str, user_id: int | None = None) -> None:
         except Exception:  # noqa: BLE001 — telemetry must never fail a run
             pass
 
+        # Persist the debug trace next to the annotated PDF (best-effort).
+        try:
+            trace_dir = Path(config.ANNOTATED_DIR) / run_id
+            trace_dir.mkdir(parents=True, exist_ok=True)
+            (trace_dir / "trace.json").write_text(
+                json.dumps(result.trace or {}, ensure_ascii=False, default=str),
+                encoding="utf-8",
+            )
+        except Exception:  # noqa: BLE001
+            pass
+
         for f in result.findings:
             store.add_finding(run_id, asdict(f))
         for c in result.comment_statuses:

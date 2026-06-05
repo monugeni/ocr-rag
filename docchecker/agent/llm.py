@@ -162,7 +162,10 @@ class AnthropicLLM:
             model=model,
             max_tokens=max(max_tokens, 16000),
             system=sys_blocks,
-            thinking={"type": "adaptive"},
+            # display:"summarized" is required on Opus 4.8/4.7 — the default
+            # "omitted" streams empty thinking_delta text, so the live reasoning
+            # panel and the persisted trace would both be blank.
+            thinking={"type": "adaptive", "display": "summarized"},
             output_config={"effort": effort, "format": {"type": "json_schema", "schema": _strictify(schema)}},
             messages=[{"role": "user", "content": user_text}],
         ) as stream:

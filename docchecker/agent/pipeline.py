@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import shutil
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import asdict
 from pathlib import Path
 
 from .annotate import annotate_finding
@@ -195,12 +196,13 @@ def _verify(ctx: CheckContext, llm: LLM, submitted, finding: Finding) -> bool:
     return bool(out.get("verified")) and finding.confidence in ("high", "medium")
 
 
-def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result) -> list[Finding]:
+def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result):
     """Verify candidates concurrently (each is an independent fast-model call), then
-    fold results back in candidate order. Replaces the old sequential loop so wall-
-    clock no longer scales linearly with the number of candidate findings."""
+    fold results back in candidate order. Returns (confirmed, verdicts) — verdicts is
+    a per-candidate audit list (kept/dropped/error + confidence + evidence) for the
+    debug trace, so users can see exactly what self-verification pruned and why."""
     if not candidates:
-        return []
+        return [], []
 
     def work(f: Finding):
         try:
@@ -213,15 +215,27 @@ def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result) -> l
         outcomes = list(ex.map(work, candidates))  # ex.map preserves input order
 
     confirmed: list[Finding] = []
+    verdicts: list[dict] = []
     for f, verdict, err in outcomes:
+        entry = {
+            "title": f.title,
+            "page": f.page_num,
+            "confidence": getattr(f, "confidence", ""),
+            "evidence": (f.citation or {}).get("verify_evidence", ""),
+        }
         if verdict == "keep":
             confirmed.append(f)
+            entry["verdict"] = "kept"
         elif verdict == "drop":
             result.warnings.append(f"Dropped unverified finding: {f.title}")
+            entry["verdict"] = "dropped"
         else:
             result.warnings.append(f"Verification error for '{f.title}': {err}")
             confirmed.append(f)  # keep rather than silently lose
-    return confirmed
+            entry["verdict"] = "error"
+            entry["reason"] = err
+        verdicts.append(entry)
+    return confirmed, verdicts
 
 
 def _judge_comments(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> list[CommentStatus]:
@@ -277,12 +291,24 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
     submitted = ctx.submitted[0]
     sub_text = document_text(ctx.docs_db_path, submitted.doc_id)
 
+    # Capture the model's streamed reasoning for the persisted debug trace while
+    # still forwarding it live to the SSE panel.
+    thinking_buf: list[str] = []
+    _orig_emit = ctx.emit
+
+    def _capturing_emit(ev):
+        if isinstance(ev, dict) and ev.get("type") == "thinking":
+            thinking_buf.append(ev.get("delta", "") or "")
+        _orig_emit(ev)
+
+    ctx.emit = _capturing_emit
+
     ctx.emit({"stage": "Comparing against reference", "type": "phase"})
     candidates = _compare(ctx, llm, submitted, sub_text)
     ctx.emit({"stage": f"{len(candidates)} candidate finding(s)", "type": "phase"})
 
     ctx.emit({"stage": "Self-verifying findings", "type": "phase"})
-    confirmed = _verify_all(ctx, llm, submitted, candidates, result)
+    confirmed, verdicts = _verify_all(ctx, llm, submitted, candidates, result)
 
     # Annotate confirmed findings onto a copy of the submitted PDF.
     ctx.emit({"stage": f"Annotating {len(confirmed)} finding(s)", "type": "phase"})
@@ -306,6 +332,25 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
         "candidates": len(candidates),
         "confirmed": len(confirmed),
         "comments": len(result.comment_statuses),
+    }
+
+    # Debug trace: what the model reasoned, what it raised, what verification
+    # pruned, and which limits were hit — so a run can be understood/diffed.
+    result.trace = {
+        "model": ctx.model,
+        "effort": getattr(ctx, "effort", ""),
+        "thinking": "".join(thinking_buf).strip(),
+        "raw_findings": [asdict(f) for f in candidates],
+        "verify": verdicts,
+        "limits": {
+            "submitted_chars": len(sub_text),
+            "submitted_truncated": "[... truncated at" in sub_text,
+            "candidates": len(candidates),
+            "confirmed": len(confirmed),
+            "dropped": sum(1 for v in verdicts if v.get("verdict") == "dropped"),
+            "compare_max_output_tokens": 16000,
+        },
+        "warnings": list(result.warnings),
     }
     ctx.emit({"stage": "Done", "type": "phase", "findings": len(result.findings)})
     return result
