@@ -909,6 +909,7 @@ async function sendMessage(event) {
   } finally {
     state.sending = false;
     renderAsk({ scroll: 'answer' });
+    loadUsage();
   }
 }
 
@@ -1422,7 +1423,7 @@ function connectCheckSSE(runId) {
     if (ev.type === 'thinking') { appendThinking(ev.delta || ''); return; }
     const li = document.createElement('li'); li.textContent = ev.stage || ev.type || ''; $('chk-log')?.appendChild(li);
   });
-  sse.addEventListener('end', () => { sse.close(); checkState.sse = null; loadCheckResults(runId); pollCheckRun(runId); });
+  sse.addEventListener('end', () => { sse.close(); checkState.sse = null; loadCheckResults(runId); pollCheckRun(runId); loadUsage(); });
 }
 
 function appendThinking(text) {
@@ -1487,8 +1488,24 @@ function checkCommentCard(c) {
     if (!state.isAdmin && ['documents', 'ingest', 'jobs'].includes(state.tab)) state.tab = 'ask';
     renderShell();
     renderActiveView();
+    loadUsage();
   } catch (_) { /* not logged in / endpoint missing */ }
 })();
+
+async function loadUsage() {
+  try {
+    const u = await api('/api/me/usage');
+    const chip = $('usage-chip');
+    if (!chip) return;
+    const inr = Math.round((u && u.inr) || 0);
+    if (inr > 0) {
+      chip.textContent = `₹${inr.toLocaleString('en-IN')} spent`;
+      chip.classList.remove('hidden');
+    } else {
+      chip.classList.add('hidden');
+    }
+  } catch (_) { /* usage unavailable */ }
+}
 
 init().catch((err) => {
   console.error(err);

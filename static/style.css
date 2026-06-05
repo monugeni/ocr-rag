@@ -1197,6 +1197,13 @@ a:hover {
 }
 .topbar-user { gap: 12px; }
 .user-chip { color: var(--ink-soft); }
+.usage-chip {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 999px;
+  background: var(--gold-tint); color: var(--gold);
+  font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
 
 /* topbar divider that spans the work area */
 .work-area { position: relative; height: 100vh; min-height: 100vh; }

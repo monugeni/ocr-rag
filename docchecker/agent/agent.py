@@ -43,7 +43,9 @@ def run_check(ctx: CheckContext) -> CheckResult:
             from .pipeline import run_real_check
 
             llm = AnthropicLLM(ctx.api_key, ctx.model)
-            return run_real_check(ctx, llm)
+            result = run_real_check(ctx, llm)
+            result.usage = llm.drain_usage()
+            return result
         except Exception as exc:  # noqa: BLE001 — never fail the run; fall back to stub
             ctx.emit({"stage": f"Live agent failed ({exc}); using stub", "type": "phase"})
     return _run_stub(ctx)

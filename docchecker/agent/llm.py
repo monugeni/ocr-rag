@@ -19,6 +19,7 @@ from __future__ import annotations
 import copy
 import json
 import re
+import threading
 from typing import Callable, Optional, Protocol
 
 
@@ -83,6 +84,10 @@ class AnthropicLLM:
         self._client = anthropic.Anthropic(api_key=api_key)
         self._default_model = default_model
         self.last_usage: dict = {}
+        # Per-model cumulative token usage for this run (verify calls run in
+        # parallel threads, so guard with a lock).
+        self._usage_totals: dict[str, dict[str, int]] = {}
+        self._usage_lock = threading.Lock()
 
     @staticmethod
     def _system_blocks(system: str, cache_context: Optional[str]) -> list[dict]:
@@ -92,13 +97,28 @@ class AnthropicLLM:
         blocks[-1]["cache_control"] = {"type": "ephemeral"}
         return blocks
 
-    def _record_usage(self, usage) -> None:
-        self.last_usage = {
-            "input": getattr(usage, "input_tokens", 0),
-            "output": getattr(usage, "output_tokens", 0),
-            "cache_read": getattr(usage, "cache_read_input_tokens", 0),
-            "cache_write": getattr(usage, "cache_creation_input_tokens", 0),
+    def _record_usage(self, usage, model: str = "") -> None:
+        rec = {
+            "input": getattr(usage, "input_tokens", 0) or 0,
+            "output": getattr(usage, "output_tokens", 0) or 0,
+            "cache_read": getattr(usage, "cache_read_input_tokens", 0) or 0,
+            "cache_write": getattr(usage, "cache_creation_input_tokens", 0) or 0,
         }
+        self.last_usage = rec
+        with self._usage_lock:
+            tot = self._usage_totals.setdefault(
+                model or self._default_model,
+                {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0},
+            )
+            for k, v in rec.items():
+                tot[k] += v
+
+    def drain_usage(self) -> dict[str, dict[str, int]]:
+        """Return per-model cumulative usage and reset the counters."""
+        with self._usage_lock:
+            out = self._usage_totals
+            self._usage_totals = {}
+            return out
 
     def call_tool(
         self,
@@ -130,7 +150,7 @@ class AnthropicLLM:
             tool_choice={"type": "tool", "name": tool_name},
             messages=[{"role": "user", "content": user_text}],
         )
-        self._record_usage(resp.usage)
+        self._record_usage(resp.usage, mdl)
         for block in resp.content:
             if getattr(block, "type", None) == "tool_use" and block.name == tool_name:
                 return dict(block.input)
@@ -149,7 +169,7 @@ class AnthropicLLM:
             if emit is not None:
                 self._stream_thinking(stream, emit)
             msg = stream.get_final_message()
-        self._record_usage(msg.usage)
+        self._record_usage(msg.usage, model)
         txt = next((b.text for b in msg.content if getattr(b, "type", None) == "text"), None)
         return _loads_loose(txt) if txt else {}
 

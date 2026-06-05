@@ -119,6 +119,15 @@ def run_check_for_run(run_id: str, user_id: int | None = None) -> None:
         ctx = build_context(run_id)
         result = agent_run_check(ctx)
 
+        # Record per-user spend for this run's LLM usage (best-effort).
+        try:
+            from . import usage as usage_mod
+            email = auth.get_user_email(user_id)
+            for model, toks in (result.usage or {}).items():
+                usage_mod.record(email, "check", model, toks)
+        except Exception:  # noqa: BLE001 — telemetry must never fail a run
+            pass
+
         for f in result.findings:
             store.add_finding(run_id, asdict(f))
         for c in result.comment_statuses:

@@ -97,3 +97,4 @@ class CheckResult:
     annotated_pdfs: dict[int, str] = field(default_factory=dict)   # doc_id -> path
     stats: dict[str, Any] = field(default_factory=dict)
     warnings: list[str] = field(default_factory=list)
+    usage: dict[str, Any] = field(default_factory=dict)   # model -> token totals

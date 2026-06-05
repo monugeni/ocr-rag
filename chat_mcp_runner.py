@@ -63,6 +63,18 @@ ALLOWED_TOOLS = {
 class ChatRunResult:
     answer: str
     sources: list[dict[str, Any]]
+    usage: dict[str, int] = field(default_factory=dict)
+    model: str = ""
+
+
+def _acc_usage(acc: dict[str, int], usage: Any) -> None:
+    """Accumulate one Anthropic response.usage into a running per-turn total."""
+    if not usage:
+        return
+    acc["input"] = acc.get("input", 0) + (getattr(usage, "input_tokens", 0) or 0)
+    acc["output"] = acc.get("output", 0) + (getattr(usage, "output_tokens", 0) or 0)
+    acc["cache_read"] = acc.get("cache_read", 0) + (getattr(usage, "cache_read_input_tokens", 0) or 0)
+    acc["cache_write"] = acc.get("cache_write", 0) + (getattr(usage, "cache_creation_input_tokens", 0) or 0)
 
 
 @dataclass
@@ -148,6 +160,7 @@ async def _run_folder_chat(
     mcp_server: Any = None,
 ) -> ChatRunResult:
     tracker = SourceTracker()
+    usage: dict[str, int] = {}
 
     if mcp_server is not None:
         tools = await _list_allowed_tools(mcp_server)
@@ -161,8 +174,9 @@ async def _run_folder_chat(
             attachment=attachment,
             tools=tools,
             tracker=tracker,
+            usage=usage,
         )
-        return ChatRunResult(answer=response, sources=tracker.as_list())
+        return ChatRunResult(answer=response, sources=tracker.as_list(), usage=usage, model=model)
 
     last_error: Optional[Exception] = None
     if not mcp_url:
@@ -184,8 +198,9 @@ async def _run_folder_chat(
                         attachment=attachment,
                         tools=tools,
                         tracker=tracker,
+                        usage=usage,
                     )
-            return ChatRunResult(answer=response, sources=tracker.as_list())
+            return ChatRunResult(answer=response, sources=tracker.as_list(), usage=usage, model=model)
         except Exception as exc:
             last_error = exc
             if attempt == MCP_CONNECT_RETRIES - 1:
@@ -237,7 +252,10 @@ async def _chat_with_tools(
     attachment: Optional[dict[str, Any]],
     tools: list[dict[str, Any]],
     tracker: SourceTracker,
+    usage: Optional[dict[str, int]] = None,
 ) -> str:
+    if usage is None:
+        usage = {}
     client = anthropic.AsyncAnthropic(api_key=api_key)
     messages = _build_messages(question=question, history=history, attachment=attachment)
     system_prompt = _build_system_prompt(project=project, attachment=attachment)
@@ -257,6 +275,7 @@ async def _chat_with_tools(
                 output_config={"effort": "medium"},
                 cache_control={"type": "ephemeral"},
             )
+            _acc_usage(usage, getattr(response, "usage", None))
 
             assistant_blocks = [_dump_block(block) for block in response.content]
             messages.append({"role": "assistant", "content": assistant_blocks})
@@ -325,6 +344,7 @@ async def _chat_with_tools(
         system_prompt=system_prompt,
         messages=messages,
         attachment=attachment,
+        usage=usage,
     )
 
 
@@ -411,6 +431,7 @@ async def _force_final_answer(
     system_prompt: str,
     messages: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]],
+    usage: Optional[dict[str, int]] = None,
 ) -> str:
     client = anthropic.AsyncAnthropic(api_key=api_key)
     final_messages = list(messages)
@@ -432,6 +453,8 @@ async def _force_final_answer(
             output_config={"effort": "medium"},
             cache_control={"type": "ephemeral"},
         )
+        if usage is not None:
+            _acc_usage(usage, getattr(response, "usage", None))
     finally:
         close = getattr(client, "close", None)
         if close is not None:

@@ -119,6 +119,18 @@ def is_admin(oidc_sub: str) -> bool:
         conn.close()
 
 
+def get_user_email(user_id: int | None) -> str | None:
+    """Email for a user id (for spend attribution), or None."""
+    if user_id is None:
+        return None
+    conn = get_conn()
+    try:
+        row = conn.execute("SELECT email FROM users WHERE id = ?", (user_id,)).fetchone()
+        return row["email"] if row else None
+    finally:
+        conn.close()
+
+
 def logout_session(request: Request) -> None:
     request.session.pop("user", None)
 

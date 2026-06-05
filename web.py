@@ -681,6 +681,17 @@ def _current_owner(request: Request) -> tuple[str, Optional[str]]:
     return "anon", None
 
 
+def _record_usage(email: Optional[str], kind: str, model: str, usage: Optional[dict]):
+    """Record LLM spend for a user (best-effort; no-op if docchecker is absent)."""
+    if not usage:
+        return
+    try:
+        from docchecker import usage as usage_mod
+        usage_mod.record(email, kind, model, usage)
+    except Exception:  # noqa: BLE001 — telemetry must never break chat
+        pass
+
+
 def _thread_for_owner(conn, thread_id: str, owner_key: str):
     """Fetch a thread the caller owns, or raise 404 (404 not 403 to avoid
     revealing that someone else's thread id exists)."""
@@ -2441,6 +2452,17 @@ def get_chat_messages(thread_id: str, request: Request):
         conn.close()
 
 
+@app.get("/api/me/usage")
+def my_usage(request: Request):
+    """Estimated ₹ spend for the current user (Ask + Check)."""
+    _, owner_email = _current_owner(request)
+    try:
+        from docchecker import usage as usage_mod
+        return usage_mod.total_for_email(owner_email)
+    except Exception:  # noqa: BLE001
+        return {"inr": 0.0, "usd": 0.0, "tokens": 0, "by_kind": {}}
+
+
 @app.delete("/api/chats/{thread_id}")
 def delete_chat_thread(thread_id: str, request: Request):
     owner_key, _ = _current_owner(request)
@@ -2461,7 +2483,7 @@ def create_chat_message(thread_id: str, data: dict, request: Request):
     if not content:
         raise HTTPException(400, "Message content required")
 
-    owner_key, _ = _current_owner(request)
+    owner_key, owner_email = _current_owner(request)
     conn = get_conn()
     try:
         thread = _thread_for_owner(conn, thread_id, owner_key)
@@ -2471,6 +2493,7 @@ def create_chat_message(thread_id: str, data: dict, request: Request):
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
         response = _generate_mcp_chat_answer(thread["project"], content, history)
+        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
         _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources)
 
         if len(existing_messages) == 1 and thread["title"] == "New chat":
@@ -2509,7 +2532,7 @@ def review_chat_document(
     attachment = _prepare_chat_review_attachment(file)
     question = (content or "").strip() or _default_attachment_review_question(attachment["filename"])
 
-    owner_key, _ = _current_owner(request)
+    owner_key, owner_email = _current_owner(request)
     conn = get_conn()
     try:
         thread = _thread_for_owner(conn, thread_id, owner_key)
@@ -2530,6 +2553,7 @@ def review_chat_document(
             history,
             attachment=attachment,
         )
+        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
         sources = [
             *attachment["assistant_sources"],
             *response.sources,
