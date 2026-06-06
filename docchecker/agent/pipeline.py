@@ -148,10 +148,16 @@ def _reference_block(ctx: CheckContext, llm: LLM, sub_text: str) -> str:
     # more reference folders (e.g. the tender folder + a Standards folder).
     ref_folders = ctx.reference_projects or ([ctx.reference_project] if ctx.reference_project else [])
     if ctx.company_mcp_url and ref_folders:
-        ctx.emit({"stage": "Retrieving existing reference requirements", "type": "phase"})
+        ctx.emit({"stage": "Planning reference searches over the whole document…", "type": "phase"})
         queries = _plan_queries(ctx, llm, sub_text)
+        preview = "; ".join(queries[:6]) + (" …" if len(queries) > 6 else "")
+        ctx.emit({
+            "stage": f"Searching reference KB — {len(queries)} queries across {len(ref_folders)} folder(s): {preview}",
+            "type": "phase",
+        })
         for folder in ref_folders:
             retrieved = fetch_reference_context(ctx.company_mcp_url, folder, queries)
+            ctx.emit({"stage": f"Retrieved requirements from '{folder}'", "type": "phase"})
             if retrieved:
                 blocks.append(f"=== REFERENCE (existing KB: {folder}) ===\n{retrieved}")
 

@@ -1259,7 +1259,7 @@ async function init() {
 // ===================== Check tab =====================
 const CHECK_DOC_TYPES = ['Drawing', 'Datasheet', 'Vendor document', 'Procedure', 'Specification', 'Calculation', 'Material requisition', 'Inspection / test report', 'Report', 'Other'];
 const SEV_COLORS = { critical: '#D7263D', major: '#E8A33D', minor: '#F4D35E', observation: '#4C9BE8' };
-const checkState = { sub: 'new', runId: null, sse: null, resultsLoaded: false };
+const checkState = { sub: 'new', runId: null, sse: null, resultsLoaded: false, starting: false };
 
 function renderCheck() {
   const view = $('check-view');
@@ -1394,7 +1394,7 @@ async function uploadCheckFile(runId, role, file) {
   await api(`/api/runs/${runId}/uploads`, { method: 'POST', body: form });
 }
 
-function openCheckRun(runId) { checkState.sub = 'run'; checkState.runId = runId; renderCheckRun(); }
+function openCheckRun(runId) { checkState.sub = 'run'; checkState.runId = runId; checkState.starting = false; renderCheckRun(); }
 
 function renderCheckRun() {
   checkState.resultsLoaded = false;
@@ -1414,9 +1414,14 @@ function renderCheckRun() {
 }
 
 async function startRun(runId) {
-  $('chk-start-btn').disabled = true;
+  checkState.starting = true;
+  const btn = $('chk-start-btn'); if (btn) btn.disabled = true;
   try { await api(`/api/runs/${runId}/start`, { method: 'POST' }); connectCheckSSE(runId); pollCheckRun(runId); }
-  catch (e) { showToast(e.message, 'error'); }
+  catch (e) {
+    // Surface a manual "Run check" fallback if auto-start fails.
+    showToast(e.message, 'error'); checkState.starting = false;
+    if (btn) btn.disabled = false; $('chk-start')?.classList.remove('hidden');
+  }
 }
 
 function connectCheckSSE(runId) {
@@ -1448,7 +1453,11 @@ async function pollCheckRun(runId) {
   const up = $('chk-uploads'); if (up) up.innerHTML = `<table class="grid">${run.uploads.map((u) => `<tr><td>${u.role}</td><td>${escapeHtml(u.filename)}</td><td class="ing ${u.ingest_status === 'done' ? 'ok' : u.ingest_status === 'failed' ? 'bad' : 'wait'}">${u.ingest_status}${u.page_count ? ' · ' + u.page_count + 'p' : ''}</td></tr>`).join('')}</table>`;
   const subs = run.uploads.filter((u) => u.role === 'submitted');
   const ready = subs.length && run.uploads.every((u) => ['done', 'failed'].includes(u.ingest_status)) && subs.some((u) => u.ingest_status === 'done' && u.doc_id);
-  if (run.status === 'created') { $('chk-start').classList.toggle('hidden', !ready); if (!ready) setTimeout(() => pollCheckRun(runId), 1500); }
+  if (run.status === 'created') {
+    // Auto-start once uploads finish ingesting — no second click needed.
+    if (ready && !checkState.starting) { startRun(runId); }
+    else if (!ready) { setTimeout(() => pollCheckRun(runId), 1500); }
+  }
   else if (run.status === 'queued' || run.status === 'running') { $('chk-start').classList.add('hidden'); connectCheckSSE(runId); setTimeout(() => pollCheckRun(runId), 2000); }
   else if (run.status === 'done') { $('chk-start').classList.add('hidden'); loadCheckResults(runId); }
   else if (run.status === 'failed') { $('chk-progress').classList.remove('hidden'); const li = document.createElement('li'); li.textContent = 'Failed: ' + (run.error || 'unknown'); $('chk-log')?.appendChild(li); }
