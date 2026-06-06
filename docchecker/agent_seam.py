@@ -84,7 +84,7 @@ def build_context(run_id: str) -> CheckContext:
     annotated_dir = Path(config.ANNOTATED_DIR) / run_id
 
     run_meta = json.loads(run["metadata"]) if run.get("metadata") else {}
-    effort = run_meta.get("effort") or "high"
+    effort = run_meta.get("effort") or "medium"
     if effort not in ("low", "medium", "high", "xhigh", "max"):
         effort = "high"
 

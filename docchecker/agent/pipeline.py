@@ -14,7 +14,7 @@ from pathlib import Path
 from .annotate import annotate_finding
 from .comments import read_prior_comments
 from .company_refs import fetch_reference_context
-from .docs_reader import document_text, page_text
+from .docs_reader import document_text, page_text, read_pages
 from .llm import LLM
 from .prompts import build_system_prompt
 from .schema import CATEGORIES, CheckContext, CheckResult, CommentStatus, Finding
@@ -158,18 +158,29 @@ def _reference_block(ctx: CheckContext, llm: LLM, sub_text: str) -> str:
     return "\n\n".join(blocks) if blocks else "(no reference documents provided)"
 
 
-# One focused compare pass per dimension. A single all-categories pass has
-# incomplete, run-to-run-varying recall (the model misses different things each
-# single-shot run); running a dedicated pass per dimension and unioning the
-# results dramatically improves recall and stability. Passes run in parallel.
-_LENSES = [
-    ("compliance", "Does the submission satisfy each requirement, spec and clause in the reference? Flag every deviation or unmet requirement."),
-    ("completeness", "Does the submission cover everything the reference asks for? Flag every missing or unaddressed item."),
-    ("consistency", "Do values, quantities, tags and units match across the submission and reference (and within the submission)? Flag every contradiction."),
-    ("bom", "Bill of materials: do item lists, quantities and part numbers match the reference (PO/PR line items)? Flag every mismatch."),
-    ("dimension", "Do dimensions, sizes and ratings match the reference and the datasheet? Flag every mismatch."),
-    ("deviation", "Flag every explicit or implicit deviation from the reference — including notes, exceptions and qualifications."),
-]
+# Pagination: a short document (a datasheet) is checked in one exhaustive pass.
+# A long one (100s of pages) is split into page-aligned chunks so every page gets
+# real scrutiny instead of being lost in one giant pass — the reference context
+# is cached and reused across chunks.
+_CHUNK_CHARS = 30_000  # page-aligned chunk budget; a datasheet stays a single chunk
+
+
+def _page_chunks(db_path: str, doc_id: int, budget: int = _CHUNK_CHARS) -> list[list[tuple[int, str]]]:
+    """Group consecutive pages into ~budget-char chunks (page-aligned). Returns a
+    list of chunks, each a list of (page_num, page_block)."""
+    chunks: list[list[tuple[int, str]]] = []
+    cur: list[tuple[int, str]] = []
+    cur_len = 0
+    for p in read_pages(db_path, doc_id):
+        block = f"\n[Page {p['page_num']}]\n{p.get('content') or ''}"
+        if cur and cur_len + len(block) > budget:
+            chunks.append(cur)
+            cur, cur_len = [], 0
+        cur.append((p["page_num"], block))
+        cur_len += len(block)
+    if cur:
+        chunks.append(cur)
+    return chunks
 
 
 def _finding_from_dict(f: dict, submitted, category_default: str) -> Finding:
@@ -205,51 +216,72 @@ def _dedupe_findings(findings: list[Finding]) -> list[Finding]:
     return list(best.values())
 
 
-def _lens_emit(ctx: CheckContext, key: str):
-    """Tag a lens's streamed reasoning with its name so the parallel thinking
+_EXHAUSTIVE = (
+    "EXHAUSTIVELY against the reference. Work through it clause by clause, row by row, value by "
+    "value — do not skip any section, table or row. For EVERY requirement, spec, quantity, "
+    "material, dimension, rating, tag and clause, confirm whether the submission satisfies it and "
+    "report every deviation, unmet requirement, missing item, inconsistency, BOM/quantity "
+    "mismatch and dimensional mismatch using the report_findings tool. Be exhaustive — a later "
+    "step verifies findings, so do not self-censor borderline ones. Copy submitted_anchor "
+    "verbatim from the relevant submitted page."
+)
+
+
+def _span_emit(ctx: CheckContext, span: str):
+    """Tag a chunk's streamed reasoning with its page span so parallel thinking
     streams stay attributable in the live panel and the trace."""
     def emit(ev):
         if isinstance(ev, dict) and ev.get("type") == "thinking":
-            ev = {**ev, "delta": f"[{key}] " + (ev.get("delta") or "")}
+            ev = {**ev, "delta": f"[{span}] " + (ev.get("delta") or "")}
         ctx.emit(ev)
     return emit
 
 
 def _compare(ctx: CheckContext, llm: LLM, submitted, sub_text: str) -> list[Finding]:
     system = build_system_prompt(ctx)
-    ref_block = _reference_block(ctx, llm, sub_text)  # retrieved once, reused by every lens
-    base = (
-        f"SUBMITTED DOCUMENT: {submitted.title} (doc {submitted.doc_id})\n{sub_text}\n\n"
-        f"{ref_block}\n\n"
-    )
+    ref_block = _reference_block(ctx, llm, sub_text)  # retrieved once, reused across chunks
 
-    def run_lens(lens: tuple[str, str]) -> list[Finding]:
-        key, desc = lens
-        user = base + (
-            f"Focus on {key.upper()}. {desc}\n"
-            "Report EVERY such finding using the report_findings tool — be exhaustive and do not "
-            "self-censor borderline ones (a separate step verifies them). Copy submitted_anchor "
-            "verbatim from the relevant submitted page."
-        )
+    chunks = _page_chunks(ctx.docs_db_path, submitted.doc_id) or [[(1, sub_text)]]
+    multi = len(chunks) > 1
+
+    def run_chunk(chunk: list[tuple[int, str]]) -> list[Finding]:
+        pns = [pn for pn, _ in chunk]
+        span = f"pages {pns[0]}–{pns[-1]}" if len(pns) > 1 else f"page {pns[0]}"
+        chunk_text = "".join(b for _, b in chunk)
+        hdr = f"SUBMITTED DOCUMENT: {submitted.title} (doc {submitted.doc_id})"
+        if multi:
+            # Reference goes in the cached system block (reused by every chunk);
+            # only the chunk's pages vary per request.
+            user = f"{hdr} — {span}\n{chunk_text}\n\nCheck this part ({span}) {_EXHAUSTIVE}"
+            cache_ctx, emit = ref_block, _span_emit(ctx, span)
+        else:
+            user = f"{hdr}\n{chunk_text}\n\n{ref_block}\n\nCheck the submission {_EXHAUSTIVE}"
+            cache_ctx, emit = None, ctx.emit
         try:
             out = llm.call_tool(
-                system=system, user_text=user,
+                system=system, cache_context=cache_ctx, user_text=user,
                 tool_name="report_findings",
-                tool_description=f"Report all {key} findings from the comparison.",
+                tool_description="Report all candidate findings from the comparison.",
                 input_schema=_FINDINGS_TOOL,
-                model=ctx.model, deep=True, effort=ctx.effort, max_tokens=24000,
-                emit=_lens_emit(ctx, key),
+                model=ctx.model, deep=True, effort=ctx.effort, max_tokens=24000, emit=emit,
             )
-            fnds = [_finding_from_dict(f, submitted, key) for f in out.get("findings", [])]
-        except Exception as exc:  # noqa: BLE001 — one lens must not sink the rest
-            ctx.emit({"stage": f"Lens '{key}' failed: {exc}", "type": "phase"})
+            fnds = [_finding_from_dict(f, submitted, "compliance") for f in out.get("findings", [])]
+        except Exception as exc:  # noqa: BLE001 — one chunk must not sink the rest
+            ctx.emit({"stage": f"{span} failed: {exc}", "type": "phase"})
             fnds = []
-        ctx.emit({"stage": f"Checked {key}: {len(fnds)} candidate(s)", "type": "phase"})
+        if multi:
+            ctx.emit({"stage": f"Checked {span}: {len(fnds)} finding(s)", "type": "phase"})
         return fnds
 
-    with ThreadPoolExecutor(max_workers=len(_LENSES), thread_name_prefix="lens") as ex:
-        per_lens = list(ex.map(run_lens, _LENSES))
-    return _dedupe_findings([f for lst in per_lens for f in lst])
+    if not multi:
+        return _dedupe_findings(run_chunk(chunks[0]))
+
+    # Run the first chunk to warm the reference cache, then the rest in parallel
+    # (they read the cached reference at ~0.1x input cost).
+    found = run_chunk(chunks[0])
+    with ThreadPoolExecutor(max_workers=min(6, len(chunks) - 1), thread_name_prefix="chunk") as ex:
+        found += [f for lst in ex.map(run_chunk, chunks[1:]) for f in lst]
+    return _dedupe_findings(found)
 
 
 def _verify(ctx: CheckContext, llm: LLM, submitted, finding: Finding) -> bool:
@@ -400,14 +432,14 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
             "Submitted document was truncated for analysis (very long document) — later pages may be under-checked."
         )
 
-    ctx.emit({"stage": "Comparing against reference (multi-lens)", "type": "phase"})
+    ctx.emit({"stage": "Comparing against reference", "type": "phase"})
     candidates = _compare(ctx, llm, submitted, sub_text)
     compare_truncated = getattr(llm, "any_truncated", False)
     if compare_truncated:
         result.warnings.append(
             "A comparison pass hit its output budget — some findings may be missing. Re-run or split the document."
         )
-    ctx.emit({"stage": f"{len(candidates)} unique candidate finding(s) across lenses", "type": "phase"})
+    ctx.emit({"stage": f"{len(candidates)} candidate finding(s)", "type": "phase"})
 
     ctx.emit({"stage": "Self-verifying findings", "type": "phase"})
     confirmed, verdicts = _verify_all(ctx, llm, submitted, candidates, result)
@@ -444,7 +476,6 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
         "thinking": "".join(thinking_buf).strip(),
         "raw_findings": [asdict(f) for f in candidates],
         "verify": verdicts,
-        "lenses": [k for k, _ in _LENSES],
         "limits": {
             "submitted_chars": len(sub_text),
             "submitted_truncated": sub_truncated,
