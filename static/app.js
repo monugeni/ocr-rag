@@ -1469,10 +1469,16 @@ async function loadCheckResults(runId) {
   const el = $('chk-results'); el.classList.remove('hidden');
   const findings = res.findings || []; const comments = res.comment_results || [];
   el.innerHTML = `
-    <h3>Findings <span class="muted">(${findings.length})</span></h3>
-    <div class="check-split">
-      <ul class="findings">${findings.map(checkFindingCard).join('') || '<li class="muted">No findings.</li>'}</ul>
-      <div class="pdf-pane"><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a><iframe src="/static/pdfjs/web/viewer.html?file=${encodeURIComponent('/api/runs/' + runId + '/annotated.pdf')}"></iframe></div>
+    <div class="check-split" id="chk-split">
+      <div class="split-col findings-col">
+        <div class="split-col-head"><span class="split-title">Findings <span class="muted">(${findings.length})</span></span><button class="split-collapse" data-act="collapse-findings" title="Collapse findings" aria-label="Collapse findings">‹</button></div>
+        <ul class="findings">${findings.map(checkFindingCard).join('') || '<li class="muted">No findings.</li>'}</ul>
+      </div>
+      <div class="split-handle" id="chk-split-handle" title="Drag to resize"></div>
+      <div class="split-col pdf-pane">
+        <div class="split-col-head"><button class="split-collapse" data-act="collapse-pdf" title="Collapse preview" aria-label="Collapse preview">›</button><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a></div>
+        <iframe src="/static/pdfjs/web/viewer.html?file=${encodeURIComponent('/api/runs/' + runId + '/annotated.pdf')}"></iframe>
+      </div>
     </div>
     ${comments.length ? `<h3>Prior comment incorporation</h3><ul class="findings">${comments.map(checkCommentCard).join('')}</ul>` : ''}
     <div class="check-trace"><button class="chip-btn" id="chk-trace-btn">Show debug trace</button><div id="chk-trace-body" class="trace-body hidden"></div></div>
@@ -1483,6 +1489,50 @@ async function loadCheckResults(runId) {
     li.querySelector('.fstatus').textContent = b.dataset.act; li.classList.toggle('dim', b.dataset.act === 'dismissed');
   }));
   $('chk-trace-btn')?.addEventListener('click', () => toggleTrace(runId));
+  bindSplit();
+}
+
+function bindSplit() {
+  const split = $('chk-split'); const handle = $('chk-split-handle');
+  if (!split) return;
+  // Restore saved width.
+  const saved = parseInt(localStorage.getItem('chk_findings_w') || '', 10);
+  if (saved >= 180) split.style.setProperty('--findings-w', saved + 'px');
+
+  // Drag-to-resize the findings column.
+  if (handle) {
+    handle.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      if (split.classList.contains('findings-collapsed') || split.classList.contains('pdf-collapsed')) return;
+      const startX = e.clientX;
+      const startW = $('chk-split').querySelector('.findings-col').getBoundingClientRect().width;
+      const maxW = split.getBoundingClientRect().width - 220;
+      const onMove = (ev) => {
+        const w = Math.max(180, Math.min(maxW, startW + (ev.clientX - startX)));
+        split.style.setProperty('--findings-w', w + 'px');
+      };
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        document.body.classList.remove('resizing');
+        const w = parseInt(getComputedStyle(split).getPropertyValue('--findings-w'), 10);
+        if (w >= 180) localStorage.setItem('chk_findings_w', String(w));
+      };
+      document.body.classList.add('resizing');
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  }
+
+  // Collapse toggles — collapsing one expands the other (at most one collapsed).
+  split.querySelector('[data-act="collapse-findings"]')?.addEventListener('click', () => {
+    split.classList.remove('pdf-collapsed');
+    split.classList.toggle('findings-collapsed');
+  });
+  split.querySelector('[data-act="collapse-pdf"]')?.addEventListener('click', () => {
+    split.classList.remove('findings-collapsed');
+    split.classList.toggle('pdf-collapsed');
+  });
 }
 
 async function toggleTrace(runId) {
