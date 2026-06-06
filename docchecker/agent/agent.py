@@ -39,10 +39,16 @@ def run_check(ctx: CheckContext) -> CheckResult:
     # Live pipeline when enabled and an API key is present; otherwise the stub.
     if ctx.live and ctx.api_key and ctx.docs_db_path:
         try:
-            from .llm import AnthropicLLM
             from .pipeline import run_real_check
 
-            llm = AnthropicLLM(ctx.api_key, ctx.model)
+            if (ctx.provider or "anthropic").lower() == "grok":
+                from .grok_llm import GrokLLM
+
+                llm = GrokLLM(ctx.api_key, ctx.model, base_url=ctx.base_url)
+            else:
+                from .llm import AnthropicLLM
+
+                llm = AnthropicLLM(ctx.api_key, ctx.model)
             result = run_real_check(ctx, llm)
             result.usage = llm.drain_usage()
             return result

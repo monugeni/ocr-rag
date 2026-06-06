@@ -59,9 +59,11 @@ class CheckContext:
     # uses the deterministic stub.
     docs_db_path: str = ""
     api_key: Optional[str] = None
+    provider: str = "anthropic"   # anthropic | grok (xAI) — selects the LLM backend
+    base_url: Optional[str] = None  # provider API base (set for grok; None = SDK default)
     model: str = "claude-opus-4-8"
     fast_model: str = "claude-haiku-4-5"
-    effort: str = "high"          # low | medium | high | xhigh | max (deep-pass thinking depth)
+    effort: str = "high"          # low | medium | high | xhigh | max (deep-pass thinking depth; Anthropic only)
     live: bool = False
 
 

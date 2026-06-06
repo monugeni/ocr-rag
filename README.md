@@ -25,6 +25,21 @@ A pipeline for ingesting large engineering PDFs (tenders, specifications, etc.) 
 - [marker-pdf](https://pypi.org/project/marker-pdf/) (`pip install marker-pdf`)
 - An `ANTHROPIC_API_KEY` environment variable (for LLM metadata extraction and MCP-backed web chat)
 
+## LLM provider (Anthropic / Grok A/B)
+
+Both the folder chat and the document checker default to Anthropic but can run on
+**Grok (xAI)** instead, for cost/quality A/B comparison. Grok is OpenAI-compatible
+and reuses the same MCP tools, source tracking and finding schema.
+
+| Surface | Switch | Default model | Grok model env |
+|---------|--------|---------------|----------------|
+| Folder chat | `OCR_RAG_CHAT_PROVIDER=anthropic\|grok` | `claude-sonnet-4-6` (`ANTHROPIC_CHAT_MODEL`) | `GROK_CHAT_MODEL` (`grok-4.3`) |
+| Doc checker | `CHECKER_PROVIDER=anthropic\|grok`, or per-run `metadata.provider` | `claude-opus-4-8` (`CHECKER_MODEL`) | `CHECKER_GROK_MODEL` (`grok-4.3`) |
+
+Grok needs `XAI_API_KEY` (or `GROK_API_KEY`); `XAI_BASE_URL` defaults to
+`https://api.x.ai/v1`. The checker reads `metadata.provider` per run first, so you
+can launch one run on Anthropic and one on Grok against the same documents.
+
 ## Setup
 
 ```bash

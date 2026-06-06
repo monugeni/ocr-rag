@@ -77,6 +77,16 @@ def _acc_usage(acc: dict[str, int], usage: Any) -> None:
     acc["cache_write"] = acc.get("cache_write", 0) + (getattr(usage, "cache_creation_input_tokens", 0) or 0)
 
 
+def _acc_usage_oai(acc: dict[str, int], usage: Any) -> None:
+    """Accumulate one xAI/OpenAI ``usage`` dict into the running per-turn total."""
+    if not usage:
+        return
+    import grok_client
+
+    for key, value in grok_client.normalize_usage(usage).items():
+        acc[key] = acc.get(key, 0) + value
+
+
 @dataclass
 class SourceTracker:
     next_id: int = 1
@@ -133,6 +143,8 @@ def run_folder_chat(
     history: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]] = None,
     mcp_server: Any = None,
+    provider: str = "anthropic",
+    base_url: Optional[str] = None,
 ) -> ChatRunResult:
     return asyncio.run(
         _run_folder_chat(
@@ -144,7 +156,40 @@ def run_folder_chat(
             history=history,
             attachment=attachment,
             mcp_server=mcp_server,
+            provider=provider,
+            base_url=base_url,
         )
+    )
+
+
+async def _dispatch_chat(
+    provider: str,
+    *,
+    session: Any,
+    api_key: str,
+    model: str,
+    base_url: Optional[str],
+    project: str,
+    question: str,
+    history: list[dict[str, Any]],
+    attachment: Optional[dict[str, Any]],
+    tools: list[dict[str, Any]],
+    tracker: SourceTracker,
+    usage: dict[str, int],
+) -> str:
+    """Run one chat turn against the selected provider. The MCP session, tool
+    list, source tracking and result formatting are provider-agnostic; only the
+    model call and its tool-block dialect differ."""
+    if (provider or "anthropic").lower() == "grok":
+        return await _chat_with_tools_grok(
+            session=session, api_key=api_key, model=model, base_url=base_url,
+            project=project, question=question, history=history,
+            attachment=attachment, tools=tools, tracker=tracker, usage=usage,
+        )
+    return await _chat_with_tools(
+        session=session, api_key=api_key, model=model, project=project,
+        question=question, history=history, attachment=attachment,
+        tools=tools, tracker=tracker, usage=usage,
     )
 
 
@@ -158,16 +203,20 @@ async def _run_folder_chat(
     history: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]],
     mcp_server: Any = None,
+    provider: str = "anthropic",
+    base_url: Optional[str] = None,
 ) -> ChatRunResult:
     tracker = SourceTracker()
     usage: dict[str, int] = {}
 
     if mcp_server is not None:
         tools = await _list_allowed_tools(mcp_server)
-        response = await _chat_with_tools(
+        response = await _dispatch_chat(
+            provider,
             session=mcp_server,
             api_key=api_key,
             model=model,
+            base_url=base_url,
             project=project,
             question=question,
             history=history,
@@ -188,10 +237,12 @@ async def _run_folder_chat(
                 async with ClientSession(read_stream, write_stream) as session:
                     await _initialize_session(session)
                     tools = await _list_allowed_tools(session)
-                    response = await _chat_with_tools(
+                    response = await _dispatch_chat(
+                        provider,
                         session=session,
                         api_key=api_key,
                         model=model,
+                        base_url=base_url,
                         project=project,
                         question=question,
                         history=history,
@@ -470,6 +521,189 @@ async def _force_final_answer(
             "produce a stable final review. Please narrow the question or ask about a smaller section."
         )
 
+    return (
+        "I gathered evidence from the folder documents, but I still could not produce a stable final answer. "
+        "Please narrow the question or ask about a smaller section."
+    )
+
+
+async def _chat_with_tools_grok(
+    *,
+    session: Any,
+    api_key: str,
+    model: str,
+    base_url: Optional[str],
+    project: str,
+    question: str,
+    history: list[dict[str, Any]],
+    attachment: Optional[dict[str, Any]],
+    tools: list[dict[str, Any]],
+    tracker: SourceTracker,
+    usage: Optional[dict[str, int]] = None,
+) -> str:
+    """Grok (xAI) equivalent of ``_chat_with_tools`` — same MCP tools, source
+    tracking and stale-loop guards, but the OpenAI tool-calling dialect.
+
+    The single growing ``messages`` list lets xAI's automatic prompt caching
+    reuse the prefix across rounds, mirroring the Anthropic path's cache_control."""
+    import grok_client
+
+    if usage is None:
+        usage = {}
+    system_prompt = _build_system_prompt(project=project, attachment=attachment)
+    messages: list[dict[str, Any]] = [{"role": "system", "content": system_prompt}]
+    messages.extend(_build_messages(question=question, history=history, attachment=attachment))
+    oai_tools = grok_client.to_openai_tools(tools)
+
+    seen_tool_calls: dict[tuple[str, str], int] = {}
+    stale_rounds = 0
+    previous_round_signature: Optional[tuple[tuple[str, str], ...]] = None
+
+    for _ in range(MAX_TOOL_ROUNDS):
+        resp = await grok_client.acreate(
+            api_key=api_key,
+            base_url=base_url,
+            payload={
+                "model": model,
+                "max_tokens": 12000,
+                "messages": messages,
+                "tools": oai_tools,
+                "tool_choice": "auto",
+            },
+        )
+        _acc_usage_oai(usage, resp.get("usage"))
+        choice = (resp.get("choices") or [{}])[0]
+        msg = choice.get("message") or {}
+        tool_calls = msg.get("tool_calls") or []
+
+        assistant_msg: dict[str, Any] = {"role": "assistant", "content": msg.get("content") or ""}
+        if tool_calls:
+            assistant_msg["tool_calls"] = tool_calls
+        messages.append(assistant_msg)
+
+        if not tool_calls:
+            answer = (msg.get("content") or "").strip()
+            if not answer:
+                raise RuntimeError("LLM returned an empty response.")
+            return answer
+
+        # Every tool_call must get a matching tool message BEFORE any other
+        # message type, so collect tool results first and append image follow-ups
+        # (vision) only after all tool messages are in place.
+        tool_messages: list[dict[str, Any]] = []
+        image_messages: list[dict[str, Any]] = []
+        round_signature: list[tuple[str, str]] = []
+        repeated_loop = True
+        tool_errors = 0
+        sources_before = len(tracker.order)
+
+        for block in tool_calls:
+            fn = block.get("function") or {}
+            name = fn.get("name") or ""
+            try:
+                raw_args = json.loads(fn.get("arguments") or "{}")
+            except Exception:  # noqa: BLE001
+                raw_args = {}
+            arguments = _normalize_tool_arguments(name, raw_args, project)
+            call_key = (
+                name,
+                json.dumps(arguments, sort_keys=True, ensure_ascii=True, default=str),
+            )
+            round_signature.append(call_key)
+            seen_tool_calls[call_key] = seen_tool_calls.get(call_key, 0) + 1
+            if seen_tool_calls[call_key] <= MAX_REPEATED_TOOL_CALLS:
+                repeated_loop = False
+
+            try:
+                raw_result = await session.call_tool(name, arguments)
+                payload = _coerce_tool_payload(raw_result)
+                is_error = bool(getattr(raw_result, "isError", False))
+            except Exception as exc:  # noqa: BLE001
+                payload = {"error": str(exc)}
+                is_error = True
+            if is_error:
+                tool_errors += 1
+
+            content = _format_tool_result(
+                tool_name=name, payload=payload, tracker=tracker, project=project,
+            )
+            text, image_url = grok_client.split_tool_content(content)
+            tool_messages.append({
+                "role": "tool",
+                "tool_call_id": block.get("id"),
+                "content": text or "(no result)",
+            })
+            if image_url:
+                image_messages.append({
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": f"Image returned by {name}:"},
+                        {"type": "image_url", "image_url": {"url": image_url}},
+                    ],
+                })
+
+        messages.extend(tool_messages)
+        messages.extend(image_messages)
+
+        round_signature_key = tuple(round_signature)
+        new_sources = len(tracker.order) - sources_before
+        no_progress = new_sources <= 0 and (
+            repeated_loop
+            or tool_errors == len(tool_calls)
+            or round_signature_key == previous_round_signature
+        )
+        stale_rounds = stale_rounds + 1 if no_progress else 0
+        previous_round_signature = round_signature_key
+
+        if repeated_loop or stale_rounds >= MAX_STALE_TOOL_ROUNDS:
+            break
+
+    return await _force_final_answer_grok(
+        api_key=api_key,
+        base_url=base_url,
+        model=model,
+        messages=messages,
+        attachment=attachment,
+        usage=usage,
+    )
+
+
+async def _force_final_answer_grok(
+    *,
+    api_key: str,
+    base_url: Optional[str],
+    model: str,
+    messages: list[dict[str, Any]],
+    attachment: Optional[dict[str, Any]],
+    usage: Optional[dict[str, int]] = None,
+) -> str:
+    import grok_client
+
+    final_messages = list(messages)
+    final_messages.append({
+        "role": "user",
+        "content": (
+            "Stop using tools and answer now using only the evidence already gathered in the conversation. "
+            "If the gathered evidence is insufficient, say that clearly instead of speculating."
+        ),
+    })
+    resp = await grok_client.acreate(
+        api_key=api_key,
+        base_url=base_url,
+        payload={"model": model, "max_tokens": 12000, "messages": final_messages},
+    )
+    if usage is not None:
+        _acc_usage_oai(usage, resp.get("usage"))
+
+    answer = grok_client.message_text(resp)
+    if answer:
+        return answer
+
+    if attachment:
+        return (
+            "I gathered some evidence from the folder and the uploaded document, but I still could not "
+            "produce a stable final review. Please narrow the question or ask about a smaller section."
+        )
     return (
         "I gathered evidence from the folder documents, but I still could not produce a stable final answer. "
         "Please narrow the question or ask about a smaller section."

@@ -17,6 +17,7 @@ submission re-lookup tool are deferred — see the design spec. Relies on Opus's
 from __future__ import annotations
 
 import asyncio
+import json
 from typing import Any
 
 import anthropic
@@ -201,4 +202,150 @@ def agentic_sweep(ctx: CheckContext, llm, submitted, uploaded_ref_text: str = ""
     pages = read_pages(ctx.docs_db_path, submitted.doc_id)
     if not pages:
         return []
+    if (ctx.provider or "anthropic").lower() == "grok":
+        return asyncio.run(_sweep_async_grok(ctx, llm, submitted, pages, uploaded_ref_text))
     return asyncio.run(_sweep_async(ctx, llm, submitted, pages, uploaded_ref_text))
+
+
+# ---------------------------------------------------------------------------
+# Grok (xAI) sweep — OpenAI-compatible mirror of the Anthropic path above.
+# Same single growing conversation (xAI auto-caches the prefix), same MCP search
+# tools and report_findings interception; only the tool-call dialect differs.
+# ---------------------------------------------------------------------------
+def _report_findings_function(findings_schema: dict) -> dict:
+    return {
+        "type": "function",
+        "function": {
+            "name": "report_findings",
+            "description": (
+                "Report every finding for the CURRENT page. Call exactly once per page after you "
+                "have checked it against the tender — with an empty list if the page has no issues."
+            ),
+            "parameters": findings_schema,
+        },
+    }
+
+
+async def _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker):
+    """Grok page-by-page sweep in one cumulative conversation. ``session`` is the
+    MCP client session for reference search (or None for an uploaded-refs-only run)."""
+    import grok_client
+
+    from .pipeline import _finding_from_dict
+
+    messages: list[dict] = [{"role": "system", "content": system}]
+    total = len(pages)
+    for idx, page in enumerate(pages, start=1):
+        page_num = page["page_num"]
+        ctx.emit({"stage": f"Checking page {page_num} ({idx}/{total})…", "type": "phase"})
+        messages.append({
+            "role": "user",
+            "content": _page_message(page_num, total, submitted.title, page.get("content") or ""),
+        })
+        before = len(findings)
+        reported = False
+        for _ in range(MAX_ROUNDS_PER_PAGE):
+            resp = await grok_client.acreate(
+                api_key=ctx.api_key,
+                base_url=ctx.base_url,
+                payload={
+                    "model": ctx.model,
+                    "max_tokens": MAX_TOKENS,
+                    "messages": messages,
+                    "tools": tools,
+                    "tool_choice": "auto",
+                },
+            )
+            llm._record_usage(resp.get("usage"), ctx.model)  # feed spend + trace usage
+            choice = (resp.get("choices") or [{}])[0]
+            msg = choice.get("message") or {}
+            reasoning = msg.get("reasoning_content")
+            if reasoning:
+                ctx.emit({"type": "thinking", "delta": f"[page {page_num}] {reasoning}\n"})
+
+            tool_calls = msg.get("tool_calls") or []
+            assistant_msg: dict = {"role": "assistant", "content": msg.get("content") or ""}
+            if tool_calls:
+                assistant_msg["tool_calls"] = tool_calls
+            messages.append(assistant_msg)
+
+            if not tool_calls:
+                break  # model answered without a tool call → page done
+
+            tool_messages: list[dict] = []
+            image_messages: list[dict] = []
+            for tc in tool_calls:
+                fn = tc.get("function") or {}
+                name = fn.get("name") or ""
+                try:
+                    args = json.loads(fn.get("arguments") or "{}")
+                except Exception:  # noqa: BLE001
+                    args = {}
+                if name == "report_findings":
+                    for f in (args.get("findings") or []):
+                        findings.append(_finding_from_dict(f, submitted, "compliance"))
+                    reported = True
+                    tool_messages.append({
+                        "role": "tool", "tool_call_id": tc.get("id"),
+                        "content": "Recorded. Continue to the next page.",
+                    })
+                elif session is not None:
+                    arguments = chat._normalize_tool_arguments(name, args, ref_scope)
+                    try:
+                        raw = await session.call_tool(name, arguments)
+                        payload = chat._coerce_tool_payload(raw)
+                    except Exception as exc:  # noqa: BLE001
+                        payload = {"error": str(exc)}
+                    content = chat._format_tool_result(
+                        tool_name=name, payload=payload, tracker=tracker, project=ref_scope,
+                    )
+                    text, image_url = grok_client.split_tool_content(content)
+                    tool_messages.append({
+                        "role": "tool", "tool_call_id": tc.get("id"),
+                        "content": text or "(no result)",
+                    })
+                    if image_url:
+                        image_messages.append({
+                            "role": "user",
+                            "content": [
+                                {"type": "text", "text": f"Image returned by {name}:"},
+                                {"type": "image_url", "image_url": {"url": image_url}},
+                            ],
+                        })
+                else:
+                    tool_messages.append({
+                        "role": "tool", "tool_call_id": tc.get("id"),
+                        "content": "Search is unavailable for this run; rely on the provided references.",
+                    })
+            messages.extend(tool_messages)
+            messages.extend(image_messages)
+            if reported:
+                break
+        ctx.emit({"stage": f"Page {page_num}: {len(findings) - before} finding(s)", "type": "phase"})
+
+
+async def _sweep_async_grok(ctx: CheckContext, llm, submitted, pages, uploaded_ref_text: str) -> list[Finding]:
+    import grok_client
+
+    from .pipeline import _dedupe_findings, _FINDINGS_TOOL
+
+    ref_projects = ctx.reference_projects or ([ctx.reference_project] if ctx.reference_project else [])
+    ref_scope = ref_projects[0] if ref_projects else ""
+    system = _system_prompt(ctx, uploaded_ref_text)
+    findings: list[Finding] = []
+    tracker = chat.SourceTracker()
+    report_tool = _report_findings_function(_FINDINGS_TOOL)
+    have_mcp = bool(ctx.company_mcp_url and ref_projects)
+
+    if have_mcp:
+        async with streamablehttp_client(ctx.company_mcp_url, timeout=15, sse_read_timeout=120) as (r, w, _):
+            async with ClientSession(r, w) as session:
+                await session.initialize()
+                tools = grok_client.to_openai_tools(await chat._list_allowed_tools(session)) + [report_tool]
+                await _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker)
+    else:
+        # No reference KB to search — check each page against the uploaded
+        # reference text carried in the system prompt.
+        await _page_loop_grok(ctx, llm, submitted, pages, system, [report_tool], None, "", findings, tracker)
+
+    return _dedupe_findings(findings)

@@ -61,6 +61,15 @@ CHECKER_MODEL = os.environ.get("CHECKER_MODEL", "claude-opus-4-8")
 CHECKER_FAST_MODEL = os.environ.get("CHECKER_FAST_MODEL", "claude-haiku-4-5")
 CHECKER_LIVE_AGENT = os.environ.get("CHECKER_LIVE_AGENT", "1").strip() in ("1", "true", "yes")
 
+# LLM provider selection (for A/B against the Anthropic path). "anthropic"
+# (default) or "grok" (xAI). Per-run override via run metadata {"provider": ...}.
+CHECKER_PROVIDER = os.environ.get("CHECKER_PROVIDER", "anthropic").strip().lower()
+# xAI (Grok) credentials/models — shared key name with the chat path.
+XAI_API_KEY = os.environ.get("XAI_API_KEY", "") or os.environ.get("GROK_API_KEY", "")
+XAI_BASE_URL = os.environ.get("XAI_BASE_URL", "https://api.x.ai/v1")
+CHECKER_GROK_MODEL = os.environ.get("CHECKER_GROK_MODEL", "grok-4.3")
+CHECKER_GROK_FAST_MODEL = os.environ.get("CHECKER_GROK_FAST_MODEL", "grok-4.3")
+
 
 def ensure_dirs() -> None:
     for d in (DATA_DIR, UPLOADS_DIR, ANNOTATED_DIR, EXPORTS_DIR):

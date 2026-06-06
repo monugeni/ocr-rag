@@ -1,4 +1,7 @@
 anthropic>=0.42.0
+# Direct httpx use for the Grok (xAI) provider path (chat + docchecker). Already
+# a transitive dependency of anthropic; pinned explicitly since we import it.
+httpx>=0.27.0
 mcp[cli]>=1.20.0
 pdfplumber>=0.10.0
 python-dotenv>=1.0.0

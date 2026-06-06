@@ -1049,7 +1049,10 @@ CHAT_TOOL_CATALOG = [
 def _invoke_chat_model(system_prompt: str, messages: list[dict], max_tokens: int = 1600) -> str:
     api_key = _chat_api_key()
     if not api_key:
-        raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
+        raise HTTPException(503, f"{_chat_key_hint()} is not configured on the server.")
+
+    if _chat_provider() == "grok":
+        return _invoke_grok_chat_model(api_key, system_prompt, messages, max_tokens)
 
     req = urllib.request.Request(
         "https://api.anthropic.com/v1/messages",
@@ -1081,6 +1084,29 @@ def _invoke_chat_model(system_prompt: str, messages: list[dict], max_tokens: int
         for block in data.get("content", [])
         if block.get("type") == "text"
     ).strip()
+    if not text:
+        raise HTTPException(502, "LLM returned an empty response.")
+    return text
+
+
+def _invoke_grok_chat_model(
+    api_key: str, system_prompt: str, messages: list[dict], max_tokens: int
+) -> str:
+    """Grok (xAI) counterpart of the Anthropic ``_invoke_chat_model`` path, for
+    the secondary chat helpers (folder fallback answer, suggestions, review)."""
+    import grok_client
+
+    oai_messages = [{"role": "system", "content": system_prompt}, *messages]
+    try:
+        resp = grok_client.create(
+            api_key=api_key,
+            base_url=_chat_base_url(),
+            payload={"model": _chat_model_name(), "max_tokens": max_tokens, "messages": oai_messages},
+        )
+    except Exception as exc:  # noqa: BLE001
+        raise HTTPException(502, f"LLM request failed: {exc}") from exc
+
+    text = grok_client.message_text(resp)
     if not text:
         raise HTTPException(502, "LLM returned an empty response.")
     return text
@@ -1562,12 +1588,33 @@ def _retrieve_folder_context(
     }
 
 
+def _chat_provider() -> str:
+    """Which LLM provider drives the folder chat. ``anthropic`` (default) or
+    ``grok`` (xAI), set via OCR_RAG_CHAT_PROVIDER for A/B comparison."""
+    provider = (os.environ.get("OCR_RAG_CHAT_PROVIDER", "anthropic") or "anthropic").strip().lower()
+    return provider if provider in ("anthropic", "grok") else "anthropic"
+
+
 def _chat_model_name() -> str:
-    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-opus-4-8")
+    if _chat_provider() == "grok":
+        return os.environ.get("GROK_CHAT_MODEL", "grok-4.3")
+    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6")
 
 
 def _chat_api_key() -> Optional[str]:
+    if _chat_provider() == "grok":
+        return os.environ.get("XAI_API_KEY") or os.environ.get("GROK_API_KEY")
     return os.environ.get("ANTHROPIC_API_KEY")
+
+
+def _chat_base_url() -> Optional[str]:
+    if _chat_provider() == "grok":
+        return os.environ.get("XAI_BASE_URL") or "https://api.x.ai/v1"
+    return None
+
+
+def _chat_key_hint() -> str:
+    return "XAI_API_KEY" if _chat_provider() == "grok" else "ANTHROPIC_API_KEY"
 
 
 def _generate_mcp_chat_answer(
@@ -1578,7 +1625,7 @@ def _generate_mcp_chat_answer(
 ):
     api_key = _chat_api_key()
     if not api_key:
-        raise HTTPException(503, "ANTHROPIC_API_KEY is not configured on the server.")
+        raise HTTPException(503, f"{_chat_key_hint()} is not configured on the server.")
 
     try:
         import mcp_server
@@ -1595,6 +1642,8 @@ def _generate_mcp_chat_answer(
             history=history,
             attachment=attachment,
             mcp_server=mcp_server.mcp,
+            provider=_chat_provider(),
+            base_url=_chat_base_url(),
         )
     except HTTPException:
         raise

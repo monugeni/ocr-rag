@@ -88,6 +88,22 @@ def build_context(run_id: str) -> CheckContext:
     if effort not in ("low", "medium", "high", "xhigh", "max"):
         effort = "high"
 
+    # Provider selection (anthropic | grok). Per-run metadata wins over the
+    # server default so two runs can be compared head-to-head.
+    provider = (run_meta.get("provider") or config.CHECKER_PROVIDER or "anthropic").strip().lower()
+    if provider not in ("anthropic", "grok"):
+        provider = "anthropic"
+    if provider == "grok":
+        api_key = config.XAI_API_KEY or None
+        model = config.CHECKER_GROK_MODEL
+        fast_model = config.CHECKER_GROK_FAST_MODEL
+        base_url = config.XAI_BASE_URL
+    else:
+        api_key = config.ANTHROPIC_API_KEY or None
+        model = config.CHECKER_MODEL
+        fast_model = config.CHECKER_FAST_MODEL
+        base_url = None
+
     template_instructions = None
     if run.get("template_id"):
         tmpl = store.get_template(run["template_id"])
@@ -115,9 +131,11 @@ def build_context(run_id: str) -> CheckContext:
         mcp_servers={},
         emit=_emit(run_id),
         docs_db_path=config.DOCS_DB,
-        api_key=config.ANTHROPIC_API_KEY or None,
-        model=config.CHECKER_MODEL,
-        fast_model=config.CHECKER_FAST_MODEL,
+        api_key=api_key,
+        provider=provider,
+        base_url=base_url,
+        model=model,
+        fast_model=fast_model,
         effort=effort,
         live=config.CHECKER_LIVE_AGENT,
     )
