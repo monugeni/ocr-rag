@@ -432,19 +432,24 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
 
     ctx.emit = _capturing_emit
 
-    sub_truncated = "[... truncated at" in sub_text
-    if sub_truncated:
-        result.warnings.append(
-            "Submitted document was truncated for analysis (very long document) — later pages may be under-checked."
-        )
+    # Uploaded reference docs (not in an MCP folder) ride along in the agentic
+    # system prompt (cached); KB folders are searched live by the model.
+    uploaded_ref_text = ""
+    if ctx.references:
+        parts = [
+            f"=== {ref.title} (doc {ref.doc_id}) ===\n{document_text(ctx.docs_db_path, ref.doc_id)}"
+            for ref in ctx.references
+        ]
+        uploaded_ref_text = "\n\n".join(parts)[:120_000]
 
-    ctx.emit({"stage": "Comparing against reference", "type": "phase"})
-    candidates = _compare(ctx, llm, submitted, sub_text)
-    compare_truncated = getattr(llm, "any_truncated", False)
-    if compare_truncated:
-        result.warnings.append(
-            "A comparison pass hit its output budget — some findings may be missing. Re-run or split the document."
-        )
+    ctx.emit({"stage": "Checking the submission page by page against the tender", "type": "phase"})
+    from .agentic import agentic_sweep
+    candidates = agentic_sweep(ctx, llm, submitted, uploaded_ref_text)
+    sub_truncated = False  # the agentic sweep reads every page (no 120k cap)
+    compare_truncated = False
+    has_reference = bool((ctx.company_mcp_url and (ctx.reference_projects or ctx.reference_project)) or ctx.references)
+    if not has_reference:
+        result.warnings.append("No reference (folder or uploaded files) was provided to check against.")
     ctx.emit({"stage": f"{len(candidates)} candidate finding(s)", "type": "phase"})
 
     ctx.emit({"stage": "Self-verifying findings", "type": "phase"})
@@ -483,14 +488,13 @@ def run_real_check(ctx: CheckContext, llm: LLM) -> CheckResult:
         "raw_findings": [asdict(f) for f in candidates],
         "verify": verdicts,
         "limits": {
+            "mode": "agentic",
             "submitted_chars": len(sub_text),
             "submitted_truncated": sub_truncated,
             "candidates": len(candidates),
             "confirmed": len(confirmed),
             "possible": sum(1 for v in verdicts if v.get("verdict") == "possible"),
             "dropped": sum(1 for v in verdicts if v.get("verdict") == "dropped"),
-            "compare_max_output_tokens": 24000,
-            "compare_output_truncated": compare_truncated,
         },
         "warnings": list(result.warnings),
     }
