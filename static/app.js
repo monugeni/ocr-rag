@@ -1495,7 +1495,7 @@ function renderTrace(t) {
   }
   const lim = t.limits || {};
   const limRow = `<div class="trace-limits">`
-    + `<span><b>${lim.candidates ?? '?'}</b> raised → <b>${lim.confirmed ?? '?'}</b> confirmed, <b>${lim.dropped ?? 0}</b> pruned</span>`
+    + `<span><b>${lim.candidates ?? '?'}</b> raised → <b>${lim.confirmed ?? '?'}</b> kept (<b>${lim.possible ?? 0}</b> possible), <b>${lim.dropped ?? 0}</b> pruned</span>`
     + `<span>submitted: <b>${(lim.submitted_chars ?? 0).toLocaleString()}</b> chars${lim.submitted_truncated ? ' <span class="trace-warn">(TRUNCATED)</span>' : ''}</span>`
     + (lim.compare_output_truncated ? '<span class="trace-warn">output budget reached — findings may be missing</span>' : '')
     + (t.model ? `<span>model: ${escapeHtml(t.model)}${t.effort ? ' · effort ' + escapeHtml(t.effort) : ''}</span>` : '')
@@ -1514,7 +1514,8 @@ function checkFindingCard(f) {
   // Compact index only — the full comment text lives on the annotated PDF
   // (shown in the viewer), so it is not duplicated here.
   const col = SEV_COLORS[f.severity] || '#888';
-  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span><span class="muted small">p${f.page_num ?? '?'}</span></div><div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
+  const possible = f.confidence === 'low' ? '<span class="tag wait">possible</span>' : '';
+  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span>${possible}<span class="muted small">p${f.page_num ?? '?'}</span></div><div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
 }
 
 function checkCommentCard(c) {

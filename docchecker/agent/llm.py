@@ -85,6 +85,7 @@ class AnthropicLLM:
         self._default_model = default_model
         self.last_usage: dict = {}
         self.last_stop_reason: str | None = None  # to detect output-budget (max_tokens) truncation
+        self.any_truncated: bool = False           # set if ANY call hit max_tokens (parallel-safe)
         # Per-model cumulative token usage for this run (verify calls run in
         # parallel threads, so guard with a lock).
         self._usage_totals: dict[str, dict[str, int]] = {}
@@ -153,6 +154,8 @@ class AnthropicLLM:
         )
         self._record_usage(resp.usage, mdl)
         self.last_stop_reason = getattr(resp, "stop_reason", None)
+        if self.last_stop_reason == "max_tokens":
+            self.any_truncated = True
         for block in resp.content:
             if getattr(block, "type", None) == "tool_use" and block.name == tool_name:
                 return dict(block.input)
@@ -176,6 +179,8 @@ class AnthropicLLM:
             msg = stream.get_final_message()
         self._record_usage(msg.usage, model)
         self.last_stop_reason = getattr(msg, "stop_reason", None)
+        if self.last_stop_reason == "max_tokens":
+            self.any_truncated = True
         txt = next((b.text for b in msg.content if getattr(b, "type", None) == "text"), None)
         return _loads_loose(txt) if txt else {}
 

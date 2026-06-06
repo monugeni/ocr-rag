@@ -20,7 +20,9 @@ def _content(f: Finding) -> str:
     ref_bits = [b for b in (ref.get("doc_title"), ref.get("heading")) if b]
     suffix = f"  (ref: {' — '.join(ref_bits)})" if ref_bits else ""
     body = (f.detail or "").strip() or (f.title or "").strip()
-    return f"{body}{suffix}"
+    # Kept-but-uncertain findings are flagged so the reviewer can confirm them.
+    prefix = "(Possible) " if getattr(f, "possible", False) else ""
+    return f"{prefix}{body}{suffix}"
 
 
 def annotate_finding(pdf_path: str, finding: Finding) -> tuple[int | None, str]:

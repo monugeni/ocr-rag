@@ -77,6 +77,7 @@ class Finding:
     bbox: Optional[list[float]] = None
     citation: dict[str, Any] = field(default_factory=dict)
     confidence: str = "medium"       # high|medium|low
+    possible: bool = False           # kept-but-uncertain (recall-first verify)
     annotation_xref: Optional[int] = None
 
 
