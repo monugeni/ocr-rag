@@ -73,6 +73,32 @@ def register(app) -> None:
 
     @app.get("/healthz")
     def _healthz():
-        return {"status": "ok", "checker": True, "auth_mode": config.AUTH_MODE}
+        import os
+
+        ck_prov = (config.CHECKER_PROVIDER or "anthropic").strip().lower()
+        if ck_prov == "grok":
+            ck_model, ck_fast = config.CHECKER_GROK_MODEL, config.CHECKER_GROK_FAST_MODEL
+            ck_key = bool(config.XAI_API_KEY)
+        else:
+            ck_model, ck_fast = config.CHECKER_MODEL, config.CHECKER_FAST_MODEL
+            ck_key = bool(config.ANTHROPIC_API_KEY)
+
+        chat_prov = (os.environ.get("OCR_RAG_CHAT_PROVIDER", "anthropic") or "anthropic").strip().lower()
+        if chat_prov == "grok":
+            chat_model = os.environ.get("GROK_CHAT_MODEL", "grok-4.3")
+            chat_key = bool(os.environ.get("XAI_API_KEY") or os.environ.get("GROK_API_KEY"))
+        else:
+            chat_model = os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6")
+            chat_key = bool(config.ANTHROPIC_API_KEY)
+
+        return {
+            "status": "ok",
+            "auth_mode": config.AUTH_MODE,
+            "checker": {
+                "enabled": True, "provider": ck_prov,
+                "model": ck_model, "fast_model": ck_fast, "key_present": ck_key,
+            },
+            "chat": {"provider": chat_prov, "model": chat_model, "key_present": chat_key},
+        }
 
     log.info("docchecker registered (auth=%s, model=%s)", config.AUTH_MODE, config.CHECKER_MODEL)
