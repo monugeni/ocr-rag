@@ -83,12 +83,12 @@ def register(app) -> None:
             ck_model, ck_fast = config.CHECKER_MODEL, config.CHECKER_FAST_MODEL
             ck_key = bool(config.ANTHROPIC_API_KEY)
 
-        chat_prov = (os.environ.get("OCR_RAG_CHAT_PROVIDER", "anthropic") or "anthropic").strip().lower()
+        chat_prov = config.env_select("OCR_RAG_CHAT_PROVIDER", "anthropic").lower() or "anthropic"
         if chat_prov == "grok":
-            chat_model = os.environ.get("GROK_CHAT_MODEL", "grok-4.3")
+            chat_model = config.env_select("GROK_CHAT_MODEL", "grok-4.3")
             chat_key = bool(os.environ.get("XAI_API_KEY") or os.environ.get("GROK_API_KEY"))
         else:
-            chat_model = os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6")
+            chat_model = config.env_select("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6")
             chat_key = bool(config.ANTHROPIC_API_KEY)
 
         return {

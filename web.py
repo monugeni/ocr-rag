@@ -1593,17 +1593,25 @@ def _retrieve_folder_context(
     }
 
 
+def _env_select(name: str, default: str = "") -> str:
+    """Read a selector env var (provider / model / URL) tolerantly: strip any
+    inline ``#`` comment + whitespace. systemd EnvironmentFile keeps the literal
+    rest of the line, so ``OCR_RAG_CHAT_PROVIDER=grok  # comment`` would
+    otherwise never match ``"grok"`` and silently fall back to Anthropic."""
+    return (os.environ.get(name, default) or "").split("#", 1)[0].strip()
+
+
 def _chat_provider() -> str:
     """Which LLM provider drives the folder chat. ``anthropic`` (default) or
     ``grok`` (xAI), set via OCR_RAG_CHAT_PROVIDER for A/B comparison."""
-    provider = (os.environ.get("OCR_RAG_CHAT_PROVIDER", "anthropic") or "anthropic").strip().lower()
+    provider = _env_select("OCR_RAG_CHAT_PROVIDER", "anthropic").lower() or "anthropic"
     return provider if provider in ("anthropic", "grok") else "anthropic"
 
 
 def _chat_model_name() -> str:
     if _chat_provider() == "grok":
-        return os.environ.get("GROK_CHAT_MODEL", "grok-4.3")
-    return os.environ.get("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6")
+        return _env_select("GROK_CHAT_MODEL", "grok-4.3") or "grok-4.3"
+    return _env_select("ANTHROPIC_CHAT_MODEL", "claude-sonnet-4-6") or "claude-sonnet-4-6"
 
 
 def _chat_api_key() -> Optional[str]:
@@ -1614,7 +1622,7 @@ def _chat_api_key() -> Optional[str]:
 
 def _chat_base_url() -> Optional[str]:
     if _chat_provider() == "grok":
-        return os.environ.get("XAI_BASE_URL") or "https://api.x.ai/v1"
+        return _env_select("XAI_BASE_URL", "https://api.x.ai/v1") or "https://api.x.ai/v1"
     return None
 
 

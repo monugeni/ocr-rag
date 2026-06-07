@@ -56,19 +56,31 @@ OIDC_METADATA_URL = os.environ.get("OIDC_METADATA_URL", "").strip() or (
 OIDC_SCOPE = os.environ.get("OIDC_SCOPE", "openid email profile")
 
 # Anthropic / models
+def env_select(name: str, default: str = "") -> str:
+    """Read a *selector* env var (provider / model / base URL) tolerantly.
+
+    systemd ``EnvironmentFile=`` and ``Environment=`` keep the literal rest of
+    the line, so ``CHECKER_PROVIDER=grok  # comment`` yields the value
+    ``grok  # comment`` — which silently fails every ``== "grok"`` check and
+    falls back to Anthropic. Strip any inline ``#`` comment and surrounding
+    whitespace. Safe here because none of these values legitimately contain
+    ``#``. NOT used for secrets (an API key may contain ``#``)."""
+    return (os.environ.get(name, default) or "").split("#", 1)[0].strip()
+
+
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
-CHECKER_MODEL = os.environ.get("CHECKER_MODEL", "claude-opus-4-8")
-CHECKER_FAST_MODEL = os.environ.get("CHECKER_FAST_MODEL", "claude-haiku-4-5")
-CHECKER_LIVE_AGENT = os.environ.get("CHECKER_LIVE_AGENT", "1").strip() in ("1", "true", "yes")
+CHECKER_MODEL = env_select("CHECKER_MODEL", "claude-opus-4-8")
+CHECKER_FAST_MODEL = env_select("CHECKER_FAST_MODEL", "claude-haiku-4-5")
+CHECKER_LIVE_AGENT = env_select("CHECKER_LIVE_AGENT", "1").lower() in ("1", "true", "yes")
 
 # LLM provider selection (for A/B against the Anthropic path). "anthropic"
 # (default) or "grok" (xAI). Per-run override via run metadata {"provider": ...}.
-CHECKER_PROVIDER = os.environ.get("CHECKER_PROVIDER", "anthropic").strip().lower()
+CHECKER_PROVIDER = env_select("CHECKER_PROVIDER", "anthropic").lower()
 # xAI (Grok) credentials/models — shared key name with the chat path.
 XAI_API_KEY = os.environ.get("XAI_API_KEY", "") or os.environ.get("GROK_API_KEY", "")
-XAI_BASE_URL = os.environ.get("XAI_BASE_URL", "https://api.x.ai/v1")
-CHECKER_GROK_MODEL = os.environ.get("CHECKER_GROK_MODEL", "grok-4.3")
-CHECKER_GROK_FAST_MODEL = os.environ.get("CHECKER_GROK_FAST_MODEL", "grok-4.3")
+XAI_BASE_URL = env_select("XAI_BASE_URL", "https://api.x.ai/v1")
+CHECKER_GROK_MODEL = env_select("CHECKER_GROK_MODEL", "grok-4.3")
+CHECKER_GROK_FAST_MODEL = env_select("CHECKER_GROK_FAST_MODEL", "grok-4.3")
 
 
 def ensure_dirs() -> None:
