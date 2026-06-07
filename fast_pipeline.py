@@ -25,7 +25,7 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Iterable, Optional
@@ -1069,10 +1069,106 @@ def group_nodes_by_page(nodes: Iterable[TextNode]) -> dict[int, list[TextNode]]:
     return page_map
 
 
+# A superscript/subscript token sitting alone is one of: a raised "degree" sign
+# (poppler decodes the ° glyph as a small raised o/0, often glued to its unit, e.g.
+# "oC"/"0C"), a numeric exponent ("13" in 1×10^13), or an ordinal/footnote mark.
+_DEGREE_SUP_RE = re.compile(r"^[oO0º°˚]\s*([CFcf])?$")
+_NUM_SUP_RE = re.compile(r"^[+\-]?\d+$")
+
+
+def merge_super_subscripts(nodes: list[TextNode]) -> list[TextNode]:
+    """Fold superscript/subscript fragments back into their base token before
+    rows are assembled, so they aren't scattered onto their own line.
+
+    pdftohtml emits a superscript/subscript as a smaller-font node sitting
+    slightly above/below and horizontally adjacent to its base. Left alone, the
+    row grouper drops it on a separate line — turning ``1×10^13 ohm-cm`` into a
+    floating ``13`` over ``1× 10 ohm-cm`` and ``27°C`` into ``27`` + ``oC``.
+    Exponents are rejoined as caret notation (``1× 10^13``); the raised-o degree
+    sign becomes ``°`` (``27°C``); ordinals/marks are appended inline.
+
+    Returns a new node list (inputs are not mutated)."""
+    if len(nodes) < 2:
+        return nodes
+    work = [replace(n) for n in nodes]
+    sizes = [n.font_size for n in work if n.font_size > 0 and n.text.strip()]
+    if not sizes:
+        return nodes
+    body = statistics.median(sizes)
+    if body <= 0:
+        return nodes
+
+    # Pages can mix body sizes (e.g. a 15pt report with a 12pt sub-section), so a
+    # fragment's "smallness" and the base's "largeness" are decided RELATIVE to
+    # each candidate base, not against a single global size. Any node is a
+    # potential base; we only try to attach nodes below the page median.
+    smalls = [n for n in work if n.text.strip() and 0 < n.font_size < body * 0.95]
+    if not smalls:
+        return nodes
+
+    # Phase 1 — match each fragment to a base using PRISTINE geometry, so a base
+    # that already absorbed one fragment can't widen and over-capture the next.
+    matches: list[tuple[TextNode, TextNode, str]] = []  # (base, small, rendered)
+    consumed: set[int] = set()
+    for sm in sorted(smalls, key=lambda n: (n.top, n.left)):
+        sm_cy = sm.top + sm.height / 2.0
+        best, best_key, best_is_super = None, None, True
+        for b in work:
+            if b is sm or not b.text.strip():
+                continue
+            # base must be clearly larger than the fragment
+            if sm.font_size > b.font_size * 0.85:
+                continue
+            # fragment must be raised (superscript) or lowered (subscript) vs the
+            # base — not merely a smaller word sitting on the same baseline.
+            is_super = sm.bottom <= b.bottom - b.height * 0.12
+            is_sub = sm.top >= b.top + b.height * 0.12
+            if not (is_super or is_sub):
+                continue
+            # vertical band overlap and horizontal adjacency (sup/subs sit at the
+            # base's right edge, sometimes slightly overlapping it).
+            if sm_cy < b.top - b.height * 0.6 or sm_cy > b.bottom + b.height * 0.6:
+                continue
+            if b.left > sm.left + 2:
+                continue
+            gap = sm.left - b.right
+            if gap < -max(b.width, 1.0) * 0.6 or gap > 10:
+                continue
+            key = abs(gap)
+            if best_key is None or key < best_key:
+                # direction by centre: fragment above the base's mid-line is a
+                # superscript, below it a subscript.
+                best, best_key = b, key
+                best_is_super = sm_cy <= (b.top + b.bottom) / 2.0
+        if best is None:
+            continue
+        token = sm.text.strip()
+        m = _DEGREE_SUP_RE.match(token)
+        if m:
+            rendered = "°" + (m.group(1).upper() if m.group(1) else "")
+        elif _NUM_SUP_RE.match(token):
+            rendered = ("^" if best_is_super else "_") + token
+        else:
+            rendered = token  # ordinals / footnote marks: inline, no marker
+        matches.append((best, sm, rendered))
+        consumed.add(id(sm))
+
+    if not consumed:
+        return nodes
+    # Phase 2 — apply merges left-to-right per base, then widen the base box.
+    for base, sm, rendered in matches:
+        base.text = base.text.rstrip() + rendered
+        if base.raw_text:
+            base.raw_text = base.raw_text.rstrip() + rendered
+        base.width = max(base.right, sm.right) - base.left
+    return [n for n in work if id(n) not in consumed]
+
+
 def build_logical_lines_for_page(page: PageInfo, nodes: list[TextNode]) -> list[LogicalLine]:
     if not nodes:
         return []
 
+    nodes = merge_super_subscripts(nodes)
     sorted_nodes = sorted(nodes, key=lambda item: (item.top, item.left))
     rows: list[list[TextNode]] = []
     for node in sorted_nodes:
