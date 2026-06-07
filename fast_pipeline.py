@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import statistics
@@ -216,6 +217,7 @@ class LogicalLine:
     repeated_key: str = ""
     is_running: bool = False
     is_table_like: bool = False
+    is_table_block: bool = False   # synthetic block holding a reconstructed pdfplumber table
     role: str = "body"
     local_context: str = ""
     role_reasons: list[str] = field(default_factory=list)
@@ -1232,6 +1234,226 @@ def build_logical_lines(pages: list[PageInfo], nodes: list[TextNode]) -> dict[in
         for page in pages
     }
     return page_lines
+
+
+# ---------------------------------------------------------------------------
+# Bordered-table reconstruction (pdfplumber ruling lines)
+#
+# The fast pipeline linearises tables, which scrambles multi-column test
+# certificates. Bordered tables, though, carry their cell grid as ruling lines in
+# the PDF; pdfplumber recovers it. We reuse merge_super_subscripts() on
+# pdfplumber's own words so cell values keep exponents/degrees (10^13, 27°C), then
+# splice the reconstructed markdown back over the linearised lines — guarded so a
+# coordinate mismatch can never delete text it doesn't cover.
+# ---------------------------------------------------------------------------
+
+_NUM_TOK_RE = re.compile(r"\d+(?:\.\d+)?")
+_TOK_RE = re.compile(r"[0-9]+(?:\.[0-9]+)?|[A-Za-z]+")
+
+
+def _tables_enabled() -> bool:
+    return os.environ.get("OCR_RAG_FAST_PIPELINE_TABLES", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+@dataclass
+class TableBlock:
+    page_num: int
+    top_frac: float            # band as fraction of page height (tool-independent)
+    bottom_frac: float
+    left_frac: float
+    right_frac: float
+    markdown: str
+    tokens: frozenset          # all cell tokens, for the per-line safety gate
+
+
+def _norm_tokens(text: str) -> frozenset:
+    return frozenset(t.lower() for t in _TOK_RE.findall(text or ""))
+
+
+def _plumber_words_as_nodes(page) -> list[TextNode]:
+    try:
+        words = page.extract_words(extra_attrs=["size"], use_text_flow=False)
+    except Exception:  # noqa: BLE001
+        return []
+    nodes = [
+        TextNode(
+            page_num=page.page_number,
+            top=float(w["top"]),
+            left=float(w["x0"]),
+            width=float(w["x1"]) - float(w["x0"]),
+            height=float(w["bottom"]) - float(w["top"]),
+            font_size=float(w.get("size") or 0.0),
+            font_family="",
+            text=w.get("text", ""),
+        )
+        for w in words
+        if w.get("text")
+    ]
+    # Same super/subscript reconstruction as the main path, so cell values keep
+    # 10^13 / 27°C instead of pdfplumber's flattened "1013" / "27oC".
+    return merge_super_subscripts(nodes)
+
+
+def _table_grid_text(table, nodes: list[TextNode]) -> list[list[str]]:
+    """Cell text per row, built from the super/subscript-corrected word nodes.
+
+    Spanned cells (None bbox) are left empty — matching pdfplumber's own
+    extract(). Forward-filling them from the left was wrong for vertically merged
+    cells (it duplicated the wrong value), so the spanned header simply reads as
+    a labelled cell over empty ones, which an LLM associates by position."""
+    grid: list[list[str]] = []
+    for row in table.rows:
+        out: list[str] = []
+        for cell in row.cells:
+            if cell is None:
+                out.append("")
+                continue
+            x0, top, x1, bot = cell
+            inside = [
+                n for n in nodes
+                if x0 - 1.0 <= n.center_x <= x1 + 1.0
+                and top - 1.0 <= (n.top + n.bottom) / 2.0 <= bot + 1.0
+            ]
+            inside.sort(key=lambda n: (round(n.top, 1), n.left))
+            out.append(normalize_space(" ".join(n.text for n in inside)))
+        grid.append(out)
+    return grid
+
+
+def _grid_is_real(grid: list[list[str]]) -> bool:
+    if len(grid) < 2:
+        return False
+    ncols = max((len(r) for r in grid), default=0)
+    if ncols < 2:
+        return False
+    return sum(1 for r in grid for c in r if c.strip()) >= 3
+
+
+def _grid_to_markdown(grid: list[list[str]]) -> str:
+    ncols = max((len(r) for r in grid), default=0)
+    if ncols < 2 or len(grid) < 2:
+        return ""
+    rows = [list(r) + [""] * (ncols - len(r)) for r in grid]
+
+    def fmt(cells: list[str]) -> str:
+        return "| " + " | ".join(c.replace("|", r"\|") for c in cells) + " |"
+
+    out = [fmt(rows[0]), "| " + " | ".join(["---"] * ncols) + " |"]
+    out.extend(fmt(r) for r in rows[1:])
+    return "\n".join(out)
+
+
+def extract_pdfplumber_table_blocks(pdf_path: Path) -> dict[int, list[TableBlock]]:
+    """{page_num: [TableBlock]} for every bordered table pdfplumber can recover.
+    Returns {} (never raises) when pdfplumber is missing or a page fails."""
+    try:
+        import pdfplumber  # noqa: F401
+    except ImportError:
+        return {}
+
+    result: dict[int, list[TableBlock]] = {}
+    try:
+        with pdfplumber.open(str(pdf_path)) as pdf:
+            for page in pdf.pages:
+                ph = float(page.height) or 1.0
+                pw = float(page.width) or 1.0
+                nodes = _plumber_words_as_nodes(page)
+                if not nodes:
+                    continue
+                try:
+                    tables = page.find_tables()
+                except Exception:  # noqa: BLE001
+                    continue
+                blocks: list[TableBlock] = []
+                for table in tables:
+                    grid = _table_grid_text(table, nodes)
+                    if not _grid_is_real(grid):
+                        continue
+                    md = _grid_to_markdown(grid)
+                    if not md:
+                        continue
+                    x0, top, x1, bot = table.bbox
+                    blocks.append(TableBlock(
+                        page_num=page.page_number,
+                        top_frac=top / ph, bottom_frac=bot / ph,
+                        left_frac=x0 / pw, right_frac=x1 / pw,
+                        markdown=md,
+                        tokens=_norm_tokens(" ".join(c for r in grid for c in r)),
+                    ))
+                if blocks:
+                    result[page.page_number] = blocks
+    except Exception:  # noqa: BLE001 — table recon is best-effort, never fatal
+        return result
+    return result
+
+
+def splice_table_blocks(
+    page_lines: dict[int, list[LogicalLine]],
+    pages: list[PageInfo],
+    table_blocks: dict[int, list[TableBlock]],
+    v_tol: float = 0.012,
+    min_line_coverage: float = 0.6,
+) -> int:
+    """Replace the linearised lines inside each table's band with one synthetic
+    markdown block.
+
+    SAFETY: a line in the band is only deleted if most of ITS tokens appear in
+    the reconstructed table. So a section heading or note that happens to sit on
+    the table's top border (not in any cell) is preserved, and a coordinate drift
+    that lands real prose in the band can't silently delete it. Returns the number
+    of tables spliced."""
+    dims = {p.page_num: (p.height or 1.0, p.width or 1.0) for p in pages}
+    spliced = 0
+    for pnum, blocks in table_blocks.items():
+        lines = page_lines.get(pnum)
+        if not lines:
+            continue
+        ph, pw = dims.get(pnum, (1.0, 1.0))
+        consumed: set[int] = set()
+        synth: list[LogicalLine] = []
+        for blk in blocks:
+            band = []
+            for ln in lines:
+                if id(ln) in consumed:
+                    continue
+                cy = (ln.top + (ln.height or 0) / 2.0) / ph
+                cx = (ln.left + (ln.width or 0) / 2.0) / pw
+                if blk.top_frac - v_tol <= cy <= blk.bottom_frac + v_tol and \
+                        blk.left_frac - 0.06 <= cx <= blk.right_frac + 0.06:
+                    band.append(ln)
+            # Keep only the band lines that are actually part of the table.
+            members = []
+            for ln in band:
+                toks = _norm_tokens(ln.text)
+                if not toks:
+                    continue
+                if len(toks & blk.tokens) / len(toks) >= min_line_coverage:
+                    members.append(ln)
+            if not members:
+                continue  # couldn't locate the table's source lines — don't splice
+            top = min(ln.top for ln in members)
+            left = min(ln.left for ln in members)
+            bottom = max(ln.top + (ln.height or 0) for ln in members)
+            right = max(ln.right for ln in members)
+            synth.append(LogicalLine(
+                page_num=pnum, line_index=0, top=top, left=left,
+                width=right - left, height=max(bottom - top, 1.0),
+                text=blk.markdown, font_size=0.0, bold=False, centered=False,
+                word_count=len(blk.markdown.split()), is_table_like=True,
+                is_table_block=True, role="table",
+            ))
+            for ln in members:
+                consumed.add(id(ln))
+            spliced += 1
+        if not synth:
+            continue
+        kept = [ln for ln in lines if id(ln) not in consumed]
+        kept.extend(synth)
+        kept.sort(key=lambda l: l.top)
+        for i, ln in enumerate(kept):
+            ln.line_index = i
+        page_lines[pnum] = kept
+    return spliced
 
 
 def detect_running_lines(page_lines: dict[int, list[LogicalLine]], pages: list[PageInfo]) -> set[str]:
@@ -2680,6 +2902,24 @@ def build_chunks_and_pages(
         for line in page_lines[page_num]:
             if line.is_running or is_page_number(line.text):
                 continue
+            # A reconstructed table is emitted whole: its own chunk, kept out of
+            # the surrounding paragraph so its markdown grid stays intact.
+            if line.is_table_block:
+                flush_paragraph()
+                chunks.append(
+                    ParagraphChunk(
+                        chunk_id=len(chunks) + 1,
+                        page_start=line.page_num,
+                        page_end=line.page_num,
+                        breadcrumb=with_local_context(current_breadcrumb(), active_local_context),
+                        text=line.text,
+                        chunk_type="table",
+                        heading_id=stack[-1][2].id if stack else None,
+                        confidence=round(current_confidence(), 3),
+                    )
+                )
+                page_content.append(line.text)
+                continue
             heading = hlookup.get((line.page_num, line.line_index))
             if heading:
                 flush_paragraph()
@@ -2803,6 +3043,18 @@ def run_fast_pipeline(
             raise RuntimeError(f"No pages extracted from {pdf_path}")
 
         page_lines = build_logical_lines(pages, nodes)
+        # Reconstruct bordered tables and splice them over the linearised lines
+        # (best-effort; never fatal). Done before role/heading detection so
+        # line indices stay consistent for the heading lookup.
+        if _tables_enabled():
+            try:
+                table_blocks = extract_pdfplumber_table_blocks(source_pdf)
+                if table_blocks:
+                    n_spliced = splice_table_blocks(page_lines, pages, table_blocks)
+                    if n_spliced:
+                        warnings.append(f"tables_reconstructed: {n_spliced}")
+            except Exception as exc:  # noqa: BLE001
+                warnings.append(f"table_reconstruction_failed: {exc}")
         running_lines = mark_running_lines(page_lines, pages)
         all_lines = [line for lines in page_lines.values() for line in lines]
         body_size = estimate_body_font_size(all_lines)
