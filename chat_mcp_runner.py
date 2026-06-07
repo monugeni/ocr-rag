@@ -27,6 +27,29 @@ def _semantic_tools_enabled() -> bool:
         "1", "true", "yes", "on",
     }
 
+
+def _chat_thinking_off() -> bool:
+    """Chat/tender-search thinking mode. Default 'adaptive' lets the model scale
+    thinking to the query (≈free on simple lookups, deeper on hard applicability
+    questions). Set OCR_RAG_CHAT_THINKING=off for lowest cost/latency."""
+    return os.environ.get("OCR_RAG_CHAT_THINKING", "adaptive").strip().lower() in {
+        "off", "none", "disabled", "0", "false", "no",
+    }
+
+
+def _anthropic_thinking() -> dict[str, Any]:
+    if _chat_thinking_off():
+        return {"type": "disabled"}
+    return {"type": "adaptive", "display": "summarized"}
+
+
+def _chat_effort() -> str:
+    return "low" if _chat_thinking_off() else "medium"
+
+
+def _grok_reasoning() -> str:
+    return "none" if _chat_thinking_off() else "medium"
+
 PROJECT_SCOPED_TOOLS = {
     "list_folder_entries",
     "list_documents",
@@ -362,8 +385,8 @@ async def _chat_with_tools(
                 tools=tools,
                 # display:"summarized" so the thinking blocks carry text we can
                 # stream live to the chat UI (Opus/Sonnet 4.x omit it otherwise).
-                thinking={"type": "adaptive", "display": "summarized"},
-                output_config={"effort": "medium"},
+                thinking=_anthropic_thinking(),
+                output_config={"effort": _chat_effort()},
                 cache_control={"type": "ephemeral"},
             )
             _acc_usage(usage, getattr(response, "usage", None))
@@ -555,8 +578,8 @@ async def _force_final_answer(
             max_tokens=12000,
             system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}],
             messages=final_messages,
-            thinking={"type": "adaptive"},
-            output_config={"effort": "medium"},
+            thinking=_anthropic_thinking(),
+            output_config={"effort": _chat_effort()},
             cache_control={"type": "ephemeral"},
         )
         if usage is not None:
@@ -630,7 +653,7 @@ async def _chat_with_tools_grok(
                 "messages": messages,
                 "tools": oai_tools,
                 "tool_choice": "auto",
-                "reasoning_effort": "medium",
+                "reasoning_effort": _grok_reasoning(),
             },
         )
         _acc_usage_oai(usage, resp.get("usage"))
@@ -771,7 +794,7 @@ async def _force_final_answer_grok(
             "model": model,
             "max_tokens": 12000,
             "messages": final_messages,
-            "reasoning_effort": "medium",
+            "reasoning_effort": _grok_reasoning(),
         },
     )
     if usage is not None:
