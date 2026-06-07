@@ -1285,6 +1285,13 @@ function bindGlobalEvents() {
   }
   $('new-folder-btn').addEventListener('click', promptNewFolder);
   $('folder-search').addEventListener('input', renderShell);
+  // Collapsible left (folder/tender) pane — persisted across sessions.
+  const shell = document.querySelector('.app-shell');
+  if (localStorage.getItem('folders_collapsed') === '1') shell.classList.add('folders-collapsed');
+  $('sidebar-toggle')?.addEventListener('click', () => {
+    const collapsed = shell.classList.toggle('folders-collapsed');
+    localStorage.setItem('folders_collapsed', collapsed ? '1' : '0');
+  });
   document.addEventListener('click', handleClick);
   document.addEventListener('change', handleChange);
   document.addEventListener('submit', handleSubmit);
@@ -1576,8 +1583,15 @@ async function loadCheckResults(runId) {
   const res = await api(`/api/runs/${runId}/results`);
   const el = $('chk-results'); el.classList.remove('hidden');
   const findings = res.findings || []; const comments = res.comment_results || [];
+  // Default to the PDF preview filling the pane (findings collapsed); remember
+  // the user's choice. '#zoom=page-fit' makes pdf.js fit each full page in the
+  // viewport so the page height is never cropped.
+  const layout = localStorage.getItem('chk_layout') || 'pdf-full';
+  const layoutClass = layout === 'pdf-full' ? ' findings-collapsed'
+    : layout === 'findings-full' ? ' pdf-collapsed' : '';
+  const pdfUrl = encodeURIComponent('/api/runs/' + runId + '/annotated.pdf') + '#zoom=page-fit';
   el.innerHTML = `
-    <div class="check-split" id="chk-split">
+    <div class="check-split${layoutClass}" id="chk-split">
       <div class="split-col findings-col">
         <div class="split-col-head"><span class="split-title">Findings <span class="muted">(${findings.length})</span></span><button class="split-collapse" data-act="collapse-findings" title="Collapse findings" aria-label="Collapse findings">‹</button></div>
         <ul class="findings">${findings.map(checkFindingCard).join('') || '<li class="muted">No findings.</li>'}</ul>
@@ -1585,7 +1599,7 @@ async function loadCheckResults(runId) {
       <div class="split-handle" id="chk-split-handle" title="Drag to resize"></div>
       <div class="split-col pdf-pane">
         <div class="split-col-head"><button class="split-collapse" data-act="collapse-pdf" title="Collapse preview" aria-label="Collapse preview">›</button><a href="/api/runs/${runId}/annotated.pdf" target="_blank" class="muted">Open annotated PDF &#8599;</a></div>
-        <iframe src="/static/pdfjs/web/viewer.html?file=${encodeURIComponent('/api/runs/' + runId + '/annotated.pdf')}"></iframe>
+        <iframe src="/static/pdfjs/web/viewer.html?file=${pdfUrl}"></iframe>
       </div>
     </div>
     ${comments.length ? `<h3>Prior comment incorporation</h3><ul class="findings">${comments.map(checkCommentCard).join('')}</ul>` : ''}
@@ -1633,13 +1647,20 @@ function bindSplit() {
   }
 
   // Collapse toggles — collapsing one expands the other (at most one collapsed).
+  const saveLayout = () => {
+    const l = split.classList.contains('findings-collapsed') ? 'pdf-full'
+      : split.classList.contains('pdf-collapsed') ? 'findings-full' : 'split';
+    localStorage.setItem('chk_layout', l);
+  };
   split.querySelector('[data-act="collapse-findings"]')?.addEventListener('click', () => {
     split.classList.remove('pdf-collapsed');
     split.classList.toggle('findings-collapsed');
+    saveLayout();
   });
   split.querySelector('[data-act="collapse-pdf"]')?.addEventListener('click', () => {
     split.classList.remove('findings-collapsed');
     split.classList.toggle('pdf-collapsed');
+    saveLayout();
   });
 }
 
