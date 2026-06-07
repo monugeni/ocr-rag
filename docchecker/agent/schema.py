@@ -74,7 +74,8 @@ class Finding:
     severity: str                    # critical|major|minor|observation
     category: str
     title: str
-    detail: str
+    detail: str                      # full rationale + tender clause reference (UI only)
+    vendor_comment: Optional[str] = None  # terse "what is wrong" for the annotated PDF sent to vendors
     anchor_text: Optional[str] = None
     bbox: Optional[list[float]] = None
     citation: dict[str, Any] = field(default_factory=dict)

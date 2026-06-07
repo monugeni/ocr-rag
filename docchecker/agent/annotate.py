@@ -10,19 +10,15 @@ from .schema import SEVERITY_COLORS, Finding
 
 
 def _content(f: Finding) -> str:
-    """Vendor-appropriate comment text — NO severity or internal category labels.
-
-    The annotated PDF may be sent to the vendor as-is, so the comment reads as a clean
-    review remark plus the governing reference. Severity/category are stored separately
-    (DB + web UI) only.
+    """Vendor-facing comment text for the annotated PDF, which may be sent to the
+    vendor as-is. It states ONLY what is wrong — no rationale, no tender/clause
+    reference, no severity/category labels. Those live in the DB + web UI (the
+    ``detail`` field), not on the PDF.
     """
-    ref = f.citation or {}
-    ref_bits = [b for b in (ref.get("doc_title"), ref.get("heading")) if b]
-    suffix = f"  (ref: {' — '.join(ref_bits)})" if ref_bits else ""
-    body = (f.detail or "").strip() or (f.title or "").strip()
+    body = (f.vendor_comment or "").strip() or (f.title or "").strip()
     # Kept-but-uncertain findings are flagged so the reviewer can confirm them.
     prefix = "(Possible) " if getattr(f, "possible", False) else ""
-    return f"{prefix}{body}{suffix}"
+    return f"{prefix}{body}"
 
 
 def annotate_finding(pdf_path: str, finding: Finding) -> tuple[int | None, str]:

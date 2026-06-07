@@ -35,8 +35,19 @@ _FINDINGS_TOOL = {
                         "type": "string",
                         "enum": ["critical", "major", "minor", "observation"],
                     },
-                    "title": {"type": "string"},
-                    "detail": {"type": "string"},
+                    "title": {"type": "string", "description": "Short label for the issue (internal/UI)."},
+                    "detail": {
+                        "type": "string",
+                        "description": "Full rationale for the reviewer: why it is wrong, citing the governing "
+                        "tender/reference clause (doc, page, clause). Shown in the UI only — never on the PDF.",
+                    },
+                    "vendor_comment": {
+                        "type": "string",
+                        "description": "A terse, standalone remark stating ONLY what is wrong, to be placed on the "
+                        "PDF that may be sent to the vendor as-is. NO rationale, NO tender/clause references, NO "
+                        "severity labels — just the deficiency, e.g. 'Conductor resistance 0.91 ohm/km exceeds the "
+                        "0.868 maximum.'",
+                    },
                     "submitted_page": {"type": "integer"},
                     "submitted_anchor": {
                         "type": "string",
@@ -46,7 +57,7 @@ _FINDINGS_TOOL = {
                     "ref_page": {"type": "integer"},
                     "ref_quote": {"type": "string"},
                 },
-                "required": ["category", "severity", "title", "detail", "submitted_page", "submitted_anchor"],
+                "required": ["category", "severity", "title", "detail", "vendor_comment", "submitted_page", "submitted_anchor"],
             },
         }
     },
@@ -197,6 +208,7 @@ def _finding_from_dict(f: dict, submitted, category_default: str) -> Finding:
         category=f.get("category", category_default),
         title=f.get("title", "Finding"),
         detail=f.get("detail", ""),
+        vendor_comment=(f.get("vendor_comment") or "").strip() or None,
         anchor_text=f.get("submitted_anchor"),
         citation={
             "doc_title": f.get("ref_doc_title"),

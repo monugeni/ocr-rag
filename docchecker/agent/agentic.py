@@ -79,6 +79,14 @@ def _system_prompt(ctx: CheckContext, uploaded_ref_text: str) -> str:
         "under-reporting.\n"
         "Earlier pages and the requirements you already retrieved remain in this conversation — "
         "use them when a later page refers back to an earlier value.\n"
+        "\n"
+        "Two comment fields per finding, written for different readers:\n"
+        "  - detail: the full rationale for the reviewer — explain why it is wrong and cite the "
+        "governing tender/reference clause (doc, page, clause). Shown only in the internal UI.\n"
+        "  - vendor_comment: a terse, standalone remark stating ONLY what is wrong. It is placed on "
+        "the PDF that may be sent to the vendor as-is, so it must contain NO rationale, NO tender or "
+        "clause references, and NO severity labels — just the deficiency, e.g. 'Conductor resistance "
+        "0.91 ohm/km exceeds the 0.868 maximum.'\n"
         "Then I will send the next page."
     )
     if uploaded_ref_text:

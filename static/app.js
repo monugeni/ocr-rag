@@ -1850,11 +1850,22 @@ function renderTrace(t) {
 }
 
 function checkFindingCard(f) {
-  // Compact index only — the full comment text lives on the annotated PDF
-  // (shown in the viewer), so it is not duplicated here.
   const col = SEV_COLORS[f.severity] || '#888';
   const possible = f.confidence === 'low' ? '<span class="tag wait">possible</span>' : '';
-  return `<li class="finding" data-id="${f.id}"><div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span>${possible}<span class="muted small">p${f.page_num ?? '?'}</span></div><div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div></li>`;
+  // Full reviewer view: rationale + governing tender clause reference. (The PDF
+  // annotation gets only the terse vendor_comment.)
+  const cite = f.citation || {};
+  const refBits = [cite.doc_title, cite.ref_page ? `p${cite.ref_page}` : ''].filter(Boolean).join(' · ');
+  const refLine = (refBits || cite.snippet)
+    ? `<div class="finding-ref"><span class="finding-ref-label">Ref</span> ${escapeHtml(refBits)}${cite.snippet ? ` — <span class="finding-quote">“${escapeHtml(String(cite.snippet).slice(0, 240))}”</span>` : ''}</div>`
+    : '';
+  const detail = f.detail ? `<div class="finding-detail">${escapeHtml(f.detail)}</div>` : '';
+  const vendor = f.vendor_comment ? `<div class="finding-vendor"><span class="finding-vendor-label">PDF comment</span> ${escapeHtml(f.vendor_comment)}</div>` : '';
+  return `<li class="finding" data-id="${f.id}">
+    <div class="finding-head"><span class="dot" style="background:${col}"></span><strong>${escapeHtml(f.title || f.category)}</strong><span class="tag">${f.category}</span><span class="tag">${f.severity}</span>${possible}<span class="muted small">p${f.page_num ?? '?'}</span></div>
+    ${detail}${refLine}${vendor}
+    <div class="actions"><button data-act="accepted">Accept</button><button data-act="dismissed">Dismiss</button><span class="muted small fstatus">${f.status}</span></div>
+  </li>`;
 }
 
 function checkCommentCard(c) {

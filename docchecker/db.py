@@ -93,7 +93,8 @@ CREATE TABLE IF NOT EXISTS findings (
     severity        TEXT,                       -- critical|major|minor|observation
     category        TEXT,
     title           TEXT,
-    detail          TEXT,
+    detail          TEXT,                       -- full rationale + clause ref (UI only)
+    vendor_comment  TEXT,                       -- terse "what is wrong" for the annotated PDF
     citation        TEXT,                       -- JSON {ref_doc, ref_page, heading, snippet}
     confidence      TEXT,                       -- high|medium|low
     status          TEXT DEFAULT 'open',        -- open|accepted|dismissed
@@ -171,6 +172,9 @@ def init_databases() -> None:
         cols = {r["name"] for r in conn.execute("PRAGMA table_info(users)")}
         if "is_admin" not in cols:
             conn.execute("ALTER TABLE users ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0")
+        fcols = {r["name"] for r in conn.execute("PRAGMA table_info(findings)")}
+        if "vendor_comment" not in fcols:
+            conn.execute("ALTER TABLE findings ADD COLUMN vendor_comment TEXT")
         conn.commit()
     finally:
         conn.close()

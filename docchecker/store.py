@@ -251,8 +251,8 @@ def add_finding(run_id: str, f: dict) -> int:
         cur = conn.execute(
             """INSERT INTO findings
                  (run_id, doc_id, page_num, bbox, anchor_text, annotation_xref,
-                  severity, category, title, detail, citation, confidence, status)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open')""",
+                  severity, category, title, detail, vendor_comment, citation, confidence, status)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open')""",
             (
                 run_id,
                 f.get("doc_id"),
@@ -264,6 +264,7 @@ def add_finding(run_id: str, f: dict) -> int:
                 f.get("category"),
                 f.get("title"),
                 f.get("detail"),
+                f.get("vendor_comment"),
                 json.dumps(f.get("citation") or {}),
                 f.get("confidence", "medium"),
             ),
