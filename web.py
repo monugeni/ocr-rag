@@ -43,10 +43,10 @@ from uuid import uuid4
 
 import uvicorn
 from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from chat_mcp_runner import run_folder_chat
+from chat_mcp_runner import arun_folder_chat, run_folder_chat
 from ingest import (
     init_db, ingest_document, replay_corrections,
     extract_metadata_llm, apply_metadata, compute_embeddings, ingest_fast_pdf,
@@ -2574,6 +2574,125 @@ def create_chat_message(thread_id: str, data: dict, request: Request):
         }
     finally:
         conn.close()
+
+
+def _sse(obj: dict) -> str:
+    """One SSE frame. The chat stream is POST (message in the body), so the
+    browser reads it with fetch()+getReader rather than EventSource, but the
+    on-the-wire framing is still standard `data: <json>` events."""
+    return f"data: {json.dumps(obj, default=str)}\n\n"
+
+
+def _persist_chat_answer(thread_id, project, content, response, owner_email, is_first):
+    """Store the streamed assistant turn and return the same payload the blocking
+    /messages endpoint returns, so the front-end render path is identical."""
+    conn = get_conn()
+    try:
+        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
+        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources)
+        if is_first:
+            conn.execute(
+                "UPDATE chat_threads SET title = ? WHERE id = ?",
+                (_thread_title_from_message(content), thread_id),
+            )
+            _touch_thread(conn, thread_id)
+        conn.commit()
+        thread_row = dict(conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?", (thread_id,)
+        ).fetchone())
+        messages = _fetch_chat_messages(conn, thread_id)
+    finally:
+        conn.close()
+    return {
+        "thread": {**thread_row, "folder": project},
+        "messages": messages,
+        "retrieval": {"query": content, "source_count": len(response.sources)},
+    }
+
+
+@app.post("/api/chats/{thread_id}/messages/stream")
+async def stream_chat_message(thread_id: str, data: dict, request: Request):
+    """Streaming sibling of create_chat_message: runs the same MCP chat loop but
+    emits live thinking / tool-activity events (SSE frames) as the model works,
+    then a final `done` event carrying the persisted thread + messages. The
+    front-end falls back to the blocking endpoint if this fails."""
+    content = (data.get("content") or "").strip()
+    if not content:
+        raise HTTPException(400, "Message content required")
+
+    api_key = _chat_api_key()
+    if not api_key:
+        raise HTTPException(503, f"{_chat_key_hint()} is not configured on the server.")
+
+    owner_key, owner_email = _current_owner(request)
+    conn = get_conn()
+    try:
+        thread = _thread_for_owner(conn, thread_id, owner_key)
+        _insert_chat_message(conn, thread_id, "user", content)
+        existing_messages = _fetch_chat_messages(conn, thread_id)
+        history = existing_messages[:-1]
+        is_first = len(existing_messages) == 1 and thread["title"] == "New chat"
+        project = thread["project"]
+        conn.commit()
+    finally:
+        conn.close()
+
+    import mcp_server
+    mcp_server.DB_PATH = DB_PATH
+    provider, model = _chat_provider(), _chat_model_name()
+
+    async def streamer():
+        queue: asyncio.Queue = asyncio.Queue()
+
+        def on_event(ev):
+            try:
+                queue.put_nowait(ev)
+            except Exception:  # noqa: BLE001 — progress is best-effort
+                pass
+
+        async def run():
+            try:
+                res = await arun_folder_chat(
+                    mcp_url=MCP_SERVER_URL,
+                    api_key=api_key,
+                    model=model,
+                    project=project,
+                    question=content,
+                    history=history,
+                    attachment=None,
+                    mcp_server=mcp_server.mcp,
+                    provider=provider,
+                    base_url=_chat_base_url(),
+                    on_event=on_event,
+                )
+                await queue.put({"__final__": res})
+            except Exception as exc:  # noqa: BLE001
+                await queue.put({"__error__": str(exc)})
+
+        task = asyncio.create_task(run())
+        yield _sse({"type": "start", "provider": provider, "model": model})
+        try:
+            while True:
+                ev = await queue.get()
+                if "__error__" in ev:
+                    yield _sse({"type": "error", "error": ev["__error__"]})
+                    return
+                if "__final__" in ev:
+                    payload = _persist_chat_answer(
+                        thread_id, project, content, ev["__final__"], owner_email, is_first
+                    )
+                    yield _sse({"type": "done", **payload})
+                    return
+                yield _sse(ev)
+        finally:
+            if not task.done():
+                task.cancel()
+
+    return StreamingResponse(
+        streamer(),
+        media_type="text/event-stream",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 @app.post("/api/chats/{thread_id}/review-document")

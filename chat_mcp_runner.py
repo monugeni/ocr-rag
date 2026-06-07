@@ -4,7 +4,7 @@ import asyncio
 import json
 import os
 from dataclasses import dataclass, field
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 import anthropic
 from mcp import ClientSession
@@ -162,6 +162,38 @@ def run_folder_chat(
     )
 
 
+async def arun_folder_chat(
+    *,
+    mcp_url: Optional[str],
+    api_key: str,
+    model: str,
+    project: str,
+    question: str,
+    history: list[dict[str, Any]],
+    attachment: Optional[dict[str, Any]] = None,
+    mcp_server: Any = None,
+    provider: str = "anthropic",
+    base_url: Optional[str] = None,
+    on_event: Optional[Callable[[dict], None]] = None,
+) -> ChatRunResult:
+    """Async entrypoint for the streaming chat endpoint. Identical to
+    ``run_folder_chat`` but awaitable (so the caller can drain ``on_event``
+    progress events on the same loop) and with no inner ``asyncio.run``."""
+    return await _run_folder_chat(
+        mcp_url=mcp_url,
+        api_key=api_key,
+        model=model,
+        project=project,
+        question=question,
+        history=history,
+        attachment=attachment,
+        mcp_server=mcp_server,
+        provider=provider,
+        base_url=base_url,
+        on_event=on_event,
+    )
+
+
 async def _dispatch_chat(
     provider: str,
     *,
@@ -176,6 +208,7 @@ async def _dispatch_chat(
     tools: list[dict[str, Any]],
     tracker: SourceTracker,
     usage: dict[str, int],
+    on_event: Optional[Callable[[dict], None]] = None,
 ) -> str:
     """Run one chat turn against the selected provider. The MCP session, tool
     list, source tracking and result formatting are provider-agnostic; only the
@@ -185,11 +218,12 @@ async def _dispatch_chat(
             session=session, api_key=api_key, model=model, base_url=base_url,
             project=project, question=question, history=history,
             attachment=attachment, tools=tools, tracker=tracker, usage=usage,
+            on_event=on_event,
         )
     return await _chat_with_tools(
         session=session, api_key=api_key, model=model, project=project,
         question=question, history=history, attachment=attachment,
-        tools=tools, tracker=tracker, usage=usage,
+        tools=tools, tracker=tracker, usage=usage, on_event=on_event,
     )
 
 
@@ -205,6 +239,7 @@ async def _run_folder_chat(
     mcp_server: Any = None,
     provider: str = "anthropic",
     base_url: Optional[str] = None,
+    on_event: Optional[Callable[[dict], None]] = None,
 ) -> ChatRunResult:
     tracker = SourceTracker()
     usage: dict[str, int] = {}
@@ -224,6 +259,7 @@ async def _run_folder_chat(
             tools=tools,
             tracker=tracker,
             usage=usage,
+            on_event=on_event,
         )
         return ChatRunResult(answer=response, sources=tracker.as_list(), usage=usage, model=model)
 
@@ -250,6 +286,7 @@ async def _run_folder_chat(
                         tools=tools,
                         tracker=tracker,
                         usage=usage,
+                        on_event=on_event,
                     )
             return ChatRunResult(answer=response, sources=tracker.as_list(), usage=usage, model=model)
         except Exception as exc:
@@ -304,6 +341,7 @@ async def _chat_with_tools(
     tools: list[dict[str, Any]],
     tracker: SourceTracker,
     usage: Optional[dict[str, int]] = None,
+    on_event: Optional[Callable[[dict], None]] = None,
 ) -> str:
     if usage is None:
         usage = {}
@@ -322,16 +360,25 @@ async def _chat_with_tools(
                 system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}],
                 messages=messages,
                 tools=tools,
-                thinking={"type": "adaptive"},
+                # display:"summarized" so the thinking blocks carry text we can
+                # stream live to the chat UI (Opus/Sonnet 4.x omit it otherwise).
+                thinking={"type": "adaptive", "display": "summarized"},
                 output_config={"effort": "medium"},
                 cache_control={"type": "ephemeral"},
             )
             _acc_usage(usage, getattr(response, "usage", None))
 
+            thinking = _collect_thinking(response.content)
+            if thinking:
+                _emit(on_event, {"type": "thinking", "text": thinking})
+
             assistant_blocks = [_dump_block(block) for block in response.content]
             messages.append({"role": "assistant", "content": assistant_blocks})
 
             tool_uses = [block for block in response.content if getattr(block, "type", "") == "tool_use"]
+            for block in tool_uses:
+                _emit(on_event, {"type": "tool", "name": block.name,
+                                 "summary": _tool_call_summary(block.name, block.input)})
             if not tool_uses:
                 answer = _collect_text(response.content)
                 if not answer:
@@ -423,9 +470,17 @@ def _build_system_prompt(*, project: str, attachment: Optional[dict[str, Any]]) 
         "- Distinguish mandatory requirements ('shall', 'must', 'minimum', 'not less than') from "
         "guidance or options ('should', 'may', 'preferred'). Say plainly where the tender is silent "
         "or ambiguous.\n"
-        "- Mind applicability and scope: a requirement stated for one item or system does NOT "
-        "automatically apply to another (e.g. a material grade specified for dampers does not govern "
-        "on-off valves unless stated generally). State what a requirement governs before asserting it.\n"
+        "- Context and applicability are decisive. Establish WHAT a clause governs before applying "
+        "it. A requirement stated for one item, system or service does NOT automatically apply to "
+        "another: stringent tests or materials for heater-coil pipes inside a fired heater do not "
+        "govern external utility piping; a grade specified for dampers does not govern on-off valves; "
+        "a thickness for one line class does not govern another. BUT honour genuinely general "
+        "requirements — when the tender says 'all piping' or covers a whole class/service, it applies "
+        "across that class unless a more specific clause overrides it (apply the stated order of "
+        "precedence; flag conflicts rather than choosing). Read clause and document context, not "
+        "keywords: a pipe 'bend' (a fitting) is not a road 'bend' nor a 'bend test' on a plate or "
+        "weld coupon — match an item to a requirement only when subject, service, size/class and "
+        "component type genuinely correspond. State what a requirement governs before asserting it.\n"
         "- Surface cross-references and conflicts: tenders refer out to codes/standards (IS, ASME, "
         "API, etc.) and to other documents. Where requirements conflict, point it out, cite both, and "
         "apply the stated order of precedence; if none is stated, flag it rather than choosing.\n"
@@ -540,6 +595,7 @@ async def _chat_with_tools_grok(
     tools: list[dict[str, Any]],
     tracker: SourceTracker,
     usage: Optional[dict[str, int]] = None,
+    on_event: Optional[Callable[[dict], None]] = None,
 ) -> str:
     """Grok (xAI) equivalent of ``_chat_with_tools`` — same MCP tools, source
     tracking and stale-loop guards, but the OpenAI tool-calling dialect.
@@ -581,6 +637,18 @@ async def _chat_with_tools_grok(
         choice = (resp.get("choices") or [{}])[0]
         msg = choice.get("message") or {}
         tool_calls = msg.get("tool_calls") or []
+
+        reasoning = (msg.get("reasoning_content") or "").strip()
+        if reasoning:
+            _emit(on_event, {"type": "thinking", "text": reasoning})
+        for block in tool_calls:
+            fn = block.get("function") or {}
+            try:
+                _args = json.loads(fn.get("arguments") or "{}")
+            except Exception:  # noqa: BLE001
+                _args = {}
+            _emit(on_event, {"type": "tool", "name": fn.get("name") or "",
+                             "summary": _tool_call_summary(fn.get("name") or "", _args)})
 
         assistant_msg: dict[str, Any] = {"role": "assistant", "content": msg.get("content") or ""}
         if tool_calls:
@@ -991,3 +1059,38 @@ def _collect_text(blocks: list[Any]) -> str:
         if getattr(block, "type", "") == "text":
             parts.append(getattr(block, "text", ""))
     return "".join(parts).strip()
+
+
+def _collect_thinking(blocks: list[Any]) -> str:
+    """Pull summarized thinking text out of an Anthropic response's content blocks.
+
+    Only populated when the request opts in with ``thinking.display = "summarized"``
+    (Opus/Sonnet 4.x omit thinking text by default)."""
+    parts = []
+    for block in blocks:
+        if getattr(block, "type", "") == "thinking":
+            parts.append(getattr(block, "thinking", "") or "")
+    return "".join(parts).strip()
+
+
+def _tool_call_summary(name: str, arguments: Any) -> str:
+    """A short 'tool: key argument' line for the live chat progress trace."""
+    args = arguments if isinstance(arguments, dict) else {}
+    for key in ("query", "q", "text", "title", "name"):
+        val = args.get(key)
+        if isinstance(val, str) and val.strip():
+            return f"{name}: {val.strip()[:80]}"
+    for key in ("page_num", "page", "doc_id", "document_id", "section_id"):
+        if args.get(key) is not None:
+            return f"{name}: {key}={args[key]}"
+    return name
+
+
+def _emit(on_event: Optional[Callable[[dict], None]], event: dict) -> None:
+    """Fire a progress event for the streaming chat UI; never let it break a run."""
+    if on_event is None:
+        return
+    try:
+        on_event(event)
+    except Exception:  # noqa: BLE001 — progress is best-effort
+        pass

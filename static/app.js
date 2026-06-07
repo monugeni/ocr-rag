@@ -424,12 +424,42 @@ function markCitations(text) {
   return (text || '').replace(/\[(\d+(?:\s*[,–-]\s*\d+)*)\]/g, '<sup class="cite">$1</sup>');
 }
 
+// Live "thinking" trace shown in the assistant bubble while the model works,
+// before the final answer replaces it. Steps are thinking summaries and tool
+// calls, in the order the model produced them.
+function renderLiveTrace(live) {
+  if (!live) return '<div class="live-head">Working…</div>';
+  const head = live.model
+    ? `<div class="live-head"><span class="live-dot"></span>${escapeHtml(live.model)} working…</div>`
+    : '<div class="live-head"><span class="live-dot"></span>Working…</div>';
+  const steps = (live.steps || []).map((s) => (
+    s.kind === 'tool'
+      ? `<div class="live-step tool">${escapeHtml(s.text)}</div>`
+      : `<div class="live-step think">${escapeHtml(s.text)}</div>`
+  )).join('');
+  return `${head}${steps ? `<div class="live-steps">${steps}</div>` : ''}`;
+}
+
+// Patch just the streaming assistant bubble in place (no full re-render) so the
+// composer and scroll position survive each event.
+function updateLiveBubble(live) {
+  const container = $('messages');
+  if (!container) return;
+  const bodies = container.querySelectorAll('.message.assistant .message-body');
+  const last = bodies[bodies.length - 1];
+  if (last) last.innerHTML = `<div class="live-thinking">${renderLiveTrace(live.live)}</div>`;
+  container.scrollTop = container.scrollHeight;
+}
+
 function renderMessage(message) {
   const sources = Array.isArray(message.sources) ? message.sources : [];
   const isUser = message.role === 'user';
+  const streaming = !isUser && message.live && !message.content;
   const body = isUser
     ? renderMarkdown(message.content || '')
-    : renderMarkdown(markCitations(message.content || ''));
+    : streaming
+      ? `<div class="live-thinking">${renderLiveTrace(message.live)}</div>`
+      : renderMarkdown(markCitations(message.content || ''));
   const meta = !isUser && sources.length ? `<span class="msg-meta">· ${sources.length} source${sources.length > 1 ? 's' : ''}</span>` : '';
   return `
     <article class="message ${isUser ? 'user' : 'assistant'}">
@@ -896,14 +926,21 @@ async function sendMessage(event) {
     state.sending = true;
     if (!state.threadId) await createChatThread();
     state.messages.push({ role: 'user', content, sources: [] });
-    state.messages.push({ role: 'assistant', content: 'Working...', sources: [] });
+    const live = { role: 'assistant', content: '', sources: [], live: { steps: [] } };
+    state.messages.push(live);
     renderAsk({ scroll: 'answer' });
-    const data = await api(`/api/chats/${enc(state.threadId)}/messages`, {
-      method: 'POST',
-      body: JSON.stringify({ content }),
-    });
-    state.messages = data.messages || [];
-    state.chats = [data.thread, ...state.chats.filter((t) => t.id !== data.thread.id)];
+    const status = await streamChat(content, live);
+    if (status === 'no-start') {
+      // Streaming endpoint never began (e.g. unsupported) — fall back to the
+      // blocking endpoint. The server only persists the user message after that
+      // point, so no double-insert.
+      const data = await api(`/api/chats/${enc(state.threadId)}/messages`, {
+        method: 'POST',
+        body: JSON.stringify({ content }),
+      });
+      state.messages = data.messages || [];
+      state.chats = [data.thread, ...state.chats.filter((t) => t.id !== data.thread.id)];
+    }
   } catch (err) {
     showToast(err.message, 'error');
   } finally {
@@ -911,6 +948,77 @@ async function sendMessage(event) {
     renderAsk({ scroll: 'answer' });
     loadUsage();
   }
+}
+
+// Consume the streaming chat endpoint (SSE frames over a POST body). Returns:
+//   'ok'           — final answer received and rendered
+//   'stream-error' — stream began but errored mid-way (user msg already saved)
+//   'no-start'     — stream never began; caller may fall back to blocking POST
+async function streamChat(content, live) {
+  let resp;
+  try {
+    resp = await fetch(`/api/chats/${enc(state.threadId)}/messages/stream`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+  } catch (e) {
+    return 'no-start';
+  }
+  if (!resp.ok || !resp.body) return 'no-start';
+
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = '';
+  let done = null;
+  let broke = false;
+  for (;;) {
+    let chunk;
+    try {
+      chunk = await reader.read();
+    } catch (e) {
+      broke = true;
+      break;
+    }
+    if (chunk.done) break;
+    buf += decoder.decode(chunk.value, { stream: true });
+    const frames = buf.split('\n\n');
+    buf = frames.pop();
+    for (const frame of frames) {
+      const dline = frame.split('\n').find((l) => l.startsWith('data:'));
+      if (!dline) continue;
+      let ev;
+      try {
+        ev = JSON.parse(dline.slice(5).trim());
+      } catch (e) {
+        continue;
+      }
+      if (ev.type === 'start') {
+        live.live.model = ev.model;
+        live.live.provider = ev.provider;
+        updateLiveBubble(live);
+      } else if (ev.type === 'thinking') {
+        live.live.steps.push({ kind: 'think', text: ev.text });
+        updateLiveBubble(live);
+      } else if (ev.type === 'tool') {
+        live.live.steps.push({ kind: 'tool', text: ev.summary || ev.name });
+        updateLiveBubble(live);
+      } else if (ev.type === 'error') {
+        done = { error: ev.error };
+      } else if (ev.type === 'done') {
+        done = ev;
+      }
+    }
+  }
+  if (done && done.messages) {
+    state.messages = done.messages || [];
+    state.chats = [done.thread, ...state.chats.filter((t) => t.id !== done.thread.id)];
+    return 'ok';
+  }
+  if (done && done.error) showToast(done.error, 'error');
+  else if (broke) showToast('The connection dropped before the answer finished.', 'error');
+  await loadMessages();
+  return 'stream-error';
 }
 
 async function switchThread(id) {

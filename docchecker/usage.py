@@ -28,8 +28,24 @@ _DEFAULT_PRICE = _PRICING["opus"]  # unknown model -> price as the most expensiv
 _lock = threading.Lock()
 
 
+def _grok_pricing() -> dict[str, float]:
+    """xAI (Grok) USD/1M pricing. We don't hardcode exact rates — set the real
+    numbers via OCR_RAG_GROK_PRICE_IN / _OUT (per 1M tokens). Defaults are a
+    rough grok-4 family estimate; cache read ~0.25x input, write ~1.25x."""
+    def _f(env: str, default: float) -> float:
+        try:
+            return float(os.environ.get(env, default))
+        except (TypeError, ValueError):
+            return default
+    inp = _f("OCR_RAG_GROK_PRICE_IN", 3.00)
+    out = _f("OCR_RAG_GROK_PRICE_OUT", 15.00)
+    return {"input": inp, "output": out, "cache_read": inp * 0.25, "cache_write": inp * 1.25}
+
+
 def _price_for(model: str) -> dict[str, float]:
     m = (model or "").lower()
+    if "grok" in m:
+        return _grok_pricing()
     for key, price in _PRICING.items():
         if key in m:
             return price
