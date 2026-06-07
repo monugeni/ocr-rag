@@ -82,9 +82,12 @@ a:hover {
   min-height: 100vh;
 }
 
-/* Collapsible left (folder/tender) pane. */
+/* Collapsible left (folder/tender) pane. Collapse to a SINGLE full-width column:
+   hiding the panel with display:none removes it from the grid, so a two-track
+   template would auto-place the work area into the empty first (0px) track and
+   shrink it to nothing. One 1fr track lets the work area fill the width. */
 .app-shell.folders-collapsed {
-  grid-template-columns: 0 minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
 }
 .app-shell.folders-collapsed .folder-panel {
   display: none;
