@@ -29,17 +29,20 @@ _lock = threading.Lock()
 
 
 def _grok_pricing() -> dict[str, float]:
-    """xAI (Grok) USD/1M pricing. We don't hardcode exact rates — set the real
-    numbers via OCR_RAG_GROK_PRICE_IN / _OUT (per 1M tokens). Defaults are a
-    rough grok-4 family estimate; cache read ~0.25x input, write ~1.25x."""
+    """xAI (Grok) USD/1M pricing. Defaults are grok-4.3's published rates
+    (input $1.25, output $2.50, cached input $0.20 per 1M — docs.x.ai, May 2026);
+    override per-model via OCR_RAG_GROK_PRICE_IN / _OUT / _CACHE. xAI bills no
+    separate cache-write, and our usage normalizer always reports cache_write=0,
+    so that rate is inert."""
     def _f(env: str, default: float) -> float:
         try:
             return float(os.environ.get(env, default))
         except (TypeError, ValueError):
             return default
-    inp = _f("OCR_RAG_GROK_PRICE_IN", 3.00)
-    out = _f("OCR_RAG_GROK_PRICE_OUT", 15.00)
-    return {"input": inp, "output": out, "cache_read": inp * 0.25, "cache_write": inp * 1.25}
+    inp = _f("OCR_RAG_GROK_PRICE_IN", 1.25)
+    out = _f("OCR_RAG_GROK_PRICE_OUT", 2.50)
+    cache = _f("OCR_RAG_GROK_PRICE_CACHE", 0.20)
+    return {"input": inp, "output": out, "cache_read": cache, "cache_write": inp * 1.25}
 
 
 def _price_for(model: str) -> dict[str, float]:
