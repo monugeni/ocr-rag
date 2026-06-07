@@ -30,6 +30,9 @@ class GrokLLM:
         self._api_key = api_key
         self._default_model = default_model
         self._base_url = base_url or grok_client.xai_base_url()
+        # One conversation id per run: the verify/judge passes share a big stable
+        # system prefix, so sticky routing lets xAI's auto-cache reuse it.
+        self._conv_id = grok_client.new_conv_id()
         self.last_usage: dict = {}
         self.last_stop_reason: str | None = None
         self.any_truncated: bool = False
@@ -79,13 +82,14 @@ class GrokLLM:
             {"role": "user", "content": user_text},
         ]
         if deep:
-            return self._structured(mdl, messages, tool_name, input_schema, max_tokens, emit)
+            return self._structured(mdl, messages, tool_name, input_schema, max_tokens, effort, emit)
         return self._forced_tool(mdl, messages, tool_name, tool_description, input_schema, max_tokens)
 
     def _forced_tool(self, model, messages, tool_name, tool_description, schema, max_tokens) -> dict:
         resp = grok_client.create(
             api_key=self._api_key,
             base_url=self._base_url,
+            conv_id=self._conv_id,
             payload={
                 "model": model,
                 "max_tokens": max_tokens,
@@ -99,6 +103,8 @@ class GrokLLM:
                     },
                 }],
                 "tool_choice": {"type": "function", "function": {"name": tool_name}},
+                # Mirrors the Anthropic non-deep path (forced tool_use, no thinking).
+                "reasoning_effort": "none",
             },
         )
         self._record_usage(resp.get("usage"), model)
@@ -118,10 +124,11 @@ class GrokLLM:
         # No tool call produced — fall back to parsing any text content.
         return _loads_loose(msg.get("content") or "")
 
-    def _structured(self, model, messages, tool_name, schema, max_tokens, emit=None) -> dict:
+    def _structured(self, model, messages, tool_name, schema, max_tokens, effort="high", emit=None) -> dict:
         resp = grok_client.create(
             api_key=self._api_key,
             base_url=self._base_url,
+            conv_id=self._conv_id,
             payload={
                 "model": model,
                 "max_tokens": max(max_tokens, 16000),
@@ -134,6 +141,9 @@ class GrokLLM:
                         "strict": True,
                     },
                 },
+                # Mirror the Anthropic deep pass's effort (low|medium|high|xhigh|max
+                # → grok none|low|medium|high) so the A/B compares like depth.
+                "reasoning_effort": grok_client.reasoning_effort(effort),
             },
         )
         self._record_usage(resp.get("usage"), model)

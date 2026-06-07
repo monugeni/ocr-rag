@@ -554,6 +554,10 @@ async def _chat_with_tools_grok(
     messages: list[dict[str, Any]] = [{"role": "system", "content": system_prompt}]
     messages.extend(_build_messages(question=question, history=history, attachment=attachment))
     oai_tools = grok_client.to_openai_tools(tools)
+    # One conversation id for the whole turn so xAI's automatic prompt caching
+    # keeps the growing prefix on the same server across rounds. Reasoning at
+    # "medium" mirrors the Anthropic chat's effort=medium for a fair A/B.
+    conv_id = grok_client.new_conv_id()
 
     seen_tool_calls: dict[tuple[str, str], int] = {}
     stale_rounds = 0
@@ -563,12 +567,14 @@ async def _chat_with_tools_grok(
         resp = await grok_client.acreate(
             api_key=api_key,
             base_url=base_url,
+            conv_id=conv_id,
             payload={
                 "model": model,
                 "max_tokens": 12000,
                 "messages": messages,
                 "tools": oai_tools,
                 "tool_choice": "auto",
+                "reasoning_effort": "medium",
             },
         )
         _acc_usage_oai(usage, resp.get("usage"))
@@ -665,6 +671,7 @@ async def _chat_with_tools_grok(
         messages=messages,
         attachment=attachment,
         usage=usage,
+        conv_id=conv_id,
     )
 
 
@@ -676,6 +683,7 @@ async def _force_final_answer_grok(
     messages: list[dict[str, Any]],
     attachment: Optional[dict[str, Any]],
     usage: Optional[dict[str, int]] = None,
+    conv_id: Optional[str] = None,
 ) -> str:
     import grok_client
 
@@ -690,7 +698,13 @@ async def _force_final_answer_grok(
     resp = await grok_client.acreate(
         api_key=api_key,
         base_url=base_url,
-        payload={"model": model, "max_tokens": 12000, "messages": final_messages},
+        conv_id=conv_id,
+        payload={
+            "model": model,
+            "max_tokens": 12000,
+            "messages": final_messages,
+            "reasoning_effort": "medium",
+        },
     )
     if usage is not None:
         _acc_usage_oai(usage, resp.get("usage"))

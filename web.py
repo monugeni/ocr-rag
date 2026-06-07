@@ -1101,7 +1101,12 @@ def _invoke_grok_chat_model(
         resp = grok_client.create(
             api_key=api_key,
             base_url=_chat_base_url(),
-            payload={"model": _chat_model_name(), "max_tokens": max_tokens, "messages": oai_messages},
+            payload={
+                "model": _chat_model_name(),
+                "max_tokens": max_tokens,
+                "messages": oai_messages,
+                "reasoning_effort": "low",
+            },
         )
     except Exception as exc:  # noqa: BLE001
         raise HTTPException(502, f"LLM request failed: {exc}") from exc

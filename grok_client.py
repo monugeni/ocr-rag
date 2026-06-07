@@ -22,6 +22,30 @@ from typing import Any, Optional
 DEFAULT_GROK_MODEL = "grok-4.3"
 DEFAULT_XAI_BASE_URL = "https://api.x.ai/v1"
 
+# grok-4.3 accepts reasoning_effort none|low|medium|high (defaults to "low" when
+# omitted). The Anthropic side uses low|medium|high|xhigh|max; collapse the top
+# three to "high" so an Anthropic-vs-Grok A/B compares like reasoning depth.
+_EFFORT_TO_REASONING = {
+    "none": "none",
+    "low": "low",
+    "medium": "medium",
+    "high": "high",
+    "xhigh": "high",
+    "max": "high",
+}
+
+
+def reasoning_effort(effort: Optional[str]) -> str:
+    """Map an Anthropic-style effort string to a valid grok reasoning_effort."""
+    return _EFFORT_TO_REASONING.get((effort or "").strip().lower(), "low")
+
+
+def new_conv_id() -> str:
+    """A fresh conversation id for the ``x-grok-conv-id`` sticky-routing header."""
+    import uuid
+
+    return uuid.uuid4().hex
+
 
 def xai_base_url() -> str:
     return (os.environ.get("XAI_BASE_URL") or DEFAULT_XAI_BASE_URL).rstrip("/")
@@ -90,8 +114,13 @@ def split_tool_content(content: Any) -> tuple[str, Optional[str]]:
     return text, image_url
 
 
-def _headers(api_key: str) -> dict[str, str]:
-    return {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+def _headers(api_key: str, conv_id: Optional[str] = None) -> dict[str, str]:
+    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    # Sticky routing for xAI's automatic prompt caching — keeps a conversation's
+    # requests on the same server so the growing prefix actually hits the cache.
+    if conv_id:
+        headers["x-grok-conv-id"] = conv_id
+    return headers
 
 
 def create(
@@ -99,6 +128,7 @@ def create(
     api_key: str,
     payload: dict[str, Any],
     base_url: Optional[str] = None,
+    conv_id: Optional[str] = None,
     timeout: float = 180.0,
 ) -> dict[str, Any]:
     """Synchronous chat-completions call (used by the docchecker LLM protocol)."""
@@ -106,7 +136,7 @@ def create(
 
     url = f"{(base_url or xai_base_url()).rstrip('/')}/chat/completions"
     with httpx.Client(timeout=timeout) as client:
-        resp = client.post(url, headers=_headers(api_key), json=payload)
+        resp = client.post(url, headers=_headers(api_key, conv_id), json=payload)
         resp.raise_for_status()
         return resp.json()
 
@@ -116,6 +146,7 @@ async def acreate(
     api_key: str,
     payload: dict[str, Any],
     base_url: Optional[str] = None,
+    conv_id: Optional[str] = None,
     timeout: float = 180.0,
 ) -> dict[str, Any]:
     """Async chat-completions call (used by the chat + agentic-sweep loops)."""
@@ -123,7 +154,7 @@ async def acreate(
 
     url = f"{(base_url or xai_base_url()).rstrip('/')}/chat/completions"
     async with httpx.AsyncClient(timeout=timeout) as client:
-        resp = await client.post(url, headers=_headers(api_key), json=payload)
+        resp = await client.post(url, headers=_headers(api_key, conv_id), json=payload)
         resp.raise_for_status()
         return resp.json()
 

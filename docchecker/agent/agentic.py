@@ -226,13 +226,15 @@ def _report_findings_function(findings_schema: dict) -> dict:
     }
 
 
-async def _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker):
+async def _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker, conv_id):
     """Grok page-by-page sweep in one cumulative conversation. ``session`` is the
-    MCP client session for reference search (or None for an uploaded-refs-only run)."""
+    MCP client session for reference search (or None for an uploaded-refs-only run).
+    ``conv_id`` pins xAI sticky routing so the growing prefix hits the cache."""
     import grok_client
 
     from .pipeline import _finding_from_dict
 
+    effort = grok_client.reasoning_effort(ctx.effort)
     messages: list[dict] = [{"role": "system", "content": system}]
     total = len(pages)
     for idx, page in enumerate(pages, start=1):
@@ -248,12 +250,14 @@ async def _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, re
             resp = await grok_client.acreate(
                 api_key=ctx.api_key,
                 base_url=ctx.base_url,
+                conv_id=conv_id,
                 payload={
                     "model": ctx.model,
                     "max_tokens": MAX_TOKENS,
                     "messages": messages,
                     "tools": tools,
                     "tool_choice": "auto",
+                    "reasoning_effort": effort,
                 },
             )
             llm._record_usage(resp.get("usage"), ctx.model)  # feed spend + trace usage
@@ -336,16 +340,17 @@ async def _sweep_async_grok(ctx: CheckContext, llm, submitted, pages, uploaded_r
     tracker = chat.SourceTracker()
     report_tool = _report_findings_function(_FINDINGS_TOOL)
     have_mcp = bool(ctx.company_mcp_url and ref_projects)
+    conv_id = grok_client.new_conv_id()  # one id for the whole cumulative sweep
 
     if have_mcp:
         async with streamablehttp_client(ctx.company_mcp_url, timeout=15, sse_read_timeout=120) as (r, w, _):
             async with ClientSession(r, w) as session:
                 await session.initialize()
                 tools = grok_client.to_openai_tools(await chat._list_allowed_tools(session)) + [report_tool]
-                await _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker)
+                await _page_loop_grok(ctx, llm, submitted, pages, system, tools, session, ref_scope, findings, tracker, conv_id)
     else:
         # No reference KB to search — check each page against the uploaded
         # reference text carried in the system prompt.
-        await _page_loop_grok(ctx, llm, submitted, pages, system, [report_tool], None, "", findings, tracker)
+        await _page_loop_grok(ctx, llm, submitted, pages, system, [report_tool], None, "", findings, tracker, conv_id)
 
     return _dedupe_findings(findings)

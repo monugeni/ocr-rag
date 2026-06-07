@@ -40,6 +40,13 @@ Grok needs `XAI_API_KEY` (or `GROK_API_KEY`); `XAI_BASE_URL` defaults to
 `https://api.x.ai/v1`. The checker reads `metadata.provider` per run first, so you
 can launch one run on Anthropic and one on Grok against the same documents.
 
+Grok reasoning + caching are wired to match the Anthropic path for a fair A/B:
+`reasoning_effort` is set to `medium` for the chat, mirrors the checker's `effort`
+(`low|medium|high|xhigh|max` → grok `low|medium|high`) for the deep checking pass,
+and `none` for the no-thinking verify/plan passes. xAI's automatic prompt caching
+is engaged via a per-conversation `x-grok-conv-id` header (sticky routing), and
+cached tokens flow into the usage totals.
+
 ## Setup
 
 ```bash
