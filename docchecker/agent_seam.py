@@ -84,7 +84,10 @@ def build_context(run_id: str) -> CheckContext:
     annotated_dir = Path(config.ANNOTATED_DIR) / run_id
 
     run_meta = json.loads(run["metadata"]) if run.get("metadata") else {}
-    effort = run_meta.get("effort") or "medium"
+    # Default to high: the checker is recall-critical and medium was shown to
+    # under-report (grok-4.3 found 1 vs Opus 10 on the same doc at medium). For
+    # grok this maps to reasoning_effort "high" (its max).
+    effort = run_meta.get("effort") or "high"
     if effort not in ("low", "medium", "high", "xhigh", "max"):
         effort = "high"
 
