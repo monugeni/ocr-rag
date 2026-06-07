@@ -1307,6 +1307,10 @@ body.resizing iframe { pointer-events:none; }
 
 .messages { padding: 4px 0 8px; display: block; }
 .thread-col { max-width: 760px; margin: 0 auto; padding: 4px 40px 8px; }
+/* Wide reading mode (toolbar toggle): let chat fill the available width. */
+.ask-view.wide .thread-col,
+.ask-view.wide .composer-wrap,
+.ask-view.wide .composer-hint { max-width: none; }
 
 /* messages */
 .message {
