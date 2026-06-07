@@ -334,6 +334,7 @@ function pageHeader(title, subtitle = '', actions = '') {
 
 const ICON = {
   plus: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`,
+  search: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>`,
   refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 4v5h-5"/></svg>`,
   send: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
   trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>`,
@@ -428,10 +429,8 @@ function markCitations(text) {
 // before the final answer replaces it. Steps are thinking summaries and tool
 // calls, in the order the model produced them.
 function renderLiveTrace(live) {
-  if (!live) return '<div class="live-head">Working…</div>';
-  const head = live.model
-    ? `<div class="live-head"><span class="live-dot"></span>${escapeHtml(live.model)} working…</div>`
-    : '<div class="live-head"><span class="live-dot"></span>Working…</div>';
+  const head = '<div class="live-head"><span class="live-dot"></span>DocLens working…</div>';
+  if (!live) return head;
   const steps = (live.steps || []).map((s) => (
     s.kind === 'tool'
       ? `<div class="live-step tool">${escapeHtml(s.text)}</div>`
@@ -461,6 +460,12 @@ function renderMessage(message) {
       ? `<div class="live-thinking">${renderLiveTrace(message.live)}</div>`
       : renderMarkdown(markCitations(message.content || ''));
   const meta = !isUser && sources.length ? `<span class="msg-meta">· ${sources.length} source${sources.length > 1 ? 's' : ''}</span>` : '';
+  const hasTrace = !isUser && message.trace && Array.isArray(message.trace.events) && message.trace.events.length;
+  const traceBlock = hasTrace ? `
+      <div class="search-trace" data-msg="${escapeHtml(String(message.id || ''))}">
+        <button class="chip-btn trace-toggle" type="button" data-action="toggle-trace">${ICON.search || ''}Search trace</button>
+        <div class="trace-panel hidden"></div>
+      </div>` : '';
   return `
     <article class="message ${isUser ? 'user' : 'assistant'}">
       <div class="msg-who">
@@ -470,8 +475,118 @@ function renderMessage(message) {
       </div>
       <div class="message-body">${body}</div>
       ${sources.length ? `<div class="sources"><div class="sources-label">Sources</div>${sources.map(renderSource).join('')}</div>` : ''}
+      ${traceBlock}
     </article>
   `;
+}
+
+// Group the flat trace event stream into rounds for display + diagramming.
+function traceRounds(trace) {
+  const rounds = new Map();
+  const get = (n) => { if (!rounds.has(n)) rounds.set(n, { n, thinking: '', calls: [], stale: false, usage: null }); return rounds.get(n); };
+  for (const ev of (trace.events || [])) {
+    const r = get(ev.round || 1);
+    if (ev.type === 'thinking') r.thinking += (r.thinking ? '\n' : '') + (ev.text || '');
+    else if (ev.type === 'tool_result') r.calls.push(ev);
+    else if (ev.type === 'round_end') { r.stale = !!ev.stale; r.usage = ev.usage || null; r.final = !!ev.final; }
+  }
+  return [...rounds.values()].sort((a, b) => a.n - b.n);
+}
+
+// Build a mermaid flowchart of the search: question → rounds → tool calls → answer,
+// with bottlenecks flagged (slow >2s, dead-end = no new sources, repeated calls).
+function traceMermaid(rounds) {
+  const L = ['flowchart TD', '  Q([Question])'];
+  const cls = [];
+  let prev = 'Q';
+  rounds.forEach((r) => {
+    const rid = `R${r.n}`;
+    L.push(`  ${rid}["Round ${r.n}${r.stale ? ' · stale' : ''}"]`);
+    L.push(`  ${prev} --> ${rid}`);
+    if (r.stale) cls.push(`class ${rid} stale;`);
+    r.calls.forEach((c, i) => {
+      const tid = `${rid}c${i}`;
+      const secs = (c.ms / 1000).toFixed(1);
+      const out = c.new_sources > 0 ? `${c.new_sources} new src` : 'no new';
+      const label = `${c.name}<br/>${(c.query || '').slice(0, 38)}<br/>${secs}s · ${out}`;
+      L.push(`  ${tid}["${label.replace(/"/g, "'")}"]`);
+      L.push(`  ${rid} --> ${tid}`);
+      if (c.error) cls.push(`class ${tid} err;`);
+      else if (c.new_sources <= 0) cls.push(`class ${tid} dead;`);
+      else if (c.ms > 2000) cls.push(`class ${tid} slow;`);
+      else cls.push(`class ${tid} good;`);
+      if (c.repeated) cls.push(`class ${tid} repeat;`);
+    });
+    prev = rid;
+  });
+  L.push('  A([Answer])');
+  L.push(`  ${prev} --> A`);
+  L.push('  classDef good fill:#e7f3ea,stroke:#4c9b6a,color:#1d3d2a;');
+  L.push('  classDef dead fill:#fdeaea,stroke:#d7263d,color:#7a1420;');
+  L.push('  classDef slow fill:#fdf2e0,stroke:#e8a33d,color:#6b4a10;');
+  L.push('  classDef err fill:#fdeaea,stroke:#d7263d,color:#7a1420,stroke-width:2px;');
+  L.push('  classDef stale fill:#f0ede6,stroke:#b9b2a3,color:#5b554a;');
+  L.push('  classDef repeat stroke-dasharray:5 4;');
+  return L.join('\n') + '\n  ' + cls.join('\n  ');
+}
+
+function traceBreakdown(trace, rounds) {
+  const totalCalls = rounds.reduce((a, r) => a + r.calls.length, 0);
+  const dead = rounds.reduce((a, r) => a + r.calls.filter((c) => c.new_sources <= 0).length, 0);
+  const repeats = rounds.reduce((a, r) => a + r.calls.filter((c) => c.repeated).length, 0);
+  const slow = rounds.reduce((a, r) => a + r.calls.filter((c) => c.ms > 2000).length, 0);
+  const summary = `<div class="trace-summary">
+    <span><b>${rounds.length}</b> rounds</span>
+    <span><b>${totalCalls}</b> searches</span>
+    <span><b>${(trace.ms_total / 1000).toFixed(1)}s</b> total</span>
+    ${dead ? `<span class="warn"><b>${dead}</b> dead-end</span>` : ''}
+    ${repeats ? `<span class="warn"><b>${repeats}</b> repeated</span>` : ''}
+    ${slow ? `<span class="warn"><b>${slow}</b> slow</span>` : ''}
+  </div>`;
+  const rows = rounds.map((r) => {
+    const calls = r.calls.map((c) => {
+      const tag = c.error ? 'err' : c.new_sources <= 0 ? 'dead' : c.ms > 2000 ? 'slow' : 'good';
+      const bits = [`${(c.ms / 1000).toFixed(1)}s`, `${c.result_chars || 0} chars`,
+        c.new_sources > 0 ? `${c.new_sources} new sources` : 'no new sources'];
+      if (c.repeated) bits.push('repeated');
+      return `<li class="tcall ${tag}"><span class="tcall-name">${escapeHtml(c.name)}</span>
+        <span class="tcall-q">${escapeHtml(c.query || '')}</span>
+        <span class="tcall-meta">${bits.join(' · ')}</span></li>`;
+    }).join('');
+    return `<div class="tround">
+      <div class="tround-head">Round ${r.n}${r.stale ? ' <span class="warn">· stale (no progress)</span>' : ''}</div>
+      ${r.thinking ? `<div class="tround-think">${escapeHtml(r.thinking)}</div>` : ''}
+      ${calls ? `<ul class="tcalls">${calls}</ul>` : '<div class="muted">no searches this round</div>'}
+    </div>`;
+  }).join('');
+  return summary + `<div class="mermaid-wrap"></div>` + rows;
+}
+
+async function renderSearchTrace(panel, trace) {
+  const rounds = traceRounds(trace);
+  panel.innerHTML = traceBreakdown(trace, rounds);
+  const wrap = panel.querySelector('.mermaid-wrap');
+  try {
+    const m = await loadMermaid();
+    const { svg } = await m.render('tg' + Math.random().toString(36).slice(2), traceMermaid(rounds));
+    if (wrap) wrap.innerHTML = svg;
+  } catch (e) {
+    if (wrap) wrap.innerHTML = '<div class="muted">Diagram unavailable.</div>';
+  }
+}
+
+let _mermaidPromise = null;
+function loadMermaid() {
+  if (window.mermaid) return Promise.resolve(window.mermaid);
+  if (_mermaidPromise) return _mermaidPromise;
+  _mermaidPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    s.onload = () => { window.mermaid.initialize({ startOnLoad: false, theme: 'neutral', securityLevel: 'strict' }); resolve(window.mermaid); };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  return _mermaidPromise;
 }
 
 // Pull a leading clause/section number (e.g. "6.2.1", "B31.3") out of a breadcrumb.
@@ -994,15 +1109,27 @@ async function streamChat(content, live) {
         continue;
       }
       if (ev.type === 'start') {
-        live.live.model = ev.model;
-        live.live.provider = ev.provider;
         updateLiveBubble(live);
       } else if (ev.type === 'thinking') {
         live.live.steps.push({ kind: 'think', text: ev.text });
         updateLiveBubble(live);
       } else if (ev.type === 'tool') {
-        live.live.steps.push({ kind: 'tool', text: ev.summary || ev.name });
+        live.live.steps.push({ kind: 'tool', text: ev.query || ev.summary || ev.name, _tool: ev.name });
         updateLiveBubble(live);
+      } else if (ev.type === 'tool_result') {
+        // Annotate the matching live tool step with its outcome.
+        const step = [...live.live.steps].reverse().find((s) => s.kind === 'tool' && !s._done);
+        if (step) {
+          step._done = true;
+          const bits = [`${(ev.ms / 1000).toFixed(1)}s`];
+          bits.push(ev.new_sources > 0 ? `${ev.new_sources} new` : 'no new results');
+          if (ev.repeated) bits.push('repeat');
+          if (ev.error) bits.push('error');
+          step.text = `${step.text}  ·  ${bits.join(' · ')}`;
+        }
+        updateLiveBubble(live);
+      } else if (ev.type === 'round_end') {
+        /* boundary marker — used by the persisted trace, not the live view */
       } else if (ev.type === 'error') {
         done = { error: ev.error };
       } else if (ev.type === 'done') {
@@ -1326,6 +1453,17 @@ function handleClick(event) {
   if (action === 'confirm-move') void confirmMove();
   if (action === 'new-chat') void newChat();
   if (action === 'delete-chat') void deleteChat();
+  if (action === 'toggle-trace') {
+    const wrap = target.closest('.search-trace');
+    const panel = wrap?.querySelector('.trace-panel');
+    if (!panel) return;
+    const willShow = panel.classList.contains('hidden');
+    panel.classList.toggle('hidden');
+    if (willShow && !panel.dataset.rendered) {
+      const msg = (state.messages || []).find((m) => String(m.id) === wrap.dataset.msg);
+      if (msg && msg.trace) { panel.dataset.rendered = '1'; void renderSearchTrace(panel, msg.trace); }
+    }
+  }
   if (action === 'refresh') void refreshActiveData();
   if (action === 'go-documents') setTab('documents');
   if (action === 'go-ingest') setTab('ingest');

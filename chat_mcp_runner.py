@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Optional
 
@@ -375,8 +376,10 @@ async def _chat_with_tools(
     stale_rounds = 0
     previous_round_signature: Optional[tuple[tuple[str, str], ...]] = None
 
+    round_no = 0
     try:
         for _ in range(MAX_TOOL_ROUNDS):
+            round_no += 1
             response = await client.messages.create(
                 model=model,
                 max_tokens=12000,
@@ -390,22 +393,27 @@ async def _chat_with_tools(
                 cache_control={"type": "ephemeral"},
             )
             _acc_usage(usage, getattr(response, "usage", None))
+            ru = getattr(response, "usage", None)
+            round_usage = {
+                "input": getattr(ru, "input_tokens", 0) or 0,
+                "output": getattr(ru, "output_tokens", 0) or 0,
+                "cache_read": getattr(ru, "cache_read_input_tokens", 0) or 0,
+            }
 
             thinking = _collect_thinking(response.content)
             if thinking:
-                _emit(on_event, {"type": "thinking", "text": thinking})
+                _emit(on_event, {"type": "thinking", "text": thinking, "round": round_no})
 
             assistant_blocks = [_dump_block(block) for block in response.content]
             messages.append({"role": "assistant", "content": assistant_blocks})
 
             tool_uses = [block for block in response.content if getattr(block, "type", "") == "tool_use"]
-            for block in tool_uses:
-                _emit(on_event, {"type": "tool", "name": block.name,
-                                 "summary": _tool_call_summary(block.name, block.input)})
             if not tool_uses:
                 answer = _collect_text(response.content)
                 if not answer:
                     raise RuntimeError("LLM returned an empty response.")
+                _emit(on_event, {"type": "round_end", "round": round_no, "stale": False,
+                                 "final": True, "usage": round_usage})
                 return answer
 
             tool_results = []
@@ -415,31 +423,39 @@ async def _chat_with_tools(
             round_signature: list[tuple[str, str]] = []
             for block in tool_uses:
                 arguments = _normalize_tool_arguments(block.name, block.input, project)
+                query = _tool_call_summary(block.name, block.input)
+                _emit(on_event, {"type": "tool", "name": block.name, "query": query, "round": round_no})
                 call_key = (
                     block.name,
                     json.dumps(arguments, sort_keys=True, ensure_ascii=True, default=str),
                 )
                 round_signature.append(call_key)
                 seen_tool_calls[call_key] = seen_tool_calls.get(call_key, 0) + 1
-                if seen_tool_calls[call_key] <= MAX_REPEATED_TOOL_CALLS:
+                repeated = seen_tool_calls[call_key] > MAX_REPEATED_TOOL_CALLS
+                if not repeated:
                     repeated_loop = False
 
+                t0 = time.monotonic()
                 raw_result = await session.call_tool(block.name, arguments)
+                ms = int((time.monotonic() - t0) * 1000)
                 payload = _coerce_tool_payload(raw_result)
                 is_error = bool(getattr(raw_result, "isError", False))
                 if is_error:
                     tool_errors += 1
+                sb = len(tracker.order)
+                content = _format_tool_result(
+                    tool_name=block.name, payload=payload, tracker=tracker, project=project,
+                )
+                new_sources = len(tracker.order) - sb
                 tool_results.append({
                     "type": "tool_result",
                     "tool_use_id": block.id,
-                    "content": _format_tool_result(
-                        tool_name=block.name,
-                        payload=payload,
-                        tracker=tracker,
-                        project=project,
-                    ),
+                    "content": content,
                     "is_error": is_error,
                 })
+                _emit(on_event, {"type": "tool_result", "name": block.name, "query": query,
+                                 "round": round_no, "ms": ms, "result_chars": _content_len(content),
+                                 "new_sources": new_sources, "error": is_error, "repeated": repeated})
 
             messages.append({"role": "user", "content": tool_results})
             round_signature_key = tuple(round_signature)
@@ -451,6 +467,8 @@ async def _chat_with_tools(
             )
             stale_rounds = stale_rounds + 1 if no_progress else 0
             previous_round_signature = round_signature_key
+            _emit(on_event, {"type": "round_end", "round": round_no, "stale": no_progress,
+                             "new_sources": new_sources, "usage": round_usage})
 
             if repeated_loop or stale_rounds >= MAX_STALE_TOOL_ROUNDS:
                 break
@@ -1094,6 +1112,15 @@ def _collect_thinking(blocks: list[Any]) -> str:
         if getattr(block, "type", "") == "thinking":
             parts.append(getattr(block, "thinking", "") or "")
     return "".join(parts).strip()
+
+
+def _content_len(content: Any) -> int:
+    """Approximate character size of a formatted tool result (str or block list)."""
+    if isinstance(content, str):
+        return len(content)
+    if isinstance(content, list):
+        return sum(len(b.get("text", "")) for b in content if isinstance(b, dict) and b.get("type") == "text")
+    return 0
 
 
 def _tool_call_summary(name: str, arguments: Any) -> str:

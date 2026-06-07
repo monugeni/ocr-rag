@@ -240,6 +240,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     role        TEXT NOT NULL CHECK(role IN ('user', 'assistant')),
     content     TEXT NOT NULL,
     sources     TEXT,
+    trace       TEXT,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -260,6 +261,7 @@ def init_db(db_path: str) -> sqlite3.Connection:
         "delete_after_cancel": "INTEGER NOT NULL DEFAULT 0",
         "cancel_reason": "TEXT",
     })
+    _ensure_table_columns(conn, "chat_messages", {"trace": "TEXT"})
     _ensure_table_columns(conn, "page_embeddings", {
         "breadcrumb": "TEXT",
         "chunk_type": "TEXT DEFAULT 'text'",

@@ -705,7 +705,7 @@ def _thread_for_owner(conn, thread_id: str, owner_key: str):
 
 def _fetch_chat_messages(conn, thread_id: str):
     rows = conn.execute(
-        "SELECT id, role, content, sources, created_at "
+        "SELECT id, role, content, sources, trace, created_at "
         "FROM chat_messages WHERE thread_id = ? ORDER BY id",
         (thread_id,)
     ).fetchall()
@@ -713,6 +713,7 @@ def _fetch_chat_messages(conn, thread_id: str):
     for row in rows:
         item = dict(row)
         item["sources"] = json.loads(item["sources"]) if item["sources"] else []
+        item["trace"] = json.loads(item["trace"]) if item.get("trace") else None
         messages.append(item)
     return messages
 
@@ -785,10 +786,11 @@ def _insert_chat_message(
     role: str,
     content: str,
     sources: Optional[list] = None,
+    trace: Optional[dict] = None,
 ):
     conn.execute(
-        "INSERT INTO chat_messages (thread_id, role, content, sources) VALUES (?, ?, ?, ?)",
-        (thread_id, role, content, json.dumps(sources or []))
+        "INSERT INTO chat_messages (thread_id, role, content, sources, trace) VALUES (?, ?, ?, ?, ?)",
+        (thread_id, role, content, json.dumps(sources or []), json.dumps(trace) if trace else None)
     )
     _touch_thread(conn, thread_id)
 
@@ -2587,13 +2589,13 @@ def _sse(obj: dict) -> str:
     return f"data: {json.dumps(obj, default=str)}\n\n"
 
 
-def _persist_chat_answer(thread_id, project, content, response, owner_email, is_first):
+def _persist_chat_answer(thread_id, project, content, response, owner_email, is_first, trace=None):
     """Store the streamed assistant turn and return the same payload the blocking
     /messages endpoint returns, so the front-end render path is identical."""
     conn = get_conn()
     try:
         _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
-        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources)
+        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources, trace=trace)
         if is_first:
             conn.execute(
                 "UPDATE chat_threads SET title = ? WHERE id = ?",
@@ -2674,7 +2676,10 @@ async def stream_chat_message(thread_id: str, data: dict, request: Request):
                 await queue.put({"__error__": str(exc)})
 
         task = asyncio.create_task(run())
-        yield _sse({"type": "start", "provider": provider, "model": model})
+        trace_events = []
+        t_start = asyncio.get_event_loop().time()
+        # 'start' carries no model name — the front end must not display it.
+        yield _sse({"type": "start", "provider": provider})
         try:
             while True:
                 ev = await queue.get()
@@ -2682,11 +2687,17 @@ async def stream_chat_message(thread_id: str, data: dict, request: Request):
                     yield _sse({"type": "error", "error": ev["__error__"]})
                     return
                 if "__final__" in ev:
+                    trace = {
+                        "provider": provider,
+                        "ms_total": int((asyncio.get_event_loop().time() - t_start) * 1000),
+                        "events": trace_events,
+                    }
                     payload = _persist_chat_answer(
-                        thread_id, project, content, ev["__final__"], owner_email, is_first
+                        thread_id, project, content, ev["__final__"], owner_email, is_first, trace=trace
                     )
                     yield _sse({"type": "done", **payload})
                     return
+                trace_events.append(ev)
                 yield _sse(ev)
         finally:
             if not task.done():
