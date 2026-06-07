@@ -43,7 +43,7 @@ from uuid import uuid4
 
 import uvicorn
 from fastapi import FastAPI, File, Form, HTTPException, Query, Request, UploadFile
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
 from chat_mcp_runner import arun_folder_chat, run_folder_chat
@@ -1966,17 +1966,27 @@ class IngestionTracker:
 
     def all(self):
         conn = self._conn()
-        # Clean terminal jobs older than 1 hour
-        conn.execute(
-            "DELETE FROM ingestion_jobs WHERE status IN ('completed', 'failed', 'cancelled') "
-            "AND started_at < datetime('now', '-1 hour')"
-        )
-        conn.commit()
-        rows = conn.execute(
-            "SELECT * FROM ingestion_jobs ORDER BY started_at DESC"
-        ).fetchall()
-        conn.close()
-        return [dict(r) for r in rows]
+        try:
+            # Read first — this is a frequently-polled GET and must not fail just
+            # because a writer holds the lock. WAL lets this read proceed
+            # concurrently with an in-flight ingestion write.
+            rows = conn.execute(
+                "SELECT * FROM ingestion_jobs ORDER BY started_at DESC"
+            ).fetchall()
+            result = [dict(r) for r in rows]
+            # Opportunistic cleanup of old terminal jobs — best effort. Never let
+            # a transient lock turn a status poll into a 500.
+            try:
+                conn.execute(
+                    "DELETE FROM ingestion_jobs WHERE status IN ('completed', 'failed', 'cancelled') "
+                    "AND started_at < datetime('now', '-1 hour')"
+                )
+                conn.commit()
+            except sqlite3.OperationalError:
+                conn.rollback()
+            return result
+        finally:
+            conn.close()
 
     def for_project(self, project):
         conn = self._conn()
@@ -2546,42 +2556,28 @@ def create_chat_message(thread_id: str, data: dict, request: Request):
         raise HTTPException(400, "Message content required")
 
     owner_key, owner_email = _current_owner(request)
+
+    # 1) Persist the user message in its own short transaction. Do NOT hold the
+    # SQLite write lock open across the multi-second LLM call below — that is
+    # what starved every other writer (the ingestion-job poller, other chats)
+    # and produced "database is locked" 500s.
     conn = get_conn()
     try:
         thread = _thread_for_owner(conn, thread_id, owner_key)
-
         _insert_chat_message(conn, thread_id, "user", content)
-
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
-        response = _generate_mcp_chat_answer(thread["project"], content, history)
-        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
-        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=response.sources)
-
-        if len(existing_messages) == 1 and thread["title"] == "New chat":
-            conn.execute(
-                "UPDATE chat_threads SET title = ? WHERE id = ?",
-                (_thread_title_from_message(content), thread_id)
-            )
-            _touch_thread(conn, thread_id)
-
+        is_first = len(existing_messages) == 1 and thread["title"] == "New chat"
+        project = thread["project"]
         conn.commit()
-        return {
-            "thread": {
-                **dict(conn.execute(
-                "SELECT * FROM chat_threads WHERE id = ?",
-                (thread_id,)
-            ).fetchone()),
-                "folder": thread["project"],
-            },
-            "messages": _fetch_chat_messages(conn, thread_id),
-            "retrieval": {
-                "query": content,
-                "source_count": len(response.sources),
-            },
-        }
     finally:
         conn.close()
+
+    # 2) Long LLM + MCP call with no DB connection held.
+    response = _generate_mcp_chat_answer(project, content, history)
+
+    # 3) Persist the assistant turn in a fresh short transaction.
+    return _persist_chat_answer(thread_id, project, content, response, owner_email, is_first)
 
 
 def _sse(obj: dict) -> str:
@@ -2714,58 +2710,54 @@ def review_chat_document(
     question = (content or "").strip() or _default_attachment_review_question(attachment["filename"])
 
     owner_key, owner_email = _current_owner(request)
+
+    # 1) Persist the user message + attachment refs in a short transaction, then
+    # release the connection so the long review call doesn't hold the write lock.
     conn = get_conn()
     try:
         thread = _thread_for_owner(conn, thread_id, owner_key)
-
         _insert_chat_message(
-            conn,
-            thread_id,
-            "user",
-            question,
-            sources=attachment["message_sources"],
+            conn, thread_id, "user", question, sources=attachment["message_sources"],
         )
-
         existing_messages = _fetch_chat_messages(conn, thread_id)
         history = existing_messages[:-1]
-        response = _generate_mcp_chat_answer(
-            thread["project"],
-            question,
-            history,
-            attachment=attachment,
-        )
-        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
-        sources = [
-            *attachment["assistant_sources"],
-            *response.sources,
-        ]
-        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=sources)
-
-        if len(existing_messages) == 1 and thread["title"] == "New chat":
-            conn.execute(
-                "UPDATE chat_threads SET title = ? WHERE id = ?",
-                (_thread_title_from_message(question), thread_id)
-            )
-            _touch_thread(conn, thread_id)
-
+        is_first = len(existing_messages) == 1 and thread["title"] == "New chat"
+        project = thread["project"]
         conn.commit()
-        return {
-            "thread": {
-                **dict(conn.execute(
-                    "SELECT * FROM chat_threads WHERE id = ?",
-                    (thread_id,)
-                ).fetchone()),
-                "folder": thread["project"],
-            },
-            "messages": _fetch_chat_messages(conn, thread_id),
-            "retrieval": {
-                "query": question,
-                "source_count": len(response.sources),
-                "attachment_pages": attachment["page_count"],
-            },
-        }
     finally:
         conn.close()
+
+    # 2) Long LLM + MCP review with no DB connection held.
+    response = _generate_mcp_chat_answer(project, question, history, attachment=attachment)
+    sources = [*attachment["assistant_sources"], *response.sources]
+
+    # 3) Persist the assistant turn in a fresh short transaction.
+    conn = get_conn()
+    try:
+        _record_usage(owner_email, "chat", getattr(response, "model", ""), getattr(response, "usage", None))
+        _insert_chat_message(conn, thread_id, "assistant", response.answer, sources=sources)
+        if is_first:
+            conn.execute(
+                "UPDATE chat_threads SET title = ? WHERE id = ?",
+                (_thread_title_from_message(question), thread_id),
+            )
+            _touch_thread(conn, thread_id)
+        conn.commit()
+        thread_row = dict(conn.execute(
+            "SELECT * FROM chat_threads WHERE id = ?", (thread_id,)
+        ).fetchone())
+        messages = _fetch_chat_messages(conn, thread_id)
+    finally:
+        conn.close()
+    return {
+        "thread": {**thread_row, "folder": project},
+        "messages": messages,
+        "retrieval": {
+            "query": question,
+            "source_count": len(response.sources),
+            "attachment_pages": attachment["page_count"],
+        },
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -3392,12 +3384,35 @@ def resolve_flag(flag_id: int):
 # Static files + entry point
 # ---------------------------------------------------------------------------
 
+static_path = Path(__file__).parent / "static"
+
+
+def _asset_version() -> str:
+    """Cache-bust token for static assets, derived from the on-disk app.js /
+    style.css (mtime + size). Changes whenever a deploy rewrites those files, so
+    browsers always refetch the new JS/CSS without a hand-bumped version string.
+    Computed per request (a couple of stat() calls — negligible)."""
+    import hashlib
+
+    parts = []
+    for name in ("app.js", "style.css"):
+        try:
+            st = (static_path / name).stat()
+            parts.append(f"{int(st.st_mtime)}-{st.st_size}")
+        except OSError:
+            parts.append(name)
+    return hashlib.sha1("|".join(parts).encode()).hexdigest()[:10]
+
+
 @app.get("/")
 async def index():
-    return FileResponse(Path(__file__).parent / "static" / "index.html")
+    html = (static_path / "index.html").read_text(encoding="utf-8")
+    html = html.replace("__ASSET_V__", _asset_version())
+    # The HTML must always revalidate so a new ?v= is seen immediately on reload;
+    # the versioned JS/CSS underneath can still be cached hard.
+    return HTMLResponse(html, headers={"Cache-Control": "no-cache"})
 
 
-static_path = Path(__file__).parent / "static"
 if static_path.exists():
     app.mount("/static", StaticFiles(directory=str(static_path)))
 
