@@ -74,6 +74,29 @@ _VERDICT_TOOL = {
     "required": ["verified", "confidence", "evidence"],
 }
 
+# Batch verdict: one verdict per candidate finding on a page, keyed by index — so
+# the page text is sent ONCE per page instead of once per finding (the verifier
+# otherwise has 0% prompt-cache reuse and re-pays for the page every time).
+_VERDICT_BATCH_TOOL = {
+    "type": "object",
+    "properties": {
+        "verdicts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "index": {"type": "integer", "description": "The [index] of the finding this verdict is for."},
+                    "verified": {"type": "boolean"},
+                    "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+                    "evidence": {"type": "string"},
+                },
+                "required": ["index", "verified", "confidence"],
+            },
+        }
+    },
+    "required": ["verdicts"],
+}
+
 _PLAN_TOOL = {
     "type": "object",
     "properties": {
@@ -335,6 +358,64 @@ def _verify(ctx: CheckContext, llm: LLM, submitted, finding: Finding) -> bool:
     return bool(out.get("verified"))
 
 
+def _verify_page(ctx: CheckContext, llm: LLM, submitted, page_num: int, findings: list[Finding]) -> list[tuple[Finding, bool]]:
+    """Verify EVERY candidate finding on one page in a single call (page text sent
+    once). Returns [(finding, keep)] in input order. Recall-first: a finding with
+    a missing verdict is kept."""
+    if len(findings) == 1:
+        f = findings[0]
+        return [(f, _verify(ctx, llm, submitted, f))]
+
+    sub_page = page_text(ctx.docs_db_path, submitted.doc_id, page_num)
+    lines = []
+    for i, f in enumerate(findings):
+        ref_quote = (f.citation or {}).get("snippet") or ""
+        lines.append(
+            f"[{i}] ({f.category}/{f.severity}) {f.title} — {f.detail}"
+            + (f"  | reference quote: {ref_quote}" if ref_quote else "")
+        )
+    user = (
+        "Verify EACH candidate finding below against the submitted page.\n\n"
+        f"SUBMITTED PAGE {page_num}:\n{sub_page}\n\n"
+        "CANDIDATE FINDINGS:\n" + "\n".join(lines) + "\n\n"
+        "Return one verdict per finding via the verdicts tool, keyed by its [index]. Set "
+        "verified=false ONLY if the page clearly contradicts or clearly does not support that "
+        "finding. If unsure, keep it: verified=true with confidence=low. Missing a genuine issue "
+        "is worse than flagging a borderline one."
+    )
+    out = llm.call_tool(
+        system=(
+            "You are a recall-first verifier for engineering document review. Keep findings "
+            "unless they are clearly wrong or unsupported by the submitted page. When unsure, "
+            "keep them with low confidence rather than dropping them."
+        ),
+        user_text=user,
+        tool_name="verdicts",
+        tool_description="One verdict per candidate finding, keyed by index.",
+        input_schema=_VERDICT_BATCH_TOOL,
+        model=ctx.fast_model,
+        max_tokens=400 + 220 * len(findings),
+    )
+    by_index = {}
+    for v in (out.get("verdicts") or []):
+        try:
+            by_index[int(v.get("index"))] = v
+        except (TypeError, ValueError):
+            continue
+    results: list[tuple[Finding, bool]] = []
+    for i, f in enumerate(findings):
+        v = by_index.get(i)
+        if v is None:
+            f.confidence = "low"
+            results.append((f, True))  # recall-first: no verdict → keep
+            continue
+        f.confidence = v.get("confidence", "low")
+        if v.get("evidence"):
+            f.citation = {**(f.citation or {}), "verify_evidence": v["evidence"]}
+        results.append((f, bool(v.get("verified", True))))
+    return results
+
+
 def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result):
     """Verify candidates concurrently (each is an independent fast-model call), then
     fold results back in candidate order. Returns (confirmed, verdicts) — verdicts is
@@ -343,19 +424,33 @@ def _verify_all(ctx: CheckContext, llm: LLM, submitted, candidates, result):
     if not candidates:
         return [], []
 
-    def work(f: Finding):
-        try:
-            return f, ("keep" if _verify(ctx, llm, submitted, f) else "drop"), None
-        except Exception as exc:  # noqa: BLE001
-            return f, "error", str(exc)
+    # Group by submitted page so each page is verified in ONE call (page text sent
+    # once), then run pages concurrently. Falls back to per-finding for 1-finding pages.
+    from collections import defaultdict
+    by_page: dict[int, list[Finding]] = defaultdict(list)
+    for f in candidates:
+        by_page[f.page_num].append(f)
 
-    with ThreadPoolExecutor(max_workers=min(6, len(candidates)),
+    def work_page(item):
+        page_num, fs = item
+        try:
+            return [(f, "keep" if keep else "drop", None) for f, keep in _verify_page(ctx, llm, submitted, page_num, fs)]
+        except Exception as exc:  # noqa: BLE001
+            return [(f, "error", str(exc)) for f in fs]
+
+    with ThreadPoolExecutor(max_workers=min(6, len(by_page)),
                             thread_name_prefix="verify") as ex:
-        outcomes = list(ex.map(work, candidates))  # ex.map preserves input order
+        page_outcomes = list(ex.map(work_page, by_page.items()))
+
+    outcome_by_id = {}
+    for lst in page_outcomes:
+        for f, verdict, err in lst:
+            outcome_by_id[id(f)] = (verdict, err)
 
     confirmed: list[Finding] = []
     verdicts: list[dict] = []
-    for f, verdict, err in outcomes:
+    for f in candidates:  # preserve original candidate order in the audit trail
+        verdict, err = outcome_by_id.get(id(f), ("keep", None))
         entry = {
             "title": f.title,
             "page": f.page_num,

@@ -383,7 +383,7 @@ async def _chat_with_tools(
             response = await client.messages.create(
                 model=model,
                 max_tokens=12000,
-                system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}],
+                system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
                 messages=messages,
                 tools=tools,
                 # display:"summarized" so the thinking blocks carry text we can
@@ -594,7 +594,7 @@ async def _force_final_answer(
         response = await client.messages.create(
             model=model,
             max_tokens=12000,
-            system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral"}}],
+            system=[{"type": "text", "text": system_prompt, "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
             messages=final_messages,
             thinking=_anthropic_thinking(),
             output_config={"effort": _chat_effort()},

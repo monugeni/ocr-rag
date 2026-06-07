@@ -135,7 +135,7 @@ async def _page_loop(client, ctx, llm, submitted, pages, system, tools, session,
             resp = await client.messages.create(
                 model=ctx.model,
                 max_tokens=MAX_TOKENS,
-                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
+                system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral", "ttl": "1h"}}],
                 messages=messages,
                 tools=tools,
                 thinking={"type": "adaptive", "display": "summarized"},
