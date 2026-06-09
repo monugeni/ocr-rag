@@ -21,7 +21,7 @@ const state = {
   inspecting: false,
 };
 
-const VALID_TABS = new Set(['ask', 'check', 'documents', 'ingest', 'jobs', 'inspect']);
+const VALID_TABS = new Set(['ask', 'check', 'history', 'documents', 'ingest', 'jobs', 'inspect']);
 const INSPECT_PANELS = new Set(['metadata', 'toc', 'page', 'search']);
 const $ = (id) => document.getElementById(id);
 
@@ -314,6 +314,7 @@ function renderActiveView() {
   renderShell();
   if (state.tab === 'ask') renderAsk();
   if (state.tab === 'check') renderCheck();
+  if (state.tab === 'history') renderHistory();
   if (state.tab === 'documents') renderDocuments();
   if (state.tab === 'ingest') renderIngest();
   if (state.tab === 'jobs') renderJobs();
@@ -1571,7 +1572,7 @@ function renderCheckNew() {
       <div id="chk-prior" class="hidden"><label class="dropzone"><input id="chk-prior-file" type="file"><span class="dz-text">Old commented PDF — <b>browse</b></span></label><ul id="chk-prior-list" class="filelist"></ul></div>
       <div class="check-actions"><button id="chk-run" class="primary">Run check</button></div>
     </div>
-    <div class="check-recent"><h3>Recent checks</h3><div id="chk-recent" class="muted">Loading…</div></div>
+    <div class="check-recent"><a href="#" id="chk-see-history">See past checks &rarr;</a></div>
   `;
   bindFileList('chk-submitted', 'chk-submitted-list');
   bindFileList('chk-reference', 'chk-reference-list');
@@ -1583,7 +1584,7 @@ function renderCheckNew() {
     .map((f) => `<option value="${escapeHtml(f.folder)}">${escapeHtml(f.folder)}</option>`).join('');
   $('chk-revision').addEventListener('change', (e) => $('chk-prior').classList.toggle('hidden', !e.target.checked));
   $('chk-run').addEventListener('click', startCheck);
-  loadRecentChecks();
+  $('chk-see-history').addEventListener('click', (e) => { e.preventDefault(); setTab('history'); });
 }
 
 function bindFileList(inputId, listId) {
@@ -1614,14 +1615,121 @@ function bindFileList(inputId, listId) {
   }
 }
 
-async function loadRecentChecks() {
+// ---------------------------------------------------------------------------
+// History — past checking sessions across all folders (retrieval + delete).
+// ---------------------------------------------------------------------------
+const historyState = { q: '', runs: [] };
+
+function renderHistory() {
+  const view = $('history-view');
+  if (!view) return;
+  view.innerHTML = `
+    ${pageHeader('History', 'Past checking sessions across all folders.', '')}
+    <div class="history-toolbar">
+      <input id="hist-search" type="search" placeholder="Search by document, type or folder…" value="${escapeHtml(historyState.q)}">
+    </div>
+    <div id="hist-list" class="list"><div class="muted">Loading…</div></div>
+  `;
+  const search = $('hist-search');
+  let t;
+  search.addEventListener('input', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { historyState.q = search.value.trim(); loadHistory(); }, 250);
+  });
+  loadHistory();
+}
+
+async function loadHistory() {
+  const el = $('hist-list');
+  if (!el) return;
   try {
-    const runs = await api(`/api/runs?project_number=${enc(state.folder)}`);
-    const el = $('chk-recent'); if (!el) return;
-    if (!runs.length) { el.innerHTML = '<div class="muted">No checks yet for this folder.</div>'; return; }
-    el.innerHTML = runs.map((r) => `<div class="recent-row"><span class="status-pill" data-s="${r.status}">${r.status}</span><span>${escapeHtml(r.document_type || 'document')}</span><span class="muted">${escapeHtml(r.created_at || '')}</span><a href="#" class="open-run" data-runid="${r.id}">open</a></div>`).join('');
-    el.querySelectorAll('.open-run').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); openCheckRun(a.dataset.runid); }));
-  } catch (_) { /* ignore */ }
+    const qs = historyState.q ? `?q=${enc(historyState.q)}` : '';
+    const runs = await api(`/api/runs${qs}`);
+    historyState.runs = runs;
+    if (!runs.length) {
+      el.innerHTML = `<div class="muted">${historyState.q
+        ? `No checks match “${escapeHtml(historyState.q)}”.`
+        : 'No checks yet.'}</div>`;
+      return;
+    }
+    el.innerHTML = runs.map(renderHistoryRow).join('');
+    el.querySelectorAll('.hist-open').forEach((a) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      setTab('check');
+      openCheckRun(a.dataset.runid);
+    }));
+    el.querySelectorAll('.hist-del').forEach((b) => b.addEventListener('click', () => confirmDeleteRun(b.dataset.runid)));
+  } catch (err) {
+    el.innerHTML = `<div class="muted">Could not load history: ${escapeHtml(err.message)}</div>`;
+  }
+}
+
+function renderHistoryRow(r) {
+  const name = escapeHtml(r.submitted_name || r.document_type || 'document');
+  const folder = escapeHtml(r.project_number || '');
+  const when = escapeHtml(r.created_at || '');
+  const n = r.finding_count || 0;
+  const count = r.status === 'done' ? `${n} finding${n === 1 ? '' : 's'}` : '';
+  const busy = r.status === 'running' || r.status === 'queued';
+  const del = busy ? '' : `<button class="ghost small hist-del" data-runid="${r.id}" title="Delete">🗑</button>`;
+  return `<div class="recent-row hist-row">
+    <span class="status-pill" data-s="${r.status}">${escapeHtml(r.status)}</span>
+    <span class="hist-name">${name}</span>
+    <span class="muted">${folder}</span>
+    <span class="muted">${when}</span>
+    <span class="muted">${count}</span>
+    <a href="#" class="hist-open" data-runid="${r.id}">open</a>
+    ${del}
+  </div>`;
+}
+
+function confirmDialog({ title, body, confirmLabel = 'Confirm', cancelLabel = 'Cancel' }) {
+  return new Promise((resolve) => {
+    const existing = $('confirm-dialog');
+    if (existing) existing.remove();
+    const dlg = document.createElement('div');
+    dlg.id = 'confirm-dialog';
+    dlg.className = 'modal-overlay';
+    dlg.innerHTML = `
+      <div class="modal">
+        <div class="modal-head">
+          <h3>${escapeHtml(title)}</h3>
+          <button class="ghost small" type="button" data-act="cancel" aria-label="Close">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="muted">${escapeHtml(body)}</div>
+          <div class="modal-actions">
+            <button class="ghost" type="button" data-act="cancel">${escapeHtml(cancelLabel)}</button>
+            <button class="primary" type="button" data-act="ok">${escapeHtml(confirmLabel)}</button>
+          </div>
+        </div>
+      </div>`;
+    const done = (val) => { dlg.remove(); resolve(val); };
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) return done(false);
+      const act = e.target.closest('[data-act]')?.dataset.act;
+      if (act === 'cancel') done(false);
+      if (act === 'ok') done(true);
+    });
+    document.body.appendChild(dlg);
+  });
+}
+
+async function confirmDeleteRun(runId) {
+  const ok = await confirmDialog({
+    title: 'Delete check',
+    body: 'Permanently delete this check and its annotated PDF? This cannot be undone.',
+    confirmLabel: 'Delete',
+  });
+  if (!ok) return;
+  try {
+    await api(`/api/runs/${enc(runId)}`, { method: 'DELETE' });
+    showToast('Check deleted');
+    historyState.runs = historyState.runs.filter((r) => r.id !== runId);
+    loadHistory();
+  } catch (err) {
+    showToast(err.message, 'error');
+  }
 }
 
 async function startCheck() {
