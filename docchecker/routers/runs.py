@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import shutil
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request
@@ -29,9 +30,9 @@ def create_run(payload: RunCreate, request: Request):
 
 
 @router.get("")
-def list_runs(request: Request, project_number: str | None = None, limit: int = 50):
+def list_runs(request: Request, q: str | None = None, limit: int = 100):
     auth.require_user(request)
-    return store.list_runs(project_number=project_number, limit=limit)
+    return store.list_run_cards(q=q, limit=limit)
 
 
 @router.get("/{run_id}")
@@ -41,6 +42,36 @@ def get_run(run_id: str, request: Request):
     if not run:
         raise HTTPException(status_code=404, detail="run not found")
     return run
+
+
+@router.delete("/{run_id}")
+def delete_run(run_id: str, request: Request):
+    user = auth.require_user(request)
+    run = store.get_run(run_id)
+    if not run:
+        raise HTTPException(status_code=404, detail="run not found")
+    if run["status"] in ("running", "queued"):
+        raise HTTPException(
+            status_code=409,
+            detail=f"cannot delete a run while it is {run['status']}",
+        )
+    from .. import config
+
+    artifacts = store.delete_run(run_id)
+    for p in artifacts["disk_paths"]:
+        try:
+            Path(p).unlink(missing_ok=True)
+        except Exception:  # noqa: BLE001 — best-effort cleanup
+            pass
+    for d in (Path(config.ANNOTATED_DIR) / run_id, Path(config.EXPORTS_DIR) / run_id):
+        shutil.rmtree(d, ignore_errors=True)
+    auth.record_audit(
+        "run_deleted",
+        user_id=user["id"],
+        run_id=run_id,
+        payload={"project_number": run.get("project_number")},
+    )
+    return {"deleted": run_id}
 
 
 @router.post("/{run_id}/start")

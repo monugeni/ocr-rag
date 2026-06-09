@@ -5,6 +5,7 @@ Thin functions over checker.db so routers and the agent seam stay readable.
 from __future__ import annotations
 
 import json
+import sqlite3
 import uuid
 from typing import Any, Optional
 
@@ -173,6 +174,88 @@ def list_runs(
         return [dict(r) for r in rows]
     finally:
         conn.close()
+
+
+def list_run_cards(q: str | None = None, limit: int = 100) -> list[dict]:
+    """Runs across ALL folders, newest-first, each enriched with the submitted
+    document name and a findings count — backs the History view. Optional `q`
+    filters (LIKE) over folder, document type, and submitted filename."""
+    where, params = "", []
+    if q:
+        like = f"%{q}%"
+        where = (
+            " WHERE (r.project_number LIKE ? OR r.document_type LIKE ? "
+            "OR EXISTS (SELECT 1 FROM uploads u2 WHERE u2.run_id = r.id "
+            "AND u2.role = 'submitted' AND u2.filename LIKE ?))"
+        )
+        params = [like, like, like]
+    conn = get_conn()
+    try:
+        rows = conn.execute(
+            f"""SELECT r.*,
+                  (SELECT u.filename FROM uploads u
+                     WHERE u.run_id = r.id AND u.role = 'submitted'
+                     ORDER BY u.id LIMIT 1) AS submitted_name,
+                  (SELECT COUNT(*) FROM findings f WHERE f.run_id = r.id) AS finding_count
+                FROM check_runs r{where}
+                ORDER BY r.created_at DESC LIMIT ?""",
+            (*params, limit),
+        ).fetchall()
+        return [dict(x) for x in rows]
+    finally:
+        conn.close()
+
+
+def _purge_ingested_doc(docs_db_path: str, doc_id: int) -> None:
+    """Remove one document and all derived rows from a docs.db (ocr-rag schema).
+    Mirrors web.py:_delete_document_data; the *_fts tables stay in sync via the
+    triggers on the documents/pages/chunks deletes. Best-effort per table so a
+    schema that predates a column never blocks the run delete."""
+    conn = sqlite3.connect(docs_db_path)
+    try:
+        conn.execute("PRAGMA foreign_keys=ON")
+        try:
+            conn.execute(
+                "DELETE FROM page_embeddings WHERE page_id IN "
+                "(SELECT id FROM pages WHERE doc_id = ?)",
+                (doc_id,),
+            )
+        except sqlite3.OperationalError:
+            pass  # embeddings table absent in this DB
+        for tbl in ("chunks", "pages", "sections", "corrections",
+                    "cross_references", "quality_flags", "ingestion_jobs"):
+            try:
+                conn.execute(f"DELETE FROM {tbl} WHERE doc_id = ?", (doc_id,))
+            except sqlite3.OperationalError:
+                pass
+        conn.execute("DELETE FROM documents WHERE id = ?", (doc_id,))
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def delete_run(run_id: str) -> dict:
+    """Hard-delete a run. Purges its ingested docs from check_docs.db, deletes the
+    check_runs row (FK cascade clears uploads/findings/comment_incorporation), and
+    returns the upload disk paths so the caller can unlink them."""
+    from . import config
+    conn = get_conn()
+    try:
+        ups = conn.execute(
+            "SELECT disk_path, doc_id FROM uploads WHERE run_id = ?", (run_id,)
+        ).fetchall()
+        disk_paths = [u["disk_path"] for u in ups if u["disk_path"]]
+        doc_ids = {u["doc_id"] for u in ups if u["doc_id"] is not None}
+        conn.execute("DELETE FROM check_runs WHERE id = ?", (run_id,))
+        conn.commit()
+    finally:
+        conn.close()
+    for did in doc_ids:
+        try:
+            _purge_ingested_doc(config.DOCS_DB, did)
+        except Exception:  # noqa: BLE001 — best-effort; the run row is already gone
+            pass
+    return {"disk_paths": disk_paths, "doc_ids": list(doc_ids)}
 
 
 def update_run(run_id: str, **fields: Any) -> None:
