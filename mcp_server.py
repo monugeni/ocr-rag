@@ -37,7 +37,6 @@ Usage:
 """
 
 import argparse
-import base64
 from collections import Counter
 import json
 import math
@@ -52,6 +51,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp.utilities.types import Image
 
 from corrections import register_correction_tools
 
@@ -2107,7 +2107,7 @@ def read_document_chunks(
         }
 
 
-@mcp.tool()
+@mcp.tool(structured_output=False)
 def render_page_image(
     doc_id: int,
     page_num: int,
@@ -2118,7 +2118,8 @@ def render_page_image(
 
     Use this after search/ranking finds a page that may be a drawing, form,
     scanned page, title block, table image, or a page where extracted text is
-    incomplete. The result includes a PNG image as base64 plus page metadata.
+    incomplete. Returns compact page metadata plus the PNG as native MCP image
+    content (not embedded base64 in JSON).
 
     Args:
         doc_id: Document ID.
@@ -2207,7 +2208,7 @@ def render_page_image(
     image_path = cache_dir / f"doc{doc_id}_page{page_num}_{dpi}dpi.png"
     image_path.write_bytes(png_bytes)
 
-    return {
+    metadata = {
         "doc_id": doc_id,
         "doc_title": d["title"],
         "project": d["project"],
@@ -2222,8 +2223,8 @@ def render_page_image(
         "height_px": height_px,
         "dpi": dpi,
         "renderer": renderer,
-        "image_base64": base64.b64encode(png_bytes).decode("ascii"),
     }
+    return [metadata, Image(path=image_path)]
 
 
 @mcp.tool()

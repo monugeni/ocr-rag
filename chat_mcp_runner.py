@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import json
 import os
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable, Optional
 
 import anthropic
@@ -444,7 +446,11 @@ async def _chat_with_tools(
                     tool_errors += 1
                 sb = len(tracker.order)
                 content = _format_tool_result(
-                    tool_name=block.name, payload=payload, tracker=tracker, project=project,
+                    tool_name=block.name,
+                    payload=payload,
+                    tracker=tracker,
+                    project=project,
+                    raw_result=raw_result,
                 )
                 new_sources = len(tracker.order) - sb
                 tool_results.append({
@@ -740,7 +746,11 @@ async def _chat_with_tools_grok(
                 tool_errors += 1
 
             content = _format_tool_result(
-                tool_name=name, payload=payload, tracker=tracker, project=project,
+                tool_name=name,
+                payload=payload,
+                tracker=tracker,
+                project=project,
+                raw_result=raw_result,
             )
             text, image_url = grok_client.split_tool_content(content)
             tool_messages.append({
@@ -919,6 +929,7 @@ def _format_tool_result(
     payload: Any,
     tracker: SourceTracker,
     project: str,
+    raw_result: Any = None,
 ) -> Any:
     annotations = []
     for source in _extract_sources(payload, tool_name=tool_name, project=project):
@@ -945,7 +956,7 @@ def _format_tool_result(
     else:
         text = f"Tool: {tool_name}\nStructured result:\n{body}"
 
-    image_block = _image_block_from_payload(payload)
+    image_block = _image_block_from_payload(payload) or _image_block_from_mcp_result(raw_result)
     if image_block:
         return [
             {"type": "text", "text": text},
@@ -957,18 +968,50 @@ def _format_tool_result(
 def _image_block_from_payload(payload: Any) -> Optional[dict[str, Any]]:
     if not isinstance(payload, dict):
         return None
-    image_base64 = payload.get("image_base64")
     mime_type = payload.get("mime_type") or "image/png"
-    if not image_base64:
+    image_base64 = payload.get("image_base64")
+    if image_base64:
+        return {
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": mime_type,
+                "data": image_base64,
+            },
+        }
+    image_path = payload.get("image_path")
+    if not image_path:
+        return None
+    path = Path(str(image_path))
+    if not path.is_file():
         return None
     return {
         "type": "image",
         "source": {
             "type": "base64",
             "media_type": mime_type,
-            "data": image_base64,
+            "data": base64.b64encode(path.read_bytes()).decode("ascii"),
         },
     }
+
+
+def _image_block_from_mcp_result(result: Any) -> Optional[dict[str, Any]]:
+    for block in getattr(result, "content", []) or []:
+        if getattr(block, "type", "") != "image":
+            continue
+        data = getattr(block, "data", None)
+        if not data:
+            continue
+        mime_type = getattr(block, "mimeType", None) or "image/png"
+        return {
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": mime_type,
+                "data": data,
+            },
+        }
+    return None
 
 
 def _extract_sources(payload: Any, *, tool_name: str, project: str) -> list[dict[str, Any]]:
