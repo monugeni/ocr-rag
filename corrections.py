@@ -18,6 +18,7 @@ Usage:
 import json
 import os
 import tempfile
+from functools import wraps
 from pathlib import Path
 from typing import Any
 
@@ -215,9 +216,22 @@ def _rebuild_breadcrumbs(conn, doc_id):
 def register_correction_tools(mcp, get_db):
     """Register all 25 correction tools with the MCP server."""
 
+    def admin_tool():
+        """Register a correction tool behind the request-scoped admin gate."""
+        def decorator(func):
+            @wraps(func)
+            def guarded(*args, **kwargs):
+                from ocr_mcp_auth import require_mcp_admin
+
+                require_mcp_admin()
+                return func(*args, **kwargs)
+
+            return mcp.tool()(guarded)
+        return decorator
+
     # ===== Document-level (5) =====
 
-    @mcp.tool()
+    @admin_tool()
     def merge_documents(doc_id_a: int, doc_id_b: int) -> ToolResult:
         """Merge document B into document A. Moves all pages and sections, then deletes B.
         Refuses if page numbers overlap between the two documents.
@@ -296,7 +310,7 @@ def register_correction_tools(mcp, get_db):
                 "deleted_doc_id": doc_id_b, "total_pages": total,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def split_document(doc_id: int, at_page: int) -> ToolResult:
         """Split a document at a page boundary. Pages >= at_page become a new document.
         Sections spanning the boundary are cloned. Breadcrumbs rebuilt for both.
@@ -402,7 +416,7 @@ def register_correction_tools(mcp, get_db):
                 "new_title": new_title, "new_pages": after,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def set_document_title(doc_id: int, title: str) -> ToolResult:
         """Set or correct a document's title.
 
@@ -432,7 +446,7 @@ def register_correction_tools(mcp, get_db):
                 "status": "updated", "doc_id": doc_id, "title": title
             }
 
-    @mcp.tool()
+    @admin_tool()
     def set_document_type(doc_id: int, doc_type: str) -> ToolResult:
         """Set the document type classification.
 
@@ -463,7 +477,7 @@ def register_correction_tools(mcp, get_db):
                 "document_type": doc_type,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def link_documents(doc_id: int, related_doc_id: int,
                        relationship: str) -> ToolResult:
         """Create a cross-reference link between two documents.
@@ -508,7 +522,7 @@ def register_correction_tools(mcp, get_db):
 
     # ===== Heading hierarchy (4) =====
 
-    @mcp.tool()
+    @admin_tool()
     def add_heading(doc_id: int, page_num: int, text: str,
                     level: int) -> ToolResult:
         """Add a heading the extractor missed. Inserts a section and rebuilds breadcrumbs.
@@ -560,7 +574,7 @@ def register_correction_tools(mcp, get_db):
                 "heading": text, "level": level, "page_num": page_num,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def remove_heading(doc_id: int, page_num: int,
                        text_prefix: str) -> ToolResult:
         """Remove a false-positive heading. Re-parents its children and rebuilds breadcrumbs.
@@ -618,7 +632,7 @@ def register_correction_tools(mcp, get_db):
                 "heading": section['heading'], "page_num": page_num,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def change_heading_level(doc_id: int, page_num: int,
                              text_prefix: str, new_level: int) -> ToolResult:
         """Change a heading's level (e.g. H3 to H2). Rebuilds breadcrumbs.
@@ -672,7 +686,7 @@ def register_correction_tools(mcp, get_db):
                 "old_level": old_level, "new_level": new_level,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def rename_heading(doc_id: int, page_num: int,
                        old_text_prefix: str, new_text: str) -> ToolResult:
         """Rename a heading. Updates the section and rebuilds breadcrumbs.
@@ -727,7 +741,7 @@ def register_correction_tools(mcp, get_db):
 
     # ===== Page-level (4) =====
 
-    @mcp.tool()
+    @admin_tool()
     def reclassify_page(doc_id: int, page_num: int,
                         new_type: str) -> ToolResult:
         """Change a page's type classification.
@@ -768,7 +782,7 @@ def register_correction_tools(mcp, get_db):
                 "page_num": page_num, "new_type": new_type,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def skip_page(doc_id: int, page_num: int) -> ToolResult:
         """Mark a page as skipped (excluded from search results).
 
@@ -807,7 +821,7 @@ def register_correction_tools(mcp, get_db):
                 "page_num": page_num,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def move_page_to_document(page_num: int, from_doc_id: int,
                               to_doc_id: int) -> ToolResult:
         """Move a single page from one document to another. Rebuilds both documents.
@@ -849,7 +863,7 @@ def register_correction_tools(mcp, get_db):
                 "from_doc_id": from_doc_id, "to_doc_id": to_doc_id,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def set_page_breadcrumb(doc_id: int, page_num: int,
                             breadcrumb: str) -> ToolResult:
         """Override the breadcrumb (heading context) for a specific page.
@@ -892,7 +906,7 @@ def register_correction_tools(mcp, get_db):
 
     # ===== Content (3) =====
 
-    @mcp.tool()
+    @admin_tool()
     def fix_ocr_text(doc_id: int, page_num: int,
                      old_text: str, new_text: str) -> ToolResult:
         """Fix OCR scanning artifacts ONLY — garbled characters produced by the scanner.
@@ -956,7 +970,7 @@ def register_correction_tools(mcp, get_db):
                 "page_num": page_num, "replacements": occurrences,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def add_running_header(doc_id: int, text: str) -> ToolResult:
         """Strip a repeated header/footer from all pages of a document.
         Lines containing this text are removed immediately.
@@ -1005,7 +1019,7 @@ def register_correction_tools(mcp, get_db):
                 "header_text": text, "lines_removed": lines_removed,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def remove_running_header(doc_id: int, text: str) -> ToolResult:
         """Mark a running header for removal on next re-extraction.
         Sidecar-only — no immediate content change. The extractor will
@@ -1038,7 +1052,7 @@ def register_correction_tools(mcp, get_db):
 
     # ===== Metadata (5) =====
 
-    @mcp.tool()
+    @admin_tool()
     def set_document_number(doc_id: int, number: str) -> ToolResult:
         """Set or correct the document reference number.
 
@@ -1068,7 +1082,7 @@ def register_correction_tools(mcp, get_db):
                 "document_number": number,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def set_revision(doc_id: int, revision: str) -> ToolResult:
         """Set or correct the document revision.
 
@@ -1097,7 +1111,7 @@ def register_correction_tools(mcp, get_db):
                 "status": "updated", "doc_id": doc_id, "revision": revision,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def add_cross_reference(doc_id: int, page_num: int,
                             target_doc_id: int, context: str) -> ToolResult:
         """Record a cross-reference from a page to another document.
@@ -1144,7 +1158,7 @@ def register_correction_tools(mcp, get_db):
                 "page_num": page_num, "target_doc_id": target_doc_id,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def add_keywords(doc_id: int, keywords_csv: str) -> ToolResult:
         """Add search keywords to a document's metadata. Merges with existing keywords.
 
@@ -1179,7 +1193,7 @@ def register_correction_tools(mcp, get_db):
                 "status": "updated", "doc_id": doc_id, "keywords": merged,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def add_equipment_tags(doc_id: int, tags_csv: str) -> ToolResult:
         """Add equipment tag references to a document's metadata.
 
@@ -1216,7 +1230,7 @@ def register_correction_tools(mcp, get_db):
 
     # ===== Quality (3) =====
 
-    @mcp.tool()
+    @admin_tool()
     def flag_low_quality(doc_id: int, page_num: int,
                          reason: str) -> ToolResult:
         """Flag a page as low quality (OCR errors, garbled text, missing content).
@@ -1255,7 +1269,7 @@ def register_correction_tools(mcp, get_db):
                 "page_num": page_num, "flag": "low_quality",
             }
 
-    @mcp.tool()
+    @admin_tool()
     def flag_duplicate(doc_id: int, duplicate_of_doc_id: int) -> ToolResult:
         """Flag a document as a duplicate of another.
 
@@ -1295,7 +1309,7 @@ def register_correction_tools(mcp, get_db):
                 "duplicate_of": duplicate_of_doc_id,
             }
 
-    @mcp.tool()
+    @admin_tool()
     def suggest_reocr(doc_id: int, reason: str) -> ToolResult:
         """Suggest that a document needs OCR re-processing.
 

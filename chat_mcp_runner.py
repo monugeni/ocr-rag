@@ -13,6 +13,8 @@ import anthropic
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
 
+from ocr_mcp_auth import internal_mcp_headers
+
 
 MAX_HISTORY_MESSAGES = 8
 MAX_TOOL_ROUNDS = 20
@@ -295,7 +297,12 @@ async def _run_folder_chat(
 
     for attempt in range(MCP_CONNECT_RETRIES):
         try:
-            async with streamablehttp_client(mcp_url, timeout=10, sse_read_timeout=120) as (read_stream, write_stream, _):
+            async with streamablehttp_client(
+                mcp_url,
+                headers=internal_mcp_headers(),
+                timeout=10,
+                sse_read_timeout=120,
+            ) as (read_stream, write_stream, _):
                 async with ClientSession(read_stream, write_stream) as session:
                     await _initialize_session(session)
                     tools = await _list_allowed_tools(session)

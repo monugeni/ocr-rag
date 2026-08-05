@@ -269,6 +269,19 @@ MCP_PORT=${MCP_PORT}
 
 # Web GUI port
 WEB_PORT=${WEB_PORT}
+
+# Protect the public MCP endpoint with the existing BYOM OAuth server.
+# BYOM currently issues MCP access tokens for its own audience; OCR-RAG asks
+# BYOM's introspection endpoint to validate those tokens before every session.
+OCR_RAG_MCP_OAUTH_ENABLED=1
+OCR_RAG_OAUTH_ISSUER=https://oauth.esteem.co.in
+OCR_RAG_OAUTH_INTROSPECTION_URL=https://oauth.esteem.co.in/introspect
+OCR_RAG_OAUTH_TOKEN_AUDIENCE=https://byom.esteem.co.in
+OCR_RAG_OAUTH_REQUIRED_SCOPE=imap
+
+# Optional but recommended behind a reverse proxy. If omitted, OCR-RAG derives
+# its public resource URL from X-Forwarded-Proto / X-Forwarded-Host.
+# OCR_RAG_MCP_RESOURCE_URL=https://ocr-rag.example.com
 EOF
     chown "${SERVICE_USER}:${SERVICE_USER}" "$ENV_FILE"
     chmod 600 "$ENV_FILE"

@@ -198,7 +198,14 @@ async def _sweep_async(ctx: CheckContext, llm, submitted, pages, uploaded_ref_te
 
     try:
         if have_mcp:
-            async with streamablehttp_client(ctx.company_mcp_url, timeout=15, sse_read_timeout=120) as (r, w, _):
+            from ocr_mcp_auth import internal_mcp_headers
+
+            async with streamablehttp_client(
+                ctx.company_mcp_url,
+                headers=internal_mcp_headers(),
+                timeout=15,
+                sse_read_timeout=120,
+            ) as (r, w, _):
                 async with ClientSession(r, w) as session:
                     await session.initialize()
                     tools = (await chat._list_allowed_tools(session)) + [report_tool]
@@ -367,7 +374,14 @@ async def _sweep_async_grok(ctx: CheckContext, llm, submitted, pages, uploaded_r
     conv_id = grok_client.new_conv_id()  # one id for the whole cumulative sweep
 
     if have_mcp:
-        async with streamablehttp_client(ctx.company_mcp_url, timeout=15, sse_read_timeout=120) as (r, w, _):
+        from ocr_mcp_auth import internal_mcp_headers
+
+        async with streamablehttp_client(
+            ctx.company_mcp_url,
+            headers=internal_mcp_headers(),
+            timeout=15,
+            sse_read_timeout=120,
+        ) as (r, w, _):
             async with ClientSession(r, w) as session:
                 await session.initialize()
                 tools = grok_client.to_openai_tools(await chat._list_allowed_tools(session)) + [report_tool]

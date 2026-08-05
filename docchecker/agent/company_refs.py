@@ -10,6 +10,8 @@ import asyncio
 import json
 from typing import Any
 
+from ocr_mcp_auth import internal_mcp_headers
+
 
 def _parse_result(result: Any) -> dict:
     """Coerce an MCP CallToolResult into a dict (structuredContent or JSON text)."""
@@ -32,7 +34,12 @@ async def _ranked_search(url: str, project: str, query: str, max_results: int) -
     from mcp import ClientSession
     from mcp.client.streamable_http import streamablehttp_client
 
-    async with streamablehttp_client(url, timeout=15, sse_read_timeout=60) as (r, w, _):
+    async with streamablehttp_client(
+        url,
+        headers=internal_mcp_headers(),
+        timeout=15,
+        sse_read_timeout=60,
+    ) as (r, w, _):
         async with ClientSession(r, w) as session:
             await session.initialize()
             res = await session.call_tool(

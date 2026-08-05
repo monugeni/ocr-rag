@@ -36,7 +36,10 @@ sudo bash deploy.sh                # first-time install -> /btrfs/ocr-rag, syste
 sudo bash deploy.sh --update       # pull + restart
 ```
 
-There is no test suite in this repo. To smoke-test a change, prefer ingesting a small file from `samples/` into a throwaway DB (e.g. `--db /tmp/scratch.db`) and exercising the resulting MCP server with `curl` or via the web UI.
+The focused MCP OAuth regression suite is `python -m unittest -v test_mcp_auth.py`.
+For ingestion/retrieval changes, prefer ingesting a small file from `samples/`
+into a throwaway DB (e.g. `--db /tmp/scratch.db`) and exercising the resulting
+MCP server with `curl` or via the web UI.
 
 Marker is **not** a default dependency. The fast Poppler pipeline (`pdftohtml -xml` + `pdftotext --layout`) is the production path; Marker is only used when you explicitly pre-convert PDFs with `marker_single`/`marker` and then point `ingest.py` at the JSON output. The fast pipeline needs `poppler-utils` installed.
 
@@ -91,6 +94,15 @@ Three things are worth internalising before editing anything:
 - **Sidecar corrections live next to the PDF**, suffix `_corrections.json` (`CORRECTIONS_SUFFIX` in `corrections.py`). Re-ingestion replays them; deleting the PDF means deleting the corrections too.
 - **Embeddings are optional** and gated by env: chat semantic fallback only runs when `OCR_RAG_ENABLE_SEMANTIC_FALLBACK=1`. Fast-pipeline OCR is gated by `OCR_RAG_FAST_PIPELINE_OCR=1`. The MCP tool `semantic_search` is only useful if `page_embeddings` has been populated.
 - **`ANTHROPIC_API_KEY` is required for two things**: ingestion-time metadata extraction (skippable with `--skip-llm`) and the web chat (`chat_mcp_runner`). Loaded from `.env` via `python-dotenv`.
+- **The HTTP MCP transport is OAuth-protected by default.** `ocr_mcp_auth.py`
+  reuses BYOM through token introspection and requires its `imap` scope. Trusted
+  localhost clients must send `internal_mcp_headers()`; only isolated local
+  development should set `OCR_RAG_MCP_OAUTH_ENABLED=0`.
+- **Management is admin-only at the server boundary.** Web folder/document/
+  ingestion/job/quality management routes must call `web._require_admin()`;
+  hiding tabs is not authorization. MCP correction tools use the request-scoped
+  `ocr_mcp_auth.require_mcp_admin()` gate. Search, chat, and cited page reads
+  remain available to authenticated non-admin users.
 - **Split-document filenames are parsed**, not stored as metadata: see `_SPLIT_RE` in `web.py` — `<parent>_part<NNN>_p<start>-<end>[_<label>].pdf`. The UI groups parts back together based on this pattern.
 - **Production paths differ from dev paths**: deploy.sh installs to `/btrfs/ocr-rag` with data under `/btrfs/ocr-rag/data`. Don't hardcode dev-relative paths in code that runs under the systemd unit.
 - **Backups before destructive ops**: anything that rewrites `docs.db` in place (notably `reingest_fast.py`) must snapshot the file first. Existing `*.before-fast-reingest-*.bak` files in the repo are evidence of this convention.

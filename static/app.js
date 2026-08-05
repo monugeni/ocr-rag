@@ -1,4 +1,5 @@
 const state = {
+  isAdmin: false,
   folders: [],
   folder: '',
   expanded: new Set(),
@@ -154,7 +155,14 @@ async function refreshActiveData() {
   if (!state.folder) return;
   // loadFolders refreshes the sidebar document/pending counts; without it the
   // counts stay stale after deletes/ingests until a manual page reload.
-  await Promise.all([loadFolders(), loadDocuments(), loadChats(), loadJobs()]);
+  const loaders = [loadFolders(), loadChats()];
+  if (state.isAdmin) loaders.push(loadDocuments(), loadJobs());
+  else {
+    state.docs = [];
+    state.pending = [];
+    state.jobs = [];
+  }
+  await Promise.all(loaders);
   if (state.tab === 'inspect' && state.inspectDocId && !state.inspectInfo) {
     await loadInspection(state.inspectDocId);
   }
@@ -260,6 +268,12 @@ function renderFolderRow(folder, { depth, hasChildren, isExpanded = false, flat 
     ? `<button class="folder-chevron ${isExpanded ? 'open' : ''}" type="button" data-action="toggle-folder" data-folder="${escapeHtml(folder.folder)}" aria-label="${isExpanded ? 'Collapse' : 'Expand'}"></button>`
     : `<span class="folder-chevron empty"></span>`;
   const title = flat ? escapeHtml(folder.folder) : escapeHtml(folder.display_name || folder.folder);
+  const addButton = state.isAdmin
+    ? `<button class="folder-add" type="button" data-action="new-subfolder" data-parent="${escapeHtml(folder.folder)}" title="New sub-folder">+</button>`
+    : '';
+  const deleteButton = state.isAdmin
+    ? `<button class="folder-delete" type="button" data-action="delete-folder" data-folder="${escapeHtml(folder.folder)}" title="Delete folder" aria-label="Delete ${escapeHtml(folder.folder)}">×</button>`
+    : '';
   return `
     <div class="folder-row-wrap ${isActive ? 'active' : ''}" style="--depth: ${depth};">
       ${chevron}
@@ -269,7 +283,10 @@ function renderFolderRow(folder, { depth, hasChildren, isExpanded = false, flat 
         </span>
         <span class="folder-count">${folder.docs || 0}</span>
       </button>
-      <button class="folder-add" type="button" data-action="new-subfolder" data-parent="${escapeHtml(folder.folder)}" title="New sub-folder">+</button>
+      <span class="folder-actions">
+        ${addButton}
+        ${deleteButton}
+      </span>
     </div>
   `;
 }
@@ -279,10 +296,11 @@ function renderShell() {
 
   const active = state.folders.find((f) => f.folder === state.folder);
   $('active-folder').textContent = active ? active.folder : 'Select a folder';
+  $('new-folder-btn')?.classList.toggle('hidden', !state.isAdmin);
   if (active) {
     $('folder-stats').innerHTML = `<b>${active.docs || 0}</b> document${(active.docs || 0) === 1 ? '' : 's'}`
       + ` &nbsp;·&nbsp; <b>${active.pages || 0}</b> pages`
-      + ` &nbsp;·&nbsp; <b>${active.pending || 0}</b> pending`;
+      + (state.isAdmin ? ` &nbsp;·&nbsp; <b>${active.pending || 0}</b> pending` : '');
   } else {
     $('folder-stats').textContent = '';
   }
@@ -1262,6 +1280,54 @@ async function deletePending(folder, filename, btn) {
   }
 }
 
+async function deleteFolder(folder, btn) {
+  if (!state.isAdmin || !folder) return;
+  const descendants = state.folders.filter((item) => item.folder.startsWith(`${folder}/`));
+  const childWarning = descendants.length
+    ? ` It also deletes ${descendants.length} sub-folder${descendants.length === 1 ? '' : 's'}.`
+    : '';
+  const entered = prompt(
+    `Permanently delete "${folder}"?${childWarning}\n\n`
+    + 'All documents, chats, ingestion jobs, pending uploads, and source files in this folder tree will be removed.\n\n'
+    + `Type the full folder name to confirm:\n${folder}`,
+  );
+  if (entered === null) return;
+  if (entered.trim() !== folder) {
+    showToast('Folder name did not match. Nothing was deleted.', 'error');
+    return;
+  }
+
+  setActionBusy(btn, '…');
+  showToast(`Deleting ${folder}…`);
+  try {
+    await api(`/api/folders/${enc(folder)}`, { method: 'DELETE' });
+    for (const item of [folder, ...descendants.map((entry) => entry.folder)]) {
+      state.expanded.delete(item);
+    }
+    saveExpanded();
+    state.folder = '';
+    state.threadId = '';
+    state.messages = [];
+    state.docs = [];
+    state.pending = [];
+    state.jobs = [];
+    clearInspector();
+    await loadFolders();
+    if (state.folder) {
+      setHash();
+      await refreshActiveData();
+    } else {
+      history.replaceState(null, '', location.pathname);
+      renderActiveView();
+    }
+    showToast(`Folder "${folder}" deleted`);
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = '×';
+    showToast(err.message, 'error');
+  }
+}
+
 async function reingestJob(jobId) {
   if (!jobId) return;
   try {
@@ -1401,7 +1467,7 @@ async function confirmMove() {
 
 function startPolling() {
   setInterval(async () => {
-    if (!state.folder) return;
+    if (!state.folder || !state.isAdmin) return;
     try {
       const previousJobs = JSON.stringify(state.jobs);
       const hadActiveJobs = state.jobs.some((job) => job.status === 'queued' || job.status === 'running');
@@ -1458,6 +1524,7 @@ function handleClick(event) {
     renderShell();
   }
   if (action === 'new-subfolder') void promptNewSubfolder(target.dataset.parent || '');
+  if (action === 'delete-folder') void deleteFolder(target.dataset.folder || '', target);
   if (action === 'move-doc') openMoveDialog(Number(target.dataset.docId));
   if (action === 'cancel-move') closeMoveDialog();
   if (action === 'confirm-move') void confirmMove();
@@ -1516,6 +1583,7 @@ async function init() {
   bindGlobalEvents();
   readHash();
   state.expanded = loadExpanded();
+  await initCurrentUser();
   await loadFolders();
   expandAncestors(state.folder);
   setHash();
@@ -1981,7 +2049,7 @@ function checkCommentCard(c) {
   return `<li class="finding"><div class="finding-head"><strong>${escapeHtml(c.prior_comment_text || '(comment)')}</strong><span class="tag ${cls}">${escapeHtml(c.verdict)}</span><span class="muted small">p${c.prior_page ?? '?'}</span></div><div>${escapeHtml(c.detail || '')}</div></li>`;
 }
 
-(async function initChecker() {
+async function initCurrentUser() {
   try {
     const me = await api('/api/me');
     state.isAdmin = !!me.is_admin;
@@ -1992,7 +2060,7 @@ function checkCommentCard(c) {
     renderActiveView();
     loadUsage();
   } catch (_) { /* not logged in / endpoint missing */ }
-})();
+}
 
 async function loadUsage() {
   try {

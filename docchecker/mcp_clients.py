@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from typing import Any, Optional
 
 from . import config
+from ocr_mcp_auth import internal_mcp_headers
 
 
 def _port_open(port: int, host: str = "127.0.0.1") -> bool:
@@ -52,6 +53,9 @@ class McpProcess:
 
 def start_ocr_rag_mcp(db_path: str, port: int, *, wait: float = 25.0) -> McpProcess:
     """Launch an ocr-rag MCP server over ``db_path`` on ``port`` and wait for it."""
+    # Materialize the process-local credential before spawning so the child
+    # inherits the same token used by these trusted localhost clients.
+    internal_mcp_headers()
     if _port_open(port):
         raise RuntimeError(f"port {port} already in use")
     proc = subprocess.Popen(
@@ -114,7 +118,12 @@ async def list_tools(url: str) -> list[str]:
     from mcp import ClientSession
     from mcp.client.streamable_http import streamablehttp_client
 
-    async with streamablehttp_client(url, timeout=10, sse_read_timeout=120) as (r, w, _):
+    async with streamablehttp_client(
+        url,
+        headers=internal_mcp_headers(),
+        timeout=10,
+        sse_read_timeout=120,
+    ) as (r, w, _):
         async with ClientSession(r, w) as session:
             await session.initialize()
             result = await session.list_tools()
@@ -125,7 +134,12 @@ async def call_tool(url: str, name: str, arguments: dict[str, Any]) -> Any:
     from mcp import ClientSession
     from mcp.client.streamable_http import streamablehttp_client
 
-    async with streamablehttp_client(url, timeout=30, sse_read_timeout=180) as (r, w, _):
+    async with streamablehttp_client(
+        url,
+        headers=internal_mcp_headers(),
+        timeout=30,
+        sse_read_timeout=180,
+    ) as (r, w, _):
         async with ClientSession(r, w) as session:
             await session.initialize()
             return await session.call_tool(name, arguments)

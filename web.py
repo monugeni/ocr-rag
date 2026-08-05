@@ -681,6 +681,22 @@ def _current_owner(request: Request) -> tuple[str, Optional[str]]:
     return "anon", None
 
 
+def _require_admin(request: Request) -> dict:
+    """Require a logged-in administrator using a fresh database lookup.
+
+    The session's ``is_admin`` value is only a UI hint and may be stale after a
+    grant or revocation. Every management request therefore rechecks the user
+    record before performing any read or mutation.
+    """
+    from docchecker import auth
+
+    user = auth.require_user(request)
+    oidc_sub = user.get("oidc_sub") or ""
+    if not oidc_sub or not auth.is_admin(oidc_sub):
+        raise HTTPException(403, "Administrator access required")
+    return user
+
+
 def _record_usage(email: Optional[str], kind: str, model: str, usage: Optional[dict]):
     """Record LLM spend for a user (best-effort; no-op if docchecker is absent)."""
     if not usage:
@@ -2101,7 +2117,8 @@ def list_folders(scope: Optional[str] = Query(None), recursive: bool = Query(Fal
 
 @app.post("/api/projects")
 @app.post("/api/folders")
-def create_folder(data: dict):
+def create_folder(data: dict, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(data.get("name", "").strip(), "Folder name")
     folder_dir = _folder_disk_path(folder)
     folder_dir.mkdir(parents=True, exist_ok=True)
@@ -2110,7 +2127,8 @@ def create_folder(data: dict):
 
 @app.patch("/api/projects/{folder:path}")
 @app.patch("/api/folders/{folder:path}")
-def rename_folder(folder: str, data: dict):
+def rename_folder(folder: str, data: dict, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     new_folder = _validate_folder_name(data.get("name", "").strip(), "New folder name")
     if new_folder == folder:
@@ -2145,7 +2163,8 @@ def rename_folder(folder: str, data: dict):
 
 @app.delete("/api/projects/{folder:path}")
 @app.delete("/api/folders/{folder:path}")
-def delete_folder(folder: str):
+def delete_folder(folder: str, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
@@ -2193,7 +2212,8 @@ def delete_folder(folder: str):
 
 @app.get("/api/projects/{folder:path}/documents")
 @app.get("/api/folders/{folder:path}/documents")
-def list_documents(folder: str):
+def list_documents(folder: str, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
@@ -2260,6 +2280,7 @@ def create_folder_chat(folder: str, request: Request, data: Optional[dict] = Non
 @app.post("/api/folders/{folder:path}/upload")
 async def upload_files(
     folder: str,
+    request: Request,
     files: list[UploadFile] = File(...),
     paths: list[str] = Form(default=[]),
 ):
@@ -2270,6 +2291,7 @@ async def upload_files(
     original directory layout.  This is used by the browser folder-upload
     feature (``webkitdirectory``).
     """
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     folder_dir = _folder_disk_path(folder)
     folder_dir.mkdir(parents=True, exist_ok=True)
@@ -2321,7 +2343,13 @@ async def upload_files(
 
 @app.post("/api/projects/{folder:path}/pending/{filename:path}/discard")
 @app.post("/api/folders/{folder:path}/pending/{filename:path}/discard")
-def discard_pending_file(folder: str, filename: str, data: Optional[dict] = None):
+def discard_pending_file(
+    folder: str,
+    filename: str,
+    request: Request,
+    data: Optional[dict] = None,
+):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     relative_name = _normalize_folder_name(filename)
     upload_relative = _normalize_folder_name(f"{folder}/{relative_name}")
@@ -2369,7 +2397,8 @@ def discard_pending_file(folder: str, filename: str, data: Optional[dict] = None
 
 
 @app.patch("/api/documents/{doc_id}")
-def rename_document(doc_id: int, data: dict):
+def rename_document(doc_id: int, data: dict, request: Request):
+    _require_admin(request)
     new_title = data.get("title", "").strip()
     if not new_title:
         raise HTTPException(400, "New title required")
@@ -2391,7 +2420,8 @@ def rename_document(doc_id: int, data: dict):
 
 
 @app.post("/api/documents/bulk-move")
-def bulk_move_documents(data: dict):
+def bulk_move_documents(data: dict, request: Request):
+    _require_admin(request)
     doc_ids = data.get("doc_ids") or []
     if not doc_ids:
         raise HTTPException(400, "Document ids required")
@@ -2450,7 +2480,8 @@ def download_file(doc_id: int):
 
 
 @app.post("/api/documents/bulk-delete")
-def bulk_delete_documents(data: dict):
+def bulk_delete_documents(data: dict, request: Request):
+    _require_admin(request)
     doc_ids = data.get("doc_ids") or []
     if not doc_ids:
         raise HTTPException(400, "Document ids required")
@@ -2483,7 +2514,8 @@ def bulk_delete_documents(data: dict):
 
 
 @app.delete("/api/documents/{doc_id}")
-def delete_document(doc_id: int):
+def delete_document(doc_id: int, request: Request):
+    _require_admin(request)
     conn = get_conn()
     try:
         doc = conn.execute(
@@ -3181,7 +3213,8 @@ def _active_job_id_for_source(source_rel: str) -> str | None:
 
 @app.post("/api/projects/{folder:path}/ingest")
 @app.post("/api/folders/{folder:path}/ingest")
-async def ingest_all(folder: str):
+async def ingest_all(folder: str, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
@@ -3215,7 +3248,13 @@ async def ingest_all(folder: str):
 
 @app.post("/api/projects/{folder:path}/ingest/{filename:path}")
 @app.post("/api/folders/{folder:path}/ingest/{filename:path}")
-async def ingest_single(folder: str, filename: str, no_split: bool = False):
+async def ingest_single(
+    folder: str,
+    filename: str,
+    request: Request,
+    no_split: bool = False,
+):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     relative_name = _normalize_folder_name(filename)
     file_path = _folder_disk_path(folder) / relative_name
@@ -3240,18 +3279,20 @@ async def ingest_single(folder: str, filename: str, no_split: bool = False):
 
 
 @app.get("/api/ingestion/jobs")
-def get_jobs():
+def get_jobs(request: Request):
+    _require_admin(request)
     return tracker.all()
 
 
 @app.post("/api/ingestion/jobs/{job_id}/retry")
-async def retry_ingestion_job(job_id: str):
+async def retry_ingestion_job(job_id: str, request: Request):
     """Re-run a failed/cancelled ingestion from its original source file.
 
     A failed split ingestion may have left the original PDF parked in the
     folder's ``_originals/`` directory (where it no longer shows up under
     pending uploads), so restore it before re-dispatching.
     """
+    _require_admin(request)
     job = tracker.get(job_id)
     if not job:
         raise HTTPException(404, "Ingestion job not found")
@@ -3287,7 +3328,12 @@ async def retry_ingestion_job(job_id: str):
 
 
 @app.post("/api/ingestion/jobs/{job_id}/cancel")
-def cancel_ingestion_job(job_id: str, data: Optional[dict] = None):
+def cancel_ingestion_job(
+    job_id: str,
+    request: Request,
+    data: Optional[dict] = None,
+):
+    _require_admin(request)
     job = tracker.get(job_id)
     if not job:
         raise HTTPException(404, "Ingestion job not found")
@@ -3345,7 +3391,8 @@ def cancel_ingestion_job(job_id: str, data: Optional[dict] = None):
 
 @app.get("/api/projects/{folder:path}/quality")
 @app.get("/api/folders/{folder:path}/quality")
-def folder_quality(folder: str):
+def folder_quality(folder: str, request: Request):
+    _require_admin(request)
     folder = _validate_folder_name(folder, "Folder name")
     conn = get_conn()
     try:
@@ -3378,7 +3425,8 @@ def folder_quality(folder: str):
 
 
 @app.patch("/api/quality/{flag_id}/resolve")
-def resolve_flag(flag_id: int):
+def resolve_flag(flag_id: int, request: Request):
+    _require_admin(request)
     conn = get_conn()
     try:
         conn.execute(
@@ -3431,11 +3479,13 @@ if static_path.exists():
 def _start_mcp_server(db_path, port):
     """Start the MCP server in a background thread."""
     import mcp_server
+    from ocr_mcp_auth import run_protected_mcp
+
     mcp_server.DB_PATH = db_path
     mcp_server.mcp.settings.port = port
     mcp_server.mcp.settings.host = "0.0.0.0"
     mcp_server.mcp.settings.transport_security.enable_dns_rebinding_protection = False
-    mcp_server.mcp.run(transport="streamable-http")
+    run_protected_mcp(mcp_server.mcp, host="0.0.0.0", port=port)
 
 
 def main():

@@ -99,6 +99,17 @@ python ingest.py --project samples/split_output --db docs.db --skip-llm
 python mcp_server.py --db docs.db --port 8200
 ```
 
+The HTTP MCP endpoint is OAuth-protected by default. It reuses the existing
+BYOM authorization server at `https://oauth.esteem.co.in`, validates public
+bearer tokens through BYOM's introspection endpoint, and requires the `imap`
+scope currently issued by BYOM. No BYOM signing secret is copied into OCR-RAG.
+
+For isolated local development only, OAuth can be disabled explicitly:
+
+```bash
+OCR_RAG_MCP_OAUTH_ENABLED=0 python mcp_server.py --db docs.db --port 8200
+```
+
 ### 5. Start the Web App
 
 ```bash
@@ -106,6 +117,50 @@ python web.py --db docs.db --port 8201 --mcp-port 8200
 ```
 
 The web UI chat uses the same MCP tools exposed on the local MCP server, so the in-app assistant and external MCP clients investigate folder documents through the same interface.
+
+## MCP OAuth configuration
+
+External clients connect to the public OCR-RAG MCP URL and discover BYOM from
+`/.well-known/oauth-protected-resource`. Missing or invalid credentials receive
+a `401` response with an OAuth resource-metadata challenge. The normal BYOM
+authorization-code + PKCE login is then used to obtain the bearer token.
+
+| Environment variable | Default | Purpose |
+|---|---|---|
+| `OCR_RAG_MCP_OAUTH_ENABLED` | `1` | Enforce OAuth on MCP HTTP requests |
+| `OCR_RAG_OAUTH_ISSUER` | `https://oauth.esteem.co.in` | Existing BYOM authorization server |
+| `OCR_RAG_OAUTH_INTROSPECTION_URL` | `<issuer>/introspect` | BYOM token-validation endpoint |
+| `OCR_RAG_OAUTH_TOKEN_AUDIENCE` | `https://byom.esteem.co.in` | Audience used by current BYOM access tokens |
+| `OCR_RAG_OAUTH_REQUIRED_SCOPE` | `imap` | Scope required on an accepted BYOM token |
+| `OCR_RAG_MCP_RESOURCE_URL` | derived from request | Canonical public OCR-RAG MCP resource URL |
+| `OCR_RAG_INTERNAL_MCP_TOKEN` | random per process | Optional fixed credential for trusted localhost components |
+
+When Nginx or another reverse proxy terminates TLS, preserve the
+`Authorization` header and send `X-Forwarded-Proto` and `X-Forwarded-Host`.
+Set `OCR_RAG_MCP_RESOURCE_URL` explicitly if those headers are unavailable.
+OAuth authenticates access to the shared company knowledge base; it does not
+create separate per-user document stores.
+
+### Administrator authorization
+
+The web session and MCP bearer subject are checked against the `is_admin`
+column in `data/checks.db`. Authorization is enforced server-side with a fresh
+database lookup on every management request; hiding controls in the browser is
+only a usability measure.
+
+Administrators can create, rename, and delete folders; list/manage documents;
+upload or discard source files; start, retry, or cancel ingestion; manage jobs
+and quality flags; and call document-correction MCP tools. Other authenticated
+users retain read-only knowledge access through Ask, Check, History, search,
+and cited document/page views.
+
+Grant, revoke, or list administrators from the application directory:
+
+```bash
+./venv/bin/python -m docchecker.adminctl grant alice@esteem.co.in
+./venv/bin/python -m docchecker.adminctl revoke alice@esteem.co.in
+./venv/bin/python -m docchecker.adminctl list
+```
 
 ## MCP Server Tools
 

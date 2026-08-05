@@ -192,7 +192,7 @@ a:hover {
 
 .folder-row-wrap {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr) 24px;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
   align-items: center;
   gap: 2px;
   padding-inline-start: calc(var(--depth, 0) * 14px);
@@ -272,7 +272,14 @@ a:hover {
   content: '';
 }
 
-.folder-add {
+.folder-actions {
+  display: flex;
+  align-items: center;
+  min-width: 24px;
+}
+
+.folder-add,
+.folder-delete {
   width: 24px;
   height: 24px;
   border: none;
@@ -288,14 +295,22 @@ a:hover {
 }
 
 .folder-row-wrap:hover .folder-add,
-.folder-row-wrap.active .folder-add {
+.folder-row-wrap.active .folder-add,
+.folder-row-wrap:hover .folder-delete,
+.folder-row-wrap.active .folder-delete {
   opacity: 0.7;
 }
 
-.folder-add:hover {
+.folder-add:hover,
+.folder-delete:hover {
   opacity: 1 !important;
   background: rgba(15, 118, 110, 0.15);
   color: var(--text);
+}
+
+.folder-delete:hover {
+  background: #fee4e2;
+  color: var(--danger);
 }
 
 .modal-overlay {

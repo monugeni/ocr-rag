@@ -54,6 +54,7 @@ from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.utilities.types import Image
 
 from corrections import register_correction_tools
+from ocr_mcp_auth import run_protected_mcp
 
 
 # ---------------------------------------------------------------------------
@@ -2555,7 +2556,7 @@ def main():
 
     mcp.settings.host = "0.0.0.0"
     mcp.settings.transport_security.enable_dns_rebinding_protection = False
-    mcp.run(transport="streamable-http")
+    run_protected_mcp(mcp, host="0.0.0.0", port=args.port)
 
 
 if __name__ == '__main__':
