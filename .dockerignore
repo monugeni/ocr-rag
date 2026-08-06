@@ -1,0 +1,17 @@
+.git
+__pycache__
+**/__pycache__
+venv
+data
+uploads
+output
+tmp
+docs
+samples
+comparison_outputs
+*.db
+*.db-*
+*.bak
+.env
+Dockerfile
+docker-compose.yml

@@ -1,0 +1,12 @@
+services:
+  ocr-rag:
+    build: .
+    container_name: ocr-rag
+    restart: unless-stopped
+    ports:
+      - "8200:8200"
+      - "8201:8201"
+    env_file: .env
+    volumes:
+      # Existing prod data, mounted at the identical path — no data moves.
+      - /btrfs/ocr-rag/data:/btrfs/ocr-rag/data
