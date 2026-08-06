@@ -1,4 +1,6 @@
 .git
+.snaps
+.cache
 __pycache__
 **/__pycache__
 venv
