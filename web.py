@@ -349,6 +349,40 @@ def _pending_uploads(conn, folder: str) -> list[dict]:
     return pending
 
 
+def _pending_counts_by_folder(conn) -> dict[str, int]:
+    """Not-yet-ingested ingestable file count per exact folder, in ONE walk of
+    the uploads tree. list_folders used to call _pending_uploads() per folder,
+    re-walking (and stat-ing) overlapping subtrees — quadratic on nested trees."""
+    uploads_root = Path(UPLOADS_DIR)
+    if not uploads_root.exists():
+        return {}
+    ingested = {
+        (row["project"], row["filename"])
+        for row in conn.execute("SELECT project, filename FROM documents")
+    }
+    counts: dict[str, int] = {}
+    for current_root, dirnames, filenames in os.walk(uploads_root):
+        dirnames[:] = [
+            name for name in dirnames
+            if not name.startswith(".") and not name.startswith("_")
+        ]
+        current_path = Path(current_root)
+        if current_path == uploads_root:
+            continue
+        folder = _folder_relative_path(current_path, uploads_root)
+        if not folder:
+            continue
+        count = sum(
+            1 for name in filenames
+            if not name.startswith(".") and not name.startswith("_")
+            and Path(name).suffix.lower() in INGESTABLE_EXTENSIONS
+            and (folder, name) not in ingested
+        )
+        if count:
+            counts[folder] = count
+    return counts
+
+
 def _rename_folder_value(value: str, old_folder: str, new_folder: str) -> str:
     if value == old_folder:
         return new_folder
@@ -2061,12 +2095,7 @@ def list_folders(scope: Optional[str] = Query(None), recursive: bool = Query(Fal
                 GROUP BY project
             """).fetchall()
         }
-        exact_pending = {}
-        for known_folder in folders:
-            exact_pending[known_folder] = len([
-                item for item in _pending_uploads(conn, known_folder)
-                if item["folder"] == known_folder
-            ])
+        exact_pending = _pending_counts_by_folder(conn)
 
         scoped_folders = folders
         if scope:

@@ -198,6 +198,16 @@ CREATE INDEX IF NOT EXISTS idx_cross_references_doc ON cross_references(doc_id);
 CREATE INDEX IF NOT EXISTS idx_quality_flags_doc ON quality_flags(doc_id);
 CREATE INDEX IF NOT EXISTS idx_page_embeddings_page ON page_embeddings(page_id);
 
+-- FK-support indexes: with PRAGMA foreign_keys=ON, deleting a parent row scans
+-- every child table that references it. Without these, folder/document deletes
+-- go quadratic (each deleted section full-scans sections.parent_id and
+-- pages.section_id) and time out on large DBs.
+CREATE INDEX IF NOT EXISTS idx_sections_parent ON sections(parent_id);
+CREATE INDEX IF NOT EXISTS idx_pages_section ON pages(section_id);
+CREATE INDEX IF NOT EXISTS idx_page_embeddings_chunk ON page_embeddings(chunk_id);
+CREATE INDEX IF NOT EXISTS idx_cross_references_target ON cross_references(target_doc_id);
+CREATE INDEX IF NOT EXISTS idx_quality_flags_related ON quality_flags(related_doc_id);
+
 CREATE TABLE IF NOT EXISTS ingestion_jobs (
     id          TEXT PRIMARY KEY,
     filename    TEXT NOT NULL,
