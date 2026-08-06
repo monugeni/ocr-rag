@@ -10,3 +10,11 @@ services:
     volumes:
       # Existing prod data, mounted at the identical path — no data moves.
       - /btrfs/ocr-rag/data:/btrfs/ocr-rag/data
+    networks:
+      - default
+      - openwebui-app
+
+networks:
+  openwebui-app:
+    name: openwebui-fireworks_app
+    external: true
