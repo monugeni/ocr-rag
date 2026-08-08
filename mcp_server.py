@@ -4,33 +4,17 @@ Document RAG MCP Server
 ========================
 Single server for all folders. Every search requires a folder path.
 
-Tools:
-    Discovery:
-        list_folders        - List all folders
-        list_folder_entries - List folders/files in a folder
-        list_documents      - List documents in a folder scope
-        get_document_info   - Full metadata for a document
-        get_toc             - Section tree for a document
+Always-on (tools/list):
+    list_folders, list_folder_entries, list_documents, get_document_info,
+    ranked_search, get_page, get_pages, read_document_chunks,
+    discover_tools, run_tool
 
-    Search:
-        ranked_search       - Broad chunk FTS plus deterministic statistical reranking
-        search_chunks       - Chunk-level FTS keyword search with pagination
-        search_pages        - FTS keyword search with abbreviation expansion + OR fallback
-        search_sections     - Search section headings
-        semantic_search     - Vector/embedding search for conceptual similarity
-        get_section         - Get all pages belonging to a section heading
-
-    Navigation:
-        get_page            - Get full page content with context
-        get_pages           - Get a range of pages
-        read_document       - Paginated whole-document page reader
-        read_document_chunks - Paginated whole-document chunk reader
-        get_adjacent        - Get next/previous page
-        render_page_image   - Render a PDF page to PNG for visual inspection
-
-    Fallback (LLM calls these when Marker output looks wrong):
-        reextract_page      - Re-extract page text from original PDF via pdfplumber
-        reextract_table     - Re-extract table from original PDF via pdfplumber
+Deferred (discover_tools + run_tool — same handlers, no data loss):
+    search: search_chunks, search_pages, search_sections, semantic_search
+    structure: get_toc, get_section, get_adjacent
+    read: read_document, render_page_image
+    reextract: reextract_page, reextract_table
+    corrections: all admin correction tools (merge/split/heading/OCR fixes/etc.)
 
 Usage:
     python mcp_server.py --db docs.db --port 8200
@@ -38,6 +22,7 @@ Usage:
 
 import argparse
 from collections import Counter
+import copy
 import json
 import math
 import re
@@ -48,7 +33,7 @@ import sys
 import tempfile
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.utilities.types import Image
@@ -2521,6 +2506,271 @@ def semantic_search(
 
 
 # ---------------------------------------------------------------------------
+# Progressive tool disclosure (core always-on; rest via discover + run)
+# ---------------------------------------------------------------------------
+# Registration-only. Tool handlers, DB paths, and correction side effects are
+# unchanged. Deferred tools keep the exact same FastMCP Tool.fn objects.
+
+_CORE_TOOL_NAMES = frozenset({
+    "list_folders",
+    "list_folder_entries",
+    "list_documents",
+    "get_document_info",
+    "ranked_search",
+    "get_page",
+    "get_pages",
+    "read_document_chunks",
+    "discover_tools",
+    "run_tool",
+})
+
+_TOOL_DOMAINS: Dict[str, List[str]] = {
+    "search": [
+        "search_chunks",
+        "search_pages",
+        "search_sections",
+        "semantic_search",
+    ],
+    "structure": [
+        "get_toc",
+        "get_section",
+        "get_adjacent",
+    ],
+    "read": [
+        "read_document",
+        "render_page_image",
+    ],
+    "reextract": [
+        "reextract_page",
+        "reextract_table",
+    ],
+    "corrections": [
+        "merge_documents",
+        "split_document",
+        "set_document_title",
+        "set_document_type",
+        "link_documents",
+        "add_heading",
+        "remove_heading",
+        "change_heading_level",
+        "rename_heading",
+        "reclassify_page",
+        "skip_page",
+        "move_page_to_document",
+        "set_page_breadcrumb",
+        "fix_ocr_text",
+        "add_running_header",
+        "remove_running_header",
+        "set_document_number",
+        "set_revision",
+        "add_cross_reference",
+        "add_keywords",
+        "add_equipment_tags",
+        "flag_low_quality",
+        "flag_duplicate",
+        "suggest_reocr",
+    ],
+}
+
+_DEFERRED_TOOLS: Dict[str, Any] = {}
+
+
+def _strip_schema_titles(node) -> None:
+    """Drop generated title keys without touching a property actually named 'title'."""
+    if not isinstance(node, dict):
+        return
+    node.pop("title", None)
+    for key, value in node.items():
+        if key in ("properties", "$defs", "definitions") and isinstance(value, dict):
+            for sub in value.values():
+                _strip_schema_titles(sub)
+        elif key in ("anyOf", "oneOf", "allOf", "prefixItems") and isinstance(value, list):
+            for sub in value:
+                _strip_schema_titles(sub)
+        elif key in ("items", "additionalProperties", "not"):
+            _strip_schema_titles(value)
+
+
+def _public_input_schema(tool) -> Dict[str, Any]:
+    schema = copy.deepcopy(tool.parameters)
+    _strip_schema_titles(schema)
+    return schema
+
+
+def _slim_tool_schemas() -> None:
+    for tool in mcp._tool_manager._tools.values():
+        _strip_schema_titles(tool.parameters)
+
+
+def _one_line_description(text: str) -> str:
+    line = " ".join((text or "").strip().split())
+    if len(line) <= 160:
+        return line
+    return line[:157].rstrip() + "..."
+
+
+def _domain_for_tool(name: str) -> Optional[str]:
+    for domain, names in _TOOL_DOMAINS.items():
+        if name in names:
+            return domain
+    return None
+
+
+def _discover_payload(domain: str = "", detail: str = "short") -> Dict[str, Any]:
+    detail = (detail or "short").strip().lower()
+    if detail not in ("short", "full"):
+        detail = "short"
+    domain = (domain or "").strip().lower()
+
+    core_index = sorted(_CORE_TOOL_NAMES - {"discover_tools", "run_tool"})
+
+    if not domain:
+        return {
+            "core_tools": core_index,
+            "domains": {d: list(names) for d, names in _TOOL_DOMAINS.items()},
+            "usage": (
+                "Core tools are callable directly. For deferred tools: "
+                'discover_tools(domain="search"|"structure"|"read"|"reextract"|'
+                '"corrections"|"all", detail="short"|"full") then '
+                "run_tool(name, arguments={...}). Discovery does not modify the "
+                "database or sidecar files."
+            ),
+        }
+
+    if domain == "all":
+        names = sorted(_DEFERRED_TOOLS.keys())
+    elif domain in _TOOL_DOMAINS:
+        names = list(_TOOL_DOMAINS[domain])
+    else:
+        return {
+            "error": f"Unknown domain {domain!r}",
+            "domains": sorted(_TOOL_DOMAINS.keys()) + ["all"],
+        }
+
+    tools_out = []
+    for name in names:
+        tool = _DEFERRED_TOOLS.get(name)
+        if tool is None:
+            continue
+        schema = _public_input_schema(tool)
+        if detail == "full":
+            tools_out.append({
+                "name": name,
+                "domain": _domain_for_tool(name),
+                "description": (tool.description or "").strip(),
+                "inputSchema": schema,
+            })
+        else:
+            tools_out.append({
+                "name": name,
+                "domain": _domain_for_tool(name),
+                "description": _one_line_description(tool.description or ""),
+                "required": schema.get("required", []),
+                "properties": sorted((schema.get("properties") or {}).keys()),
+            })
+
+    return {
+        "domain": domain,
+        "detail": detail,
+        "tools": tools_out,
+        "next": 'Call run_tool(name, arguments={...}) with a tool name from this list.',
+    }
+
+
+@mcp.tool()
+def discover_tools(domain: str = "", detail: str = "short") -> ToolResult:
+    """
+    List deferred document tools without loading them into the always-on tool list.
+    domain: search|structure|read|reextract|corrections|all (empty = index).
+    detail: short|full. Then call run_tool(name, arguments). Read-only catalog.
+    """
+    return {
+        "ok": True,
+        "status": "tools_discovered",
+        "message": "Deferred tool catalog.",
+        **_discover_payload(domain=domain, detail=detail),
+    }
+
+
+@mcp.tool()
+def run_tool(name: str, arguments: Optional[Dict[str, Any]] = None) -> Any:
+    """
+    Run a deferred tool by name with a JSON arguments object. Uses the same
+    handler as before (including admin-gated corrections). Core tools must be
+    called directly — not through run_tool.
+    """
+    name = (name or "").strip()
+    if not name:
+        return {"ok": False, "status": "error", "error": "Provide a deferred tool name.", "action": "run_tool"}
+    if name in _CORE_TOOL_NAMES:
+        return {
+            "ok": False,
+            "status": "error",
+            "error": f"{name!r} is a core tool — call it directly, not via run_tool.",
+            "action": "run_tool",
+            "tool": name,
+        }
+    tool = _DEFERRED_TOOLS.get(name)
+    if tool is None:
+        domain = _domain_for_tool(name)
+        hint = (
+            f'discover_tools(domain="{domain}")'
+            if domain
+            else 'discover_tools() or discover_tools(domain="all")'
+        )
+        return {
+            "ok": False,
+            "status": "error",
+            "error": f"Unknown deferred tool {name!r}. Use {hint}.",
+            "action": "run_tool",
+            "tool": name,
+            "domains": sorted(_TOOL_DOMAINS.keys()) + ["all"],
+        }
+    args = arguments if isinstance(arguments, dict) else {}
+    try:
+        pre = tool.fn_metadata.pre_parse_json(args)
+        parsed = tool.fn_metadata.arg_model.model_validate(pre)
+        kwargs = parsed.model_dump_one_level()
+        # Same fn object previously registered with FastMCP (guards preserved).
+        return tool.fn(**kwargs)
+    except Exception as e:
+        schema = _public_input_schema(tool)
+        return {
+            "ok": False,
+            "status": "error",
+            "error": f"Invalid arguments for {name}: {e}",
+            "action": "run_tool",
+            "tool": name,
+            "required": schema.get("required", []),
+            "properties": sorted((schema.get("properties") or {}).keys()),
+            "domain": _domain_for_tool(name),
+        }
+
+
+def _finalize_public_tools() -> None:
+    """
+    Keep core tools in tools/list; park the rest for discover_tools/run_tool.
+
+    Does not open the DB, touch sidecars, or replace handlers — only which
+    names are advertised in the MCP tools/list payload.
+    """
+    global _DEFERRED_TOOLS
+    deferred: Dict[str, Any] = {}
+    for name in list(mcp._tool_manager._tools.keys()):
+        if name in _CORE_TOOL_NAMES:
+            continue
+        deferred[name] = mcp._tool_manager._tools[name]
+        mcp._tool_manager.remove_tool(name)
+    _DEFERRED_TOOLS = deferred
+    _slim_tool_schemas()
+    for tool in _DEFERRED_TOOLS.values():
+        _strip_schema_titles(tool.parameters)
+
+
+_finalize_public_tools()
+
+
+# ---------------------------------------------------------------------------
 # Entry point
 # ---------------------------------------------------------------------------
 
@@ -2553,6 +2803,10 @@ def main():
         print(f"Folders: {folder_list}")
         print(f"Total pages indexed: {total_pages}")
         print(f"Starting on port {args.port}...")
+        print(
+            f"MCP tools: {len(mcp._tool_manager._tools)} core, "
+            f"{len(_DEFERRED_TOOLS)} deferred (discover_tools / run_tool)"
+        )
 
     mcp.settings.host = "0.0.0.0"
     mcp.settings.transport_security.enable_dns_rebinding_protection = False
